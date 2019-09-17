@@ -8,9 +8,9 @@ const instance = axios.create({
   credentials: false
 })
 /* 接口配置 guid: 项目标识默认 */
-const httpsbaseUrl = 'https://monitor-screen.cloud.hoge.cn'
+export const httpsbaseUrl = 'https://monitor-screen.cloud.hoge.cn'
 // const baseUrl = 'http://monitor-screen.cloud.hoge.cn'
-const workcallUrl = 'https://sys-team.cloud.hoge.cn'
+export const workcallUrl = 'https://sys-team.cloud.hoge.cn'
 
 // workcallInfoList 记者列表
 export const getReporter = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=screen&a=reporterLine`)
