@@ -66,3 +66,6 @@ export const jilincomponentFusionMediaData = getComponent('jilin/fusionMediaData
 export const jilincomponentVideoList = getComponent('jilin/videoList') // 直播监看
 export const jilincomponentWorkcallCommand = getComponent('jilin/workcallCommand') // 协同指挥
 /* 吉林套系 end */
+
+/* 新沂套系 */
+export const xinyicomponentReport = getComponent('xinyi/report')

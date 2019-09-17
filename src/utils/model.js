@@ -28,7 +28,7 @@ export const asyncConfig = () => {
         600: {
           gravity: '',
           router: 'test01',
-          subviews: ['600'],
+          subviews: ['601'],
           title: '测试',
           view: 'screen'
         },
@@ -38,6 +38,7 @@ export const asyncConfig = () => {
         }
       }
     }
+    storage.set('saas_config', config)
     resolve(config)
   })
 }
@@ -89,6 +90,7 @@ export const initRouter = (router) => {
     for (let key in data) {
       var item = data[key]
       if (item.view === 'screen') {
+        console.log(key)
         defineRouters.push({
           path: `/${item.router}`,
           name: item.router,
