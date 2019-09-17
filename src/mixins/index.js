@@ -28,6 +28,7 @@ export default {
         } else {
           dom.style.fontSize = height / 1080 * 100 + 'px'
         }
+        console.log(dom.style.fontSize)
       }
     },
     getProportion (id) {
