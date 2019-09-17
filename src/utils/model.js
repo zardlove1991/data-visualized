@@ -27,7 +27,7 @@ export const asyncConfig = () => {
       view: {
         600: {
           gravity: '',
-          router: 'test01',
+          router: 'report',
           subviews: ['601'],
           title: '测试',
           view: 'screen'
@@ -90,7 +90,6 @@ export const initRouter = (router) => {
     for (let key in data) {
       var item = data[key]
       if (item.view === 'screen') {
-        console.log(key)
         defineRouters.push({
           path: `/${item.router}`,
           name: item.router,

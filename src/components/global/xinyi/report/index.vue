@@ -1,6 +1,7 @@
 <template>
   <div class="xy-report" id="xy-report">
-    <div class="report-wrap">
+    <div class="report-wrap sys-flex sys-vertical">
+      <div class="report-title">{{reportTitle}}</div>
       <div
         class="report-list animated sys-flex sys-flex-center"
         :class="{'fadeInLeft' : v}"
@@ -9,8 +10,8 @@
         :key="k"
       >
         <div class="list-title overhidden">{{v.title}}</div>
-        <div class="report-user">{{v.project_user_name}}</div>
-        <div class="report-time">{{v.create_time | format}}</div>
+        <div class="list-user">{{v.project_user_name}}</div>
+        <div class="list-time">{{v.create_time | format}}</div>
       </div>
     </div>
   </div>
@@ -22,6 +23,7 @@ export default {
   name: 'report',
   data () {
     return {
+      reportTitle: '报题展示',
       list: [],
       dataList: [],
       count: 0
@@ -64,34 +66,64 @@ export default {
 
     initList () {
       this.dataList = this.list.slice(this.count, this.count + 4)
-      // this.count += 4
-      // this.listInterval = setInterval(() => {
-      //   if (this.count < this.list.length) {
-      //     this.dataList = []
-      //     setTimeout(() => {
-      //       this.dataList = this.list.slice(this.count, this.count + 4)
-      //       this.count += 4
-      //     }, 100)
-      //   } else {
-      //     this.dataList = []
-      //     clearInterval(this.listInterval)
-      //     this.count = 0
-      //     this.getDataList()
-      //   }
-      // }, 10000)
+      this.count += 4
+      this.listInterval = setInterval(() => {
+        if (this.count < this.list.length) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = this.list.slice(this.count, this.count + 4)
+            this.count += 4
+          }, 100)
+        } else {
+          this.dataList = []
+          clearInterval(this.listInterval)
+          this.count = 0
+          this.getDataList()
+        }
+      }, 10000)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import 'src/styles/index.scss';
 .xy-report {
-  width: 500px;
-  height: 500px;
-  .sys-flex{display: -webkit-flex;display: -ms-flexbox;display: flex;}
-.sys-flex-center{-webkit-align-items: center;-ms-flex-align: center;align-items: center;}
-.list-title {
-        flex: 1;
-      }
+  padding: 0.5em;
+  .report-wrap {
+    width: 100%;
+    height: 100%;
+    background: url('./assets/f-top-right.png') no-repeat center;
+    background-size: 100% 100%;
+    padding: 0.4em 0.6em;
+  }
+  .report-title {
+    text-align: left;
+    // font-size: px1rem(23px);
+    font-size: 1.5em;
+    color: #d6e6ff;
+    margin-bottom: 0.3em;
+  }
+  .report-list {
+    height: 1.5em;
+    padding: 0.2em;
+    margin-bottom: 0.3em;
+    color: #d6e6ff;
+    background: url('./assets/user-list-bg.png') no-repeat center;
+    background-size: 100%;
+    .list-title {
+      flex: 1;
+      text-align: left;
+    }
+    .list-user {
+      font-size: 0.8em;
+      color: rgba(243, 248, 254, 0.5);
+    }
+    .list-time {
+      margin-left: 0.2em;
+      font-size: 0.8em;
+      color: rgba(243, 248, 254, 0.5);
+    }
+  }
 }
 </style>
