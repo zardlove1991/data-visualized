@@ -71,6 +71,29 @@ export const initRouter = (router) => {
     }
     router.options.routes.unshift(...defineRouters)
     router.addRoutes(router.options.routes)
+  }).catch(err => {
+    console.log(err)
+    let data = {
+      330: {
+        view: 'screen',
+        title: '报题展示',
+        router: 'report'
+      }
+    }
+    for (let key in data) {
+      var item = data[key]
+      if (item.view === 'screen') {
+        defineRouters.push({
+          path: `/${item.router}`,
+          name: item.router,
+          component: {
+            template: `<layout-view viewId="${key}"></layout-view>`
+          }
+        })
+      }
+    }
+    router.options.routes.unshift(...defineRouters)
+    router.addRoutes(router.options.routes)
   })
 }
 
