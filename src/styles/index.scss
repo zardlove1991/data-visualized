@@ -45,9 +45,9 @@ html, body, #app {
 }
 
 // px to rem
-@function px1rem($px-values,$baseline-px:16px,$support-for-ie:false){
+@function px1em($px-values,$baseline-px:16px,$support-for-ie:false){
   //Conver the baseline into rems
-  $baseline-rem: $baseline-px / 1rem * 1;
+  $baseline-rem: $baseline-px / 1em * 2;
   //Print the first line in pixel values
   @if $support-for-ie {
       @return $px-values;

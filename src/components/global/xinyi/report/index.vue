@@ -3,7 +3,7 @@
     <div class="report-wrap sys-flex sys-vertical">
       <div class="report-title">{{reportTitle}}</div>
       <div
-        class="report-list animated sys-flex sys-flex-center"
+        class="report-list animated sys-flex sys-flex-center overhidden"
         :class="{'fadeInLeft' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
@@ -89,18 +89,19 @@ export default {
 <style lang="scss" scoped>
 @import 'src/styles/index.scss';
 .xy-report {
-  padding: 0.5em;
+  width: 100%;
+  padding: px1em(15px);
   .report-wrap {
     width: 100%;
     height: 100%;
     background: url('./assets/f-top-right.png') no-repeat center;
     background-size: 100% 100%;
-    padding: 0.4em 0.6em;
+    padding: px1em(18px) px1em(12px);
   }
   .report-title {
     text-align: left;
-    // font-size: px1rem(23px);
-    font-size: 1.5em;
+    font-size: px1em(23px);
+    // font-size: 1.5em;
     color: #d6e6ff;
     margin-bottom: 0.3em;
   }
@@ -108,6 +109,7 @@ export default {
     height: 1.5em;
     padding: 0.2em;
     margin-bottom: 0.3em;
+    font-size: px1em(19.2px);
     color: #d6e6ff;
     background: url('./assets/user-list-bg.png') no-repeat center;
     background-size: 100%;
@@ -116,12 +118,12 @@ export default {
       text-align: left;
     }
     .list-user {
-      font-size: 0.8em;
+      font-size: px1em(17.2px);
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
       margin-left: 0.2em;
-      font-size: 0.8em;
+      font-size: px1em(17.2px);
       color: rgba(243, 248, 254, 0.5);
     }
   }
