@@ -12,6 +12,7 @@ import {createStore} from './store'
 import {initRouter} from '@/utils/model'
 import * as api from './servers/api' // 接口
 import mixins from '@/mixins'
+import './styles/index.scss'
 
 Vue.use(ElementUI)
 Vue.use(BaiduMap, {
