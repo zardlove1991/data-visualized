@@ -172,10 +172,12 @@ export default {
       margin-right: 2%;
       font-size: px1em(17px);
       color: #d6e6ff;
-      background: url('./assets/news-btn.png') no-repeat;
+      background: url('./assets/news-btn.png') no-repeat center;
+      background-size: 100%;
     }
     .active {
-      background: url('./assets/news-active-btn.png') no-repeat;
+      background: url('./assets/news-active-btn.png') no-repeat center;
+      background-size: 100%;
     }
   }
   .news-list {

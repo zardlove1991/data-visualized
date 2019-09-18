@@ -9,7 +9,7 @@
       </div>
       <div
         class="clue-list animated sys-flex sys-flex-center overhidden"
-        :class="{'fadeInLeft' : v}"
+        :class="{'flipInX' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
         :key="k"
@@ -134,10 +134,12 @@ export default {
       margin-right: 2%;
       font-size: px1em(8.5px);
       color: #d6e6ff;
-      background: url('./assets/clue-btn.png') no-repeat;
+      background: url('./assets/clue-btn.png') no-repeat center;
+      background-size: 100%;
     }
     .active {
-      background: url('./assets/clue-active-btn.png') no-repeat;
+      background: url('./assets/clue-active-btn.png') no-repeat center;
+      background-size: 100%;
     }
   }
   .clue-list {

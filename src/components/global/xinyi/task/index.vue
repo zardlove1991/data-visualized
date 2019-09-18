@@ -6,7 +6,7 @@
         <div class="task-list-box">
           <div
             class="task-list animated sys-flex sys-flex-center overhidden"
-            :class="{'fadeInLeft' : v, 'bgurl0': k === 0, 'bgurl1': k === 1, 'bgurl2': k === 2, 'bgurl3': k === 3}"
+            :class="{'flipInX' : v, 'bgurl0': k === 0, 'bgurl1': k === 1, 'bgurl2': k === 2, 'bgurl3': k === 3}"
             :style="{'animation-delay' : k/2 + 's'}"
             v-for="(v,k) in dataList"
             :key="k"

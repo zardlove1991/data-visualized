@@ -4,7 +4,7 @@
       <div class="report-title">{{reportTitle}}</div>
       <div
         class="report-list animated sys-flex sys-flex-center overhidden"
-        :class="{'fadeInLeft' : v}"
+        :class="{'flipInX' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
         :key="k"
