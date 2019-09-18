@@ -2,7 +2,7 @@
   <div class="xy-clue" id="xy-clue">
     <div class="clue-wrap sys-flex sys-vertical">
       <div class="clue-title">{{projectTitle}}</div>
-      <div class="title-list sys-flex sys-flex-center">
+      <div class="title-list sys-flex sys-flex-center flex-justify-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
           {{v.name}}
         </div>
@@ -110,7 +110,7 @@ export default {
 @import 'src/styles/index.scss';
 .xy-clue {
   width: 100%;
-  padding: px1em(14px);
+  padding: px1em(11px) px1em(6px);
   .clue-wrap {
     width: 100%;
     height: 100%;
