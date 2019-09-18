@@ -69,3 +69,4 @@ export const jilincomponentWorkcallCommand = getComponent('jilin/workcallCommand
 
 /* 新沂套系 */
 export const xinyicomponentReport = getComponent('xinyi/report')
+export const xinyicomponentProject = getComponent('xinyi/project')

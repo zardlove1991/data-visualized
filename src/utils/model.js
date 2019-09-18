@@ -35,6 +35,17 @@ export const asyncConfig = () => {
         601: {
           component: 'report',
           view: 'component'
+        },
+        602: {
+          gravity: '',
+          router: 'project',
+          subviews: ['603'],
+          title: '测试',
+          view: 'screen'
+        },
+        603: {
+          component: 'project',
+          view: 'component'
         }
       }
     }
