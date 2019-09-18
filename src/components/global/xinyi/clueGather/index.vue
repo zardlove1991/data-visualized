@@ -2,7 +2,7 @@
   <div class="xy-clue" id="xy-clue">
     <div class="clue-wrap sys-flex sys-vertical">
       <div class="clue-title">{{projectTitle}}</div>
-      <div class="title-list sys-flex sys-flex-center flex-justify-center">
+      <div class="title-list sys-flex sys-flex-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
           {{v.name}}
         </div>
