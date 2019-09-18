@@ -71,3 +71,4 @@ export const jilincomponentWorkcallCommand = getComponent('jilin/workcallCommand
 export const xinyicomponentReport = getComponent('xinyi/report')
 export const xinyicomponentProject = getComponent('xinyi/project')
 export const xinyicomponentClueGather = getComponent('xinyi/clueGather')
+export const xinyicomponentTask = getComponent('xinyi/task')
