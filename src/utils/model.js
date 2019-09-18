@@ -46,6 +46,17 @@ export const asyncConfig = () => {
         603: {
           component: 'project',
           view: 'component'
+        },
+        604: {
+          gravity: '',
+          router: 'clueGather',
+          subviews: ['605'],
+          title: '测试',
+          view: 'screen'
+        },
+        605: {
+          component: 'clueGather',
+          view: 'component'
         }
       }
     }
