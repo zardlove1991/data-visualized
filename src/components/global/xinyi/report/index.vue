@@ -90,40 +90,40 @@ export default {
 @import 'src/styles/index.scss';
 .xy-report {
   width: 100%;
-  padding: px1em(15px);
+  padding: px1em(14px);
   .report-wrap {
     width: 100%;
     height: 100%;
     background: url('./assets/f-top-right.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(18px) px1em(12px);
+    padding: px1em(17px) px1em(11px);
   }
   .report-title {
     text-align: left;
-    font-size: px1em(23px);
+    height: 20%;
+    font-size: px1em(22px);
     // font-size: 1.5em;
     color: #d6e6ff;
-    margin-bottom: 0.3em;
   }
   .report-list {
-    height: 1.5em;
+    height: 20%;
     padding: 0.2em;
-    margin-bottom: 0.3em;
-    font-size: px1em(19.2px);
     color: #d6e6ff;
     background: url('./assets/user-list-bg.png') no-repeat center;
     background-size: 100%;
     .list-title {
       flex: 1;
+      font-size: px1em(18.5px);
       text-align: left;
     }
     .list-user {
-      font-size: px1em(17.2px);
+      flex-basis: 20%;
+      font-size: px1em(16.5px);
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
-      margin-left: 0.2em;
-      font-size: px1em(17.2px);
+      flex-basis: 20%;
+      font-size: px1em(16.5px);
       color: rgba(243, 248, 254, 0.5);
     }
   }
