@@ -79,6 +79,17 @@ export const asyncConfig = () => {
         609: {
           component: 'news',
           view: 'component'
+        },
+        610: {
+          gravity: '',
+          router: 'hotStats',
+          subviews: ['611'],
+          title: '测试',
+          view: 'screen'
+        },
+        611: {
+          component: 'hotStats',
+          view: 'component'
         }
       }
     }
