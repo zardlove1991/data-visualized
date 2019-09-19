@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'title',
   data () {
     return {
       titleTitle: '新沂市融媒体指挥调度中心',
