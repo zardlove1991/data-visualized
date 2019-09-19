@@ -301,7 +301,7 @@ export default {
         visualMap: {
           show: false,
           min: 0,
-          // max: 2500,
+          max: this.areaData.geo[0].value,
           left: 'center',
           top: 'bottom',
           inRange: {
