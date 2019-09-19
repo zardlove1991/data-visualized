@@ -90,6 +90,28 @@ export const asyncConfig = () => {
         611: {
           component: 'hotStats',
           view: 'component'
+        },
+        612: {
+          gravity: '',
+          router: 'title',
+          subviews: ['613'],
+          title: '测试',
+          view: 'screen'
+        },
+        613: {
+          component: 'title',
+          view: 'component'
+        },
+        614: {
+          gravity: '',
+          router: 'workcallInfoMap',
+          subviews: ['615'],
+          title: '测试',
+          view: 'screen'
+        },
+        615: {
+          component: 'workcallInfoMap',
+          view: 'component'
         }
       }
     }

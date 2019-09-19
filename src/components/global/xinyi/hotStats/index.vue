@@ -54,7 +54,7 @@ export default {
         series: []
       },
       areaData: {
-        geo: []
+        geo: [{ value: 0 }]
       },
       seriesData: []
     }
@@ -302,7 +302,7 @@ export default {
         visualMap: {
           show: false,
           min: 0,
-          // max: 2500,
+          max: this.areaData.geo[0].value || 0,
           left: 'center',
           top: 'bottom',
           inRange: {
