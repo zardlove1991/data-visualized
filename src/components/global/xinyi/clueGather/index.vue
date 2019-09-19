@@ -1,7 +1,7 @@
 <template>
   <div class="xy-clue" id="xy-clue">
     <div class="clue-wrap sys-flex sys-vertical">
-      <div class="clue-title">{{projectTitle}}</div>
+      <div class="clue-title">{{clueTitle}}</div>
       <div class="title-list sys-flex sys-flex-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
           {{v.name}}
@@ -28,7 +28,7 @@ export default {
   name: 'clue',
   data () {
     return {
-      projectTitle: '选题展示',
+      clueTitle: '线索汇聚',
       titleList: [{
         name: '互联网',
         type: 0
