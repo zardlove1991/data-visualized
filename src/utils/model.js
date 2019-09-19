@@ -101,6 +101,17 @@ export const asyncConfig = () => {
         613: {
           component: 'title',
           view: 'component'
+        },
+        614: {
+          gravity: '',
+          router: 'workcallInfoMap',
+          subviews: ['615'],
+          title: '测试',
+          view: 'screen'
+        },
+        615: {
+          component: 'workcallInfoMap',
+          view: 'component'
         }
       }
     }
