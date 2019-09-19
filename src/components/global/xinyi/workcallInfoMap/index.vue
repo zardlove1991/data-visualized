@@ -470,7 +470,7 @@ export default {
   },
   created () {
     // getDataConfig().then(res => {
-    this.center = { lng: 118, lat: 32 }
+    this.center = { lng: 118.7653724500868, lat: 31.97024088541667 }
     // })
   },
   mounted () {
@@ -488,8 +488,7 @@ export default {
       if (!map) {
         map = new BMap.Map('my-map')
       }
-      console.log(map)
-      map.setMapStyle(this.mapStyle)
+      // map.setMapStyle(this.mapStyle)
       map.addControl(new BMap.NavigationControl())
       // 绘制带图标注
       var _this = this
@@ -579,6 +578,7 @@ export default {
       getConnecterList().then(response => {
         if (!response.data.ErrorCode && response.data.data.length) {
           this.reporterList = response.data.data // .splice(0, 5)
+          console.log(this.reporterList[0])
         }
         this.rMap()
       })
