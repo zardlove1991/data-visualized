@@ -13,6 +13,12 @@ import {initRouter} from '@/utils/model'
 import * as api from './servers/api' // 接口
 import mixins from '@/mixins'
 import './styles/index.scss'
+import filters from '@/utils/filter'
+
+// vue全局过滤器
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 Vue.use(ElementUI)
 Vue.use(BaiduMap, {

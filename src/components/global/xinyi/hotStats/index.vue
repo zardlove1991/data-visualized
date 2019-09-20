@@ -28,7 +28,6 @@ import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/map'
 import china from 'echarts/map/json/china.json'
-// import 'echarts/map/js/china'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/legend'
@@ -54,8 +53,7 @@ export default {
         series: []
       },
       areaData: {
-        geo: [{ value: 0 }],
-        reg: []
+        geo: [{ value: 0 }]
       },
       seriesData: []
     }
@@ -307,6 +305,7 @@ export default {
           show: false,
           trigger: 'item'
         },
+        // 用来展示映射的效果
         visualMap: {
           show: false,
           min: 0,
@@ -348,13 +347,14 @@ export default {
                 areaColor: '#567bb6'
               }
             },
-            data: this.areaData.reg
+            data: this.areaData.geo
           }
         ]
       }
     }
   },
   watch: {
+    // 监测热点的ID变换，更新图表数据
     'hotNews.eventId': {
       handler (newValue) {
         if (newValue) {
@@ -405,13 +405,8 @@ export default {
       })
       getTopicPubArea(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
+          // 地图数据省份不要后缀，正则替换掉
           this.areaData.geo = res.data.result.map(v => {
-            return {
-              value: v.count,
-              name: v.name_zh
-            }
-          })
-          this.areaData.reg = res.data.result.map(v => {
             return {
               value: v.count,
               name: v.name_zh.replace(/省|市|自治区|维吾尔|壮族|回族/g, '')

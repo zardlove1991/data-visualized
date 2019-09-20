@@ -16,7 +16,7 @@
       >
         <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-user">{{v.project_user_name}}</div>
-        <div class="list-time">{{v.create_time | format}}</div>
+        <div class="list-time">{{v.create_time | dateFormat}}</div>
       </div>
     </div>
   </div>
@@ -45,25 +45,6 @@ export default {
       count: 0
     }
   },
-  filters: {
-    format: inputTime => {
-      inputTime = parseInt(inputTime) * 1000
-      var date = new Date(inputTime)
-      var y = date.getFullYear()
-      var m = date.getMonth() + 1
-      m = m < 10 ? '0' + m : m
-      var d = date.getDate()
-      d = d < 10 ? '0' + d : d
-      var h = date.getHours()
-      h = h < 10 ? '0' + h : h
-      var minute = date.getMinutes()
-      var second = date.getSeconds()
-      minute = minute < 10 ? '0' + minute : minute
-      second = second < 10 ? '0' + second : second
-      var time = y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
-      return time.slice(5, 10)
-    }
-  },
   created () {
     this.getData(this.titleList[this.currentIndex].type)
     setInterval(() => {
@@ -82,6 +63,7 @@ export default {
   methods: {
     getData (type) {
       this.dataList = []
+      // 根据传参不同调用不同的接口数据
       if (type === 0) {
         getWebsitList().then(res => {
           if (res && res.data && res.data.data) {
