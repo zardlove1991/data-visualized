@@ -132,7 +132,7 @@ export default {
   .news-wrap {
     width: 100%;
     height: 100%;
-    background: url('./assets/topic-inset-bg.png') no-repeat center;
+    background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
     padding: px1em(17px) px1em(11px);
   }
