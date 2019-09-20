@@ -28,6 +28,7 @@ import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/map'
 import china from 'echarts/map/json/china.json'
+// import 'echarts/map/js/china'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/legend'
@@ -348,7 +349,9 @@ export default {
   watch: {
     'hotNews.eventId': {
       handler (newValue) {
-        this.getEchartData(newValue)
+        if (newValue) {
+          this.getEchartData(newValue)
+        }
       }
     }
   },
@@ -368,7 +371,6 @@ export default {
         }
       })
     },
-
     getEchartData (value) {
       getTopicTrend(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
@@ -404,7 +406,6 @@ export default {
         }
       })
     },
-
     initList () {
       this.hotNews = this.list[this.count]
       this.count++
