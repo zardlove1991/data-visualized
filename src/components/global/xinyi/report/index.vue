@@ -71,7 +71,7 @@ export default {
 @import 'src/styles/index.scss';
 .xy-report {
   width: 100%;
-  padding: 0.25vh 0.5vw;
+  padding: 0.25vh 0.25vw;
   .report-wrap {
     width: 100%;
     height: 100%;

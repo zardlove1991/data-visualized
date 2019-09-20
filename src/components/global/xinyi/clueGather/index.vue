@@ -92,13 +92,13 @@ export default {
 @import 'src/styles/index.scss';
 .xy-clue {
   width: 100%;
-  padding: 0.25vh 0.5vw;
+  padding: 0.25vh 0.25vw;
   .clue-wrap {
     width: 100%;
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
+    padding: px1em(8.5px) px1em(5.5px);
   }
   .clue-title {
     text-align: left;
