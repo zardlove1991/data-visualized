@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="task-chart-box">
-          <chart :options="pieOpt"></chart>
+          <chart :options="pieOpt" :autoResize="true"></chart>
         </div>
       </div>
     </div>
