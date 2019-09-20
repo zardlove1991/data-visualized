@@ -578,7 +578,6 @@ export default {
       getConnecterList().then(response => {
         if (!response.data.ErrorCode && response.data.data.length) {
           this.reporterList = response.data.data // .splice(0, 5)
-          console.log(this.reporterList[0])
         }
         this.rMap()
       })
