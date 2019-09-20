@@ -162,7 +162,7 @@ export default {
 @import "src/styles/index.scss";
 .xy-task {
   width: 100%;
-  padding: px1em(14px);
+  padding: 0.25vh 0.5vw;
   .task-wrap {
     width: 100%;
     height: 100%;

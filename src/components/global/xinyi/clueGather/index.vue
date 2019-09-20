@@ -92,7 +92,7 @@ export default {
 @import 'src/styles/index.scss';
 .xy-clue {
   width: 100%;
-  padding: px1em(11px) px1em(6px);
+  padding: 0.25vh 0.5vw;
   .clue-wrap {
     width: 100%;
     height: 100%;
