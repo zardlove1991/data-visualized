@@ -3,7 +3,7 @@
     <div :class="layoutClass()" v-if="view">
       <div :class="subItemClass(id, viewId)" class="overflow" v-for="id in view.subviews" :key="id" >
         <layout-view v-if="config[id].view === 'layout'" :viewId="id"></layout-view>
-        <components-view class="bg" v-else :config="config[id]"></components-view>
+        <components-view :style="defineBg()" class="bg" v-else :config="config[id]"></components-view>
       </div>
     </div>
   </div>
@@ -48,6 +48,14 @@ export default {
         subItemClass = 'flex1'
       }
       return subItemClass
+    },
+    defineBg () {
+      if (this.view.viewAttr && this.view.viewAttr.bg) {
+        return `
+          background: url(${this.data.viewAttr.bg}) no-repeat center center;
+          background-size: 100% 100%
+        `
+      }
     }
   },
   components: { componentsView }
