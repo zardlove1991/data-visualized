@@ -1,6 +1,6 @@
 <template>
   <div class="xy-project" id="xy-project">
-    <div class="project-wrap sys-flex sys-vertical">
+    <div class="project-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
       <div class="project-title">{{projectTitle}}</div>
       <div
         class="project-list animated sys-flex sys-flex-center overhidden"
@@ -75,9 +75,13 @@ export default {
   .project-wrap {
     width: 100%;
     height: 100%;
+    // background: url('./assets/bg.png') no-repeat center;
+    // background-size: 100% 100%;
+    padding: px1em(17px) px1em(11px);
+  }
+  .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
   }
   .project-title {
     text-align: left;

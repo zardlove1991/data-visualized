@@ -1,6 +1,6 @@
 <template>
   <div class="xy-clue" id="xy-clue">
-    <div class="clue-wrap sys-flex sys-vertical">
+    <div class="clue-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
       <div class="clue-title">{{clueTitle}}</div>
       <div class="title-list sys-flex sys-flex-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
@@ -96,9 +96,11 @@ export default {
   .clue-wrap {
     width: 100%;
     height: 100%;
+    padding: px1em(8.5px) px1em(5.5px);
+  }
+  .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(8.5px) px1em(5.5px);
   }
   .clue-title {
     text-align: left;

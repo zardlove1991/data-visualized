@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-title sys-flex sys-flex-center" id="xy-title">
+  <div class="xy-title sys-flex sys-flex-center" id="xy-title" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
     <div class="title-title">{{titleTitle}}</div>
   </div>
 </template>
@@ -26,13 +26,17 @@ export default {
   width: 100%;
   height: 100%;
   padding: 0.25vh 0.5vw;
-  background: url("./assets/bg-01.png") no-repeat center;
-  background-size: 100%;
+  // background: url("./assets/bg-01.png") no-repeat center;
+  // background-size: 100%;
   .title-title {
     width: 100%;
     font-size: px1em(190px);
     font-weight: bold;
     color: #ffffff;
   }
+}
+.warp-bg {
+  background: url('./assets/bg-01.png') no-repeat center;
+  background-size: 100% 100%;
 }
 </style>

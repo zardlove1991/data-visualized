@@ -1,6 +1,6 @@
 <template>
   <div class="xy-news" id="xy-news">
-    <div class="news-wrap sys-flex sys-vertical">
+    <div class="news-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
       <div class="news-title">{{newsTitle}}</div>
       <div class="title-list sys-flex sys-flex-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
@@ -132,9 +132,13 @@ export default {
   .news-wrap {
     width: 100%;
     height: 100%;
+    // background: url('./assets/bg.png') no-repeat center;
+    // background-size: 100% 100%;
+    padding: px1em(17px) px1em(11px);
+  }
+  .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
   }
   .news-title {
     text-align: left;

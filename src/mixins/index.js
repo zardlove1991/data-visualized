@@ -11,11 +11,17 @@ export default {
       pageAnimated: false
     }
   },
+  computed: {
+    showDefault () {
+      return !(this.data.viewAttr && this.data.viewAttr.bg)
+    }
+  },
   mounted () {
     this.pageAnimated = true
     if (this.reload && !this.no_reload_on_mount) {
       this.reload()
     }
+    console.log(this.data)
   },
   components: {...modules},
   methods: {
@@ -42,6 +48,14 @@ export default {
         return dom.clientWidth / 1920
       } else {
         return 1
+      }
+    },
+    defineBg () {
+      if (this.data.viewAttr && this.data.viewAttr.bg) {
+        return `
+          background: url(${this.data.viewAttr.bg}) no-repeat center center;
+          background-size: 100% 100%
+        `
       }
     }
   }
