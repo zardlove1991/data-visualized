@@ -54,7 +54,8 @@ export default {
         series: []
       },
       areaData: {
-        geo: [{ value: 0 }]
+        geo: [{ value: 0 }],
+        reg: []
       },
       seriesData: []
     }
@@ -152,6 +153,13 @@ export default {
         color: ['#ce4272', '#0554f5', '#f3972e', '#008aed', '#14da7d'],
         textStyle: {
           color: '#fff'
+        },
+        title: {
+          text: '情感分析',
+          textStyle: {
+            color: 'rgb(214,230,255)',
+            fontSize: this.proportion * 18
+          }
         },
         series: [
           {
@@ -340,7 +348,7 @@ export default {
                 areaColor: '#567bb6'
               }
             },
-            data: this.areaData.geo
+            data: this.areaData.reg
           }
         ]
       }
@@ -401,6 +409,12 @@ export default {
             return {
               value: v.count,
               name: v.name_zh
+            }
+          })
+          this.areaData.reg = res.data.result.map(v => {
+            return {
+              value: v.count,
+              name: v.name_zh.replace(/省|市|自治区|维吾尔|壮族|回族/g, '')
             }
           })
         }
