@@ -12,7 +12,7 @@ export default {
   name: 'newspaper',
   data () {
     return {
-      url: `http://124.161.254.181/zyrb/20190528/html/index.htm?time=${new Date().getTime()}`
+      url: `http://szb.xy.gov.cn/`
     }
   },
   created () {
