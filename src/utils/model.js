@@ -123,6 +123,17 @@ export const asyncConfig = () => {
     //     617: {
     //       component: 'newspaper',
     //       view: 'component'
+    //     },
+    //     618: {
+    //       gravity: '',
+    //       router: 'tv',
+    //       subviews: ['619'],
+    //       title: '测试',
+    //       view: 'screen'
+    //     },
+    //     619: {
+    //       component: 'tv',
+    //       view: 'component'
     //     }
     //   }
     // }

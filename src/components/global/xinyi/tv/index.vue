@@ -27,7 +27,7 @@ export default {
   name: 'tv',
   data () {
     return {
-      tvTitle: '电视监看',
+      tvTitle: '电视直播',
       tvList: []
     }
   },
