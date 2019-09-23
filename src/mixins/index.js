@@ -21,7 +21,6 @@ export default {
     if (this.reload && !this.no_reload_on_mount) {
       this.reload()
     }
-    console.log(this.data)
   },
   components: {...modules},
   methods: {
