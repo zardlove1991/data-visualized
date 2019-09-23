@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'title',
+  name: 'xinyi',
   data () {
     return {
       titleTitle: '新沂市融媒体指挥调度中心',
