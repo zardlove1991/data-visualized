@@ -114,7 +114,7 @@ export default {
     background-size: 100%;
     padding: 0 0.4em;
     .tv-list {
-      width: 45em;
+      width: 45%;
       // height: 5.6em;
       .vjs-custom-skin {
         width: 100%;
