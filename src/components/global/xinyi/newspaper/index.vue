@@ -1,6 +1,7 @@
 <template>
-  <div class="xy-newspaper" id="xy-newspaper">
-    <div class="newspaper-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
+  <div class="xy-newspaper" id="xy-newspaper" :style="defineBg()">
+    <!--  :class="[{'warp-bg' : showDefault}]"  -->
+    <div class="newspaper-wrap sys-flex sys-vertical">
       <div class="newspaper-title">{{newspaperTitle}}</div>
       <div class="newspaper-box">
         <iframe :src="url"></iframe>
@@ -32,6 +33,8 @@ export default {
   .newspaper-wrap {
     width: 100%;
     height: 100%;
+    background: url('./assets/bg.png') no-repeat center;
+    background-size: 100% 100%;
     padding: px1em(17px) px1em(11px);
   }
   .warp-bg {

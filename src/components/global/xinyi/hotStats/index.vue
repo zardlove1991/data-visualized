@@ -1,6 +1,7 @@
 <template>
-  <div class="xy-hot" id="xy-hot">
-    <div class="hot-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
+  <div class="xy-hot" id="xy-hot" :style="defineBg()">
+    <!--  :class="[{'warp-bg' : showDefault}]"  -->
+    <div class="hot-wrap sys-flex sys-vertical">
       <div class="hot-title hidden">{{hotNews.title}}</div>
       <div class="hot-charts sys-flex sys-flex-wrap flex-justify-between">
         <div class="heat-trend chart-box">
@@ -445,8 +446,8 @@ export default {
   .hot-wrap {
     width: 100%;
     height: 100%;
-    // background: url("./assets/bg.png") no-repeat center;
-    // background-size: 100% 100%;
+    background: url("./assets/bg.png") no-repeat center;
+    background-size: 100% 100%;
     padding: px1em(8.5px) px1em(5.5px);
   }
   .warp-bg {

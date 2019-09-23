@@ -1,6 +1,7 @@
 <template>
-  <div class="xy-report" id="xy-report">
-    <div class="report-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
+  <div class="xy-report" id="xy-report" :style="defineBg()">
+    <!-- :class="[{'warp-bg' : showDefault}]" -->
+    <div class="report-wrap sys-flex sys-vertical" >
       <div class="report-title">{{reportTitle}}</div>
       <div
         class="report-list animated sys-flex sys-flex-center overhidden"
@@ -75,8 +76,8 @@ export default {
   .report-wrap {
     width: 100%;
     height: 100%;
-    // background: url('./assets/bg.png') no-repeat center;
-    // background-size: 100% 100%;
+    background: url('./assets/bg.png') no-repeat center;
+    background-size: 100% 100%;
     padding: px1em(17px) px1em(11px);
   }
   .warp-bg {
@@ -94,7 +95,7 @@ export default {
     height: 20%;
     padding: 0.2em;
     color: #d6e6ff;
-    background: url('./assets/user-list-bg.png') no-repeat center;
+    // background: url('./assets/user-list-bg.png') no-repeat center;
     background-size: 100%;
     .list-title {
       flex: 1;
