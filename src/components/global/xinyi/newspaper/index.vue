@@ -1,7 +1,7 @@
 <template>
   <div class="xy-newspaper" id="xy-newspaper">
     <div class="newspaper-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
-      <div class="tv-title">{{newspaperTitle}}</div>
+      <div class="newspaper-title">{{newspaperTitle}}</div>
       <div class="newspaper-box">
         <iframe :src="url"></iframe>
       </div>
@@ -38,7 +38,7 @@ export default {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
   }
-  .tv-title {
+  .newspaper-title {
     text-align: left;
     height: 15%;
     font-size: px1em(22px);
