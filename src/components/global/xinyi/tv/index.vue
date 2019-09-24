@@ -115,7 +115,7 @@ export default {
     padding: 0% 5% 5% 0;
     margin: 0 auto;
     background: url("./assets/tvbg.png") no-repeat center;
-    background-size: 100%;
+    background-size: 100% 100%;
     .tv-name {
       width: 40%;
       font-size: px1em(15px);
