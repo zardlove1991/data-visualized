@@ -470,12 +470,38 @@ export default {
   .hot-charts {
     flex: 1;
     .chart-box {
-      width: 50%;
+      position: relative;
+      width: 48%;
       height: 45%;
+      padding: 1% 0 0 1%;
       .echarts {
         width: 100%;
         height: 100%;
       }
+    }
+    .chart-box::after{
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      height: 25%;
+      width: 25%;
+      border-top-left-radius: 10%;
+      border-left: px1em(1px) solid #8c6bf9;
+      border-top: px1em(1px) solid #8c6bf9;
+    }
+    .chart-box::before{
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      content: '';
+      display: block;
+      height: 25%;
+      width: 25%;
+      border-bottom-right-radius: 10%;
+      border-right: px1em(1px) solid #8c6bf9;
+      border-bottom: px1em(1px) solid #8c6bf9;
     }
   }
 }

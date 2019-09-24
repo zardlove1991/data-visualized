@@ -144,19 +144,19 @@ export default {
       display: block;
       height: 25%;
       width: 15%;
-      border-left: 2px solid white;
-      border-top: 2px solid white;
+      border-left: px1em(1px) solid white;
+      border-top: px1em(1px) solid white;
     }
     .tv-list::before{
       position: absolute;
-      bottom: -1px;
-      right: -1px;
+      bottom: -(px1em(1px));
+      right: -(px1em(1px));
       content: '';
       display: block;
       height: 25%;
       width: 15%;
-      border-right: 5px solid white;
-      border-bottom: 5px solid white;
+      border-right: px1em(1px) solid white;
+      border-bottom: px1em(1px) solid white;
     }
   }
 }
