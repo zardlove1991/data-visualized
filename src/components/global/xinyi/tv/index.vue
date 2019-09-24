@@ -3,8 +3,10 @@
     <!--  :class="[{'warp-bg' : showDefault}]" -->
     <div class="tv-wrap sys-flex sys-vertical">
       <div class="tv-title sys-flex sys-flex-center">{{tvTitle}}</div>
-      <div class="tv-main sys-flex sys-flex-center flex-justify-between ">
-        <div v-for="(v,k) in tvList" :key="k" class="tv-list">
+      <div class="tv-main sys-flex sys-flex-center flex-justify-around sys-flex-wrap">
+        <div class="tv-name">《新闻频道》</div>
+        <div class="tv-name">《生活频道》</div>
+        <div v-for="(v,k) in tvList" :key="k" class="tv-list list-box">
           <video-player
             class="vjs-custom-skin"
             ref="videoPlayer"
@@ -12,7 +14,7 @@
             :playsinline="true"
             customEventName="customstatechangedeventname"
           ></video-player>
-          <div class="tv-name">{{v.name}}</div>
+          <!-- <div class="tv-name">{{v.name}}</div> -->
         </div>
       </div>
     </div>
@@ -78,7 +80,7 @@ export default {
               }
             }
           })
-          this.tvList = data.slice(0, 4)
+          this.tvList = data.slice(0, 2).concat(data.slice(0, 2))
         }
       })
     }
@@ -110,11 +112,18 @@ export default {
   .tv-main {
     width: 70%;
     height: 80%;
+    padding: 0% 5% 5% 0;
     margin: 0 auto;
-    background: url("./assets/back.png") no-repeat center;
+    background: url("./assets/tvbg.png") no-repeat center;
     background-size: 100%;
+    .tv-name {
+      width: 40%;
+      font-size: px1em(15px);
+      color: #d6e6ff;
+    }
     .tv-list {
-      width: 45%;
+      position: relative;
+      width: 40%;
       .vjs-custom-skin {
         width: 100%;
         height: 100%;
@@ -126,6 +135,28 @@ export default {
         text-align: center;
         margin-top: 0.15em;
       }
+    }
+    .tv-list::after{
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      height: 25%;
+      width: 15%;
+      border-left: 2px solid white;
+      border-top: 2px solid white;
+    }
+    .tv-list::before{
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      content: '';
+      display: block;
+      height: 25%;
+      width: 15%;
+      border-right: 5px solid white;
+      border-bottom: 5px solid white;
     }
   }
 }
