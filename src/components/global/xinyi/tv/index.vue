@@ -101,7 +101,7 @@ export default {
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: 0 px1em(17px) px1em(2px) 0;
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -114,11 +114,11 @@ export default {
     color: #d6e6ff;
   }
   .tv-main {
-    width: 70%;
-    height: 80%;
+    width: 80%;
+    height: 70%;
     margin: 0 auto;
     .tv-box {
-      padding: 5% 5% 5% 0;
+      padding: 5% 5% 0 0;
       height: 90%;
       background: url("./assets/tvbg.png") no-repeat center;
       background-size: 100% 100%;
@@ -128,13 +128,14 @@ export default {
       padding-right: 5%;
     }
     .tv-name {
-      width: 40%;
+      width: 45%;
       font-size: px1em(15px);
       color: #d6e6ff;
     }
     .tv-list {
       position: relative;
-      width: 40%;
+      width: 45%;
+      height: 40%;
       .vjs-custom-skin {
         width: 100%;
         height: 100%;

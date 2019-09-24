@@ -48,9 +48,9 @@ export default {
     color: #d6e6ff;
   }
   .newspaper-box {
-    padding: 0 15% 2% 15%;
-    width: 100%;
-    height: 80%;
+    width: 80%;
+    height: 70%;
+    margin: 0 auto;
     iframe {
       display: block;
       width: 100%;
