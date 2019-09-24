@@ -3,18 +3,22 @@
     <!--  :class="[{'warp-bg' : showDefault}]" -->
     <div class="tv-wrap sys-flex sys-vertical">
       <div class="tv-title sys-flex sys-flex-center">{{tvTitle}}</div>
-      <div class="tv-main sys-flex sys-flex-center flex-justify-around sys-flex-wrap">
-        <div class="tv-name">《新闻频道》</div>
-        <div class="tv-name">《生活频道》</div>
-        <div v-for="(v,k) in tvList" :key="k" class="tv-list list-box">
-          <video-player
-            class="vjs-custom-skin"
-            ref="videoPlayer"
-            :options="v.playerOpt"
-            :playsinline="true"
-            customEventName="customstatechangedeventname"
-          ></video-player>
-          <!-- <div class="tv-name">{{v.name}}</div> -->
+      <div class="tv-main">
+        <div class="name-box sys-flex sys-flex-center flex-justify-around">
+          <div class="tv-name">《新闻频道》</div>
+          <div class="tv-name">《生活频道》</div>
+        </div>
+        <div class="sys-flex sys-flex-center flex-justify-around sys-flex-wrap tv-box">
+          <div v-for="(v,k) in tvList" :key="k" class="tv-list list-box">
+            <video-player
+              class="vjs-custom-skin"
+              ref="videoPlayer"
+              :options="v.playerOpt"
+              :playsinline="true"
+              customEventName="customstatechangedeventname"
+            ></video-player>
+            <!-- <div class="tv-name">{{v.name}}</div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -97,7 +101,7 @@ export default {
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: 0 px1em(17px);
+    padding: 0 px1em(17px) px1em(2px) 0;
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -112,10 +116,17 @@ export default {
   .tv-main {
     width: 70%;
     height: 80%;
-    padding: 0% 5% 5% 0;
     margin: 0 auto;
-    background: url("./assets/tvbg.png") no-repeat center;
-    background-size: 100% 100%;
+    .tv-box {
+      padding: 5% 5% 5% 0;
+      height: 90%;
+      background: url("./assets/tvbg.png") no-repeat center;
+      background-size: 100% 100%;
+    }
+    .name-box {
+      height: 10%;
+      padding-right: 5%;
+    }
     .tv-name {
       width: 40%;
       font-size: px1em(15px);
