@@ -1,6 +1,6 @@
 <template>
 <!--  :class="[{'warp-bg' : showDefault}]"  -->
-  <div class="xy-title sys-flex sys-flex-center" id="xy-title" :style="defineBg()">
+  <div class="xy-title sys-flex sys-flex-center warp-bg" id="xy-title" :style="defineBg()">
     <div class="title-title">{{titleTitle}}</div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
   }
 }
 .warp-bg {
-  background: url('./assets/bg-01.png') no-repeat center;
+  // background: url('./assets/bg.png') no-repeat center;
   background-size: 100% 100%;
 }
 </style>
