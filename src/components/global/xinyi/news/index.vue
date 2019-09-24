@@ -2,7 +2,7 @@
   <div class="xy-news" id="xy-news" :style="defineBg()">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="news-wrap sys-flex sys-vertical">
-      <div class="news-title">{{newsTitle}}</div>
+      <div class="news-title sys-flex sys-flex-center">{{newsTitle}}</div>
       <div class="title-list sys-flex sys-flex-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
           {{v.name}}
@@ -86,10 +86,6 @@ export default {
             {
               title: '新沂市总工会平安志愿者服务站,积极开展平安创建工作',
               click_number: 603
-            },
-            {
-              title: '江苏新沂市统战部部长周树兵被查:涉嫌严重违纪违法',
-              click_number: 544
             }
           ]
         })
@@ -112,10 +108,6 @@ export default {
             {
               title: '746亩,10月份徐州新沂市乡镇拆迁又来了,看看有没有你村?',
               click_number: 763
-            },
-            {
-              title: '2019徐州新沂市劳务派遣教师招聘600名公告',
-              click_number: 684
             }
           ]
         })
@@ -135,43 +127,39 @@ export default {
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
   }
   .news-title {
+    height: 20%;
     text-align: left;
     font-size: px1em(22px);
-     margin-bottom: px1em(5px);
-    // font-size: 1.5em;
     color: #d6e6ff;
   }
   .title-list {
     width: 100%;
-    height: 10%;
-    margin-bottom: px1em(11.5px);
+    height: 20%;
+    margin-left: 1%;
     .list-item {
-      width: px1em(160px);
-      height: px1em(60px);
+      width: px1em(200px);
+      height: px1em(70px);
       margin-right: 2%;
       font-size: px1em(17px);
       color: #d6e6ff;
       background: url('./assets/news-btn.png') no-repeat center;
-      background-size: 100%;
+      background-size: 100% 100%;
     }
     .active {
       background: url('./assets/news-active-btn.png') no-repeat center;
-      background-size: 100%;
+      background-size: 100% 100%;
     }
   }
   .news-list {
     height: 20%;
-    padding: 0.2em;
     color: #d6e6ff;
-    background: url('./assets/user-list-bg.png') no-repeat center;
-    background-size: 100%;
     .list-icon {
       width: px1em(50px);
       height: px1em(50px);

@@ -2,7 +2,7 @@
   <div class="xy-tv" id="xy-tv" :style="defineBg()">
     <!--  :class="[{'warp-bg' : showDefault}]" -->
     <div class="tv-wrap sys-flex sys-vertical">
-      <div class="tv-title">{{tvTitle}}</div>
+      <div class="tv-title sys-flex sys-flex-center">{{tvTitle}}</div>
       <div class="tv-main sys-flex sys-flex-center flex-justify-between ">
         <div v-for="(v,k) in tvList" :key="k" class="tv-list">
           <video-player
@@ -95,7 +95,7 @@ export default {
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -108,14 +108,13 @@ export default {
     color: #d6e6ff;
   }
   .tv-main {
-    width: 100%;
+    width: 70%;
     height: 80%;
+    margin: 0 auto;
     background: url("./assets/back.png") no-repeat center;
     background-size: 100%;
-    padding: 0 0.4em;
     .tv-list {
       width: 45%;
-      // height: 5.6em;
       .vjs-custom-skin {
         width: 100%;
         height: 100%;

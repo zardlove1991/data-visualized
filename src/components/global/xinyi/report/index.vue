@@ -2,7 +2,7 @@
   <div class="xy-report" id="xy-report" :style="defineBg()">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="report-wrap sys-flex sys-vertical" >
-      <div class="report-title">{{reportTitle}}</div>
+      <div class="report-title sys-flex sys-flex-center">{{reportTitle}}</div>
       <div
         class="report-list animated sys-flex sys-flex-center overhidden"
         :class="{'flipInX' : v}"
@@ -78,7 +78,7 @@ export default {
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -88,14 +88,11 @@ export default {
     text-align: left;
     height: 20%;
     font-size: px1em(22px);
-    // font-size: 1.5em;
     color: #d6e6ff;
   }
   .report-list {
     height: 20%;
-    padding: 0.2em;
     color: #d6e6ff;
-    // background: url('./assets/user-list-bg.png') no-repeat center;
     background-size: 100%;
     .list-title {
       flex: 1;

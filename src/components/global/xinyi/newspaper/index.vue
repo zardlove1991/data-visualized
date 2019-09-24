@@ -2,7 +2,7 @@
   <div class="xy-newspaper" id="xy-newspaper" :style="defineBg()">
     <!--  :class="[{'warp-bg' : showDefault}]"  -->
     <div class="newspaper-wrap sys-flex sys-vertical">
-      <div class="newspaper-title">{{newspaperTitle}}</div>
+      <div class="newspaper-title sys-flex sys-flex-center">{{newspaperTitle}}</div>
       <div class="newspaper-box">
         <iframe :src="url"></iframe>
       </div>
@@ -35,7 +35,7 @@ export default {
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -43,14 +43,14 @@ export default {
   }
   .newspaper-title {
     text-align: left;
-    height: 15%;
+    height: 20%;
     font-size: px1em(22px);
     color: #d6e6ff;
   }
   .newspaper-box {
-    padding: 2.5%;
+    padding: 0 15% 2% 15%;
     width: 100%;
-    height: 85%;
+    height: 80%;
     iframe {
       display: block;
       width: 100%;

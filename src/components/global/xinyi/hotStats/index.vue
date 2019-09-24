@@ -448,7 +448,7 @@ export default {
     height: 100%;
     background: url("./assets/bg.png") no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(8.5px) px1em(5.5px);
+    padding: px1em(8.5px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;

@@ -2,7 +2,7 @@
   <div class="xy-task" id="xy-task" :style="defineBg()">
     <!--  :class="[{'warp-bg' : showDefault}]" -->
     <div class="task-wrap sys-flex sys-vertical" >
-      <div class="task-title">{{taskTitle}}</div>
+      <div class="task-title sys-flex sys-flex-center">{{taskTitle}}</div>
       <div class="task-content sys-flex">
         <div class="task-list-box">
           <div
@@ -169,7 +169,7 @@ export default {
     height: 100%;
     background: url("./assets/bg.png") no-repeat center;
     background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -179,7 +179,6 @@ export default {
     text-align: left;
     height: 20%;
     font-size: px1em(22px);
-    // font-size: 1.5em;
     color: #d6e6ff;
   }
   .task-content {
@@ -215,7 +214,6 @@ export default {
   }
   .task-list {
     height: 25%;
-    padding: 0.2em;
     color: #d6e6ff;
     .list-title {
       font-size: px1em(18.5px);
