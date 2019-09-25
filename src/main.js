@@ -29,6 +29,19 @@ Vue.mixin(mixins)
 const store = createStore(Vue)
 const router = createRouter(Vue)
 
+// 判断是否需要登录
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log(123)
+  } else {
+    next()
+  }
+})
+
 // 异步加载配置
 initRouter(router)
 
