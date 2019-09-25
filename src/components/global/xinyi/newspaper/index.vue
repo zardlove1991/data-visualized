@@ -15,11 +15,11 @@ export default {
   data () {
     return {
       newspaperTitle: '数字报',
-      url: ''
+      url: 'http://szb.xy.gov.cn/'
     }
   },
   created () {
-    this.url = 'http://szb.xy.gov.cn/'
+    // this.url = 'http://szb.xy.gov.cn/'
   },
   mounted () {
     this.setFontsize('xy-newspaper')
