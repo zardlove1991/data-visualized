@@ -10,13 +10,11 @@ export default {
   name: 'xinyi',
   data () {
     return {
-      titleTitle: '新沂市融媒体指挥调度中心',
-      proportion: 1
+      titleTitle: '新沂市融媒体指挥调度中心'
     }
   },
   mounted () {
-    this.proportion = this.getProportion('xy-task') * 1.5
-    this.setFontsize('xy-task')
+    this.setFontsize('xy-title')
   }
 }
 </script>
@@ -31,7 +29,7 @@ export default {
   // background-size: 100%;
   .title-title {
     width: 100%;
-    font-size: px1em(190px);
+    font-size: px1em(45px);
     font-weight: bold;
     color: #ffffff;
   }
