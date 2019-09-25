@@ -24,7 +24,7 @@
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
                       
-                      <div class="connect connect-video"></div>
+                      <div class="connect connect-video" @click="callvideo(v)"></div>
                       <!-- @click="callvideo(v)" -->
                     </div>
                     <div class="border-line"></div>
