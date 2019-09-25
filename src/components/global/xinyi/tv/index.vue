@@ -134,12 +134,19 @@ export default {
     }
     .tv-list {
       position: relative;
-      width: 45%;
+      width: 40%;
       height: 40%;
       .vjs-custom-skin {
         width: 100%;
         height: 100%;
         overflow: hidden;
+        .video-js.vjs-fluid,
+        .video-js.vjs-16-9,
+        .video-js.vjs-4-3 {
+          width: 100%;
+          max-width: 100%;
+          height: 100% !important;
+        }
       }
       .tv-name {
         color: #00fff6;
@@ -161,8 +168,8 @@ export default {
     }
     .tv-list::before{
       position: absolute;
-      bottom: -(px1em(1px));
-      right: -(px1em(1px));
+      bottom: -(px1em(2px));
+      right: -(px1em(2px));
       content: '';
       display: block;
       height: 25%;
