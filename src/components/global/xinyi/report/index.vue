@@ -10,6 +10,10 @@
         v-for="(v,k) in dataList"
         :key="k"
       >
+        <div 
+          class="list-icon"
+          :class="{'bgback': v.audit_status !== '1', 'bgpass': v.audit_status === '1'}"
+        ></div>
         <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-user">{{v.project_user_name}}</div>
         <div class="list-time">{{v.create_time | dateFormat}}</div>
@@ -94,6 +98,22 @@ export default {
     height: 20%;
     color: #d6e6ff;
     background-size: 100%;
+    .list-icon {
+      width: px1em(50px);
+      height: px1em(40px);
+      line-height: px1em(40px);
+      font-size: px1em(18.5px);
+      margin-right: px1em(10px);
+      text-align: center;
+    }
+    .bgpass {
+      background: url('./assets/pass.png') no-repeat center;
+      background-size: 100% 100%;
+    }
+    .bgback {
+      background: url('./assets/back.png') no-repeat center;
+      background-size: 100% 100%;
+    }
     .list-title {
       flex: 1;
       font-size: px1em(18.5px);
