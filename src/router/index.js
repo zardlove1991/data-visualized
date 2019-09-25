@@ -7,7 +7,11 @@ const allRoutes = [
   {
     path: '/',
     name: 'home',
-    component: getPage('home')
+    component: getPage('home'),
+    meta: {
+      title: '首页',
+      requiresAuth: true
+    }
   },
   {
     path: '/commandSystem',
