@@ -33,11 +33,13 @@ export default {
         let a = width / height
         if (a > (1920 / 1080)) {
           multiple = (1920 / 1080) / a
+        } else {
+          multiple = (1080 / 1920) / (height / width)
         }
-        if (a > 1.78) {
+        if (a > (1920 / 1080)) {
           dom.style.fontSize = width / 1920 * 100 * multiple + 'px'
         } else {
-          dom.style.fontSize = height / 1080 * 100 + 'px'
+          dom.style.fontSize = height / 1080 * 100 * multiple + 'px'
         }
       }
     },
