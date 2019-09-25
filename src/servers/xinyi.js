@@ -14,3 +14,4 @@ export const getTopicTrend = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apid
 export const getTopicEmotion = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=hotspot&a=topicEmotion&custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7&id=${id}`)
 export const getTopicPubArea = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=hotspot&a=topicPubArea&custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&id=${id}`)
 export const getConnecterList = (id) => createAPI(`${httpsbaseUrl}//index.php?m=Apidaping&c=stat&a=getWorkCallConnecterList&custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d`)
+export const getTvList = (id) => createAPI(`http://mapi.zyrb.com.cn/api/open/ziyang/daping_channel.php?appid=m2ox476nugyemljjju&appkey=cbb268bdc1b57938c834bb50f94859ab`)

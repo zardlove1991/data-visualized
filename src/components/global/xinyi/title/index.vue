@@ -1,21 +1,20 @@
 <template>
-  <div class="xy-title sys-flex sys-flex-center" id="xy-title" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
+<!--  :class="[{'warp-bg' : showDefault}]"  -->
+  <div class="xy-title sys-flex sys-flex-center warp-bg" id="xy-title" :style="defineBg()">
     <div class="title-title">{{titleTitle}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'title',
+  name: 'xinyi',
   data () {
     return {
-      titleTitle: '新沂市融媒体指挥调度中心',
-      proportion: 1
+      titleTitle: '新沂市融媒体指挥调度中心'
     }
   },
   mounted () {
-    this.proportion = this.getProportion('xy-task') * 1.5
-    this.setFontsize('xy-task')
+    this.setFontsize('xy-title')
   }
 }
 </script>
@@ -30,13 +29,13 @@ export default {
   // background-size: 100%;
   .title-title {
     width: 100%;
-    font-size: px1em(190px);
+    font-size: px1em(45px);
     font-weight: bold;
     color: #ffffff;
   }
 }
 .warp-bg {
-  background: url('./assets/bg-01.png') no-repeat center;
+  // background: url('./assets/bg.png') no-repeat center;
   background-size: 100% 100%;
 }
 </style>

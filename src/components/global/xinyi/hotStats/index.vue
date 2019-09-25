@@ -1,6 +1,7 @@
 <template>
-  <div class="xy-hot" id="xy-hot">
-    <div class="hot-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
+  <div class="xy-hot" id="xy-hot" :style="defineBg()">
+    <!--  :class="[{'warp-bg' : showDefault}]"  -->
+    <div class="hot-wrap sys-flex sys-vertical">
       <div class="hot-title hidden">{{hotNews.title}}</div>
       <div class="hot-charts sys-flex sys-flex-wrap flex-justify-between">
         <div class="heat-trend chart-box">
@@ -445,9 +446,9 @@ export default {
   .hot-wrap {
     width: 100%;
     height: 100%;
-    // background: url("./assets/bg.png") no-repeat center;
-    // background-size: 100% 100%;
-    padding: px1em(8.5px) px1em(5.5px);
+    background: url("./assets/bg.png") no-repeat center;
+    background-size: 100% 100%;
+    padding: px1em(8.5px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -469,12 +470,38 @@ export default {
   .hot-charts {
     flex: 1;
     .chart-box {
-      width: 50%;
+      position: relative;
+      width: 48%;
       height: 45%;
+      padding: 1% 0 0 1%;
       .echarts {
         width: 100%;
         height: 100%;
       }
+    }
+    .chart-box::after{
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      height: 25%;
+      width: 25%;
+      border-top-left-radius: 10%;
+      border-left: px1em(1px) solid #8c6bf9;
+      border-top: px1em(1px) solid #8c6bf9;
+    }
+    .chart-box::before{
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      content: '';
+      display: block;
+      height: 25%;
+      width: 25%;
+      border-bottom-right-radius: 10%;
+      border-right: px1em(1px) solid #8c6bf9;
+      border-bottom: px1em(1px) solid #8c6bf9;
     }
   }
 }

@@ -488,7 +488,7 @@ export default {
       if (!map) {
         map = new BMap.Map('my-map')
       }
-      // map.setMapStyle(this.mapStyle)
+      map.setMapStyle(this.mapStyle)
       map.addControl(new BMap.NavigationControl())
       // 绘制带图标注
       var _this = this

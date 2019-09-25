@@ -1,7 +1,8 @@
 <template>
-  <div class="xy-project" id="xy-project">
-    <div class="project-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
-      <div class="project-title">{{projectTitle}}</div>
+  <div class="xy-project" id="xy-project" :style="defineBg()">
+    <!--  :class="[{'warp-bg' : showDefault}]" -->
+    <div class="project-wrap sys-flex sys-vertical">
+      <div class="project-title sys-flex sys-flex-center">{{projectTitle}}</div>
       <div
         class="project-list animated sys-flex sys-flex-center overhidden"
         :class="{'flipInX' : v}"
@@ -75,9 +76,9 @@ export default {
   .project-wrap {
     width: 100%;
     height: 100%;
-    // background: url('./assets/bg.png') no-repeat center;
-    // background-size: 100% 100%;
-    padding: px1em(17px) px1em(11px);
+    background: url('./assets/bg.png') no-repeat center;
+    background-size: 100% 100%;
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -87,14 +88,11 @@ export default {
     text-align: left;
     height: 20%;
     font-size: px1em(22px);
-    // font-size: 1.5em;
     color: #d6e6ff;
   }
   .project-list {
     height: 20%;
-    padding: 0.2em;
     color: #d6e6ff;
-    background: url('./assets/user-list-bg.png') no-repeat center;
     background-size: 100%;
     .list-title {
       flex: 1;

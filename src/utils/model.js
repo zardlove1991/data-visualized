@@ -19,7 +19,7 @@ export const asyncConfig = () => {
     //   describe: '测试',
     //   disable: '0',
     //   extend: {style: 'xinyi'},
-    //   guid: 'OThjNDhlYj',
+    //   guid: 'NTk0YjQ2NW',
     //   id: '16',
     //   mark: '测试',
     //   title: 'cyn',
@@ -111,6 +111,28 @@ export const asyncConfig = () => {
     //     },
     //     615: {
     //       component: 'workcallInfoMap',
+    //       view: 'component'
+    //     },
+    //     616: {
+    //       gravity: '',
+    //       router: 'newspaper',
+    //       subviews: ['617'],
+    //       title: '测试',
+    //       view: 'screen'
+    //     },
+    //     617: {
+    //       component: 'newspaper',
+    //       view: 'component'
+    //     },
+    //     618: {
+    //       gravity: '',
+    //       router: 'tv',
+    //       subviews: ['619'],
+    //       title: '测试',
+    //       view: 'screen'
+    //     },
+    //     619: {
+    //       component: 'tv',
     //       view: 'component'
     //     }
     //   }

@@ -1,7 +1,8 @@
 <template>
-  <div class="xy-clue" id="xy-clue">
-    <div class="clue-wrap sys-flex sys-vertical" :class="[{'warp-bg' : showDefault}]" :style="defineBg()">
-      <div class="clue-title">{{clueTitle}}</div>
+  <div class="xy-clue" id="xy-clue" :style="defineBg()">
+    <!-- :class="[{'warp-bg' : showDefault}]" -->
+    <div class="clue-wrap sys-flex sys-vertical">
+      <div class="clue-title sys-flex sys-flex-center">{{clueTitle}}</div>
       <div class="title-list sys-flex sys-flex-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
           {{v.name}}
@@ -67,19 +68,19 @@ export default {
       if (type === 0) {
         getWebsitList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 8)
+            this.dataList = res.data.data.slice(0, 3)
           }
         })
       } else if (type === 1) {
         getWechatList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 8)
+            this.dataList = res.data.data.slice(0, 3)
           }
         })
       } else if (type === 2) {
         getWeiboList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 8)
+            this.dataList = res.data.data.slice(0, 3)
           }
         })
       }
@@ -96,55 +97,54 @@ export default {
   .clue-wrap {
     width: 100%;
     height: 100%;
-    padding: px1em(8.5px) px1em(5.5px);
+    background: url('./assets/bg.png') no-repeat center;
+    background-size: 100% 100%;
+    padding: 0 px1em(17px);
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
   }
   .clue-title {
+    height: 20%;
     text-align: left;
-    font-size: px1em(11.5px);
-    // font-size: 1.5em;
+    font-size: px1em(22px);
     color: #d6e6ff;
   }
   .title-list {
     width: 100%;
-    height: 10%;
-    margin-bottom: px1em(11.5px);
+    height: 20%;
+    margin-left: 1%;
     .list-item {
-      width: px1em(160px);
-      height: px1em(60px);
+      width: px1em(200px);
+      height: px1em(70px);
       margin-right: 2%;
-      font-size: px1em(8.5px);
+      font-size: px1em(17px);
       color: #d6e6ff;
       background: url('./assets/clue-btn.png') no-repeat center;
-      background-size: 100%;
+      background-size: 100% 100%;
     }
     .active {
       background: url('./assets/clue-active-btn.png') no-repeat center;
-      background-size: 100%;
+      background-size: 100% 100%;
     }
   }
   .clue-list {
-    height: 10%;
-    padding: 0.2em;
+    height: 20%;
     color: #d6e6ff;
-    background: url('./assets/user-list-bg.png') no-repeat center;
-    background-size: 100%;
     .list-title {
       flex: 1;
-      font-size: px1em(9.5px);
+      font-size: px1em(19px);
       text-align: left;
     }
     .list-user {
       flex-basis: 20%;
-      font-size: px1em(6.5px);
+      font-size: px1em(13px);
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
       flex-basis: 20%;
-      font-size: px1em(6.5px);
+      font-size: px1em(13px);
       color: rgba(243, 248, 254, 0.5);
     }
   }
