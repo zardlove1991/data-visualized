@@ -84,7 +84,8 @@ export default {
               }
             }
           })
-          this.tvList = data.slice(0, 2).concat(data.slice(0, 2))
+          this.tvList = data.slice(0, 2)
+          .concat(data.slice(0, 2))
         }
       })
     }
@@ -135,7 +136,7 @@ export default {
     .tv-list {
       position: relative;
       width: 40%;
-      height: 40%;
+      // height: 40%;
       .vjs-custom-skin {
         width: 100%;
         height: 100%;
