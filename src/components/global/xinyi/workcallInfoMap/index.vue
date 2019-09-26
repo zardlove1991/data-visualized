@@ -474,7 +474,7 @@ export default {
     // })
   },
   mounted () {
-    this.setFontsize('workcallInfoMap')
+    this.setFontsize('workcallInfoMap', true)
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getReporter()
@@ -649,7 +649,7 @@ export default {
             background-color: #114497;
           }
           .reporter-list-content{
-            height: 9em;
+            height: calc(100% - 2.2em);
             overflow: scroll;
           }
           .reporter-list {
