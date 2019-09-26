@@ -474,7 +474,7 @@ export default {
     // })
   },
   mounted () {
-    this.setFontsize('workcallInfoMap', true)
+    this.setFontsize('workcallInfoMap')
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getReporter()
