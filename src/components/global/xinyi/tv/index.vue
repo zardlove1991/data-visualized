@@ -84,8 +84,7 @@ export default {
               }
             }
           })
-          this.tvList = data.slice(0, 2)
-          .concat(data.slice(0, 2))
+          this.tvList = data.slice(0, 2).concat(data.slice(0, 2))
         }
       })
     }
