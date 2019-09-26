@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     showDefault () {
-      return !(this.data.viewAttr && this.data.viewAttr.bg)
+      return !(this.data && this.data.viewAttr && this.data.viewAttr.bg)
     }
   },
   mounted () {
