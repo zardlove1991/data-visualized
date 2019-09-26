@@ -68,19 +68,19 @@ export default {
       if (type === 0) {
         getWebsitList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 3)
+            this.dataList = res.data.data.slice(0, 6)
           }
         })
       } else if (type === 1) {
         getWechatList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 3)
+            this.dataList = res.data.data.slice(0, 6)
           }
         })
       } else if (type === 2) {
         getWeiboList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 3)
+            this.dataList = res.data.data.slice(0, 6)
           }
         })
       }
@@ -93,7 +93,7 @@ export default {
 @import 'src/styles/index.scss';
 .xy-clue {
   width: 100%;
-  padding: 0.25vh 0.25vw;
+  padding: 0.25vh 0.1vw;
   .clue-wrap {
     width: 100%;
     height: 100%;
@@ -106,20 +106,20 @@ export default {
     background-size: 100% 100%;
   }
   .clue-title {
-    height: 20%;
+    height: 15%;
     text-align: left;
     font-size: px1em(22px);
     color: #d6e6ff;
   }
   .title-list {
     width: 100%;
-    height: 20%;
+    height: 15%;
     margin-left: 1%;
     .list-item {
-      width: px1em(200px);
-      height: px1em(70px);
+      width: px1em(180px);
+      height: px1em(60px);
       margin-right: 2%;
-      font-size: px1em(17px);
+      font-size: px1em(15px);
       color: #d6e6ff;
       background: url('./assets/clue-btn.png') no-repeat center;
       background-size: 100% 100%;
@@ -130,21 +130,21 @@ export default {
     }
   }
   .clue-list {
-    height: 20%;
+    height: 11%;
     color: #d6e6ff;
     .list-title {
       flex: 1;
-      font-size: px1em(19px);
+      font-size: px1em(15px);
       text-align: left;
     }
     .list-user {
       flex-basis: 20%;
-      font-size: px1em(13px);
+      font-size: px1em(13.5px);
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
       flex-basis: 20%;
-      font-size: px1em(13px);
+      font-size: px1em(13.5px);
       color: rgba(243, 248, 254, 0.5);
     }
   }

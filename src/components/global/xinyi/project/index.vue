@@ -40,21 +40,21 @@ export default {
     getDataList () {
       getProjectData().then(res => {
         if (res && res.data && res.data.data) {
-          this.list = res.data.data
+          this.list = res.data.data.slice(0, 8)
           this.initList()
         }
       })
     },
 
     initList () {
-      this.dataList = this.list.slice(this.count, this.count + 4)
-      this.count += 4
+      this.dataList = this.list.slice(this.count, this.count + 8)
+      this.count += 8
       this.listInterval = setInterval(() => {
         if (this.count < this.list.length) {
           this.dataList = []
           setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 4)
-            this.count += 4
+            this.dataList = this.list.slice(this.count, this.count + 8)
+            this.count += 8
           }, 100)
         } else {
           this.dataList = []
@@ -72,7 +72,7 @@ export default {
 @import 'src/styles/index.scss';
 .xy-project {
   width: 100%;
-  padding: 0.25vh 0.25vw;
+  padding: 0.25vh 0.1vw;
   .project-wrap {
     width: 100%;
     height: 100%;
@@ -86,27 +86,27 @@ export default {
   }
   .project-title {
     text-align: left;
-    height: 20%;
+    height: 15%;
     font-size: px1em(22px);
     color: #d6e6ff;
   }
   .project-list {
-    height: 20%;
+    height: 10%;
     color: #d6e6ff;
     background-size: 100%;
     .list-title {
       flex: 1;
-      font-size: px1em(18.5px);
+      font-size: px1em(15px);
       text-align: left;
     }
     .list-user {
       flex-basis: 20%;
-      font-size: px1em(16.5px);
+      font-size: px1em(13.5px);
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
       flex-basis: 20%;
-      font-size: px1em(16.5px);
+      font-size: px1em(13.5px);
       color: rgba(243, 248, 254, 0.5);
     }
   }

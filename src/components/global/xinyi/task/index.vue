@@ -4,10 +4,10 @@
     <div class="task-wrap sys-flex sys-vertical" >
       <div class="task-title sys-flex sys-flex-center">{{taskTitle}}</div>
       <div class="task-content sys-flex">
-        <div class="task-list-box">
+        <div class="task-list-box sys-flex sys-vertical flex-justify-between">
           <div
             class="task-list animated sys-flex sys-flex-center overhidden"
-            :class="{'flipInX' : v, 'bgurl0': k === 0, 'bgurl1': k === 1, 'bgurl2': k === 2, 'bgurl3': k === 3}"
+            :class="{'flipInX' : v, 'bgurl0': k%4 === 0, 'bgurl1': k%4 === 1, 'bgurl2': k%4 === 2, 'bgurl3': k%4 === 3}"
             :style="{'animation-delay' : k/2 + 's'}"
             v-for="(v,k) in dataList"
             :key="k"
@@ -118,7 +118,7 @@ export default {
     getDataList () {
       getTaskList().then(res => {
         if (res && res.data && res.data.data && res.data.data[0]) {
-          this.list = res.data.data
+          this.list = res.data.data.slice(0, 8)
           this.initList()
         }
       })
@@ -138,14 +138,14 @@ export default {
     },
 
     initList () {
-      this.dataList = this.list.slice(this.count, this.count + 4)
-      this.count += 4
+      this.dataList = this.list.slice(this.count, this.count + 8)
+      this.count += 8
       this.listInterval = setInterval(() => {
         if (this.count < this.list.length) {
           this.dataList = []
           setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 4)
-            this.count += 4
+            this.dataList = this.list.slice(this.count, this.count + 8)
+            this.count += 8
           }, 100)
         } else {
           this.dataList = []
@@ -163,7 +163,7 @@ export default {
 @import "src/styles/index.scss";
 .xy-task {
   width: 100%;
-  padding: 0.25vh 0.25vw;
+  padding: 0.25vh 0.1vw;
   .task-wrap {
     width: 100%;
     height: 100%;
@@ -177,7 +177,7 @@ export default {
   }
   .task-title {
     text-align: left;
-    height: 20%;
+    height: 15%;
     font-size: px1em(22px);
     color: #d6e6ff;
   }
@@ -213,10 +213,10 @@ export default {
     }
   }
   .task-list {
-    height: 25%;
+    height: 11%;
     color: #d6e6ff;
     .list-title {
-      font-size: px1em(18.5px);
+      font-size: px1em(15px);
       text-align: left;
     }
   }

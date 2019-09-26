@@ -30,7 +30,7 @@ export default {
 @import 'src/styles/index.scss';
 .xy-newspaper {
   width: 100%;
-  padding: 0.25vh 0.25vw;
+  padding: 0.25vh 0.1vw;
   .newspaper-wrap {
     width: 100%;
     height: 100%;
@@ -44,13 +44,13 @@ export default {
   }
   .newspaper-title {
     text-align: left;
-    height: 20%;
+    height: 15%;
     font-size: px1em(22px);
     color: #d6e6ff;
   }
   .newspaper-box {
     width: 80%;
-    height: 70%;
+    height: 75%;
     margin: 0 auto;
     iframe {
       display: block;
