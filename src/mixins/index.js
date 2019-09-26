@@ -38,7 +38,7 @@ export default {
         if (a > 1.78) {
           dom.style.fontSize = width / 1920 * 100 * multiple + 'px'
         } else {
-          dom.style.fontSize = height / 1080 * 100+ 'px'
+          dom.style.fontSize = height / 1080 * 100 + 'px'
         }
 
         // 如果考虑以高作为判断字体的因素
