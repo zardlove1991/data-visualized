@@ -73,7 +73,7 @@ export default {
         },
         grid: {
           left: this.proportion * 30,
-          top: this.proportion * 60,
+          // top: this.proportion * 60,
           bottom: this.proportion * 30,
           containLabel: true
         },
