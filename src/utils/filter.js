@@ -13,7 +13,7 @@ const dateFormat = (inputTime) => {
   minute = minute < 10 ? '0' + minute : minute
   second = second < 10 ? '0' + second : second
   let time = y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
-  return time.slice(5, 10)
+  return time.slice(5, 16)
 }
 
 export default {

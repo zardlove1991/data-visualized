@@ -95,7 +95,7 @@ export default {
 @import 'src/styles/index.scss';
 .xy-tv {
   width: 100%;
-  padding: 0.25vh 0.25vw;
+  padding: 0.25vh 0.1vw;
   .tv-wrap {
     width: 100%;
     height: 100%;
@@ -109,13 +109,14 @@ export default {
   }
   .tv-title {
     text-align: left;
-    height: 20%;
+    height: 15%;
     font-size: px1em(22px);
+    font-weight: bold;
     color: #d6e6ff;
   }
   .tv-main {
     width: 80%;
-    height: 70%;
+    height: 75%;
     margin: 0 auto;
     .tv-box {
       padding: 5% 5% 0 0;
@@ -135,7 +136,7 @@ export default {
     .tv-list {
       position: relative;
       width: 40%;
-      height: 40%;
+      // height: 40%;
       .vjs-custom-skin {
         width: 100%;
         height: 100%;
@@ -168,8 +169,8 @@ export default {
     }
     .tv-list::before{
       position: absolute;
-      bottom: -(px1em(2px));
-      right: -(px1em(2px));
+      bottom: -1px;
+      right: -1px;
       content: '';
       display: block;
       height: 25%;

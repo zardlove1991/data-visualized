@@ -1,15 +1,15 @@
 <template>
-  <div class="xy-clue" id="xy-clue" :style="defineBg()">
+  <div class="maanshan-clue" id="maanshan-clue" :style="defineBg()">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="clue-wrap sys-flex sys-vertical">
-      <div class="clue-title sys-flex sys-flex-center">{{clueTitle}}</div>
+      <div class="clue-title sys-flex sys-flex-center">{{componentTitle}}</div>
       <div class="title-list sys-flex sys-flex-center">
         <div class="list-item sys-flex sys-flex-center flex-justify-center" v-for="(v,k) in titleList" :key="k" :class="{'active': currentIndex === k}">
-          {{v.name}}
+          <span>{{v.name}}</span>
         </div>
       </div>
       <div
-        class="clue-list animated sys-flex sys-flex-center overhidden"
+        class="clue-list animated sys-flex sys-flex-center"
         :class="{'flipInX' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
@@ -29,7 +29,7 @@ export default {
   name: 'clue',
   data () {
     return {
-      clueTitle: '线索汇聚',
+      componentTitle: '线索汇聚',
       titleList: [{
         name: '互联网',
         type: 0
@@ -56,10 +56,10 @@ export default {
       } else {
         this.getData(this.titleList[this.currentIndex].type)
       }
-    }, 10000)
+    }, 100000)
   },
   mounted () {
-    this.setFontsize('xy-clue')
+    this.setFontsize('maanshan-clue')
   },
   methods: {
     getData (type) {
@@ -68,19 +68,19 @@ export default {
       if (type === 0) {
         getWebsitList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 6)
+            this.dataList = res.data.data.slice(0, 3)
           }
         })
       } else if (type === 1) {
         getWechatList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 6)
+            this.dataList = res.data.data.slice(0, 3)
           }
         })
       } else if (type === 2) {
         getWeiboList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 6)
+            this.dataList = res.data.data.slice(0, 3)
           }
         })
       }
@@ -90,41 +90,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'src/styles/index.scss';
-.xy-clue {
+.maanshan-clue {
   width: 100%;
-  padding: 0.25vh 0.1vw;
+  height: 100%;
+  padding: 0.4em;
   .clue-wrap {
     width: 100%;
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: 0 px1em(17px);
+    padding: 0.85em;
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
   }
   .clue-title {
-    height: 15%;
+    height: 1em;
     text-align: left;
-    font-size: px1em(22px);
+    font-size: 0.8em;
     font-weight: bold;
     color: #d6e6ff;
+    margin-bottom: 0.75em;
   }
   .title-list {
     width: 100%;
-    height: 15%;
-    margin-left: 1%;
+    height: 1.2em;
+    margin-bottom: 0.85em;
     .list-item {
-      width: px1em(180px);
-      height: px1em(60px);
-      margin-right: 2%;
-      font-size: px1em(15px);
-      font-weight: bold;
-      color: #d6e6ff;
+      width: 3.5em;
+      height: 1.2em;
+      margin-right: 0.7em;
       background: url('./assets/clue-btn.png') no-repeat center;
       background-size: 100% 100%;
+      span {
+        font-size: 0.66em;
+        font-weight: bold;
+        color: #d6e6ff;
+      }
     }
     .active {
       background: url('./assets/clue-active-btn.png') no-repeat center;
@@ -132,21 +135,21 @@ export default {
     }
   }
   .clue-list {
-    height: 11%;
-    color: #d6e6ff;
+    margin-bottom: 0.97em;
+    color: #ffffff;
     .list-title {
       flex: 1;
-      font-size: px1em(15px);
+      font-size: 0.58em;
       text-align: left;
     }
     .list-user {
-      flex-basis: 20%;
-      font-size: px1em(13.5px);
+      flex-basis: 10%;
+      font-size: 0.42em;
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
       flex-basis: 20%;
-      font-size: px1em(13.5px);
+      font-size: 0.42em;
       color: rgba(243, 248, 254, 0.5);
     }
   }

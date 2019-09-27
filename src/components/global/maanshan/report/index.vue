@@ -1,10 +1,10 @@
 <template>
-  <div class="xy-report" id="xy-report" :style="defineBg()">
+  <div class="maanshan-report" id="maanshan-report" :style="defineBg()">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="report-wrap sys-flex sys-vertical" >
-      <div class="report-title sys-flex sys-flex-center">{{reportTitle}}</div>
+      <div class="report-title sys-flex sys-flex-center">{{componentTitle}}</div>
       <div
-        class="report-list animated sys-flex sys-flex-center overhidden"
+        class="report-list animated sys-flex sys-flex-center"
         :class="{'flipInX' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
@@ -15,7 +15,7 @@
           :class="{'bgback': v.audit_status !== '1', 'bgpass': v.audit_status === '1'}"
         ></div>
         <div class="list-title overhidden">{{v.title}}</div>
-        <div class="list-user">{{v.project_user_name}}</div>
+        <div class="list-user overhidden">{{v.project_user_name}}</div>
         <div class="list-time">{{v.create_time | dateFormat}}</div>
       </div>
     </div>
@@ -28,7 +28,7 @@ export default {
   name: 'report',
   data () {
     return {
-      reportTitle: '报题展示',
+      componentTitle: '报题展示',
       list: [],
       dataList: [],
       count: 0
@@ -38,27 +38,27 @@ export default {
     this.getDataList()
   },
   mounted () {
-    this.setFontsize('xy-report')
+    this.setFontsize('maanshan-report')
   },
   methods: {
     getDataList () {
       getReportData().then(res => {
         if (res && res.data && res.data.data) {
-          this.list = res.data.data.slice(0, 8)
+          this.list = res.data.data
           this.initList()
         }
       })
     },
 
     initList () {
-      this.dataList = this.list.slice(this.count, this.count + 8)
-      this.count += 8
+      this.dataList = this.list.slice(this.count, this.count + 4)
+      this.count += 4
       this.listInterval = setInterval(() => {
         if (this.count < this.list.length) {
           this.dataList = []
           setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 8)
-            this.count += 8
+            this.dataList = this.list.slice(this.count, this.count + 4)
+            this.count += 4
           }, 100)
         } else {
           this.dataList = []
@@ -73,39 +73,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'src/styles/index.scss';
-.xy-report {
+.maanshan-report {
   width: 100%;
-  padding: 0.25vh 0.1vw;
+  height: 100%;
+  padding: 0.4em;
   .report-wrap {
     width: 100%;
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: 0 px1em(17px);
+    padding: 0.85em;
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
   }
   .report-title {
+    height: 1em;
     text-align: left;
-    height: 15%;
-    font-size: px1em(22px);
+    font-size: 0.8em;
     font-weight: bold;
-    color: #d6e6ff;
+    color: #D6E6FF;
+    margin-bottom: 1.25em;
   }
   .report-list {
-    height: 10%;
-    color: #d6e6ff;
-    background-size: 100%;
+    padding-left: 0.5em;
+    margin-bottom: 0.97em;
+    color: #ffffff;
     .list-icon {
-      width: px1em(40px);
-      height: px1em(32px);
-      line-height: px1em(32px);
-      font-size: px1em(17px);
-      margin-right: px1em(10px);
-      text-align: center;
+      width: 0.9em;
+      height: 0.74em;
+      margin-right: 0.25em;
     }
     .bgpass {
       background: url('./assets/pass.png') no-repeat center;
@@ -117,18 +115,16 @@ export default {
     }
     .list-title {
       flex: 1;
-      font-size: px1em(15px);
+      font-size: 0.58em;
       text-align: left;
     }
     .list-user {
-      flex-basis: 20%;
-      font-size: px1em(13.5px);
-      color: rgba(243, 248, 254, 0.5);
+      flex-basis: 10%;
+      font-size: 0.42em;
     }
     .list-time {
       flex-basis: 20%;
-      font-size: px1em(13.5px);
-      color: rgba(243, 248, 254, 0.5);
+      font-size: 0.42em;
     }
   }
 }

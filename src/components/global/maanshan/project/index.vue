@@ -1,17 +1,17 @@
 <template>
-  <div class="xy-project" id="xy-project" :style="defineBg()">
-    <!--  :class="[{'warp-bg' : showDefault}]" -->
-    <div class="project-wrap sys-flex sys-vertical">
-      <div class="project-title sys-flex sys-flex-center">{{projectTitle}}</div>
+  <div class="maanshan-project" id="maanshan-project" :style="defineBg()">
+    <!-- :class="[{'warp-bg' : showDefault}]" -->
+    <div class="project-wrap sys-flex sys-vertical" >
+      <div class="project-title sys-flex sys-flex-center">{{componentTitle}}</div>
       <div
-        class="project-list animated sys-flex sys-flex-center overhidden"
+        class="project-list animated sys-flex sys-flex-center"
         :class="{'flipInX' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
         :key="k"
       >
         <div class="list-title overhidden">{{v.title}}</div>
-        <div class="list-user">{{v.project_user_name}}</div>
+        <div class="list-user overhidden">{{v.project_user_name}}</div>
         <div class="list-time">{{v.create_time | dateFormat}}</div>
       </div>
     </div>
@@ -24,7 +24,7 @@ export default {
   name: 'project',
   data () {
     return {
-      projectTitle: '选题展示',
+      componentTitle: '选题展示',
       list: [],
       dataList: [],
       count: 0
@@ -34,27 +34,27 @@ export default {
     this.getDataList()
   },
   mounted () {
-    this.setFontsize('xy-project')
+    this.setFontsize('maanshan-project')
   },
   methods: {
     getDataList () {
       getProjectData().then(res => {
         if (res && res.data && res.data.data) {
-          this.list = res.data.data.slice(0, 8)
+          this.list = res.data.data
           this.initList()
         }
       })
     },
 
     initList () {
-      this.dataList = this.list.slice(this.count, this.count + 8)
-      this.count += 8
+      this.dataList = this.list.slice(this.count, this.count + 4)
+      this.count += 4
       this.listInterval = setInterval(() => {
         if (this.count < this.list.length) {
           this.dataList = []
           setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 8)
-            this.count += 8
+            this.dataList = this.list.slice(this.count, this.count + 4)
+            this.count += 4
           }, 100)
         } else {
           this.dataList = []
@@ -69,46 +69,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'src/styles/index.scss';
-.xy-project {
+.maanshan-project {
   width: 100%;
-  padding: 0.25vh 0.1vw;
+  height: 100%;
+  padding: 0.4em;
   .project-wrap {
     width: 100%;
     height: 100%;
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
-    padding: 0 px1em(17px);
+    padding: 0.85em;
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
     background-size: 100% 100%;
   }
   .project-title {
+    height: 1em;
     text-align: left;
-    height: 15%;
-    font-size: px1em(22px);
+    font-size: 0.8em;
     font-weight: bold;
-    color: #d6e6ff;
+    color: #D6E6FF;
+    margin-bottom: 1.25em;
   }
   .project-list {
-    height: 10%;
-    color: #d6e6ff;
+    padding-left: 0.5em;
+    margin-bottom: 0.97em;
+    color: #ffffff;
     background-size: 100%;
     .list-title {
       flex: 1;
-      font-size: px1em(15px);
+      font-size: 0.58em;
       text-align: left;
     }
     .list-user {
-      flex-basis: 20%;
-      font-size: px1em(13.5px);
-      color: rgba(243, 248, 254, 0.5);
+      flex-basis: 10%;
+      font-size: 0.42em;
     }
     .list-time {
       flex-basis: 20%;
-      font-size: px1em(13.5px);
-      color: rgba(243, 248, 254, 0.5);
+      font-size: 0.42em;
     }
   }
 }

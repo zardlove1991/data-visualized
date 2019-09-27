@@ -442,7 +442,7 @@ export default {
 @import "src/styles/index.scss";
 .xy-hot {
   width: 100%;
-  padding: 0.25vh 0.25vw;
+  padding: 0.25vh 0.1vw;
   .hot-wrap {
     width: 100%;
     height: 100%;
@@ -455,9 +455,10 @@ export default {
     background-size: 100% 100%;
   }
   .hot-title {
-    height: px1em(100px);
+    height: px1em(110px);
     text-align: center;
     font-size: px1em(11px);
+    font-weight: bold;
     color: #d6e6ff;
   }
   .hidden {

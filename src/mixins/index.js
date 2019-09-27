@@ -25,7 +25,7 @@ export default {
   },
   components: {...modules},
   methods: {
-    setFontsize (id) {
+    setFontsize (id, isHeight = false) {
       let dom = document.getElementById(id)
       if (dom) {
         let width = dom.clientWidth
@@ -39,6 +39,20 @@ export default {
           dom.style.fontSize = width / 1920 * 100 * multiple + 'px'
         } else {
           dom.style.fontSize = height / 1080 * 100 + 'px'
+        }
+
+        // 如果考虑以高作为判断字体的因素
+        if (isHeight) {
+          if (a > (1920 / 1080)) {
+            multiple = (1920 / 1080) / a
+          } else {
+            multiple = (1080 / 1920) / (height / width)
+          }
+          if (a > 1.78) {
+            dom.style.fontSize = width / 1920 * 100 * multiple + 'px'
+          } else {
+            dom.style.fontSize = height / 1080 * 100 * multiple + 'px'
+          }
         }
       }
     },
