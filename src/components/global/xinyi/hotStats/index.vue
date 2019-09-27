@@ -54,7 +54,8 @@ export default {
         series: []
       },
       areaData: {
-        geo: [{ value: 0 }]
+        geo: [{ value: 0 }],
+        reg: [{ value: 0 }]
       },
       seriesData: []
     }
@@ -71,6 +72,8 @@ export default {
           }
         },
         grid: {
+          left: this.proportion * 30,
+          top: this.proportion * 60,
           bottom: this.proportion * 30,
           containLabel: true
         },
@@ -210,9 +213,11 @@ export default {
           trigger: 'axis',
           axisPointer: {
             type: 'shadow'
-          }
+          },
         },
         grid: {
+          left: this.proportion * 30,
+          top: this.proportion * 60,
           bottom: this.proportion * 30,
           containLabel: true
         },
@@ -242,7 +247,7 @@ export default {
             type: 'value',
             axisLabel: {
               interval: 15,
-              formatter: '{value}',
+              formatter: '{value}%',
               textStyle: {
                 // fontSize:'13'
               }
@@ -284,8 +289,16 @@ export default {
                 label: {
                   show: true,
                   position: 'top',
-                  formatter: '{c}'
-                }
+                  formatter: '{c}%',
+                  color: '#ffffff'
+                },
+                color: new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    { offset: 1, color: '#0066FF' },
+                    { offset: 0, color: '#18BBFF' }
+                  ]
+                )
               }
             },
             data: this.areaData.geo.slice(0, 5).map(v => v.value)
@@ -348,7 +361,7 @@ export default {
                 areaColor: '#567bb6'
               }
             },
-            data: this.areaData.geo
+            data: this.areaData.reg
           }
         ]
       }
@@ -368,7 +381,7 @@ export default {
     this.getDataList()
   },
   mounted () {
-    this.proportion = this.getProportion('xy-hot') * 1.5
+    this.proportion = this.getProportion('xy-hot')
     this.setFontsize('xy-hot')
   },
   methods: {
@@ -406,8 +419,15 @@ export default {
       })
       getTopicPubArea(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
-          // 地图数据省份不要后缀，正则替换掉
+          let total = res.data.result.reduce((past, cur) => past + cur.count, 0)
           this.areaData.geo = res.data.result.map(v => {
+            return {
+              value: parseInt(v.count / total * 100),
+              name: v.name_zh.replace(/省|市|自治区|维吾尔|壮族|回族/g, '')
+            }
+          })
+          // 地图数据省份不要后缀，正则替换掉
+          this.areaData.reg = res.data.result.map(v => {
             return {
               value: v.count,
               name: v.name_zh.replace(/省|市|自治区|维吾尔|壮族|回族/g, '')
