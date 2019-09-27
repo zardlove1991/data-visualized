@@ -75,6 +75,7 @@ export default {
 <style lang="scss" scoped>
 .maanshan-report {
   width: 100%;
+  height: 100%;
   padding: 0.4em;
   .report-wrap {
     width: 100%;
@@ -88,18 +89,17 @@ export default {
     background-size: 100% 100%;
   }
   .report-title {
+    height: 1em;
     text-align: left;
     font-size: 0.8em;
     font-weight: bold;
     color: #D6E6FF;
-    margin-bottom: 1em;
+    margin-bottom: 1.25em;
   }
   .report-list {
-    height: 0.75em;
     padding-left: 0.5em;
-    margin-bottom: 0.9em;
+    margin-bottom: 0.97em;
     color: #ffffff;
-    background-size: 100%;
     .list-icon {
       width: 0.9em;
       height: 0.74em;

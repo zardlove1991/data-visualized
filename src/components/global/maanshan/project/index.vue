@@ -71,6 +71,7 @@ export default {
 <style lang="scss" scoped>
 .maanshan-project {
   width: 100%;
+  height: 100%;
   padding: 0.4em;
   .project-wrap {
     width: 100%;
@@ -84,16 +85,16 @@ export default {
     background-size: 100% 100%;
   }
   .project-title {
+    height: 1em;
     text-align: left;
     font-size: 0.8em;
     font-weight: bold;
     color: #D6E6FF;
-    margin-bottom: 1em;
+    margin-bottom: 1.25em;
   }
   .project-list {
-    height: 0.75em;
     padding-left: 0.5em;
-    margin-bottom: 0.9em;
+    margin-bottom: 0.97em;
     color: #ffffff;
     background-size: 100%;
     .list-title {

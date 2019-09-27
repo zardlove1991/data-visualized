@@ -28,3 +28,4 @@ export const xinyicomponentTv = getComponent('xinyi/tv')
 /* 马鞍山套系 */
 export const maanshancomponentReport = getComponent('maanshan/report')
 export const maanshancomponentProject = getComponent('maanshan/project')
+export const maanshancomponentClueGather = getComponent('maanshan/clueGather')
