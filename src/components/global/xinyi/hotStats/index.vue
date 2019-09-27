@@ -213,7 +213,7 @@ export default {
           trigger: 'axis',
           axisPointer: {
             type: 'shadow'
-          },
+          }
         },
         grid: {
           left: this.proportion * 30,
