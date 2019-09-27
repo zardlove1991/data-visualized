@@ -50,7 +50,7 @@ export default {
     color: #d6e6ff;
   }
   .newspaper-box {
-    width: 80%;
+    width: 70%;
     height: 75%;
     margin: 0 auto;
     iframe {

@@ -8,7 +8,7 @@
           <div class="tv-name">《新闻频道》</div>
           <div class="tv-name">《生活频道》</div>
         </div>
-        <div class="sys-flex sys-flex-center flex-justify-around sys-flex-wrap tv-box">
+        <div class="sys-flex sys-flex-center flex-justify-between sys-flex-wrap tv-box">
           <div v-for="(v,k) in tvList" :key="k" class="tv-list list-box">
             <video-player
               class="vjs-custom-skin"
@@ -115,11 +115,11 @@ export default {
     color: #d6e6ff;
   }
   .tv-main {
-    width: 80%;
+    width: 70%;
     height: 75%;
     margin: 0 auto;
     .tv-box {
-      padding: 5% 5% 0 0;
+      padding: 4% 7.5% 0 0.5%;
       height: 90%;
       background: url("./assets/tvbg.png") no-repeat center;
       background-size: 100% 100%;
@@ -135,8 +135,10 @@ export default {
     }
     .tv-list {
       position: relative;
-      width: 40%;
-      // height: 40%;
+      width: 5.5em;
+      padding: 2px;
+      background: url("./assets/back.png") no-repeat center;
+      background-size: 100% 100%;
       .vjs-custom-skin {
         width: 100%;
         height: 100%;
@@ -156,28 +158,28 @@ export default {
         margin-top: 0.15em;
       }
     }
-    .tv-list::after{
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      display: block;
-      height: 25%;
-      width: 15%;
-      border-left: px1em(1px) solid white;
-      border-top: px1em(1px) solid white;
-    }
-    .tv-list::before{
-      position: absolute;
-      bottom: -1px;
-      right: -1px;
-      content: '';
-      display: block;
-      height: 25%;
-      width: 15%;
-      border-right: px1em(1px) solid white;
-      border-bottom: px1em(1px) solid white;
-    }
+    // .tv-list::after{
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   content: '';
+    //   display: block;
+    //   height: 25%;
+    //   width: 15%;
+    //   border-left: px1em(1px) solid white;
+    //   border-top: px1em(1px) solid white;
+    // }
+    // .tv-list::before{
+    //   position: absolute;
+    //   bottom: -1px;
+    //   right: -1px;
+    //   content: '';
+    //   display: block;
+    //   height: 25%;
+    //   width: 15%;
+    //   border-right: px1em(1px) solid white;
+    //   border-bottom: px1em(1px) solid white;
+    // }
   }
 }
 </style>
