@@ -24,3 +24,7 @@ export const xinyicomponentTitle = getComponent('xinyi/title')
 export const xinyicomponentWorkcallInfoMap = getComponent('xinyi/workcallInfoMap')
 export const xinyicomponentNewspaper = getComponent('xinyi/newspaper')
 export const xinyicomponentTv = getComponent('xinyi/tv')
+
+/* 马鞍山套系 */
+export const maanshancomponentReport = getComponent('maanshan/report')
+export const maanshancomponentProject = getComponent('maanshan/project')
