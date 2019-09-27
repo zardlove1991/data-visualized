@@ -29,7 +29,7 @@ export const getUserInfo = (memberId) => createXietongAPI(`${workcallUrl}/Apisys
 /* 通用 end */
 
 // 获取配置数据
-export const getConfigData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apiadmin&c=CP_project&a=detail`)
+export const getConfigData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apiadmin&c=CP_project&a=new_detail`)
 
 export const getUrl = (action) => {
   if (!action) {
