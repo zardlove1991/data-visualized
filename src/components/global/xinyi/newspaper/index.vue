@@ -46,6 +46,7 @@ export default {
     text-align: left;
     height: 15%;
     font-size: px1em(22px);
+    font-weight: bold;
     color: #d6e6ff;
   }
   .newspaper-box {

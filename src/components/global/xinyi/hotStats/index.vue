@@ -458,6 +458,7 @@ export default {
     height: px1em(110px);
     text-align: center;
     font-size: px1em(11px);
+    font-weight: bold;
     color: #d6e6ff;
   }
   .hidden {

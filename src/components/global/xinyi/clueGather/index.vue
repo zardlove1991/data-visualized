@@ -109,6 +109,7 @@ export default {
     height: 15%;
     text-align: left;
     font-size: px1em(22px);
+    font-weight: bold;
     color: #d6e6ff;
   }
   .title-list {
@@ -120,6 +121,7 @@ export default {
       height: px1em(60px);
       margin-right: 2%;
       font-size: px1em(15px);
+      font-weight: bold;
       color: #d6e6ff;
       background: url('./assets/clue-btn.png') no-repeat center;
       background-size: 100% 100%;
