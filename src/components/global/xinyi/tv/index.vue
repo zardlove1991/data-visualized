@@ -115,7 +115,7 @@ export default {
     color: #d6e6ff;
   }
   .tv-main {
-    width: 70%;
+    width: 80%;
     height: 75%;
     margin: 0 auto;
     .tv-box {
@@ -135,7 +135,8 @@ export default {
     }
     .tv-list {
       position: relative;
-      width: 5.5em;
+      width: 49%;
+      height: 48%;
       padding: 2px;
       background: url("./assets/back.png") no-repeat center;
       background-size: 100% 100%;
@@ -143,13 +144,6 @@ export default {
         width: 100%;
         height: 100%;
         overflow: hidden;
-        .video-js.vjs-fluid,
-        .video-js.vjs-16-9,
-        .video-js.vjs-4-3 {
-          width: 100%;
-          max-width: 100%;
-          height: 100% !important;
-        }
       }
       .tv-name {
         color: #00fff6;
@@ -158,28 +152,6 @@ export default {
         margin-top: 0.15em;
       }
     }
-    // .tv-list::after{
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   content: '';
-    //   display: block;
-    //   height: 25%;
-    //   width: 15%;
-    //   border-left: px1em(1px) solid white;
-    //   border-top: px1em(1px) solid white;
-    // }
-    // .tv-list::before{
-    //   position: absolute;
-    //   bottom: -1px;
-    //   right: -1px;
-    //   content: '';
-    //   display: block;
-    //   height: 25%;
-    //   width: 15%;
-    //   border-right: px1em(1px) solid white;
-    //   border-bottom: px1em(1px) solid white;
-    // }
   }
 }
 </style>

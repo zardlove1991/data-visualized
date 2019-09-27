@@ -172,3 +172,9 @@ html, body, #app {
   }
 
 }
+.vjs-custom-skin .vjs-fluid {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  padding-top: 0 !important;
+}
