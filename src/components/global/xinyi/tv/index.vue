@@ -168,8 +168,8 @@ export default {
     }
     .tv-list::before{
       position: absolute;
-      bottom: -(px1em(2px));
-      right: -(px1em(2px));
+      bottom: -1px;
+      right: -1px;
       content: '';
       display: block;
       height: 25%;
