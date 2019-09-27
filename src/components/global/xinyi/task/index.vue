@@ -17,6 +17,10 @@
         </div>
         <div class="task-chart-box">
           <chart :options="pieOpt" :autoResize="true"></chart>
+          <div class="task-total sys-flex sys-vertical flex-justify-center">
+            <span class="total-text">任务总数</span>
+            <span class="total-number">{{taskTotal}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -42,7 +46,8 @@ export default {
       count: 0,
       proportion: 1,
       legendData: [],
-      seriesData: []
+      seriesData: [],
+      taskTotal: 0
     }
   },
   computed: {
@@ -132,6 +137,7 @@ export default {
               value: v.total,
               name: v.title
             })
+            this.taskTotal = res.data.data.reduce((past, cur) => past + cur.total, 0)
           })
         }
       })
@@ -205,11 +211,28 @@ export default {
       }
     }
     .task-chart-box {
+      position: relative;
       height: 100%;
       flex-basis: 50%;
       .echarts {
         width: 100%;
         height: 100%;
+      }
+      .task-total {
+        position: absolute;
+        top: 30%;
+        left: 25%;
+        width: 40%;
+        height: 40%;
+        z-index: 100;
+        color: #D6E6FF;
+        font-weight: bold;
+        .total-text {
+          font-size: 0.3em;
+        }
+        .total-number {
+          font-size: 0.5em;
+        }
       }
     }
   }
