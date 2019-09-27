@@ -31,7 +31,7 @@ const router = createRouter(Vue)
 
 // 判断是否需要登录
 router.beforeEach((to, from, next) => {
-  console.log(to)
+  // console.log(to)
   if (to.meta.title) {
     document.title = to.meta.title
   }
