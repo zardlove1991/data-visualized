@@ -33,6 +33,7 @@ export default {
     letter-spacing: 0.10em;
     font-weight: bold;
     color: #ffffff;
+    transform: scaleY(1.5)
   }
 }
 .warp-bg {
