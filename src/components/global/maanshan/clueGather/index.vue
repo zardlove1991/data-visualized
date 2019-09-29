@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getWebsitList, getWechatList, getWeiboList } from '@/servers/xinyi'
+import { getWebsitList, getWechatList, getWeiboList } from '@/servers/maanshan'
 export default {
   name: 'clue',
   data () {

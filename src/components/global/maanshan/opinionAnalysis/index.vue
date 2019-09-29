@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { getHotTopicList, getTopicTrend, getTopicEmotion, getTopicPubArea } from '@/servers/xinyi'
+import { getHotTopicList, getTopicTrend, getTopicEmotion, getTopicPubArea } from '@/servers/maanshan'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/chart/pie'

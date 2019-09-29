@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getReportData } from '@/servers/xinyi'
+import { getReportData } from '@/servers/maanshan'
 export default {
   name: 'report',
   data () {

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getProjectData } from '@/servers/xinyi'
+import { getProjectData } from '@/servers/maanshan'
 export default {
   name: 'project',
   data () {
