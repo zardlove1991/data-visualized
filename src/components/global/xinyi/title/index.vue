@@ -29,7 +29,7 @@ export default {
   // background-size: 100%;
   .title-title {
     width: 100%;
-    font-size: px1em(45px);
+    font-size: px1em(47px);
     font-weight: bold;
     color: #ffffff;
   }
