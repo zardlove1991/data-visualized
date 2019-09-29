@@ -470,7 +470,7 @@ export default {
   },
   created () {
     // getDataConfig().then(res => {
-    this.center = { lng: 118.7653724500868, lat: 31.97024088541667 }
+    this.center = { lng: 118.360804, lat: 34.375425 }
     // })
   },
   mounted () {
