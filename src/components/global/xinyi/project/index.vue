@@ -5,7 +5,7 @@
       <div class="project-title sys-flex sys-flex-center">{{projectTitle}}</div>
       <div
         class="project-list animated sys-flex sys-flex-center overhidden"
-        :class="{'flipInX' : v}"
+        :class="{'fadeInLeft' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
         :key="k"

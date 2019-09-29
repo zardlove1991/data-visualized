@@ -2,12 +2,14 @@
   <div class="xy-task" id="xy-task" :style="defineBg()">
     <!--  :class="[{'warp-bg' : showDefault}]" -->
     <div class="task-wrap sys-flex sys-vertical" >
-      <div class="task-title sys-flex sys-flex-center">{{taskTitle}}</div>
+      <div class="task-title sys-flex sys-flex-center">
+        <span class="title-box">{{taskTitle}}</span>
+      </div>
       <div class="task-content sys-flex">
-        <div class="task-list-box sys-flex sys-vertical flex-justify-between">
+        <div class="task-list-box sys-flex sys-vertical flex-justify-around">
           <div
             class="task-list animated sys-flex sys-flex-center overhidden"
-            :class="{'flipInX' : v, 'bgurl0': k%4 === 0, 'bgurl1': k%4 === 1, 'bgurl2': k%4 === 2, 'bgurl3': k%4 === 3}"
+            :class="{'fadeInLeft' : v, 'bgurl0': k%4 === 0, 'bgurl1': k%4 === 1, 'bgurl2': k%4 === 2, 'bgurl3': k%4 === 3}"
             :style="{'animation-delay' : k/2 + 's'}"
             v-for="(v,k) in dataList"
             :key="k"
@@ -187,11 +189,14 @@ export default {
     background-size: 100% 100%;
   }
   .task-title {
-    text-align: left;
     height: 15%;
-    font-size: px1em(22px);
-    font-weight: bold;
-    color: #d6e6ff;
+    .title-box {
+      text-align: left;
+      font-size: px1em(22px);
+      font-weight: bold;
+      color: #d6e6ff;
+      // transform: scaleY(1.5);
+    }
   }
   .task-content {
     flex: 1;
@@ -245,10 +250,11 @@ export default {
     height: 11%;
     color: #d6e6ff;
     .list-title {
-      // transform: scale(1,2);
-      // font-size: px1em(10px);
+      // transform: scaleY(1.5);
+      // font-size: px1em(8px);
       // 原样式
       font-size: px1em(15px);
+      // letter-spacing: 0.05em;
       text-align: left;
     }
   }
