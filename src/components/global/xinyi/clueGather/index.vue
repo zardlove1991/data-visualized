@@ -68,19 +68,19 @@ export default {
       if (type === 0) {
         getWebsitList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 6)
+            this.dataList = res.data.data
           }
         })
       } else if (type === 1) {
         getWechatList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 6)
+            this.dataList = res.data.data
           }
         })
       } else if (type === 2) {
         getWeiboList().then(res => {
           if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 6)
+            this.dataList = res.data.data
           }
         })
       }

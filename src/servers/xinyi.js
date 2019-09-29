@@ -2,12 +2,12 @@ import { httpsbaseUrl, createAPI } from './api'
 const baseid = '401'
 const basekey = 'bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ'
 
-export const getReportData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallReportList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 报题
-export const getProjectData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 选题
-export const getWebsitList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 线索汇聚-网站
-export const getWechatList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 线索汇聚-微信
-export const getWeiboList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 线索汇聚-微博
-export const getTaskList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallTaskList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 任务列表
+export const getReportData = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallReportList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`) // 报题
+export const getProjectData = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`) // 选题
+export const getWebsitList = (count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`) // 线索汇聚-网站
+export const getWechatList = (count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`) // 线索汇聚-微信
+export const getWeiboList = (count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`) // 线索汇聚-微博
+export const getTaskList = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallTaskList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`) // 任务列表
 export const getTaskAccess = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallTaskAccess&custom_appid=${baseid}&custom_appkey=${basekey}`) // 任务统计
 export const getRankList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=m2odata&a=getRankList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 稿件排行-阅读量
 export const getRankCommentList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=m2odata&a=newsCommentRank&custom_appid=${baseid}&custom_appkey=${basekey}`) // 稿件排行-推荐量

@@ -41,9 +41,10 @@ export default {
   data () {
     return {
       taskTitle: '任务统计',
-      list: [],
       dataList: [],
-      count: 0,
+      dataInterval: null,
+      count: 8,
+      page: 1,
       proportion: 1,
       legendData: [],
       seriesData: [],
@@ -121,10 +122,11 @@ export default {
   },
   methods: {
     getDataList () {
-      getTaskList().then(res => {
+      getTaskList(this.count, this.page).then(res => {
         if (res && res.data && res.data.data && res.data.data[0]) {
-          this.list = res.data.data.slice(0, 8)
-          this.initList()
+          this.dataList = []
+          this.dataList = res.data.data
+          this.intervalData()
         }
       })
       getTaskAccess().then(res => {
@@ -143,22 +145,25 @@ export default {
       })
     },
 
-    initList () {
-      this.dataList = this.list.slice(this.count, this.count + 8)
-      this.count += 8
-      this.listInterval = setInterval(() => {
-        if (this.count < this.list.length) {
-          this.dataList = []
-          setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 8)
-            this.count += 8
-          }, 100)
-        } else {
-          this.dataList = []
-          clearInterval(this.listInterval)
-          this.count = 0
-          this.getDataList()
-        }
+    intervalData () {
+      this.dataInterval = setInterval(() => {
+        getTaskList(this.count, this.page).then(res => {
+          if (res && res.data && res.data.data && res.data.data[0]) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.data
+              if (res.data.data.length < this.count) {
+                this.page = 1
+              } else {
+                this.page++
+              }
+            }, 100)
+          } else {
+            this.page = 1
+            clearInterval(this.dataInterval)
+            this.getDataList()
+          }
+        })
       }, 10000)
     }
   }
@@ -240,6 +245,9 @@ export default {
     height: 11%;
     color: #d6e6ff;
     .list-title {
+      // transform: scale(1,2);
+      // font-size: px1em(10px);
+      // 原样式
       font-size: px1em(15px);
       text-align: left;
     }

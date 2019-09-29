@@ -25,9 +25,10 @@ export default {
   data () {
     return {
       projectTitle: '选题展示',
-      list: [],
       dataList: [],
-      count: 0
+      dataInterval: null,
+      count: 8,
+      page: 1
     }
   },
   created () {
@@ -38,30 +39,41 @@ export default {
   },
   methods: {
     getDataList () {
-      getProjectData().then(res => {
-        if (res && res.data && res.data.data) {
-          this.list = res.data.data.slice(0, 8)
-          this.initList()
-        }
-      })
-    },
-
-    initList () {
-      this.dataList = this.list.slice(this.count, this.count + 8)
-      this.count += 8
-      this.listInterval = setInterval(() => {
-        if (this.count < this.list.length) {
+      getProjectData(this.count, this.page).then(res => {
+        if (res && res.data && res.data.data && res.data.data[0]) {
           this.dataList = []
           setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 8)
-            this.count += 8
+            this.dataList = res.data.data
+            if (res.data.data.length < this.count) {
+              this.page = 1
+            } else {
+              this.page++
+            }
           }, 100)
-        } else {
-          this.dataList = []
-          clearInterval(this.listInterval)
-          this.count = 0
-          this.getDataList()
         }
+      })
+      this.intervalData()
+    },
+
+    intervalData () {
+      this.dataInterval = setInterval(() => {
+        getProjectData(this.count, this.page).then(res => {
+          if (res && res.data && res.data.data && res.data.data[0]) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.data
+              if (res.data.data.length < this.count) {
+                this.page = 1
+              } else {
+                this.page++
+              }
+            }, 100)
+          } else {
+            this.page = 1
+            clearInterval(this.dataInterval)
+            this.getDataList()
+          }
+        })
       }, 10000)
     }
   }
