@@ -51,16 +51,18 @@ export default {
   }
   .newspaper-box {
     width: 80%;
-    height: 75%;
+    height: 85%;
     margin: 0 auto;
     iframe {
       display: block;
       width: 100%;
-      height: 100%;
+      height: 85%;
+      margin-top: 3%;
       outline: none;
       border: none;
       box-shadow: none;
       -webkit-appearance: none;
+      transform: scale(1, 1.1);
     }
   }
 }
