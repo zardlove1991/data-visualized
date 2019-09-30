@@ -16,4 +16,4 @@ export const getTopicTrend = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apid
 export const getTopicEmotion = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=hotspot&a=topicEmotion&custom_appid=${baseid}&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7&id=${id}`) // 热点新闻-情感分析
 export const getTopicPubArea = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=hotspot&a=topicPubArea&custom_appid=${baseid}&custom_appkey=${basekey}&id=${id}`) // 热点新闻-地域分布
 export const getConnecterList = (id) => createAPI(`${httpsbaseUrl}//index.php?m=Apidaping&c=stat&a=getWorkCallConnecterList&custom_appid=${baseid}&custom_appkey=${basekey}`) // 记者连线
-export const getTvList = (id) => createAPI(`http://mapi.zyrb.com.cn/api/open/ziyang/daping_channel.php?appid=m2ox476nugyemljjju&appkey=cbb268bdc1b57938c834bb50f94859ab`) // 电视直播
+export const getTvList = (id) => createAPI(`http://monitor-screen.cloud.hoge.cn/index.php?m=Apidaping&c=rongmei&a=getChannelList&custom_appid=401&custom_appkey=%20bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ`) // 电视直播

@@ -5,8 +5,8 @@
       <div class="tv-title sys-flex sys-flex-center">{{tvTitle}}</div>
       <div class="tv-main">
         <div class="name-box sys-flex sys-flex-center flex-justify-around">
-          <div class="tv-name">《新闻频道》</div>
           <div class="tv-name">《生活频道》</div>
+          <div class="tv-name">《新闻频道》</div>
         </div>
         <div class="sys-flex sys-flex-center flex-justify-between sys-flex-wrap tv-box">
           <div v-for="(v,k) in tvList" :key="k" class="tv-list list-box">
@@ -84,7 +84,75 @@ export default {
               }
             }
           })
-          this.tvList = data.slice(0, 2).concat(data.slice(0, 2))
+          let nullData = [
+            {
+              playerOpt: {
+                autoplay: true, // 自动播放
+                controls: true, // 是否显示控制栏
+                muted: true,
+                fluid: true,
+                width: 820,
+                // techOrder: ['flash', 'html5'], // 兼容顺序
+                sourceOrder: true,
+                flash: { hls: { withCredentials: false } },
+                html5: { hls: { withCredentials: false } },
+                sources: [
+                  {
+                    withCredentials: false,
+                    type: 'application/x-mpegURL',
+                    src: null
+                  }
+                ],
+                /* poster:
+                  value.snap.host +
+                  value.snap.dir +
+                  value.snap.filepath +
+                  value.snap.filename, // 播放器默认图片 */
+                controlBar: {
+                  // 配置控制栏
+                  timeDivider: false, // 时间分割线
+                  durationDisplay: false, // 总时间
+                  progressControl: true, // 进度条
+                  customControlSpacer: true, // 未知
+                  fullscreenToggle: true // 全屏
+                }
+              }
+            },
+            {
+              playerOpt: {
+                autoplay: true, // 自动播放
+                controls: true, // 是否显示控制栏
+                muted: true,
+                fluid: true,
+                width: 820,
+                // techOrder: ['flash', 'html5'], // 兼容顺序
+                sourceOrder: true,
+                flash: { hls: { withCredentials: false } },
+                html5: { hls: { withCredentials: false } },
+                sources: [
+                  {
+                    withCredentials: false,
+                    type: 'application/x-mpegURL',
+                    src: null
+                  }
+                ],
+                /* poster:
+                  value.snap.host +
+                  value.snap.dir +
+                  value.snap.filepath +
+                  value.snap.filename, // 播放器默认图片 */
+                controlBar: {
+                  // 配置控制栏
+                  timeDivider: false, // 时间分割线
+                  durationDisplay: false, // 总时间
+                  progressControl: true, // 进度条
+                  customControlSpacer: true, // 未知
+                  fullscreenToggle: true // 全屏
+                }
+              }
+            }
+          ]
+          this.tvList = data.slice(0, 2).concat(nullData)
         }
       })
     }
@@ -121,7 +189,7 @@ export default {
     margin: 0 auto;
     margin-top: -2.5%;
     .tv-box {
-      padding: 4% 7.5% 0 0.5%;
+      padding: 4.5% 7.5% 0 0.5%;
       height: 100%;
       background: url("./assets/tvbg.png") no-repeat center;
       background-size: 100% 100%;
