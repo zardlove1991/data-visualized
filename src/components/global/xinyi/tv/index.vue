@@ -33,7 +33,7 @@ export default {
   name: 'tv',
   data () {
     return {
-      tvTitle: '电视直播',
+      tvTitle: '电视频道',
       tvList: []
     }
   },
