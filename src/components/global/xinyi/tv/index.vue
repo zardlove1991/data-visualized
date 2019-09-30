@@ -96,13 +96,13 @@ export default {
                 sourceOrder: true,
                 flash: { hls: { withCredentials: false } },
                 html5: { hls: { withCredentials: false } },
-                sources: [
-                  {
-                    withCredentials: false,
-                    type: 'application/x-mpegURL',
-                    src: null
-                  }
-                ],
+                // sources: [
+                //   {
+                //     withCredentials: false,
+                //     type: 'application/x-mpegURL',
+                //     src: null
+                //   }
+                // ],
                 /* poster:
                   value.snap.host +
                   value.snap.dir +
@@ -129,13 +129,13 @@ export default {
                 sourceOrder: true,
                 flash: { hls: { withCredentials: false } },
                 html5: { hls: { withCredentials: false } },
-                sources: [
-                  {
-                    withCredentials: false,
-                    type: 'application/x-mpegURL',
-                    src: null
-                  }
-                ],
+                // sources: [
+                //   {
+                //     withCredentials: false,
+                //     type: 'application/x-mpegURL',
+                //     src: null
+                //   }
+                // ],
                 /* poster:
                   value.snap.host +
                   value.snap.dir +
