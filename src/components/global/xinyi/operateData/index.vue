@@ -165,7 +165,7 @@ export default {
   .img-box {
     width: 1.6em;
     height: 1.6em;
-    margin-right: 0.9em;
+    margin-right: 1.5em;
   }
   .mbt12 {
     font-size: 0.4em;

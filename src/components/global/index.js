@@ -14,6 +14,7 @@ export const jilincomponentWorkcallInfoMap = getComponent('jilin/workcallInfoMap
 /* 吉林套系 end */
 
 /* 新沂套系 */
+// 因为该套系在圆形高出来前就做了，所以样式并非按照原型图做的，存在字体边距等较大差距
 export const xinyicomponentReport = getComponent('xinyi/report')
 export const xinyicomponentProject = getComponent('xinyi/project')
 export const xinyicomponentClueGather = getComponent('xinyi/clueGather')
