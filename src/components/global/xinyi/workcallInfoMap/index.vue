@@ -617,9 +617,11 @@ export default {
   .container-inner {
     width: 100%;
     height: 100%;
-    background: url('./assets/bg_1.png') no-repeat center;
-    background-size: 100% 100%;
-    padding: 0.3em 0.5em;
+    border: solid 0.02em #00D2FF;
+    border-radius: 0.2em;
+    // background: url('./assets/bg_1.png') no-repeat center;
+    // background-size: 100% 100%;
+    // padding: 0.3em 0.5em;
     .main-wrap {
       width: 100%;
       height: 100%;
