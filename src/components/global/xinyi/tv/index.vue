@@ -115,22 +115,25 @@ export default {
     color: #d6e6ff;
   }
   .tv-main {
+    position: relative;
     width: 80%;
-    height: 75%;
+    height: 80%;
     margin: 0 auto;
     .tv-box {
       padding: 4% 7.5% 0 0.5%;
-      height: 90%;
+      height: 100%;
       background: url("./assets/tvbg.png") no-repeat center;
       background-size: 100% 100%;
     }
     .name-box {
-      height: 10%;
-      padding-right: 5%;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      font-size: 0.3em;
+      padding-left: 0.5%;
+      padding-right: 7.5%;
     }
     .tv-name {
-      width: 45%;
-      font-size: px1em(15px);
       color: #d6e6ff;
     }
     .tv-list {
