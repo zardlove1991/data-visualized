@@ -56,8 +56,8 @@ export default {
     iframe {
       display: block;
       width: 100%;
-      height: 85%;
-      margin-top: 3%;
+      height: 86%;
+      margin-top: 2%;
       outline: none;
       border: none;
       box-shadow: none;

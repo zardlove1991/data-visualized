@@ -619,7 +619,7 @@ export default {
     height: 100%;
     background: url('./assets/bg_1.png') no-repeat center;
     background-size: 100% 100%;
-    padding: 1%;
+    padding: 0.3em 0.5em;
     .main-wrap {
       width: 100%;
       height: 100%;

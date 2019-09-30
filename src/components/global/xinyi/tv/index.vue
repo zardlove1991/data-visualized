@@ -117,8 +117,9 @@ export default {
   .tv-main {
     position: relative;
     width: 80%;
-    height: 80%;
+    height: 85%;
     margin: 0 auto;
+    margin-top: -2.5%;
     .tv-box {
       padding: 4% 7.5% 0 0.5%;
       height: 100%;
