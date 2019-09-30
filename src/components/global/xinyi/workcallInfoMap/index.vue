@@ -612,10 +612,14 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  border: solid 0.02em #00D2FF;
+  // border: solid 0.02em #00D2FF;
+  padding: 0.25vh 0.1vw;
   .container-inner {
     width: 100%;
     height: 100%;
+    background: url('./assets/bg_1.png') no-repeat center;
+    background-size: 100% 100%;
+    padding: 1%;
     .main-wrap {
       width: 100%;
       height: 100%;
@@ -649,7 +653,7 @@ export default {
             background-color: #114497;
           }
           .reporter-list-content{
-            height: calc(100% - 2.2em);
+            height: 9em;
             overflow: scroll;
           }
           .reporter-list {
