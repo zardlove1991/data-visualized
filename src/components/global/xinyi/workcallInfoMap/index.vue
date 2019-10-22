@@ -15,7 +15,7 @@
               </div>
               <div class="reporter-list-content" v-if="reporterList && reporterList.length">
                 <div class="reporter-list" v-for="(v,k) in reporterList" :key="k">
-                    <div class="sys-flex sys-flex-center">
+                    <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
                       <img class="avatar" v-if="v.avatar" :src="v.avatar && v.avatar.uri" />
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
                       <div class="info overhidden sys-flex-one">
@@ -484,10 +484,10 @@ export default {
   methods: {
     rMap () {
       var BMap = window.BMap
-      let map = this.map
-      if (!map) {
-        map = new BMap.Map('my-map')
-      }
+      let map = this.map = new BMap.Map('my-map')
+      // if (!map) {
+      //   map = new BMap.Map('my-map')
+      // }
       // map.setMapStyle(this.mapStyle)
       map.addControl(new BMap.NavigationControl())
       // 绘制带图标注
@@ -533,13 +533,13 @@ export default {
         // vv.member_id = vv.user_id
         var img = vv.avatar && vv.avatar.uri ? vv.avatar.uri : require('./assets/default_avatar.png')
         if (vv.longitude && vv.latitude) { // 地图上只画在线且有坐标的
-          if (vv.rc_status === '0' || vv.rc_status === 1) {
+          if (vv.rc_status === 0 || vv.rc_status === 1) {
             var mySquare = new SquareOverlay({
               lng: vv.longitude,
               lat: vv.latitude
             }, 60, 'red', img, vv)
             setTimeout(function () {
-              if (vv.rc_status === '0') {
+              if (vv.rc_status === 0) {
                 mySquare['_div'].classList.add('landmark-red')
               }
             }, 100)
@@ -591,6 +591,12 @@ export default {
       this.callInfo = reporter
       this.callType = 'video'
       this.callShow = true
+    },
+    // 定位记者中心
+    reporterLocate (reporter) {
+      let BMap = window.BMap
+      let centerPoint = new BMap.Point(reporter.longitude, reporter.latitude)
+      this.map.panTo(centerPoint)
     },
     split_array (arr, len) {
       let aLen = arr.length
