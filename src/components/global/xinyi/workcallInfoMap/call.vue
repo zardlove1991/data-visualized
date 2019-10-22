@@ -19,7 +19,7 @@
       <div class="sys-flex sys-flex-center flex-justify-center">
         <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
         <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
-        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="hangUp">
+        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="close">
       </div>
 
     </div>
@@ -35,7 +35,7 @@
       <span class="invite-name">{{info_item.member_name}}</span>
       <span class="invite-tip">{{invite_tip}}</span>
     </div>
-    <span class="close-btn" @click="hangUp"></span>
+    <span class="close-btn" @click="close"></span>
   </div>
 </template>
 
@@ -202,6 +202,7 @@ export default {
       this.online = false
       this.onlineTime = 0
       this.time = '00:00'
+      clearInterval(this.callTimer)
       this.$emit('update:callShow', false)
       this.$emit('update:infoItem', {})
       this.invite_call = false
