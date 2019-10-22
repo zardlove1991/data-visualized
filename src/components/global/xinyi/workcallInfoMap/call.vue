@@ -19,7 +19,7 @@
       <div class="sys-flex sys-flex-center flex-justify-center">
         <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
         <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
-        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="close">
+        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="hangUp">
       </div>
 
     </div>
