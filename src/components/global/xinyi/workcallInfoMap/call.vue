@@ -35,7 +35,7 @@
       <span class="invite-name">{{info_item.member_name}}</span>
       <span class="invite-tip">{{invite_tip}}</span>
     </div>
-    <span class="close-btn" @click="close"></span>
+    <span class="close-btn" @click="hangUp"></span>
   </div>
 </template>
 
@@ -201,6 +201,7 @@ export default {
       this.call_Show = false
       this.online = false
       this.onlineTime = 0
+      this.time = '00:00'
       this.$emit('update:callShow', false)
       this.$emit('update:infoItem', {})
       this.invite_call = false
