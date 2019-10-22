@@ -18,8 +18,8 @@
                     <div class="sys-flex sys-flex-center">
                       <img class="avatar" v-if="v.avatar" :src="v.avatar && v.avatar.uri" />
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
-                      <div class="info sys-flex-one">
-                          <div class="name">{{v.member_name}}</div>
+                      <div class="info overhidden sys-flex-one">
+                          <div class="name overhidden">{{v.member_name}}</div>
                           <div class="depart">{{v.mobile}}</div>
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
@@ -47,7 +47,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
 import { getConnecterList } from '@/servers/xinyi'
-// import {getDataConfig} from '@/utils/model'
+import {getDataConfig} from '@/utils/model'
 export default {
   name: 'workcallInfoMap',
   data () {
@@ -469,9 +469,9 @@ export default {
     swiperSlide
   },
   created () {
-    // getDataConfig().then(res => {
-    this.center = { lng: 118.360804, lat: 34.375425 }
-    // })
+    getDataConfig().then(res => {
+      this.center = {lng: +res.lng, lat: +res.lat}
+    })
   },
   mounted () {
     this.setFontsize('workcallInfoMap')
