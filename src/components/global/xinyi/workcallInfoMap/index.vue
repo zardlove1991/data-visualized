@@ -530,7 +530,7 @@ export default {
       this.coordinateList = []
       this.unlinecoordinateList = []
       this.reporterList.forEach(vv => {
-        vv.member_id = vv.user_id
+        // vv.member_id = vv.user_id
         var img = vv.avatar && vv.avatar.uri ? vv.avatar.uri : require('./assets/default_avatar.png')
         if (vv.longitude && vv.latitude) { // 地图上只画在线且有坐标的
           if (vv.rc_status === '0' || vv.rc_status === 1) {

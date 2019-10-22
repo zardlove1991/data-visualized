@@ -62,7 +62,7 @@ export default {
   props: {
     infoItem: {
       type: Object,
-      default: {}
+      default: () => {}
     },
     callType: '',
     callShow: false
