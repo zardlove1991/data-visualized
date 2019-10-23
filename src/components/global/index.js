@@ -32,3 +32,7 @@ export const maanshancomponentReport = getComponent('maanshan/report')
 export const maanshancomponentProject = getComponent('maanshan/project')
 export const maanshancomponentClueGather = getComponent('maanshan/clueGather')
 export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAnalysis')
+
+/* 溧水套系 */
+// 主屏部分
+export const lishuicomponentWorkcallInfoMap = getComponent('lishui/workcallInfoMap')
