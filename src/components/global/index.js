@@ -36,3 +36,4 @@ export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAn
 /* 溧水套系 */
 // 主屏部分
 export const lishuicomponentWorkcallInfoMap = getComponent('lishui/workcallInfoMap')
+export const lishuicomponentDataAnalysis = getComponent('lishui/dataAnalysis')
