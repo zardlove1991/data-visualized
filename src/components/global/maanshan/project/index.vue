@@ -1,5 +1,5 @@
 <template>
-  <div class="maanshan-project" id="maanshan-project" :style="defineBg()">
+  <div class="maanshan-project" id="maanshan-project">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="project-wrap sys-flex sys-vertical" >
       <div class="project-title sys-flex sys-flex-center">{{componentTitle}}</div>

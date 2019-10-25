@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-task" id="xy-task" :style="defineBg()">
+  <div class="xy-task" id="xy-task">
     <!--  :class="[{'warp-bg' : showDefault}]" -->
     <div class="task-wrap sys-flex sys-vertical" >
       <div class="task-title sys-flex sys-flex-center">

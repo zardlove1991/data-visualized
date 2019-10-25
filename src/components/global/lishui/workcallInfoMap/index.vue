@@ -1,6 +1,9 @@
 <template>
   <div class="container" id="workcallInfoMap">
-    <div class="container-inner overhidden">
+    <div class="container-title sys-flex sys-flex-center flex-justify-center">
+      <div class="title-image"></div>
+    </div>
+    <div class="container-inner">
       <div class="main-wrap">
         <div class="reporter-map-wrap flex">
           <call
@@ -20,7 +23,7 @@
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
                       <div class="info overhidden sys-flex-one">
                           <div class="name overhidden">{{v.member_name}}</div>
-                          <div class="depart">{{v.mobile}}</div>
+                          <div class="depart">{{`${v.role_title}-${v.org_title}`}}</div>
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
                       
@@ -46,8 +49,8 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
-import { getConnecterList } from '@/servers/xinyi'
-import {getDataConfig} from '@/utils/model'
+import { getConnecterList } from '@/servers/lishui'
+import { getDataConfig } from '@/utils/model'
 export default {
   name: 'workcallInfoMap',
   data () {
@@ -618,16 +621,25 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  // border: solid 0.02em #00D2FF;
-  padding: 0.25vh 0.1vw;
-  .container-inner {
+  padding: 11px;
+  .container-title {
     width: 100%;
-    height: 100%;
-    border: solid 0.02em #00D2FF;
-    border-radius: 0.2em;
-    // background: url('./assets/bg_1.png') no-repeat center;
-    // background-size: 100% 100%;
-    // padding: 0.3em 0.5em;
+    height: 20%;
+    .title-image {
+      width: 80%;
+      height: 50%;
+      background: url('./assets/title-image.png') no-repeat center;
+      background-size: 100% 100%;
+    }
+  }
+  .container-inner {
+    position: absolute;
+    top: 17%;
+    width: calc(100% - 22px);
+    height: 82%;
+    padding: 0.5em 0.07em 0.07em 0.07em;
+    background: url('./assets/map-back.png') no-repeat center;
+    background-size: 100% 100%;
     .main-wrap {
       width: 100%;
       height: 100%;

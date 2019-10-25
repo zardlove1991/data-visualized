@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-operate" id="xy-operate" :style="defineBg()">
+  <div class="xy-operate" id="xy-operate">
     <!--  :class="[{'warp-bg' : showDefault}]"  -->
     <div class="operate-wrap sys-flex sys-vertical">
       <div class="operate-title sys-flex sys-flex-center">{{operateDataTitle}}</div>

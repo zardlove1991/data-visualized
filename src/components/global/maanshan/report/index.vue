@@ -1,5 +1,5 @@
 <template>
-  <div class="maanshan-report" id="maanshan-report" :style="defineBg()">
+  <div class="maanshan-report" id="maanshan-report">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="report-wrap sys-flex sys-vertical" >
       <div class="report-title sys-flex sys-flex-center">{{componentTitle}}</div>

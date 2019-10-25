@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-newspaper" id="xy-newspaper" :style="defineBg()">
+  <div class="xy-newspaper" id="xy-newspaper">
     <!--  :class="[{'warp-bg' : showDefault}]"  -->
     <div class="newspaper-wrap sys-flex sys-vertical">
       <div class="newspaper-title sys-flex sys-flex-center">{{newspaperTitle}}</div>

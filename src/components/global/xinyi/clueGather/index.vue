@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-clue" id="xy-clue" :style="defineBg()">
+  <div class="xy-clue" id="xy-clue">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="clue-wrap sys-flex sys-vertical">
       <div class="clue-title sys-flex sys-flex-center">{{clueTitle}}</div>

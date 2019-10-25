@@ -1,6 +1,6 @@
 <template>
 <!--  :class="[{'warp-bg' : showDefault}]"  -->
-  <div class="xy-title sys-flex sys-flex-center warp-bg" id="xy-title" :style="defineBg()">
+  <div class="xy-title sys-flex sys-flex-center warp-bg" id="xy-title">
     <div class="title-title">{{titleTitle}}</div>
   </div>
 </template>
