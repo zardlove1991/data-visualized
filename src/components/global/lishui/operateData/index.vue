@@ -104,20 +104,20 @@ export default {
   mounted () {
     this.setFontsize('ls-operateData')
     this.microList = [
-        {
-          lable: '昨日阅读数：',
-          value: 123
-        }, {
-          lable: '今日新消息数：',
-          value: 234
-        }, {
-          lable: '新增粉丝数：',
-          value: 0
-        }, {
-          lable: '累计粉丝数：',
-          value: 0
-        }
-      ]
+      {
+        lable: '昨日阅读数：',
+        value: 123
+      }, {
+        lable: '今日新消息数：',
+        value: 234
+      }, {
+        lable: '新增粉丝数：',
+        value: 0
+      }, {
+        lable: '累计粉丝数：',
+        value: 0
+      }
+    ]
   }
 }
 </script>
@@ -135,10 +135,9 @@ export default {
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
     .box-item {
-      width: 4.2em;
+      width: 22%;
       height: 100%;
       padding: 0.8em 0.3em 0.3em;
-      background-size: 100% 100%;
       .list-item {
         width: 100%;
         height: 25%;
@@ -153,24 +152,28 @@ export default {
     }
     .micro-box {
       background: url('./assets/micro.png') no-repeat center center;
+      background-size: 100% 100%;
       .item-value {
         color: #C9BA3D;
       }
     }
     .app-box {
       background: url('./assets/app.png') no-repeat center center;
+      background-size: 100% 100%;
       .item-value {
         color: #23DF9F;
       }
     }
     .web-box {
       background: url('./assets/web.png') no-repeat center center;
+      background-size: 100% 100%;
       .item-value {
         color: #B732D3;
       }
     }
     .content-box {
       background: url('./assets/content.png') no-repeat center center;
+      background-size: 100% 100%;
       .item-value {
         color: #D85C30;
       }

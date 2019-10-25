@@ -642,32 +642,54 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+// px to rem
+@function pxem($px-values,$baseline-px:16px,$support-for-ie:false){
+  //Conver the baseline into rems
+  $baseline-rem: $baseline-px / 1em * 12.5;
+  //Print the first line in pixel values
+  @if $support-for-ie {
+      @return $px-values;
+  }
+  //if there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"{
+      @return $px-values / $baseline-rem;
+  }
+  @else {
+      //Create an empty list that we can dump values into
+      $rem-values:();
+      @each $value in $px-values{
+          // If the value is zero or not a number, return it
+          @if $value == 0 or type-of($value) != "number"{
+              $rem-values: append($rem-values, $value / $baseline-rem);
+          }
+      }
+      @return $rem-values;
+  }
+}
 .main-wrap {
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 11px;
+  padding: 17px;
   .data-analysis-wrap {
     width: 100%;
     height: 100%;
-    padding: 1.2em 0.45em 0.5em 0.45em;
+    padding: pxem(215px) pxem(100px) pxem(146px) ;
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
     .data-analysis-list {
       width: 48%;
       height: 100%;
-      padding: 0.3em;
+      padding: pxem(67px);
       background: url('./assets/news-border.png') no-repeat center center;
       background-size: 100% 100%;
     }
     .data-list {
-      height: 1.7em;
+      height: pxem(340px);
       background: rgb(16, 43, 95);
-      padding: 0.2em;
-      border: 0.02em dotted transparent;
+      padding: pxem(55px);
       &.active {
         background: rgb(10, 67, 183);
-        border: 0.02em dotted rgba(0, 255, 240, 1);
         .data-title {
           color: #F7F02B;
         }
@@ -676,14 +698,14 @@ export default {
         width: 100%;
         height: 1em;
         line-height: 1em;
-        font-size: 0.27em;
+        font-size: 0.27rem;
         font-family: PingFangSC-Regular;
         font-weight: 400;
         color: #ffffff;
         text-align: left;
       }
       .data-brief {
-        font-size: 0.2em;
+        font-size: 0.2rem;
         color: #fff;
         height: 3.25em;
         overflow: hidden;
@@ -694,22 +716,23 @@ export default {
       height: 100%;
       .echarts-top {
         width: 100%;
-        height: 3.85em;
+        height: pxem(770px);
         .data-channel {
-          width: 4.6em;
-          height: 3.85em;
+          width: 55%;
+          height: 100%;
           background: url('./assets/channel-border.png') no-repeat center center;
           background-size: 100% 100%;
           position: relative;
-          padding: 0.2em;
+          padding: pxem(37px);
+          margin-right: pxem(67px);
           .channel-title {
-            font-size: 0.24em;
+            font-size: 0.24rem;
             color: #fff;
             text-align: left;
           }
           .channel-box {
-            width: 4.2em;
-            height: 3.2em;
+            width: 100%;
+            height: pxem(650px);
             .echarts {
               width: 100%;
               height: 100%;
@@ -717,20 +740,20 @@ export default {
           }
         }
         .data-media {
-          width: 3.8em;
-          height: 3.85em;
+          flex: 1;
+          height: 100%;
           background: url('./assets/media-border.png') no-repeat center center;
           background-size: 100% 100%;
           position: relative;
-          padding: 0.2em;
+          padding: pxem(37px);
           .media-title {
-            font-size: 0.24em;
+            font-size: 0.24rem;
             color: #fff;
             text-align: left;
           }
           .media-box {
-            width: 3.4em;
-            height: 3.2em;
+            width: 100%;
+            height: pxem(650px);
             .echarts {
               width: 100%;
               height: 100%;
@@ -740,21 +763,21 @@ export default {
       }
       .echarts-bottom {
         width: 100%;
-        height: 4.5em;
+        height: pxem(886px);
         .data-source {
           width: 100%;
-          height: 4.5em;
+          height: 100%;
           background: url('./assets/source-border.png') no-repeat center center;
           background-size: 100% 100%;
-          padding: 0.2em;
+          padding: pxem(37px);
           .source-title {
-            font-size: 0.24em;
+            font-size: 0.24rem;
             color: #fff;
             text-align: left;
           }
           .source-box {
             width: 100%;
-            height: 3.85em;
+            height: 100%;
             .echarts {
               width: 100%;
               height: 100%;
