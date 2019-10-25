@@ -136,7 +136,7 @@ export default {
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
     .box-item {
-      width: pxem(840px);
+      width: 22%;
       height: 100%;
       padding: pxem(115px) pxem(67px) pxem(58px);
       .list-item {

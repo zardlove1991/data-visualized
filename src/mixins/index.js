@@ -40,11 +40,6 @@ export default {
         } else {
           dom.style.fontSize = height / 1080 * 100 + 'px'
         }
-        if (a > 1.78) {
-          document.documentElement.style.fontSize = width / 1920 * 100 * multiple + 'px'
-        } else {
-          document.documentElement.style.fontSize = height / 1080 * 100 + 'px'
-        }
       }
     },
     getProportion (id) {
