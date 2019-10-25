@@ -17,13 +17,13 @@
       <div class="data-echarts sys-flex sys-vertical flex-justify-between">
         <div class="echarts-top sys-flex flex-justify-between">
           <div class="data-channel">
-            <p v-if="typeActive == 'internet'" class="channel-title">分渠道数据分析</p>
+            <p v-if="typeActive == 'internet'" class="echarts-title channel-title">分渠道数据分析</p>
             <div class="channel-box">
               <chart v-if="typeActive == 'internet'" :options="lineOptions" :autoResize="true"></chart>
             </div>
           </div>
           <div class="data-media">
-            <p v-if="typeActive == 'internet'" class="media-title">媒体占比</p>
+            <p v-if="typeActive == 'internet'" class="echarts-title media-title">媒体占比</p>
             <div class="media-box">
               <chart v-if="typeActive == 'internet'" :options="pieOptions" :autoResize="true"></chart>
             </div>
@@ -31,7 +31,7 @@
         </div>
         <div class="echarts-bottom">
           <div class="data-source">
-            <p v-if="typeActive == 'internet'" class="source-title">TOP 10 活跃新闻媒体来源</p>
+            <p v-if="typeActive == 'internet'" class="echarts-title source-title">TOP 10 活跃新闻媒体来源</p>
             <div class="source-box">
               <chart v-if="typeActive == 'internet'" :options="top10options" :autoResize="true"></chart>
             </div>
@@ -691,6 +691,11 @@ export default {
     .data-echarts {
       width: 48%;
       height: 100%;
+      .echarts-title {
+        font-size: pxrem(48px, 12.5);
+        color: #fff;
+        text-align: left;
+      }
       .echarts-top {
         width: 100%;
         height: pxem(770px, 12.5);
@@ -702,11 +707,6 @@ export default {
           position: relative;
           padding: pxem(37px, 12.5);
           margin-right: pxem(67px, 12.5);
-          .channel-title {
-            font-size: pxrem(54px, 12.5);
-            color: #fff;
-            text-align: left;
-          }
           .channel-box {
             width: 100%;
             height: pxem(650px, 12.5);
@@ -723,11 +723,6 @@ export default {
           background-size: 100% 100%;
           position: relative;
           padding: pxem(37px, 12.5);
-          .media-title {
-            font-size: pxrem(54px, 12.5);
-            color: #fff;
-            text-align: left;
-          }
           .media-box {
             width: 100%;
             height: pxem(650px, 12.5);
@@ -747,11 +742,6 @@ export default {
           background: url('./assets/source-border.png') no-repeat center center;
           background-size: 100% 100%;
           padding: pxem(37px, 12.5);
-          .source-title {
-            font-size: pxrem(54px, 12.5);
-            color: #fff;
-            text-align: left;
-          }
           .source-box {
             width: 100%;
             height: 100%;
