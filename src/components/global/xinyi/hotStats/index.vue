@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-hot" id="xy-hot" :style="defineBg()">
+  <div class="xy-hot" id="xy-hot">
     <!--  :class="[{'warp-bg' : showDefault}]"  -->
     <div class="hot-wrap sys-flex sys-vertical">
       <div class="hot-title hidden">{{hotNews.title}}</div>

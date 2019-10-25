@@ -63,14 +63,6 @@ export default {
       } else {
         return 1
       }
-    },
-    defineBg () {
-      if (this.data.viewAttr && this.data.viewAttr.bg) {
-        return `
-          background: url(${this.data.viewAttr.bg}) no-repeat center center;
-          background-size: 100% 100%
-        `
-      }
     }
   }
 }

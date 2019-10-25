@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-tv" id="xy-tv" :style="defineBg()">
+  <div class="xy-tv" id="xy-tv">
     <!--  :class="[{'warp-bg' : showDefault}]" -->
     <div class="tv-wrap sys-flex sys-vertical">
       <div class="tv-title sys-flex sys-flex-center">{{tvTitle}}</div>

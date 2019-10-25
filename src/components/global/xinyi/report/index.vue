@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-report" id="xy-report" :style="defineBg()">
+  <div class="xy-report" id="xy-report">
     <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="report-wrap sys-flex sys-vertical" >
       <div class="report-title sys-flex sys-flex-center">{{reportTitle}}</div>

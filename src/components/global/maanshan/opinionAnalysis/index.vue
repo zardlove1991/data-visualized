@@ -1,5 +1,5 @@
 <template>
-  <div class="maanshan-opinion" id="maanshan-opinion" :style="defineBg()">
+  <div class="maanshan-opinion" id="maanshan-opinion">
     <!--  :class="[{'warp-bg' : showDefault}]"  -->
     <div class="opinion-wrap sys-flex sys-vertical">
       <div class="opinion-title">{{hotNews.title}}</div>
