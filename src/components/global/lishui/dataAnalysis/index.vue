@@ -17,13 +17,13 @@
       <div class="data-echarts sys-flex sys-vertical flex-justify-between">
         <div class="echarts-top sys-flex flex-justify-between">
           <div class="data-channel">
-            <p v-if="typeActive == 'internet'" class="channel-title">分渠道数据分析</p>
+            <p v-if="typeActive == 'internet'" class="echarts-title channel-title">分渠道数据分析</p>
             <div class="channel-box">
               <chart v-if="typeActive == 'internet'" :options="lineOptions" :autoResize="true"></chart>
             </div>
           </div>
           <div class="data-media">
-            <p v-if="typeActive == 'internet'" class="media-title">媒体占比</p>
+            <p v-if="typeActive == 'internet'" class="echarts-title media-title">媒体占比</p>
             <div class="media-box">
               <chart v-if="typeActive == 'internet'" :options="pieOptions" :autoResize="true"></chart>
             </div>
@@ -31,7 +31,7 @@
         </div>
         <div class="echarts-bottom">
           <div class="data-source">
-            <p v-if="typeActive == 'internet'" class="source-title">TOP 10 活跃新闻媒体来源</p>
+            <p v-if="typeActive == 'internet'" class="echarts-title source-title">TOP 10 活跃新闻媒体来源</p>
             <div class="source-box">
               <chart v-if="typeActive == 'internet'" :options="top10options" :autoResize="true"></chart>
             </div>
@@ -642,30 +642,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-// px to rem
-@function pxem($px-values,$baseline-px:16px,$support-for-ie:false){
-  //Conver the baseline into rems
-  $baseline-rem: $baseline-px / 1em * 12.5;
-  //Print the first line in pixel values
-  @if $support-for-ie {
-      @return $px-values;
-  }
-  //if there is only one (numeric) value, return the property/value line for it.
-  @if type-of($px-values) == "number"{
-      @return $px-values / $baseline-rem;
-  }
-  @else {
-      //Create an empty list that we can dump values into
-      $rem-values:();
-      @each $value in $px-values{
-          // If the value is zero or not a number, return it
-          @if $value == 0 or type-of($value) != "number"{
-              $rem-values: append($rem-values, $value / $baseline-rem);
-          }
-      }
-      @return $rem-values;
-  }
-}
+@import 'src/styles/index.scss';
 .main-wrap {
   width: 100%;
   height: 100%;
@@ -674,20 +651,20 @@ export default {
   .data-analysis-wrap {
     width: 100%;
     height: 100%;
-    padding: pxem(215px) pxem(100px) pxem(146px) ;
+    padding: pxem(215px, 12.5) pxem(100px, 12.5) pxem(146px, 12.5) ;
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
     .data-analysis-list {
       width: 48%;
       height: 100%;
-      padding: pxem(67px);
+      padding: pxem(67px, 12.5);
       background: url('./assets/news-border.png') no-repeat center center;
       background-size: 100% 100%;
     }
     .data-list {
-      height: pxem(340px);
+      height: pxem(340px, 12.5);
       background: rgb(16, 43, 95);
-      padding: pxem(55px);
+      padding: pxem(55px, 12.5);
       &.active {
         background: rgb(10, 67, 183);
         .data-title {
@@ -698,14 +675,14 @@ export default {
         width: 100%;
         height: 1em;
         line-height: 1em;
-        font-size: 0.27rem;
+        font-size: pxrem(54px, 12.5);
         font-family: PingFangSC-Regular;
         font-weight: 400;
         color: #ffffff;
         text-align: left;
       }
       .data-brief {
-        font-size: 0.2rem;
+        font-size: pxrem(40px, 12.5);
         color: #fff;
         height: 3.25em;
         overflow: hidden;
@@ -714,25 +691,25 @@ export default {
     .data-echarts {
       width: 48%;
       height: 100%;
+      .echarts-title {
+        font-size: pxrem(48px, 12.5);
+        color: #fff;
+        text-align: left;
+      }
       .echarts-top {
         width: 100%;
-        height: pxem(770px);
+        height: pxem(770px, 12.5);
         .data-channel {
           width: 55%;
           height: 100%;
           background: url('./assets/channel-border.png') no-repeat center center;
           background-size: 100% 100%;
           position: relative;
-          padding: pxem(37px);
-          margin-right: pxem(67px);
-          .channel-title {
-            font-size: 0.24rem;
-            color: #fff;
-            text-align: left;
-          }
+          padding: pxem(37px, 12.5);
+          margin-right: pxem(67px, 12.5);
           .channel-box {
             width: 100%;
-            height: pxem(650px);
+            height: pxem(650px, 12.5);
             .echarts {
               width: 100%;
               height: 100%;
@@ -745,15 +722,10 @@ export default {
           background: url('./assets/media-border.png') no-repeat center center;
           background-size: 100% 100%;
           position: relative;
-          padding: pxem(37px);
-          .media-title {
-            font-size: 0.24rem;
-            color: #fff;
-            text-align: left;
-          }
+          padding: pxem(37px, 12.5);
           .media-box {
             width: 100%;
-            height: pxem(650px);
+            height: pxem(650px, 12.5);
             .echarts {
               width: 100%;
               height: 100%;
@@ -763,18 +735,13 @@ export default {
       }
       .echarts-bottom {
         width: 100%;
-        height: pxem(886px);
+        height: pxem(886px, 12.5);
         .data-source {
           width: 100%;
           height: 100%;
           background: url('./assets/source-border.png') no-repeat center center;
           background-size: 100% 100%;
-          padding: pxem(37px);
-          .source-title {
-            font-size: 0.24rem;
-            color: #fff;
-            text-align: left;
-          }
+          padding: pxem(37px, 12.5);
           .source-box {
             width: 100%;
             height: 100%;

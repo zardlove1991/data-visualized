@@ -8,19 +8,19 @@
         </div>
       </div>
       <div class="app-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in appList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
+        <div v-for="(v, i) in appList" :key="i" class="list-item sys-flex flex-justify-around sys-flex-center">
           <span class="item-lable">{{v.lable}}</span>
           <span class="item-value">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="web-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in webList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
+        <div v-for="(v, i) in webList" :key="i" class="list-item sys-flex flex-justify-around sys-flex-center">
           <span class="item-lable">{{v.lable}}</span>
           <span class="item-value">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="content-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in contentList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
+        <div v-for="(v, i) in contentList" :key="i" class="list-item sys-flex flex-justify-around sys-flex-center">
           <span class="item-lable">{{v.lable}}</span>
           <span class="item-value">{{v.value | numberFormat}}</span>
         </div>
@@ -123,30 +123,32 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import 'src/styles/index.scss';
 .main-wrap {
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 11px;
+  padding: 17px;
   .operate-data-wrap{
     width: 100%;
     height: 100%;
-    padding: 1.2em 0.45em 0.5em 0.45em;
+    padding: pxem(115px) pxem(100px) pxem(58px) ;
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
     .box-item {
       width: 22%;
       height: 100%;
-      padding: 0.8em 0.3em 0.3em;
+      padding: pxem(115px) pxem(67px) pxem(58px);
       .list-item {
         width: 100%;
         height: 25%;
         .item-lable {
-          font-size: 0.2em;
+          font-size: pxrem(38px, 12.5);
           color: #ffffff;
         }
         .item-value {
-          font-size: 0.36em;
+          font-size: pxrem(72px, 12.5);
+          font-weight: bold;
         }
       }
     }

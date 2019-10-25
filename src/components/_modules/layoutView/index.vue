@@ -27,6 +27,14 @@ export default {
     reload () {
       getRouterConfig().then(data => {
         this.view = data[this.viewId]
+        if (this.view.view === 'screen') {
+          let multiple = 1
+          let a = document.documentElement.clientWidth / document.documentElement.clientHeight
+          if (a > (1920 / 1080)) {
+            multiple = (1920 / 1080) / a
+          }
+          document.documentElement.style.fontSize = (document.documentElement.clientWidth / 1920) * 100 * multiple / (this.view.multiple || 1) + 'px'
+        }
         this.config = data
       })
     },

@@ -25,7 +25,7 @@ export default {
   },
   components: {...modules},
   methods: {
-    setFontsize (id, isHeight = false) {
+    setFontsize (id) {
       let dom = document.getElementById(id)
       if (dom) {
         let width = dom.clientWidth
