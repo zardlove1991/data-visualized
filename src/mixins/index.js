@@ -25,7 +25,7 @@ export default {
   },
   components: {...modules},
   methods: {
-    setFontsize (id, isHeight = false) {
+    setFontsize (id) {
       let dom = document.getElementById(id)
       if (dom) {
         let width = dom.clientWidth
@@ -39,6 +39,11 @@ export default {
           dom.style.fontSize = width / 1920 * 100 * multiple + 'px'
         } else {
           dom.style.fontSize = height / 1080 * 100 + 'px'
+        }
+        if (a > 1.78) {
+          document.documentElement.style.fontSize = width / 1920 * 100 * multiple + 'px'
+        } else {
+          document.documentElement.style.fontSize = height / 1080 * 100 + 'px'
         }
       }
     },

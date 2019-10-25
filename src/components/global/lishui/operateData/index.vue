@@ -123,30 +123,33 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import 'src/styles/index.scss';
 .main-wrap {
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 11px;
+  padding: 17px;
   .operate-data-wrap{
     width: 100%;
     height: 100%;
-    padding: 1.2em 0.45em 0.5em 0.45em;
+    padding: pxem(115px) pxem(100px) pxem(58px) ;
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
     .box-item {
-      width: 22%;
+      width: pxem(840px);
       height: 100%;
-      padding: 0.8em 0.3em 0.3em;
+      padding: pxem(115px) pxem(67px) pxem(58px);
       .list-item {
         width: 100%;
         height: 25%;
         .item-lable {
-          font-size: 0.2em;
+          font-size: pxrem(38px);
+          letter-spacing: 0.10rem;
           color: #ffffff;
         }
         .item-value {
-          font-size: 0.36em;
+          font-size: pxrem(72px);
+          font-weight: bold;
         }
       }
     }
