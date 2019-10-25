@@ -16,6 +16,11 @@ const dateFormat = (inputTime) => {
   return time.slice(5, 16)
 }
 
+// 补全位数并三位补逗号
+const numberFormat = (number = 0, length = 8) => {
+  return number.toString().padStart(length, '0').replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+}
+
 export default {
-  dateFormat
+  dateFormat, numberFormat
 }
