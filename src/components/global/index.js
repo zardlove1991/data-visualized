@@ -35,3 +35,4 @@ export const lishuicomponentWorkcallInfoMap = getComponent('lishui/workcallInfoM
 export const lishuicomponentDayTask = getComponent('lishui/dayTask')
 export const lishuicomponentDataAnalysis = getComponent('lishui/dataAnalysis')
 export const lishuicomponentOperateData = getComponent('lishui/operateData')
+export const lishuicomponentContentProduction = getComponent('lishui/contentProduction')
