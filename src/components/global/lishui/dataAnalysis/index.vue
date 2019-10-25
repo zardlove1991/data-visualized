@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrap" id="ls-dataAnalysis" :style="defineBg()">
+  <div class="main-wrap" id="ls-dataAnalysis">
     <div class="data-analysis-wrap sys-flex flex-justify-between">
       <div class="data-analysis-list sys-flex sys-vertical flex-justify-between">
         <div
