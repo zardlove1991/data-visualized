@@ -2,16 +2,12 @@ import { getStyle } from '@/utils/model'
 const curPath = getStyle()
 
 const getComponent = modules => () => {
-  // 不加载不属于套系内的组建
+  // 不加载不属于套系内的组件
   if (modules.indexOf(curPath) > -1) {
     return import(`./${modules}`)
   }
   return false
 }
-
-/* 吉林套系 */
-export const jilincomponentWorkcallInfoMap = getComponent('jilin/workcallInfoMap') // 在线记者
-/* 吉林套系 end */
 
 /* 新沂套系 */
 // 因为该套系在圆形高出来前就做了，所以样式并非按照原型图做的，存在字体边距等较大差距
@@ -36,3 +32,4 @@ export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAn
 /* 溧水套系 */
 // 主屏部分
 export const lishuicomponentWorkcallInfoMap = getComponent('lishui/workcallInfoMap')
+export const lishuicomponentDayTask = getComponent('lishui/dayTask')
