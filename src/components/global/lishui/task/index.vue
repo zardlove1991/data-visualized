@@ -2,7 +2,7 @@
   <div class="ls-task" id="ls-task">
     <div class="task-wrap">
       <swiper :options="swiperOption" ref="mySwiper" >
-        <swiper-slide class="sys-flex sys-flex-wrap flex-justify-left" style="height:100%!important;" v-for="(item,k) in taskList" :key="k">
+        <swiper-slide class="sys-flex sys-flex-wrap flex-justify-between" style="height:100%!important;" v-for="(item,k) in taskList" :key="k">
           <div class="task-list" v-for="(list,key) in item" :key="key">
             <div class="task-nav sys-flex sys-flex-center">
               <div class="project-title sys-flex-one overhidden">所属选题：{{list.project_title}}</div>
@@ -10,12 +10,12 @@
               <div class="task-status emergency" v-if="list.priority == 2">紧急</div>
               <div class="task-status urgent" v-if="list.priority == 3">加急</div>
             </div>
-            <div class="task-content">
-              <div class="brief">{{list.title}}</div>
+            <div class="task-content sys-flex sys-vertical  flex-justify-between">
+              <div class="brief sys-flex-one">{{list.title}}</div>
               <div class="task-info sys-flex sys-flex-center overhidden flex-justify-between">
                 <div class="task-create-user">{{list.task_user_name}}</div>
                 <div class="task-create-time">{{list.create_time | dateFormat}}</div>
-                <div class="task-type sys-flex-one not-beginning">{{list.status_show}}</div>
+                <div class="task-type sys-flex-one" :class="{'on-start': list.status == 1,'on-progress' :  list.status == 2 , 'on-stop' : list.status == 3 , 'on-done' : list.status == 4}">{{list.status_show}}</div>
               </div>
             </div>
           </div>
@@ -39,13 +39,11 @@ export default {
     return {
       taskList: [],
       swiperOption: {
-        slidesPerView: 4,
-        slidesPerColumn: 2,
         // notNextTick: true,
         speed: 2000,
         // autoplay : false,
         autoplay: {
-          delay: 5000,
+          delay: 15000,
           stopOnLastSlide: false,
           disableOnInteraction: false
         },
@@ -61,6 +59,8 @@ export default {
           prevEl: '.swiper-button-prev'
         }
       },
+      count: 8,
+      current: 1,
       currentIndex: 1,
       contentShow: false,
       contentDetail: null
@@ -70,7 +70,7 @@ export default {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 5000)
+    }, 15000)
   },
   mounted () {
     this.setFontsize('ls-task')
@@ -81,14 +81,14 @@ export default {
         if (!response.data.ErrorCode) {
           if (response.data.data.length) {
             this.taskList = []
-            this.taskList = response.data.data
+            this.taskList = [response.data.data]
             this.current += 1
           } else {
             this.current = 1
             this.getDataList()
           }
+          console.log(this.taskList)
         }
-        console.log(this.taskList)
       })
     }
   }
@@ -126,22 +126,23 @@ export default {
       }
       .task-nav{
         width: 100%;
-        height: 22%;
-        padding: 0 0.16rem;
+        height: 25%;
+        padding: pxem(33px);
         background: rgba(9,44,111,1);
         .project-title{
-          font-size: 0.16rem;
+          font-size: pxrem(32px);
           font-family: PingFangSC-Regular;
           font-weight: 400;
+          text-align: left;
           color: rgba(174,183,209,1);
         }
         .task-status{
-          width: 0.4rem;
-          height: 0.2rem;
-          line-height: 0.2rem;
-          border-radius:0.025rem;
+          width: pxrem(94px);
+          height: pxrem(46px);
+          line-height: pxrem(46px);
+          border-radius: 0.025rem;
           text-align: center;
-          font-size: 0.15rem;
+          font-size: pxrem(30px);
           color: #fff;
           &.normal{
             background: RGBA(34, 115, 238, 1);
@@ -155,44 +156,49 @@ export default {
         }
       }
       .task-content{
-        height: 80%;
-        padding: 0.1rem 0.16rem;
-        background:rgba(23,52,76,0);
+        height: 75%;
+        padding: pxem(40px) pxem(33px);
+        background: rgba(23,52,76,0);
         .brief{
-          height: 0.5rem;
-          font-size: 0.18rem;
-          margin-bottom: 0.1rem;
-          font-weight:400;
-          color:#fff;
+          margin-bottom: pxrem(20px);
+          font-size: pxrem(38px);
+          font-weight: 400;
+          color: #fff;
+          text-align: left;
           overflow: hidden;
         }
         .task-info{
           width: 100%;
           .task-create-user{
-            // width: 18%;
-            font-size: 0.15rem;
-            padding-left: 0.2rem; 
-            color:#fff;
+            font-size: pxrem(30px);
+            padding-left: pxrem(40px); 
+            color: #fff;
             background: url('./assets/user.png') no-repeat center left;
-            background-size:0.125rem 0.14rem;
-            margin-right: 0.15rem; 
+            background-size: pxrem(25px) pxrem(28px);
+            margin-right: pxrem(40px); 
           }
           .task-create-time{
-            font-size: 0.15rem;
-            padding-left: 0.2rem; 
+            font-size: pxrem(30px);
+            padding-left: pxrem(40px);  
             color:#fff;
             background: url('./assets/time.png') no-repeat center left;
-            background-size: 0.125rem 0.125rem;
+            background-size: pxrem(29px) pxrem(29px);
           }
           .task-type{
-            font-size: 0.15rem;
+            font-size: pxrem(30px);
             text-align: right;
             color: #fff;
             font-family: Adobe Heiti Std R;
             font-weight: normal;
-            // &.not-beginning{
-                // color
-            // }
+            &.on-progress {
+              color: #01DF76;
+            }
+            &.on-stop {
+              color: #F34A4A;
+            }
+            &.on-done {
+              color: #25B17C;
+            }
           }
         }
       }
