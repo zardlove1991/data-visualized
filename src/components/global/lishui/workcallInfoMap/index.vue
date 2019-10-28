@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="workcallInfoMap">
+  <div class="container" id="ls-workcallInfoMap">
     <div class="container-title sys-flex sys-flex-center flex-justify-center">
       <div class="title-image"></div>
     </div>
@@ -13,9 +13,6 @@
           </call>
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
           <div class="reporter-list-wrap">
-              <div class="reporter-list-title">
-                记者列表
-              </div>
               <div class="reporter-list-content" v-if="reporterList && reporterList.length">
                 <div class="reporter-list" v-for="(v,k) in reporterList" :key="k">
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
@@ -477,7 +474,7 @@ export default {
     })
   },
   mounted () {
-    this.setFontsize('workcallInfoMap')
+    this.setFontsize('ls-workcallInfoMap')
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getReporter()
@@ -614,6 +611,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// px转em,第二个参数可以控制倍数
+@function pxem($px-values,$base-multiple: 18.75, $baseline-px:16px,$support-for-ie:false){
+  //Conver the baseline into rems
+  $baseline-rem: $baseline-px / 1em * $base-multiple;
+  //Print the first line in pixel values
+  @if $support-for-ie {
+      @return $px-values;
+  }
+  //if there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"{
+      @return $px-values / $baseline-rem;
+  }
+  @else {
+      //Create an empty list that we can dump values into
+      $rem-values:();
+      @each $value in $px-values{
+          // If the value is zero or not a number, return it
+          @if $value == 0 or type-of($value) != "number"{
+              $rem-values: append($rem-values, $value / $baseline-rem);
+          }
+      }
+      @return $rem-values;
+  }
+}
+
+// px转rem,第二个参数可以控制倍数
+@function pxrem($px-values,$base-multiple: 18.75, $baseline-px:16px,$support-for-ie:false){
+  //Conver the baseline into rems
+  $baseline-rem: $baseline-px / 1rem * $base-multiple;
+  //Print the first line in pixel values
+  @if $support-for-ie {
+      @return $px-values;
+  }
+  //if there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"{
+      @return $px-values / $baseline-rem;
+  }
+  @else {
+      //Create an empty list that we can dump values into
+      $rem-values:();
+      @each $value in $px-values{
+          // If the value is zero or not a number, return it
+          @if $value == 0 or type-of($value) != "number"{
+              $rem-values: append($rem-values, $value / $baseline-rem);
+          }
+      }
+      @return $rem-values;
+  }
+}
 .anchorBL{
   display:none!important;
 }
@@ -649,7 +695,7 @@ export default {
         height: 100%;
         width: 100%;
         .no-data{
-          font-size: 0.34em;
+          font-size: pxrem(70px);
           color: #ebebeb;
           padding: 2em;
         }
@@ -658,20 +704,12 @@ export default {
           background: #202b67;
         }
         .reporter-list-wrap {
-          width: 6em;
+          width: 23%;
+          padding: pxem(70px);
           overflow-y: hidden;
           overflow-x: scroll;
           position: relative;
-          background: #0A1D4D;
-          .reporter-list-title{
-            height: 2.2em;
-            line-height: 2.2em;
-            color: #fff;
-            font-size: 0.43em;
-            font-weight: 700;
-            text-align: center;
-            background-color: #114497;
-          }
+          background: #021E61;
           .reporter-list-content{
             height: 9em;
             overflow: scroll;
@@ -699,13 +737,13 @@ export default {
               flex-direction: column;
               text-align: left;
               .name {
-                font-size: 0.4em;
+                font-size: pxrem(70px, 18.75);
                 font-family: PingFangSC-Regular;
                 font-weight: 400;
                 color: rgba(255, 255, 255, 1);
               }
               .depart {
-                font-size: 0.28em;
+                font-size: pxrem(48px, 18.75);
                 font-family: PingFangSC-Light;
                 font-weight: 400;
                 color: #00BAFF;
