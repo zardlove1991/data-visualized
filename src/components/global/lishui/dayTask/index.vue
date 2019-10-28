@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="wrap-right">
-        <div class="right-list sys-flex sys-flex-center" v-for="(v,k) in listData" :key="k">
+        <div class="right-list sys-flex sys-flex-center" v-for="(v, k) in listData" :key="k">
           <div class="list-status">
             <img v-if="v.status === 1" src="./assets/start.png" />
             <img v-if="v.status === 2" src="./assets/ing.png" />
