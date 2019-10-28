@@ -684,6 +684,7 @@ export default {
       .data-brief {
         font-size: pxrem(40px, 12.5);
         color: #fff;
+        text-align: left;
         height: 3.25em;
         overflow: hidden;
       }
