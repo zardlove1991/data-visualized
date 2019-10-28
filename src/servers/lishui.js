@@ -12,3 +12,5 @@ export const getConnecterList = (id) => createAPI(`${httpsbaseUrl}//index.php?m=
 export const getHotTopicList = (page, size) => createAPI(`${baseUrl}/index.php?m=Apidaping&c=hotspot&a=getHotTopicList&flag=weekly&category=politics&customAppid=${customAppid}&customAppkey=${customAppkey}&size=${size}&page=${page}`)
 /* 热点话题分析 */
 export const getHotTopicDetail = (id, num) => createAPI(`${baseUrl}/index.php?m=Apidaping&c=hotspot&a=mediaAnalysis&id=${id}&num=${num}&customAppid=${customAppid}&customAppkey=${customAppkey}`)
+/* 获取选题 */
+export const getProjectData = (count, page) => createAPI(`${baseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&create_time=1&custom_appid=${customAppid}&custom_appkey=${customAppkey}&count=${count}&page=${page}`)
