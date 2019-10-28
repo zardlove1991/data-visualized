@@ -12,7 +12,7 @@
       >
         <div 
           class="list-icon"
-          :class="{'bgback': v.audit_status !== '1', 'bgpass': v.audit_status === '1'}"
+          :class="{'bgwait': v.audit_status === '0','bgback': v.audit_status === '2', 'bgpass': v.audit_status === '1'}"
         ></div>
         <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-user">{{v.project_user_name}}</div>
@@ -118,6 +118,10 @@ export default {
       font-size: px1em(17px);
       margin-right: px1em(10px);
       text-align: center;
+    }
+    .bgwait {
+      background: url('./assets/wait.png') no-repeat center;
+      background-size: 100% 100%;
     }
     .bgpass {
       background: url('./assets/pass.png') no-repeat center;
