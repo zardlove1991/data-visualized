@@ -1,0 +1,135 @@
+<template>
+  <div class="lishui-communicationeffect" id="lishui-communicationeffect">
+    <div class="communicationeffect-wrap">
+      <div class="wrap-top sys-flex sys-flex-center flex-justify-between">
+        <div class="top-left top-common sys-flex sys-flex-center flex-justify-center">
+          <span>阅读总量：</span>
+          <span>165,395</span>
+        </div>
+        <div class="top-center">
+          <img src="./assets/line.png" />
+        </div>
+        <div class="top-right top-common sys-flex sys-flex-center flex-justify-center">
+          <span>收获评论：</span>
+          <span>165,395</span>
+        </div>
+      </div>
+      <div class="wrap-bottom">
+        <chart :options="barOptions"></chart>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import echarts from 'vue-echarts/components/ECharts'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/chart/line'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/title'
+import 'echarts/lib/component/legend'
+export default {
+  name: 'communicationEffect',
+  data () {
+    return {
+      barOptions: {
+        legend: {
+          data: [{
+            name: '阅读量',
+            textStyle: {
+              color: '#fff',
+              fontSize: 20
+            }
+          }, {
+            name: '评论量',
+            textStyle: {
+              color: '#fff',
+              fontSize: 20
+            }
+          }]
+        },
+        xAxis: {
+          type: 'category',
+          data: ['10.12', '10.13', '10.14', '10.15', '10.16', '10.17', '10.18'],
+          axisLabel: {
+            interval: 0,
+            color: '#fff',
+            fontSize: 20,
+            fontWeight: 'bold'
+          }
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            formatter: '{value}',
+            color: '#fff',
+            fontSize: 20,
+            fontWeight: 'bold'
+          }
+        },
+        series: [{
+          type: 'bar',
+          name: '阅读量',
+          barWidth: 35,
+          data: [550, 410, 200, 100, 580, 300, 150]
+        }, {
+          type: 'line',
+          name: '评论量',
+          data: [100, 380, 250, 270, 200, 210, 400]
+        }]
+      }
+    }
+  },
+  components: {
+    chart: echarts
+  },
+  mounted () {
+    this.setFontsize('lishui-communicationeffect')
+  }
+}
+</script>
+<style lang="scss" scoped>
+@import "~@/styles/index.scss";
+.lishui-communicationeffect {
+  width: 100%;
+  height: 100%;
+  padding: px2em(33px) px2em(26px) px2em(53px) px2em(50px);
+  position: relative;
+  .communicationeffect-wrap {
+    width: 100%;
+    height: 100%;
+    background: url('./assets/border.png') no-repeat center;
+    background-size: 100% 100%;
+    padding: px2em(170px) px2em(103px) px2em(106px) px2em(108px);
+    color: #fff;
+    .wrap-top {
+      margin-bottom: px2em(30px);
+      .top-common {
+        width: px2em(740px);
+        height: px2em(130px);
+        background: url('./assets/back.png') no-repeat center;
+        background-size: 100% 100%;
+        span:first-of-type {
+          font-size: px2em(36px);
+        }
+        span:last-of-type {
+          font-size: px2em(60px);
+          color: #00FFF6;
+        }
+      }
+      .top-center {
+        width: px2em(89px);
+        height: px2em(62px);
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+    }
+    .wrap-bottom {
+      width: 100%;
+      height: px2em(550px);
+    }
+  }
+}
+</style>

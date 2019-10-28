@@ -253,3 +253,8 @@ html, body, #app {
   height: 100% !important;
   padding-top: 0 !important;
 }
+.echarts, canvas{
+  display: block;
+  width : 100%!important;
+  height: 100%!important;
+}
