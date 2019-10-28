@@ -16,3 +16,5 @@ export const getHotTopicDetail = (id, num) => createAPI(`${baseUrl}/index.php?m=
 export const getProjectData = (count, page) => createAPI(`${baseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallSubjectList&create_time=1&custom_appid=${customAppid}&custom_appkey=${customAppkey}&count=${count}&page=${page}`)
 /* 获取报题 */
 export const getReportData = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallReportList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`)
+/* 任务列表 */
+export const getTaskList = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallTaskList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`)
