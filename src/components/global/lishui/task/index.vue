@@ -81,9 +81,7 @@ export default {
         if (!response.data.ErrorCode) {
           if (response.data.data.length) {
             this.taskList = []
-            this.taskList = response.data.data.map(v => {
-              return [v]
-            })
+            this.taskList = response.data.data
             this.current += 1
           } else {
             this.current = 1
