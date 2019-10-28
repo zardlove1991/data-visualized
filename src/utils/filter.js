@@ -1,4 +1,4 @@
-const dateFormat = (inputTime) => {
+const dateFormat = (inputTime, start = 5, end = 16) => {
   inputTime = parseInt(inputTime) * 1000
   let date = new Date(inputTime)
   let y = date.getFullYear()
@@ -13,7 +13,7 @@ const dateFormat = (inputTime) => {
   minute = minute < 10 ? '0' + minute : minute
   second = second < 10 ? '0' + second : second
   let time = y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
-  return time.slice(5, 16)
+  return time.slice(start, end)
 }
 
 // 补全位数并三位补逗号
