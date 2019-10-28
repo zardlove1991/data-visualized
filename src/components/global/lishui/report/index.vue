@@ -119,13 +119,15 @@ export default {
     }
     .report-user{
       width: 10%;
-      margin-right: pxrem(20px, 12.5);
+      margin-left: pxrem(40px, 12.5);
       font-size: pxrem(32px, 12.5);
       font-family: PingFangSC-Regular;
       font-weight: 400;
+      text-align: left;
       color: rgba(0,246,255,1);
     }
     .report-time{
+      width: 20%;
       font-size: pxrem(32px, 12.5);
       font-family: PingFangSC-Regular;
       font-weight: 400;

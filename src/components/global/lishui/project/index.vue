@@ -111,7 +111,7 @@ export default {
     }
 
     .project-status{
-      width: 10%;
+      width: 15%;
       text-align: center;
       display: block;
       margin: 0 pxrem(64px, 12.5) 0 pxrem(32px, 12.5);
@@ -131,12 +131,12 @@ export default {
     }
 
     .project-progress{
-      width: 30%;
+      width: 25%;
       color : rgba(255,255,255,0.7);
       font-size: pxrem(32px, 12.5);
       text-align: center;
       .progress-total{
-        width: 60%;
+        width: 70%;
         height: pxrem(22px, 12.5);
         background: RGBA(68, 97, 115, 1);
         border-radius: 0.11rem;
