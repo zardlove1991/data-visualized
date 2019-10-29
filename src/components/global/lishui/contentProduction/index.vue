@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="bottom-right">
-          <chart :options="barOptions"></chart>
+          <chart :options="barOptions" :autoResize="true"></chart>
         </div>
       </div>
     </div>
