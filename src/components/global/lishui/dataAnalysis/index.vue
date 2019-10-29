@@ -174,8 +174,8 @@ export default {
           formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
         legend: {
-          orient: 'vertical',
-          right: 0,
+          orient: 'horizontal',
+          bottom: 0,
           icon: 'circle',
           textStyle: {
             color: '#fff',
@@ -227,7 +227,8 @@ export default {
           }
         },
         legend: {
-          orient: 'vertical',
+          orient: 'horizontal',
+          top: 0,
           right: 0,
           icon: 'circle',
           textStyle: {
@@ -240,8 +241,8 @@ export default {
         grid: {
           left: '0%',
           right: '0%',
-          bottom: '10%',
-          top: '10%',
+          bottom: '5%',
+          top: '15%',
           containLabel: true
         },
         xAxis: [
@@ -684,6 +685,7 @@ export default {
       .data-brief {
         font-size: pxrem(40px, 12.5);
         color: #fff;
+        text-align: left;
         height: 3.25em;
         overflow: hidden;
       }

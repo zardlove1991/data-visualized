@@ -16,8 +16,8 @@
         :key="k"
       >
         <div class="list-title overhidden">{{v.title}}</div>
-        <div class="list-user">{{v.project_user_name}}</div>
-        <div class="list-time">{{v.create_time | dateFormat}}</div>
+        <div class="list-user overhidden">{{v.source}}</div>
+        <div class="list-time">{{v.date.slice(5, 16)}}</div>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@ export default {
       } else {
         this.getData(this.titleList[this.currentIndex].type)
       }
-    }, 100000)
+    }, 10000)
   },
   mounted () {
     this.setFontsize('maanshan-clue')
@@ -67,20 +67,20 @@ export default {
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
         getWebsitList().then(res => {
-          if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 3)
+          if (res && res.data && res.data.result && res.data.result.data) {
+            this.dataList = res.data.result.data.slice(0, 3)
           }
         })
       } else if (type === 1) {
         getWechatList().then(res => {
-          if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 3)
+          if (res && res.data && res.data.result && res.data.result.data) {
+            this.dataList = res.data.result.data.slice(0, 3)
           }
         })
       } else if (type === 2) {
         getWeiboList().then(res => {
-          if (res && res.data && res.data.data) {
-            this.dataList = res.data.data.slice(0, 3)
+          if (res && res.data && res.data.result && res.data.result.data) {
+            this.dataList = res.data.result.data.slice(0, 3)
           }
         })
       }
@@ -143,12 +143,14 @@ export default {
       text-align: left;
     }
     .list-user {
-      flex-basis: 10%;
+      flex-basis: 15%;
       font-size: 0.42em;
+      padding-left: 0.5em;
+      text-align: left;
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
-      flex-basis: 20%;
+      flex-basis: 15%;
       font-size: 0.42em;
       color: rgba(243, 248, 254, 0.5);
     }

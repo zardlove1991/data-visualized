@@ -58,7 +58,9 @@ export default {
         if (!response.data.ErrorCode) {
           if (response.data.data.length) {
             this.projectList = []
-            this.projectList = response.data.data
+            setTimeout(() => {
+              this.projectList = response.data.data
+            }, 100)
             this.current += 1
           } else {
             this.current = 1
@@ -96,28 +98,28 @@ export default {
     font-weight: 400;
     .project-title{
       width: 60%;
-      font-size: pxrem(38px);
+      font-size: pxrem(38px, 12.5);
       text-align: left;
     }
 
     .project-user{
       width: 10%;
       text-align: left;
-      line-height: pxrem(32px);
-      font-size: pxrem(32px);
+      line-height: pxrem(32px, 12.5);
+      font-size: pxrem(32px, 12.5);
       color:rgba(255,255,255,1);
       margin-right: 0.1rem;
       margin-left: 0.1rem;
     }
 
     .project-status{
-      width: 10%;
+      width: 15%;
       text-align: center;
       display: block;
-      margin: 0 pxrem(64px) 0 pxrem(32px);
+      margin: 0 pxrem(64px, 12.5) 0 pxrem(32px, 12.5);
       text-align: center;
       border-radius: 0.08rem;
-      font-size: pxrem(32px);
+      font-size: pxrem(32px, 12.5);
       color: rgba(255,255,255,0.7);
     }
     .status-progress{
@@ -131,13 +133,13 @@ export default {
     }
 
     .project-progress{
-      width: 30%;
+      width: 25%;
       color : rgba(255,255,255,0.7);
-      font-size: pxrem(32px);
+      font-size: pxrem(32px, 12.5);
       text-align: center;
       .progress-total{
-        width: 60%;
-        height: pxrem(22px);
+        width: 70%;
+        height: pxrem(22px, 12.5);
         background: RGBA(68, 97, 115, 1);
         border-radius: 0.11rem;
         overflow: hidden;
@@ -166,9 +168,9 @@ export default {
         }
       }
       .percent{
-        line-height: pxrem(32px);
-        font-size: pxrem(32px);
-        margin-left: pxrem(30px);
+        line-height: pxrem(32px, 12.5);
+        font-size: pxrem(32px, 12.5);
+        margin-left: pxrem(30px, 12.5);
         color:rgba(255,255,255,1);
       }
     }
