@@ -2,7 +2,7 @@
   <div class="lishui-personalranking" id="lishui-personalranking">
     <div class="personalranking-wrap sys-flex sys-flex-center sys-flex-wrap flex-justify-between">
       <div class="rank-list sys-flex sys-flex-center flex-justify-between" v-for="(v, k) in rankList" :key="k">
-        <div class="serial hg-flex"><span>{{k + 1}}</span></div>
+        <div class="serial hg-flex" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k > 2}"><span>{{k + 1}}</span></div>
         <div class="information sys-flex sys-flex-center">
           <img :src="v.img" />
           <span>{{v.name}}</span>
@@ -85,13 +85,25 @@ export default {
         width: px2em(55px);
         height: px2em(65px);
         position: absolute;
-        background: url('./assets/one.png') no-repeat center;
+        background: no-repeat center;
         background-size: 100% 100%;
         left: 0;
         top: 0;
         span {
           font-size: px2em(32px);
           padding-bottom: px2em(50px);
+        }
+        &.one {
+          background-image: url('./assets/one.png');
+        }
+        &.two {
+          background-image: url('./assets/two.png');
+        }
+        &.three {
+          background-image: url('./assets/three.png');
+        }
+        &.four {
+          background-image: url('./assets/four.png');
         }
       }
       .information {

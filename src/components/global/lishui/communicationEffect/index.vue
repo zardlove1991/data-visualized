@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="wrap-bottom">
-        <chart :options="barOptions"></chart>
+        <chart :options="barOptions" :autoResize="true"></chart>
       </div>
     </div>
   </div>
@@ -37,13 +37,15 @@ export default {
             name: '阅读量',
             textStyle: {
               color: '#fff',
-              fontSize: 20
+              fontSize: 30,
+              width: 100,
+              height: 100
             }
           }, {
             name: '评论量',
             textStyle: {
               color: '#fff',
-              fontSize: 20
+              fontSize: 30
             }
           }]
         },
@@ -53,27 +55,69 @@ export default {
           axisLabel: {
             interval: 0,
             color: '#fff',
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: 'bold'
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#4A6AA8'
+            }
           }
         },
         yAxis: {
           type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#4A6AA8'
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              width: 0.5,
+              opacity: 0.5,
+              type: 'dashed',
+              color: '#4A6AA8'
+            }
+          },
           axisLabel: {
             formatter: '{value}',
             color: '#fff',
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: 'bold'
           }
         },
         series: [{
           type: 'bar',
           name: '阅读量',
-          barWidth: 35,
+          barWidth: 45,
+          itemStyle: {
+            normal: {
+              // 颜色渐变
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#3FB0FF'
+              }, {
+                offset: 1,
+                color: '#003CFF'
+              }])
+            }
+          },
           data: [550, 410, 200, 100, 580, 300, 150]
         }, {
           type: 'line',
           name: '评论量',
+          symbol: 'circle',
+          symbolSize: 20,
+          itemStyle: {
+            normal: {
+              color: '#00F8BD',
+              lineStyle: {
+                color: '#00F8BD',
+                width: 5
+              }
+            }
+          },
           data: [100, 380, 250, 270, 200, 210, 400]
         }]
       }
