@@ -140,8 +140,10 @@ export default {
       text-align: left;
     }
     .list-user {
-      flex-basis: 20%;
+      flex-basis: 15%;
       font-size: px1em(13.5px);
+      margin-left: px1em(27px);
+      text-align: left;
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
