@@ -119,7 +119,7 @@ export default {
     this.getDataList()
   },
   mounted () {
-    this.proportion = this.getProportion('xy-task') * 1.5
+    this.proportion = this.getProportion('xy-task') * 1.8
     this.setFontsize('xy-task')
   },
   methods: {
@@ -166,7 +166,7 @@ export default {
             this.getDataList()
           }
         })
-      }, 10000)
+      }, 25000)
     }
   }
 }

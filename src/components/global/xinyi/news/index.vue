@@ -60,7 +60,7 @@ export default {
       } else {
         this.getData(this.titleList[this.currentIndex].type)
       }
-    }, 10000)
+    }, 25000)
   },
   mounted () {
     this.setFontsize('xy-news')

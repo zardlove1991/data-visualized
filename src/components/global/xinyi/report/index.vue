@@ -78,7 +78,7 @@ export default {
             this.getDataList()
           }
         })
-      }, 10000)
+      }, 25000)
     }
   }
 }
