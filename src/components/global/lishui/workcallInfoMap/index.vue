@@ -540,7 +540,7 @@ export default {
         span2.innerText = item.member_name
         div.style.position = 'absolute'
         div.style.width = '1.1em'
-        div.style.height = '0.7em' 
+        div.style.height = '0.7em'
         map.getPanes().markerPane.appendChild(div)
         this._div = div
         div.onclick = function () {

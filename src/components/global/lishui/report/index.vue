@@ -45,7 +45,9 @@ export default {
         if (!response.data.ErrorCode) {
           if (response.data.data.length) {
             this.reportList = []
-            this.reportList = response.data.data
+            setTimeout(() => {
+              this.reportList = response.data.data
+            }, 100)
             this.current += 1
           } else {
             this.current = 1
