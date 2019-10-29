@@ -21,8 +21,9 @@
         >{{k+1}}</div>
         <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-number sys-flex sys-flex-center flex-justify-center">
-          <img class="list-number-icon" src="./assets/read.png" alt="">
-          <span class="list-number-text">{{v.click_number}}</span>
+          <span class="list-number-icon read-icon" v-show="titleList[currentIndex].type === 0"></span>
+          <span class="list-number-icon comment-icon" v-show="titleList[currentIndex].type === 1"></span>
+          <span class="list-number-text">{{ titleList[currentIndex].type === 0 ? v.click_num : v.comment_num}}</span>
         </div>
       </div>
     </div>
@@ -69,71 +70,13 @@ export default {
       this.dataList = []
       if (type === 0) {
         getRankList().then(res => {
-          // if (res && res.data && res.data.data) {
-          //   this.dataList = res.data.data.slice(0, 4)
-          // }
-
-          // 接口没有数据，模拟数据
-          this.dataList = [
-            {
-              title: '江苏新沂市局(分公司)利用共享汽车提高市场走访效率小记',
-              click_number: 785
-            },
-            {
-              title: '新沂市人民检察院上线运行“公益生态监测平台',
-              click_number: 694
-            },
-            {
-              title: '新沂市总工会平安志愿者服务站,积极开展平安创建工作',
-              click_number: 603
-            },
-            {
-              title: '江苏新沂市局(分公司)利用共享汽车提高市场走访效率小记',
-              click_number: 586
-            },
-            {
-              title: '新沂市人民检察院上线运行“公益生态监测平台',
-              click_number: 543
-            },
-            {
-              title: '新沂市总工会平安志愿者服务站,积极开展平安创建工作',
-              click_number: 502
-            }
-          ]
+          if (res && res.data) {
+            this.dataList = res.data
+          }
         })
       } else if (type === 1) {
         getRankCommentList().then(res => {
-          // if (res && res.data && res.data.data) {
-          //   this.dataList = res.data.data.slice(0, 4)
-          // }
-
-          // 接口没有数据，模拟数据
-          this.dataList = [
-            {
-              title: '新沂市中医医院搬迁公告',
-              click_number: 985
-            },
-            {
-              title: '苏北小城新沂市房价六千左右,未来价格还能涨吗?',
-              click_number: 842
-            },
-            {
-              title: '746亩,10月份徐州新沂市乡镇拆迁又来了,看看有没有你村?',
-              click_number: 763
-            },
-            {
-              title: '新沂市中医医院搬迁公告',
-              click_number: 720
-            },
-            {
-              title: '苏北小城新沂市房价六千左右,未来价格还能涨吗?',
-              click_number: 708
-            },
-            {
-              title: '746亩,10月份徐州新沂市乡镇拆迁又来了,看看有没有你村?',
-              click_number: 699
-            }
-          ]
+          this.dataList = res.data
         })
       }
     }
@@ -215,6 +158,14 @@ export default {
         width: px1em(40px);
         height: px1em(40px);
         margin-right: px1em(10px);
+        &.read-icon {
+          background: url('./assets/read.png') no-repeat center;
+          background-size: 100% 100%;
+        }
+        &.comment-icon {
+          background: url('./assets/comment.png') no-repeat center;
+          background-size: 80% 80%;
+        }
       }
       .list-number-text {
         font-size: px1em(13.5px) !important;
