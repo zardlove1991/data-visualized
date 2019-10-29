@@ -132,7 +132,7 @@ export default {
       width: px1em(40px);
       height: px1em(40px);
       line-height: px1em(40px);
-      font-size: px1em(15px);
+      font-size: px1em(18px);
       margin-right: px1em(15px);
       text-align: center;
     }
@@ -147,16 +147,16 @@ export default {
     }
     .list-title {
       flex: 1;
-      font-size: px1em(15px);
+      font-size: px1em(18px);
       text-align: left;
     }
     .list-number {
       flex-basis: 20%;
       color: rgba(243, 248, 254, 0.5);
       .list-number-icon {
-        font-size: px1em(13.5px);
-        width: px1em(40px);
-        height: px1em(40px);
+        font-size: px1em(14px);
+        width: px1em(45px);
+        height: px1em(45px);
         margin-right: px1em(10px);
         &.read-icon {
           background: url('./assets/read.png') no-repeat center;
@@ -168,7 +168,7 @@ export default {
         }
       }
       .list-number-text {
-        font-size: px1em(13.5px) !important;
+        font-size: px1em(14.5px) !important;
       }
     }
   }

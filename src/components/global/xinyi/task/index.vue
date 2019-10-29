@@ -250,11 +250,8 @@ export default {
     height: 11%;
     color: #d6e6ff;
     .list-title {
-      // transform: scaleY(1.5);
-      // font-size: px1em(8px);
       // 原样式
-      font-size: px1em(15px);
-      // letter-spacing: 0.05em;
+      font-size: px1em(18px);
       text-align: left;
     }
   }

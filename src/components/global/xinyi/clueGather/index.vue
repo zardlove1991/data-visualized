@@ -136,19 +136,19 @@ export default {
     color: #d6e6ff;
     .list-title {
       flex: 1;
-      font-size: px1em(15px);
+      font-size: px1em(18px);
       text-align: left;
     }
     .list-user {
       flex-basis: 15%;
-      font-size: px1em(13.5px);
+      font-size: px1em(14.5px);
       margin-left: px1em(27px);
       text-align: left;
       color: rgba(243, 248, 254, 0.5);
     }
     .list-time {
       flex-basis: 20%;
-      font-size: px1em(13.5px);
+      font-size: px1em(14.5px);
       color: rgba(243, 248, 254, 0.5);
     }
   }
