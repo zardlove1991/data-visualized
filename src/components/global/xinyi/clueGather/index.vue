@@ -16,8 +16,8 @@
         :key="k"
       >
         <div class="list-title overhidden">{{v.title}}</div>
-        <div class="list-user">{{v.project_user_name}}</div>
-        <div class="list-time">{{v.create_time | dateFormat}}</div>
+        <div class="list-user">{{v.source}}</div>
+        <div class="list-time">{{v.date.slice(5, 16)}}</div>
       </div>
     </div>
   </div>
@@ -67,20 +67,20 @@ export default {
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
         getWebsitList().then(res => {
-          if (res && res.data && res.data.data) {
-            this.dataList = res.data.data
+          if (res && res.data && res.data.result && res.data.result.data) {
+            this.dataList = res.data.result.data.slice(0, 6)
           }
         })
       } else if (type === 1) {
         getWechatList().then(res => {
-          if (res && res.data && res.data.data) {
-            this.dataList = res.data.data
+          if (res && res.data && res.data.result && res.data.result.data) {
+            this.dataList = res.data.result.data.slice(0, 6)
           }
         })
       } else if (type === 2) {
         getWeiboList().then(res => {
-          if (res && res.data && res.data.data) {
-            this.dataList = res.data.data
+          if (res && res.data && res.data.result && res.data.result.data) {
+            this.dataList = res.data.result.data.slice(0, 6)
           }
         })
       }
