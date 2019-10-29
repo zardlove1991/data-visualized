@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="workcallInfoMap">
+  <div class="container" id="ls-workcallInfoMap">
     <div class="container-title sys-flex sys-flex-center flex-justify-center">
       <div class="title-image"></div>
     </div>
@@ -13,9 +13,6 @@
           </call>
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
           <div class="reporter-list-wrap">
-              <div class="reporter-list-title">
-                记者列表
-              </div>
               <div class="reporter-list-content" v-if="reporterList && reporterList.length">
                 <div class="reporter-list" v-for="(v,k) in reporterList" :key="k">
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
@@ -30,7 +27,7 @@
                       <div class="connect connect-video" @click="callvideo(v)"></div>
                       <!-- @click="callvideo(v)" -->
                     </div>
-                    <div class="border-line"></div>
+                    <!-- <div class="border-line"></div> -->
                 </div>
               </div>
               <div class="no-data" v-else>
@@ -477,7 +474,7 @@ export default {
     })
   },
   mounted () {
-    this.setFontsize('workcallInfoMap')
+    this.setFontsize('ls-workcallInfoMap')
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getReporter()
@@ -500,22 +497,50 @@ export default {
         this._map = map
         let div = document.createElement('div')
         let img = document.createElement('img')
+        let img2 = document.createElement('img')
+        let span = document.createElement('span')
+        let span2 = document.createElement('span')
         div.appendChild(img)
+        div.appendChild(img2)
+        div.appendChild(span)
+        span.appendChild(span2)
         var item = this._mid
         img.src = this._src
         img.style.position = 'absolute'
         img.style['border-radius'] = '50%'
         img.style.overflow = 'hidden'
-        img.style.width = '0.72em'
-        img.style.height = '0.72em'
-        img.style.top = '0.12em'
-        img.style.left = '0.15em'
-        div.className = 'map-style'
+        img.style.width = '0.5em'
+        img.style.height = '0.5em'
+        img.style.top = '0'
+        img.style.left = '0'
+        img.style.zIndex = 10
+        img2.style.position = 'absolute'
+        img2.style['border-radius'] = '50%'
+        img2.style.overflow = 'hidden'
+        img2.style.width = '0.2em'
+        img2.style.height = '0.2em'
+        img2.style.bottom = '0'
+        img2.style.left = '0.45em'
+        img2.style.background = 'url(' + require('./assets/landmark.png') + ') no-repeat center center'
+        img2.style.backgroundSize = '100%'
+        span.style.position = 'absolute'
+        span.style.borderRadius = '0.5em'
+        span.style.overflow = 'hidden'
+        span.style.width = '0.9em'
+        span.style.height = '0.35em'
+        span.style.top = '0.1em'
+        span.style.left = '0.25em'
+        span.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+        span.style.color = 'rgb(255, 255, 255)'
+        span.zIndex = 9
+        span2.style.position = 'absolute'
+        span2.style.top = '0.4em'
+        span2.style.left = '30%'
+        span2.style.fontSize = '0.16rem'
+        span2.innerText = item.member_name
         div.style.position = 'absolute'
-        div.style.width = '1em'
-        div.style.height = '1.3em'
-        div.style.background = 'url(' + require('./assets/landmark.png') + ') no-repeat center center'
-        div.style.backgroundSize = '100%'
+        div.style.width = '1.1em'
+        div.style.height = '0.7em' 
         map.getPanes().markerPane.appendChild(div)
         this._div = div
         div.onclick = function () {
@@ -614,6 +639,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// px转em,第二个参数可以控制倍数
+@function pxem($px-values,$base-multiple: 18.75, $baseline-px:16px,$support-for-ie:false){
+  //Conver the baseline into rems
+  $baseline-rem: $baseline-px / 1em * $base-multiple;
+  //Print the first line in pixel values
+  @if $support-for-ie {
+      @return $px-values;
+  }
+  //if there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"{
+      @return $px-values / $baseline-rem;
+  }
+  @else {
+      //Create an empty list that we can dump values into
+      $rem-values:();
+      @each $value in $px-values{
+          // If the value is zero or not a number, return it
+          @if $value == 0 or type-of($value) != "number"{
+              $rem-values: append($rem-values, $value / $baseline-rem);
+          }
+      }
+      @return $rem-values;
+  }
+}
+
+// px转rem,第二个参数可以控制倍数
+@function pxrem($px-values,$base-multiple: 18.75, $baseline-px:16px,$support-for-ie:false){
+  //Conver the baseline into rems
+  $baseline-rem: $baseline-px / 1rem * $base-multiple;
+  //Print the first line in pixel values
+  @if $support-for-ie {
+      @return $px-values;
+  }
+  //if there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"{
+      @return $px-values / $baseline-rem;
+  }
+  @else {
+      //Create an empty list that we can dump values into
+      $rem-values:();
+      @each $value in $px-values{
+          // If the value is zero or not a number, return it
+          @if $value == 0 or type-of($value) != "number"{
+              $rem-values: append($rem-values, $value / $baseline-rem);
+          }
+      }
+      @return $rem-values;
+  }
+}
 .anchorBL{
   display:none!important;
 }
@@ -649,7 +723,7 @@ export default {
         height: 100%;
         width: 100%;
         .no-data{
-          font-size: 0.34em;
+          font-size: pxrem(70px);
           color: #ebebeb;
           padding: 2em;
         }
@@ -658,68 +732,66 @@ export default {
           background: #202b67;
         }
         .reporter-list-wrap {
-          width: 6em;
+          width: 23%;
+          padding: pxem(70px);
           overflow-y: hidden;
           overflow-x: scroll;
           position: relative;
-          background: #0A1D4D;
-          .reporter-list-title{
-            height: 2.2em;
-            line-height: 2.2em;
-            color: #fff;
-            font-size: 0.43em;
-            font-weight: 700;
-            text-align: center;
-            background-color: #114497;
-          }
+          background: #021E61;
           .reporter-list-content{
-            height: 9em;
+            height: 100%;
             overflow: scroll;
           }
           .reporter-list {
-            padding: 0.4em 0.4em 0;
             position: relative;
-            .border-line{
-              width: 100%;
-              margin-top: 0.4em;
-              height: 0.03em;
-              background: url('./assets/border-line.png') no-repeat bottom;
-              background-size: 100%;
+            height: pxem(300px);
+            padding: pxem(50px);
+            margin-bottom: pxem(50px);
+            background-color: #123371;
+            &:hover {
+              background-color: #0A43B7;
             }
+            // .border-line{
+            //   width: 100%;
+            //   margin-top: 0.4em;
+            //   height: 0.03em;
+            //   background: url('./assets/border-line.png') no-repeat bottom;
+            //   background-size: 100%;
+            // }
             .avatar {
-              width: 1em;
-              height: 1em;
+              width: pxrem(190px);
+              height: pxrem(190px);
               border-radius: 50%;
               overflow: hidden;
               border: solid 0.02em #fff;
-              margin-right: 0.28em;
+              margin-right: pxrem(60px);
             }
             .info {
               height: 100%;
               flex-direction: column;
               text-align: left;
               .name {
-                font-size: 0.4em;
+                font-size: pxrem(70px);
                 font-family: PingFangSC-Regular;
                 font-weight: 400;
                 color: rgba(255, 255, 255, 1);
               }
               .depart {
-                font-size: 0.28em;
+                font-size: pxrem(48px);
                 font-family: PingFangSC-Light;
                 font-weight: 400;
                 color: #00BAFF;
               }
             }
             .connect {
-              width: 0.68em;
-              height: 0.68em;
+              width: pxrem(120px);
+              height: pxrem(120px);
               background: url("") no-repeat center right;
-              background-size: 0.68em 0.68em;
+              background-size: pxrem(120px) pxrem(120px);
               cursor: pointer;
               &.connect-audio {
                 background-image: url("./assets/audio.png");
-                margin-right: 0.3em;
+                margin-right: pxrem(30px);
               }
               &.connect-video {
                 background-image: url("./assets/video.png");
