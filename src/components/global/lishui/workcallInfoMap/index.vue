@@ -497,22 +497,50 @@ export default {
         this._map = map
         let div = document.createElement('div')
         let img = document.createElement('img')
+        let img2 = document.createElement('img')
+        let span = document.createElement('span')
+        let span2 = document.createElement('span')
         div.appendChild(img)
+        div.appendChild(img2)
+        div.appendChild(span)
+        span.appendChild(span2)
         var item = this._mid
         img.src = this._src
         img.style.position = 'absolute'
         img.style['border-radius'] = '50%'
         img.style.overflow = 'hidden'
-        img.style.width = '0.72em'
-        img.style.height = '0.72em'
-        img.style.top = '0.12em'
-        img.style.left = '0.15em'
-        div.className = 'map-style'
+        img.style.width = '0.5em'
+        img.style.height = '0.5em'
+        img.style.top = '0'
+        img.style.left = '0'
+        img.style.zIndex = 10
+        img2.style.position = 'absolute'
+        img2.style['border-radius'] = '50%'
+        img2.style.overflow = 'hidden'
+        img2.style.width = '0.2em'
+        img2.style.height = '0.2em'
+        img2.style.bottom = '0'
+        img2.style.left = '0.45em'
+        img2.style.background = 'url(' + require('./assets/landmark.png') + ') no-repeat center center'
+        img2.style.backgroundSize = '100%'
+        span.style.position = 'absolute'
+        span.style.borderRadius = '0.5em'
+        span.style.overflow = 'hidden'
+        span.style.width = '0.9em'
+        span.style.height = '0.35em'
+        span.style.top = '0.1em'
+        span.style.left = '0.25em'
+        span.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+        span.style.color = 'rgb(255, 255, 255)'
+        span.zIndex = 9
+        span2.style.position = 'absolute'
+        span2.style.top = '0.4em'
+        span2.style.left = '30%'
+        span2.style.fontSize = '0.16rem'
+        span2.innerText = item.member_name
         div.style.position = 'absolute'
-        div.style.width = '1em'
-        div.style.height = '1.3em'
-        div.style.background = 'url(' + require('./assets/landmark.png') + ') no-repeat center center'
-        div.style.backgroundSize = '100%'
+        div.style.width = '1.1em'
+        div.style.height = '0.7em' 
         map.getPanes().markerPane.appendChild(div)
         this._div = div
         div.onclick = function () {
@@ -711,7 +739,7 @@ export default {
           position: relative;
           background: #021E61;
           .reporter-list-content{
-            height: 9em;
+            height: 100%;
             overflow: scroll;
           }
           .reporter-list {
@@ -720,6 +748,9 @@ export default {
             padding: pxem(50px);
             margin-bottom: pxem(50px);
             background-color: #123371;
+            &:hover {
+              background-color: #0A43B7;
+            }
             // .border-line{
             //   width: 100%;
             //   margin-top: 0.4em;
