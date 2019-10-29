@@ -198,7 +198,7 @@ export default {
       position: absolute;
       width: 100%;
       top: 0;
-      font-size: 0.3em;
+      font-size: px1em(13px);
       padding-left: 0.5%;
       padding-right: 7.5%;
     }
