@@ -4,25 +4,25 @@
       <div class="micro-box box-item sys-flex sys-vertical flex-justify-between">
         <div v-for="(v, i) in microList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
           <span class="item-lable">{{v.lable}}</span>
-          <span class="item-value">{{v.value | numberFormat}}</span>
+          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="app-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in appList" :key="i" class="list-item sys-flex flex-justify-around sys-flex-center">
+        <div v-for="(v, i) in appList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
           <span class="item-lable">{{v.lable}}</span>
-          <span class="item-value">{{v.value | numberFormat}}</span>
+          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="web-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in webList" :key="i" class="list-item sys-flex flex-justify-around sys-flex-center">
+        <div v-for="(v, i) in webList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
           <span class="item-lable">{{v.lable}}</span>
-          <span class="item-value">{{v.value | numberFormat}}</span>
+          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="content-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in contentList" :key="i" class="list-item sys-flex flex-justify-around sys-flex-center">
+        <div v-for="(v, i) in contentList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
           <span class="item-lable">{{v.lable}}</span>
-          <span class="item-value">{{v.value | numberFormat}}</span>
+          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@ export default {
     .box-item {
       width: 22%;
       height: 100%;
-      padding: pxem(115px) pxem(67px) pxem(58px);
+      padding: pxem(115px) pxem(167px) pxem(158px);
       .list-item {
         width: 100%;
         height: 25%;
