@@ -27,7 +27,7 @@
                       <div class="connect connect-video" @click="callvideo(v)"></div>
                       <!-- @click="callvideo(v)" -->
                     </div>
-                    <div class="border-line"></div>
+                    <!-- <div class="border-line"></div> -->
                 </div>
               </div>
               <div class="no-data" v-else>
@@ -715,49 +715,52 @@ export default {
             overflow: scroll;
           }
           .reporter-list {
-            padding: 0.4em 0.4em 0;
             position: relative;
-            .border-line{
-              width: 100%;
-              margin-top: 0.4em;
-              height: 0.03em;
-              background: url('./assets/border-line.png') no-repeat bottom;
-              background-size: 100%;
-            }
+            height: pxem(300px);
+            padding: pxem(50px);
+            margin-bottom: pxem(50px);
+            background-color: #123371;
+            // .border-line{
+            //   width: 100%;
+            //   margin-top: 0.4em;
+            //   height: 0.03em;
+            //   background: url('./assets/border-line.png') no-repeat bottom;
+            //   background-size: 100%;
+            // }
             .avatar {
-              width: 1em;
-              height: 1em;
+              width: pxrem(190px);
+              height: pxrem(190px);
               border-radius: 50%;
               overflow: hidden;
               border: solid 0.02em #fff;
-              margin-right: 0.28em;
+              margin-right: pxrem(60px);
             }
             .info {
               height: 100%;
               flex-direction: column;
               text-align: left;
               .name {
-                font-size: pxrem(70px, 18.75);
+                font-size: pxrem(70px);
                 font-family: PingFangSC-Regular;
                 font-weight: 400;
                 color: rgba(255, 255, 255, 1);
               }
               .depart {
-                font-size: pxrem(48px, 18.75);
+                font-size: pxrem(48px);
                 font-family: PingFangSC-Light;
                 font-weight: 400;
                 color: #00BAFF;
               }
             }
             .connect {
-              width: 0.68em;
-              height: 0.68em;
+              width: pxrem(120px);
+              height: pxrem(120px);
               background: url("") no-repeat center right;
-              background-size: 0.68em 0.68em;
+              background-size: pxrem(120px) pxrem(120px);
               cursor: pointer;
               &.connect-audio {
                 background-image: url("./assets/audio.png");
-                margin-right: 0.3em;
+                margin-right: pxrem(30px);
               }
               &.connect-video {
                 background-image: url("./assets/video.png");
