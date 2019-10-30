@@ -74,7 +74,7 @@ export default {
     this.getData()
     setInterval(() => {
       this.getData()
-    }, '30000')
+    }, 25000)
   },
   methods: {
     getData () {

@@ -73,7 +73,7 @@ export default {
         },
         grid: {
           left: this.proportion * 30,
-          // top: this.proportion * 60,
+          top: this.proportion * 50,
           bottom: this.proportion * 30,
           containLabel: true
         },
@@ -96,6 +96,9 @@ export default {
             boundaryGap: false,
             name: '日期',
             // nameLocation:'start',
+            nameTextStyle: {
+              fontSize: this.proportion * 12
+            },
             nameGap: 5,
             axisLine: {
               lineStyle: {
@@ -109,14 +112,20 @@ export default {
               // interval:15,
               alignWithLabel: true
             },
+            axisLabel: {
+              fontSize: this.proportion * 12
+            },
             data: this.heatData.xAxis
           }
         ],
         yAxis: [
           {
             type: 'value',
+            nameTextStyle: {
+              fontSize: this.proportion * 12
+            },
             axisLabel: {
-              // formatter: '{value} °C'
+              fontSize: this.proportion * 12,
               formatter: '{value}'
             },
             name: '访问量',
@@ -124,7 +133,7 @@ export default {
             color: '#fff',
             axisTick: {
               show: false,
-              // interval:15,
+              fontSize: this.proportion * 12,
               alignWithLabel: true
             },
             axisLine: {
@@ -228,6 +237,9 @@ export default {
               show: false,
               alignWithLabel: true
             },
+            axisLabel: {
+              fontSize: this.proportion * 12
+            },
             axisLine: {
               lineStyle: {
                 color: ['#71a4f2'],
@@ -235,10 +247,6 @@ export default {
                 type: 'solid'
               }
             },
-            // axisLabel: {
-            //   interval: 0,
-            //   rotate: -45
-            // },
             data: this.areaData.geo.slice(0, 5).map(v => v.name)
           }
         ],
@@ -248,13 +256,14 @@ export default {
             axisLabel: {
               interval: 15,
               formatter: '{value}%',
+              fontSize: this.proportion * 12,
               textStyle: {
                 // fontSize:'13'
               }
             },
             axisTick: {
               show: false,
-              // interval:15,
+              fontSize: this.proportion * 12,
               alignWithLabel: true
             },
             color: '#fff',
@@ -290,7 +299,8 @@ export default {
                   show: true,
                   position: 'top',
                   formatter: '{c}%',
-                  color: '#ffffff'
+                  color: '#ffffff',
+                  fontSize: this.proportion * 10
                 },
                 color: new echarts.graphic.LinearGradient(
                   0, 0, 0, 1,
@@ -381,7 +391,7 @@ export default {
     this.getDataList()
   },
   mounted () {
-    this.proportion = this.getProportion('xy-hot')
+    this.proportion = this.getProportion('xy-hot') * 1.5
     this.setFontsize('xy-hot')
   },
   methods: {
@@ -452,7 +462,7 @@ export default {
           this.count = 0
           this.getDataList()
         }
-      }, 10000)
+      }, 25000)
     }
   }
 }
