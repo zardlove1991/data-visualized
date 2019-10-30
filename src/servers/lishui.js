@@ -4,6 +4,7 @@ const basekey = 'bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ'
 
 /* 记者连线 */
 export const getConnecterList = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=PROJECT_MGZlNTdhOT&a=getWorkCallConnectList`)
+export const getOperateData = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=PROJECT_MGZlNTdhOT&a=getOperateData`)
 /* 获取热点话题 */
 export const getHotTopicList = (page, size) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=hotspot&a=getHotTopicList&flag=weekly&category=politics&custom_appid=${baseid}&customAppkey=${basekey}&size=${size}&page=${page}`)
 /* 热点话题分析 */

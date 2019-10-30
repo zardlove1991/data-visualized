@@ -3,25 +3,25 @@
     <div class="operate-data-wrap sys-flex flex-justify-between">
       <div class="micro-box box-item sys-flex sys-vertical flex-justify-between">
         <div v-for="(v, i) in microList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
-          <span class="item-lable">{{v.lable}}</span>
+          <span class="item-text">{{v.text}}</span>
           <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="app-box box-item sys-flex sys-vertical flex-justify-between">
         <div v-for="(v, i) in appList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
-          <span class="item-lable">{{v.lable}}</span>
+          <span class="item-text">{{v.text}}</span>
           <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="web-box box-item sys-flex sys-vertical flex-justify-between">
         <div v-for="(v, i) in webList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
-          <span class="item-lable">{{v.lable}}</span>
+          <span class="item-text">{{v.text}}</span>
           <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="content-box box-item sys-flex sys-vertical flex-justify-between">
         <div v-for="(v, i) in contentList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
-          <span class="item-lable">{{v.lable}}</span>
+          <span class="item-text">{{v.text}}</span>
           <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
         </div>
       </div>
@@ -30,68 +30,84 @@
 </template>
 
 <script>
-import { } from '@/servers/lishui'
+import { getOperateData } from '@/servers/lishui'
 export default {
   name: 'operateData',
   data () {
     return {
       microList: [
         {
-          lable: '昨日阅读数：',
+          text: '昨日阅读数：',
+          lable: 'yesterday_click_num',
           value: 0
         }, {
-          lable: '今日新消息数：',
+          text: '今日新消息数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '新增粉丝数：',
+          text: '新增粉丝数：',
+          lable: 'new_user_num',
           value: 0
         }, {
-          lable: '累计粉丝数：',
+          text: '累计粉丝数：',
+          lable: 'cumulative_user_num',
           value: 0
         }
       ],
       appList: [
         {
-          lable: '昨日浏览量数：',
+          text: '昨日浏览量数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '今日发布数：',
+          text: '今日发布数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '新增注册数：',
+          text: '新增注册数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '累计注册数：',
+          text: '累计注册数：',
+          lable: 'today_msg_num',
           value: 0
         }
       ],
       webList: [
         {
-          lable: '昨日阅读数：',
+          text: '昨日阅读数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '今日点赞数：',
+          text: '今日点赞数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '新增粉丝数：',
+          text: '新增粉丝数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '累计粉丝数：',
+          text: '累计粉丝数：',
+          lable: 'today_msg_num',
           value: 0
         }
       ],
       contentList: [
         {
-          lable: '昨日点赞数：',
+          text: '昨日点赞数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '今日新消息数：',
+          text: '今日新消息数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '新增粉丝数：',
+          text: '新增粉丝数：',
+          lable: 'today_msg_num',
           value: 0
         }, {
-          lable: '累计粉丝数：',
+          text: '累计粉丝数：',
+          lable: 'today_msg_num',
           value: 0
         }
       ]
@@ -99,25 +115,37 @@ export default {
   },
 
   created () {
+    this.getDataList()
+    // setInterval(() => {
+    //   this.getDataList()
+    // }, 15000)
   },
 
   mounted () {
     this.setFontsize('ls-operateData')
     this.microList = [
       {
-        lable: '昨日阅读数：',
+        text: '昨日阅读数：',
         value: 123
       }, {
-        lable: '今日新消息数：',
+        text: '今日新消息数：',
         value: 234
       }, {
-        lable: '新增粉丝数：',
+        text: '新增粉丝数：',
         value: 0
       }, {
-        lable: '累计粉丝数：',
+        text: '累计粉丝数：',
         value: 0
       }
     ]
+  },
+
+  methods: {
+    getDataList () {
+      getOperateData().then((response) => {
+        console.log(response)
+      })
+    }
   }
 }
 </script>
@@ -142,7 +170,7 @@ export default {
       .list-item {
         width: 100%;
         height: 25%;
-        .item-lable {
+        .item-text {
           font-size: pxrem(38px, 12.5);
           color: #ffffff;
         }
