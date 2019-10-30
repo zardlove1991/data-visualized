@@ -10,7 +10,7 @@ export default {
   name: 'websiteContent',
   data () {
     return {
-      url: `http://www.baidu.com/?time=${(new Date()).getTime()}`
+      url: `http://www.lsrmw.cn/default.php?time=${(new Date()).getTime()}`
     }
   },
   mounted () {
