@@ -43,7 +43,7 @@ export default {
         speed: 2000,
         // autoplay : false,
         autoplay: {
-          delay: 15000,
+          delay: 10000,
           stopOnLastSlide: false,
           disableOnInteraction: false
         },
@@ -59,7 +59,7 @@ export default {
           prevEl: '.swiper-button-prev'
         }
       },
-      count: 8,
+      count: 16,
       current: 1,
       currentIndex: 1,
       contentShow: false,
@@ -70,7 +70,7 @@ export default {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 15000)
+    }, 60000)
   },
   mounted () {
     this.setFontsize('ls-task')
@@ -81,7 +81,8 @@ export default {
         if (!response.data.ErrorCode) {
           if (response.data.data.length) {
             this.taskList = []
-            this.taskList = [response.data.data]
+            // this.taskList = [response.data.data]
+            this.taskList = this.split_array(response.data.data, 8)
             this.current += 1
           } else {
             this.current = 1
@@ -89,6 +90,14 @@ export default {
           }
         }
       })
+    },
+    split_array (arr, len) {
+      let arrlen = arr.length
+      let result = []
+      for (let i = 0; i < arrlen; i += len) {
+        result.push(arr.slice(i, i + len))
+      }
+      return result
     }
   }
 }
