@@ -604,8 +604,8 @@ export default {
     },
     getReporter () {
       getConnecterList().then(response => {
-        if (!response.data.ErrorCode && response.data.data.length) {
-          this.reporterList = response.data.data // .splice(0, 5)
+        if (!response.data.ErrorCode && response.data.result.length) {
+          this.reporterList = response.data.result
         }
         this.rMap()
       })

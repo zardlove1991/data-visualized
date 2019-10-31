@@ -462,7 +462,7 @@ export default {
           this.count = 0
           this.getDataList()
         }
-      }, 25000)
+      }, 35000)
     }
   }
 }
