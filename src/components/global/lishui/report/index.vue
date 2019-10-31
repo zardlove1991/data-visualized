@@ -27,7 +27,7 @@ export default {
       keyword: '',
       reportList: [],
       count: 10,
-      current: 1
+      page: 1
     }
   },
   created () {
@@ -41,16 +41,16 @@ export default {
   },
   methods: {
     getDataList () {
-      getReportData(this.count, this.current).then((response) => {
-        if (!response.data.ErrorCode) {
-          if (response.data.data.length) {
+      getReportData(this.count, this.page).then((response) => {
+        if (!response.data.error_code) {
+          if (response.data.result.length) {
             this.reportList = []
             setTimeout(() => {
-              this.reportList = response.data.data
+              this.reportList = response.data.result
             }, 100)
-            this.current += 1
+            this.page += 1
           } else {
-            this.current = 1
+            this.page = 1
             this.getDataList()
           }
         }

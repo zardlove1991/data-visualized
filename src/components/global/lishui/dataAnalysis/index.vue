@@ -3,37 +3,36 @@
     <div class="data-analysis-wrap sys-flex flex-justify-between">
       <div class="data-analysis-list sys-flex sys-vertical flex-justify-between">
         <div
-          v-show="typeActive == 'internet'"
           class="data-list animated sys-flex sys-vertical flex-justify-between"
           v-for="(v , k) in newsList"
           :key="k"
-          :class="{'active' : curIndex == k,'fadeInLeft' : v.topic_name}"
+          :class="{'active' : curIndex == k,'fadeInLeft' : v.title}"
           v-bind:style="{'animation-delay' : k/2+'s'}"
         >
-          <div class="data-title overhidden">{{v.topic_name}}</div>
-          <div class="data-brief">{{v.topic_info}}</div>
+          <div class="data-title overhidden">{{v.title}}</div>
+          <div class="data-brief">{{v.content}}</div>
         </div>
       </div>
       <div class="data-echarts sys-flex sys-vertical flex-justify-between">
         <div class="echarts-top sys-flex flex-justify-between">
           <div class="data-channel">
-            <p v-if="typeActive == 'internet'" class="echarts-title channel-title">分渠道数据分析</p>
+            <p class="echarts-title channel-title">分渠道数据分析</p>
             <div class="channel-box">
-              <chart v-if="typeActive == 'internet'" :options="lineOptions" :autoResize="true"></chart>
+              <chart :options="lineOptions" :autoResize="true"></chart>
             </div>
           </div>
           <div class="data-media">
-            <p v-if="typeActive == 'internet'" class="echarts-title media-title">媒体占比</p>
+            <p class="echarts-title media-title">媒体占比</p>
             <div class="media-box">
-              <chart v-if="typeActive == 'internet'" :options="pieOptions" :autoResize="true"></chart>
+              <chart :options="pieOptions" :autoResize="true"></chart>
             </div>
           </div>
         </div>
         <div class="echarts-bottom">
           <div class="data-source">
-            <p v-if="typeActive == 'internet'" class="echarts-title source-title">TOP 10 活跃新闻媒体来源</p>
+            <p class="echarts-title source-title">TOP 10 活跃新闻媒体来源</p>
             <div class="source-box">
-              <chart v-if="typeActive == 'internet'" :options="top10options" :autoResize="true"></chart>
+              <chart :options="top10options" :autoResize="true"></chart>
             </div>
           </div>
         </div>
@@ -51,16 +50,15 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/gauge'
-import { getHotTopicList, getHotTopicDetail } from '@/servers/lishui'
+import { getHotTopicList, getHotsTopicTrend, getHotsTopicActiveMedia, getHotsTopicMedia } from '@/servers/lishui'
 export default {
   name: 'dataAnalysis',
   data () {
     return {
-      typeActive: 'internet',
       newsList: [],
       localNewsList: [],
       page: 1,
-      size: 4,
+      count: 4,
       currentNewsData: {
         title: '',
         result: {
@@ -523,14 +521,12 @@ export default {
   created () {
     this.initNewsList()
     setInterval(() => {
-      if (this.typeActive === 'internet') {
-        this.curIndex += 1
-        if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
-          this.curIndex = 0
-          this.initNewsList()
-        }
-        this.getHotTopicDetail()
+      this.curIndex += 1
+      if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
+        this.curIndex = 0
+        this.initNewsList()
       }
+      this.getHotTopicDetail()
     }, '10000')
   },
   mounted () {
@@ -541,14 +537,16 @@ export default {
 
     // 初始化新闻列表
     initNewsList () {
-      getHotTopicList(1, this.size).then(response => {
-        this.newsList = []
-        setTimeout(() => {
-          this.newsList = response.data.result
-          if (this.curIndex === 0) {
-            this.getHotTopicDetail()
-          }
-        }, 100)
+      getHotTopicList(this.count, this.page).then(response => {
+        if (!response.data.error_code) {
+          this.newsList = []
+          setTimeout(() => {
+            this.newsList = response.data.result
+            if (this.curIndex === 0) {
+              this.getHotTopicDetail()
+            }
+          }, 100)
+        }
       })
     },
 
@@ -621,23 +619,6 @@ export default {
       })
     }
 
-    // 循环加载新闻
-    // getNextNews(){
-    //     this.getNewsDetails();
-    //     this.curIndex++;
-    //     this.newsInterval = setInterval(()=>{
-    //         if(this.curIndex < this.newsList.length){
-    //             setTimeout(()=>{
-    //                 this.getNewsDetails();
-    //                 this.curIndex++;
-    //             },100)
-    //         }else{
-    //             this.curIndex = 0;
-    //             clearInterval(this.newsInterval);
-    //             this.getNewsDetails();
-    //         }
-    //     },30000)
-    // }
   }
 }
 </script>
