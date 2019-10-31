@@ -38,9 +38,7 @@ export default {
       keyword: '',
       projectList: [],
       count: 10,
-      current: 1,
-      contentShow: false,
-      contentDetail: null
+      page: 1
     }
   },
   created () {
@@ -54,16 +52,16 @@ export default {
   },
   methods: {
     getDataList () {
-      getProjectData(this.count, this.current).then((response) => {
-        if (!response.data.ErrorCode) {
-          if (response.data.data.length) {
+      getProjectData(this.count, this.page).then((response) => {
+        if (!response.data.error_code) {
+          if (response.data.result.length) {
             this.projectList = []
             setTimeout(() => {
-              this.projectList = response.data.data
+              this.projectList = response.data.result
             }, 100)
-            this.current += 1
+            this.page += 1
           } else {
-            this.current = 1
+            this.page = 1
             this.getDataList()
           }
         }

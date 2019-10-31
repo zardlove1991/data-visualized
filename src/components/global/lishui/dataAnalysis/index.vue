@@ -3,37 +3,36 @@
     <div class="data-analysis-wrap sys-flex flex-justify-between">
       <div class="data-analysis-list sys-flex sys-vertical flex-justify-between">
         <div
-          v-show="typeActive == 'internet'"
           class="data-list animated sys-flex sys-vertical flex-justify-between"
           v-for="(v , k) in newsList"
           :key="k"
-          :class="{'active' : curIndex == k,'fadeInLeft' : v.topic_name}"
+          :class="{'active' : curIndex == k,'fadeInLeft' : v.title}"
           v-bind:style="{'animation-delay' : k/2+'s'}"
         >
-          <div class="data-title overhidden">{{v.topic_name}}</div>
-          <div class="data-brief">{{v.topic_info}}</div>
+          <div class="data-title overhidden">{{v.title}}</div>
+          <div class="data-brief">{{v.content}}</div>
         </div>
       </div>
       <div class="data-echarts sys-flex sys-vertical flex-justify-between">
         <div class="echarts-top sys-flex flex-justify-between">
           <div class="data-channel">
-            <p v-if="typeActive == 'internet'" class="echarts-title channel-title">分渠道数据分析</p>
+            <p class="echarts-title channel-title">分渠道数据分析</p>
             <div class="channel-box">
-              <chart v-if="typeActive == 'internet'" :options="lineOptions" :autoResize="true"></chart>
+              <chart :options="lineOptions" :autoResize="true"></chart>
             </div>
           </div>
           <div class="data-media">
-            <p v-if="typeActive == 'internet'" class="echarts-title media-title">媒体占比</p>
+            <p class="echarts-title media-title">媒体占比</p>
             <div class="media-box">
-              <chart v-if="typeActive == 'internet'" :options="pieOptions" :autoResize="true"></chart>
+              <chart :options="pieOptions" :autoResize="true"></chart>
             </div>
           </div>
         </div>
         <div class="echarts-bottom">
           <div class="data-source">
-            <p v-if="typeActive == 'internet'" class="echarts-title source-title">TOP 10 活跃新闻媒体来源</p>
+            <p class="echarts-title source-title">TOP 10 活跃新闻媒体来源</p>
             <div class="source-box">
-              <chart v-if="typeActive == 'internet'" :options="top10options" :autoResize="true"></chart>
+              <chart :options="top10options" :autoResize="true"></chart>
             </div>
           </div>
         </div>
@@ -51,16 +50,18 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/gauge'
-import { getHotTopicList, getHotTopicDetail } from '@/servers/lishui'
+import { getHotTopicList, getHotsTopicTrend, getHotsTopicActiveMedia, getHotsTopicMedia } from '@/servers/lishui'
 export default {
   name: 'dataAnalysis',
+  components: {
+    chart: echarts
+  },
   data () {
     return {
-      typeActive: 'internet',
       newsList: [],
       localNewsList: [],
       page: 1,
-      size: 4,
+      count: 4,
       currentNewsData: {
         title: '',
         result: {
@@ -284,221 +285,6 @@ export default {
         ],
         series: []
       },
-
-      localbar: {
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            label: {
-              backgroundColor: '#6a7985'
-            }
-          }
-        },
-        grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '3%',
-          top: '5%',
-          containLabel: true
-        },
-        // calculable: true,
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: true,
-            data: [],
-            axisLabel: {
-              interval: 0,
-              rotate: 20,
-              color: '#fff',
-              fontSize: 14
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            gridIndex: 0,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                width: 0.5,
-                opacity: 0.5,
-                type: 'dashed',
-                color: '#4A6AA8'
-              }
-            },
-            axisLabel: {
-              color: '#fff',
-              fontSize: 12,
-              formatter: '{value}',
-              interval: 30
-            },
-
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        series: [
-          {
-            name: '文稿',
-            type: 'bar',
-            barCategoryGap: '60%',
-            barWidth: '60%',
-            itemStyle: {
-              normal: {
-                color: '#0541ff',
-                width: 15,
-                lineStyle: {
-                  color: '#0541ff'
-                },
-                label: {
-                  show: true,
-                  position: 'top',
-                  textStyle: {
-                    fontSize: 14,
-                    color: 'white'
-                  }
-                }
-              }
-            },
-            data: []
-          }
-        ]
-      },
-      localpie: {
-        title: {
-          text: '',
-          textStyle: {
-            color: '#fff',
-            fontSize: 12
-          }
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
-        },
-        legend: {
-          orient: 'vertical',
-          right: 0,
-          icon: 'circle',
-          textStyle: {
-            color: '#fff',
-            fontSize: 8
-          }
-        },
-        series: [
-          {
-            name: '发布渠道占比',
-            type: 'pie',
-            radius: ['20%', '70%'],
-            minAngle: 5,
-            avoidLabelOverlap: true,
-            label: {
-              normal: {
-                show: true,
-                length: 2,
-                // formatter: '{b}:{d}%',
-                formatter: '{d}%',
-                position: 'outside'
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontSize: 12,
-                  fontWeight: 'bold'
-                }
-              }
-            },
-            labelLine: {
-              normal: {
-                show: true,
-                length: 20,
-                length2: 20
-              }
-            },
-            data: []
-          }
-        ]
-      },
-      localline: {
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            label: {
-              backgroundColor: '#6a7985'
-            }
-          }
-        },
-        legend: {
-          orient: 'vertical',
-          right: 0,
-          icon: 'circle',
-          textStyle: {
-            color: '#fff',
-            fontSize: 8
-          },
-          data: []
-        },
-
-        grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '10%',
-          top: '10%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: true,
-            data: [],
-            axisLine: {
-              lineStyle: {
-                color: '#fff'
-              }
-            },
-            inverse: true
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            gridIndex: 0,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                width: 0.5,
-                opacity: 0.5,
-                type: 'dashed',
-                color: '#4A6AA8'
-              }
-            },
-            axisLabel: {
-              color: '#fff',
-              fontSize: 10,
-              formatter: '{value}'
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        series: []
-      },
-
       type: {
         '21': '媒体站点',
         '22': '博客',
@@ -513,25 +299,27 @@ export default {
         '103': '手机管家'
       },
       curIndex: 0,
-      loaclCurIndex: 0
+      curId: null
     }
   },
-  components: {
-    chart: echarts
-  },
-
-  created () {
-    this.initNewsList()
-    setInterval(() => {
-      if (this.typeActive === 'internet') {
-        this.curIndex += 1
-        if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
-          this.curIndex = 0
-          this.initNewsList()
-        }
+  watch: {
+    curId: {
+      handler: function (newValue) {
         this.getHotTopicDetail()
       }
-    }, '10000')
+    }
+  },
+  created () {
+    this.initNewsList()
+    // setInterval(() => {
+    //   this.curIndex += 1
+    //   if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
+    //     this.curIndex = 0
+    //     this.initNewsList()
+    //   } else {
+    //     this.curId = this.newsList[this.curIndex]['id']
+    //   }
+    // }, '10000')
   },
   mounted () {
     this.setFontsize('ls-dataAnalysis')
@@ -541,41 +329,31 @@ export default {
 
     // 初始化新闻列表
     initNewsList () {
-      getHotTopicList(1, this.size).then(response => {
-        this.newsList = []
-        setTimeout(() => {
-          this.newsList = response.data.result
-          if (this.curIndex === 0) {
-            this.getHotTopicDetail()
-          }
-        }, 100)
+      getHotTopicList(this.count, this.page).then(response => {
+        if (!response.data.error_code) {
+          this.newsList = []
+          setTimeout(() => {
+            this.newsList = response.data.result
+            this.curId = this.newsList[this.curIndex]['id']
+          }, 100)
+        }
       })
     },
 
     // 获取详细数据
     getHotTopicDetail () {
-      let id = this.newsList[this.curIndex]['topic_id']
-      // var lineArray = {}
-      var _this = this
-      let index = this.curIndex + 1 === 5 ? 1 : this.curIndex + 1
-      getHotTopicDetail(id, index).then(response => {
-        if (response.data.result && response.data.result.channel_list) {
-          _this.lineOptions.legend.data = []
+      getHotsTopicTrend(this.curId).then(response => {
+        if (!response.data.error_code) {
+          this.lineOptions.legend.data = []
           this.lineOptions.xAxis[0].data = []
           this.lineOptions.series = []
-          this.lineOptions.xAxis[0].data = response.data.result.channel_list.x
-          for (
-            let i = 0;
-            i < Object.values(response.data.result.channel_list.y).length;
-            i++
-          ) {
-            _this.lineOptions.legend.data.push(
-              _this.type[Object.keys(response.data.result.channel_list.y)[i]]
-            )
-            _this.lineOptions.series.push({
+          this.lineOptions.xAxis[0].data = response.data.result[0].count.map(v => v.field)
+          this.lineOptions.legend.data = response.data.result.map(v => v.name_zh)
+          this.lineOptions.series = response.data.result.map(v => {
+            return {
+              name: v.name_zh,
               type: 'line',
-              name:
-                _this.type[Object.keys(response.data.result.channel_list.y)[i]],
+              data: v.count.map(i => i.value),
               smooth: true,
               itemStyle: {
                 normal: {
@@ -587,57 +365,35 @@ export default {
                     }
                   }
                 }
-              },
-              data: Object.values(response.data.result.channel_list.y)[i]
-            })
-          }
+              }
+            }
+          })
         }
-        if (response.data.result && response.data.result.list) {
+      })
+      getHotsTopicMedia(this.curId).then(response => {
+        if (!response.data.error_code) {
           this.pieOptions.series[0].data = []
-          for (var i = 0; i < response.data.result.list.length; i++) {
-            this.pieOptions.series[0].data.push({
-              value: response.data.result.list[i]['heat'],
-              name: this.type[response.data.result.list[i]['channel']],
+          this.pieOptions.series[0].data = response.data.result.map(v => {
+            return {
+              value: v.count,
+              name: v.name_zh,
               label: {
                 fontSize: 12
               }
-            })
-            if (response.data.result.list[i]['channel'] === '21') {
-              var topSourceList =
-                response.data.result.list[i]['top_list'][1]['top_source_list']
-              var top10optionsXAxis = []
-              var top10optionsSeries = []
-              for (var j = 0; j < topSourceList.length; j++) {
-                top10optionsXAxis.push(topSourceList[j]['from'])
-                top10optionsSeries.push(topSourceList[j]['count'])
-              }
-              if (top10optionsXAxis.length > 0) {
-                this.top10options.xAxis[0].data = top10optionsXAxis
-                this.top10options.series[0].data = top10optionsSeries
-              }
             }
-          }
+          })
+        }
+      })
+      getHotsTopicActiveMedia(this.curId).then(response => {
+        if (!response.data.error_code) {
+          this.top10options.xAxis[0].data = []
+          this.top10options.series[0].data = []
+          this.top10options.xAxis[0].data = response.data.result.map(v => v.name_zh)
+          this.top10options.series[0].data = response.data.result.map(v => v.count)
         }
       })
     }
 
-    // 循环加载新闻
-    // getNextNews(){
-    //     this.getNewsDetails();
-    //     this.curIndex++;
-    //     this.newsInterval = setInterval(()=>{
-    //         if(this.curIndex < this.newsList.length){
-    //             setTimeout(()=>{
-    //                 this.getNewsDetails();
-    //                 this.curIndex++;
-    //             },100)
-    //         }else{
-    //             this.curIndex = 0;
-    //             clearInterval(this.newsInterval);
-    //             this.getNewsDetails();
-    //         }
-    //     },30000)
-    // }
   }
 }
 </script>

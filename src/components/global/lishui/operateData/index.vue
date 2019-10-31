@@ -2,27 +2,27 @@
   <div class="main-wrap" id="ls-operateData">
     <div class="operate-data-wrap sys-flex flex-justify-between">
       <div class="micro-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in microList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
+        <div v-for="(v, i) in microList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center animated" :class="{'flipInX' : v.value}" :style="{'animation-delay' : i/2+'s'}">
           <span class="item-text">{{v.text}}</span>
-          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
+          <span class="item-value">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="app-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in appList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
+        <div v-for="(v, i) in appList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center animated" :class="{'flipInX' : v.value}" :style="{'animation-delay' : i/2+'s'}">
           <span class="item-text">{{v.text}}</span>
-          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
+          <span class="item-value">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="web-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in webList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
+        <div v-for="(v, i) in webList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center animated" :class="{'flipInX' : v.value}" :style="{'animation-delay' : i/2+'s'}">
           <span class="item-text">{{v.text}}</span>
-          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
+          <span class="item-value">{{v.value | numberFormat}}</span>
         </div>
       </div>
       <div class="content-box box-item sys-flex sys-vertical flex-justify-between">
-        <div v-for="(v, i) in contentList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center">
+        <div v-for="(v, i) in contentList" :key="i" class="list-item sys-flex flex-justify-between sys-flex-center animated" :class="{'flipInX' : v.value}" :style="{'animation-delay' : i/2+'s'}">
           <span class="item-text">{{v.text}}</span>
-          <span class="item-value animated" :class="{'flipInX' : v.value}">{{v.value | numberFormat}}</span>
+          <span class="item-value">{{v.value | numberFormat}}</span>
         </div>
       </div>
     </div>
@@ -57,45 +57,45 @@ export default {
       appList: [
         {
           text: '昨日浏览量数：',
-          lable: 'today_msg_num',
+          lable: 'yesterday_click_num',
           value: 0
         }, {
           text: '今日发布数：',
-          lable: 'today_msg_num',
+          lable: 'today_publish_num',
           value: 0
         }, {
           text: '新增注册数：',
-          lable: 'today_msg_num',
+          lable: 'new_user_num',
           value: 0
         }, {
           text: '累计注册数：',
-          lable: 'today_msg_num',
+          lable: 'cumulative_user_num',
           value: 0
         }
       ],
       webList: [
         {
           text: '昨日阅读数：',
-          lable: 'today_msg_num',
+          lable: 'yesterday_click_num',
           value: 0
         }, {
-          text: '今日点赞数：',
-          lable: 'today_msg_num',
+          text: '昨日点赞数：',
+          lable: 'yesterday_like_num',
           value: 0
         }, {
           text: '新增粉丝数：',
-          lable: 'today_msg_num',
+          lable: 'new_user_num',
           value: 0
         }, {
           text: '累计粉丝数：',
-          lable: 'today_msg_num',
+          lable: 'cumulative_user_num',
           value: 0
         }
       ],
       contentList: [
         {
           text: '昨日点赞数：',
-          lable: 'today_msg_num',
+          lable: 'yesterday_like_num',
           value: 0
         }, {
           text: '今日新消息数：',
@@ -103,11 +103,11 @@ export default {
           value: 0
         }, {
           text: '新增粉丝数：',
-          lable: 'today_msg_num',
+          lable: 'new_user_num',
           value: 0
         }, {
           text: '累计粉丝数：',
-          lable: 'today_msg_num',
+          lable: 'cumulative_user_num',
           value: 0
         }
       ]
@@ -116,34 +116,44 @@ export default {
 
   created () {
     this.getDataList()
-    // setInterval(() => {
-    //   this.getDataList()
-    // }, 15000)
+    setInterval(() => {
+      this.getDataList()
+    }, 15000)
   },
 
   mounted () {
     this.setFontsize('ls-operateData')
-    this.microList = [
-      {
-        text: '昨日阅读数：',
-        value: 123
-      }, {
-        text: '今日新消息数：',
-        value: 234
-      }, {
-        text: '新增粉丝数：',
-        value: 0
-      }, {
-        text: '累计粉丝数：',
-        value: 0
-      }
-    ]
   },
 
   methods: {
     getDataList () {
       getOperateData().then((response) => {
-        console.log(response)
+        if (!response.data.error_code) {
+          this.microList = this.microList.map(v => {
+            return {
+              ...v,
+              value: response.data.result.weiYunYin[v.lable]
+            }
+          })
+          this.appList = this.appList.map(v => {
+            return {
+              ...v,
+              value: response.data.result.app[v.lable]
+            }
+          })
+          this.webList = this.webList.map(v => {
+            return {
+              ...v,
+              value: response.data.result.web[v.lable]
+            }
+          })
+          this.contentList = this.contentList.map(v => {
+            return {
+              ...v,
+              value: response.data.result.content[v.lable]
+            }
+          })
+        }
       })
     }
   }

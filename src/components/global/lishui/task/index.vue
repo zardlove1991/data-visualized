@@ -60,10 +60,7 @@ export default {
         }
       },
       count: 16,
-      current: 1,
-      currentIndex: 1,
-      contentShow: false,
-      contentDetail: null
+      page: 1
     }
   },
   created () {
@@ -77,15 +74,14 @@ export default {
   },
   methods: {
     getDataList () {
-      getTaskList(this.count, this.current).then((response) => {
-        if (!response.data.ErrorCode) {
-          if (response.data.data.length) {
+      getTaskList(this.count, this.page).then((response) => {
+        if (!response.data.error_code) {
+          if (response.data.result.task_arr.length) {
             this.taskList = []
-            // this.taskList = [response.data.data]
-            this.taskList = this.split_array(response.data.data, 8)
-            this.current += 1
+            this.taskList = this.split_array(response.data.result.task_arr, 8)
+            // this.page += 1
           } else {
-            this.current = 1
+            this.page = 1
             this.getDataList()
           }
         }
