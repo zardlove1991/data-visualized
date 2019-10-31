@@ -53,6 +53,9 @@ import 'echarts/lib/chart/gauge'
 import { getHotTopicList, getHotsTopicTrend, getHotsTopicActiveMedia, getHotsTopicMedia } from '@/servers/lishui'
 export default {
   name: 'dataAnalysis',
+  components: {
+    chart: echarts
+  },
   data () {
     return {
       newsList: [],
@@ -282,221 +285,6 @@ export default {
         ],
         series: []
       },
-
-      localbar: {
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            label: {
-              backgroundColor: '#6a7985'
-            }
-          }
-        },
-        grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '3%',
-          top: '5%',
-          containLabel: true
-        },
-        // calculable: true,
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: true,
-            data: [],
-            axisLabel: {
-              interval: 0,
-              rotate: 20,
-              color: '#fff',
-              fontSize: 14
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            gridIndex: 0,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                width: 0.5,
-                opacity: 0.5,
-                type: 'dashed',
-                color: '#4A6AA8'
-              }
-            },
-            axisLabel: {
-              color: '#fff',
-              fontSize: 12,
-              formatter: '{value}',
-              interval: 30
-            },
-
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        series: [
-          {
-            name: '文稿',
-            type: 'bar',
-            barCategoryGap: '60%',
-            barWidth: '60%',
-            itemStyle: {
-              normal: {
-                color: '#0541ff',
-                width: 15,
-                lineStyle: {
-                  color: '#0541ff'
-                },
-                label: {
-                  show: true,
-                  position: 'top',
-                  textStyle: {
-                    fontSize: 14,
-                    color: 'white'
-                  }
-                }
-              }
-            },
-            data: []
-          }
-        ]
-      },
-      localpie: {
-        title: {
-          text: '',
-          textStyle: {
-            color: '#fff',
-            fontSize: 12
-          }
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
-        },
-        legend: {
-          orient: 'vertical',
-          right: 0,
-          icon: 'circle',
-          textStyle: {
-            color: '#fff',
-            fontSize: 8
-          }
-        },
-        series: [
-          {
-            name: '发布渠道占比',
-            type: 'pie',
-            radius: ['20%', '70%'],
-            minAngle: 5,
-            avoidLabelOverlap: true,
-            label: {
-              normal: {
-                show: true,
-                length: 2,
-                // formatter: '{b}:{d}%',
-                formatter: '{d}%',
-                position: 'outside'
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontSize: 12,
-                  fontWeight: 'bold'
-                }
-              }
-            },
-            labelLine: {
-              normal: {
-                show: true,
-                length: 20,
-                length2: 20
-              }
-            },
-            data: []
-          }
-        ]
-      },
-      localline: {
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            label: {
-              backgroundColor: '#6a7985'
-            }
-          }
-        },
-        legend: {
-          orient: 'vertical',
-          right: 0,
-          icon: 'circle',
-          textStyle: {
-            color: '#fff',
-            fontSize: 8
-          },
-          data: []
-        },
-
-        grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '10%',
-          top: '10%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: true,
-            data: [],
-            axisLine: {
-              lineStyle: {
-                color: '#fff'
-              }
-            },
-            inverse: true
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            gridIndex: 0,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                width: 0.5,
-                opacity: 0.5,
-                type: 'dashed',
-                color: '#4A6AA8'
-              }
-            },
-            axisLabel: {
-              color: '#fff',
-              fontSize: 10,
-              formatter: '{value}'
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        series: []
-      },
-
       type: {
         '21': '媒体站点',
         '22': '博客',
@@ -511,23 +299,27 @@ export default {
         '103': '手机管家'
       },
       curIndex: 0,
-      loaclCurIndex: 0
+      curId: null
     }
   },
-  components: {
-    chart: echarts
+  watch: {
+    curId: {
+      handler: function (newValue) {
+        this.getHotTopicDetail()
+      }
+    }
   },
-
   created () {
     this.initNewsList()
-    setInterval(() => {
-      this.curIndex += 1
-      if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
-        this.curIndex = 0
-        this.initNewsList()
-      }
-      this.getHotTopicDetail()
-    }, '10000')
+    // setInterval(() => {
+    //   this.curIndex += 1
+    //   if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
+    //     this.curIndex = 0
+    //     this.initNewsList()
+    //   } else {
+    //     this.curId = this.newsList[this.curIndex]['id']
+    //   }
+    // }, '10000')
   },
   mounted () {
     this.setFontsize('ls-dataAnalysis')
@@ -542,9 +334,7 @@ export default {
           this.newsList = []
           setTimeout(() => {
             this.newsList = response.data.result
-            if (this.curIndex === 0) {
-              this.getHotTopicDetail()
-            }
+            this.curId = this.newsList[this.curIndex]['id']
           }, 100)
         }
       })
@@ -552,28 +342,18 @@ export default {
 
     // 获取详细数据
     getHotTopicDetail () {
-      let id = this.newsList[this.curIndex]['topic_id']
-      // var lineArray = {}
-      var _this = this
-      let index = this.curIndex + 1 === 5 ? 1 : this.curIndex + 1
-      getHotTopicDetail(id, index).then(response => {
-        if (response.data.result && response.data.result.channel_list) {
-          _this.lineOptions.legend.data = []
+      getHotsTopicTrend(this.curId).then(response => {
+        if (!response.data.error_code) {
+          this.lineOptions.legend.data = []
           this.lineOptions.xAxis[0].data = []
           this.lineOptions.series = []
-          this.lineOptions.xAxis[0].data = response.data.result.channel_list.x
-          for (
-            let i = 0;
-            i < Object.values(response.data.result.channel_list.y).length;
-            i++
-          ) {
-            _this.lineOptions.legend.data.push(
-              _this.type[Object.keys(response.data.result.channel_list.y)[i]]
-            )
-            _this.lineOptions.series.push({
+          this.lineOptions.xAxis[0].data = response.data.result[0].count.map(v => v.field)
+          this.lineOptions.legend.data = response.data.result.map(v => v.name_zh)
+          this.lineOptions.series = response.data.result.map(v => {
+            return {
+              name: v.name_zh,
               type: 'line',
-              name:
-                _this.type[Object.keys(response.data.result.channel_list.y)[i]],
+              data: v.count.map(i => i.value),
               smooth: true,
               itemStyle: {
                 normal: {
@@ -585,36 +365,31 @@ export default {
                     }
                   }
                 }
-              },
-              data: Object.values(response.data.result.channel_list.y)[i]
-            })
-          }
+              }
+            }
+          })
         }
-        if (response.data.result && response.data.result.list) {
+      })
+      getHotsTopicMedia(this.curId).then(response => {
+        if (!response.data.error_code) {
           this.pieOptions.series[0].data = []
-          for (var i = 0; i < response.data.result.list.length; i++) {
-            this.pieOptions.series[0].data.push({
-              value: response.data.result.list[i]['heat'],
-              name: this.type[response.data.result.list[i]['channel']],
+          this.pieOptions.series[0].data = response.data.result.map(v => {
+            return {
+              value: v.count,
+              name: v.name_zh,
               label: {
                 fontSize: 12
               }
-            })
-            if (response.data.result.list[i]['channel'] === '21') {
-              var topSourceList =
-                response.data.result.list[i]['top_list'][1]['top_source_list']
-              var top10optionsXAxis = []
-              var top10optionsSeries = []
-              for (var j = 0; j < topSourceList.length; j++) {
-                top10optionsXAxis.push(topSourceList[j]['from'])
-                top10optionsSeries.push(topSourceList[j]['count'])
-              }
-              if (top10optionsXAxis.length > 0) {
-                this.top10options.xAxis[0].data = top10optionsXAxis
-                this.top10options.series[0].data = top10optionsSeries
-              }
             }
-          }
+          })
+        }
+      })
+      getHotsTopicActiveMedia(this.curId).then(response => {
+        if (!response.data.error_code) {
+          this.top10options.xAxis[0].data = []
+          this.top10options.series[0].data = []
+          this.top10options.xAxis[0].data = response.data.result.map(v => v.name_zh)
+          this.top10options.series[0].data = response.data.result.map(v => v.count)
         }
       })
     }
