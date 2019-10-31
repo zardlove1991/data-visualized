@@ -21,7 +21,7 @@ export const getProjectData = (count = 10, page = 1) => createAPI(`${httpsbaseUr
 /* 获取报题 */
 export const getReportData = (count = 10, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT_main&a=getWorkCallReportList&count=${count}&page=${page}`)
 /* 任务列表 */
-export const getTaskList = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=stat&a=getWorkCallTaskList&custom_appid=${baseid}&custom_appkey=${basekey}&count=${count}&page=${page}`)
+export const getTaskList = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT_main&a=getWorkCallTaskList&count=${count}&page=${page}`)
 /* 辅屏任务数目 */
 export const getDaytaskNum = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT_aux&a=getWorkCallTaskNum`)
 /* 辅屏任务列表 */
