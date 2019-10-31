@@ -1,59 +1,77 @@
 <template>
   <div class="lishui-manuscriptoutput" id="lishui-manuscriptoutput">
     <div class="manuscriptoutput-wrap">
-      <div class="wrap-list sys-flex sys-flex-center" v-for="(v, k) in dataList" :key="k">
+      <div class="wrap-list sys-flex sys-flex-center animated" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList" :key="k">
         <div class="list-status sys-flex sys-flex-center">
           <img v-if="k === 0" src="./assets/new.png" />
-          <span v-if="k !== 0">【{{v.status}}】</span>
+          <span v-if="k !== 0">【{{v.typeName}}】</span>
         </div>
-        <div class="list-text">{{v.text}}</div>
+        <div class="list-text overhidden">{{v.title}}</div>
         <div class="list-time list-span sys-flex sys-flex-center">
           <img src="./assets/time.png" />
-          <span>{{v.time}}</span>
+          <span>{{v.publish_time}}</span>
         </div>
         <div class="list-read list-span sys-flex sys-flex-center">
           <img src="./assets/read.png" />
-          <span>{{v.read}}</span>
+          <span>{{v.click_num}}</span>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { getArticleList } from '@/servers/lishui'
 export default {
   name: 'manuscriptOutput',
   data () {
     return {
-      dataList: [{
-        status: 1,
-        text: 'Interbrand全球品牌榜：华为成为唯一上榜中国品牌',
-        time: '10-08 12:13',
-        read: '12345'
-      }, {
-        status: '文稿',
-        text: 'Interbrand全球品牌榜：华为成为唯一上榜中国品牌',
-        time: '10-08 12:13',
-        read: '12345'
-      }, {
-        status: '文稿',
-        text: 'Interbrand全球品牌榜：华为成为唯一上榜中国品牌',
-        time: '10-08 12:13',
-        read: '12345'
-      }, {
-        status: '文稿',
-        text: 'Interbrand全球品牌榜：华为成为唯一上榜中国品牌',
-        time: '10-08 12:13',
-        read: '12345'
-      }, {
-        status: '文稿',
-        text: 'Interbrand全球品牌榜：华为成为唯一上榜中国品牌',
-        time: '10-08 12:13',
-        read: '12345'
-      }]
+      dataList: [],
+      page: 1
     }
   },
   mounted () {
     this.setFontsize('lishui-manuscriptoutput')
+  },
+  created () {
+    this.getArticleList()
+    setInterval(() => {
+      this.getArticleList()
+    }, 25000)
+  },
+  methods: {
+    getArticleList () {
+      getArticleList(this.page, 5).then(res => {
+        if (res && res.data && res.data.result && res.data.result[0]) {
+          this.dataList = res.data.result
+          this.dataList.forEach(val => {
+            switch (val.type) {
+              case 'article':
+                val.typeName = '文稿'
+                break
+              case 'gallery':
+                val.typeName = '图集'
+                break
+              case 'topic':
+                val.typeName = '专题'
+                break
+              case 'link':
+                val.typeName = '外链'
+                break
+              case 'video':
+                val.typeName = '视频'
+                break
+              default:
+                break
+            }
+          })
+          if (res.data.result.length < 5) {
+            this.page = 1
+          } else {
+            this.page += 1
+          }
+        }
+      })
+    }
   }
 }
 </script>

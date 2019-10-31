@@ -1,14 +1,14 @@
 <template>
   <div class="lishui-personalranking" id="lishui-personalranking">
-    <div class="personalranking-wrap sys-flex sys-flex-center sys-flex-wrap flex-justify-between">
-      <div class="rank-list sys-flex sys-flex-center flex-justify-between" v-for="(v, k) in rankList" :key="k">
+    <div class="personalranking-wrap sys-flex sys-flex-wrap flex-justify-between">
+      <div class="rank-list sys-flex sys-flex-center flex-justify-between animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in rankList" :key="k">
         <div class="serial hg-flex" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k > 2}"><span>{{k + 1}}</span></div>
         <div class="information sys-flex sys-flex-center">
-          <img :src="v.img" />
+          <img :src="v && v.avatar ? v.avatar.host + v.avatar.filepath + v.avatar.filename : defaultImg" />
           <span>{{v.name}}</span>
         </div>
         <div class="num sys-flex sys-flex-center">
-          <span>{{v.num}}</span>
+          <span>{{v.publish}}</span>
           <span>条</span>
         </div>
       </div>
@@ -16,47 +16,32 @@
   </div>
 </template>
 <script>
+import { getRankList } from '@/servers/lishui'
 export default {
   name: 'personalRanking',
   data () {
     return {
-      rankList: [{
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '张亮',
-        num: 85
-      }, {
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '张亮',
-        num: 85
-      }, {
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '张亮',
-        num: 85
-      }, {
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '张亮',
-        num: 85
-      }, {
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '吴亦凡',
-        num: 85
-      }, {
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '张亮',
-        num: 85
-      }, {
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '张亮',
-        num: 85
-      }, {
-        img: 'http://b-ssl.duitang.com/uploads/item/201208/30/20120830173930_PBfJE.jpeg',
-        name: '张亮',
-        num: 85
-      }]
+      rankList: [],
+      defaultImg: require('../../../../assets/avatar/touxiang.png')
     }
   },
   mounted () {
     this.setFontsize('lishui-personalranking')
+  },
+  created () {
+    this.getRankList()
+    setInterval(() => {
+      this.getRankList()
+    }, 25000)
+  },
+  methods: {
+    getRankList () {
+      getRankList().then(res => {
+        if (res && res.data && res.data.result && res.data.result.data && res.data.result.data[0]) {
+          this.rankList = res.data.result.data
+        }
+      })
+    }
   }
 }
 </script>

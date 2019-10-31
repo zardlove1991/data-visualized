@@ -1,74 +1,92 @@
 <template>
   <div class="lishui-daytask" id="lishui-daytask">
-    <div class="daytask-wrap sys-flex sys-flex-center flex-justify-between">
+    <div class="daytask-wrap sys-flex sys-flex-center">
       <div class="wrap-left">
-        <div class="left-list">
-          <div class="sys-flex sys-flex-center"><span>总任务：</span><span>4361</span></div>
+        <div class="left-list" v-for="(v, k) in numList" :key="k">
+          <div class="sys-flex sys-flex-center"><span>{{v.title}}：</span><span>{{v.num}}</span></div>
           <div class="progress-total">
-            <span class="progress" :style="{'width' : total + '%'}"></span>
-          </div>
-        </div>
-        <div class="left-list">
-          <div class="sys-flex sys-flex-center"><span>待开始：</span><span>1698</span></div>
-          <div class="progress-total">
-            <span class="progress" :style="{'width' : start + '%'}"></span>
-          </div>
-        </div>
-        <div class="left-list">
-          <div class="sys-flex sys-flex-center"><span>进行中：</span><span>4361</span></div>
-          <div class="progress-total">
-            <span class="progress" :style="{'width' : img + '%'}"></span>
-          </div>
-        </div>
-        <div class="left-list">
-          <div class="sys-flex sys-flex-center"><span>已完成：</span><span>4361</span></div>
-          <div class="progress-total">
-            <span class="progress" :style="{'width' : finish + '%'}"></span>
+            <span class="progress" :style="{'width' : getPersent(v.num, total)}"></span>
           </div>
         </div>
       </div>
       <div class="wrap-right">
-        <div class="right-list sys-flex sys-flex-center" v-for="(v, k) in listData" :key="k">
+        <div class="right-list sys-flex sys-flex-center animated" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in listData" :key="k">
           <div class="list-status">
-            <img v-if="v.status === 1" src="./assets/start.png" />
-            <img v-if="v.status === 2" src="./assets/ing.png" />
-            <img v-if="v.status === 3" src="./assets/finish.png" />
+            <img v-if="v.status === '1'" src="./assets/start.png" />
+            <img v-if="v.status === '2'" src="./assets/ing.png" />
+            <img v-if="v.status === '4'" src="./assets/finish.png" />
           </div>
-          <div class="list-text">{{v.text}}</div>
+          <div class="list-text overhidden">{{v.title}}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { getDaytaskNum, getDaytaskList } from '@/servers/lishui'
 export default {
   name: 'dayTask',
   data () {
     return {
-      listData: [{
-        status: 1,
-        text: '军运会今晚武汉开幕 这些“硬核”精彩不容错过'
-      }, {
-        status: 2,
-        text: '军运会今晚武汉开幕 这些“硬核”精彩不容错过'
-      }, {
-        status: 2,
-        text: '军运会今晚武汉开幕 这些“硬核”精彩不容错过'
-      }, {
-        status: 3,
-        text: '这对60后夫妻隐居山林16年，过着人们最“向往的生活”'
-      }, {
-        status: 3,
-        text: '军运会今晚武汉开幕 这些“硬核”精彩不容错过'
-      }],
-      total: 100,
-      start: 50,
-      img: 80,
-      finish: 20
+      listData: [],
+      total: 0,
+      page: 1,
+      numList: []
     }
+  },
+  created () {
+    // 接口获取任务数目
+    this.getTaskNum()
+    // 接口获取任务列表
+    this.getTaskList()
+    setInterval(() => {
+      this.getTaskList()
+    }, 25000)
   },
   mounted () {
     this.setFontsize('lishui-daytask')
+  },
+  methods: {
+    getTaskNum () {
+      getDaytaskNum().then(res => {
+        if (res && res.data && res.data.result && res.data.result[0]) {
+          let list = res.data.result
+          list.forEach(list => {
+            if (list.status === 1 || list.status === 2 || list.status === 4) {
+              this.numList.push({
+                title: list.title,
+                num: list.total
+              })
+              this.total += list.total
+            }
+          })
+          this.numList.unshift({
+            title: '总任务',
+            num: this.total
+          })
+        }
+      })
+    },
+    getTaskList () {
+      getDaytaskList(this.page, 5).then(res => {
+        if (res && res.data && res.data.result && res.data.result.task_arr && res.data.result.task_arr[0]) {
+          this.listData = res.data.result.task_arr
+          if (res.data.result.task_arr.length < 5) {
+            this.page = 1
+          } else {
+            this.page += 1
+          }
+        }
+      })
+    },
+    getPersent (num, total) {
+      num = parseFloat(num)
+      total = parseFloat(total)
+      if (isNaN(num) || isNaN(total)) {
+        return '-'
+      }
+      return total <= 0 ? '0%' : (Math.round(num / total * 10000) / 100.00) + '%'
+    }
   }
 }
 </script>
@@ -92,6 +110,7 @@ export default {
       background: url('./assets/miniBorder.png') no-repeat center;
       background-size: 100% 100%;
       padding: px2em(52px) px2em(60px);
+      margin-right: px2em(88px);
       .left-list {
         margin-bottom: px2em(73px);
         &:last-of-type {

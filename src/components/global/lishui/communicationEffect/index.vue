@@ -4,14 +4,14 @@
       <div class="wrap-top sys-flex sys-flex-center flex-justify-between">
         <div class="top-left top-common sys-flex sys-flex-center flex-justify-center">
           <span>阅读总量：</span>
-          <span>165,395</span>
+          <span>{{readNum}}</span>
         </div>
         <div class="top-center">
           <img src="./assets/line.png" />
         </div>
         <div class="top-right top-common sys-flex sys-flex-center flex-justify-center">
           <span>收获评论：</span>
-          <span>165,395</span>
+          <span>{{commentNum}}</span>
         </div>
       </div>
       <div class="wrap-bottom">
@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+import { getEffect } from '@/servers/lishui'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
@@ -31,6 +32,8 @@ export default {
   name: 'communicationEffect',
   data () {
     return {
+      readNum: 0,
+      commentNum: 0,
       barOptions: {
         legend: {
           data: [{
@@ -51,7 +54,7 @@ export default {
         },
         xAxis: {
           type: 'category',
-          data: ['10.12', '10.13', '10.14', '10.15', '10.16', '10.17', '10.18'],
+          data: [],
           axisLabel: {
             interval: 0,
             color: '#fff',
@@ -103,7 +106,7 @@ export default {
               }])
             }
           },
-          data: [550, 410, 200, 100, 580, 300, 150]
+          data: []
         }, {
           type: 'line',
           name: '评论量',
@@ -118,7 +121,7 @@ export default {
               }
             }
           },
-          data: [100, 380, 250, 270, 200, 210, 400]
+          data: []
         }]
       }
     }
@@ -128,6 +131,30 @@ export default {
   },
   mounted () {
     this.setFontsize('lishui-communicationeffect')
+  },
+  created () {
+    this.getEffect()
+  },
+  methods: {
+    getEffect () {
+      getEffect().then(res => {
+        if (res && res.data && res.data.result) {
+          let data = res.data.result
+          this.readNum = data.all.click_num
+          this.commentNum = data.all.comment_num
+          let arr = Object.keys(data)
+          arr.pop()
+          this.barOptions.xAxis.data = arr.reverse()
+          let dataArr = Object.values(data)
+          if (dataArr && dataArr[0]) {
+            dataArr.forEach(value => {
+              this.barOptions.series[0].data.push(value.click_num)
+              this.barOptions.series[1].data.push(value.comment_num)
+            })
+          }
+        }
+      })
+    }
   }
 }
 </script>

@@ -14,7 +14,7 @@
         </div>
         <div class="top-right sys-flex sys-flex-center flex-justify-between">
           <span>未过审：</span>
-          <span>840</span>
+          <span>200</span>
         </div>
       </div>
       <div class="wrap-bottom sys-flex sys-flex-center flex-justify-between">
@@ -129,23 +129,23 @@ export default {
           data: [50, 80, 2, 60]
         }]
       },
-      testList: [0, 1, 2, 3, 4, 5, 6, 7],
+      testList: [0, 0, 0, 0, 1, 0, 4, 0],
       dateList: [{
         text: '日',
-        date: '100',
-        num: '200'
+        date: '120',
+        num: '2'
       }, {
-        text: '日',
-        date: '100',
-        num: '200'
+        text: '周',
+        date: '400',
+        num: '4'
       }, {
-        text: '日',
-        date: '100',
-        num: '200'
+        text: '月',
+        date: '1307',
+        num: '3'
       }, {
-        text: '日',
-        date: '100',
-        num: '200'
+        text: '年',
+        date: '10698',
+        num: '3'
       }],
       currentIndex: 0
     }
