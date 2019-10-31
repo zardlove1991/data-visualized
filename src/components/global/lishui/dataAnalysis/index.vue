@@ -311,15 +311,15 @@ export default {
   },
   created () {
     this.initNewsList()
-    // setInterval(() => {
-    //   this.curIndex += 1
-    //   if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
-    //     this.curIndex = 0
-    //     this.initNewsList()
-    //   } else {
-    //     this.curId = this.newsList[this.curIndex]['id']
-    //   }
-    // }, '10000')
+    setInterval(() => {
+      this.curIndex += 1
+      if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
+        this.curIndex = 0
+        this.initNewsList()
+      } else {
+        this.curId = this.newsList[this.curIndex]['id']
+      }
+    }, '10000')
   },
   mounted () {
     this.setFontsize('ls-dataAnalysis')
