@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { getDaytaskNum, getDaytaskList } from '@/servers/lishui'
+import { getDaytaskNum, getTaskList } from '@/servers/lishui'
 export default {
   name: 'dayTask',
   data () {
@@ -68,7 +68,7 @@ export default {
       })
     },
     getTaskList () {
-      getDaytaskList(this.page, 5).then(res => {
+      getTaskList(5, this.page).then(res => {
         if (res && res.data && res.data.result && res.data.result.task_arr && res.data.result.task_arr[0]) {
           this.listData = res.data.result.task_arr
           if (res.data.result.task_arr.length < 5) {
