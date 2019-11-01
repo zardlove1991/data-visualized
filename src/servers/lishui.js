@@ -1,6 +1,4 @@
 import { httpsbaseUrl, createAPI } from './api'
-const baseid = '401'
-const basekey = 'bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ'
 
 /* 记者连线 */
 export const getConnecterList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT&a=getWorkCallConnectList`)
