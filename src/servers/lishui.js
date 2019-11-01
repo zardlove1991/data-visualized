@@ -3,7 +3,7 @@ import { httpsbaseUrl, createAPI } from './api'
 /* 记者连线 */
 export const getConnecterList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT&a=getWorkCallConnectList`)
 /* 运营数据 */
-export const getOperateData = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT&a=getOperateData`)
+export const getOperateData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT&a=getOperateData`)
 /* 获取热点话题 */
 export const getHotTopicList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=MGZlNTdhOT&a=getHotsTopicList&count=${count}&page=${page}`)
 /* 舆情分析 */
