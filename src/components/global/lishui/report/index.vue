@@ -84,8 +84,8 @@ export default {
     font-family: PingFangSC-Regular;
     font-weight: 400;
     .report-status{
-      width: pxrem(130px, 12.5);
-      height: pxrem(52px, 12.5);
+      width: pxrem(130px, 6.25);
+      height: pxrem(52px, 6.25);
       text-align: center;
       span{
         display: block;
@@ -115,14 +115,14 @@ export default {
     }
     .report-title{
       flex: 1;
-      font-size: pxrem(38px, 12.5);
-      margin-left: pxrem(24px, 12.5);
+      font-size: pxrem(38px, 6.25);
+      margin-left: pxrem(24px, 6.25);
       text-align: left;
     }
     .report-user{
       width: 10%;
-      margin-left: pxrem(40px, 12.5);
-      font-size: pxrem(32px, 12.5);
+      margin-left: pxrem(40px, 6.25);
+      font-size: pxrem(32px, 6.25);
       font-family: PingFangSC-Regular;
       font-weight: 400;
       text-align: left;
@@ -130,7 +130,7 @@ export default {
     }
     .report-time{
       width: 20%;
-      font-size: pxrem(32px, 12.5);
+      font-size: pxrem(32px, 6.25);
       font-family: PingFangSC-Regular;
       font-weight: 400;
       color: rgba(0,246,255,1);
