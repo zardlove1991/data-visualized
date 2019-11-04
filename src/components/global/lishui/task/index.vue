@@ -11,7 +11,7 @@
               <div class="task-status urgent" v-if="list.priority == 3">加急</div>
             </div>
             <div class="task-content sys-flex sys-vertical  flex-justify-between">
-              <div class="brief sys-flex-one">{{list.title}}</div>
+              <div class="brief sys-flex-one overhidden">{{list.title}}</div>
               <div class="task-info sys-flex sys-flex-center overhidden flex-justify-between">
                 <div class="task-create-user">{{list.task_user_name}}</div>
                 <div class="task-create-time">{{list.create_time | dateFormat(0, 16)}}</div>
