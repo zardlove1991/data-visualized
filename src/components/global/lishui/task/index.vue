@@ -11,7 +11,7 @@
               <div class="task-status urgent" v-if="list.priority == 3">加急</div>
             </div>
             <div class="task-content sys-flex sys-vertical  flex-justify-between">
-              <div class="brief sys-flex-one overhidden">{{list.title}}</div>
+              <div class="brief">{{list.title}}</div>
               <div class="task-info sys-flex sys-flex-center overhidden flex-justify-between">
                 <div class="task-create-user">{{list.task_user_name}}</div>
                 <div class="task-create-time">{{list.create_time | dateFormat(0, 16)}}</div>
@@ -131,7 +131,7 @@ export default {
       .task-nav{
         width: 100%;
         height: 25%;
-        padding: pxem(33px);
+        padding: pxem(33px, 12.5);
         background: rgba(9,44,111,1);
         .project-title{
           font-size: pxrem(32px, 8);
@@ -161,11 +161,12 @@ export default {
       }
       .task-content{
         height: 75%;
-        padding: pxem(40px) pxem(33px);
+        padding: pxem(40px, 12.5) pxem(33px, 12.5);
         background: rgba(23,52,76,0);
         .brief{
-          margin-bottom: pxrem(20px, 8);
-          font-size: pxrem(38px, 8);
+          font-size: pxrem(35px, 8);
+          line-height: 1.5em;
+          height: 3em;
           font-weight: 400;
           color: #fff;
           text-align: left;
