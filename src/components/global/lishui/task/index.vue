@@ -2,7 +2,7 @@
   <div class="ls-task" id="ls-task">
     <div class="task-wrap">
       <swiper :options="swiperOption" ref="mySwiper" >
-        <swiper-slide class="sys-flex sys-flex-wrap flex-justify-between" style="height:100%!important;" v-for="(item,k) in taskList" :key="k">
+        <swiper-slide class="sys-flex sys-flex-wrap" style="height:100%!important;" v-for="(item,k) in taskList" :key="k">
           <div class="task-list" v-for="(list,key) in item" :key="key">
             <div class="task-nav sys-flex sys-flex-center">
               <div class="project-title sys-flex-one overhidden">所属选题：{{list.project_title}}</div>
@@ -78,7 +78,7 @@ export default {
         if (!response.data.error_code) {
           if (response.data.result.task_arr.length) {
             this.taskList = []
-            this.taskList = this.split_array(response.data.result.task_arr, 3)
+            this.taskList = this.split_array(response.data.result.task_arr, 6)
             // this.page += 1
           } else {
             this.page = 1
@@ -120,14 +120,15 @@ export default {
       }
     }
     .task-list{
-      width: 30%;
-      height: 100%;
+      width: 31%;
+      height: 46%;
       background: rgba(2,122,186,0.2);
       border: 0.01rem solid rgba(2, 122, 186, 0.5);
-      margin-bottom: 0.15rem;
-      &:not(:nth-of-type(4n)){
-        margin-right: 0.15rem;
-      }
+      margin-bottom: 0.5%;
+      // align-items: flex-end;
+      // &:not(:nth-of-type(2n)){
+        margin: 0 1.15%;
+      // }
       .task-nav{
         width: 100%;
         height: 25%;
