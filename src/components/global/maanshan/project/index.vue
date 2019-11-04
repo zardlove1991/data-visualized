@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getProjectData } from '@/servers/maanshan'
+import { getWorkCallReportList } from '@/servers/maanshan'
 export default {
   name: 'project',
   data () {
@@ -38,9 +38,9 @@ export default {
   },
   methods: {
     getDataList () {
-      getProjectData().then(res => {
-        if (res && res.data && res.data.data) {
-          this.list = res.data.data
+      getWorkCallReportList().then(res => {
+        if (res && res.data && res.data.result) {
+          this.list = res.data.result
           this.initList()
         }
       })

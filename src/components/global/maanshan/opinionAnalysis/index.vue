@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { getHotTopicList, getTopicTrend, getTopicEmotion, getTopicPubArea } from '@/servers/maanshan'
+import { getHotTopicList, getHotsTopicTrend, getHotsTopicEmotion, getHotsTopicPubArea } from '@/servers/maanshan'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/chart/pie'
@@ -401,7 +401,7 @@ export default {
       })
     },
     getEchartData (value) {
-      getTopicTrend(value).then(res => {
+      getHotsTopicTrend(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.heatData.xAxis = res.data.result[0].count.map(v => v.field.slice(5))
           this.heatData.series = res.data.result.map(v => {
@@ -414,7 +414,7 @@ export default {
           })
         }
       })
-      getTopicEmotion(value).then(res => {
+      getHotsTopicEmotion(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.sentimentData.series = res.data.result.map(v => {
             return {
@@ -424,7 +424,7 @@ export default {
           })
         }
       })
-      getTopicPubArea(value).then(res => {
+      getHotsTopicPubArea(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           let total = res.data.result.reduce((past, cur) => past + cur.count, 0)
           this.areaData.geo = res.data.result.map(v => {

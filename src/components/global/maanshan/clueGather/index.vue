@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getWebsitList, getWechatList, getWeiboList } from '@/servers/maanshan'
+import { getCluesTogether } from '@/servers/maanshan'
 export default {
   name: 'clue',
   data () {
@@ -66,19 +66,19 @@ export default {
       this.dataList = []
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
-        getWebsitList().then(res => {
+        getCluesTogether('website').then(res => {
           if (res && res.data && res.data.result && res.data.result.data) {
             this.dataList = res.data.result.data.slice(0, 3)
           }
         })
       } else if (type === 1) {
-        getWechatList().then(res => {
+        getCluesTogether('weChat').then(res => {
           if (res && res.data && res.data.result && res.data.result.data) {
             this.dataList = res.data.result.data.slice(0, 3)
           }
         })
       } else if (type === 2) {
-        getWeiboList().then(res => {
+        getCluesTogether('weiBo').then(res => {
           if (res && res.data && res.data.result && res.data.result.data) {
             this.dataList = res.data.result.data.slice(0, 3)
           }
