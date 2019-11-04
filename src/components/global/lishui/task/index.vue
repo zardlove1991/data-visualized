@@ -2,7 +2,7 @@
   <div class="ls-task" id="ls-task">
     <div class="task-wrap">
       <swiper :options="swiperOption" ref="mySwiper" >
-        <swiper-slide class="sys-flex sys-flex-wrap" style="height:100%!important;" v-for="(item,k) in taskList" :key="k">
+        <swiper-slide class="sys-flex sys-flex-wrap" style="height:100%!important;align-content:space-between;" v-for="(item,k) in taskList" :key="k">
           <div class="task-list" v-for="(list,key) in item" :key="key">
             <div class="task-nav sys-flex sys-flex-center">
               <div class="project-title sys-flex-one overhidden">所属选题：{{list.project_title}}</div>
@@ -120,15 +120,14 @@ export default {
       }
     }
     .task-list{
-      width: 31%;
-      height: 46%;
+      width: 33%;
+      height: 48%;
       background: rgba(2,122,186,0.2);
       border: 0.01rem solid rgba(2, 122, 186, 0.5);
-      margin-bottom: 0.5%;
-      // align-items: flex-end;
-      // &:not(:nth-of-type(2n)){
-        margin: 0 1.15%;
-      // }
+      margin-right: 0.5%;
+      &:nth-child(3n+3) {
+        margin-right: 0;
+      }
       .task-nav{
         width: 100%;
         height: 25%;
