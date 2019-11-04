@@ -181,7 +181,7 @@ export default {
         width: 100%;
         height: 25%;
         .item-text {
-          font-size: pxrem(38px, 12.5);
+          font-size: pxrem(38px, 8);
           color: #ffffff;
         }
         .item-value {
