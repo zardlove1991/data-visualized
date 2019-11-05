@@ -43,6 +43,8 @@ export default {
   data () {
     return {
       newsList: [],
+      count: 20,
+      page: 1,
       hotNews: {},
       curIndex: 0,
       curId: null,
@@ -81,7 +83,13 @@ export default {
           containLabel: true
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
         },
         legend: {
           data: ['网站', '微信', '微博'],
@@ -387,14 +395,14 @@ export default {
     this.initNewsList()
     setInterval(() => {
       this.curIndex += 1
-      if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
+      if (this.curIndex > this.count - 1 || this.curIndex >= this.newsList.length) {
         this.curIndex = 0
         this.initNewsList()
       } else {
         this.hotNews = this.newsList[this.curIndex]
         this.curId = this.newsList[this.curIndex]['id']
       }
-    }, '10000')
+    }, 10000)
   },
   mounted () {
     this.proportion = this.getProportion('maanshan-opinion')
@@ -407,7 +415,7 @@ export default {
         if (!response.data.error_code) {
           this.newsList = []
           setTimeout(() => {
-            this.newsList = response.data.result
+            this.newsList = response.data.result.data
             this.hotNews = this.newsList[this.curIndex]
             this.curId = this.newsList[this.curIndex]['id']
           }, 100)
@@ -423,7 +431,19 @@ export default {
               name: v.name_zh,
               smooth: true,
               type: 'line',
-              data: v.count.map(c => c.value)
+              data: v.count.map(c => c.value),
+              smooth: true,
+              itemStyle: {
+                normal: {
+                  label: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                      color: 'white'
+                    }
+                  }
+                }
+              }
             }
           })
         }

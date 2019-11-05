@@ -43,10 +43,10 @@ export default {
     getDataList () {
       getWorkCallReportList(this.count, this.page).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result.length) {
+          if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.result
+              this.dataList = res.data.result.data
             }, 100)
             this.page += 1
           } else {

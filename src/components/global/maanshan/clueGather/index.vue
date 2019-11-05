@@ -77,6 +77,7 @@ export default {
               this.webPage += 1
             } else {
               this.webPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
             }
           }
         })
@@ -91,6 +92,7 @@ export default {
               this.weChatPage += 1
             } else {
               this.weChatPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
             }
           }
         })
@@ -105,6 +107,7 @@ export default {
               this.weBoPage += 1
             } else {
               this.weBoPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
             }
           }
         })
