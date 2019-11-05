@@ -603,9 +603,9 @@ export default {
       this.currentActive = false
     },
     getReporter () {
-      getConnecterList().then(response => {
-        if (!response.data.ErrorCode && response.data.result.length) {
-          this.reporterList = response.data.result
+      getConnecterList().then(res => {
+        if (!res.data.error_code && res.data.result.length) {
+          this.reporterList = res.data.result
         }
         this.rMap()
       })

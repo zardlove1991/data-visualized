@@ -285,19 +285,6 @@ export default {
         ],
         series: []
       },
-      type: {
-        '21': '媒体站点',
-        '22': '博客',
-        '23': '论坛贴吧',
-        '24': '视频站点',
-        '25': '电子报',
-        '26': '其他',
-        '104': '微信公众号',
-        '303': '新浪微博',
-        '100': '腾讯社交',
-        '102': '浏览器',
-        '103': '手机管家'
-      },
       curIndex: 0,
       curId: null
     }
@@ -414,14 +401,14 @@ export default {
     .data-analysis-list {
       width: 48%;
       height: 100%;
-      padding: pxem(67px, 12.5);
+      padding: pxrem(67px, 12.5);
       background: url('./assets/news-border.png') no-repeat center center;
       background-size: 100% 100%;
     }
     .data-list {
       height: pxem(340px, 12.5);
       background: rgb(16, 43, 95);
-      padding: pxem(55px, 12.5);
+      padding: pxrem(55px, 12.5);
       &.active {
         background: rgb(10, 67, 183);
         .data-title {
@@ -432,17 +419,18 @@ export default {
         width: 100%;
         height: 1em;
         line-height: 1em;
-        font-size: pxrem(54px, 12.5);
+        font-size: pxrem(54px);
         font-family: PingFangSC-Regular;
         font-weight: 400;
         color: #ffffff;
         text-align: left;
       }
       .data-brief {
-        font-size: pxrem(40px, 12.5);
+        font-size: pxrem(40px);
         color: #fff;
         text-align: left;
-        height: 3.25em;
+        height: 2.5em;
+        line-height: 1.25em;
         overflow: hidden;
       }
     }
@@ -450,21 +438,21 @@ export default {
       width: 48%;
       height: 100%;
       .echarts-title {
-        font-size: pxrem(48px, 12.5);
+        font-size: pxrem(48px);
         color: #fff;
         text-align: left;
       }
       .echarts-top {
         width: 100%;
-        height: pxem(770px, 12.5);
+        height: 48%;
         .data-channel {
           width: 55%;
           height: 100%;
           background: url('./assets/channel-border.png') no-repeat center center;
           background-size: 100% 100%;
           position: relative;
-          padding: pxem(37px, 12.5);
-          margin-right: pxem(67px, 12.5);
+          padding: pxrem(37px);
+          margin-right: pxrem(67px);
           .channel-box {
             width: 100%;
             height: pxem(650px, 12.5);
@@ -480,7 +468,7 @@ export default {
           background: url('./assets/media-border.png') no-repeat center center;
           background-size: 100% 100%;
           position: relative;
-          padding: pxem(37px, 12.5);
+          padding: pxrem(37px);
           .media-box {
             width: 100%;
             height: pxem(650px, 12.5);
@@ -493,13 +481,13 @@ export default {
       }
       .echarts-bottom {
         width: 100%;
-        height: pxem(886px, 12.5);
+        height: 50%;
         .data-source {
           width: 100%;
           height: 100%;
           background: url('./assets/source-border.png') no-repeat center center;
           background-size: 100% 100%;
-          padding: pxem(37px, 12.5);
+          padding: pxrem(37px);
           .source-box {
             width: 100%;
             height: 100%;

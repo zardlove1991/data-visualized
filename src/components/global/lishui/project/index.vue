@@ -96,15 +96,15 @@ export default {
     font-weight: 400;
     .project-title{
       width: 60%;
-      font-size: pxrem(38px, 8);
+      font-size: pxrem(38px);
       text-align: left;
     }
 
     .project-user{
       width: 10%;
       text-align: left;
-      line-height: pxrem(32px, 8);
-      font-size: pxrem(32px, 8);
+      line-height: pxrem(32px);
+      font-size: pxrem(32px);
       color:rgba(255,255,255,1);
       margin-right: 0.1rem;
       margin-left: 0.1rem;
@@ -114,10 +114,10 @@ export default {
       width: 15%;
       text-align: center;
       display: block;
-      margin: 0 pxrem(64px, 8) 0 pxrem(32px, 8);
+      margin: 0 pxrem(64px) 0 pxrem(32px);
       text-align: center;
       border-radius: 0.08rem;
-      font-size: pxrem(32px, 8);
+      font-size: pxrem(32px);
       color: rgba(255,255,255,0.7);
     }
     .status-progress{
@@ -133,11 +133,11 @@ export default {
     .project-progress{
       width: 25%;
       color : rgba(255,255,255,0.7);
-      font-size: pxrem(32px, 8);
+      font-size: pxrem(32px);
       text-align: center;
       .progress-total{
         width: 70%;
-        height: pxrem(22px, 8);
+        height: pxrem(22px);
         background: RGBA(68, 97, 115, 1);
         border-radius: 0.11rem;
         overflow: hidden;
@@ -166,9 +166,9 @@ export default {
         }
       }
       .percent{
-        line-height: pxrem(32px, 8);
-        font-size: pxrem(32px, 8);
-        margin-left: pxrem(30px, 8);
+        line-height: pxrem(32px);
+        font-size: pxrem(32px);
+        margin-left: pxrem(30px);
         color:rgba(255,255,255,1);
       }
     }
