@@ -25,44 +25,36 @@ export default {
   data () {
     return {
       componentTitle: '选题展示',
-      list: [],
       dataList: [],
-      count: 0
+      count: 4,
+      page: 1
     }
   },
   created () {
     this.getDataList()
+    setInterval(() => {
+      this.getDataList()
+    }, 10000)
   },
   mounted () {
     this.setFontsize('maanshan-project')
   },
   methods: {
     getDataList () {
-      getWorkCallReportList().then(res => {
-        if (res && res.data && res.data.result) {
-          this.list = res.data.result
-          this.initList()
+      getWorkCallReportList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result
+            }, 100)
+            this.page += 1
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
-    },
-
-    initList () {
-      this.dataList = this.list.slice(this.count, this.count + 4)
-      this.count += 4
-      this.listInterval = setInterval(() => {
-        if (this.count < this.list.length) {
-          this.dataList = []
-          setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 4)
-            this.count += 4
-          }, 100)
-        } else {
-          this.dataList = []
-          clearInterval(this.listInterval)
-          this.count = 0
-          this.getDataList()
-        }
-      }, 10000)
     }
   }
 }

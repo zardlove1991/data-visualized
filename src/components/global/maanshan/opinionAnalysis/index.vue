@@ -402,6 +402,7 @@ export default {
     },
     getEchartData (value) {
       getHotsTopicTrend(value).then(res => {
+        console.log(res)
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.heatData.xAxis = res.data.result[0].count.map(v => v.field.slice(5))
           this.heatData.series = res.data.result.map(v => {
@@ -445,6 +446,7 @@ export default {
     },
     initList () {
       this.hotNews = this.list[this.count]
+      console.log(this.hotNews)
       this.count++
       this.listInterval = setInterval(() => {
         if (this.count < this.list.length) {
