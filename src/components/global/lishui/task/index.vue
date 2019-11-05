@@ -59,7 +59,7 @@ export default {
           prevEl: '.swiper-button-prev'
         }
       },
-      count: 16,
+      count: 24,
       page: 1
     }
   },
@@ -74,11 +74,11 @@ export default {
   },
   methods: {
     getDataList () {
-      getTaskList(this.count, this.page).then((response) => {
-        if (!response.data.error_code) {
-          if (response.data.result.task_arr.length) {
+      getTaskList(this.count, this.page).then((res) => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
             this.taskList = []
-            this.taskList = this.split_array(response.data.result.task_arr, 8)
+            this.taskList = this.split_array(res.data.result.data, 8)
             // this.page += 1
           } else {
             this.page = 1

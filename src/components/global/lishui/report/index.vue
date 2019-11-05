@@ -41,12 +41,12 @@ export default {
   },
   methods: {
     getDataList () {
-      getReportData(this.count, this.page).then((response) => {
-        if (!response.data.error_code) {
-          if (response.data.result.length) {
+      getReportData(this.count, this.page).then((res) => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
             this.reportList = []
             setTimeout(() => {
-              this.reportList = response.data.result
+              this.reportList = res.data.result.data
             }, 100)
             this.page += 1
           } else {
@@ -75,6 +75,7 @@ export default {
     background-size: 100% 100%;
     .report-list-wrap{
       height: 100%;
+      align-content: flex-start;
     }
   }
   .report-list{

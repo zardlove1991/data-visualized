@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap" id="ls-dataAnalysis">
     <div class="data-analysis-wrap sys-flex flex-justify-between">
-      <div class="data-analysis-list sys-flex sys-vertical flex-justify-between">
+      <div class="data-analysis-list sys-flex sys-flex-wrap">
         <div
           class="data-list animated sys-flex sys-vertical flex-justify-between"
           v-for="(v , k) in newsList"
@@ -302,11 +302,12 @@ export default {
       this.curIndex += 1
       if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
         this.curIndex = 0
+        this.page++
         this.initNewsList()
       } else {
         this.curId = this.newsList[this.curIndex]['id']
       }
-    }, '10000')
+    }, 15000)
   },
   mounted () {
     this.setFontsize('ls-dataAnalysis')
@@ -316,13 +317,17 @@ export default {
 
     // 初始化新闻列表
     initNewsList () {
-      getHotTopicList(this.count, this.page).then(response => {
-        if (!response.data.error_code) {
-          this.newsList = []
-          setTimeout(() => {
-            this.newsList = response.data.result
-            this.curId = this.newsList[this.curIndex]['id']
-          }, 100)
+      getHotTopicList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.newsList = []
+            setTimeout(() => {
+              this.newsList = res.data.result.data
+              this.curId = this.newsList[this.curIndex]['id']
+            }, 100)
+          } else {
+            this.page = 1
+          }
         }
       })
     },
@@ -406,9 +411,12 @@ export default {
       background-size: 100% 100%;
     }
     .data-list {
-      height: pxem(340px, 12.5);
+      height: 23%;
+      width: 100%;
+      margin-bottom: 1%;
       background: rgb(16, 43, 95);
       padding: pxrem(55px, 12.5);
+
       &.active {
         background: rgb(10, 67, 183);
         .data-title {

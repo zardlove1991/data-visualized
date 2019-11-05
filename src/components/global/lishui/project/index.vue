@@ -54,10 +54,10 @@ export default {
     getDataList () {
       getProjectData(this.count, this.page).then((response) => {
         if (!response.data.error_code) {
-          if (response.data.result.length) {
+          if (response.data.result.data.length) {
             this.projectList = []
             setTimeout(() => {
-              this.projectList = response.data.result
+              this.projectList = response.data.result.data
             }, 100)
             this.page += 1
           } else {
@@ -86,6 +86,7 @@ export default {
     background-size: 100% 100%;
     .project-list-wrap{
       height: 100%;
+      align-content: flex-start;
     }
   }
   .project-list{
