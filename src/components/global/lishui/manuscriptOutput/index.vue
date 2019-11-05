@@ -42,7 +42,10 @@ export default {
     getArticleList () {
       getArticleList(this.page, 5).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
-          this.dataList = res.data.result
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = res.data.result
+          }, 100)
           this.dataList.forEach(val => {
             switch (val.type) {
               case 'article':

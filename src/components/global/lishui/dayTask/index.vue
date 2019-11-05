@@ -70,7 +70,10 @@ export default {
     getTaskList () {
       getTaskList(5, this.page).then(res => {
         if (res && res.data && res.data.result && res.data.result.data && res.data.result.data[0]) {
-          this.listData = res.data.result.data
+          this.listData = []
+          setTimeout(() => {
+            this.listData = res.data.result.data
+          }, 100)
           if (res.data.result.data.length < 5) {
             this.page = 1
           } else {
