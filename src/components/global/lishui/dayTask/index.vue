@@ -69,9 +69,9 @@ export default {
     },
     getTaskList () {
       getTaskList(5, this.page).then(res => {
-        if (res && res.data && res.data.result && res.data.result.task_arr && res.data.result.task_arr[0]) {
-          this.listData = res.data.result.task_arr
-          if (res.data.result.task_arr.length < 5) {
+        if (res && res.data && res.data.result && res.data.result.data && res.data.result.data[0]) {
+          this.listData = res.data.result.data
+          if (res.data.result.data.length < 5) {
             this.page = 1
           } else {
             this.page += 1
@@ -156,7 +156,9 @@ export default {
           }
         }
         .list-text {
-          font-size: px2em(38px)
+          width: 62%;
+          font-size: px2em(38px);
+          text-align: left;
         }
       }
     }
