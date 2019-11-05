@@ -58,10 +58,10 @@ export default {
   },
   data () {
     return {
+      localList: [],
       newsList: [],
-      localNewsList: [],
       page: 1,
-      count: 4,
+      count: 12,
       currentNewsData: {
         title: '',
         result: {
@@ -297,13 +297,30 @@ export default {
     }
   },
   created () {
-    this.initNewsList()
+    // this.initNewsList()
+    // setInterval(() => {
+    //   this.curIndex += 1
+    //   if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
+    //     this.curIndex = 0
+    //     this.page++
+    //     this.initNewsList()
+    //   } else {
+    //     this.curId = this.newsList[this.curIndex]['id']
+    //   }
+    // }, 15000)
+
+    // 本地模拟分页效果
+    this.initLocalList()
     setInterval(() => {
       this.curIndex += 1
       if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
         this.curIndex = 0
-        this.page++
-        this.initNewsList()
+        this.page === 3 ? this.page = 0 : this.page++
+        this.newsList = []
+        setTimeout(() => {
+          this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
+          this.curId = this.newsList[this.curIndex]['id']
+        }, 100)
       } else {
         this.curId = this.newsList[this.curIndex]['id']
       }
@@ -314,7 +331,18 @@ export default {
   },
 
   methods: {
-
+    // 本地模拟分页效果
+    initLocalList () {
+      getHotTopicList(this.count).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.localList = res.data.result.data
+            this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
+            this.curId = this.newsList[this.curIndex]['id']
+          }
+        }
+      })
+    },
     // 初始化新闻列表
     initNewsList () {
       getHotTopicList(this.count, this.page).then(res => {
