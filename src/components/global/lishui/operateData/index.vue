@@ -176,16 +176,16 @@ export default {
     .box-item {
       width: 22%;
       height: 100%;
-      padding: pxem(115px) pxem(167px) pxem(158px);
+      padding: pxem(135px) pxem(80px) pxem(120px);
       .list-item {
         width: 100%;
         height: 25%;
         .item-text {
-          font-size: pxrem(38px, 8);
+          font-size: pxrem(38px);
           color: #ffffff;
         }
         .item-value {
-          font-size: pxrem(72px, 12.5);
+          font-size: pxrem(72px);
           font-weight: bold;
         }
       }

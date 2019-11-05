@@ -78,7 +78,7 @@ export default {
         if (!response.data.error_code) {
           if (response.data.result.task_arr.length) {
             this.taskList = []
-            this.taskList = this.split_array(response.data.result.task_arr, 6)
+            this.taskList = this.split_array(response.data.result.task_arr, 8)
             // this.page += 1
           } else {
             this.page = 1
@@ -120,33 +120,30 @@ export default {
       }
     }
     .task-list{
-      width: 33%;
+      width: 24.5%;
       height: 48%;
       background: rgba(2,122,186,0.2);
       border: 0.01rem solid rgba(2, 122, 186, 0.5);
       margin-right: 0.5%;
-      &:nth-child(3n+3) {
-        margin-right: 0;
-      }
       .task-nav{
         width: 100%;
         height: 25%;
         padding: pxem(33px, 12.5);
         background: rgba(9,44,111,1);
         .project-title{
-          font-size: pxrem(32px, 8);
+          font-size: pxrem(32px);
           font-family: PingFangSC-Regular;
           font-weight: 400;
           text-align: left;
           color: rgba(174,183,209,1);
         }
         .task-status{
-          width: pxrem(94px, 8);
-          height: pxrem(46px, 8);
-          line-height: pxrem(46px, 8);
+          width: pxrem(94px);
+          height: pxrem(46px);
+          line-height: pxrem(46px);
           border-radius: 0.025rem;
           text-align: center;
-          font-size: pxrem(30px, 8);
+          font-size: pxrem(30px);
           color: #fff;
           &.normal{
             background: RGBA(34, 115, 238, 1);
@@ -164,7 +161,7 @@ export default {
         padding: pxem(40px, 12.5) pxem(33px, 12.5);
         background: rgba(23,52,76,0);
         .brief{
-          font-size: pxrem(35px, 8);
+          font-size: pxrem(38px);
           line-height: 1.5em;
           height: 3em;
           font-weight: 400;
@@ -175,22 +172,22 @@ export default {
         .task-info{
           width: 100%;
           .task-create-user{
-            font-size: pxrem(30px, 8);
-            padding-left: pxrem(40px, 8); 
+            font-size: pxrem(30px);
+            padding-left: pxrem(40px); 
             color: #fff;
             background: url('./assets/user.png') no-repeat center left;
-            background-size: pxrem(25px, 8) pxrem(28px, 8);
-            margin-right: pxrem(40px, 8); 
+            background-size: pxrem(25px) pxrem(28px);
+            margin-right: pxrem(40px); 
           }
           .task-create-time{
-            font-size: pxrem(30px, 8);
-            padding-left: pxrem(40px, 8);  
+            font-size: pxrem(30px);
+            padding-left: pxrem(40px);  
             color:#fff;
             background: url('./assets/time.png') no-repeat center left;
-            background-size: pxrem(29px, 8) pxrem(29px, 8);
+            background-size: pxrem(29px) pxrem(29px);
           }
           .task-type{
-            font-size: pxrem(30px, 8);
+            font-size: pxrem(30px);
             text-align: right;
             color: #fff;
             font-family: Adobe Heiti Std R;

@@ -33,7 +33,7 @@ export default {
           if (a > (1920 / 1080)) {
             multiple = (1920 / 1080) / a
           }
-          document.documentElement.style.fontSize = (document.documentElement.clientWidth / 1920) * 100 * multiple / (this.view.multiple || 1) + 'px'
+          document.documentElement.style.fontSize = (document.documentElement.clientWidth / 1920) * 100 * multiple * (this.view.multiple || 1) + 'px'
         }
         this.config = data
       })
