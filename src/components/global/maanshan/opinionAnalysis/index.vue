@@ -42,9 +42,10 @@ export default {
   },
   data () {
     return {
+      newsList: [],
       hotNews: {},
-      list: [],
-      count: 0,
+      curIndex: 0,
+      curId: null,
       proportion: 1,
       heatData: {
         xAxis: [],
@@ -376,33 +377,45 @@ export default {
   },
   watch: {
     // 监测热点的ID变换，更新图表数据
-    'hotNews.eventId': {
-      handler (newValue) {
-        if (newValue) {
-          this.getEchartData(newValue)
-        }
+    curId: {
+      handler: function (newValue) {
+        this.getHotTopicDetail()
       }
     }
   },
   created () {
-    this.getDataList()
+    this.initNewsList()
+    setInterval(() => {
+      this.curIndex += 1
+      if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
+        this.curIndex = 0
+        this.initNewsList()
+      } else {
+        this.hotNews = this.newsList[this.curIndex]
+        this.curId = this.newsList[this.curIndex]['id']
+      }
+    }, '10000')
   },
   mounted () {
     this.proportion = this.getProportion('maanshan-opinion')
     this.setFontsize('maanshan-opinion')
   },
   methods: {
-    getDataList () {
-      getHotTopicList().then(res => {
-        if (res && res.data && res.data.result && res.data.result[0]) {
-          this.list = res.data.result
-          this.initList()
+    // 初始化新闻列表
+    initNewsList () {
+      getHotTopicList(this.count, this.page).then(response => {
+        if (!response.data.error_code) {
+          this.newsList = []
+          setTimeout(() => {
+            this.newsList = response.data.result
+            this.hotNews = this.newsList[this.curIndex]
+            this.curId = this.newsList[this.curIndex]['id']
+          }, 100)
         }
       })
     },
-    getEchartData (value) {
-      getHotsTopicTrend(value).then(res => {
-        console.log(res)
+    getHotTopicDetail () {
+      getHotsTopicTrend(this.curId).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.heatData.xAxis = res.data.result[0].count.map(v => v.field.slice(5))
           this.heatData.series = res.data.result.map(v => {
@@ -415,7 +428,7 @@ export default {
           })
         }
       })
-      getHotsTopicEmotion(value).then(res => {
+      getHotsTopicEmotion(this.curId).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.sentimentData.series = res.data.result.map(v => {
             return {
@@ -425,7 +438,7 @@ export default {
           })
         }
       })
-      getHotsTopicPubArea(value).then(res => {
+      getHotsTopicPubArea(this.curId).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           let total = res.data.result.reduce((past, cur) => past + cur.count, 0)
           this.areaData.geo = res.data.result.map(v => {
@@ -443,25 +456,6 @@ export default {
           })
         }
       })
-    },
-    initList () {
-      this.hotNews = this.list[this.count]
-      console.log(this.hotNews)
-      this.count++
-      this.listInterval = setInterval(() => {
-        if (this.count < this.list.length) {
-          this.hotNews = ''
-          setTimeout(() => {
-            this.hotNews = this.list[this.count]
-            this.count++
-          }, 100)
-        } else {
-          this.dataList = ''
-          clearInterval(this.listInterval)
-          this.count = 0
-          this.getDataList()
-        }
-      }, 10000)
     }
   }
 }
