@@ -1,7 +1,13 @@
 <template>
   <div class="lishui-manuscriptoutput" id="lishui-manuscriptoutput">
     <div class="manuscriptoutput-wrap">
-      <div class="wrap-list sys-flex sys-flex-center animated" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList" :key="k">
+      <div
+        class="wrap-list sys-flex sys-flex-center animated"
+        :class="{'flipInX' : v.title}"
+        :style="{'animation-delay' : k/2 + 's'}"
+        v-for="(v, k) in dataList"
+        :key="k"
+      >
         <div class="list-status sys-flex sys-flex-center">
           <img v-if="k === 0" src="./assets/new.png" />
           <span v-if="k !== 0">【{{v.typeName}}】</span>
@@ -45,28 +51,28 @@ export default {
           this.dataList = []
           setTimeout(() => {
             this.dataList = res.data.result
+            this.dataList.forEach(val => {
+              switch (val.type) {
+                case 'article':
+                  val.typeName = '文稿'
+                  break
+                case 'gallery':
+                  val.typeName = '图集'
+                  break
+                case 'topic':
+                  val.typeName = '专题'
+                  break
+                case 'link':
+                  val.typeName = '外链'
+                  break
+                case 'video':
+                  val.typeName = '视频'
+                  break
+                default:
+                  break
+              }
+            })
           }, 100)
-          this.dataList.forEach(val => {
-            switch (val.type) {
-              case 'article':
-                val.typeName = '文稿'
-                break
-              case 'gallery':
-                val.typeName = '图集'
-                break
-              case 'topic':
-                val.typeName = '专题'
-                break
-              case 'link':
-                val.typeName = '外链'
-                break
-              case 'video':
-                val.typeName = '视频'
-                break
-              default:
-                break
-            }
-          })
           if (res.data.result.length < 5) {
             this.page = 1
           } else {
@@ -88,7 +94,7 @@ export default {
   .manuscriptoutput-wrap {
     width: 100%;
     height: 100%;
-    background: url('./assets/border.png') no-repeat center;
+    background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
     padding: px2em(210px) px2em(128px) px2em(130px) px2em(96px);
     color: #fff;
@@ -100,7 +106,7 @@ export default {
       .list-status {
         span {
           font-size: px2em(38px);
-          color: #0AFBF2;
+          color: #0afbf2;
         }
         img {
           width: px2em(107px);
@@ -114,7 +120,7 @@ export default {
       .list-span {
         span {
           font-size: px2em(32px);
-          color: #FEFEFF;
+          color: #fefeff;
         }
       }
       .list-time {
