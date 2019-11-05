@@ -43,7 +43,7 @@ export default {
         speed: 2000,
         // autoplay : false,
         autoplay: {
-          delay: 10000,
+          delay: 15000,
           stopOnLastSlide: false,
           disableOnInteraction: false
         },
@@ -67,7 +67,7 @@ export default {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 60000)
+    }, 45000)
   },
   mounted () {
     this.setFontsize('ls-task')

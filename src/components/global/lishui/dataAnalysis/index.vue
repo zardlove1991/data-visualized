@@ -315,7 +315,7 @@ export default {
       this.curIndex += 1
       if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
         this.curIndex = 0
-        this.page === 3 ? this.page = 0 : this.page++
+        this.page === 3 ? this.page = 1 : this.page++
         this.newsList = []
         setTimeout(() => {
           this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
