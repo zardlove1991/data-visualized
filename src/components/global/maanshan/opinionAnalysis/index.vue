@@ -432,7 +432,6 @@ export default {
               smooth: true,
               type: 'line',
               data: v.count.map(c => c.value),
-              smooth: true,
               itemStyle: {
                 normal: {
                   label: {
