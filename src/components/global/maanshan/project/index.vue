@@ -12,57 +12,49 @@
       >
         <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-user overhidden">{{v.project_user_name}}</div>
-        <div class="list-time">{{v.create_time | dateFormat}}</div>
+        <div class="list-time">{{v.update_time | dateFormat}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getProjectData } from '@/servers/maanshan'
+import { getWorkCallReportList } from '@/servers/maanshan'
 export default {
   name: 'project',
   data () {
     return {
       componentTitle: '选题展示',
-      list: [],
       dataList: [],
-      count: 0
+      count: 4,
+      page: 1
     }
   },
   created () {
     this.getDataList()
+    setInterval(() => {
+      this.getDataList()
+    }, 10000)
   },
   mounted () {
     this.setFontsize('maanshan-project')
   },
   methods: {
     getDataList () {
-      getProjectData().then(res => {
-        if (res && res.data && res.data.data) {
-          this.list = res.data.data
-          this.initList()
+      getWorkCallReportList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.data
+            }, 100)
+            this.page += 1
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
-    },
-
-    initList () {
-      this.dataList = this.list.slice(this.count, this.count + 4)
-      this.count += 4
-      this.listInterval = setInterval(() => {
-        if (this.count < this.list.length) {
-          this.dataList = []
-          setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 4)
-            this.count += 4
-          }, 100)
-        } else {
-          this.dataList = []
-          clearInterval(this.listInterval)
-          this.count = 0
-          this.getDataList()
-        }
-      }, 10000)
     }
   }
 }

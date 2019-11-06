@@ -14,7 +14,7 @@
               <div class="brief">{{list.title}}</div>
               <div class="task-info sys-flex sys-flex-center overhidden flex-justify-between">
                 <div class="task-create-user">{{list.task_user_name}}</div>
-                <div class="task-create-time">{{list.create_time | dateFormat(0, 16)}}</div>
+                <div class="task-create-time">{{list.update_time | dateFormat(0, 16)}}</div>
                 <div class="task-type sys-flex-one" :class="{'on-start': list.status == 1,'on-progress' :  list.status == 2 , 'on-stop' : list.status == 3 , 'on-done' : list.status == 4}">{{list.status_show}}</div>
               </div>
             </div>

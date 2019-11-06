@@ -71,12 +71,12 @@ export default {
       if (type === 0) {
         getRankList().then(res => {
           if (res && res.data) {
-            this.dataList = res.data
+            this.dataList = res.data.slice(0, 6)
           }
         })
       } else if (type === 1) {
         getRankCommentList().then(res => {
-          this.dataList = res.data
+          this.dataList = res.data.slice(0, 6)
         })
       }
     }

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getWebsitList, getWechatList, getWeiboList } from '@/servers/maanshan'
+import { getCluesTogether } from '@/servers/maanshan'
 export default {
   name: 'clue',
   data () {
@@ -41,9 +41,11 @@ export default {
         type: 2
       }],
       currentIndex: 0,
-      list: [],
       dataList: [],
-      count: 0
+      count: 3,
+      webPage: 1,
+      weChatPage: 1,
+      weBoPage: 1
     }
   },
   created () {
@@ -56,31 +58,57 @@ export default {
       } else {
         this.getData(this.titleList[this.currentIndex].type)
       }
-    }, 10000)
+    }, 15000)
   },
   mounted () {
     this.setFontsize('maanshan-clue')
   },
   methods: {
     getData (type) {
-      this.dataList = []
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
-        getWebsitList().then(res => {
-          if (res && res.data && res.data.result && res.data.result.data) {
-            this.dataList = res.data.result.data.slice(0, 3)
+        getCluesTogether('website', this.count, this.webPage).then(res => {
+          if (res && res.data && res.data.result && res.data.result) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              this.webPage += 1
+            } else {
+              this.webPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
+            }
           }
         })
       } else if (type === 1) {
-        getWechatList().then(res => {
-          if (res && res.data && res.data.result && res.data.result.data) {
-            this.dataList = res.data.result.data.slice(0, 3)
+        getCluesTogether('weChat', this.count, this.weChatPage).then(res => {
+          if (res && res.data && res.data.result && res.data.result) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              this.weChatPage += 1
+            } else {
+              this.weChatPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
+            }
           }
         })
       } else if (type === 2) {
-        getWeiboList().then(res => {
-          if (res && res.data && res.data.result && res.data.result.data) {
-            this.dataList = res.data.result.data.slice(0, 3)
+        getCluesTogether('weiBo', this.count, this.weBoPage).then(res => {
+          if (res && res.data && res.data.result && res.data.result) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              this.weBoPage += 1
+            } else {
+              this.weBoPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
+            }
           }
         })
       }

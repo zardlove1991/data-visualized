@@ -11,7 +11,7 @@
           </div>
           <div class="report-title overhidden">{{v.title}}</div>
           <div class="report-user">{{v.project_user_name}}</div>
-          <div class="report-time">{{v.create_time | dateFormat}}</div>
+          <div class="report-time">{{v.update_time | dateFormat}}</div>
         </div>
       </div>
     </div>
