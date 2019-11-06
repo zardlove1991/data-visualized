@@ -16,7 +16,7 @@
         ></div>
         <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-user">{{v.project_user_name}}</div>
-        <div class="list-time">{{v.create_time | dateFormat}}</div>
+        <div class="list-time">{{v.update_time | dateFormat}}</div>
       </div>
     </div>
   </div>
