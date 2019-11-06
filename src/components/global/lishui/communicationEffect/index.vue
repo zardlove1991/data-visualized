@@ -146,6 +146,7 @@ export default {
           arr.pop()
           this.barOptions.xAxis.data = arr.reverse()
           let dataArr = Object.values(data)
+          dataArr.pop()
           if (dataArr && dataArr[0]) {
             dataArr.forEach(value => {
               this.barOptions.series[0].data.push(value.click_num)
