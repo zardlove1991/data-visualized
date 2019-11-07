@@ -633,30 +633,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// px转em,第二个参数可以控制倍数
-@function pxem($px-values,$base-multiple: 18.75, $baseline-px:16px,$support-for-ie:false){
-  //Conver the baseline into rems
-  $baseline-rem: $baseline-px / 1em * $base-multiple;
-  //Print the first line in pixel values
-  @if $support-for-ie {
-      @return $px-values;
-  }
-  //if there is only one (numeric) value, return the property/value line for it.
-  @if type-of($px-values) == "number"{
-      @return $px-values / $baseline-rem;
-  }
-  @else {
-      //Create an empty list that we can dump values into
-      $rem-values:();
-      @each $value in $px-values{
-          // If the value is zero or not a number, return it
-          @if $value == 0 or type-of($value) != "number"{
-              $rem-values: append($rem-values, $value / $baseline-rem);
-          }
-      }
-      @return $rem-values;
-  }
-}
 
 // px转rem,第二个参数可以控制倍数
 @function pxrem($px-values,$base-multiple: 6.25, $baseline-px:16px,$support-for-ie:false){
@@ -715,11 +691,12 @@ export default {
         }
         .reporter-list-wrap {
           width: 25%;
-          padding: pxem(70px);
+          padding: pxrem(30px);
           overflow-y: hidden;
           overflow-x: scroll;
           position: relative;
-          background: #021E61;
+          background: #06234B;
+          border-left: 0.04px solid #0072FF;
           .reporter-list-content{
             height: 100%;
             overflow: scroll;
@@ -729,9 +706,9 @@ export default {
             height: pxrem(270px);
             padding: pxrem(35px);
             margin-bottom: pxrem(50px);
-            background-color: #123371;
+            background-color: #12305E;
             &:hover {
-              background-color: #0A43B7;
+              background-color: #0138A6;
             }
             .avatar {
               width: pxrem(170px);
