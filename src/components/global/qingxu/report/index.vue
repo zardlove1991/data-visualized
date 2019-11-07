@@ -121,7 +121,7 @@ export default {
       text-align: left;
     }
     .report-user{
-      width: 10%;
+      width: 8%;
       margin-left: pxrem(40px);
       font-size: pxrem(32px);
       font-family: PingFangSC-Regular;
@@ -130,11 +130,12 @@ export default {
       color: rgba(0,246,255,1);
     }
     .report-time{
-      width: 15%;
+      width: 12%;
       font-size: pxrem(32px);
       font-family: PingFangSC-Regular;
       font-weight: 400;
       color: rgba(0,246,255,1);
+      text-align: right;
     }
   }
 }

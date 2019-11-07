@@ -102,7 +102,7 @@ export default {
     }
 
     .project-user{
-      width: 10%;
+      width: 8%;
       text-align: left;
       line-height: pxrem(32px);
       font-size: pxrem(32px);
@@ -111,7 +111,7 @@ export default {
     }
 
     .project-status{
-      width: 10%;
+      width: 8%;
       text-align: center;
       display: block;
       text-align: center;
