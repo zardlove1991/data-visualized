@@ -4,10 +4,10 @@
       <div class="hotTopic-list-wrap sys-flex sys-flex-wrap">
         <div class="hotTopic-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in hotTopicList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="hotTopic-title overhidden">{{v.title}}</div>
-          <div class="hotTopic-user">{{v.project_user_name}}</div>
+          <div class="hotTopic-user">{{v.class_name}}</div>
           <div class="hotTopic-number sys-flex sys-flex-center">
-            <img src="./assets/read.png" alt="" class="number-icon">
-            <span class="number-text">{{v.create_user_id}}</span>
+            <!-- <img src="./assets/read.png" alt="" class="number-icon"> -->
+            <span class="number-text">{{v.create_time.slice(5, 16)}}</span>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getProjectData } from '@/servers/qingxu'
+import { getHotsTopicList } from '@/servers/qingxu'
 export default {
   name: 'hotTopic',
   data () {
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getProjectData(this.count, this.page).then((res) => {
+      getHotsTopicList(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.hotTopicList = []

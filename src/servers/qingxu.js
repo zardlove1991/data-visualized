@@ -1,12 +1,10 @@
 import { httpsbaseUrl, createAPI } from './api'
-const GUID = 'MGZlNTdhOT'
+const GUID = 'MGNlYzAyMT'
 
 /* 记者连线 */
-export const getConnecterList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallConnectList`)
-/* 运营数据 */
-export const getOperateData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getOperateData`)
+export const getWorkCallConnectList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallConnectList`)
 /* 获取热点话题 */
-export const getHotTopicList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicList&count=${count}&page=${page}`)
+export const getHotsTopicList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicList&count=${count}&page=${page}`)
 /* 舆情分析 */
 export const getHotsTopicTrend = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicTrend&id=${id}`)
 /* 活跃媒体 */
@@ -17,13 +15,9 @@ export const getHotsTopicMedia = (id) => createAPI(`${httpsbaseUrl}/index.php?m=
 export const getProjectData = (count = 10, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallSubjectList&count=${count}&page=${page}`)
 /* 获取报题 */
 export const getReportData = (count = 10, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallReportList&count=${count}&page=${page}`)
-/* 任务列表 */
-export const getTaskList = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallTaskList&count=${count}&page=${page}`)
-/* 辅屏任务数目 */
-export const getDaytaskNum = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallTaskNum`)
-/* 辅屏成稿产出 */
-export const getArticleList = (page, size) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getM2OPlusPublish&page=${page}&size=${size}`)
-/* 辅屏传播效果 */
-export const getEffect = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getM2OPlusEffects`)
-/* 辅屏个人排行 */
-export const getRankList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getM2OPlusWorkRank`)
+/* 内容统计 */
+export const getM2OPlusRankList = (count = 10, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getM2OPlusRankList&count=${count}&page=${page}`)
+/* 发稿统计 */
+export const getM2OPlusWorkRank = (count = 10, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getM2OPlusWorkRank&count=${count}&page=${page}`)
+/* 部门统计 */
+export const getM2OPlusWorkDepartRank = (count = 10, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getM2OPlusWorkDepartRank&count=${count}&page=${page}`)

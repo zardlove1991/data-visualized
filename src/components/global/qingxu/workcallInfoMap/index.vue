@@ -42,7 +42,7 @@
 import call from './call.vue'
 import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
-import { getConnecterList } from '@/servers/lishui'
+import { getWorkCallConnectList } from '@/servers/qingxu'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'workcallInfoMap',
@@ -464,7 +464,11 @@ export default {
   },
   created () {
     getDataConfig().then(res => {
-      this.center = {lng: +res.lng, lat: +res.lat}
+      // this.center = {lng: +res.lng, lat: +res.lat}
+      this.center = {
+        lng: 112.365783,
+        lat: 37.614585
+      }
     })
   },
   mounted () {
@@ -597,7 +601,9 @@ export default {
       this.currentActive = false
     },
     getReporter () {
-      getConnecterList().then(res => {
+      console.log(1)
+      getWorkCallConnectList().then(res => {
+        console.log(res)
         if (!res.data.error_code && res.data.result.length) {
           this.reporterList = res.data.result
         }

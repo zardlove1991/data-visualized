@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import { getRankList } from '@/servers/qingxu'
+import { getM2OPlusWorkRank } from '@/servers/qingxu'
 export default {
   name: 'personalRanking',
   data () {
@@ -31,16 +31,16 @@ export default {
     this.setFontsize('qx-personalranking')
   },
   created () {
-    this.getRankList()
+    this.getDataList()
     setInterval(() => {
-      this.getRankList()
-    }, 25000)
+      this.getDataList()
+    }, 15000)
   },
   methods: {
-    getRankList () {
-      getRankList().then(res => {
-        if (res && res.data && res.data.result && res.data.result.data && res.data.result.data[0]) {
-          this.rankList = res.data.result.data
+    getDataList () {
+      getM2OPlusWorkRank().then(res => {
+        if (res && res.data && res.data.result && res.data.result && res.data.result[0]) {
+          this.rankList = res.data.result
         }
       })
     }

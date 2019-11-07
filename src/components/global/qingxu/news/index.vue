@@ -2,7 +2,7 @@
   <div class="qx-news" id="qx-news">
     <div class="news-wrap">
       <div class="news-list-wrap sys-flex sys-flex-wrap">
-        <div class="news-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in hotTopicList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="news-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in newsList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div 
             class="news-icon"
             :class="{'bgfirst': k == 0, 'bgsecond': k == 1, 'bgthird': k === 2}"
@@ -10,7 +10,7 @@
           <div class="news-title overhidden">{{v.title}}</div>
           <div class="news-number sys-flex sys-flex-center">
             <img src="./assets/read.png" alt="" class="number-icon">
-            <span class="number-text">{{v.create_user_id}}</span>
+            <span class="number-text">{{v.click_num}}</span>
           </div>
         </div>
       </div>
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import { getProjectData } from '@/servers/qingxu'
+import { getM2OPlusRankList } from '@/servers/qingxu'
 export default {
   name: 'news',
   data () {
     return {
-      hotTopicList: [],
+      newsList: [],
       count: 5,
       page: 1
     }
@@ -40,17 +40,13 @@ export default {
   },
   methods: {
     getDataList () {
-      getProjectData(this.count, this.page).then((res) => {
+      getM2OPlusRankList(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
-          if (res.data.result.data.length) {
-            this.hotTopicList = []
+          if (res.data.result.length) {
+            this.newsList = []
             setTimeout(() => {
-              this.hotTopicList = res.data.result.data
+              this.newsList = res.data.result
             }, 100)
-            this.page += 1
-          } else {
-            this.page = 1
-            this.getDataList()
           }
         }
       })
