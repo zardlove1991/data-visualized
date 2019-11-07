@@ -6,7 +6,6 @@
           <span class="serial-number">{{k + 1}}</span>
         </div>
         <div class="information sys-flex sys-flex-center">
-          <img :src="v && v.avatar ? v.avatar.host + v.avatar.filepath + v.avatar.filename : defaultImg" class="info-img" />
           <span class="info-name">{{v.name}}</span>
         </div>
         <div class="num sys-flex sys-flex-center">
@@ -23,12 +22,11 @@ export default {
   name: 'personalRanking',
   data () {
     return {
-      rankList: [],
-      defaultImg: require('../../../../assets/avatar/touxiang.png')
+      rankList: []
     }
   },
   mounted () {
-    this.setFontsize('qx-personalranking')
+    // this.setFontsize('qx-personalranking')
   },
   created () {
     this.getRankList()
@@ -95,12 +93,6 @@ export default {
         }
       }
       .information {
-        .info-img {
-          width: pxrem(94px);
-          height: pxrem(94px);
-          border-radius: 50%;
-          margin-right: pxrem(40px);
-        }
         .info-name {
           font-size: pxrem(42px);
           color: #FFFFFF;

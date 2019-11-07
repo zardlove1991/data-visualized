@@ -48,5 +48,7 @@ export const lishuicomponentPersonalRanking = getComponent('lishui/personalRanki
 export const qingxucomponentReport = getComponent('qingxu/report')
 export const qingxucomponentProject = getComponent('qingxu/project')
 export const qingxucomponentHotTopic = getComponent('qingxu/hotTopic')
+export const qingxucomponentWorkcallInfoMap = getComponent('qingxu/workcallInfoMap')
 export const qingxucomponentNews = getComponent('qingxu/news')
 export const qingxucomponentPersonalRanking = getComponent('qingxu/personalRanking')
+export const qingxucomponentDepartmentRanking = getComponent('qingxu/departmentRanking')
