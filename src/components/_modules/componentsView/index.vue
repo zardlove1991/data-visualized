@@ -19,10 +19,6 @@ export default {
       style: getStyle()
     }
   },
-  methods: {
-    reload () {
-    }
-  },
   components: {
     ...components
   }
