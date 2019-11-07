@@ -43,9 +43,6 @@ export const lishuicomponentManuscriptOutput = getComponent('lishui/manuscriptOu
 export const lishuicomponentCommunicationEffect = getComponent('lishui/communicationEffect')
 export const lishuicomponentWebsiteContent = getComponent('lishui/websiteContent')
 export const lishuicomponentPersonalRanking = getComponent('lishui/personalRanking')
-export const lishuicomponentTvOne = getComponent('lishui/tvOne')
-export const lishuicomponentTvTwo = getComponent('lishui/tvTwo')
-export const lishuicomponentTvThree = getComponent('lishui/tvThree')
 
 /* 清徐县套系 */
 export const qingxucomponentReport = getComponent('qingxu/report')
