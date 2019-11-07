@@ -5,12 +5,12 @@ const GUID = 'MGNlYzAyMT'
 export const getWorkCallConnectList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallConnectList`)
 /* 获取热点话题 */
 export const getHotsTopicList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicList&count=${count}&page=${page}`)
-/* 舆情分析 */
-export const getHotsTopicTrend = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicTrend&id=${id}`)
-/* 活跃媒体 */
-export const getHotsTopicActiveMedia = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicActiveMedia&id=${id}`)
-/* 媒体传播分布 */
-export const getHotsTopicMedia = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicMedia&id=${id}`)
+/* 情感分析 */
+export const getHotsTopicEmotion = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicEmotion&id=${id}`)
+/* 情感分析 */
+export const getHotsTopicHotWord = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicHotWord&id=${id}`)
+/* 区域分析 */
+export const getHotsTopicPubArea = (id) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicPubArea&id=${id}`)
 /* 获取选题 */
 export const getProjectData = (count = 10, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallSubjectList&count=${count}&page=${page}`)
 /* 获取报题 */

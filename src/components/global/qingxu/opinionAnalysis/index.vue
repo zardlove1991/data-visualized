@@ -1,32 +1,31 @@
 <template>
-  <div class="main-wrap" id="ls-opinionAnalysis">
-    <div class="opinion-analysis-wrap sys-flex flex-justify-between">
-      <swiper :options="swiperOption" ref="mySwiper" >
+  <div class="qx-opinionAnalysis" id="qx-opinionAnalysis">
+    <div class="opinion-analysis-wrap sys-flex flex-justify-between sys-vertical">
+      <!-- <swiper :options="swiperOption" ref="mySwiper" >
         <swiper-slide v-for="(v) in 10" :key="v">
           {{v}}
         </swiper-slide>
-      </swiper>
-      <div class="data-echarts sys-flex sys-vertical flex-justify-between">
-        <div class="echarts-top sys-flex flex-justify-between">
-          <div class="data-channel">
-            <p class="echarts-title channel-title">分渠道数据分析</p>
-            <div class="channel-box">
-              <chart :options="lineOptions" :autoResize="true"></chart>
-            </div>
-          </div>
-          <div class="data-media">
-            <p class="echarts-title media-title">媒体占比</p>
-            <div class="media-box">
-              <chart :options="pieOptions" :autoResize="true"></chart>
-            </div>
+      </swiper> -->
+      <div class="data-title overhidden">{{localNews.title}}</div>
+      <div class="data-echarts sys-flex flex-justify-between">
+        <div class="sentiment-analysis sys-flex flex-justify-between sys-vertical">
+          <div class="sentiment-title"></div>
+          <div class="chart-box">
+            <chart :options="sentimentOpt" :autoResize="true"></chart>
           </div>
         </div>
-        <div class="echarts-bottom">
-          <div class="data-source">
-            <p class="echarts-title source-title">TOP 10 活跃新闻媒体来源</p>
-            <div class="source-box">
-              <chart :options="top10options" :autoResize="true"></chart>
-            </div>
+        <div class="line"></div>
+        <div class="key-word sys-flex flex-justify-between sys-vertical">
+          <div class="key-title"></div>
+          <div class="chart-box">
+            <chart :options="keyOpt" :autoResize="true"></chart>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="geographical-analysis sys-flex flex-justify-between sys-vertical">
+          <div class="geographical-title"></div>
+          <div class="chart-box">
+            <chart :options="geoOpt" :autoResize="true"></chart>
           </div>
         </div>
       </div>
@@ -45,7 +44,8 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/gauge'
-import { getHotTopicList, getHotsTopicTrend, getHotsTopicActiveMedia, getHotsTopicMedia } from '@/servers/qingxu'
+import 'echarts-wordcloud'
+import { getHotsTopicList, getHotsTopicEmotion, getHotsTopicPubArea, getHotsTopicHotWord } from '@/servers/qingxu'
 export default {
   name: 'opinionAnalysis',
   components: {
@@ -56,234 +56,203 @@ export default {
   data () {
     return {
       localList: [],
+      localNews: {},
+      localIndex: 0,
       newsList: [],
       page: 1,
       count: 12,
-      currentNewsData: {
-        title: '',
-        result: {
-          media_distribution: {},
-          sex_scale: {},
-          emotion: [],
-          age: [],
-          area: {}
-        }
+      curIndex: 0,
+      curId: null,
+      sentimentData: {
+        series: []
       },
-      top10options: {
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            label: {
-              backgroundColor: '#6a7985'
-            }
-          }
-        },
-        grid: {
-          left: '2%',
-          right: '0%',
-          bottom: '4%',
-          top: '7%',
-          containLabel: true
-        },
-        // calculable: true,
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: true,
-            data: [],
-            axisLabel: {
-              interval: 0,
-              rotate: 20,
-              color: '#fff',
-              fontSize: 14
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            gridIndex: 0,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                width: 0.5,
-                opacity: 0.5,
-                type: 'dashed',
-                color: '#4A6AA8'
-              }
-            },
-            axisLabel: {
-              color: '#fff',
-              fontSize: 12,
-              formatter: '{value}',
-              interval: 30
-            },
-
-            axisLine: {
-              lineStyle: {
-                color: '#4A6AA8'
-              }
-            }
-          }
-        ],
-        series: [
-          {
-            name: '文稿',
-            type: 'bar',
-            barCategoryGap: '60%',
-            barWidth: '60%',
-            itemStyle: {
-              normal: {
-                color: '#0541ff',
-                width: 15,
-                lineStyle: {
-                  color: '#0541ff'
-                },
-                label: {
-                  show: true,
-                  position: 'top',
-                  textStyle: {
-                    fontSize: 14,
-                    color: 'white'
-                  }
-                }
-              }
-            },
-            data: []
-          }
-        ]
-      },
-      pieOptions: {
-        title: {
-          text: '',
-          textStyle: {
-            color: '#fff',
-            fontSize: 12
-          }
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
-        },
-        legend: {
-          orient: 'horizontal',
-          bottom: 0,
-          icon: 'circle',
-          textStyle: {
-            color: '#fff',
-            fontSize: 8
-          }
+      keyWordsList: [],
+      areaData: {
+        geo: [{ value: 0 }],
+        reg: [{ value: 0 }]
+      }
+    }
+  },
+  computed: {
+    sentimentOpt () {
+      return {
+        color: ['#ce4272', '#0554f5', '#f3972e', '#008aed', '#14da7d'],
+        textStyle: {
+          color: '#fff'
         },
         series: [
           {
-            name: '发布渠道占比',
+            name: '情感分析',
             type: 'pie',
-            radius: ['20%', '70%'],
-            minAngle: 5,
+            // center: ['45%', '50%'],
+            radius: ['50%', '70%'],
             avoidLabelOverlap: true,
             label: {
               normal: {
                 show: true,
-                length: 2,
-                // formatter: '{b}:{d}%',
-                formatter: '{d}%',
-                position: 'outside'
+                formatter: '{b}: {d}%',
+                textStyle: {
+                  color: 'rgba(214, 230, 255, 0.5)',
+                  fontSize: this.proportion * 14,
+                  fontWeight: 'bold'
+                }
               },
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: 12,
-                  fontWeight: 'bold'
+                  fontSize: this.proportion * 18,
+                  fontWeight: 'bold',
+                  color: 'rgba(214, 230, 255, 0.5)'
                 }
               }
             },
             labelLine: {
               normal: {
-                show: true,
-                length: 20,
-                length2: 20
+                show: true
               }
             },
-            data: []
+            data: this.sentimentData.series
           }
         ]
-      },
-      lineOptions: {
+      }
+    },
+    geoOpt () {
+      return {
+        color: ['#4da2fe'],
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'cross',
-            label: {
-              backgroundColor: '#6a7985'
-            }
+            type: 'shadow'
           }
         },
-        legend: {
-          orient: 'horizontal',
-          top: 0,
-          right: 0,
-          icon: 'circle',
-          textStyle: {
-            color: '#fff',
-            fontSize: 8
-          },
-          data: []
-        },
-
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '5%',
-          top: '15%',
+          left: this.proportion * 15,
+          right: this.proportion * 15,
+          top: this.proportion * 15,
+          bottom: this.proportion * 15,
           containLabel: true
         },
         xAxis: [
           {
             type: 'category',
-            boundaryGap: true,
-            data: [1, 2, 3],
+            axisTick: {
+              show: false,
+              alignWithLabel: true
+            },
+            axisLabel: {
+              fontSize: this.proportion * 12
+            },
             axisLine: {
               lineStyle: {
-                color: '#fff'
+                color: ['#71a4f2'],
+                width: '1',
+                type: 'solid'
               }
-            }
+            },
+            data: this.areaData.geo.slice(0, 7).map(v => v.name)
           }
         ],
         yAxis: [
           {
             type: 'value',
-            gridIndex: 0,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                width: 0.5,
-                opacity: 0.5,
-                type: 'dashed',
-                color: '#4A6AA8'
+            axisLabel: {
+              interval: 15,
+              formatter: '{value}%',
+              fontSize: this.proportion * 12,
+              textStyle: {
+                // fontSize:'13'
               }
             },
-            axisLabel: {
-              color: '#fff',
-              fontSize: 10,
-              formatter: '{value}'
+            axisTick: {
+              show: false,
+              fontSize: this.proportion * 12,
+              alignWithLabel: true
             },
+            color: '#fff',
             axisLine: {
               lineStyle: {
-                color: '#4A6AA8'
+              // show:false,
+                color: ['#71a4f2'],
+                width: '1',
+                type: 'solid'
               }
+            },
+            splitLine: {
+              // interval:15,
+              lineStyle: {
+                color: ['rgba(113,164,242,0.1)'],
+                width: '1',
+                type: 'solid'
+              }
+            },
+            axisPointer: {
+              show: true
             }
           }
         ],
-        series: []
-      },
-      curIndex: 0,
-      curId: null
+        series: [
+          {
+            name: '地域分布',
+            type: 'bar',
+            barWidth: '50%',
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true,
+                  position: 'top',
+                  formatter: '{c}%',
+                  color: '#ffffff',
+                  fontSize: this.proportion * 10
+                },
+                color: new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    { offset: 1, color: '#0066FF' },
+                    { offset: 0, color: '#18BBFF' }
+                  ]
+                )
+              }
+            },
+            data: this.areaData.geo.slice(0, 7).map(v => v.value)
+          }
+        ]
+      }
+    },
+    keyOpt () {
+      return {
+        series: [
+          {
+            type: 'wordCloud',
+            gridSize: this.proportion * 20,
+            sizeRange: [10, 30],
+            rotationRange: [0, 90],
+            rotationStep: 90,
+            shape: 'square',
+            width: '80%',
+            height: '80%',
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    'rgb(' +
+                    [
+                      Math.round(Math.random() * 255),
+                      Math.round(Math.random() * 255),
+                      Math.round(Math.random() * 255)
+                    ].join(',') +
+                    ')'
+                  )
+                }
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: '#333'
+              }
+            },
+            data: this.keyWordsList
+          }
+        ]
+      }
     }
   },
   watch: {
@@ -309,115 +278,94 @@ export default {
     // 本地模拟分页效果
     this.initLocalList()
     setInterval(() => {
-      this.curIndex += 1
-      if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
-        this.curIndex = 0
-        this.page === 3 ? this.page = 1 : this.page++
-        this.newsList = []
+      this.localIndex += 1
+      if (this.localIndex <= 11) {
         setTimeout(() => {
-          this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
-          this.curId = this.newsList[this.curIndex]['id']
+          this.localNews = this.localList[this.localIndex]
+          this.curId = this.localNews['id']
         }, 100)
       } else {
-        this.curId = this.newsList[this.curIndex]['id']
+        this.localIndex = 0
+        this.initLocalList()
       }
     }, 15000)
   },
   mounted () {
-    this.setFontsize('ls-opinionAnalysis')
+    this.proportion = this.getProportion('xy-hot')
+    this.setFontsize('qx-opinionAnalysis')
   },
 
   methods: {
     // 本地模拟分页效果
     initLocalList () {
-      getHotTopicList(this.count).then(res => {
+      getHotsTopicList(this.count).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.localList = res.data.result.data
-            this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
-            this.curId = this.newsList[this.curIndex]['id']
+            this.localNews = this.localList[this.localIndex]
+            this.curId = this.localNews['id']
           }
         }
       })
     },
     // 初始化新闻列表
     initNewsList () {
-      getHotTopicList(this.count, this.page).then(res => {
-        if (!res.data.error_code) {
-          if (res.data.result.data.length) {
-            this.newsList = []
-            setTimeout(() => {
-              this.newsList = res.data.result.data
-              this.curId = this.newsList[this.curIndex]['id']
-            }, 100)
-          } else {
-            this.page = 1
-          }
-        }
-      })
+      // getHotTopicList(this.count, this.page).then(res => {
+      //   if (!res.data.error_code) {
+      //     if (res.data.result.data.length) {
+      //       this.newsList = []
+      //       setTimeout(() => {
+      //         this.newsList = res.data.result.data
+      //         // this.curId = this.newsList[this.curIndex]['id']
+      //       }, 100)
+      //     } else {
+      //       this.page = 1
+      //     }
+      //   }
+      // })
     },
 
     // 获取详细数据
     getHotTopicDetail () {
-      getHotsTopicTrend(this.curId).then(response => {
-        if (!response.data.error_code) {
-          this.lineOptions.legend.data = []
-          this.lineOptions.xAxis[0].data = []
-          this.lineOptions.series = []
-          this.lineOptions.xAxis[0].data = response.data.result[0].count.map(v => v.field)
-          this.lineOptions.legend.data = response.data.result.map(v => v.name_zh)
-          this.lineOptions.series = response.data.result.map(v => {
-            return {
-              name: v.name_zh,
-              type: 'line',
-              data: v.count.map(i => i.value),
-              smooth: true,
-              itemStyle: {
-                normal: {
-                  label: {
-                    show: true,
-                    position: 'top',
-                    textStyle: {
-                      color: 'white'
-                    }
-                  }
-                }
-              }
-            }
-          })
-        }
-      })
-      getHotsTopicMedia(this.curId).then(response => {
-        if (!response.data.error_code) {
-          this.pieOptions.series[0].data = []
-          this.pieOptions.series[0].data = response.data.result.map(v => {
+      getHotsTopicEmotion(this.curId).then(res => {
+        if (res && res.data && res.data.result && res.data.result[0]) {
+          this.sentimentData.series = res.data.result.map(v => {
             return {
               value: v.count,
-              name: v.name_zh,
-              label: {
-                fontSize: 12
-              }
+              name: v.name_zh
             }
           })
         }
       })
-      getHotsTopicActiveMedia(this.curId).then(response => {
-        if (!response.data.error_code) {
-          this.top10options.xAxis[0].data = []
-          this.top10options.series[0].data = []
-          this.top10options.xAxis[0].data = response.data.result.map(v => v.name_zh)
-          this.top10options.series[0].data = response.data.result.map(v => v.count)
+      getHotsTopicPubArea(this.curId).then(res => {
+        if (res && res.data && res.data.result && res.data.result[0]) {
+          let total = res.data.result.reduce((past, cur) => past + cur.count, 0)
+          this.areaData.geo = res.data.result.map(v => {
+            return {
+              value: parseInt(v.count / total * 100),
+              name: v.name_zh.replace(/省|市|自治区|维吾尔|壮族|回族/g, '')
+            }
+          })
+        }
+      })
+      getHotsTopicHotWord(this.curId).then(res => {
+        if (res && res.data && res.data.result && res.data.result[0]) {
+          this.keyWordsList = res.data.result.map(v => {
+            return {
+              value: v.count,
+              name: v.name_zh
+            }
+          })
         }
       })
     }
-
   }
 }
 </script>
 
 <style lang='scss' scoped>
 @import 'src/styles/index.scss';
-.main-wrap {
+.qx-opinionAnalysis {
   width: 100%;
   height: 100%;
   position: relative;
@@ -428,108 +376,56 @@ export default {
     padding: pxrem(150px) pxrem(72px) pxrem(20px);
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
-    .opinion-analysis-list {
-      width: 48%;
-      height: 100%;
-      padding: pxrem(67px, 12.5);
-      background: url('./assets/news-border.png') no-repeat center center;
-      background-size: 100% 100%;
-    }
-    .data-list {
-      height: 23%;
+    .data-title {
       width: 100%;
-      margin-bottom: 1%;
-      background: rgb(16, 43, 95);
-      padding: pxrem(55px, 12.5);
-
-      &.active {
-        background: rgb(10, 67, 183);
-        .data-title {
-          color: #F7F02B;
-        }
-      }
-      .data-title {
-        width: 100%;
-        height: 1em;
-        line-height: 1em;
-        font-size: pxrem(54px);
-        font-family: PingFangSC-Regular;
-        font-weight: 400;
-        color: #ffffff;
-        text-align: left;
-      }
-      .data-brief {
-        font-size: pxrem(40px);
-        color: #fff;
-        text-align: left;
-        height: 2.5em;
-        line-height: 1.25em;
-        overflow: hidden;
-      }
+      height: 1.5em;
+      font-size: pxrem(48px);
+      color: #00FFE4;
     }
     .data-echarts {
-      width: 48%;
-      height: 100%;
-      .echarts-title {
-        font-size: pxrem(48px);
-        color: #fff;
-        text-align: left;
-      }
-      .echarts-top {
-        width: 100%;
-        height: 48%;
-        .data-channel {
-          width: 55%;
-          height: 100%;
-          background: url('./assets/channel-border.png') no-repeat center center;
+      width: 100%;
+      height: calc(100% - 1rem);
+      .sentiment-analysis {
+        width: 24%;
+        .sentiment-title {
+          height: pxrem(88px);
+          width: pxrem(330px);
+          background: url('./assets/sentiment.png') no-repeat center center;
           background-size: 100% 100%;
-          position: relative;
-          padding: pxrem(37px);
-          margin-right: pxrem(67px);
-          .channel-box {
-            width: 100%;
-            height: pxem(650px, 12.5);
-            .echarts {
-              width: 100%;
-              height: 100%;
-            }
-          }
         }
-        .data-media {
-          flex: 1;
-          height: 100%;
-          background: url('./assets/media-border.png') no-repeat center center;
-          background-size: 100% 100%;
-          position: relative;
-          padding: pxrem(37px);
-          .media-box {
-            width: 100%;
-            height: pxem(650px, 12.5);
-            .echarts {
-              width: 100%;
-              height: 100%;
-            }
-          }
+        .chart-box {
+          height: 80%;
         }
       }
-      .echarts-bottom {
-        width: 100%;
-        height: 50%;
-        .data-source {
-          width: 100%;
-          height: 100%;
-          background: url('./assets/source-border.png') no-repeat center center;
+      .key-word {
+        width: 26%;
+        .key-title {
+          height: pxrem(88px);
+          width: pxrem(330px);
+          background: url('./assets/keyword.png') no-repeat center center;
           background-size: 100% 100%;
-          padding: pxrem(37px);
-          .source-box {
-            width: 100%;
-            height: 100%;
-            .echarts {
-              width: 100%;
-              height: 100%;
-            }
-          }
         }
+        .chart-box {
+          height: 80%;
+        }
+      }
+      .geographical-analysis {
+        width: 45%;
+        .geographical-title {
+          height: pxrem(88px);
+          width: pxrem(330px);
+          background: url('./assets/area.png') no-repeat center center;
+          background-size: 100% 100%;
+        }
+        .chart-box {
+          height: 80%;
+        }
+      }
+      .line {
+        height: 100%;
+        width: 0.1rem;
+        background: url('./assets/border.png') no-repeat center center;
+        // background-size: 100% 100%;
       }
     }
   }
