@@ -48,3 +48,4 @@ export const lishuicomponentPersonalRanking = getComponent('lishui/personalRanki
 export const qingxucomponentReport = getComponent('qingxu/report')
 export const qingxucomponentProject = getComponent('qingxu/project')
 export const qingxucomponentHotTopic = getComponent('qingxu/hotTopic')
+export const qingxucomponentNews = getComponent('qingxu/news')
