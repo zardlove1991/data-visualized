@@ -50,3 +50,4 @@ export const lishuicomponentTvThree = getComponent('lishui/tvThree')
 /* 清徐县套系 */
 export const qingxucomponentReport = getComponent('qingxu/report')
 export const qingxucomponentProject = getComponent('qingxu/project')
+export const qingxucomponentHotTopic = getComponent('qingxu/hotTopic')
