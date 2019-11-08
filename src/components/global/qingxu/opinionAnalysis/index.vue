@@ -1,17 +1,30 @@
 <template>
   <div class="qx-opinionAnalysis" id="qx-opinionAnalysis">
     <div class="opinion-analysis-wrap sys-flex flex-justify-between sys-vertical">
-      <!-- <swiper :options="swiperOption" ref="mySwiper" >
-        <swiper-slide v-for="(v) in 10" :key="v">
-          {{v}}
+      <swiper :options="swiperOption" ref="mySwiper">
+        <swiper-slide v-for="(v, k) in localList" :key="k">
+          <div class="data-box">
+            <div class="data-title overhidden" :class="{activeTitle: k === activeIndex}">
+              {{v.title}}
+            </div>
+          </div>
         </swiper-slide>
-      </swiper> -->
-      <div class="data-title overhidden">{{localNews.title}}</div>
-      <div class="data-echarts sys-flex flex-justify-between">
+      </swiper>
+     
+      <div class="data-echarts sys-flex flex-justify-between sys-flex-center">
         <div class="sentiment-analysis sys-flex flex-justify-between sys-vertical">
           <div class="sentiment-title"></div>
-          <div class="chart-box">
-            <chart :options="sentimentOpt" :autoResize="true"></chart>
+          <div class="chart-box sys-flex sys-flex-center flex-justify-around">
+            <div class="sentiment-tip">
+              <div class="tip-list sys-flex sys-flex-center" v-for="(v, k) in tipList" :key="k">
+                <span class="tip-icon" :class="v.class"></span>
+                <span class="tip-class">{{v.name}}</span>
+                <span>{{v.value}}</span>
+              </div>
+            </div>
+            <div class="sentiment-chart"> 
+              <chart :options="sentimentOpt" :autoResize="true"></chart>
+            </div>
           </div>
         </div>
         <div class="line"></div>
@@ -56,13 +69,10 @@ export default {
   data () {
     return {
       localList: [],
-      localNews: {},
-      localIndex: 0,
-      newsList: [],
       page: 1,
       count: 12,
-      curIndex: 0,
       curId: null,
+      tipList: [],
       sentimentData: {
         series: []
       },
@@ -70,13 +80,46 @@ export default {
       areaData: {
         geo: [{ value: 0 }],
         reg: [{ value: 0 }]
-      }
+      },
+      activeIndex: 0
     }
   },
   computed: {
+    swiperOption () {
+      return {
+        speed: 2000,
+        autoplay: {
+          delay: 15000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false
+        },
+        autoHeight: true,
+        slidesPerView: 3, // 设置slider容器能够同时显示的slides数量(carousel模式)。
+        centeredSlides: true, // 设定为true时，活动块会居中
+        initialSlide: 0,
+        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, // 修改swiper的父元素时，自动初始化swiper,
+        onSlideChangeStart: () => {
+          // 通过$refs获取对应的swiper对象
+          let swiper = this.$refs.mySwiper.swiper
+          this.activeIndex = swiper.activeIndex
+        },
+        on: {
+          slideChange: () => {
+            let swiper = this.$refs.mySwiper.swiper
+            this.activeIndex = swiper.activeIndex
+            if (this.activeIndex === 0) {
+              this.initLocalList()
+            } else {
+              this.curId = this.localList[this.activeIndex]['id']
+            }
+          }
+        }
+      }
+    },
     sentimentOpt () {
       return {
-        color: ['#ce4272', '#0554f5', '#f3972e', '#008aed', '#14da7d'],
+        color: ['#0084FF', '#DE3766', '#DE9937', '#008aed', '#14da7d'],
         textStyle: {
           color: '#fff'
         },
@@ -89,7 +132,7 @@ export default {
             avoidLabelOverlap: true,
             label: {
               normal: {
-                show: true,
+                show: false,
                 formatter: '{b}: {d}%',
                 textStyle: {
                   color: 'rgba(214, 230, 255, 0.5)',
@@ -263,32 +306,8 @@ export default {
     }
   },
   created () {
-    // this.initNewsList()
-    // setInterval(() => {
-    //   this.curIndex += 1
-    //   if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
-    //     this.curIndex = 0
-    //     this.page++
-    //     this.initNewsList()
-    //   } else {
-    //     this.curId = this.newsList[this.curIndex]['id']
-    //   }
-    // }, 15000)
-
     // 本地模拟分页效果
     this.initLocalList()
-    setInterval(() => {
-      this.localIndex += 1
-      if (this.localIndex <= 11) {
-        setTimeout(() => {
-          this.localNews = this.localList[this.localIndex]
-          this.curId = this.localNews['id']
-        }, 100)
-      } else {
-        this.localIndex = 0
-        this.initLocalList()
-      }
-    }, 15000)
   },
   mounted () {
     this.proportion = this.getProportion('xy-hot')
@@ -302,27 +321,10 @@ export default {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.localList = res.data.result.data
-            this.localNews = this.localList[this.localIndex]
-            this.curId = this.localNews['id']
+            this.curId = this.localList[this.activeIndex]['id']
           }
         }
       })
-    },
-    // 初始化新闻列表
-    initNewsList () {
-      // getHotTopicList(this.count, this.page).then(res => {
-      //   if (!res.data.error_code) {
-      //     if (res.data.result.data.length) {
-      //       this.newsList = []
-      //       setTimeout(() => {
-      //         this.newsList = res.data.result.data
-      //         // this.curId = this.newsList[this.curIndex]['id']
-      //       }, 100)
-      //     } else {
-      //       this.page = 1
-      //     }
-      //   }
-      // })
     },
 
     // 获取详细数据
@@ -332,6 +334,14 @@ export default {
           this.sentimentData.series = res.data.result.map(v => {
             return {
               value: v.count,
+              name: v.name_zh
+            }
+          })
+          let total = res.data.result.reduce((past, cur) => past + cur.count, 0)
+          this.tipList = res.data.result.map(v => {
+            return {
+              class: v.name_en,
+              value: (parseInt(v.count / total * 100) || 0) + '%',
               name: v.name_zh
             }
           })
@@ -376,17 +386,31 @@ export default {
     padding: pxrem(150px) pxrem(72px) pxrem(20px);
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
+    .data-box {
+      padding: 0 pxrem(60px);
+      margin-bottom: pxrem(40px);
+    }
     .data-title {
       width: 100%;
-      height: 1.5em;
-      font-size: pxrem(48px);
-      color: #00FFE4;
+      height: pxrem(80px);
+      line-height: pxrem(80px);
+      font-size: pxrem(38px);
+      color: #FEFEFE;
+      padding-bottom: pxrem(20px);
+      border-bottom: pxrem(3px) dashed #008AFF;
+      &.activeTitle {
+        font-size: pxrem(48px);
+        color: #00FFE4;
+        position: relative;
+        border-bottom: pxrem(3px) solid #00FCFF;
+      }
     }
     .data-echarts {
       width: 100%;
-      height: calc(100% - 1rem);
+      height: 80%;
       .sentiment-analysis {
         width: 24%;
+        height: 100%;
         .sentiment-title {
           height: pxrem(88px);
           width: pxrem(330px);
@@ -395,10 +419,45 @@ export default {
         }
         .chart-box {
           height: 80%;
+          .sentiment-tip {
+            width: 30%;
+            .tip-list {
+              font-size: pxrem(34px);
+              color: #FFFFFF;
+              line-height: pxrem(100px);
+              .positive {
+                width: pxrem(30px);
+                height: pxrem(24px);
+                background-color: #0066FF;
+              }
+              .tip-icon {
+                width: pxrem(30px);
+                height: pxrem(24px);
+                margin-right: pxrem(20px);
+                &.positive {
+                  background-color: #0066FF;
+                }
+                &.negative {
+                  background-color: #DE3766;
+                }
+                &.neutral {
+                  background-color: #DE9937;
+                }
+              }
+              .tip-class {
+                margin-right: pxrem(38px)
+              }
+            }
+          }
+          .sentiment-chart {
+            width: 60%;
+            height: 100%;
+          }
         }
       }
       .key-word {
         width: 26%;
+        height: 100%;
         .key-title {
           height: pxrem(88px);
           width: pxrem(330px);
@@ -411,6 +470,7 @@ export default {
       }
       .geographical-analysis {
         width: 45%;
+        height: 100%;
         .geographical-title {
           height: pxrem(88px);
           width: pxrem(330px);
@@ -422,10 +482,10 @@ export default {
         }
       }
       .line {
-        height: 100%;
-        width: 0.1rem;
+        height: 60%;
+        width: pxrem(5px);
         background: url('./assets/border.png') no-repeat center center;
-        // background-size: 100% 100%;
+        background-size: 100% 100%;
       }
     }
   }
