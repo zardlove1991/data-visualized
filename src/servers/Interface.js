@@ -19,7 +19,10 @@ plateForm:类型{
   weBo: '微博'
 }
 */
-export const getCluesTogether = (plateForm = 'website', count = 6, page = 1, source) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getCluesTogether&plateForm=${plateForm}&count=${count}&page=${page}&source=${source}`)
+export const getCluesTogether = (plateForm = 'website', count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getCluesTogether&plateForm=${plateForm}&count=${count}&page=${page}`)
+// 新沂市单独接口
+export const getCluesTogether149434 = (plateForm = 'website', count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getCluesTogether&plateForm=${plateForm}&count=${count}&page=${page}&source=149434`)
+export const getCluesTogether149433 = (plateForm = 'website', count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getCluesTogether&plateForm=${plateForm}&count=${count}&page=${page}&source=149433`)
 
 /* 稿件排行
 desc：类型{
