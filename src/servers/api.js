@@ -11,6 +11,7 @@ const instance = axios.create({
 export const httpsbaseUrl = 'https://monitor-screen.cloud.hoge.cn'
 // const baseUrl = 'http://monitor-screen.cloud.hoge.cn'
 export const workcallUrl = 'https://sys-team.cloud.hoge.cn'
+export const GUID = window.location.pathname.split('/')[1]
 
 // workcallInfoList 记者列表
 export const getReporter = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=screen&a=reporterLine`)

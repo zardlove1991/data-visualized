@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getTaskList, getTaskAccess } from '@/servers/xinyi'
+import { getWorkCallTaskList, getDaytaskNum } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/component/legend'
@@ -47,6 +47,7 @@ export default {
       dataInterval: null,
       count: 8,
       page: 1,
+      isPaging: false,
       proportion: 1,
       legendData: [],
       seriesData: [],
@@ -117,6 +118,9 @@ export default {
   },
   created () {
     this.getDataList()
+    setInterval(() => {
+      this.getDataList()
+    }, 35000)
   },
   mounted () {
     this.proportion = this.getProportion('xy-task') * 1.8
@@ -124,15 +128,25 @@ export default {
   },
   methods: {
     getDataList () {
-      getTaskList(this.count, this.page).then(res => {
-        if (res && res.data && res.data.data && res.data.data[0]) {
-          this.dataList = []
-          this.dataList = res.data.data
-          this.intervalData()
+      getWorkCallTaskList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.data
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+            }
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
-      getTaskAccess().then(res => {
-        if (res && res.data && res.data.data && res.data.data[0]) {
+      getDaytaskNum().then(res => {
+        console.log(res)
+        if (!res.data.error_code) {
           this.legendData = []
           this.seriesData = []
           res.data.data.forEach(v => {
@@ -145,28 +159,6 @@ export default {
           })
         }
       })
-    },
-
-    intervalData () {
-      this.dataInterval = setInterval(() => {
-        getTaskList(this.count, this.page).then(res => {
-          if (res && res.data && res.data.data && res.data.data[0]) {
-            this.dataList = []
-            setTimeout(() => {
-              this.dataList = res.data.data
-              if (res.data.data.length < this.count) {
-                this.page = 1
-              } else {
-                this.page++
-              }
-            }, 100)
-          } else {
-            this.page = 1
-            clearInterval(this.dataInterval)
-            this.getDataList()
-          }
-        })
-      }, 35000)
     }
   }
 }
