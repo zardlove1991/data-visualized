@@ -26,7 +26,7 @@ export default {
     return {
       keyword: '',
       reportList: [],
-      count: 5,
+      count: 6,
       page: 1
     }
   },
@@ -81,7 +81,7 @@ export default {
   .report-list{
     color : #fff;
     width: 100%;
-    height: 20%;
+    height: 16.5%;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     .report-status{

@@ -37,7 +37,7 @@ export default {
     return {
       keyword: '',
       projectList: [],
-      count: 5,
+      count: 6,
       page: 1
     }
   },
@@ -92,7 +92,7 @@ export default {
   .project-list{
     width: 100%;
     color : #fff;
-    height: 20%;
+    height: 16.5%;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     .project-title{
