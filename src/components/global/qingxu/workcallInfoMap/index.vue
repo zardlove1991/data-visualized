@@ -15,7 +15,7 @@
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
                       <img class="avatar" v-if="v.avatar" :src="v.avatar && v.avatar.uri" />
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
-                      <div class="info overhidden sys-flex-one">
+                      <div class="info sys-flex sys-flex-one">
                           <div class="name overhidden">{{v.member_name}}</div>
                           <div class="depart">{{v.mobile}}</div>
                       </div>
@@ -464,11 +464,7 @@ export default {
   },
   created () {
     getDataConfig().then(res => {
-      // this.center = {lng: +res.lng, lat: +res.lat}
-      this.center = {
-        lng: 112.365783,
-        lat: 37.614585
-      }
+      this.center = {lng: +res.lng, lat: +res.lat}
     })
   },
   mounted () {
@@ -722,8 +718,9 @@ export default {
               margin-right: pxrem(40px);
             }
             .info {
-              height: 100%;
+              height: pxrem(200px);
               flex-direction: column;
+              justify-content: space-between;
               text-align: left;
               .name {
                 font-size: pxrem(60px);
