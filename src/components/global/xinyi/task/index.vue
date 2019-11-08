@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getWorkCallTaskList, getDaytaskNum } from '@/servers/interface'
+import { getWorkCallTaskList, getWorkCallTaskNum } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/component/legend'
@@ -144,19 +144,20 @@ export default {
           }
         }
       })
-      getDaytaskNum().then(res => {
-        console.log(res)
+      getWorkCallTaskNum().then(res => {
         if (!res.data.error_code) {
           this.legendData = []
           this.seriesData = []
-          res.data.data.forEach(v => {
-            this.legendData.push(v.title)
-            this.seriesData.push({
-              value: v.total,
-              name: v.title
+          setTimeout(() => {
+            res.data.result.forEach(v => {
+              this.legendData.push(v.title)
+              this.seriesData.push({
+                value: v.total,
+                name: v.title
+              })
+              this.taskTotal = res.data.result.reduce((past, cur) => past + cur.total, 0)
             })
-            this.taskTotal = res.data.data.reduce((past, cur) => past + cur.total, 0)
-          })
+          }, 100)
         }
       })
     }

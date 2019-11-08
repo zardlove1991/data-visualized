@@ -10,7 +10,7 @@ export const getWorkCallSubjectList = (count = 10, page = 1) => createAPI(`${htt
 export const getWorkCallTaskList = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallTaskList&count=${count}&page=${page}`)
 
 /* 任务数目 */
-export const getDaytaskNum = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getDaytaskNum`)
+export const getWorkCallTaskNum = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallTaskNum`)
 
 /* 线索汇聚
 plateForm:类型{
@@ -19,7 +19,7 @@ plateForm:类型{
   weBo: '微博'
 }
 */
-export const getCluesTogether = (plateForm = 'website', count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getCluesTogether&plateForm=${plateForm}&count=${count}&page=${page}`)
+export const getCluesTogether = (plateForm = 'website', count = 6, page = 1, source) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getCluesTogether&plateForm=${plateForm}&count=${count}&page=${page}&source=${source}`)
 
 /* 稿件排行
 desc：类型{
