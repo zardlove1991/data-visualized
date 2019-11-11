@@ -32,6 +32,8 @@ desc：类型{
 */
 export const getM2OPlusRankList = (desc = 'website', count = 6, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getM2OPlusRankList&desc=${desc}&count=${count}&page=${page}`)
 
+export const getWorkCallConnectList = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getWorkCallConnectList`)
+
 /* 热点话题 */
 export const getHotsTopicList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=${GUID}&a=getHotsTopicList&count=${count}&page=${page}`)
 

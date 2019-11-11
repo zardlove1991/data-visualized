@@ -42,11 +42,9 @@
 
 <script>
 import call from './call.vue'
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
-import { getConnecterList } from '@/servers/xinyi'
+import { getWorkCallConnectList } from '@/servers/interface'
 import {getDataConfig} from '@/utils/model'
 export default {
   name: 'workcallInfoMap',
@@ -464,9 +462,7 @@ export default {
     }
   },
   components: {
-    call,
-    swiper,
-    swiperSlide
+    call
   },
   created () {
     getDataConfig().then(res => {
@@ -575,9 +571,9 @@ export default {
       this.currentActive = false
     },
     getReporter () {
-      getConnecterList().then(response => {
-        if (!response.data.ErrorCode && response.data.data.length) {
-          this.reporterList = response.data.data // .splice(0, 5)
+      getWorkCallConnectList().then(res => {
+        if (!res.data.error_code && res.data.result.length) {
+          this.reporterList = res.data.result
         }
         this.rMap()
       })
