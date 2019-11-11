@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getWebsitList, getWechatList, getWeiboList } from '@/servers/xinyi'
+import { getCluesTogether, getCluesTogether149434, getCluesTogether149433 } from '@/servers/interface'
 export default {
   name: 'clue',
   data () {
@@ -41,9 +41,12 @@ export default {
         type: 2
       }],
       currentIndex: 0,
-      list: [],
       dataList: [],
-      count: 0
+      count: 6,
+      webPage: 1,
+      weChatPage: 1,
+      weBoPage: 1,
+      isPaging: false
     }
   },
   created () {
@@ -66,21 +69,54 @@ export default {
       this.dataList = []
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
-        getWebsitList().then(res => {
-          if (res && res.data && res.data.result && res.data.result.data) {
-            this.dataList = res.data.result.data.slice(0, 6)
+        getCluesTogether('website', this.count, this.webPage).then(res => {
+          if (!res.data.error_code) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              if (this.isPaging) {
+                this.webPage += 1
+              }
+            } else {
+              this.webPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
+            }
           }
         })
       } else if (type === 1) {
-        getWechatList().then(res => {
-          if (res && res.data && res.data.result && res.data.result.data) {
-            this.dataList = res.data.result.data.slice(0, 6)
+        getCluesTogether149434('website', this.count, this.weChatPage).then(res => {
+          if (!res.data.error_code) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              if (this.isPaging) {
+                this.weChatPage += 1
+              }
+            } else {
+              this.weChatPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
+            }
           }
         })
       } else if (type === 2) {
-        getWeiboList().then(res => {
-          if (res && res.data && res.data.result && res.data.result.data) {
-            this.dataList = res.data.result.data.slice(0, 6)
+        getCluesTogether149433('website', this.count, this.weBoPage).then(res => {
+          if (!res.data.error_code) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              if (this.isPaging) {
+                this.weBoPage += 1
+              }
+            } else {
+              this.weBoPage = 1
+              this.getData(this.titleList[this.currentIndex].type)
+            }
           }
         })
       }

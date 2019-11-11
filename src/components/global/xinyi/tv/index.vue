@@ -28,7 +28,7 @@
 import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
 import 'videojs-contrib-hls'
-import { getTvList } from '@/servers/xinyi'
+import { getM2OPlusChannelList } from '@/servers/interface'
 export default {
   name: 'tv',
   data () {
@@ -48,9 +48,9 @@ export default {
   },
   methods: {
     getTvList () {
-      getTvList().then(res => {
-        if (res && res.data && res.data.length) {
-          let data = res.data
+      getM2OPlusChannelList().then(res => {
+        if (!res.data.error_code) {
+          let data = res.data.result
           data.forEach(value => {
             value.playerOpt = {
               autoplay: true, // 自动播放

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { getHotTopicList, getTopicTrend, getTopicEmotion, getTopicPubArea } from '@/servers/xinyi'
+import { getHotsTopicList, getHotsTopicTrend, getHotsTopicEmotion, getHotsTopicPubArea } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/chart/pie'
@@ -43,8 +43,11 @@ export default {
   data () {
     return {
       hotNews: {},
-      list: [],
-      count: 0,
+      dataList: [],
+      count: 4,
+      page: 1,
+      curIndex: 0,
+      curId: null,
       proportion: 1,
       heatData: {
         xAxis: [],
@@ -78,7 +81,13 @@ export default {
           containLabel: true
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
         },
         legend: {
           data: ['网站', '微信', '微博'],
@@ -379,11 +388,9 @@ export default {
   },
   watch: {
     // 监测热点的ID变换，更新图表数据
-    'hotNews.eventId': {
+    curId: {
       handler (newValue) {
-        if (newValue) {
-          this.getEchartData(newValue)
-        }
+        this.getHotTopicDetail(newValue)
       }
     }
   },
@@ -396,15 +403,24 @@ export default {
   },
   methods: {
     getDataList () {
-      getHotTopicList().then(res => {
-        if (res && res.data && res.data.result && res.data.result[0]) {
-          this.list = res.data.result
-          this.initList()
+      getHotsTopicList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            this.dataList = res.data.result.data
+            this.initList()
+            if (this.isPaging) {
+              this.page += 1
+            }
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
     },
-    getEchartData (value) {
-      getTopicTrend(value).then(res => {
+    getHotTopicDetail (value) {
+      getHotsTopicTrend(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.heatData.xAxis = res.data.result[0].count.map(v => v.field.slice(5))
           this.heatData.series = res.data.result.map(v => {
@@ -417,7 +433,7 @@ export default {
           })
         }
       })
-      getTopicEmotion(value).then(res => {
+      getHotsTopicEmotion(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.sentimentData.series = res.data.result.map(v => {
             return {
@@ -427,7 +443,7 @@ export default {
           })
         }
       })
-      getTopicPubArea(value).then(res => {
+      getHotsTopicPubArea(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           let total = res.data.result.reduce((past, cur) => past + cur.count, 0)
           this.areaData.geo = res.data.result.map(v => {
@@ -447,19 +463,21 @@ export default {
       })
     },
     initList () {
-      this.hotNews = this.list[this.count]
-      this.count++
+      this.hotNews = this.dataList[this.curIndex]
+      this.curId = this.hotNews.id
+      this.curIndex++
+      this.curIndex++
       this.listInterval = setInterval(() => {
-        if (this.count < this.list.length) {
+        if (this.curIndex < this.dataList.length) {
           this.hotNews = ''
           setTimeout(() => {
-            this.hotNews = this.list[this.count]
-            this.count++
+            this.hotNews = this.dataList[this.curIndex]
+            this.curId = this.hotNews.id
+            this.curIndex++
           }, 100)
         } else {
-          this.dataList = ''
           clearInterval(this.listInterval)
-          this.count = 0
+          this.curIndex = 0
           this.getDataList()
         }
       }, 35000)

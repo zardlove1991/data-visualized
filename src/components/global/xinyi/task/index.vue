@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getTaskList, getTaskAccess } from '@/servers/xinyi'
+import { getWorkCallTaskList, getWorkCallTaskNum } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/component/legend'
@@ -47,6 +47,7 @@ export default {
       dataInterval: null,
       count: 8,
       page: 1,
+      isPaging: false,
       proportion: 1,
       legendData: [],
       seriesData: [],
@@ -117,6 +118,9 @@ export default {
   },
   created () {
     this.getDataList()
+    setInterval(() => {
+      this.getDataList()
+    }, 35000)
   },
   mounted () {
     this.proportion = this.getProportion('xy-task') * 1.8
@@ -124,49 +128,38 @@ export default {
   },
   methods: {
     getDataList () {
-      getTaskList(this.count, this.page).then(res => {
-        if (res && res.data && res.data.data && res.data.data[0]) {
-          this.dataList = []
-          this.dataList = res.data.data
-          this.intervalData()
-        }
-      })
-      getTaskAccess().then(res => {
-        if (res && res.data && res.data.data && res.data.data[0]) {
-          this.legendData = []
-          this.seriesData = []
-          res.data.data.forEach(v => {
-            this.legendData.push(v.title)
-            this.seriesData.push({
-              value: v.total,
-              name: v.title
-            })
-            this.taskTotal = res.data.data.reduce((past, cur) => past + cur.total, 0)
-          })
-        }
-      })
-    },
-
-    intervalData () {
-      this.dataInterval = setInterval(() => {
-        getTaskList(this.count, this.page).then(res => {
-          if (res && res.data && res.data.data && res.data.data[0]) {
+      getWorkCallTaskList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.data
-              if (res.data.data.length < this.count) {
-                this.page = 1
-              } else {
-                this.page++
-              }
+              this.dataList = res.data.result.data
             }, 100)
+            if (this.isPaging) {
+              this.page += 1
+            }
           } else {
             this.page = 1
-            clearInterval(this.dataInterval)
             this.getDataList()
           }
-        })
-      }, 35000)
+        }
+      })
+      getWorkCallTaskNum().then(res => {
+        if (!res.data.error_code) {
+          this.legendData = []
+          this.seriesData = []
+          setTimeout(() => {
+            res.data.result.forEach(v => {
+              this.legendData.push(v.title)
+              this.seriesData.push({
+                value: v.total,
+                name: v.title
+              })
+              this.taskTotal = res.data.result.reduce((past, cur) => past + cur.total, 0)
+            })
+          }, 100)
+        }
+      })
     }
   }
 }

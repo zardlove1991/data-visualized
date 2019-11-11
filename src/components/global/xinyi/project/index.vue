@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getProjectData } from '@/servers/xinyi'
+import { getWorkCallSubjectList } from '@/servers/interface'
 export default {
   name: 'project',
   data () {
@@ -28,53 +28,37 @@ export default {
       dataList: [],
       dataInterval: null,
       count: 8,
-      page: 1
+      page: 1,
+      isPaging: false
     }
   },
   created () {
     this.getDataList()
+    setInterval(() => {
+      this.getDataList()
+    }, 35000)
   },
   mounted () {
     this.setFontsize('xy-project')
   },
   methods: {
     getDataList () {
-      getProjectData(this.count, this.page).then(res => {
-        if (res && res.data && res.data.data && res.data.data[0]) {
-          this.dataList = []
-          setTimeout(() => {
-            this.dataList = res.data.data
-            if (res.data.data.length < this.count) {
-              this.page = 1
-            } else {
-              this.page++
-            }
-          }, 100)
-        }
-      })
-      this.intervalData()
-    },
-
-    intervalData () {
-      this.dataInterval = setInterval(() => {
-        getProjectData(this.count, this.page).then(res => {
-          if (res && res.data && res.data.data && res.data.data[0]) {
+      getWorkCallSubjectList(this.count, this.page).then((res) => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.data
-              if (res.data.data.length < this.count) {
-                this.page = 1
-              } else {
-                this.page++
-              }
+              this.dataList = res.data.result.data
             }, 100)
+            if (this.isPaging) {
+              this.page += 1
+            }
           } else {
             this.page = 1
-            clearInterval(this.dataInterval)
             this.getDataList()
           }
-        })
-      }, 35000)
+        }
+      })
     }
   }
 }
