@@ -489,7 +489,7 @@ export default {
           this.curIndex = 0
           this.getDataList()
         }
-      }, 35000)
+      }, 15000)
     }
   }
 }
