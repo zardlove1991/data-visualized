@@ -70,7 +70,7 @@ export default {
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
         getCluesTogether('website', this.count, this.webPage).then(res => {
-          if (res && res.data && res.data.result && res.data.result) {
+          if (!res.data.error_code) {
             if (res.data.result.length) {
               this.dataList = []
               setTimeout(() => {
@@ -87,7 +87,7 @@ export default {
         })
       } else if (type === 1) {
         getCluesTogether149434('website', this.count, this.weChatPage).then(res => {
-          if (res && res.data && res.data.result && res.data.result) {
+          if (!res.data.error_code) {
             if (res.data.result.length) {
               this.dataList = []
               setTimeout(() => {

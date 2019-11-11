@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { getRankList, getRankCommentList } from '@/servers/xinyi'
+import { getM2OPlusRankList } from '@/servers/interface'
 export default {
   name: 'news',
   data () {
@@ -45,9 +45,11 @@ export default {
         type: 1
       }],
       currentIndex: 0,
-      list: [],
       dataList: [],
-      count: 0
+      count: 6,
+      clickPage: 1,
+      commentPage: 1,
+      isPaging: false
     }
   },
   created () {
@@ -69,14 +71,38 @@ export default {
     getData (type) {
       this.dataList = []
       if (type === 0) {
-        getRankList().then(res => {
-          if (res && res.data) {
-            this.dataList = res.data.slice(0, 6)
+        getM2OPlusRankList('click_num', this.count, this.clickPage).then(res => {
+          if (!res.data.error_code) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              if (this.isPaging) {
+                this.clickPage += 1
+              }
+            } else {
+              this.clickPage = 1
+              this.getDataList()
+            }
           }
         })
       } else if (type === 1) {
-        getRankCommentList().then(res => {
-          this.dataList = res.data.slice(0, 6)
+        getM2OPlusRankList('comment_num', this.count, this.commentPage).then(res => {
+          if (!res.data.error_code) {
+            if (res.data.result.length) {
+              this.dataList = []
+              setTimeout(() => {
+                this.dataList = res.data.result
+              }, 100)
+              if (this.isPaging) {
+                this.commentPage += 1
+              }
+            } else {
+              this.commentPage = 1
+              this.getDataList()
+            }
+          }
         })
       }
     }
