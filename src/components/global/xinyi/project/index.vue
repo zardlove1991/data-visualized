@@ -26,7 +26,6 @@ export default {
     return {
       projectTitle: '选题展示',
       dataList: [],
-      dataInterval: null,
       count: 8,
       page: 1,
       isPaging: false

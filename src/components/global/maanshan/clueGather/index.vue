@@ -45,7 +45,8 @@ export default {
       count: 3,
       webPage: 1,
       weChatPage: 1,
-      weBoPage: 1
+      weBoPage: 1,
+      isPaging: false
     }
   },
   created () {
@@ -74,7 +75,9 @@ export default {
               setTimeout(() => {
                 this.dataList = res.data.result
               }, 100)
-              this.webPage += 1
+              if (this.isPaging) {
+                this.webPage += 1
+              }
             } else {
               this.webPage = 1
               this.getData(this.titleList[this.currentIndex].type)
@@ -89,7 +92,9 @@ export default {
               setTimeout(() => {
                 this.dataList = res.data.result
               }, 100)
-              this.weChatPage += 1
+              if (this.isPaging) {
+                this.weChatPage += 1
+              }
             } else {
               this.weChatPage = 1
               this.getData(this.titleList[this.currentIndex].type)
@@ -104,7 +109,9 @@ export default {
               setTimeout(() => {
                 this.dataList = res.data.result
               }, 100)
-              this.weBoPage += 1
+              if (this.isPaging) {
+                this.weBoPage += 1
+              }
             } else {
               this.weBoPage = 1
               this.getData(this.titleList[this.currentIndex].type)

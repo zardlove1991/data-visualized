@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getWorkCallSubjectList } from '@/servers/maanshan'
+import { getWorkCallReportList } from '@/servers/interface'
 export default {
   name: 'report',
   data () {
@@ -31,7 +31,8 @@ export default {
       componentTitle: '报题展示',
       dataList: [],
       count: 4,
-      page: 1
+      page: 1,
+      isPaging: false
     }
   },
   created () {
@@ -45,14 +46,16 @@ export default {
   },
   methods: {
     getDataList () {
-      getWorkCallSubjectList().then(res => {
+      getWorkCallReportList(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
               this.dataList = res.data.result.data
             }, 100)
-            this.page += 1
+            if (this.isPaging) {
+              this.page += 1
+            }
           } else {
             this.page = 1
             this.getDataList()

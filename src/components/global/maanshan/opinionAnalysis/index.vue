@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { getHotTopicList, getHotsTopicTrend, getHotsTopicEmotion, getHotsTopicPubArea } from '@/servers/maanshan'
+import { getHotsTopicList, getHotsTopicTrend, getHotsTopicEmotion, getHotsTopicPubArea } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/chart/pie'
@@ -42,10 +42,11 @@ export default {
   },
   data () {
     return {
-      newsList: [],
-      count: 20,
-      page: 1,
       hotNews: {},
+      dataList: [],
+      count: 4,
+      page: 1,
+      isPaging: false,
       curIndex: 0,
       curId: null,
       proportion: 1,
@@ -387,22 +388,12 @@ export default {
     // 监测热点的ID变换，更新图表数据
     curId: {
       handler: function (newValue) {
-        this.getHotTopicDetail()
+        this.getHotTopicDetail(newValue)
       }
     }
   },
   created () {
-    this.initNewsList()
-    setInterval(() => {
-      this.curIndex += 1
-      if (this.curIndex > this.count - 1 || this.curIndex >= this.newsList.length) {
-        this.curIndex = 0
-        this.initNewsList()
-      } else {
-        this.hotNews = this.newsList[this.curIndex]
-        this.curId = this.newsList[this.curIndex]['id']
-      }
-    }, 10000)
+    this.getDataList()
   },
   mounted () {
     this.proportion = this.getProportion('maanshan-opinion')
@@ -410,20 +401,25 @@ export default {
   },
   methods: {
     // 初始化新闻列表
-    initNewsList () {
-      getHotTopicList(this.count, this.page).then(response => {
-        if (!response.data.error_code) {
-          this.newsList = []
-          setTimeout(() => {
-            this.newsList = response.data.result.data
-            this.hotNews = this.newsList[this.curIndex]
-            this.curId = this.newsList[this.curIndex]['id']
-          }, 100)
+    getDataList () {
+      getHotsTopicList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            this.dataList = res.data.result.data
+            this.initList()
+            if (this.isPaging) {
+              this.page += 1
+            }
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
     },
-    getHotTopicDetail () {
-      getHotsTopicTrend(this.curId).then(res => {
+    getHotTopicDetail (value) {
+      getHotsTopicTrend(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.heatData.xAxis = res.data.result[0].count.map(v => v.field.slice(5))
           this.heatData.series = res.data.result.map(v => {
@@ -447,7 +443,7 @@ export default {
           })
         }
       })
-      getHotsTopicEmotion(this.curId).then(res => {
+      getHotsTopicEmotion(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.sentimentData.series = res.data.result.map(v => {
             return {
@@ -457,7 +453,7 @@ export default {
           })
         }
       })
-      getHotsTopicPubArea(this.curId).then(res => {
+      getHotsTopicPubArea(value).then(res => {
         if (res && res.data && res.data.result && res.data.result[0]) {
           let total = res.data.result.reduce((past, cur) => past + cur.count, 0)
           this.areaData.geo = res.data.result.map(v => {
@@ -475,6 +471,25 @@ export default {
           })
         }
       })
+    },
+    initList () {
+      this.hotNews = this.dataList[this.curIndex]
+      this.curId = this.hotNews.id
+      this.curIndex++
+      this.listInterval = setInterval(() => {
+        if (this.curIndex < this.dataList.length) {
+          this.hotNews = ''
+          setTimeout(() => {
+            this.hotNews = this.dataList[this.curIndex]
+            this.curId = this.hotNews.id
+            this.curIndex++
+          }, 100)
+        } else {
+          clearInterval(this.listInterval)
+          this.curIndex = 0
+          this.getDataList()
+        }
+      }, 35000)
     }
   }
 }

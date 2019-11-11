@@ -46,6 +46,7 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
+      isisPaging: false,
       curIndex: 0,
       curId: null,
       proportion: 1,
@@ -465,7 +466,6 @@ export default {
     initList () {
       this.hotNews = this.dataList[this.curIndex]
       this.curId = this.hotNews.id
-      this.curIndex++
       this.curIndex++
       this.listInterval = setInterval(() => {
         if (this.curIndex < this.dataList.length) {
