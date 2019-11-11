@@ -74,6 +74,9 @@ export default {
       border: 0.1em solid rgb(4, 70, 4);
       background-color: #44B9F4;
     }
+    .list-item:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>
