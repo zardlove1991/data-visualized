@@ -53,3 +53,7 @@ export const qingxucomponentOpinionAnalysis = getComponent('qingxu/opinionAnalys
 export const qingxucomponentNews = getComponent('qingxu/news')
 export const qingxucomponentPersonalRanking = getComponent('qingxu/personalRanking')
 export const qingxucomponentDepartmentRanking = getComponent('qingxu/departmentRanking')
+export const qingxucomponentReportDemo = getComponent('qingxu/reportDemo')
+export const qingxucomponentProjectDemo = getComponent('qingxu/projectDemo')
+export const qingxucomponentHotTopicDemo = getComponent('qingxu/hotTopicDemo')
+export const qingxucomponentTaskDemo = getComponent('qingxu/taskDemo')
