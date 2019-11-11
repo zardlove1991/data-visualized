@@ -81,7 +81,13 @@ export default {
           containLabel: true
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
         },
         legend: {
           data: ['网站', '微信', '微博'],
