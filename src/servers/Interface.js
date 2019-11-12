@@ -49,3 +49,9 @@ export const getHotsTopicPubArea = (id) => createAPI(`${httpsbaseUrl}/Apidaping/
 
 /* 电视直播 */
 export const getM2OPlusChannelList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusChannelList`)
+
+/* 发稿统计(个人) */
+export const getM2OPlusWorkRank = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkRank?count=${count}&page=${page}`)
+
+/* 部门统计 */
+export const getM2OPlusWorkDepartRank = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkDepartRank?count=${count}&page=${page}`)

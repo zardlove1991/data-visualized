@@ -11,7 +11,7 @@ const instance = axios.create({
 export const httpsbaseUrl = 'https://monitor-screen.cloud.hoge.cn'
 // const baseUrl = 'http://monitor-screen.cloud.hoge.cn'
 export const workcallUrl = 'https://sys-team.cloud.hoge.cn'
-export const GUID = window.location.pathname.split('/')[1]
+export const GUID = getPlatId()
 
 // workcallInfoList 记者列表
 export const getReporter = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=screen&a=reporterLine`)
@@ -30,7 +30,7 @@ export const getUserInfo = (memberId) => createXietongAPI(`${workcallUrl}/Apisys
 /* 通用 end */
 
 // 获取配置数据
-export const getConfigData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=CP_project&a=new_detail&guid=${getPlatId()}`)
+export const getConfigData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=CP_project&a=new_detail&guid=${GUID}`)
 
 export const getUrl = (action) => {
   if (!action) {
