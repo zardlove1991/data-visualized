@@ -30,14 +30,13 @@ export const getUserInfo = (memberId) => createXietongAPI(`${workcallUrl}/Apisys
 /* 通用 end */
 
 // 获取配置数据
-export const getConfigData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=CP_project&a=new_detail`)
+export const getConfigData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=CP_project&a=new_detail&guid=${getPlatId()}`)
 
 export const getUrl = (action) => {
   if (!action) {
     console.warn('接口地址不能为空')
     return false
   }
-  action = action + `&guid=${getPlatId()}`
   return action
 }
 
