@@ -78,12 +78,14 @@ export default {
   height: 100%;
   position: relative;
   padding: 17px;
+  background-color: #121D58;
   .project-wrap {
     width: 100%;
     height: 100%;
     padding: pxem(115px) pxem(100px) pxem(58px);
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
+    background-color: #0F1C46;
     .project-list-wrap{
       height: 100%;
       align-content: flex-start;

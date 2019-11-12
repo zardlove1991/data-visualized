@@ -163,6 +163,7 @@ export default {
         ]
       },
       pieOptions: {
+        color: ['#EF5766', '#0466FF', '#DE9937'],
         title: {
           text: '',
           textStyle: {
@@ -175,9 +176,9 @@ export default {
           formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
         legend: {
-          orient: 'horizontal',
-          bottom: 0,
-          icon: 'circle',
+          orient: 'vertical',
+          right: 0,
+          icon: 'rect',
           textStyle: {
             color: '#fff',
             fontSize: 8
@@ -187,7 +188,8 @@ export default {
           {
             name: '发布渠道占比',
             type: 'pie',
-            radius: ['20%', '70%'],
+            center: ['45%', '50%'],
+            radius: ['50%', '70%'],
             minAngle: 5,
             avoidLabelOverlap: true,
             label: {
@@ -425,12 +427,14 @@ export default {
   height: 100%;
   position: relative;
   padding: 17px;
+  background-color: #121D58;
   .data-analysis-wrap {
     width: 100%;
     height: 100%;
     padding: pxem(215px, 12.5) pxem(100px, 12.5) pxem(146px, 12.5) ;
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
+    background-color: #0F1C46;
     .data-analysis-list {
       width: 48%;
       height: 100%;

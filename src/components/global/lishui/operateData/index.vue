@@ -167,12 +167,14 @@ export default {
   height: 100%;
   position: relative;
   padding: 17px;
+  background-color: #121D58;
   .operate-data-wrap{
     width: 100%;
     height: 100%;
     padding: pxem(115px) pxem(100px) pxem(58px) ;
     background: url('./assets/border.png') no-repeat center center;
     background-size: 100% 100%;
+    background-color: #0F1C46;
     .box-item {
       width: 22%;
       height: 100%;
@@ -194,7 +196,7 @@ export default {
       background: url('./assets/micro.png') no-repeat center center;
       background-size: 100% 100%;
       .item-value {
-        color: #C9BA3D;
+        color: #00FFF6;
       }
     }
     .app-box {
