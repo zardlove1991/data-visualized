@@ -196,28 +196,28 @@ export default {
       background: url('./assets/micro.png') no-repeat center center;
       background-size: 100% 100%;
       .item-value {
-        color: #00FFF6;
+        color: #d79c2e;
       }
     }
     .app-box {
       background: url('./assets/app.png') no-repeat center center;
       background-size: 100% 100%;
       .item-value {
-        color: #23DF9F;
+        color: #02b5fd;
       }
     }
     .web-box {
       background: url('./assets/web.png') no-repeat center center;
       background-size: 100% 100%;
       .item-value {
-        color: #B732D3;
+        color: #2ad199;
       }
     }
     .content-box {
       background: url('./assets/content.png') no-repeat center center;
       background-size: 100% 100%;
       .item-value {
-        color: #D85C30;
+        color: #a63ae5;
       }
     }
   }

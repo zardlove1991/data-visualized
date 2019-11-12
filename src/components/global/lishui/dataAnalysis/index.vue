@@ -143,10 +143,10 @@ export default {
             barWidth: '60%',
             itemStyle: {
               normal: {
-                color: '#0541ff',
-                width: 15,
-                lineStyle: {
-                  color: '#0541ff'
+                color: function (params) {
+                  // build a color map as your need.
+                  let colorList = ['#03c1b5', '#03c1b5', '#03c1b5', '#0060fd', '#0060fd', '#0060fd', '#0060fd', '#0060fd', '#0060fd', '#0060fd']
+                  return colorList[params.dataIndex]
                 },
                 label: {
                   show: true,
@@ -220,6 +220,7 @@ export default {
         ]
       },
       lineOptions: {
+        color: ['#C100FF', '#00FFC0', '#ED9547'],
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -326,7 +327,7 @@ export default {
       } else {
         this.curId = this.newsList[this.curIndex]['id']
       }
-    }, 15000)
+    }, 5000)
   },
   mounted () {
     this.setFontsize('ls-dataAnalysis')
