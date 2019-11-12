@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getOperateData } from '@/servers/lishui'
+import { getOperateData } from '@/servers/interface'
 export default {
   name: 'operateData',
   data () {

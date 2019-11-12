@@ -8,7 +8,7 @@
         <!-- @click="showContent(v,k)" -->
         <div
           class="project-list sys-flex sys-flex-center flex-justify-between animated"
-          v-for="(v,k) in projectList"
+          v-for="(v,k) in dataList"
           :key="k"
           :class="{'flipInX' : v.title}"
           v-bind:style="{'animation-delay' : k/2+'s'}"
@@ -33,13 +33,12 @@
 </template>
 
 <script>
-import { getProjectData } from '@/servers/qingxu'
+import { getWorkCallSubjectList } from '@/servers/interface'
 export default {
   name: 'project',
   data () {
     return {
-      keyword: '',
-      projectList: [],
+      dataList: [],
       count: 6,
       page: 1,
       isPaging: false
@@ -56,12 +55,12 @@ export default {
   },
   methods: {
     getDataList () {
-      getProjectData(this.count, this.page).then((response) => {
-        if (!response.data.error_code) {
-          if (response.data.result.data.length) {
-            this.projectList = []
+      getWorkCallSubjectList(this.count, this.page).then((res) => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
             setTimeout(() => {
-              this.projectList = response.data.result.data
+              this.dataList = res.data.result.data
             }, 100)
             if (this.isPaging) {
               this.page += 1

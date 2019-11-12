@@ -42,7 +42,7 @@
 import call from './call.vue'
 import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
-import { getWorkCallConnectList } from '@/servers/qingxu'
+import { getWorkCallConnectList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'workcallInfoMap',

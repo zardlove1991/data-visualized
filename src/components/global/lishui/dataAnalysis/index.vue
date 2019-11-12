@@ -50,7 +50,7 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/gauge'
-import { getHotTopicList, getHotsTopicTrend, getHotsTopicActiveMedia, getHotsTopicMedia } from '@/servers/lishui'
+import { getHotsTopicList, getHotsTopicTrend, getHotsTopicActiveMedia, getHotsTopicMedia } from '@/servers/interface'
 export default {
   name: 'dataAnalysis',
   components: {
@@ -335,7 +335,7 @@ export default {
   methods: {
     // 本地模拟分页效果
     initLocalList () {
-      getHotTopicList(this.count).then(res => {
+      getHotsTopicList(this.count).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.localList = res.data.result.data
@@ -347,7 +347,7 @@ export default {
     },
     // 初始化新闻列表
     initNewsList () {
-      getHotTopicList(this.count, this.page).then(res => {
+      getHotsTopicList(this.count, this.page).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.newsList = []

@@ -2,7 +2,7 @@
   <div class="qx-news" id="qx-news">
     <div class="news-wrap">
       <div class="news-list-wrap sys-flex sys-flex-wrap">
-        <div class="news-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in newsList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="news-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div 
             class="news-icon"
             :class="{'bgfirst': k == 0, 'bgsecond': k == 1, 'bgthird': k === 2}"
@@ -24,9 +24,10 @@ export default {
   name: 'news',
   data () {
     return {
-      newsList: [],
+      dataList: [],
       count: 5,
-      page: 1
+      page: 1,
+      isPaging: false
     }
   },
   created () {
@@ -43,10 +44,16 @@ export default {
       getM2OPlusRankList(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.length) {
-            this.newsList = []
+            this.dataList = []
             setTimeout(() => {
-              this.newsList = res.data.result
+              this.dataList = res.data.result
             }, 100)
+            if (this.isPaging) {
+              this.page += 1
+            }
+          } else {
+            this.page = 1
+            this.getDataList()
           }
         }
       })

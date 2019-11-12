@@ -5,7 +5,7 @@
         热点共7183条
       </div>
       <div class="hotTopic-list-wrap sys-flex sys-flex-wrap">
-        <div class="hotTopic-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in hotTopicList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="hotTopic-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="hotTopic-title overhidden">{{v.title}}</div>
           <div class="hotTopic-user">{{v.class_name}}</div>
           <div class="hotTopic-number sys-flex sys-flex-center">
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import { getHotsTopicList } from '@/servers/qingxu'
+import { getHotsTopicList } from '@/servers/interface'
 export default {
   name: 'hotTopic',
   data () {
     return {
-      hotTopicList: [],
+      dataList: [],
       count: 6,
       page: 1,
       isPaging: false
@@ -44,9 +44,9 @@ export default {
       getHotsTopicList(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
-            this.hotTopicList = []
+            this.dataList = []
             setTimeout(() => {
-              this.hotTopicList = res.data.result.data
+              this.dataList = res.data.result.data
             }, 100)
             if (this.isPaging) {
               this.page += 1

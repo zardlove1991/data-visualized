@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getCluesTogether } from '@/servers/maanshan'
+import { getCluesTogether } from '@/servers/interface'
 export default {
   name: 'clue',
   data () {

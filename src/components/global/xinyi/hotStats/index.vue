@@ -46,7 +46,7 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
-      isisPaging: false,
+      isPaging: false,
       curIndex: 0,
       curId: null,
       proportion: 1,

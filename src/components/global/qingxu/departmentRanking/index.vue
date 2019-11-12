@@ -1,7 +1,7 @@
 <template>
   <div class="qx-personalranking" id="qx-personalranking">
     <div class="personalranking-wrap sys-flex sys-flex-wrap flex-justify-between">
-      <div class="rank-list sys-flex sys-flex-center flex-justify-between animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in rankList" :key="k">
+      <div class="rank-list sys-flex sys-flex-center flex-justify-between animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList" :key="k">
         <div class="serial hg-flex" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k > 2}">
           <span class="serial-number">{{k + 1}}</span>
         </div>
@@ -17,12 +17,15 @@
   </div>
 </template>
 <script>
-import { getM2OPlusWorkDepartRank } from '@/servers/qingxu'
+import { getM2OPlusWorkDepartRank } from '@/servers/interface'
 export default {
   name: 'personalRanking',
   data () {
     return {
-      rankList: []
+      dataList: [],
+      count: 8,
+      page: 1,
+      isPaging: false
     }
   },
   mounted () {
@@ -37,8 +40,19 @@ export default {
   methods: {
     getDataList () {
       getM2OPlusWorkDepartRank().then(res => {
-        if (res && res.data && res.data.result && res.data.result && res.data.result[0]) {
-          this.rankList = res.data.result
+        if (!res.data.error_code) {
+          if (res.data.result.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+            }
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
     }

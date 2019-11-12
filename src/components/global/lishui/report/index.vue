@@ -2,7 +2,7 @@
   <div class="ls-report" id="ls-report">
     <div class="report-wrap">
       <div class="report-list-wrap sys-flex sys-flex-wrap flex-justify-between">
-        <div class="report-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in reportList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="report-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v,k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="report-status">
             <span v-if="v.audit_status==2" class="reject"></span>
             <span v-if="v.audit_status==1" class="pass"></span>
@@ -19,15 +19,15 @@
 </template>
 
 <script>
-import { getReportData } from '@/servers/lishui'
+import { getWorkCallReportList } from '@/servers/interface'
 export default {
   name: 'report',
   data () {
     return {
-      keyword: '',
-      reportList: [],
+      dataList: [],
       count: 10,
-      page: 1
+      page: 1,
+      isPaging: true
     }
   },
   created () {
@@ -41,14 +41,16 @@ export default {
   },
   methods: {
     getDataList () {
-      getReportData(this.count, this.page).then((res) => {
+      getWorkCallReportList(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
-            this.reportList = []
+            this.dataList = []
             setTimeout(() => {
-              this.reportList = res.data.result.data
+              this.dataList = res.data.result.data
             }, 100)
-            this.page += 1
+            if (this.isPaging) {
+              this.page += 1
+            }
           } else {
             this.page = 1
             this.getDataList()

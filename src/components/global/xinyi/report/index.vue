@@ -30,7 +30,6 @@ export default {
     return {
       reportTitle: '报题展示',
       dataList: [],
-      dataInterval: null,
       count: 8,
       page: 1,
       isPaging: false

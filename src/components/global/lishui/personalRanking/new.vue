@@ -1,17 +1,15 @@
 <template>
-  <div class="qx-personalranking" id="qx-personalranking">
+  <div class="lishui-personalranking" id="lishui-personalranking">
     <div class="personalranking-wrap sys-flex sys-flex-wrap flex-justify-between">
-      <div class="rank-list sys-flex sys-flex-center flex-justify-between animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList" :key="k">
-        <div class="serial hg-flex" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k > 2}">
-          <span class="serial-number">{{k + 1}}</span>
-        </div>
+      <div class="rank-list sys-flex sys-flex-center flex-justify-between animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in rankList" :key="k">
+        <div class="serial hg-flex" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k > 2}"><span>{{k + 1}}</span></div>
         <div class="information sys-flex sys-flex-center">
-          <img :src="v && v.avatar ? v.avatar.host + v.avatar.filepath + v.avatar.filename : defaultImg" class="info-img" />
-          <span class="info-name">{{v.name}}</span>
+          <img :src="v && v.avatar ? v.avatar.host + v.avatar.filepath + v.avatar.filename : defaultImg" />
+          <span>{{v.name}}</span>
         </div>
         <div class="num sys-flex sys-flex-center">
-          <span class="num-text">{{v.publish}}</span>
-          <span class="num-unit">条</span>
+          <span>{{v.publish}}</span>
+          <span>条</span>
         </div>
       </div>
     </div>
@@ -23,21 +21,18 @@ export default {
   name: 'personalRanking',
   data () {
     return {
-      dataList: [],
-      count: 8,
-      page: 1,
-      isPaging: false,
+      rankList: [],
       defaultImg: require('../../../../assets/avatar/touxiang.png')
     }
   },
   mounted () {
-    this.setFontsize('qx-personalranking')
+    this.setFontsize('lishui-personalranking')
   },
   created () {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 15000)
+    }, 25000)
   },
   methods: {
     getDataList () {
@@ -62,38 +57,37 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "src/styles/index.scss";
-.qx-personalranking {
+@import "~@/styles/index.scss";
+.lishui-personalranking {
   width: 100%;
   height: 100%;
+  padding: px2em(33px) px2em(26px) px2em(53px) px2em(50px);
   position: relative;
-  padding: pxrem(40px);
   .personalranking-wrap {
     width: 100%;
     height: 100%;
-    padding: pxrem(150px) pxrem(72px) pxrem(20px);
     background: url('./assets/border.png') no-repeat center;
     background-size: 100% 100%;
-    align-content: space-around;
+    padding: px2em(152px) px2em(128px) px2em(110px) px2em(114px);
+    color: #fff;
     .rank-list {
-      width: 47%;
-      height: 17%;
+      width: px2em(780px);
+      height: px2em(140px);
       background: url('./assets/back.png') no-repeat center;
       background-size: 100% 100%;
-      padding: 0 pxrem(57px) 0 pxrem(94px);
+      padding: 0 px2em(57px) 0 px2em(94px);
       position: relative;
       .serial {
-        width: pxrem(60px);
-        height: pxrem(70px);
+        width: px2em(55px);
+        height: px2em(65px);
         position: absolute;
         background: no-repeat center;
         background-size: 100% 100%;
         left: 0;
         top: 0;
-        .serial-number {
-          font-size: pxrem(40px);
-          padding-bottom: 0.5em;
-          color: #ffffff;
+        span {
+          font-size: px2em(32px);
+          padding-bottom: px2em(50px);
         }
         &.one {
           background-image: url('./assets/one.png');
@@ -109,24 +103,24 @@ export default {
         }
       }
       .information {
-        .info-img {
-          width: pxrem(94px);
-          height: pxrem(94px);
+        img {
+          width: px2em(94px);
+          height: px2em(94px);
           border-radius: 50%;
-          margin-right: pxrem(40px);
+          margin-right: px2em(20px);
         }
-        .info-name {
-          font-size: pxrem(42px);
-          color: #FFFFFF;
+        span {
+          font-size: px2em(42px);
         }
       }
       .num {
         color: #00FCFF;
-        .num-text {
-          font-size: pxrem(60px);
+        span:first-of-type {
+          font-size: px2em(72px);
+          margin-right: px2em(20px);
         }
-        .num-unit {
-          font-size: pxrem(36px);
+        span:last-of-type {
+          font-size: px2em(36px);
         }
       }
     }
