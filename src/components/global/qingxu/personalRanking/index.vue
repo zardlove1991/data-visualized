@@ -43,10 +43,10 @@ export default {
     getDataList () {
       getM2OPlusWorkRank(this.count, this.page).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result.length) {
+          if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.result
+              this.dataList = res.data.result.data
             }, 100)
             if (this.isPaging) {
               this.page += 1

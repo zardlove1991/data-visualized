@@ -1,7 +1,7 @@
 <template>
   <div class="lishui-personalranking" id="lishui-personalranking">
     <div class="personalranking-wrap sys-flex sys-flex-wrap flex-justify-between">
-      <div class="rank-list sys-flex sys-flex-center flex-justify-between animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in rankList" :key="k">
+      <div class="rank-list sys-flex sys-flex-center flex-justify-between animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList" :key="k">
         <div class="serial hg-flex" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k > 2}"><span>{{k + 1}}</span></div>
         <div class="information sys-flex sys-flex-center">
           <img :src="v && v.avatar ? v.avatar.host + v.avatar.filepath + v.avatar.filename : defaultImg" />
@@ -16,12 +16,15 @@
   </div>
 </template>
 <script>
-import { getRankList } from '@/servers/lishui'
+import { getM2OPlusWorkRank } from '@/servers/interface'
 export default {
   name: 'personalRanking',
   data () {
     return {
-      rankList: [],
+      dataList: [],
+      count: 8,
+      page: 1,
+      isPaging: false,
       defaultImg: require('../../../../assets/avatar/touxiang.png')
     }
   },
@@ -29,16 +32,27 @@ export default {
     this.setFontsize('lishui-personalranking')
   },
   created () {
-    this.getRankList()
+    this.getDataList()
     setInterval(() => {
-      this.getRankList()
+      this.getDataList()
     }, 25000)
   },
   methods: {
-    getRankList () {
-      getRankList().then(res => {
-        if (res && res.data && res.data.result && res.data.result.data && res.data.result.data[0]) {
-          this.rankList = res.data.result.data
+    getDataList () {
+      getM2OPlusWorkRank(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.data
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+            }
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
     }
