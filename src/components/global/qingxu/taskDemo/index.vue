@@ -8,7 +8,7 @@
         <!-- @click="showContent(v,k)" -->
         <div
           class="project-list sys-flex sys-flex-center flex-justify-between animated"
-          v-for="(v,k) in projectList"
+          v-for="(v,k) in dataList"
           :key="k"
           :class="{'flipInX' : v.title}"
           v-bind:style="{'animation-delay' : k/2+'s'}"
@@ -33,13 +33,12 @@
 </template>
 
 <script>
-import { getWorkCallTaskList } from '@/servers/demo'
+import { getWorkCallTaskList } from '@/servers/interface'
 export default {
   name: 'project',
   data () {
     return {
-      keyword: '',
-      projectList: [],
+      dataList: [],
       count: 6,
       page: 1,
       isPaging: false
@@ -59,9 +58,9 @@ export default {
       getWorkCallTaskList(this.count, this.page).then((response) => {
         if (!response.data.error_code) {
           if (response.data.result.data.length) {
-            this.projectList = []
+            this.dataList = []
             setTimeout(() => {
-              this.projectList = [
+              this.dataList = [
                 {
                   title: '采访雨花小区保安管理员',
                   task_user_name: '周捷',
