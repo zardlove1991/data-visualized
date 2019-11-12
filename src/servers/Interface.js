@@ -53,6 +53,9 @@ export const getHotsTopicTrend = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${
 /* 情感分析 */
 export const getHotsTopicEmotion = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicEmotion?id=${id}`)
 
+/* 关联热词 */
+export const getHotsTopicHotWord = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
+
 /* 地域分布 */
 export const getHotsTopicPubArea = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicPubArea?id=${id}`)
 

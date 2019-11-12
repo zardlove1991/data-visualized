@@ -58,7 +58,7 @@ import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/gauge'
 import 'echarts-wordcloud'
-import { getHotsTopicList, getHotsTopicEmotion, getHotsTopicPubArea, getHotsTopicHotWord } from '@/servers/qingxu'
+import { getHotsTopicList, getHotsTopicEmotion, getHotsTopicPubArea, getHotsTopicHotWord } from '@/servers/interface'
 export default {
   name: 'opinionAnalysis',
   components: {
