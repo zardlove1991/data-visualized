@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getM2OPlusRankList } from '@/servers/qingxu'
+import { getM2OPlusPublish } from '@/servers/interface'
 export default {
   name: 'news',
   data () {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getM2OPlusRankList(this.count, this.page).then((res) => {
+      getM2OPlusPublish(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.length) {
             this.dataList = []
