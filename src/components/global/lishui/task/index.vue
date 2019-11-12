@@ -2,7 +2,7 @@
   <div class="ls-task" id="ls-task">
     <div class="task-wrap">
       <swiper :options="swiperOption" ref="mySwiper" >
-        <swiper-slide class="sys-flex sys-flex-wrap" style="height:100%!important;align-content:space-between;" v-for="(item,k) in taskList" :key="k">
+        <swiper-slide class="sys-flex sys-flex-wrap" style="height:100%!important;align-content:space-between;" v-for="(item,k) in dataList" :key="k">
           <div class="task-list" v-for="(list,key) in item" :key="key">
             <div class="task-nav sys-flex sys-flex-center">
               <div class="project-title sys-flex-one overhidden">所属选题：{{list.project_title}}</div>
@@ -28,7 +28,7 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import { getTaskList } from '@/servers/lishui'
+import { getWorkCallTaskList } from '@/servers/interface'
 export default {
   name: 'task',
   components: {
@@ -37,7 +37,6 @@ export default {
   },
   data () {
     return {
-      taskList: [],
       swiperOption: {
         // notNextTick: true,
         speed: 2000,
@@ -59,8 +58,10 @@ export default {
           prevEl: '.swiper-button-prev'
         }
       },
+      dataList: [],
       count: 24,
-      page: 1
+      page: 1,
+      isPaging: true
     }
   },
   created () {
@@ -74,12 +75,14 @@ export default {
   },
   methods: {
     getDataList () {
-      getTaskList(this.count, this.page).then((res) => {
+      getWorkCallTaskList(this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
-            this.taskList = []
-            this.taskList = this.split_array(res.data.result.data, 8)
-            // this.page += 1
+            this.dataList = []
+            this.dataList = this.split_array(res.data.result.data, 8)
+            if (this.isPaging) {
+              this.page += 1
+            }
           } else {
             this.page = 1
             this.getDataList()

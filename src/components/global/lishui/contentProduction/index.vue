@@ -159,7 +159,7 @@ export default {
       if (this.currentIndex >= this.dateList.length) {
         this.currentIndex = 0
       }
-    }, '5000')
+    }, 5000)
   },
   mounted () {
     this.setFontsize('lishui-contentproduction')

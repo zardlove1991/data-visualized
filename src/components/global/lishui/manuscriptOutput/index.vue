@@ -26,57 +26,53 @@
   </div>
 </template>
 <script>
-import { getArticleList } from '@/servers/lishui'
+import { getM2OPlusPublish } from '@/servers/interface'
 export default {
   name: 'manuscriptOutput',
   data () {
     return {
       dataList: [],
-      page: 1
+      count: 5,
+      page: 1,
+      isPaging: true,
+      typeList: {
+        article: '文稿',
+        gallery: '图集',
+        topic: '专题',
+        link: '外链',
+        video: '视频'
+      }
     }
   },
   mounted () {
     this.setFontsize('lishui-manuscriptoutput')
   },
   created () {
-    this.getArticleList()
+    this.getDataList()
     setInterval(() => {
-      this.getArticleList()
+      this.getDataList()
     }, 25000)
   },
   methods: {
-    getArticleList () {
-      getArticleList(this.page, 5).then(res => {
-        if (res && res.data && res.data.result && res.data.result[0]) {
-          this.dataList = []
-          setTimeout(() => {
-            this.dataList = res.data.result
-            this.dataList.forEach(val => {
-              switch (val.type) {
-                case 'article':
-                  val.typeName = '文稿'
-                  break
-                case 'gallery':
-                  val.typeName = '图集'
-                  break
-                case 'topic':
-                  val.typeName = '专题'
-                  break
-                case 'link':
-                  val.typeName = '外链'
-                  break
-                case 'video':
-                  val.typeName = '视频'
-                  break
-                default:
-                  break
-              }
-            })
-          }, 100)
-          if (res.data.result.length < 5) {
-            this.page = 1
+    getDataList () {
+      getM2OPlusPublish(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.map(v => {
+                return {
+                  ...v,
+                  typeName: this.typeList[(v.type)]
+                }
+              })
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+            }
           } else {
-            this.page += 1
+            this.page = 1
+            this.getDataList()
           }
         }
       })

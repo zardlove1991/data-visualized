@@ -46,7 +46,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
-import { getConnecterList } from '@/servers/lishui'
+import { getWorkCallConnectList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'workcallInfoMap',
@@ -603,7 +603,7 @@ export default {
       this.currentActive = false
     },
     getReporter () {
-      getConnecterList().then(res => {
+      getWorkCallConnectList().then(res => {
         if (!res.data.error_code && res.data.result.length) {
           this.reporterList = res.data.result
         }

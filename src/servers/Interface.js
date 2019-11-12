@@ -35,8 +35,17 @@ export const getM2OPlusRankList = (desc = 'website', count = 6, page = 1) => cre
 /* 在线记者 */
 export const getWorkCallConnectList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallConnectList`)
 
+/* 溧水运营数据 */
+export const getOperateData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperateData`)
+
 /* 热点话题 */
 export const getHotsTopicList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?count=${count}&page=${page}`)
+
+/* 成稿产出 */
+export const getM2OPlusPublish = (count = 5, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?count=${count}&page=${page}`)
+
+/* 辅屏传播效果 */
+export const getM2OPlusEffects = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusEffects`)
 
 /* 热度走势 */
 export const getHotsTopicTrend = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTrend?id=${id}`)
@@ -46,6 +55,12 @@ export const getHotsTopicEmotion = (id) => createAPI(`${httpsbaseUrl}/Apidaping/
 
 /* 地域分布 */
 export const getHotsTopicPubArea = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicPubArea?id=${id}`)
+
+/* 媒体占比 */
+export const getHotsTopicActiveMedia = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicActiveMedia?id=${id}`)
+
+/* 活跃媒体来源top10 */
+export const getHotsTopicMedia = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicMedia?id=${id}`)
 
 /* 电视直播 */
 export const getM2OPlusChannelList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusChannelList`)

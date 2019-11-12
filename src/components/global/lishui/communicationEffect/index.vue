@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import { getEffect } from '@/servers/lishui'
+import { getM2OPlusEffects } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
@@ -133,25 +133,27 @@ export default {
     this.setFontsize('lishui-communicationeffect')
   },
   created () {
-    this.getEffect()
+    this.getDataList()
   },
   methods: {
-    getEffect () {
-      getEffect().then(res => {
-        if (res && res.data && res.data.result) {
-          let data = res.data.result
-          this.readNum = data.all.click_num
-          this.commentNum = data.all.comment_num
-          let arr = Object.keys(data)
-          arr.pop()
-          this.barOptions.xAxis.data = arr.reverse()
-          let dataArr = Object.values(data)
-          dataArr.pop()
-          if (dataArr && dataArr[0]) {
-            dataArr.forEach(value => {
-              this.barOptions.series[0].data.push(value.click_num)
-              this.barOptions.series[1].data.push(value.comment_num)
-            })
+    getDataList () {
+      getM2OPlusEffects().then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result) {
+            let data = res.data.result
+            this.readNum = data.all.click_num
+            this.commentNum = data.all.comment_num
+            let arr = Object.keys(data)
+            arr.pop()
+            this.barOptions.xAxis.data = arr.reverse()
+            let dataArr = Object.values(data)
+            dataArr.pop()
+            if (dataArr && dataArr[0]) {
+              dataArr.forEach(value => {
+                this.barOptions.series[0].data.push(value.click_num)
+                this.barOptions.series[1].data.push(value.comment_num)
+              })
+            }
           }
         }
       })

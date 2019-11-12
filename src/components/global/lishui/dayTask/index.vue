@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="wrap-right">
-        <div class="right-list sys-flex sys-flex-center animated" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in listData" :key="k">
+        <div class="right-list sys-flex sys-flex-center animated" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList" :key="k">
           <div class="list-status">
             <img v-if="v.status === '1'" src="./assets/start.png" />
             <img v-if="v.status === '2'" src="./assets/ing.png" />
@@ -23,61 +23,62 @@
   </div>
 </template>
 <script>
-import { getDaytaskNum, getTaskList } from '@/servers/lishui'
+import { getWorkCallTaskNum, getWorkCallTaskList } from '@/servers/interface'
 export default {
   name: 'dayTask',
   data () {
     return {
-      listData: [],
-      total: 0,
+      dataList: [],
+      count: 5,
       page: 1,
-      numList: []
+      isPaging: true,
+      numList: [],
+      total: 0
     }
   },
   created () {
-    // 接口获取任务数目
-    this.getTaskNum()
     // 接口获取任务列表
-    this.getTaskList()
+    this.getDataList()
     setInterval(() => {
-      this.getTaskList()
+      this.getDataList()
     }, 25000)
   },
   mounted () {
     this.setFontsize('lishui-daytask')
   },
   methods: {
-    getTaskNum () {
-      getDaytaskNum().then(res => {
-        if (res && res.data && res.data.result && res.data.result[0]) {
-          let list = res.data.result
-          list.forEach(list => {
-            if (list.status === 1 || list.status === 2 || list.status === 4) {
-              this.numList.push({
-                title: list.title,
-                num: list.total
-              })
-              this.total += list.total
+    getDataList () {
+      getWorkCallTaskList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.data
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
             }
-          })
-          this.numList.unshift({
-            title: '总任务',
-            num: this.total
-          })
+          } else {
+            this.page = 1
+            this.getDataList()
+          }
         }
       })
-    },
-    getTaskList () {
-      getTaskList(5, this.page).then(res => {
-        if (res && res.data && res.data.result && res.data.result.data && res.data.result.data[0]) {
-          this.listData = []
-          setTimeout(() => {
-            this.listData = res.data.result.data
-          }, 100)
-          if (res.data.result.data.length < 5) {
-            this.page = 1
-          } else {
-            this.page += 1
+      getWorkCallTaskNum().then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.length) {
+            this.numList = []
+            this.numList = res.data.result.filter(v => v.status === 1 || v.status === 2 || v.status === 4).map(v => {
+              return {
+                title: v.title,
+                num: v.total
+              }
+            })
+            this.total = res.data.result.reduce((past, cur) => past + cur.total, 0)
+            this.numList.unshift({
+              title: '总任务',
+              num: this.total
+            })
           }
         }
       })
