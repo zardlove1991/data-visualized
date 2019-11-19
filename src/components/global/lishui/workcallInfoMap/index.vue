@@ -696,6 +696,7 @@ export default {
   height: 100%;
   position: relative;
   padding: 11px;
+  background-color: #121D58;
   .container-title {
     width: 100%;
     height: 20%;
