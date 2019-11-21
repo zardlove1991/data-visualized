@@ -1,6 +1,5 @@
 <template>
   <div class="maanshan-report" id="maanshan-report">
-    <!-- :class="[{'warp-bg' : showDefault}]" -->
     <div class="report-wrap sys-flex sys-vertical" >
       <div class="report-title sys-flex sys-flex-center">{{componentTitle}}</div>
       <div
@@ -32,17 +31,18 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 10000
     }
   },
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 10000)
   },
   mounted () {
     this.setFontsize('maanshan-report')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

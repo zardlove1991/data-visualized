@@ -125,7 +125,8 @@ export default {
           },
           data: []
         }]
-      }
+      },
+      frequency: 10000
     }
   },
   components: {

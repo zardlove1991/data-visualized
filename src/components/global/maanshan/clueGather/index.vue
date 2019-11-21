@@ -46,11 +46,15 @@ export default {
       webPage: 1,
       weChatPage: 1,
       weBoPage: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 10000
     }
   },
   created () {
     this.getData(this.titleList[this.currentIndex].type)
+  },
+  mounted () {
+    this.setFontsize('maanshan-clue')
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.titleList.length) {
@@ -59,10 +63,7 @@ export default {
       } else {
         this.getData(this.titleList[this.currentIndex].type)
       }
-    }, 15000)
-  },
-  mounted () {
-    this.setFontsize('maanshan-clue')
+    }, this.frequency)
   },
   methods: {
     getData (type) {

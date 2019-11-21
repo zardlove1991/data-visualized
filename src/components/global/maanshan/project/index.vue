@@ -28,17 +28,18 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 10000
     }
   },
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 10000)
   },
   mounted () {
     this.setFontsize('maanshan-project')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {
