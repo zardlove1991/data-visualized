@@ -41,7 +41,8 @@ export default {
         topic: '专题',
         link: '外链',
         video: '视频'
-      }
+      },
+      frequency: 25
     }
   },
   mounted () {
@@ -51,7 +52,7 @@ export default {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 25000)
+    }, this.frequency)
   },
   methods: {
     getDataList () {

@@ -25,7 +25,8 @@ export default {
       count: 8,
       page: 1,
       isPaging: false,
-      defaultImg: require('../../../../assets/avatar/touxiang.png')
+      defaultImg: require('../../../../assets/avatar/touxiang.png'),
+      frequency: 25
     }
   },
   mounted () {
@@ -35,7 +36,7 @@ export default {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 25000)
+    }, this.frequency)
   },
   methods: {
     getDataList () {

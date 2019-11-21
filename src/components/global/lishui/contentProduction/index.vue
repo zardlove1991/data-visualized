@@ -147,7 +147,8 @@ export default {
         date: '10698',
         num: '3'
       }],
-      currentIndex: 0
+      currentIndex: 0,
+      frequency: 5
     }
   },
   components: {
@@ -159,7 +160,7 @@ export default {
       if (this.currentIndex >= this.dateList.length) {
         this.currentIndex = 0
       }
-    }, 5000)
+    }, this.frequency)
   },
   mounted () {
     this.setFontsize('lishui-contentproduction')

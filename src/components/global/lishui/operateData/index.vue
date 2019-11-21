@@ -110,7 +110,8 @@ export default {
           lable: 'cumulative_user_num',
           value: 0
         }
-      ]
+      ],
+      frequency: 15
     }
   },
 
@@ -118,7 +119,7 @@ export default {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 15000)
+    }, this.frequency)
   },
 
   mounted () {

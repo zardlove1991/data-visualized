@@ -38,14 +38,15 @@ export default {
       dataList: [],
       count: 10,
       page: 1,
-      isPaging: true
+      isPaging: true,
+      frequency: 15
     }
   },
   created () {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 15000)
+    }, this.frequency)
   },
   mounted () {
     this.setFontsize('ls-project')

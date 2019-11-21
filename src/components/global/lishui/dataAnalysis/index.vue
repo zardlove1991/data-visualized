@@ -289,7 +289,8 @@ export default {
         series: []
       },
       curIndex: 0,
-      curId: null
+      curId: null,
+      frequency: 15
     }
   },
   watch: {
@@ -327,7 +328,7 @@ export default {
       } else {
         this.curId = this.newsList[this.curIndex]['id']
       }
-    }, 5000)
+    }, this.frequency)
   },
   mounted () {
     this.setFontsize('ls-dataAnalysis')

@@ -33,7 +33,8 @@ export default {
       page: 1,
       isPaging: true,
       numList: [],
-      total: 0
+      total: 0,
+      frequency: 25
     }
   },
   created () {
@@ -41,7 +42,7 @@ export default {
     this.getDataList()
     setInterval(() => {
       this.getDataList()
-    }, 25000)
+    }, this.frequency)
   },
   mounted () {
     this.setFontsize('lishui-daytask')
