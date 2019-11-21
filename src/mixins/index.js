@@ -12,8 +12,14 @@ export default {
     }
   },
   computed: {
-    showDefault () {
-      return !(this.data && this.data.viewAttr && this.data.viewAttr.bg)
+  },
+  // 配置项赋值提前到创建钩子，组件定时器放在挂载钩子，保证顺序问题
+  created () {
+    if (this.data && this.data.viewAttr && this.data.viewAttr.isPage === '1') {
+      this.isPage = true
+    }
+    if (this.data && this.data.viewAttr && this.data.viewAttr.frequency) {
+      this.frequency = Number(this.data.viewAttr.frequency) * 1000
     }
   },
   mounted () {
@@ -21,7 +27,6 @@ export default {
     if (this.reload && !this.no_reload_on_mount) {
       this.reload()
     }
-    // console.log(this.data)
   },
   components: {...modules},
   methods: {
