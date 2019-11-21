@@ -33,18 +33,19 @@ export default {
       page: 1,
       isPaging: true,
       numList: [],
-      total: 0
+      total: 0,
+      frequency: 25000
     }
   },
   created () {
     // 接口获取任务列表
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 25000)
   },
   mounted () {
     this.setFontsize('lishui-daytask')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

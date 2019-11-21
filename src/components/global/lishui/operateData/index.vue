@@ -110,19 +110,20 @@ export default {
           lable: 'cumulative_user_num',
           value: 0
         }
-      ]
+      ],
+      frequency: 15000
     }
   },
 
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 15000)
   },
 
   mounted () {
     this.setFontsize('ls-operateData')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
 
   methods: {

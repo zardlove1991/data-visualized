@@ -27,17 +27,18 @@ export default {
       dataList: [],
       count: 10,
       page: 1,
-      isPaging: true
+      isPaging: true,
+      frequency: 15000
     }
   },
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 15000)
   },
   mounted () {
     this.setFontsize('ls-report')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

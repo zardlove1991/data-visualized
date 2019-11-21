@@ -41,17 +41,18 @@ export default {
         topic: '专题',
         link: '外链',
         video: '视频'
-      }
+      },
+      frequency: 25000
     }
-  },
-  mounted () {
-    this.setFontsize('lishui-manuscriptoutput')
   },
   created () {
     this.getDataList()
+  },
+  mounted () {
+    this.setFontsize('lishui-manuscriptoutput')
     setInterval(() => {
       this.getDataList()
-    }, 25000)
+    }, this.frequency)
   },
   methods: {
     getDataList () {

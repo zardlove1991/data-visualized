@@ -289,7 +289,8 @@ export default {
         series: []
       },
       curIndex: 0,
-      curId: null
+      curId: null,
+      frequency: 15000
     }
   },
   watch: {
@@ -313,6 +314,9 @@ export default {
     // }, 15000)
 
     // 本地模拟分页效果
+  },
+  mounted () {
+    this.setFontsize('ls-dataAnalysis')
     this.initLocalList()
     setInterval(() => {
       this.curIndex += 1
@@ -327,10 +331,7 @@ export default {
       } else {
         this.curId = this.newsList[this.curIndex]['id']
       }
-    }, 5000)
-  },
-  mounted () {
-    this.setFontsize('ls-dataAnalysis')
+    }, this.frequency)
   },
 
   methods: {

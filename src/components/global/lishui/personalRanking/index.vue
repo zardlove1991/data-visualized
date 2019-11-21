@@ -25,17 +25,18 @@ export default {
       count: 8,
       page: 1,
       isPaging: false,
-      defaultImg: require('../../../../assets/avatar/touxiang.png')
+      defaultImg: require('../../../../assets/avatar/touxiang.png'),
+      frequency: 25000
     }
-  },
-  mounted () {
-    this.setFontsize('lishui-personalranking')
   },
   created () {
     this.getDataList()
+  },
+  mounted () {
+    this.setFontsize('lishui-personalranking')
     setInterval(() => {
       this.getDataList()
-    }, 25000)
+    }, this.frequency)
   },
   methods: {
     getDataList () {

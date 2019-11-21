@@ -147,22 +147,23 @@ export default {
         date: '10698',
         num: '3'
       }],
-      currentIndex: 0
+      currentIndex: 0,
+      frequency: 5000
     }
   },
   components: {
     chart: echarts
   },
   created () {
+  },
+  mounted () {
+    this.setFontsize('lishui-contentproduction')
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.dateList.length) {
         this.currentIndex = 0
       }
-    }, 5000)
-  },
-  mounted () {
-    this.setFontsize('lishui-contentproduction')
+    }, this.frequency)
   }
 }
 </script>
