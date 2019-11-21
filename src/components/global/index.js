@@ -28,6 +28,7 @@ export const maanshancomponentReport = getComponent('maanshan/report')
 export const maanshancomponentProject = getComponent('maanshan/project')
 export const maanshancomponentClueGather = getComponent('maanshan/clueGather')
 export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAnalysis')
+export const maanshancomponentCommunicationEffect = getComponent('maanshan/communicationEffect')
 
 /* 溧水套系 */
 // 主屏部分
