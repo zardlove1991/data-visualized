@@ -27,17 +27,18 @@ export default {
       dataList: [],
       count: 5,
       page: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 15000
     }
   },
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 15000)
   },
   mounted () {
     // this.setFontsize('qx-news')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

@@ -27,17 +27,18 @@ export default {
       count: 8,
       page: 1,
       isPaging: false,
-      defaultImg: require('../../../../assets/avatar/touxiang.png')
+      defaultImg: require('../../../../assets/avatar/touxiang.png'),
+      frequency: 15000
     }
-  },
-  mounted () {
-    this.setFontsize('qx-personalranking')
   },
   created () {
     this.getDataList()
+  },
+  mounted () {
+    this.setFontsize('qx-personalranking')
     setInterval(() => {
       this.getDataList()
-    }, 15000)
+    }, this.frequency)
   },
   methods: {
     getDataList () {

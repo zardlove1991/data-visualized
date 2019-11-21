@@ -38,17 +38,18 @@ export default {
       dataList: [],
       count: 6,
       page: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 15000
     }
   },
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 15000)
   },
   mounted () {
     // this.setFontsize('qx-project')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

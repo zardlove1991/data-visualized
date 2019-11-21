@@ -25,17 +25,18 @@ export default {
       dataList: [],
       count: 8,
       page: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 15000
     }
-  },
-  mounted () {
-    // this.setFontsize('qx-personalranking')
   },
   created () {
     this.getDataList()
+    // this.setFontsize('qx-personalranking')
+  },
+  mounted () {
     setInterval(() => {
       this.getDataList()
-    }, 15000)
+    }, this.frequency)
   },
   methods: {
     getDataList () {
