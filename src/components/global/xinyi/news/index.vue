@@ -49,26 +49,27 @@ export default {
       count: 6,
       clickPage: 1,
       commentPage: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 35000
     }
   },
   created () {
-    this.getData(this.titleList[this.currentIndex].type)
+    this.getDataList(this.titleList[this.currentIndex].type)
+  },
+  mounted () {
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.titleList.length) {
         this.currentIndex = 0
-        this.getData(this.titleList[this.currentIndex].type)
+        this.getDataList(this.titleList[this.currentIndex].type)
       } else {
-        this.getData(this.titleList[this.currentIndex].type)
+        this.getDataList(this.titleList[this.currentIndex].type)
       }
-    }, 35000)
-  },
-  mounted () {
+    }, this.frequency)
     this.setFontsize('xy-news')
   },
   methods: {
-    getData (type) {
+    getDataList (type) {
       this.dataList = []
       if (type === 0) {
         getM2OPlusRankList('click_num', this.count, this.clickPage).then(res => {

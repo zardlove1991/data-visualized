@@ -61,7 +61,8 @@ export default {
         geo: [{ value: 0 }],
         reg: [{ value: 0 }]
       },
-      seriesData: []
+      seriesData: [],
+      frequency: 35000
     }
   },
   computed: {
@@ -480,7 +481,7 @@ export default {
           this.curIndex = 0
           this.getDataList()
         }
-      }, 35000)
+      }, this.frequency)
     }
   }
 }

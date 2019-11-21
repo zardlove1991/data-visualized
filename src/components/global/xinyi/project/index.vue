@@ -28,16 +28,17 @@ export default {
       dataList: [],
       count: 8,
       page: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 35000
     }
   },
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 35000)
   },
   mounted () {
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
     this.setFontsize('xy-project')
   },
   methods: {

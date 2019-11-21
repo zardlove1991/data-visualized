@@ -48,6 +48,7 @@ export default {
       count: 8,
       page: 1,
       isPaging: false,
+      frequency: 35000,
       proportion: 1,
       legendData: [],
       seriesData: [],
@@ -118,13 +119,13 @@ export default {
   },
   created () {
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, 35000)
   },
   mounted () {
     this.proportion = this.getProportion('xy-task') * 1.8
     this.setFontsize('xy-task')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

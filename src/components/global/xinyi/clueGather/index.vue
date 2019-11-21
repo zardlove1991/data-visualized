@@ -46,26 +46,27 @@ export default {
       webPage: 1,
       weChatPage: 1,
       weBoPage: 1,
-      isPaging: false
+      isPaging: false,
+      frequency: 35000
     }
   },
   created () {
-    this.getData(this.titleList[this.currentIndex].type)
+    this.getDataList(this.titleList[this.currentIndex].type)
+  },
+  mounted () {
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.titleList.length) {
         this.currentIndex = 0
-        this.getData(this.titleList[this.currentIndex].type)
+        this.getDataList(this.titleList[this.currentIndex].type)
       } else {
-        this.getData(this.titleList[this.currentIndex].type)
+        this.getDataList(this.titleList[this.currentIndex].type)
       }
-    }, 35000)
-  },
-  mounted () {
+    }, this.frequency)
     this.setFontsize('xy-clue')
   },
   methods: {
-    getData (type) {
+    getDataList (type) {
       this.dataList = []
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
@@ -81,7 +82,7 @@ export default {
               }
             } else {
               this.webPage = 1
-              this.getData(this.titleList[this.currentIndex].type)
+              this.getDataList(this.titleList[this.currentIndex].type)
             }
           }
         })
@@ -98,7 +99,7 @@ export default {
               }
             } else {
               this.weChatPage = 1
-              this.getData(this.titleList[this.currentIndex].type)
+              this.getDataList(this.titleList[this.currentIndex].type)
             }
           }
         })
@@ -115,7 +116,7 @@ export default {
               }
             } else {
               this.weBoPage = 1
-              this.getData(this.titleList[this.currentIndex].type)
+              this.getDataList(this.titleList[this.currentIndex].type)
             }
           }
         })

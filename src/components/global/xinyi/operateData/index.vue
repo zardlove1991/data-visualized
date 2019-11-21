@@ -61,23 +61,24 @@ export default {
       web_total: [0, 0, 0, 0, 0, 0, 0, 0],
       web_regist: [0, 0, 0, 0, 0, 0, 0, 0],
       wechat_total: [0, 0, 0, 0, 0, 0, 0, 0],
-      wechat_regist: [0, 0, 0, 0, 0, 0, 0, 0]
+      wechat_regist: [0, 0, 0, 0, 0, 0, 0, 0],
+      frequency: 35000
     }
   },
   components: {
     numCount
   },
+  created () {
+    this.getDataList()
+  },
   mounted () {
     this.setFontsize('xy-operate')
-  },
-  created () {
-    this.getData()
     setInterval(() => {
-      this.getData()
-    }, 35000)
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
-    getData () {
+    getDataList () {
       this.getArticleData()
       this.getWebsiteData()
       this.getWechatData()
