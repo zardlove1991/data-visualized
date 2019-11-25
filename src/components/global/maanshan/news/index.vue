@@ -3,7 +3,7 @@
     <div class="news-wrap sys-flex sys-vertical" >
       <div class="news-title sys-flex sys-flex-center">{{componentTitle}}</div>
       <div
-        class="news-list animated sys-flex sys-flex-center overhidden"
+        class="news-list animated sys-flex sys-flex-center"
         :class="{'flipInX' : v}"
         :style="{'animation-delay' : k/2 + 's'}"
         v-for="(v,k) in dataList"
