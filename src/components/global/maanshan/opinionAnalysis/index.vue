@@ -80,8 +80,8 @@ export default {
         },
         grid: {
           left: this.proportion * 30,
-          top: this.proportion * 90,
-          bottom: this.proportion * 30,
+          top: this.proportion * 105,
+          bottom: this.proportion * 15,
           containLabel: true
         },
         tooltip: {
