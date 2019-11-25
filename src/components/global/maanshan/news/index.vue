@@ -36,7 +36,7 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
-      isPaging: true,
+      isPaging: false,
       frequency: 10000
     }
   },
@@ -45,9 +45,9 @@ export default {
   },
   mounted () {
     this.setFontsize('maanshan-news')
-    // setInterval(() => {
-    //   this.getDataList()
-    // }, this.frequency)
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {
