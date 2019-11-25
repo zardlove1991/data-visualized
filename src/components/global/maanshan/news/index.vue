@@ -9,15 +9,16 @@
         v-for="(v,k) in dataList"
         :key="k"
       >
-        <div 
+        <!-- <div 
           class="list-icon"
           :class="{'bgzero': k%4 === 0, 'bgfir': k%4 === 1, 'bgsec': k%4 === 2, 'bgfour': k%4 === 3}"
-        >{{k+1}}</div>
+        >{{k+1}}</div> -->
         <div class="list-title overhidden">{{v.title}}</div>
-        <div class="list-number sys-flex sys-flex-center flex-justify-center">
+        <!-- <div class="list-number sys-flex sys-flex-center flex-justify-center">
           <span class="list-number-icon read-icon"></span>
           <span class="list-number-text">{{ v.click_num }}</span>
-        </div>
+        </div> -->
+        <div class="list-time">{{v.create_time}}</div>
         <!-- <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-user overhidden">{{v.project_user_name}}</div>
         <div class="list-time">{{v.update_time | dateFormat}}</div> -->
@@ -27,16 +28,17 @@
 </template>
 
 <script>
-import { getWorkCallSubjectList } from '@/servers/interface'
+import { getMicroOperationArticleList } from '@/servers/interface'
 export default {
   name: 'news',
   data () {
     return {
       componentTitle: '稿件排行',
       dataList: [],
+      bind_id: '748',
       count: 4,
       page: 1,
-      isPaging: false,
+      isPaging: true,
       frequency: 10000
     }
   },
@@ -51,12 +53,17 @@ export default {
   },
   methods: {
     getDataList () {
-      getWorkCallSubjectList(this.count, this.page).then((res) => {
+      getMicroOperationArticleList(this.bind_id, this.count, this.page).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.result.data
+              this.dataList = res.data.result.data.map(v => {
+                return {
+                  title: v.title,
+                  create_time: v.create_time.replace('T', ' ').slice(5, 16)
+                }
+              })
             }, 100)
             if (this.isPaging) {
               this.page += 1
@@ -132,7 +139,7 @@ export default {
       background-color: #1f56ab;
     }
     .bgfour {
-      background-color: #04285c;
+      background-color: #b2c6e2;
     }
     .list-number {
       flex-basis: 20%;
