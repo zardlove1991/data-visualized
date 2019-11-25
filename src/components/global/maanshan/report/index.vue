@@ -31,7 +31,7 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
-      isPaging: false,
+      isPaging: true,
       frequency: 10000
     }
   },

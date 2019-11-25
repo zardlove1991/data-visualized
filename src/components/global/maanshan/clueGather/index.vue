@@ -46,7 +46,7 @@ export default {
       webPage: 1,
       weChatPage: 1,
       weBoPage: 1,
-      isPaging: false,
+      isPaging: true,
       frequency: 10000
     }
   },
