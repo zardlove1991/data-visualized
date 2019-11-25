@@ -53,6 +53,9 @@ export default {
             if (this.isPaging) {
               this.page += 1
             }
+            if (this.page > 10) {
+              this.page = 1
+            }
           } else {
             this.page = 1
             this.getDataList()
