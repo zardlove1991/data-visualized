@@ -148,7 +148,7 @@ export default {
             this.commentNum = data.all.comment_num
             let arr = Object.keys(data)
             arr.pop()
-            this.barOptions.xAxis.data = arr.reverse()
+            this.barOptions.xAxis.data = arr.reverse().map(v => v.slice(5, 16))
             let dataArr = Object.values(data)
             dataArr.pop()
             if (dataArr && dataArr[0]) {

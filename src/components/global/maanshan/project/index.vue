@@ -28,7 +28,7 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
-      isPaging: false,
+      isPaging: true,
       frequency: 10000
     }
   },
@@ -52,6 +52,9 @@ export default {
             }, 100)
             if (this.isPaging) {
               this.page += 1
+            }
+            if (this.page > 10) {
+              this.page = 1
             }
           } else {
             this.page = 1

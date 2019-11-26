@@ -46,7 +46,7 @@ export default {
       webPage: 1,
       weChatPage: 1,
       weBoPage: 1,
-      isPaging: false,
+      isPaging: true,
       frequency: 10000
     }
   },
@@ -79,6 +79,9 @@ export default {
               if (this.isPaging) {
                 this.webPage += 1
               }
+              if (this.webPage > 10) {
+                this.webPage = 1
+              }
             } else {
               this.webPage = 1
               this.getData(this.titleList[this.currentIndex].type)
@@ -96,6 +99,9 @@ export default {
               if (this.isPaging) {
                 this.weChatPage += 1
               }
+              if (this.weChatPage > 10) {
+                this.weChatPage = 1
+              }
             } else {
               this.weChatPage = 1
               this.getData(this.titleList[this.currentIndex].type)
@@ -112,6 +118,9 @@ export default {
               }, 100)
               if (this.isPaging) {
                 this.weBoPage += 1
+              }
+              if (this.weBoPage > 10) {
+                this.weBoPage = 1
               }
             } else {
               this.weBoPage = 1

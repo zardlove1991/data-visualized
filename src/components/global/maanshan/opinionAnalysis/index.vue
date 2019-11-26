@@ -46,7 +46,7 @@ export default {
       dataList: [],
       count: 4,
       page: 1,
-      isPaging: false,
+      isPaging: true,
       curIndex: 0,
       curId: null,
       proportion: 1,
@@ -80,8 +80,8 @@ export default {
         },
         grid: {
           left: this.proportion * 30,
-          top: this.proportion * 90,
-          bottom: this.proportion * 30,
+          top: this.proportion * 105,
+          bottom: this.proportion * 15,
           containLabel: true
         },
         tooltip: {
@@ -411,6 +411,9 @@ export default {
             this.initList()
             if (this.isPaging) {
               this.page += 1
+            }
+            if (this.page > 10) {
+              this.page = 1
             }
           } else {
             this.page = 1
