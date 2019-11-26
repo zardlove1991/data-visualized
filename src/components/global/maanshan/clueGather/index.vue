@@ -119,9 +119,9 @@ export default {
               }, 100)
               if (this.isPaging) {
                 this.weBoPage += 1
-              }
-              if (this.weBoPage > this.maxPage) {
-                this.weBoPage = 1
+                if (this.weBoPage > this.maxPage) {
+                  this.weBoPage = 1
+                }
               }
             } else {
               this.weBoPage = 1
