@@ -49,6 +49,9 @@ export default {
             }, 100)
             if (this.isPaging) {
               this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
             }
           } else {
             this.page = 1

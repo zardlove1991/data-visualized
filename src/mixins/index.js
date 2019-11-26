@@ -8,7 +8,8 @@ export default {
   },
   data () {
     return {
-      pageAnimated: false
+      pageAnimated: false,
+      maxPage: 10
     }
   },
   computed: {
