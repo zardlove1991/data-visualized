@@ -39,7 +39,8 @@ export default {
       count: 4,
       page: 1,
       isPaging: true,
-      frequency: 10000
+      frequency: 10000,
+      maxPage: 10
     }
   },
   created () {
@@ -67,9 +68,9 @@ export default {
             }, 100)
             if (this.isPaging) {
               this.page += 1
-            }
-            if (this.page > 10) {
-              this.page = 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
             }
           } else {
             this.page = 1

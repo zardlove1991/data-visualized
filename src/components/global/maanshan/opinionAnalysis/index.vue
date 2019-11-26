@@ -47,6 +47,8 @@ export default {
       count: 4,
       page: 1,
       isPaging: true,
+      frequency: 10000,
+      maxPage: 10,
       curIndex: 0,
       curId: null,
       proportion: 1,
@@ -61,8 +63,7 @@ export default {
         geo: [{ value: 0 }],
         reg: [{ value: 0 }]
       },
-      seriesData: [],
-      frequency: 10000
+      seriesData: []
     }
   },
   computed: {
@@ -411,9 +412,9 @@ export default {
             this.initList()
             if (this.isPaging) {
               this.page += 1
-            }
-            if (this.page > 10) {
-              this.page = 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
             }
           } else {
             this.page = 1

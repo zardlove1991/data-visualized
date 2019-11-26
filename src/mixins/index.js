@@ -21,6 +21,9 @@ export default {
     if (this.data && this.data.viewAttr && this.data.viewAttr.frequency) {
       this.frequency = Number(this.data.viewAttr.frequency) * 1000
     }
+    if (this.data && this.data.viewAttr && this.data.viewAttr.maxPage) {
+      this.maxPage = Number(this.data.viewAttr.maxPage)
+    }
   },
   mounted () {
     this.pageAnimated = true

@@ -47,7 +47,8 @@ export default {
       weChatPage: 1,
       weBoPage: 1,
       isPaging: true,
-      frequency: 10000
+      frequency: 10000,
+      maxPage: 10
     }
   },
   created () {
@@ -78,9 +79,9 @@ export default {
               }, 100)
               if (this.isPaging) {
                 this.webPage += 1
-              }
-              if (this.webPage > 10) {
-                this.webPage = 1
+                if (this.webPage > this.maxPage) {
+                  this.webPage = 1
+                }
               }
             } else {
               this.webPage = 1
@@ -98,9 +99,9 @@ export default {
               }, 100)
               if (this.isPaging) {
                 this.weChatPage += 1
-              }
-              if (this.weChatPage > 10) {
-                this.weChatPage = 1
+                if (this.weChatPage > this.maxPage) {
+                  this.weChatPage = 1
+                }
               }
             } else {
               this.weChatPage = 1
@@ -119,7 +120,7 @@ export default {
               if (this.isPaging) {
                 this.weBoPage += 1
               }
-              if (this.weBoPage > 10) {
+              if (this.weBoPage > this.maxPage) {
                 this.weBoPage = 1
               }
             } else {
