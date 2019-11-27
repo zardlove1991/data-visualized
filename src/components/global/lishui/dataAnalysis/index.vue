@@ -488,7 +488,7 @@ export default {
         width: 100%;
         height: 48%;
         .data-channel {
-          width: 45%;
+          width: 55%;
           height: 100%;
           background: url('./assets/channel-border.png') no-repeat center center;
           background-size: 100% 100%;
