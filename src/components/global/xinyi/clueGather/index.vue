@@ -81,8 +81,10 @@ export default {
                 this.webPage += 1
               }
             } else {
-              this.webPage = 1
-              this.getDataList(this.titleList[this.currentIndex].type)
+              if (this.webPage !== 1) {
+                this.webPage = 1
+                this.getDataList(this.titleList[this.currentIndex].type)
+              }
             }
           }
         })
@@ -98,8 +100,10 @@ export default {
                 this.weChatPage += 1
               }
             } else {
-              this.weChatPage = 1
-              this.getDataList(this.titleList[this.currentIndex].type)
+              if (this.weChatPage !== 1) {
+                this.weChatPage = 1
+                this.getDataList(this.titleList[this.currentIndex].type)
+              }
             }
           }
         })
@@ -115,8 +119,10 @@ export default {
                 this.weBoPage += 1
               }
             } else {
-              this.weBoPage = 1
-              this.getDataList(this.titleList[this.currentIndex].type)
+              if (this.weBoPage !== 1) {
+                this.weBoPage = 1
+                this.getDataList(this.titleList[this.currentIndex].type)
+              }
             }
           }
         })
