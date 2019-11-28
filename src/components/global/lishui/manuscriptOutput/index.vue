@@ -58,10 +58,10 @@ export default {
     getDataList () {
       getM2OPlusPublish(this.count, this.page).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result.length) {
+          if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.result.map(v => {
+              this.dataList = res.data.result.data.map(v => {
                 return {
                   ...v,
                   typeName: this.typeList[(v.type)]
