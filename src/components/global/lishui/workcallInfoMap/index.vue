@@ -20,7 +20,8 @@
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
                       <div class="info overhidden sys-flex-one">
                           <div class="name overhidden">{{v.member_name}}</div>
-                          <div class="depart">{{`${v.role_title}-${v.org_title}`}}</div>
+                          <!-- <div class="depart">{{`${v.role_title}-${v.org_title}`}}</div> -->
+                          <div class="depart">溧水区融媒体中心</div>
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
                       
