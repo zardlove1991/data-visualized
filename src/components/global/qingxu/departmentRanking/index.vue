@@ -51,8 +51,10 @@ export default {
               this.page += 1
             }
           } else {
-            this.page = 1
-            this.getDataList()
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
           }
         }
       })
