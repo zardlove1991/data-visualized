@@ -34,6 +34,7 @@ export default {
     return {
       readNum: 0,
       commentNum: 0,
+      frequency: 25000,
       barOptions: {
         legend: {
           data: [{
@@ -129,11 +130,14 @@ export default {
   components: {
     chart: echarts
   },
+  created () {
+  },
   mounted () {
     this.setFontsize('lishui-communicationeffect')
-  },
-  created () {
     this.getDataList()
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

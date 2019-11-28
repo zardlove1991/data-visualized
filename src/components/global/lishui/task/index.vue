@@ -87,8 +87,10 @@ export default {
               }
             }
           } else {
-            this.page = 1
-            this.getDataList()
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
           }
         }
       })
