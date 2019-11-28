@@ -612,11 +612,13 @@ export default {
       })
     },
     callaudio (reporter) {
+      this.getReporter()
       this.callInfo = reporter
       this.callType = 'audio'
       this.callShow = true
     },
     callvideo (reporter) {
+      this.getReporter()
       this.callInfo = reporter
       this.callType = 'video'
       this.callShow = true
