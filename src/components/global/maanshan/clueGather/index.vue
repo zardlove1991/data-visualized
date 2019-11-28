@@ -104,8 +104,10 @@ export default {
                 }
               }
             } else {
-              this.weChatPage = 1
-              this.getData(this.titleList[this.currentIndex].type)
+              if (this.weChatPage !== 1) {
+                this.weChatPage = 1
+                this.getData(this.titleList[this.currentIndex].type)
+              }
             }
           }
         })
@@ -124,8 +126,10 @@ export default {
                 }
               }
             } else {
-              this.weBoPage = 1
-              this.getData(this.titleList[this.currentIndex].type)
+              if (this.weChatPage !== 1) {
+                this.weChatPage = 1
+                this.getData(this.titleList[this.currentIndex].type)
+              }
             }
           }
         })
