@@ -8,6 +8,7 @@ export default {
   },
   data () {
     return {
+      currentViewId: '',
       pageAnimated: false,
       maxPage: 10
     }
@@ -24,6 +25,9 @@ export default {
     }
     if (this.data && this.data.viewAttr && this.data.viewAttr.maxPage) {
       this.maxPage = Number(this.data.viewAttr.maxPage)
+    }
+    if (this.data) {
+      this.currentViewId = this.data.id // 组件id
     }
   },
   mounted () {

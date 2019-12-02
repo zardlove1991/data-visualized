@@ -41,7 +41,7 @@ export const getWorkCallConnectList = () => createAPI(`${httpsbaseUrl}/Apidaping
 export const getOperateData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperateData`)
 
 /* 热点话题 */
-export const getHotsTopicList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?count=${count}&page=${page}`)
+export const getHotsTopicList = (count = 4, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?count=${count}&page=${page}&view_id=${currentViewId}`)
 
 /* 成稿产出 */
 export const getM2OPlusPublish = (count = 5, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?count=${count}&page=${page}`)
