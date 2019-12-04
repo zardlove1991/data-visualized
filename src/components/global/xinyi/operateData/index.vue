@@ -93,14 +93,14 @@ export default {
       //   }
       // })
       setTimeout(() => {
-        this.manuscript_total = this.preFixInterge('111', 8)
-        this.manuscript_today = this.preFixInterge('222', 8)
+        this.manuscript_total = this.preFixInterge('572', 8)
+        this.manuscript_today = this.preFixInterge('22', 8)
       }, 100)
     },
     getWebsiteData () {
       setTimeout(() => {
-        this.web_total = this.preFixInterge('333', 8)
-        this.web_regist = this.preFixInterge('444', 8)
+        this.web_total = this.preFixInterge('8652', 8)
+        this.web_regist = this.preFixInterge('651', 8)
       }, 100)
     },
     getWechatData () {
@@ -114,8 +114,8 @@ export default {
       //   }
       // })
       setTimeout(() => {
-        this.wechat_total = this.preFixInterge('555', 8)
-        this.wechat_regist = this.preFixInterge('666', 8)
+        this.wechat_total = this.preFixInterge('186537', 8)
+        this.wechat_regist = this.preFixInterge('15636', 8)
       }, 100)
     },
     preFixInterge (num, n) {

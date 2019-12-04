@@ -405,7 +405,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getHotsTopicList(this.count, this.page).then(res => {
+      getHotsTopicList(this.count, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -415,8 +415,10 @@ export default {
               this.page += 1
             }
           } else {
-            this.page = 1
-            this.getDataList()
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
           }
         }
       })

@@ -301,33 +301,27 @@ export default {
     }
   },
   created () {
-    // this.initNewsList()
-    // setInterval(() => {
-    //   this.curIndex += 1
-    //   if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
-    //     this.curIndex = 0
-    //     this.page++
-    //     this.initNewsList()
-    //   } else {
-    //     this.curId = this.newsList[this.curIndex]['id']
-    //   }
-    // }, 15000)
-
-    // 本地模拟分页效果
   },
   mounted () {
     this.setFontsize('ls-dataAnalysis')
     this.initLocalList()
     setInterval(() => {
       this.curIndex += 1
+      // 如果当前新闻索引超出当前列表，分页
       if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
         this.curIndex = 0
-        this.page === 3 ? this.page = 1 : this.page++
-        this.newsList = []
-        setTimeout(() => {
-          this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
-          this.curId = this.newsList[this.curIndex]['id']
-        }, 100)
+        this.page === this.count / 4 ? this.page = 1 : this.page++
+        // 分页超过3页重新发请求获取新数据
+        if (this.page === 1) {
+          this.initLocalList()
+        } else {
+          // 未超过3页，人为更新列表
+          this.newsList = []
+          setTimeout(() => {
+            this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
+            this.curId = this.newsList[this.curIndex]['id']
+          }, 100)
+        }
       } else {
         this.curId = this.newsList[this.curIndex]['id']
       }

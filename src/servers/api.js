@@ -18,9 +18,6 @@ export const getReporter = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidapin
 export const getMemberInfo = (memberId) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=user&a=memberInfo&member_id=${memberId}&access_token={access_token}`)
 
 /* 通用 */
-// 组织指挥调度 workcallInfoMap
-export const getOrgList = (id) => axios.get(`https://monitor-screen.cloud.hoge.cn/index.php?m=Apidaping&c=rongmei&a=orgList&custom_appid=123&custom_appkey=dZ1gvwHNHjZ6FMY72IQiEg7Wf2tdJotN&fid=${id}`)
-export const getUserList = (id) => axios.get(`https://monitor-screen.cloud.hoge.cn/index.php?m=Apidaping&c=rongmei&a=userDetail&custom_appid=123&custom_appkey=dZ1gvwHNHjZ6FMY72IQiEg7Wf2tdJotN&org=${id}`)
 // 大屏登录
 export const doLogin = (data) => axios.post(`${workcallUrl}/sys/login/dologin?password=${data.password}&user_name=${data.user_name}`)
 // 大屏用户详情

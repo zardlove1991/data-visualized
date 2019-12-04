@@ -132,11 +132,14 @@ export default {
   components: {
     chart: echarts
   },
+  created () {
+  },
   mounted () {
     this.setFontsize('maanshan-communicationeffect')
-  },
-  created () {
     this.getDataList()
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {

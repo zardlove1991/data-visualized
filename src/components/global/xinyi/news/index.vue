@@ -83,8 +83,10 @@ export default {
                 this.clickPage += 1
               }
             } else {
-              this.clickPage = 1
-              this.getDataList()
+              if (this.clickPage !== 1) {
+                this.clickPage = 1
+                this.getDataList()
+              }
             }
           }
         })
@@ -100,8 +102,10 @@ export default {
                 this.commentPage += 1
               }
             } else {
-              this.commentPage = 1
-              this.getDataList()
+              if (this.commentPage !== 1) {
+                this.commentPage = 1
+                this.getDataList()
+              }
             }
           }
         })

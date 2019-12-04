@@ -8,7 +8,9 @@ export default {
   },
   data () {
     return {
-      pageAnimated: false
+      currentViewId: '',
+      pageAnimated: false,
+      maxPage: 10
     }
   },
   computed: {
@@ -20,6 +22,12 @@ export default {
     }
     if (this.data && this.data.viewAttr && this.data.viewAttr.frequency) {
       this.frequency = Number(this.data.viewAttr.frequency) * 1000
+    }
+    if (this.data && this.data.viewAttr && this.data.viewAttr.maxPage) {
+      this.maxPage = Number(this.data.viewAttr.maxPage)
+    }
+    if (this.data) {
+      this.currentViewId = this.data.id // 组件id
     }
   },
   mounted () {

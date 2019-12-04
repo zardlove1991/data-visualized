@@ -148,7 +148,7 @@ export default {
         num: '3'
       }],
       currentIndex: 0,
-      frequency: 5000
+      frequency: 25000
     }
   },
   components: {

@@ -5,8 +5,8 @@
       <div class="tv-title sys-flex sys-flex-center">{{tvTitle}}</div>
       <div class="tv-main">
         <div class="name-box sys-flex sys-flex-center flex-justify-around">
-          <div class="tv-name">《生活频道》</div>
           <div class="tv-name">《新闻频道》</div>
+          <div class="tv-name">《生活频道》</div>
         </div>
         <div class="sys-flex sys-flex-center flex-justify-between sys-flex-wrap tv-box">
           <div v-for="(v,k) in tvList" :key="k" class="tv-list list-box">

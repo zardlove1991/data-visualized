@@ -82,10 +82,15 @@ export default {
             this.dataList = this.split_array(res.data.result.data, 8)
             if (this.isPaging) {
               this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
             }
           } else {
-            this.page = 1
-            this.getDataList()
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
           }
         }
       })
