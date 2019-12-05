@@ -75,3 +75,20 @@ export const getM2OPlusWorkRank = (count = 8, page = 1) => createAPI(`${httpsbas
 
 /* 部门统计 */
 export const getM2OPlusWorkDepartRank = (count = 8, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkDepartRank?count=${count}&page=${page}`)
+
+// 江宁思想与实践
+export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)
+// 江宁荔枝云
+// export const getLitchiCloud = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getLitchiCloud`)
+// 江宁新华社
+export const getM2OPLUSArticleList = (count = 5, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPLUSArticleList?category_id=49&count=${count}&page=${page}`)
+// 文明江宁
+export const getcivilizationJN = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationJN`)
+// 选题汇总
+export const getJnProject = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectPie?model=d`)
+// 报题展示
+export const getJnReport = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectPie?model=d&module_id=report`)
+// 传播分析
+export const getOperationalData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperationalData`)
+// 稿件统计
+export const getWorkCallSubjectPie = (model) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectPie?model=${model}`)

@@ -5,23 +5,23 @@
       <div class="wrap-content sys-flex sys-flex-center">
         <div class="content-left">
           <div class="left-one positionAb">
-            <div>35%</div>
+            <div>{{onePercent}}</div>
             <div>无线江宁APP</div>
           </div>
           <div class="left-two positionAb">
-            <div>38%</div>
+            <div>{{twoPercent}}</div>
             <div>短视频</div>
           </div>
           <div class="left-three positionAb">
-            <div>10%</div>
+            <div>{{threePercent}}</div>
             <div>微信</div>
           </div>
           <div class="left-four positionAb">
-            <div>20%</div>
+            <div>{{fourPercent}}</div>
             <div>微博</div>
           </div>
           <div class="left-total positionAb">
-            <div>2054532</div>
+            <div>{{total}}</div>
             <div>总用户数</div>
           </div>
           <chart :options="pieOption" :autoResize="true"></chart>
@@ -37,26 +37,20 @@
   </div>
 </template>
 <script>
+import { getOperationalData } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 export default {
   name: 'publish',
   data () {
     return {
+      total: 0,
+      onePercent: 0,
+      twoPercent: 0,
+      threePercent: 0,
+      fourPercent: 0,
       currentIndex: -1,
-      dataList: [{
-        title: '无线江宁APP',
-        num: 1025489
-      }, {
-        title: '短视频',
-        num: 1025489
-      }, {
-        title: '微信',
-        num: 1025489
-      }, {
-        title: '微博',
-        num: 1025489
-      }],
+      dataList: [],
       // 数据
       pieOption: {
         tooltip: {
@@ -91,19 +85,7 @@ export default {
                 show: false
               }
             },
-            data: [{
-              value: 35,
-              name: '无线江宁APP'
-            }, {
-              value: 10,
-              name: '短视频'
-            }, {
-              value: 38,
-              name: '微信'
-            }, {
-              value: 17,
-              name: '微博'
-            }],
+            data: [],
             itemStyle: {
               normal: {
                 // 设置饼图间隔
@@ -119,6 +101,59 @@ export default {
           }
         ]
       }
+    }
+  },
+  created () {
+    this.getOperationalData()
+  },
+  methods: {
+    GetPercent (num, total) {
+      num = parseFloat(num)
+      total = parseFloat(total)
+      if (isNaN(num) || isNaN(total)) {
+        return '-'
+      }
+      return total <= 0 ? '0%' : (Math.round(num / total * 10000) / 100.00) + '%'
+    },
+    getOperationalData () {
+      getOperationalData().then(res => {
+        let dataArr = Object.values(res.data.result)
+        if (dataArr && dataArr[0]) {
+          dataArr.forEach(value => {
+            this.total += value.cumulate_user
+          })
+        }
+        this.pieOption.series[0].data = [{
+          value: dataArr[0].cumulate_user,
+          name: '无线江宁APP'
+        }, {
+          value: dataArr[3].cumulate_user,
+          name: '短视频'
+        }, {
+          value: dataArr[2].cumulate_user,
+          name: '微信'
+        }, {
+          value: dataArr[1].cumulate_user,
+          name: '微博'
+        }]
+        this.dataList = [{
+          title: '无线江宁APP',
+          num: dataArr[0].cumulate_user
+        }, {
+          title: '短视频',
+          num: dataArr[3].cumulate_user
+        }, {
+          title: '微信',
+          num: dataArr[2].cumulate_user
+        }, {
+          title: '微博',
+          num: dataArr[1].cumulate_user
+        }]
+        this.onePercent = this.GetPercent(dataArr[0].cumulate_user, this.total)
+        this.twoPercent = this.GetPercent(dataArr[3].cumulate_user, this.total)
+        this.threePercent = this.GetPercent(dataArr[2].cumulate_user, this.total)
+        this.fourPercent = this.GetPercent(dataArr[1].cumulate_user, this.total)
+      })
     }
   },
   mounted () {

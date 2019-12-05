@@ -4,33 +4,33 @@
       <div class="wrap-title">稿件统计</div>
       <div class="wrap-content sys-flex flex-justify-between">
         <div class="content-left">
-          <div class="left-title sys-flex sys-flex-center flex-justify-center">本周稿件总数<span>598</span></div>
+          <div class="left-title sys-flex sys-flex-center flex-justify-center">本周稿件总数<span>{{total}}</span></div>
           <div class="left-one sys-flex sys-flex-center flex-justify-between">
             <div class="pass">
               <div>已通过</div>
-              <div>497</div>
+              <div>{{pass}}</div>
             </div>
             <div class="examine">
               <div>待审核</div>
-              <div>598</div>
+              <div>{{edit}}</div>
             </div>
             <div class="publish">
               <div>待发布</div>
-              <div>426</div>
+              <div>{{publish}}</div>
             </div>
           </div>
           <div class="left-two sys-flex sys-flex-center flex-justify-between">
             <div class="two-progress">
-              <div class="percent">95%</div>
+              <div class="percent">{{passPersent}}%</div>
               <div class="progress-total">
-                <span class="progress on-progress" :style="{'width' : 95 + '%'}"></span>
+                <span class="progress on-progress" :style="{'width' : passPersent + '%'}"></span>
               </div>
               <div class="article">稿件通过率</div>
             </div>
             <div class="two-progress">
-              <div class="percent">87%</div>
+              <div class="percent">{{publishPersent}}%</div>
               <div class="progress-total">
-                <span class="progress on-progress" :style="{'width' : 87 + '%'}"></span>
+                <span class="progress on-progress" :style="{'width' : publishPersent + '%'}"></span>
               </div>
               <div class="article">稿件发布率</div>
             </div>
@@ -40,7 +40,7 @@
           <div class="date sys-flex sys-flex-center flex-justify-between">
             <div class="day" v-for="(v, k) in dayList" :key="k" :class="{'active': k === currentIndex}">{{v}}</div>
           </div>
-          <div class="publish-article">已发布稿件<span>298</span></div>
+          <div class="publish-article">已发布稿件<span>{{publishTotal}}</span></div>
           <div class="line">
             <chart :options="barOptions" :autoResize="true"></chart>
           </div>
@@ -50,12 +50,21 @@
   </div>
 </template>
 <script>
+import { getWorkCallSubjectPie } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 export default {
   name: 'news',
   data () {
     return {
+      publishTotal: 0,
+      total: 0,
+      pass: 0,
+      edit: 0,
+      publish: 0,
+      passPersent: '',
+      publishPersent: '',
+      model: 'd',
       currentIndex: 0,
       dayList: ['今日', '本周', '本月'],
       barOptions: {
@@ -118,13 +127,53 @@ export default {
       }
     }
   },
+  created () {
+    this.getTotal()
+    this.getWorkCallSubjectPie()
+  },
+  methods: {
+    GetPercent (num, total) {
+      num = parseFloat(num)
+      total = parseFloat(total)
+      if (isNaN(num) || isNaN(total)) {
+        return '-'
+      }
+      return total <= 0 ? '0' : (Math.round(num / total * 10000) / 100.00)
+    },
+    getWorkCallSubjectPie () {
+      getWorkCallSubjectPie(this.model).then(res => {
+        this.publishTotal = res.data.result.num_status[3].total
+        this.barOptions.series[0].data = [res.data.result.num_status[0].total, res.data.result.num_status[1].total, res.data.result.num_status[2].total, res.data.result.num_status[3].total]
+      })
+    },
+    getTotal () {
+      getWorkCallSubjectPie('w').then(res => {
+        this.total = res.data.result.total
+        this.pass = res.data.result.num_status[3].total
+        this.edit = res.data.result.num_status[0].total
+        this.publish = res.data.result.num_status[1].total
+        this.passPersent = this.GetPercent(this.pass, this.total)
+        this.publishPersent = this.GetPercent(this.publish, this.total)
+      })
+    }
+  },
   mounted () {
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.dayList.length) {
         this.currentIndex = 0
       }
-    }, 5000)
+      if (this.currentIndex === 0) {
+        this.model = 'd'
+        this.getWorkCallSubjectPie()
+      } else if (this.currentIndex === 1) {
+        this.model = 'w'
+        this.getWorkCallSubjectPie()
+      } else if (this.currentIndex === 2) {
+        this.model = 'm'
+        this.getWorkCallSubjectPie()
+      }
+    }, 10000)
   },
   components: {
     chart: echarts

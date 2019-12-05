@@ -4,14 +4,14 @@
       <div class="wrap-title">选题汇总</div>
       <div class="wrap-content">
         <div class="content-total sys-flex sys-flex-center flex-justify-between">
-          <div class="total-left">今日选题<span>28</span>篇</div>
-          <div class="total-right">完成<span>25</span>篇，进行中<span>2</span>篇</div>
+          <div class="total-left">今日选题<span>{{total}}</span>篇</div>
+          <div class="total-right">完成<span>{{finish}}</span>篇，进行中<span>{{ing}}</span>篇</div>
         </div>
         <div class="content-list">
           <div class="list-box sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
             <div class="title overhidden">{{v.title}}</div>
-            <div class="name">{{v.name}}</div>
-            <div class="status">{{v.status}}</div>
+            <div class="name">{{v.create_user_name}}</div>
+            <div class="status">{{v.status_show}}</div>
           </div>
         </div>
       </div>
@@ -19,31 +19,49 @@
   </div>
 </template>
 <script>
+import { getWorkCallSubjectList, getJnProject } from '@/servers/interface'
 export default {
   name: 'project',
   data () {
     return {
-      dataList: [{
-        status: '进行中',
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航'
-      }, {
-        status: '进行中',
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航'
-      }, {
-        status: '进行中',
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航'
-      }, {
-        status: '进行中',
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航'
-      }, {
-        status: '进行中',
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航'
-      }]
+      finish: 0,
+      ing: 0,
+      count: 5,
+      page: 1,
+      total: 0,
+      dataList: []
+    }
+  },
+  created () {
+    this.getWorkCallSubjectList()
+    this.getJnProject()
+    setInterval(() => {
+      this.getWorkCallSubjectList()
+      this.getJnProject()
+    }, 10000)
+  },
+  methods: {
+    getJnProject () {
+      getJnProject().then(res => {
+        this.total = res.data.result.total
+        this.finish = res.data.result.num_status[3].total
+        this.ing = res.data.result.num_status[1].total
+      })
+    },
+    getWorkCallSubjectList () {
+      getWorkCallSubjectList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = res.data.result.data
+          }, 100)
+          if (res.data.result.data.length < 5) {
+            this.page = 1
+          } else {
+            this.page += 1
+          }
+        }
+      })
     }
   }
 }
@@ -93,6 +111,8 @@ export default {
           .title {
             font-size: pxrem(40px);
             margin: 0 pxrem(180px) 0 pxrem(33px);
+            width: 70%;
+            text-align: left;
           }
           .name {
             font-size: pxrem(34px);

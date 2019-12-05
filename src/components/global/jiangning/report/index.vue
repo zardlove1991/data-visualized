@@ -4,15 +4,15 @@
       <div class="wrap-title">报题展示</div>
       <div class="wrap-content">
         <div class="content-total sys-flex sys-flex-center flex-justify-between">
-          <div class="total-left">今日报题<span>28</span>篇</div>
-          <div class="total-right">通过<span>25</span>篇，待审核<span>2</span>篇，打回<span>1</span>篇</div>
+          <div class="total-left">今日报题<span>{{total}}</span>篇</div>
+          <div class="total-right">通过<span>{{pass}}</span>篇，待审核<span>{{edit}}</span>篇，打回<span>{{reject}}</span>篇</div>
         </div>
         <div class="content-list">
           <div class="list-box sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="status" :class="{'one': v.status === 0, 'two': v.status === 1, 'three': v.status === 2, 'four': v.status === 3}">{{v.status === 0 ? '待审核' : v.status === 1 ? '通过' : v.status === 2 ? '打回' : '报审'}}</div>
+            <div class="status" :class="{'one': v.audit_status === '0', 'two': v.audit_status === '1', 'three': v.audit_status === '2', 'four': v.audit_status === '4'}">{{v.audit_status === '0' ? '待审核' : v.audit_status === '1' ? '通过' : v.audit_status === '2' ? '打回' : '报审'}}</div>
             <div class="title overhidden">{{v.title}}</div>
-            <div class="name">{{v.name}}</div>
-            <div class="time">{{v.time}}</div>
+            <div class="name">{{v.create_user_name}}</div>
+            <div class="time">{{v.create_time | format}}</div>
           </div>
         </div>
       </div>
@@ -20,36 +20,70 @@
   </div>
 </template>
 <script>
+import { getWorkCallReportList, getJnReport } from '@/servers/interface'
 export default {
   name: 'report',
   data () {
     return {
-      dataList: [{
-        status: 0,
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 1,
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 2,
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 3,
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 0,
-        name: '张昊',
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }]
+      total: 0,
+      pass: 0,
+      edit: 0,
+      reject: 0,
+      count: 5,
+      page: 1,
+      dataList: []
+    }
+  },
+  filters: {
+    format: inputTime => {
+      inputTime = parseInt(inputTime) * 1000
+      var date = new Date(inputTime)
+      var y = date.getFullYear()
+      var m = date.getMonth() + 1
+      m = m < 10 ? '0' + m : m
+      var d = date.getDate()
+      d = d < 10 ? '0' + d : d
+      var h = date.getHours()
+      h = h < 10 ? '0' + h : h
+      var minute = date.getMinutes()
+      var second = date.getSeconds()
+      minute = minute < 10 ? '0' + minute : minute
+      second = second < 10 ? '0' + second : second
+      var time = y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
+      return time.slice(5, 16)
+    }
+  },
+  created () {
+    this.getWorkCallReportList()
+    this.getJnReport()
+    setInterval(() => {
+      this.getWorkCallReportList()
+      this.getJnReport()
+    }, 10000)
+  },
+  methods: {
+    getWorkCallReportList () {
+      getWorkCallReportList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = res.data.result.data
+          }, 100)
+          if (res.data.result.data.length < 5) {
+            this.page = 1
+          } else {
+            this.page += 1
+          }
+        }
+      })
+    },
+    getJnReport () {
+      getJnReport().then(res => {
+        this.total = res.data.result.total
+        this.pass = res.data.result.num_status[1].total
+        this.edit = res.data.result.num_status[0].total
+        this.reject = res.data.result.num_status[2].total
+      })
     }
   }
 }
@@ -116,6 +150,8 @@ export default {
             }
           }
           .title {
+            text-align: left;
+            width: 50%;
             font-size: pxrem(40px);
             margin: 0 pxrem(135px) 0 pxrem(33px);
           }

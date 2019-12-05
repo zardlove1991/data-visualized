@@ -3,12 +3,13 @@
     <div class="civilization-wrap">
       <div class="wrap-title">文明江宁</div>
       <div class="wrap-content">
-        <div class="content-total">共<span>12</span>条</div>
+        <div class="content-total">共<span>30</span>条</div>
         <div class="content-list">
           <div class="list-box sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" v-bind:style="{'animation-delay' : k/2+'s'}">
-            <div class="status" :class="{'new': v.status === 0, 'hot': v.status === 1, 'report': v.status === 2}"><span>{{v.status === 0 ? '新' : v.status === 1 ? '热' : '报'}}</span></div>
-            <div class="title overhidden">{{v.title}}</div>
-            <div class="time">{{v.time}}</div>
+            <!-- <span class="status" :class="{'new': v.status === 0, 'hot': v.status === 1, 'report': v.status === 2}"><span>{{v.status === 0 ? '新' : v.status === 1 ? '热' : '报'}}</span></div> -->
+            <div class="status report"><span>报</span></div>
+            <div class="title overhidden">{{v.Title}}</div>
+            <div class="time">{{v.CreateTime.slice(5)}}</div>
           </div>
         </div>
       </div>
@@ -16,32 +17,50 @@
   </div>
 </template>
 <script>
+import { getcivilizationJN } from '@/servers/interface'
 export default {
   name: 'civilizationJn',
   data () {
     return {
-      dataList: [{
-        status: 0,
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 1,
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 2,
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 2,
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        status: 0,
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }]
+      dataList: [],
+      count: 0
     }
+  },
+  created () {
+    this.getcivilizationJN()
+  },
+  methods: {
+    getcivilizationJN () {
+      getcivilizationJN().then(res => {
+        if (!res.data.error_code) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = res.data.result.slice(0, 5)
+          }, 100)
+        }
+      })
+    }
+    // initList () {
+    //   this.dataList = this.list.slice(
+    //     this.count,
+    //     this.count + 5 > this.list.length ? this.list.length : this.count + 5
+    //   )
+    //   this.count += 5
+    //   this.countNum = setInterval(() => {
+    //     if (this.count < this.list.length) {
+    //       this.dataList = []
+    //       setTimeout(() => {
+    //         this.dataList = this.list.slice(this.count, this.count + 5)
+    //         this.count += 5
+    //       }, 100)
+    //     } else {
+    //       this.dataList = []
+    //       clearInterval(this.countNum)
+    //       this.count = 0
+    //       this.getcivilizationJN()
+    //     }
+    //   }, 10000)
+    // }
   }
 }
 </script>

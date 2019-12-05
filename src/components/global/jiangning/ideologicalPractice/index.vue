@@ -5,22 +5,26 @@
       <div class="wrap-content">
         <div class="content-img sys-flex flex-justify-between">
           <div class="img-left">
-            <img src="http://img4.imgtn.bdimg.com/it/u=3648707932,2530958242&fm=26&gp=0.jpg" />
+            <img src="http://static.jstv.com/2019/12/02/zyjs-zybd.png" />
           </div>
           <div class="img-right">
             <div class="right-one">
-              <img src="http://img4.imgtn.bdimg.com/it/u=3648707932,2530958242&fm=26&gp=0.jpg" />
+              <img src="http://static.jstv.com/2019/12/02/zyjs-zyjh.png" />
             </div>
             <div class="right-two">
-              <img src="http://img4.imgtn.bdimg.com/it/u=3648707932,2530958242&fm=26&gp=0.jpg" />
+              <img src="http://static.jstv.com/2019/12/02/zyjs-zywz.png" />
             </div>
           </div>
         </div>
-        <div class="content-scroll">
-          <div class="scroll-list sys-flex sys-flex-center">
-            <div class="list-top">置顶</div>
-            <div class="list-title overhidden">中国稳投资多管齐下 专项债等新政给投资添活力</div>
-            <div class="list-time">05-25  13:51</div>
+        <div class="content-scroll sys-flex sys-flex-center">
+          <div class="list-top">置顶</div>
+          <div class="list-content">
+            <div class="list-center" :class="{'scroll-active': animate}">
+              <div class="scroll-list sys-flex sys-flex-center" v-for="(v, k) in dataList" :key="k">
+                <div class="list-title overhidden">{{v.title}}</div>
+                <div class="list-time">{{v.create_time}}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -28,10 +32,35 @@
   </div>
 </template>
 <script>
+import { getThoughtPractice } from '@/servers/interface'
 export default {
   name: 'ideologicalPractice',
   data () {
-    return {}
+    return {
+      animate: false,
+      dataList: []
+    }
+  },
+  created () {
+    this.getThoughtPractice()
+  },
+  methods: {
+    getThoughtPractice () {
+      getThoughtPractice().then(res => {
+        if (!res.data.error_code) {
+          this.dataList = res.data.result
+          setInterval(this.showMarquee, 2000)
+        }
+      })
+    },
+    showMarquee () {
+      this.animate = true
+      setTimeout(() => {
+        this.dataList.push(this.dataList[0])
+        this.dataList.shift()
+        this.animate = false
+      }, 500)
+    }
   }
 }
 </script>
@@ -81,17 +110,34 @@ export default {
         width: 100%;
         height: pxrem(140px);
         background-color: #0B295E;
-        .scroll-list {
-          padding: pxrem(50px) pxrem(40px);
-          .list-top {
-            width: pxrem(110px);
-            height: pxrem(52px);
-            background-color: #DE4646;
-            border-radius: pxrem(5px);
-            font-size: pxrem(30px);
-            margin-right: pxrem(30px);
+        padding-left: pxrem(35px);
+        .list-top {
+          width: pxrem(110px);
+          height: pxrem(52px);
+          background-color: #DE4646;
+          border-radius: pxrem(5px);
+          font-size: pxrem(30px);
+          margin-right: pxrem(30px);
+        }
+        .list-content {
+          position: relative;
+          overflow: hidden;
+          flex: 1;
+          height: pxrem(100px);
+          line-height: pxrem(100px);
+          .list-center {
+            position: absolute;
+	          top: 0;
+	          left: 0;
           }
+        }
+        .scroll-active {
+          transition: all 0.5s;
+	        margin-top: pxrem(-100px);
+        }
+        .scroll-list {
           .list-title {
+            width: 80%;
             font-size: pxrem(40px);
           }
           .list-time {

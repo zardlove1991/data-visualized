@@ -3,11 +3,11 @@
     <div class="agency-wrap">
       <div class="wrap-title">新华社</div>
       <div class="wrap-content">
-        <div class="content-total">共<span>12</span>条</div>
+        <div class="content-total">共<span>{{total}}</span>条</div>
         <div class="content-list">
           <div class="list-box sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" v-bind:style="{'animation-delay' : k/2+'s'}">
             <div class="title overhidden">{{v.title}}</div>
-            <div class="time">{{v.time}}</div>
+            <div class="time">{{v.create_time.slice(5)}}</div>
           </div>
         </div>
       </div>
@@ -15,26 +15,39 @@
   </div>
 </template>
 <script>
+import { getM2OPLUSArticleList } from '@/servers/interface'
 export default {
   name: 'newsAgency',
   data () {
     return {
-      dataList: [{
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }, {
-        title: '第二届中国国际进口博览会：科技保险为智慧出行保驾护航',
-        time: '05-25  13:51'
-      }]
+      count: 5,
+      page: 1,
+      total: 0,
+      dataList: []
+    }
+  },
+  created () {
+    this.getM2OPLUSArticleList()
+    setInterval(() => {
+      this.getM2OPLUSArticleList()
+    }, 10000)
+  },
+  methods: {
+    getM2OPLUSArticleList () {
+      getM2OPLUSArticleList(this.count, this.page).then(res => {
+        if (!res.data.error_code) {
+          this.total = res.data.result.total
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = res.data.result.data
+          }, 100)
+          if (res.data.result.data.length < 5) {
+            this.page = 1
+          } else {
+            this.page += 1
+          }
+        }
+      })
     }
   }
 }
