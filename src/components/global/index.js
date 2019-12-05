@@ -61,3 +61,6 @@ export const qingxucomponentProjectDemo = getComponent('qingxu/projectDemo')
 export const qingxucomponentHotTopicDemo = getComponent('qingxu/hotTopicDemo')
 export const qingxucomponentTaskDemo = getComponent('qingxu/taskDemo')
 export const qingxucomponentLeftDemo = getComponent('qingxu/leftDemo')
+
+/* 江宁套系 */
+export const jiangningcomponentideologicalPractice = getComponent('jiangning/ideologicalPractice')
