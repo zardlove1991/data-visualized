@@ -8,13 +8,14 @@
       <div class="task-content sys-flex">
         <div class="task-list-box sys-flex sys-vertical flex-justify-around">
           <div
-            class="task-list animated sys-flex sys-flex-center overhidden"
+            class="task-list animated sys-flex sys-flex-center flex-justify-between overhidden"
             :class="{'fadeInLeft' : v, 'bgurl0': k%4 === 0, 'bgurl1': k%4 === 1, 'bgurl2': k%4 === 2, 'bgurl3': k%4 === 3}"
             :style="{'animation-delay' : k/2 + 's'}"
             v-for="(v,k) in dataList"
             :key="k"
           >
-            <div class="list-title overhidden">{{v.title}}</div>
+            <div class="list-title overhidden">{{v.task_user_name}}-{{v.title}}</div>
+            <div class="list-time">{{v.update_time | dateFormat(5, 10)}}</div>
           </div>
         </div>
         <div class="task-chart-box">
@@ -71,7 +72,7 @@ export default {
           align: 'left',
           itemHeight: this.proportion * 15,
           x: 'right',
-          y: 'center',
+          y: 'top',
           // top: 'top',
           // left: 'center',
           textStyle: {
@@ -249,6 +250,10 @@ export default {
       // 原样式
       font-size: px1em(18px);
       text-align: left;
+    }
+    .list-time {
+      font-size: px1em(14.5px);
+      color: rgba(243, 248, 254, 0.5);
     }
   }
 }
