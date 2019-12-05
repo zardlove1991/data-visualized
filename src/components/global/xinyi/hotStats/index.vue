@@ -2,7 +2,7 @@
   <div class="xy-hot" id="xy-hot">
     <!--  :class="[{'warp-bg' : showDefault}]"  -->
     <div class="hot-wrap sys-flex sys-vertical">
-      <div class="hot-title hidden">{{hotNews.title}}</div>
+      <div class="hot-title hidden" id="hot-title">{{hotNews.title}}</div>
       <div class="hot-charts sys-flex sys-flex-wrap flex-justify-between">
         <div class="heat-trend chart-box">
           <chart :options="heatOpt" :autoResize="true"></chart>
@@ -567,6 +567,9 @@ export default {
     font-size: px1em(11px);
     font-weight: bold;
     color: #d6e6ff;
+  }
+  #hot-title {
+    text-align: -webkit-center;
   }
   .hidden {
     display: -webkit-box;
