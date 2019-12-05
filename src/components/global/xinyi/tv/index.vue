@@ -88,6 +88,7 @@ export default {
             {
               playerOpt: {
                 autoplay: true, // 自动播放
+                loop: true,
                 controls: true, // 是否显示控制栏
                 muted: true,
                 fluid: true,
@@ -96,13 +97,13 @@ export default {
                 sourceOrder: true,
                 flash: { hls: { withCredentials: false } },
                 html5: { hls: { withCredentials: false } },
-                // sources: [
-                //   {
-                //     withCredentials: false,
-                //     type: 'application/x-mpegURL',
-                //     src: null
-                //   }
-                // ],
+                sources: [
+                  {
+                    withCredentials: false,
+                    type: 'application/x-mpegURL',
+                    src: 'http://36772.live-vod.cdn.aodianyun.com/clip/0x0/d629d9961e4aef0b6c65a93e32ac968f/d629d9961e4aef0b6c65a93e32ac968f.m3u8'
+                  }
+                ],
                 /* poster:
                   value.snap.host +
                   value.snap.dir +
@@ -121,6 +122,7 @@ export default {
             {
               playerOpt: {
                 autoplay: true, // 自动播放
+                loop: true,
                 controls: true, // 是否显示控制栏
                 muted: true,
                 fluid: true,
@@ -129,18 +131,18 @@ export default {
                 sourceOrder: true,
                 flash: { hls: { withCredentials: false } },
                 html5: { hls: { withCredentials: false } },
-                // sources: [
-                //   {
-                //     withCredentials: false,
-                //     type: 'application/x-mpegURL',
-                //     src: null
-                //   }
-                // ],
-                /* poster:
-                  value.snap.host +
-                  value.snap.dir +
-                  value.snap.filepath +
-                  value.snap.filename, // 播放器默认图片 */
+                sources: [
+                  {
+                    withCredentials: false,
+                    type: 'application/x-mpegURL',
+                    src: 'http://36772.live-vod.cdn.aodianyun.com/clip/0x0/ec797e2c2cd612a4ee7654cbbdf9d811/ec797e2c2cd612a4ee7654cbbdf9d811.m3u8'
+                  }
+                ],
+                // poster:
+                //   value.snap.host +
+                //   value.snap.dir +
+                //   value.snap.filepath +
+                //   value.snap.filename, // 播放器默认图片
                 controlBar: {
                   // 配置控制栏
                   timeDivider: false, // 时间分割线
