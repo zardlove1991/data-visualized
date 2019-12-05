@@ -5,7 +5,7 @@
       <div class="wrap-content">
         <div class="content-total">共<span>30</span>条</div>
         <div class="content-list">
-          <div class="list-box sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" v-bind:style="{'animation-delay' : k/2+'s'}">
+          <div class="list-box sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.Title}" v-bind:style="{'animation-delay' : k/2+'s'}">
             <!-- <span class="status" :class="{'new': v.status === 0, 'hot': v.status === 1, 'report': v.status === 2}"><span>{{v.status === 0 ? '新' : v.status === 1 ? '热' : '报'}}</span></div> -->
             <div class="status report"><span>报</span></div>
             <div class="title overhidden">{{v.Title}}</div>
@@ -31,36 +31,39 @@ export default {
   },
   methods: {
     getcivilizationJN () {
+      if (this.countNum) {
+        this.dataList = []
+        clearInterval(this.countNum)
+        this.count = 0
+      }
       getcivilizationJN().then(res => {
         if (!res.data.error_code) {
-          this.dataList = []
-          setTimeout(() => {
-            this.dataList = res.data.result.slice(0, 5)
-          }, 100)
+          this.list = res.data.result
+          this.initList()
         }
       })
+    },
+    initList () {
+      this.dataList = this.list.slice(
+        this.count,
+        this.count + 5 > this.list.length ? this.list.length : this.count + 5
+      )
+      this.count += 5
+      this.countNum = setInterval(() => {
+        if (this.count < this.list.length) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = this.list.slice(this.count, this.count + 5)
+            this.count += 5
+          }, 100)
+        } else {
+          this.dataList = []
+          clearInterval(this.countNum)
+          this.count = 0
+          this.getcivilizationJN()
+        }
+      }, 10000)
     }
-    // initList () {
-    //   this.dataList = this.list.slice(
-    //     this.count,
-    //     this.count + 5 > this.list.length ? this.list.length : this.count + 5
-    //   )
-    //   this.count += 5
-    //   this.countNum = setInterval(() => {
-    //     if (this.count < this.list.length) {
-    //       this.dataList = []
-    //       setTimeout(() => {
-    //         this.dataList = this.list.slice(this.count, this.count + 5)
-    //         this.count += 5
-    //       }, 100)
-    //     } else {
-    //       this.dataList = []
-    //       clearInterval(this.countNum)
-    //       this.count = 0
-    //       this.getcivilizationJN()
-    //     }
-    //   }, 10000)
-    // }
   }
 }
 </script>
@@ -79,13 +82,13 @@ export default {
     padding: pxrem(30px);
     color: #fff;
     .wrap-title {
-      font-size: pxrem(50px);
+      font-size: pxrem(52px);
       font-weight: 600;
       margin-top: pxrem(-16px);
     }
     .wrap-content {
       .content-total {
-        font-size: pxrem(36px);
+        font-size: pxrem(38px);
         text-align: left;
         margin-bottom: pxrem(40px);
         padding-left: pxrem(20px);
@@ -109,7 +112,7 @@ export default {
             height: pxrem(71px);
             background: no-repeat center;
             background-size: 100%;
-            font-size: pxrem(36px);
+            font-size: pxrem(38px);
             line-height: pxrem(71px);
             margin-right: pxrem(30px);
             &.new {
@@ -126,11 +129,11 @@ export default {
             }
           }
           .title {
-            font-size: pxrem(40px);
+            font-size: pxrem(42px);
           }
           .time {
             margin-left: auto;
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
           }
         }
       }

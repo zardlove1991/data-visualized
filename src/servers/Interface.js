@@ -81,7 +81,7 @@ export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${G
 // 江宁荔枝云
 // export const getLitchiCloud = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getLitchiCloud`)
 // 江宁新华社
-export const getM2OPLUSArticleList = (count = 5, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPLUSArticleList?category_id=49&count=${count}&page=${page}`)
+export const getM2OPLUSArticleList = (count = 5, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPLUSArticleList?category_id=49&date_search=0&count=${count}&page=${page}`)
 // 文明江宁
 export const getcivilizationJN = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationJN`)
 // 选题汇总

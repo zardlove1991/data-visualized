@@ -81,18 +81,18 @@ export default {
     padding: pxrem(30px);
     color: #fff;
     .wrap-title {
-      font-size: pxrem(50px);
+      font-size: pxrem(52px);
       font-weight: 600;
       margin-top: pxrem(-16px);
     }
     .wrap-content {
       .content-total {
-        font-size: pxrem(36px);
+        font-size: pxrem(38px);
         text-align: left;
         margin-bottom: pxrem(40px);
         padding-left: pxrem(20px);
         span {
-          font-size: pxrem(50px);
+          font-size: pxrem(52px);
           font-weight: 600;
           color: #00F6FF;
           margin: 0 pxrem(8px);
@@ -109,18 +109,18 @@ export default {
             margin-bottom: 0;
           }
           .title {
-            font-size: pxrem(40px);
+            font-size: pxrem(42px);
             margin: 0 pxrem(180px) 0 pxrem(33px);
             width: 70%;
             text-align: left;
           }
           .name {
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
             color: #00F6FF;
           }
           .status {
             margin-left: auto;
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
           }
         }
       }

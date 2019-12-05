@@ -67,13 +67,13 @@ export default {
     padding: pxrem(30px);
     color: #fff;
     .wrap-title {
-      font-size: pxrem(50px);
+      font-size: pxrem(52px);
       font-weight: 600;
       margin-top: pxrem(-16px);
     }
     .wrap-content {
       .content-total {
-        font-size: pxrem(36px);
+        font-size: pxrem(38px);
         text-align: left;
         margin-bottom: pxrem(40px);
         padding-left: pxrem(20px);
@@ -93,10 +93,10 @@ export default {
             margin-bottom: 0;
           }
           .title {
-            font-size: pxrem(40px);
+            font-size: pxrem(42px);
           }
           .time {
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
           }
         }
       }

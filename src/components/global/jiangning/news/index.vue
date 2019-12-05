@@ -195,7 +195,7 @@ export default {
     padding: pxrem(30px);
     color: #fff;
     .wrap-title {
-      font-size: pxrem(50px);
+      font-size: pxrem(52px);
       font-weight: 600;
       margin-top: pxrem(-16px);
       margin-bottom: pxrem(40px);
@@ -207,9 +207,9 @@ export default {
           width: 100%;
           height: pxrem(160px);
           background-color: #0B295E;
-          font-size: pxrem(40px);
+          font-size: pxrem(42px);
           span {
-            font-size: pxrem(60px);
+            font-size: pxrem(62px);
             color: #FF3C3C;
             margin-left: pxrem(39px);
           }
@@ -218,27 +218,27 @@ export default {
           width: 100%;
           height: pxrem(325px);
           background-color: #0B204C;
-          font-size: pxrem(34px);
+          font-size: pxrem(36px);
           border-bottom: 1px solid #fff;
           padding: 0 pxrem(87px) 0 pxrem(75px);
           .pass {
             div:last-of-type {
               color: #00F6FF;
-              font-size: pxrem(56px);
+              font-size: pxrem(58px);
               margin-top: pxrem(8px);
             }
           }
           .examine {
             div:last-of-type {
               color: #2684FA;
-              font-size: pxrem(56px);
+              font-size: pxrem(58px);
               margin-top: pxrem(8px);
             }
           }
           .publish {
             div:last-of-type {
               color: #FF9A02;
-              font-size: pxrem(56px);
+              font-size: pxrem(58px);
               margin-top: pxrem(8px);
             }
           }
@@ -250,7 +250,7 @@ export default {
           padding: 0 pxrem(87px) 0 pxrem(75px);
           .two-progress {
             .percent {
-              font-size: pxrem(60px);
+              font-size: pxrem(62px);
               color: #00F6FF;
             }
             .progress-total {
@@ -282,7 +282,7 @@ export default {
               }
             }
             .article {
-              font-size: pxrem(34px);
+              font-size: pxrem(36px);
             }
           }
         }
@@ -296,7 +296,7 @@ export default {
             height: pxrem(60px);
             border-radius: pxrem(8px);
             background-color: #2684FA;
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
             line-height: pxrem(60px);
             &.active {
               background-color: #FF9A02;
@@ -304,10 +304,10 @@ export default {
           }
         }
         .publish-article {
-          font-size: pxrem(34px);
+          font-size: pxrem(36px);
           span {
             color: #00FF9C;
-            font-size: pxrem(56px);
+            font-size: pxrem(58px);
             margin-left: pxrem(25px);
           }
           margin: pxrem(30px) 0 pxrem(20px);

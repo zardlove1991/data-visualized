@@ -200,7 +200,7 @@ export default {
     padding: pxrem(30px);
     color: #fff;
     .wrap-title {
-      font-size: pxrem(50px);
+      font-size: pxrem(52px);
       font-weight: 600;
       margin-top: pxrem(-16px);
     }
@@ -215,12 +215,12 @@ export default {
         .positionAb {
           position: absolute;
           div:first-of-type {
-            font-size: pxrem(60px);
+            font-size: pxrem(62px);
             font-weight: bold;
             margin-bottom: pxrem(10px);
           }
           div:last-of-type {
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
           }
         }
         .left-one {
@@ -248,7 +248,7 @@ export default {
       .content-right {
         width: 20%;
         .right-list {
-          font-size: pxrem(40px);
+          font-size: pxrem(42px);
           text-align: left;
           margin-bottom: pxrem(60px);
           &:last-of-type {
