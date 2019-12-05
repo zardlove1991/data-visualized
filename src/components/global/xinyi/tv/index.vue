@@ -88,6 +88,7 @@ export default {
             {
               playerOpt: {
                 autoplay: true, // 自动播放
+                loop: true,
                 controls: true, // 是否显示控制栏
                 muted: true,
                 fluid: true,
@@ -121,6 +122,7 @@ export default {
             {
               playerOpt: {
                 autoplay: true, // 自动播放
+                loop: true,
                 controls: true, // 是否显示控制栏
                 muted: true,
                 fluid: true,
