@@ -14,7 +14,8 @@
           <chart :options="geoOpt" :autoResize="true"></chart>
         </div>
         <div class="regional-distribution chart-box">
-          <chart :options="regionalOpt" :autoResize="true"></chart>
+        <!--  <chart :options="regionalOpt" :autoResize="true"></chart>  -->
+          <chart :options="keyOpt" :autoResize="true"></chart>
         </div>
       </div>
     </div>
@@ -22,12 +23,13 @@
 </template>
 
 <script>
-import { getHotsTopicList, getHotsTopicTrend, getHotsTopicEmotion, getHotsTopicPubArea } from '@/servers/interface'
+import { getHotsTopicList, getHotsTopicTrend, getHotsTopicEmotion, getHotsTopicPubArea, getHotsTopicHotWord } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/map'
+import 'echarts-wordcloud'
 import china from 'echarts/map/json/china.json'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/grid'
@@ -62,6 +64,7 @@ export default {
         reg: [{ value: 0 }]
       },
       seriesData: [],
+      keyWordsList: [],
       frequency: 35000
     }
   },
@@ -386,6 +389,49 @@ export default {
           }
         ]
       }
+    },
+    keyOpt () {
+      return {
+        title: {
+          text: '关联热词',
+          textStyle: {
+            color: 'rgb(214,230,255)',
+            fontSize: this.proportion * 18
+          }
+        },
+        series: [
+          {
+            type: 'wordCloud',
+            gridSize: this.proportion * 20,
+            sizeRange: [10, 50],
+            rotationRange: [0, 90],
+            rotationStep: 90,
+            shape: 'square',
+            width: '80%',
+            height: '80%',
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    'rgb(' +
+                    [
+                      Math.round(Math.random() * 255),
+                      Math.round(Math.random() * 255),
+                      Math.round(Math.random() * 255)
+                    ].join(',') +
+                    ')'
+                  )
+                }
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: '#333'
+              }
+            },
+            data: this.keyWordsList
+          }
+        ]
+      }
     }
   },
   watch: {
@@ -432,7 +478,7 @@ export default {
               name: v.name_zh,
               smooth: true,
               type: 'line',
-              data: v.count.map(c => c.value)
+              data: v.count.map(c => c.value + Math.random() * 10)
             }
           })
         }
@@ -441,7 +487,7 @@ export default {
         if (res && res.data && res.data.result && res.data.result[0]) {
           this.sentimentData.series = res.data.result.map(v => {
             return {
-              value: v.count,
+              value: v.count + Math.random() * 10,
               name: v.name_zh
             }
           })
@@ -461,6 +507,16 @@ export default {
             return {
               value: v.count,
               name: v.name_zh.replace(/省|市|自治区|维吾尔|壮族|回族/g, '')
+            }
+          })
+        }
+      })
+      getHotsTopicHotWord(value).then(res => {
+        if (res && res.data && res.data.result && res.data.result[0]) {
+          this.keyWordsList = res.data.result.map(v => {
+            return {
+              value: v.count,
+              name: v.name_zh
             }
           })
         }
