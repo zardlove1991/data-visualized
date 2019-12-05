@@ -14,7 +14,7 @@
           <chart :options="geoOpt" :autoResize="true"></chart>
         </div>
         <div class="regional-distribution chart-box">
-        <!--  <chart :options="regionalOpt" :autoResize="true"></chart>  -->
+          <!--  <chart :options="regionalOpt" :autoResize="true"></chart>  -->
           <chart :options="keyOpt" :autoResize="true"></chart>
         </div>
       </div>
@@ -63,7 +63,6 @@ export default {
         geo: [{ value: 0 }],
         reg: [{ value: 0 }]
       },
-      seriesData: [],
       keyWordsList: [],
       frequency: 35000
     }
@@ -443,11 +442,13 @@ export default {
     }
   },
   created () {
-    this.getDataList()
+    // this.getDataList()
   },
   mounted () {
     this.proportion = this.getProportion('xy-hot') * 1.5
     this.setFontsize('xy-hot')
+    // 使用假数据
+    this.fakeData()
   },
   methods: {
     getDataList () {
@@ -540,6 +541,589 @@ export default {
           this.getDataList()
         }
       }, this.frequency)
+    },
+
+    // 本地假数据
+    fakeData () {
+      let fakeDataList = [
+        {
+          hotNews: {
+            title: '网络观看破16W+,“壮丽70年 颂歌献给党”大合唱比赛落幕'
+          },
+          heatDataxAxis: ['12-04', '12-05', '12-06'],
+          heatDataseries: [
+            {
+              data: [200, 400, 300],
+              name: '网站',
+              smooth: true,
+              type: 'line'
+            },
+            {
+              data: [259, 534, 410],
+              name: '微信',
+              smooth: true,
+              type: 'line'
+            },
+            {
+              data: [169, 378, 223],
+              name: '微博',
+              smooth: true,
+              type: 'line'
+            }
+          ],
+          sentimentDataseries: [
+            {
+              name: '正面',
+              value: 18
+            },
+            {
+              name: '负面',
+              value: 1
+            },
+            {
+              name: '中性',
+              value: 1
+            }
+          ],
+          areaDatageo: [
+            {
+              value: 60,
+              name: '江苏'
+            },
+            {
+              value: 20,
+              name: '安徽'
+            },
+            {
+              value: 10,
+              name: '上海'
+            },
+            {
+              value: 8,
+              name: '山东'
+            },
+            {
+              value: 1,
+              name: '北京'
+            }
+          ],
+          areaDatareg: [
+            {
+              value: 45,
+              name: '江苏'
+            },
+            {
+              value: 35,
+              name: '安徽'
+            },
+            {
+              value: 10,
+              name: '上海'
+            },
+            {
+              value: 8,
+              name: '山东'
+            },
+            {
+              value: 1,
+              name: '北京'
+            }
+          ],
+          keyWordsList: [
+            {
+              value: 240,
+              name: '70年'
+            },
+            {
+              value: 230,
+              name: '党'
+            },
+            {
+              value: 220,
+              name: '合唱'
+            },
+            {
+              value: 210,
+              name: '革命'
+            },
+            {
+              value: 200,
+              name: '红色'
+            },
+            {
+              value: 190,
+              name: '祖国'
+            },
+            {
+              value: 180,
+              name: '中国'
+            },
+            {
+              value: 170,
+              name: '献礼'
+            },
+            {
+              value: 160,
+              name: '精彩'
+            },
+            {
+              value: 150,
+              name: '传承'
+            },
+            {
+              value: 140,
+              name: '比赛'
+            },
+            {
+              value: 130,
+              name: '历史'
+            },
+            {
+              value: 120,
+              name: '未来'
+            },
+            {
+              value: 110,
+              name: '人民'
+            },
+            {
+              value: 100,
+              name: '热爱'
+            },
+            {
+              value: 90,
+              name: '改革'
+            },
+            {
+              value: 80,
+              name: '幸福'
+            },
+            {
+              value: 70,
+              name: '富强'
+            },
+            {
+              value: 60,
+              name: '美好'
+            },
+            {
+              value: 50,
+              name: '评选'
+            },
+            {
+              value: 40,
+              name: '一等'
+            },
+            {
+              value: 30,
+              name: '激烈'
+            },
+            {
+              value: 20,
+              name: '复兴'
+            },
+            {
+              value: 10,
+              name: '儿女'
+            }
+          ]
+        },
+        {
+          hotNews: {
+            title: '邳州市党政代表团来新考察'
+          },
+          heatDataxAxis: ['12-04', '12-05', '12-06'],
+          heatDataseries: [
+            {
+              data: [300, 450, 150],
+              name: '网站',
+              smooth: true,
+              type: 'line'
+            },
+            {
+              data: [259, 220, 189],
+              name: '微信',
+              smooth: true,
+              type: 'line'
+            },
+            {
+              data: [120, 240, 310],
+              name: '微博',
+              smooth: true,
+              type: 'line'
+            }
+          ],
+          sentimentDataseries: [
+            {
+              name: '正面',
+              value: 19
+            },
+            {
+              name: '负面',
+              value: 0
+            },
+            {
+              name: '中性',
+              value: 1
+            }
+          ],
+          areaDatageo: [
+            {
+              value: 70,
+              name: '江苏'
+            },
+            {
+              value: 5,
+              name: '安徽'
+            },
+            {
+              value: 5,
+              name: '上海'
+            },
+            {
+              value: 3,
+              name: '福建'
+            },
+            {
+              value: 2,
+              name: '江西'
+            }
+          ],
+          areaDatareg: [
+            {
+              value: 45,
+              name: '江苏'
+            },
+            {
+              value: 35,
+              name: '安徽'
+            },
+            {
+              value: 10,
+              name: '上海'
+            },
+            {
+              value: 8,
+              name: '山东'
+            },
+            {
+              value: 1,
+              name: '北京'
+            }
+          ],
+          keyWordsList: [
+            {
+              value: 240,
+              name: '党政'
+            },
+            {
+              value: 230,
+              name: '邳州'
+            },
+            {
+              value: 220,
+              name: '新沂'
+            },
+            {
+              value: 210,
+              name: '市委'
+            },
+            {
+              value: 200,
+              name: '代表团'
+            },
+            {
+              value: 190,
+              name: '书记'
+            },
+            {
+              value: 180,
+              name: '领导'
+            },
+            {
+              value: 170,
+              name: '一带一路'
+            },
+            {
+              value: 160,
+              name: '发展'
+            },
+            {
+              value: 150,
+              name: '经验'
+            },
+            {
+              value: 140,
+              name: '赞赏'
+            },
+            {
+              value: 130,
+              name: '生态旅游'
+            },
+            {
+              value: 120,
+              name: '解放思想'
+            },
+            {
+              value: 110,
+              name: '作风'
+            },
+            {
+              value: 100,
+              name: '基础设施'
+            },
+            {
+              value: 90,
+              name: '十三五'
+            },
+            {
+              value: 80,
+              name: '机场'
+            },
+            {
+              value: 70,
+              name: '枢纽经济'
+            },
+            {
+              value: 60,
+              name: '两成一地'
+            },
+            {
+              value: 50,
+              name: '生态'
+            },
+            {
+              value: 40,
+              name: '开拓创新'
+            },
+            {
+              value: 30,
+              name: '共赢'
+            },
+            {
+              value: 20,
+              name: '共赢'
+            },
+            {
+              value: 10,
+              name: '儿女'
+            }
+          ]
+        },
+        {
+          hotNews: {
+            title: '双塘镇盘活生产要素实现发展加速度'
+          },
+          heatDataxAxis: ['12-04', '12-05', '12-06'],
+          heatDataseries: [
+            {
+              data: [500, 400, 300],
+              name: '网站',
+              smooth: true,
+              type: 'line'
+            },
+            {
+              data: [180, 334, 410],
+              name: '微信',
+              smooth: true,
+              type: 'line'
+            },
+            {
+              data: [330, 378, 223],
+              name: '微博',
+              smooth: true,
+              type: 'line'
+            }
+          ],
+          sentimentDataseries: [
+            {
+              name: '正面',
+              value: 10
+            },
+            {
+              name: '负面',
+              value: 1
+            },
+            {
+              name: '中性',
+              value: 9
+            }
+          ],
+          areaDatageo: [
+            {
+              value: 80,
+              name: '江苏'
+            },
+            {
+              value: 8,
+              name: '安徽'
+            },
+            {
+              value: 5,
+              name: '上海'
+            },
+            {
+              value: 1,
+              name: '山西'
+            },
+            {
+              value: 1,
+              name: '天津'
+            }
+          ],
+          areaDatareg: [
+            {
+              value: 45,
+              name: '江苏'
+            },
+            {
+              value: 35,
+              name: '安徽'
+            },
+            {
+              value: 10,
+              name: '上海'
+            },
+            {
+              value: 8,
+              name: '山东'
+            },
+            {
+              value: 1,
+              name: '北京'
+            }
+          ],
+          keyWordsList: [
+            {
+              value: 240,
+              name: '发展'
+            },
+            {
+              value: 230,
+              name: '生产'
+            },
+            {
+              value: 220,
+              name: '加速'
+            },
+            {
+              value: 210,
+              name: '经济'
+            },
+            {
+              value: 200,
+              name: '双塘'
+            },
+            {
+              value: 190,
+              name: '新沂市'
+            },
+            {
+              value: 180,
+              name: '因地制宜'
+            },
+            {
+              value: 170,
+              name: '群众'
+            },
+            {
+              value: 160,
+              name: '财政'
+            },
+            {
+              value: 150,
+              name: '行业'
+            },
+            {
+              value: 140,
+              name: '建筑'
+            },
+            {
+              value: 130,
+              name: '集群'
+            },
+            {
+              value: 120,
+              name: '企业'
+            },
+            {
+              value: 110,
+              name: '交通'
+            },
+            {
+              value: 100,
+              name: '水利'
+            },
+            {
+              value: 90,
+              name: '基础设施'
+            },
+            {
+              value: 80,
+              name: '建材'
+            },
+            {
+              value: 70,
+              name: '交通'
+            },
+            {
+              value: 60,
+              name: '高新区'
+            },
+            {
+              value: 50,
+              name: '产业园区'
+            },
+            {
+              value: 40,
+              name: '基础'
+            },
+            {
+              value: 30,
+              name: '纳税'
+            },
+            {
+              value: 20,
+              name: '盘活'
+            },
+            {
+              value: 10,
+              name: '全镇'
+            }
+          ]
+        }
+      ]
+      let fakeDataIndex = 0
+      this.hotNews = fakeDataList[fakeDataIndex].hotNews
+      this.heatData.xAxis = fakeDataList[fakeDataIndex].heatDataxAxis
+      this.heatData.series = fakeDataList[fakeDataIndex].heatDataseries
+      this.sentimentData.series = fakeDataList[fakeDataIndex].sentimentDataseries
+      this.areaData.geo = fakeDataList[fakeDataIndex].areaDatageo
+      this.areaData.reg = fakeDataList[fakeDataIndex].areaDatareg.map(v => {
+        return {
+          value: v.value,
+          name: v.name
+        }
+      })
+      this.keyWordsList = fakeDataList[fakeDataIndex].keyWordsList
+      setInterval(() => {
+        fakeDataIndex++
+        if (fakeDataIndex > 2) {
+          fakeDataIndex = 0
+        }
+        this.hotNews = fakeDataList[fakeDataIndex].hotNews
+        this.heatData.xAxis = fakeDataList[fakeDataIndex].heatDataxAxis
+        this.heatData.series = fakeDataList[fakeDataIndex].heatDataseries
+        this.sentimentData.series = fakeDataList[fakeDataIndex].sentimentDataseries
+        this.areaData.geo = fakeDataList[fakeDataIndex].areaDatageo
+        this.areaData.reg = fakeDataList[fakeDataIndex].areaDatareg.map(v => {
+          return {
+            value: v.value,
+            name: v.name
+          }
+        })
+        this.keyWordsList = fakeDataList[fakeDataIndex].keyWordsList
+      }, 10000)
     }
   }
 }
