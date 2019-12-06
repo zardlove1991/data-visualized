@@ -109,6 +109,7 @@ export default {
               }
             }
             this.RongCall.ring()
+            this.$emit('updateList')
             this.call_Show = true
             this.invite_call = true
           })
