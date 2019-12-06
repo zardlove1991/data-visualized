@@ -4,32 +4,16 @@
       <div class="wrap-title">传播分析</div>
       <div class="wrap-content sys-flex sys-flex-center">
         <div class="content-left">
-          <div class="left-one positionAb">
-            <div>{{onePercent}}</div>
-            <div>无线江宁APP</div>
-          </div>
-          <div class="left-two positionAb">
-            <div>{{twoPercent}}</div>
-            <div>短视频</div>
-          </div>
-          <div class="left-three positionAb">
-            <div>{{threePercent}}</div>
-            <div>微信</div>
-          </div>
-          <div class="left-four positionAb">
-            <div>{{fourPercent}}</div>
-            <div>微博</div>
-          </div>
           <div class="left-total positionAb">
             <div>{{total}}</div>
             <div>总用户数</div>
           </div>
-          <chart :options="pieOption" :autoResize="true"></chart>
+          <chart v-if="initFinished" :options="pieOption" :autoResize="true"></chart>
         </div>
         <div class="content-right">
           <div class="right-list" v-for="(v, k) in dataList" :key="k">
-            <div class="title"><span :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k === 3}"></span>{{v.title}}</div>
-            <div class="num">{{v.num}}</div>
+            <div class="title"><span :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four': k === 3}"></span>{{v.name}}</div>
+            <div class="num">{{v.value}}</div>
           </div>
         </div>
       </div>
@@ -44,6 +28,13 @@ export default {
   name: 'publish',
   data () {
     return {
+      initFinished: false,
+      config: {
+        app: '无线江宁APP',
+        shortVideo: '短视频',
+        weChat: '微信',
+        weiBo: '微博'
+      },
       total: 0,
       onePercent: 0,
       twoPercent: 0,
@@ -55,30 +46,33 @@ export default {
       pieOption: {
         tooltip: {
           // 设置悬停出现的弹框样式
-          show: false,
           trigger: 'item',
-          position: [340, 220],
-          formatter: '{b}: {d}%',
-          textStyle: {
-            fontSize: '10',
-            fontWeight: 'bold'
-          }
+          formatter: '{d}% \n {b}'
         },
         series: [
           {
+            startAngle: 240,
             name: '访问来源',
             type: 'pie',
             radius: ['50%', '90%'],
-            avoidLabelOverlap: false,
+            avoidLabelOverlap: true,
             label: {
               normal: {
-                show: false,
-                position: 'center',
-                textStyle: {
-                  fontSize: '30',
-                  fontWeight: 'bold'
+                show: true,
+                formatter: '{per|{d}%}\n\n{name|{b}}',
+                rich: {
+                  name: {
+                    fontSize: 20,
+                    align: 'center'
+                  },
+                  per: {
+                    fontSize: 30,
+                    fontWeight: 'bold',
+                    align: 'center'
+                  }
                 }
-              }
+              },
+              position: 'top'
             },
             labelLine: {
               normal: {
@@ -107,6 +101,31 @@ export default {
     this.getOperationalData()
   },
   methods: {
+    getOperationalData () {
+      this.initFinished = false
+      getOperationalData().then(res => {
+        this.dataList = []
+        this.total = 0
+        let data = res.data.result
+        if (data) {
+          for (let key in data) {
+            let item = {
+              name: this.config[key],
+              value: data[key].cumulate_user
+            }
+            this.dataList.push(item)
+            this.total += item.value
+          }
+          this.dataList = this.dataList.sort((a, b) => {
+            return b.value - a.value
+          })
+          this.pieOption.series[0].data = this.dataList
+        }
+        this.initFinished = true
+      }).catch(rej => {
+        this.initFinished = true
+      })
+    },
     GetPercent (num, total) {
       num = parseFloat(num)
       total = parseFloat(total)
@@ -114,46 +133,6 @@ export default {
         return '-'
       }
       return total <= 0 ? '0%' : (Math.round(num / total * 10000) / 100.00) + '%'
-    },
-    getOperationalData () {
-      getOperationalData().then(res => {
-        let dataArr = Object.values(res.data.result)
-        if (dataArr && dataArr[0]) {
-          dataArr.forEach(value => {
-            this.total += value.cumulate_user
-          })
-        }
-        this.pieOption.series[0].data = [{
-          value: dataArr[0].cumulate_user,
-          name: '无线江宁APP'
-        }, {
-          value: dataArr[3].cumulate_user,
-          name: '短视频'
-        }, {
-          value: dataArr[2].cumulate_user,
-          name: '微信'
-        }, {
-          value: dataArr[1].cumulate_user,
-          name: '微博'
-        }]
-        this.dataList = [{
-          title: '无线江宁APP',
-          num: dataArr[0].cumulate_user
-        }, {
-          title: '短视频',
-          num: dataArr[3].cumulate_user
-        }, {
-          title: '微信',
-          num: dataArr[2].cumulate_user
-        }, {
-          title: '微博',
-          num: dataArr[1].cumulate_user
-        }]
-        this.onePercent = this.GetPercent(dataArr[0].cumulate_user, this.total)
-        this.twoPercent = this.GetPercent(dataArr[3].cumulate_user, this.total)
-        this.threePercent = this.GetPercent(dataArr[2].cumulate_user, this.total)
-        this.fourPercent = this.GetPercent(dataArr[1].cumulate_user, this.total)
-      })
     }
   },
   mounted () {

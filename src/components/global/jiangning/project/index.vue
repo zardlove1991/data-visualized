@@ -49,13 +49,13 @@ export default {
       })
     },
     getWorkCallSubjectList () {
-      getWorkCallSubjectList(this.count, this.page).then(res => {
+      getWorkCallSubjectList(this.count, this.page, 1).then(res => {
         if (!res.data.error_code) {
           this.dataList = []
           setTimeout(() => {
             this.dataList = res.data.result.data
           }, 100)
-          if (res.data.result.data.length < 5) {
+          if (res.data.result.data.length < 5 || this.page > 3) {
             this.page = 1
           } else {
             this.page += 1
