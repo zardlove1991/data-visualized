@@ -100,12 +100,11 @@ export default {
       switch (res.messageType) {
         case 'InviteMessage':
           getIndexMemberDetail(res.senderUserId).then((response) => {
-            console.log(response)
-            if (response.data.data) {
+            if (!response.data.error_code) {
               this.info_item = {
-                member_id: response.data.data.member_id,
-                member_name: response.data.data.member_name,
-                avatar: response.data.data.avatar && response.data.data.avatar.host ? response.data.data.avatar.host + response.data.data.avatar.dir + response.data.data.avatar.filename : ''
+                member_id: response.data.result.user_id,
+                member_name: response.data.result.member_name,
+                avatar: response.data.result.avatar && response.data.result.avatar.host ? response.data.result.avatar.host + response.data.result.avatar.dir + response.data.result.avatar.filename : ''
               }
             }
             this.RongCall.ring()

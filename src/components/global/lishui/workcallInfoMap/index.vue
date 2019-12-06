@@ -56,7 +56,7 @@ export default {
     return {
       center: '',
       reporterList: [],
-      frequency: 60000,
+      frequency: 120000,
       currentActive: false,
       callInfo: {},
       callShow: false,
