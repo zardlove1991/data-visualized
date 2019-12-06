@@ -245,8 +245,8 @@ export default {
         grid: {
           left: '0%',
           right: '0%',
-          bottom: '5%',
-          top: '15%',
+          bottom: '3%',
+          top: '18%',
           containLabel: true
         },
         xAxis: [
