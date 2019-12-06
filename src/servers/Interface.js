@@ -37,6 +37,9 @@ export const getMicroOperationArticleList = (id = '748', count = 6, page = 1) =>
 /* 在线记者 */
 export const getWorkCallConnectList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallConnectList`)
 
+/* 记者详情 */
+export const getIndexMemberDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getIndexMemberDetail?user_id=${id}`)
+
 /* 溧水运营数据 */
 export const getOperateData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperateData`)
 

@@ -44,6 +44,7 @@
 import {initRong} from '@/rongyun/init'
 import {getDataConfig} from '@/utils/model'
 import {server} from '@/rongyun/callServer'
+import { getIndexMemberDetail } from '@/servers/interface'
 import loadRongyun from '@/utils/loadRongyun.js'
 
 export default {
@@ -98,7 +99,7 @@ export default {
     commandMap (res) {
       switch (res.messageType) {
         case 'InviteMessage':
-          this.$api.getMemberInfo(res.senderUserId).then((response) => {
+          getIndexMemberDetail(res.senderUserId).then((response) => {
             console.log(response)
             if (response.data.data) {
               this.info_item = {
