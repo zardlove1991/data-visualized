@@ -22,7 +22,7 @@
                       <div class="info overhidden sys-flex-one">
                           <div class="name overhidden">{{v.member_name}}</div>
                           <!-- <div class="depart">{{`${v.role_title}-${v.org_title}`}}</div> -->
-                          <div class="depart">溧水区融媒体中心-{{v.rc_status ? '离线':'在线'}}</div>
+                          <div class="depart">溧水区融媒体中心-{{v.rc_status ? (v.rc_status === 1 ? '离线':'登出') : '在线'}}</div>
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
                       
