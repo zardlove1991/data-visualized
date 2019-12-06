@@ -44,7 +44,7 @@
 import {initRong} from '@/rongyun/init'
 import {getDataConfig} from '@/utils/model'
 import {server} from '@/rongyun/callServer'
-import { getIndexMemberDetail } from '@/servers/interface'
+// import { getIndexMemberDetail } from '@/servers/interface'
 import loadRongyun from '@/utils/loadRongyun.js'
 
 export default {
