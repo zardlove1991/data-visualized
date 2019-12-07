@@ -26,8 +26,10 @@ import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/grid'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
+
 export default {
   name: 'communicationEffect',
   data () {
@@ -36,6 +38,31 @@ export default {
       commentNum: 0,
       frequency: 25000,
       barOptions: {
+        title: {
+          text: '',
+          x: 'center',
+          y: 0,
+          textStyle: {
+            color: '#B4B4B4',
+            fontSize: 16,
+            fontWeight: 'normal'
+          }
+        },
+        grid: {
+          top: '20%'
+        },
+        // backgroundColor: '#0d235e',
+        tooltip: {
+          trigger: 'axis',
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          axisPointer: {
+            type: 'shadow',
+            label: {
+              show: true,
+              backgroundColor: '#7B7DDC'
+            }
+          }
+        },
         legend: {
           data: [{
             name: '阅读量',
@@ -51,7 +78,8 @@ export default {
               color: '#fff',
               fontSize: 30
             }
-          }]
+          }],
+          top: '7%'
         },
         xAxis: {
           type: 'category',
@@ -68,36 +96,63 @@ export default {
             }
           }
         },
-        yAxis: {
-          type: 'value',
-          axisLine: {
-            lineStyle: {
-              color: '#4A6AA8'
+        yAxis: [
+          {
+            splitLine: {
+              show: false
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#4A6AA8'
+              }
+            },
+            axisLabel: {
+              formatter: '{value}',
+              color: '#fff',
+              fontSize: 25,
+              fontWeight: 'bold'
             }
           },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              width: 0.5,
-              opacity: 0.5,
-              type: 'dashed',
-              color: '#4A6AA8'
+          {
+            splitLine: { show: false },
+            axisLine: {
+              lineStyle: {
+                color: '#4A6AA8'
+              }
+            },
+            axisLabel: {
+              formatter: '{value}',
+              color: '#fff',
+              fontSize: 25,
+              fontWeight: 'bold'
             }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#fff',
-            fontSize: 25,
-            fontWeight: 'bold'
           }
-        },
+        ],
         series: [{
-          type: 'bar',
+          name: '评论量',
+          type: 'line',
+          smooth: true,
+          showAllSymbol: true,
+          symbol: 'emptyCircle',
+          symbolSize: 20,
+          yAxisIndex: 1,
+          itemStyle: {
+            normal: {
+              color: '#F02FC2',
+              width: 5
+            }
+          },
+          lineStyle: {
+            width: 5
+          },
+          data: []
+        }, {
           name: '阅读量',
+          type: 'bar',
           barWidth: 45,
           itemStyle: {
             normal: {
-              // 颜色渐变
+              barBorderRadius: 5,
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                 offset: 0,
                 color: '#3FB0FF'
@@ -105,21 +160,6 @@ export default {
                 offset: 1,
                 color: '#003CFF'
               }])
-            }
-          },
-          data: []
-        }, {
-          type: 'line',
-          name: '评论量',
-          symbol: 'circle',
-          symbolSize: 20,
-          itemStyle: {
-            normal: {
-              color: '#00F8BD',
-              lineStyle: {
-                color: '#00F8BD',
-                width: 5
-              }
             }
           },
           data: []
@@ -154,8 +194,8 @@ export default {
             dataArr.pop()
             if (dataArr && dataArr[0]) {
               dataArr.forEach(value => {
-                this.barOptions.series[0].data.push(value.click_num)
-                this.barOptions.series[1].data.push(value.comment_num)
+                this.barOptions.series[1].data.push(value.click_num)
+                this.barOptions.series[0].data.push(value.comment_num)
               })
             }
           }

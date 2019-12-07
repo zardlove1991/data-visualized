@@ -27,6 +27,7 @@ import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/grid'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 export default {
@@ -36,31 +37,65 @@ export default {
       componentTitle: '传播效果',
       readNum: 0,
       commentNum: 0,
-      barOptions: {
+      frequency: 10000,
+      xAxisData: [],
+      seriesData: []
+    }
+  },
+  computed: {
+    // 通过proportion改变大小
+    barOptions () {
+      return {
+        title: {
+          text: '',
+          x: 'center',
+          y: 0,
+          textStyle: {
+            color: '#B4B4B4',
+            fontSize: 16 * this.proportion,
+            fontWeight: 'normal'
+          }
+        },
+        grid: {
+          top: '20%'
+        },
+        // backgroundColor: '#0d235e',
+        tooltip: {
+          trigger: 'axis',
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          axisPointer: {
+            type: 'shadow',
+            label: {
+              show: true,
+              backgroundColor: '#7B7DDC'
+            }
+          }
+        },
         legend: {
           data: [{
             name: '阅读量',
             textStyle: {
               color: '#fff',
-              fontSize: 30,
-              width: 100,
-              height: 100
+              fontSize: 30 * this.proportion,
+              width: 100 * this.proportion,
+              height: 100 * this.proportion
             }
           }, {
             name: '评论量',
             textStyle: {
               color: '#fff',
-              fontSize: 30
+              fontSize: 30 * this.proportion
             }
-          }]
+          }],
+          top: '7%'
         },
         xAxis: {
           type: 'category',
-          data: [],
+          data: this.xAxisData,
           axisLabel: {
             interval: 0,
             color: '#fff',
-            fontSize: 25,
+            fontSize: 25 * this.proportion,
             fontWeight: 'bold'
           },
           axisLine: {
@@ -69,36 +104,62 @@ export default {
             }
           }
         },
-        yAxis: {
-          type: 'value',
-          axisLine: {
-            lineStyle: {
-              color: '#4A6AA8'
+        yAxis: [
+          {
+            splitLine: {
+              show: false
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#4A6AA8'
+              }
+            },
+            axisLabel: {
+              formatter: '{value}',
+              color: '#fff',
+              fontSize: 25 * this.proportion,
+              fontWeight: 'bold'
             }
           },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              width: 0.5,
-              opacity: 0.5,
-              type: 'dashed',
-              color: '#4A6AA8'
+          {
+            splitLine: { show: false },
+            axisLine: {
+              lineStyle: {
+                color: '#4A6AA8'
+              }
+            },
+            axisLabel: {
+              formatter: '{value}',
+              color: '#fff',
+              fontSize: 25 * this.proportion,
+              fontWeight: 'bold'
             }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#fff',
-            fontSize: 25,
-            fontWeight: 'bold'
           }
-        },
+        ],
         series: [{
-          type: 'bar',
+          name: '评论量',
+          type: 'line',
+          smooth: true,
+          showAllSymbol: true,
+          symbol: 'emptyCircle',
+          symbolSize: 20,
+          yAxisIndex: 1,
+          itemStyle: {
+            normal: {
+              color: '#F02FC2'
+            }
+          },
+          lineStyle: {
+            width: 5
+          },
+          data: this.seriesData[1]
+        }, {
           name: '阅读量',
+          type: 'bar',
           barWidth: 45,
           itemStyle: {
             normal: {
-              // 颜色渐变
+              barBorderRadius: 5,
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                 offset: 0,
                 color: '#3FB0FF'
@@ -108,25 +169,9 @@ export default {
               }])
             }
           },
-          data: []
-        }, {
-          type: 'line',
-          name: '评论量',
-          symbol: 'circle',
-          symbolSize: 20,
-          itemStyle: {
-            normal: {
-              color: '#00F8BD',
-              lineStyle: {
-                color: '#00F8BD',
-                width: 5
-              }
-            }
-          },
-          data: []
+          data: this.seriesData[0]
         }]
-      },
-      frequency: 10000
+      }
     }
   },
   components: {
@@ -135,6 +180,7 @@ export default {
   created () {
   },
   mounted () {
+    this.proportion = this.getProportion('maanshan-communicationeffect')
     this.setFontsize('maanshan-communicationeffect')
     this.getDataList()
     // setInterval(() => {
@@ -151,15 +197,11 @@ export default {
             this.commentNum = data.all.comment_num
             let arr = Object.keys(data)
             arr.pop()
-            this.barOptions.xAxis.data = arr.reverse().map(v => v.slice(5, 16))
+            this.xAxisData = arr.reverse()
             let dataArr = Object.values(data)
             dataArr.pop()
-            if (dataArr && dataArr[0]) {
-              dataArr.forEach(value => {
-                this.barOptions.series[0].data.push(value.click_num)
-                this.barOptions.series[1].data.push(value.comment_num)
-              })
-            }
+            this.seriesData[0] = dataArr.map(v => v.click_num)
+            this.seriesData[1] = dataArr.map(v => v.comment_num)
           }
         }
       })
