@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { getWorkCallReportList, getJnReport } from '@/servers/interface'
+import { getJnWorkCallReportList, getJnReport } from '@/servers/interface'
 export default {
   name: 'report',
   data () {
@@ -54,16 +54,16 @@ export default {
     }
   },
   created () {
-    this.getWorkCallReportList()
+    this.getJnWorkCallReportList()
     this.getJnReport()
     setInterval(() => {
-      this.getWorkCallReportList()
+      this.getJnWorkCallReportList()
       this.getJnReport()
     }, 10000)
   },
   methods: {
-    getWorkCallReportList () {
-      getWorkCallReportList(this.count, this.page, 1).then(res => {
+    getJnWorkCallReportList () {
+      getJnWorkCallReportList(this.count, this.page, 1).then(res => {
         if (!res.data.error_code) {
           this.dataList = []
           setTimeout(() => {
