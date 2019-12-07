@@ -10,7 +10,7 @@ export const getWorkCallSubjectList = (count = 10, page = 1, createtime) => crea
 export const getWorkCallTaskList = (count = 8, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallTaskList?count=${count}&page=${page}&view_id=${currentViewId}`)
 
 /* 任务数目 */
-export const getWorkCallTaskNum = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallTaskNum`)
+export const getWorkCallTaskNum = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallTaskNum&view_id=${currentViewId}`)
 
 /* 线索汇聚
 plateForm:类型{
