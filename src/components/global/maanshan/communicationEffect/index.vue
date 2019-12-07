@@ -137,9 +137,9 @@ export default {
   mounted () {
     this.setFontsize('maanshan-communicationeffect')
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, this.frequency)
+    // setInterval(() => {
+    //   this.getDataList()
+    // }, this.frequency)
   },
   methods: {
     getDataList () {

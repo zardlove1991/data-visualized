@@ -135,9 +135,9 @@ export default {
   mounted () {
     this.setFontsize('lishui-communicationeffect')
     this.getDataList()
-    setInterval(() => {
-      this.getDataList()
-    }, this.frequency)
+    // setInterval(() => {
+    //   this.getDataList()
+    // }, this.frequency)
   },
   methods: {
     getDataList () {
