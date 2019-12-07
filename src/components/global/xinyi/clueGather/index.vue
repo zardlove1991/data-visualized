@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getCluesTogether, getCluesTogether149434, getCluesTogether149433 } from '@/servers/interface'
+import { getCluesTogether } from '@/servers/interface'
 export default {
   name: 'clue',
   data () {
@@ -89,7 +89,7 @@ export default {
           }
         })
       } else if (type === 1) {
-        getCluesTogether149434('website', this.count, this.weChatPage).then(res => {
+        getCluesTogether('website', this.count, this.weChatPage, '149434').then(res => {
           if (!res.data.error_code) {
             if (res.data.result.length) {
               this.dataList = []
@@ -108,7 +108,7 @@ export default {
           }
         })
       } else if (type === 2) {
-        getCluesTogether149433('website', this.count, this.weBoPage).then(res => {
+        getCluesTogether('website', this.count, this.weBoPage, '149433').then(res => {
           if (!res.data.error_code) {
             if (res.data.result.length) {
               this.dataList = []
