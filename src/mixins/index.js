@@ -27,7 +27,7 @@ export default {
       this.maxPage = Number(this.data.viewAttr.maxPage)
     }
     if (this.data) {
-      this.currentViewId = this.data.id // 组件id
+      this.currentViewId = this.data.id || '' // 组件id
     }
   },
   mounted () {
