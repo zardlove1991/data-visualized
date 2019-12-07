@@ -135,13 +135,13 @@ export default {
   mounted () {
     this.setFontsize('lishui-communicationeffect')
     this.getDataList()
-    // setInterval(() => {
-    //   this.getDataList()
-    // }, this.frequency)
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {
-      getM2OPlusEffects().then(res => {
+      getM2OPlusEffects(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result) {
             let data = res.data.result

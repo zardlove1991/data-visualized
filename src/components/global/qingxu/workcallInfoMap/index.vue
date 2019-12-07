@@ -597,7 +597,7 @@ export default {
       this.currentActive = false
     },
     getReporter () {
-      getWorkCallConnectList().then(res => {
+      getWorkCallConnectList(this.currentViewId).then(res => {
         if (!res.data.error_code && res.data.result.length) {
           this.reporterList = res.data.result
         }

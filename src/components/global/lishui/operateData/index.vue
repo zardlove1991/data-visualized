@@ -128,7 +128,7 @@ export default {
 
   methods: {
     getDataList () {
-      getOperateData().then((response) => {
+      getOperateData(this.currentViewId).then((response) => {
         if (!response.data.error_code) {
           this.microList = this.microList.map(v => {
             return {

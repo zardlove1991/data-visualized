@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getM2OPlusPublish(this.count, this.page).then((res) => {
+      getM2OPlusPublish(this.count, this.page, this.currentViewId).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []

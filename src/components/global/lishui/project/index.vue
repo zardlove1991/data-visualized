@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getWorkCallSubjectList(this.count, this.page).then((res) => {
+      getWorkCallSubjectList(this.count, this.page, this.currentViewId).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []

@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getWorkCallReportList(this.count, this.page).then((res) => {
+      getWorkCallReportList(this.count, this.page, this.currentViewId).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []

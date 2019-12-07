@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getM2OPlusWorkRank(this.count, this.page).then(res => {
+      getM2OPlusWorkRank(this.count, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.length) {
             this.dataList = []

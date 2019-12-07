@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getWorkCallTaskList(this.count, this.page).then(res => {
+      getWorkCallTaskList(this.count, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -70,7 +70,7 @@ export default {
           }
         }
       })
-      getWorkCallTaskNum().then(res => {
+      getWorkCallTaskNum(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.length) {
             this.numList = []
