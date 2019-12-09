@@ -108,7 +108,6 @@ export default {
         xAxis: [
           {
             type: 'category',
-            boundaryGap: false,
             name: '日期',
             // nameLocation:'start',
             nameGap: 5,
