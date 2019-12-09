@@ -57,7 +57,11 @@ export default {
           }
         },
         grid: {
-          top: '20%'
+          left: this.proportion * 30,
+          right: this.proportion * 60,
+          top: this.proportion * 105,
+          bottom: this.proportion * 15,
+          containLabel: true
         },
         // backgroundColor: '#0d235e',
         tooltip: {
@@ -142,7 +146,7 @@ export default {
           smooth: true,
           showAllSymbol: true,
           symbol: 'emptyCircle',
-          symbolSize: 20,
+          symbolSize: 15,
           yAxisIndex: 1,
           itemStyle: {
             normal: {
