@@ -1,10 +1,16 @@
 import { httpsbaseUrl, createAPI, GUID } from './api'
 
 /* 获取报题 */
-export const getWorkCallReportList = (count = 10, page = 1, createtime) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallReportList?count=${count}&page=${page}&create_time=${createtime}`)
+export const getJnWorkCallReportList = (count = 10, page = 1, createtime) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallReportList?count=${count}&page=${page}&create_time=${createtime}`)
 
 /* 获取选题 */
-export const getWorkCallSubjectList = (count = 10, page = 1, createtime) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectList?count=${count}&page=${page}&create_time=${createtime}`)
+export const getJnWorkCallSubjectList = (count = 10, page = 1, createtime) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectList?count=${count}&page=${page}&create_time=${createtime}`)
+
+/* 获取报题 */
+export const getWorkCallReportList = (count = 10, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallReportList?count=${count}&page=${page}&view_id=${currentViewId}`)
+
+/* 获取选题 */
+export const getWorkCallSubjectList = (count = 10, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectList?count=${count}&page=${page}&view_id=${currentViewId}`)
 
 /* 任务列表 */
 export const getWorkCallTaskList = (count = 8, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallTaskList?count=${count}&page=${page}&view_id=${currentViewId}`)

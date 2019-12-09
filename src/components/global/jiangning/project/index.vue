@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import { getWorkCallSubjectList, getJnProject } from '@/servers/interface'
+import { getJnWorkCallSubjectList, getJnProject } from '@/servers/interface'
 export default {
   name: 'project',
   data () {
@@ -33,10 +33,10 @@ export default {
     }
   },
   created () {
-    this.getWorkCallSubjectList()
+    this.getJnWorkCallSubjectList()
     this.getJnProject()
     setInterval(() => {
-      this.getWorkCallSubjectList()
+      this.getJnWorkCallSubjectList()
       this.getJnProject()
     }, 10000)
   },
@@ -48,8 +48,8 @@ export default {
         this.ing = res.data.result.num_status[1].total
       })
     },
-    getWorkCallSubjectList () {
-      getWorkCallSubjectList(this.count, this.page, 1).then(res => {
+    getJnWorkCallSubjectList () {
+      getJnWorkCallSubjectList(this.count, this.page, 1).then(res => {
         if (!res.data.error_code) {
           this.dataList = []
           setTimeout(() => {
