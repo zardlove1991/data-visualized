@@ -1,7 +1,10 @@
 <template>
   <div class="jn-civilization">
     <div class="civilization-wrap">
-      <div class="wrap-title">文明江宁</div>
+      <div class="wrap-title sys-flex sys-flex-center flex-justify-center">
+        <img src="./assets/logo@2x.png" />
+        <span>文明江宁</span>
+      </div>
       <div class="wrap-content">
         <div class="content-total">共<span>30</span>条</div>
         <div class="content-list">
@@ -85,6 +88,14 @@ export default {
       font-size: pxrem(52px);
       font-weight: 600;
       margin-top: pxrem(-12px);
+      img {
+        width: pxrem(68px);
+        height: pxrem(68px);
+        margin-right: pxrem(15px);
+      }
+      span {
+        margin-left: pxrem(15px);
+      }
     }
     .wrap-content {
       .content-total {
