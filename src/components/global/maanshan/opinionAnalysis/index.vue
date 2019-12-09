@@ -81,6 +81,7 @@ export default {
         },
         grid: {
           left: this.proportion * 30,
+          right: this.proportion * 60,
           top: this.proportion * 105,
           bottom: this.proportion * 15,
           containLabel: true
@@ -118,6 +119,7 @@ export default {
                 type: 'solid'
               }
             },
+            boundaryGap: true,
             axisTick: {
               show: false,
               // interval:15,
@@ -134,6 +136,9 @@ export default {
               formatter: '{value}'
             },
             name: '访问量',
+            nameTextStyle: {
+              fontSize: this.proportion * 15
+            },
             nameGap: 10,
             color: '#fff',
             axisTick: {
@@ -235,7 +240,9 @@ export default {
         },
         grid: {
           left: this.proportion * 30,
-          bottom: this.proportion * 30,
+          right: this.proportion * 60,
+          top: this.proportion * 80,
+          bottom: this.proportion * 15,
           containLabel: true
         },
         xAxis: [
@@ -263,7 +270,7 @@ export default {
           {
             type: 'value',
             axisLabel: {
-              interval: 15,
+              interval: 1,
               formatter: '{value}%',
               textStyle: {
                 // fontSize:'13'
@@ -283,6 +290,7 @@ export default {
                 type: 'solid'
               }
             },
+            max: 100,
             splitLine: {
               // interval:15,
               lineStyle: {
