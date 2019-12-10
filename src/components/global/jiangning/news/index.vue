@@ -7,7 +7,7 @@
           <div class="left-title sys-flex sys-flex-center flex-justify-center">本周稿件总数<span>{{total}}</span></div>
           <div class="left-one sys-flex sys-flex-center flex-justify-between">
             <div class="pass">
-              <div>已通过</div>
+              <div>已提审</div>
               <div>{{pass}}</div>
             </div>
             <div class="examine">
@@ -15,7 +15,7 @@
               <div>{{edit}}</div>
             </div>
             <div class="publish">
-              <div>待发布</div>
+              <div>已发布</div>
               <div>{{publish}}</div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default {
       barOptions: {
         xAxis: {
           type: 'category',
-          data: ['待审核', '已打回', '已通过', '已发布'],
+          data: ['已提审', '待审核', '已发布'],
           axisLabel: {
             interval: 0,
             color: '#fff',
@@ -108,8 +108,7 @@ export default {
         },
         series: [{
           type: 'bar',
-          name: '阅读量',
-          barWidth: 45,
+          barWidth: 80,
           itemStyle: {
             normal: {
               // 颜色渐变
@@ -122,7 +121,7 @@ export default {
               }])
             }
           },
-          data: [10, 50, 5, 20]
+          data: []
         }]
       }
     }
@@ -142,18 +141,22 @@ export default {
     },
     getWorkCallSubjectPie () {
       getWorkCallSubjectPie(this.model).then(res => {
-        this.publishTotal = res.data.result.num_status[3].total
-        this.barOptions.series[0].data = [res.data.result.num_status[0].total, res.data.result.num_status[1].total, res.data.result.num_status[2].total, res.data.result.num_status[3].total]
+        if (res && res.data && res.data.result) {
+          this.publishTotal = res.data.result.publish
+          this.barOptions.series[0].data = [res.data.result.create, res.data.result.audit, res.data.result.publish]
+        }
       })
     },
     getTotal () {
       getWorkCallSubjectPie('w').then(res => {
-        this.total = res.data.result.total
-        this.pass = res.data.result.num_status[3].total
-        this.edit = res.data.result.num_status[0].total
-        this.publish = res.data.result.num_status[1].total
-        this.passPersent = this.GetPercent(this.pass, this.total)
-        this.publishPersent = this.GetPercent(this.publish, this.total)
+        if (res && res.data && res.data.result) {
+          this.total = res.data.result.create + res.data.result.audit + res.data.result.publish
+          this.pass = res.data.result.create
+          this.edit = res.data.result.audit
+          this.publish = res.data.result.publish
+          this.passPersent = this.GetPercent(this.pass, this.total)
+          this.publishPersent = this.GetPercent(this.publish, this.total)
+        }
       })
     }
   },
