@@ -26,7 +26,7 @@ export default {
     return {
       finish: 0,
       ing: 0,
-      count: 5,
+      count: 10,
       page: 1,
       total: 0,
       dataList: []
@@ -55,7 +55,7 @@ export default {
           setTimeout(() => {
             this.dataList = res.data.result.data
           }, 100)
-          if (res.data.result.data.length < 5 || this.page > 3) {
+          if (res.data.result.data.length < 10 || this.page > 3) {
             this.page = 1
           } else {
             this.page += 1
@@ -78,18 +78,18 @@ export default {
     height: 100%;
     background: url('../../../../assets/common/border@2x.png') no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(30px);
+    padding: pxrem(20px) pxrem(100px) pxrem(5px);
     color: #fff;
     .wrap-title {
       font-size: pxrem(52px);
       font-weight: 600;
-      margin-top: pxrem(-16px);
+      margin-top: pxrem(-12px);
     }
     .wrap-content {
       .content-total {
         font-size: pxrem(38px);
         text-align: left;
-        margin-bottom: pxrem(40px);
+        margin-bottom: pxrem(10px);
         padding-left: pxrem(20px);
         span {
           font-size: pxrem(52px);
@@ -101,26 +101,26 @@ export default {
       .content-list {
         .list-box {
           width: 100%;
-          height: pxrem(140px);
-          background-color: #0B295E;
-          margin-bottom: pxrem(30px);
-          padding: 0 pxrem(150px) 0 pxrem(36px);
+          height: pxrem(80px);
+          border-bottom: pxrem(4px) dashed #2A5EBA;
+          margin-bottom: pxrem(8px);
+          padding: 0 pxrem(36px);
           &:last-of-type {
             margin-bottom: 0;
           }
           .title {
-            font-size: pxrem(42px);
+            font-size: pxrem(38px);
             margin: 0 pxrem(180px) 0 pxrem(33px);
             width: 70%;
             text-align: left;
           }
           .name {
-            font-size: pxrem(36px);
+            font-size: pxrem(34px);
             color: #00F6FF;
           }
           .status {
             margin-left: auto;
-            font-size: pxrem(36px);
+            font-size: pxrem(34px);
           }
         }
       }
