@@ -50,7 +50,7 @@ export const getOperateData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apid
 export const getM2OPlusPublish = (count = 5, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?count=${count}&page=${page}&view_id=${currentViewId}`)
 
 /* 辅屏传播效果 */
-export const getM2OPlusEffects = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusEffects&view_id=${currentViewId}`)
+export const getM2OPlusChart = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusChart&view_id=${currentViewId}`)
 
 /* 热点话题 */
 export const getHotsTopicList = (count = 4, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?count=${count}&page=${page}&view_id=${currentViewId}`)

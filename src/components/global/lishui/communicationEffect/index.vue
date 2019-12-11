@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import { getM2OPlusEffects } from '@/servers/interface'
+import { getM2OPlusChart } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
@@ -181,23 +181,16 @@ export default {
   },
   methods: {
     getDataList () {
-      getM2OPlusEffects(this.currentViewId).then(res => {
+      getM2OPlusChart(this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result) {
+          if (res.data.result.list) {
             let data = res.data.result
-            this.readNum = data.all.click_num
-            this.commentNum = data.all.comment_num
-            let arr = Object.keys(data)
-            arr.pop()
-            this.barOptions.xAxis.data = arr.reverse()
-            let dataArr = Object.values(data)
-            dataArr.pop()
-            if (dataArr && dataArr[0]) {
-              dataArr.forEach(value => {
-                this.barOptions.series[1].data.push(value.click_num)
-                this.barOptions.series[0].data.push(value.comment_num)
-              })
-            }
+            this.readNum = data.total_click_num
+            this.commentNum = data.total_comment_num
+            let arr = data.list.map(v => v.time)
+            this.barOptions.xAxis.data = arr
+            this.barOptions.series[1].data = data.list.map(v => v.click_num)
+            this.barOptions.series[0].data = data.list.map(v => v.comment_num)
           }
         }
       })
