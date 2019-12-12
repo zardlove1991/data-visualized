@@ -37,7 +37,7 @@ export default {
       componentTitle: '传播效果',
       readNum: 0,
       commentNum: 0,
-      frequency: 10000,
+      frequency: 60000,
       xAxisData: [],
       seriesData: []
     }
@@ -187,9 +187,9 @@ export default {
     this.proportion = this.getProportion('maanshan-communicationeffect')
     this.setFontsize('maanshan-communicationeffect')
     this.getDataList()
-    // setInterval(() => {
-    //   this.getDataList()
-    // }, this.frequency)
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {
