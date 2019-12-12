@@ -10,7 +10,8 @@
         <div class="content-list">
           <div class="list-box sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" v-bind:style="{'animation-delay' : k/2+'s'}">
             <div class="title overhidden">{{v.title}}</div>
-            <div class="time">{{v.create_time.slice(5)}}</div>
+            <!-- <div class="time">{{v.create_time.slice(5)}}</div> -->
+            <div class="time">{{v.date.slice(5)}}</div>
           </div>
         </div>
       </div>
@@ -39,12 +40,15 @@ export default {
     getM2OPLUSArticleList () {
       getM2OPLUSArticleList(this.count, this.page).then(res => {
         if (!res.data.error_code) {
-          this.total = res.data.result.total
+          // this.total = res.data.result.total
+          this.total = res.data.result.length
           this.dataList = []
           setTimeout(() => {
-            this.dataList = res.data.result.data
+            // this.dataList = res.data.result.data
+            this.dataList = res.data.result
           }, 100)
-          if (res.data.result.data.length < 10 || this.page > 3) {
+          // if (res.data.result.data.length < 10 || this.page > 3) {
+          if (res.data.result.length < 10 || this.page > 2) {
             this.page = 1
           } else {
             this.page += 1
