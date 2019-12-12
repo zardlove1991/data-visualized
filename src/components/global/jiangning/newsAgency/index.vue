@@ -40,15 +40,12 @@ export default {
     getM2OPLUSArticleList () {
       getM2OPLUSArticleList(this.count, this.page).then(res => {
         if (!res.data.error_code) {
-          // this.total = res.data.result.total
-          this.total = res.data.result.length
+          this.total = res.data.result.total
           this.dataList = []
           setTimeout(() => {
-            // this.dataList = res.data.result.data
-            this.dataList = res.data.result
+            this.dataList = res.data.result.data
           }, 100)
-          // if (res.data.result.data.length < 10 || this.page > 3) {
-          if (res.data.result.length < 10 || this.page > 2) {
+          if (res.data.result.data.length < 10 || this.page > 2) {
             this.page = 1
           } else {
             this.page += 1
