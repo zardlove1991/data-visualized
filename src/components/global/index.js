@@ -31,6 +31,7 @@ export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAn
 export const maanshancomponentCommunicationEffect = getComponent('maanshan/communicationEffect')
 export const maanshancomponentWorkcallInfoMap = getComponent('maanshan/workcallInfoMap')
 export const maanshancomponentNews = getComponent('maanshan/news')
+export const maanshancomponentTask = getComponent('maanshan/task')
 
 /* 溧水套系 */
 // 主屏部分
