@@ -61,7 +61,7 @@ export default {
       localList: [],
       newsList: [],
       page: 1,
-      count: 12,
+      count: 20,
       currentNewsData: {
         title: '',
         result: {
@@ -290,13 +290,18 @@ export default {
       },
       curIndex: 0,
       curId: null,
-      frequency: 15000
+      frequency: 5000,
+      virtual: false
     }
   },
   watch: {
     curId: {
       handler: function (newValue) {
-        this.getHotTopicDetail()
+        if (this.virtual) {
+          this.virtualDetail()
+        } else {
+          this.getHotTopicDetail()
+        }
       }
     }
   },
@@ -310,7 +315,7 @@ export default {
       // 如果当前新闻索引超出当前列表，分页
       if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
         this.curIndex = 0
-        this.page === this.count / 4 ? this.page = 1 : this.page++
+        this.page === this.maxPage ? this.page = 1 : this.page++
         // 分页超过3页重新发请求获取新数据
         if (this.page === 1) {
           this.initLocalList()
@@ -331,10 +336,11 @@ export default {
   methods: {
     // 本地模拟分页效果
     initLocalList () {
-      getHotsTopicList(this.count).then(res => {
+      getHotsTopicList(this.count, 1, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.localList = res.data.result.data
+            this.virtual = res.data.result.virtual
             this.newsList = this.localList.slice((this.page - 1) * 4, this.page * 4)
             this.curId = this.newsList[this.curIndex]['id']
           }
@@ -410,8 +416,99 @@ export default {
           this.top10options.series[0].data = response.data.result.map(v => v.count)
         }
       })
-    }
+    },
+    // 获取详细数据
+    virtualDetail () {
+      let data = this.localList.find(v => v.id === this.curId)
+      this.lineOptions.legend.data = []
+      this.lineOptions.xAxis[0].data = []
+      this.lineOptions.series = []
+      this.lineOptions.xAxis[0].data = data.hot.time
+      this.lineOptions.legend.data = ['网站', '微信', '微博']
+      this.lineOptions.series = [
+        {
+          name: '网站',
+          type: 'line',
+          data: data.hot.web,
+          smooth: true,
+          itemStyle: {
+            normal: {
+              label: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                  color: 'white'
+                }
+              }
+            }
+          }
+        },
+        {
+          name: '微信',
+          type: 'line',
+          data: data.hot.wx,
+          smooth: true,
+          itemStyle: {
+            normal: {
+              label: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                  color: 'white'
+                }
+              }
+            }
+          }
+        },
+        {
+          name: '微博',
+          type: 'line',
+          data: data.hot.weibo,
+          smooth: true,
+          itemStyle: {
+            normal: {
+              label: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                  color: 'white'
+                }
+              }
+            }
+          }
+        }
+      ]
 
+      this.pieOptions.series[0].data = []
+      this.pieOptions.series[0].data = [
+        {
+          value: data.media[0],
+          name: '网站',
+          label: {
+            fontSize: 12
+          }
+        },
+        {
+          value: data.media[1],
+          name: '微信',
+          label: {
+            fontSize: 12
+          }
+        },
+        {
+          value: data.media[2],
+          name: '微博',
+          label: {
+            fontSize: 12
+          }
+        }
+      ]
+
+      this.top10options.xAxis[0].data = []
+      this.top10options.series[0].data = []
+      this.top10options.xAxis[0].data = data.top.name
+      this.top10options.series[0].data = data.top.count
+    }
   }
 }
 </script>
