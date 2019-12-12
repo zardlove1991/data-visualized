@@ -61,7 +61,7 @@ export default {
       localList: [],
       newsList: [],
       page: 1,
-      count: 4,
+      count: 20,
       currentNewsData: {
         title: '',
         result: {
@@ -315,7 +315,7 @@ export default {
       // 如果当前新闻索引超出当前列表，分页
       if (this.curIndex > 3 || this.curIndex >= this.newsList.length) {
         this.curIndex = 0
-        this.page === this.count / 4 ? this.page = 1 : this.page++
+        this.page === this.maxPage ? this.page = 1 : this.page++
         // 分页超过3页重新发请求获取新数据
         if (this.page === 1) {
           this.initLocalList()
