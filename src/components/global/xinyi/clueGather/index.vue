@@ -72,10 +72,10 @@ export default {
       if (type === 0) {
         getCluesTogether('website', this.count, this.webPage).then(res => {
           if (!res.data.error_code) {
-            if (res.data.result.length) {
+            if (res.data.result.data.length) {
               this.dataList = []
               setTimeout(() => {
-                this.dataList = res.data.result
+                this.dataList = res.data.result.data
               }, 100)
               if (this.isPaging) {
                 this.webPage += 1
@@ -91,10 +91,10 @@ export default {
       } else if (type === 1) {
         getCluesTogether('website', this.count, this.weChatPage, '149434').then(res => {
           if (!res.data.error_code) {
-            if (res.data.result.length) {
+            if (res.data.result.data.length) {
               this.dataList = []
               setTimeout(() => {
-                this.dataList = res.data.result
+                this.dataList = res.data.result.data
               }, 100)
               if (this.isPaging) {
                 this.weChatPage += 1
@@ -110,10 +110,10 @@ export default {
       } else if (type === 2) {
         getCluesTogether('website', this.count, this.weBoPage, '149433').then(res => {
           if (!res.data.error_code) {
-            if (res.data.result.length) {
+            if (res.data.result.data.length) {
               this.dataList = []
               setTimeout(() => {
-                this.dataList = res.data.result
+                this.dataList = res.data.result.data
               }, 100)
               if (this.isPaging) {
                 this.weBoPage += 1

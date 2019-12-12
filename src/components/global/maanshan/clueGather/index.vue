@@ -71,11 +71,11 @@ export default {
       // 根据传参不同调用不同的接口数据
       if (type === 0) {
         getCluesTogether('website', this.count, this.webPage).then(res => {
-          if (res && res.data && res.data.result && res.data.result) {
-            if (res.data.result.length) {
+          if (res && res.data && res.data.result && res.data.result.data) {
+            if (res.data.result.data.length) {
               this.dataList = []
               setTimeout(() => {
-                this.dataList = res.data.result
+                this.dataList = res.data.result.data
               }, 100)
               if (this.isPaging) {
                 this.webPage += 1
@@ -91,11 +91,11 @@ export default {
         })
       } else if (type === 1) {
         getCluesTogether('weChat', this.count, this.weChatPage).then(res => {
-          if (res && res.data && res.data.result && res.data.result) {
-            if (res.data.result.length) {
+          if (res && res.data && res.data.result && res.data.result.data) {
+            if (res.data.result.data.length) {
               this.dataList = []
               setTimeout(() => {
-                this.dataList = res.data.result
+                this.dataList = res.data.result.data
               }, 100)
               if (this.isPaging) {
                 this.weChatPage += 1
@@ -113,11 +113,11 @@ export default {
         })
       } else if (type === 2) {
         getCluesTogether('weiBo', this.count, this.weBoPage).then(res => {
-          if (res && res.data && res.data.result && res.data.result) {
-            if (res.data.result.length) {
+          if (res && res.data && res.data.result && res.data.result.data) {
+            if (res.data.result.data.length) {
               this.dataList = []
               setTimeout(() => {
-                this.dataList = res.data.result
+                this.dataList = res.data.result.data
               }, 100)
               if (this.isPaging) {
                 this.weBoPage += 1
