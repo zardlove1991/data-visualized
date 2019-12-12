@@ -26,6 +26,7 @@ export default {
   data () {
     return {
       dataList: [],
+      topList: [],
       count: 0
     }
   },
@@ -42,6 +43,7 @@ export default {
       getcivilizationJN().then(res => {
         if (!res.data.error_code) {
           this.list = res.data.result
+          this.topList = this.list.splice(0, 2)
           this.initList()
         }
       })
@@ -49,15 +51,17 @@ export default {
     initList () {
       this.dataList = this.list.slice(
         this.count,
-        this.count + 10 > this.list.length ? this.list.length : this.count + 10
+        this.count + 6 > this.list.length ? this.list.length : this.count + 6
       )
-      this.count += 10
+      this.dataList.unshift(...this.topList)
+      this.count += 6
       this.countNum = setInterval(() => {
         if (this.count < this.list.length) {
           this.dataList = []
           setTimeout(() => {
-            this.dataList = this.list.slice(this.count, this.count + 10)
-            this.count += 10
+            this.dataList = this.list.slice(this.count, this.count + 6)
+            this.dataList.unshift(...this.topList)
+            this.count += 6
           }, 100)
         } else {
           this.dataList = []
@@ -87,7 +91,7 @@ export default {
     .wrap-title {
       font-size: pxrem(52px);
       font-weight: 600;
-      margin-top: pxrem(-12px);
+      margin-top: pxrem(-8px);
       img {
         width: pxrem(68px);
         height: pxrem(68px);
@@ -111,9 +115,9 @@ export default {
       .content-list {
         .list-box {
           width: 100%;
-          height: pxrem(80px);
+          height: pxrem(100px);
           border-bottom: pxrem(4px) dashed #2A5EBA;
-          margin-bottom: pxrem(8px);
+          margin-bottom: pxrem(10px);
           padding: 0 pxrem(36px);
           &:last-of-type {
             margin-bottom: 0;
@@ -142,11 +146,11 @@ export default {
           .title {
             width: 75%;
             text-align: left;
-            font-size: pxrem(38px);
+            font-size: pxrem(40px);
           }
           .time {
             margin-left: auto;
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
           }
         }
       }
