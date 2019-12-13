@@ -24,7 +24,7 @@ export default {
   name: 'newsAgency',
   data () {
     return {
-      count: 10,
+      count: 8,
       page: 1,
       total: 0,
       dataList: []
@@ -45,7 +45,7 @@ export default {
           setTimeout(() => {
             this.dataList = res.data.result.data
           }, 100)
-          if (res.data.result.data.length < 10 || this.page > 2) {
+          if (res.data.result.data.length < 8 || this.page > 2) {
             this.page = 1
           } else {
             this.page += 1
@@ -73,7 +73,7 @@ export default {
     .wrap-title {
       font-size: pxrem(52px);
       font-weight: 600;
-      margin-top: pxrem(-12px);
+      margin-top: pxrem(-8px);
       img {
         width: pxrem(68px);
         height: pxrem(68px);
@@ -97,9 +97,9 @@ export default {
       .content-list {
         .list-box {
           width: 100%;
-          height: pxrem(80px);
+          height: pxrem(100px);
           background-color: #0B295E;
-          margin-bottom: pxrem(8px);
+          margin-bottom: pxrem(10px);
           padding: 0 pxrem(36px);
           &:last-of-type {
             margin-bottom: 0;
@@ -107,10 +107,10 @@ export default {
           .title {
             width: 75%;
             text-align: left;
-            font-size: pxrem(38px);
+            font-size: pxrem(40px);
           }
           .time {
-            font-size: pxrem(34px);
+            font-size: pxrem(36px);
           }
         }
       }

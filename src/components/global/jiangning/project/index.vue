@@ -55,7 +55,7 @@ export default {
           setTimeout(() => {
             this.dataList = res.data.result.data
           }, 100)
-          if (res.data.result.data.length < 10 || this.page > 3) {
+          if (res.data.result.data.length < 10 || this.page > 1) {
             this.page = 1
           } else {
             this.page += 1
