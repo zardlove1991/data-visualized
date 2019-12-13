@@ -99,6 +99,9 @@ export default {
   },
   created () {
     this.getOperationalData()
+    setInterval(() => {
+      this.getOperationalData()
+    }, 60000)
   },
   methods: {
     getOperationalData () {
