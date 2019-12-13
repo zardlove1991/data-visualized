@@ -246,7 +246,7 @@ export default {
           left: '0%',
           right: '0%',
           bottom: '3%',
-          top: '18%',
+          top: '20%',
           containLabel: true
         },
         xAxis: [
