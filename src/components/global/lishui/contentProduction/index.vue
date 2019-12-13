@@ -10,11 +10,11 @@
         </div>
         <div class="top-right top-pass sys-flex sys-flex-center">
           <span>已通过：</span>
-          <span>840</span>
+          <span>8433</span>
         </div>
         <div class="top-right sys-flex sys-flex-center flex-justify-between">
           <span>未过审：</span>
-          <span>200</span>
+          <span>346</span>
         </div>
       </div>
       <div class="wrap-bottom sys-flex sys-flex-center flex-justify-between">
@@ -48,17 +48,20 @@ export default {
     return {
       barOptions: {
         legend: {
+          itemWidth: 60,
+          itemHeight: 30,
+          itemGap: 50,
           data: [{
             name: '已通过',
             textStyle: {
               color: '#fff',
-              fontSize: 20
+              fontSize: 30
             }
           }, {
             name: '已过审',
             textStyle: {
               color: '#fff',
-              fontSize: 20
+              fontSize: 30
             }
           }]
         },
@@ -68,8 +71,9 @@ export default {
           axisLabel: {
             interval: 0,
             color: '#fff',
-            fontSize: 20,
-            fontWeight: 'bold'
+            fontSize: 30,
+            fontWeight: 'bold',
+            margin: 15
           },
           axisLine: {
             lineStyle: {
@@ -103,7 +107,7 @@ export default {
           type: 'bar',
           name: '已通过',
           stack: 'sum',
-          barWidth: 45,
+          barWidth: 60,
           itemStyle: {
             normal: {
               color: function (params) {
@@ -117,7 +121,7 @@ export default {
           type: 'bar',
           name: '已过审',
           stack: 'sum',
-          barWidth: 45,
+          barWidth: 60,
           itemStyle: {
             normal: {
               color: function (params) {
@@ -129,14 +133,14 @@ export default {
           data: [50, 80, 2, 60]
         }]
       },
-      testList: [0, 0, 0, 0, 1, 0, 4, 0],
+      testList: [0, 0, 0, 1, 5, 6, 8, 4],
       dateList: [{
         text: '日',
-        date: '120',
+        date: '52',
         num: '2'
       }, {
         text: '周',
-        date: '400',
+        date: '374',
         num: '4'
       }, {
         text: '月',
@@ -144,7 +148,7 @@ export default {
         num: '3'
       }, {
         text: '年',
-        date: '10698',
+        date: '10689',
         num: '3'
       }],
       currentIndex: 0,
@@ -253,8 +257,8 @@ export default {
         }
       }
       .bottom-right {
-        width: px2em(850px);
-        height: px2em(510px);
+        width: px2em(900px);
+        height: px2em(550px);
       }
     }
   }

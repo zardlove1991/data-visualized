@@ -17,10 +17,10 @@
           <img src="./assets/time.png" />
           <span>{{v.publish_time}}</span>
         </div>
-        <div class="list-read list-span sys-flex sys-flex-center">
+        <!-- <div class="list-read list-span sys-flex sys-flex-center">
           <img src="./assets/read.png" />
           <span>{{v.click_num}}</span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -115,6 +115,8 @@ export default {
       }
       .list-text {
         font-size: px2em(38px);
+        width: 60%;
+        text-align: left;
       }
       .list-span {
         span {
@@ -130,13 +132,13 @@ export default {
           margin-right: px2em(20px);
         }
       }
-      .list-read {
-        img {
-          width: px2em(42px);
-          height: px2em(30px);
-          margin-right: px2em(20px);
-        }
-      }
+      // .list-read {
+      //   img {
+      //     width: px2em(42px);
+      //     height: px2em(30px);
+      //     margin-right: px2em(20px);
+      //   }
+      // }
     }
   }
 }

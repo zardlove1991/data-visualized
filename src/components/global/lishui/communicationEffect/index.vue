@@ -88,7 +88,8 @@ export default {
             interval: 0,
             color: '#fff',
             fontSize: 25,
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            margin: 20
           },
           axisLine: {
             lineStyle: {
