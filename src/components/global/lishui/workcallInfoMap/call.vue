@@ -312,7 +312,7 @@ export default {
       width: 1.7em;
       height: 1.7em;
       position: absolute;
-      bottom : 1.5em;
+      bottom : -0.2em;
       left : calc(50% - 0.8em);
       z-index:999999;
       .video-time{
@@ -374,7 +374,8 @@ export default {
   .call-info-wrap{
     width: 3.08em;
     height: 3.78em;
-
+    padding-top: 0.8em;
+    padding-left: 0.1em;
     &.invite-info-wrap{
       span{
         display: block;
