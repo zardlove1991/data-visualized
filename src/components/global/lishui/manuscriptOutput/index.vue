@@ -110,7 +110,7 @@ export default {
         img {
           width: px2em(107px);
           height: px2em(48px);
-          margin: 0 px2em(20px);
+          margin: 0 px2em(22.5px);
         }
       }
       .list-text {
