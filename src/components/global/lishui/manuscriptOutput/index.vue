@@ -115,7 +115,7 @@ export default {
       }
       .list-text {
         font-size: px2em(38px);
-        width: 60%;
+        width: 52%;
         text-align: left;
       }
       .list-span {
