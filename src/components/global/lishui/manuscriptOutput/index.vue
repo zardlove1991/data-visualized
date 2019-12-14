@@ -125,7 +125,7 @@ export default {
         }
       }
       .list-time {
-        margin: 0 px2em(70px) 0 auto;
+        margin: 0 px2em(80px) 0 px2em(65px);
         img {
           width: px2em(30px);
           height: px2em(30px);
