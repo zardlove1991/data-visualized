@@ -68,6 +68,9 @@ export default {
       currentIndex: 0,
       dayList: ['今日', '本周', '本月'],
       barOptions: {
+        grid: {
+          left: '18%'
+        },
         xAxis: {
           type: 'category',
           data: ['已提审', '待审核', '已发布'],
