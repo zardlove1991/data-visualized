@@ -116,7 +116,7 @@ export default {
               }
             }
           },
-          data: [10, 30, 5, 100]
+          data: [70, 30, 50, 15]
         }, {
           type: 'bar',
           name: '已过审',
@@ -130,7 +130,7 @@ export default {
               }
             }
           },
-          data: [50, 80, 2, 60]
+          data: [25, 10, 20, 5]
         }]
       },
       testList: [0, 0, 0, 1, 5, 6, 8, 4],
