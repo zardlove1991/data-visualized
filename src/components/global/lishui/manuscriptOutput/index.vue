@@ -15,12 +15,12 @@
         <div class="list-text overhidden">{{v.title}}</div>
         <div class="list-time list-span sys-flex sys-flex-center">
           <img src="./assets/time.png" />
-          <span>{{v.publish_time}}</span>
+          <span>{{v.publish_time.slice(0, 16)}}</span>
         </div>
-        <!-- <div class="list-read list-span sys-flex sys-flex-center">
+        <div class="list-read list-span sys-flex sys-flex-center">
           <img src="./assets/read.png" />
           <span>{{v.click_num}}</span>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -132,13 +132,13 @@ export default {
           margin-right: px2em(20px);
         }
       }
-      // .list-read {
-      //   img {
-      //     width: px2em(42px);
-      //     height: px2em(30px);
-      //     margin-right: px2em(20px);
-      //   }
-      // }
+      .list-read {
+        img {
+          width: px2em(42px);
+          height: px2em(30px);
+          margin-right: px2em(20px);
+        }
+      }
     }
   }
 }
