@@ -217,13 +217,13 @@ export default {
 .call-wrap{
   // width: 14.5em;
   height: 7.6em;
-  padding: 0.46em 0.9em;
+  padding: 0.46em;
   border : 0.02em solid rgba(96, 186, 236,0.2);
   margin : 0.23em;
   background:rgba(31,57,103,1);
   position: absolute;
   top : calc( 50% - 3.8em );
-  left: calc( 50% - 6em );
+  left: calc( 50% - 7.5em );
   z-index: 10;
   #call-main{
     width: 7.5em;
@@ -235,10 +235,8 @@ export default {
     padding: 0.1em;
     margin-top: -0.4em;
     .rong-min-window-wrap{
-      top: 0.3em;
-      position: relative;
+      bottom: 0.3em !important;
       width: 100%;
-      height: 1.2em;
       display: flex;
       position: absolute;
       height: 1.2em;
@@ -269,7 +267,7 @@ export default {
       width: calc(100% - 0.2em);
       height: calc(100% - 1.3em);
       position: absolute;
-      top: 1.2em;
+      bottom: 1.2em !important;
     }
     .rong-max-window {
       video{
@@ -315,7 +313,7 @@ export default {
       width: 1.7em;
       height: 1.7em;
       position: absolute;
-      bottom : 0.3em;
+      bottom : 1.5em;
       left : calc(50% - 0.8em);
       z-index:999999;
       .video-time{
@@ -377,8 +375,8 @@ export default {
   .call-info-wrap{
     width: 3.08em;
     height: 3.78em;
-    background: url(./assets/pic_message_border.png) no-repeat center center;
-    background-size: 5.08em 5.78em;
+    // background: url(./assets/pic_message_border.png) no-repeat center center;
+    // background-size: 5.08em 5.78em;
     margin-right: 0.8em;
     // padding: 1em;
     &.invite-info-wrap{
@@ -423,7 +421,10 @@ export default {
     }
   }
   .close-btn{
+    position: absolute;
     display: block;
+    bottom: 0.5em;
+    right: 0.5em;
     width: 0.97em;
     height: 0.28em;
     background:url(./assets/btn_return.png) no-repeat center center;
