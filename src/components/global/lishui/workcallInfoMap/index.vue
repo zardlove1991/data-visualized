@@ -608,7 +608,7 @@ export default {
       // 以下方法添加自定义控件，用来重回原点
       /* eslint-disable */
       // 定义一个控件类，即function
-      function ZoomControl(anchor = DEFAULT_ANCHOR, offset = new BMap.Size(10, 10)) { 
+      function ZoomControl(anchor = BMAP_ANCHOR_BOTTOM_RIGHT, offset = new BMap.Size(10, 10)) { 
         // 设置默认停靠位置和偏移量
         this.defaultAnchor = anchor
         this.defaultOffset = offset
