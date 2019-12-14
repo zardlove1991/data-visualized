@@ -622,10 +622,10 @@ export default {
         // 添加文字说明
         // 设置样式
         div.style.cursor = 'pointer'
-        div.style.border = '1px solid gray'
-        div.style.width = '0.6em'
-        div.style.height = '0.6em'
-        div.style.background = 'url(' + require('./assets/position.png') + ') no-repeat center center'
+        div.style.width = '0.5em'
+        div.style.height = '0.5em'
+        div.style.background = 'url(' + require('./assets/position.png') + ')'
+        div.style.backgroundSize = '100%'
         // 绑定事件，点击回到原点
         div.onclick = function (e) {
           map.centerAndZoom(new BMap.Point(_this.center.lng, _this.center.lat), 17)

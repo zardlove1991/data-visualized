@@ -234,11 +234,11 @@ export default {
     overflow: hidden;
     padding: 0.1em;
     .rong-min-window-wrap{
-      bottom: 0.2em;
+      bottom: 0.1em;
       width: 100%;
       display: flex;
       position: absolute;
-      height: 1.2em;
+      height: 1em;
       overflow: hidden;
       overflow-x: scroll;
       .min-window-list{
@@ -266,7 +266,7 @@ export default {
       width: calc(100% - 0.2em);
       height: calc(100% - 1.3em);
       position: absolute;
-      bottom: 1.2em !important;
+      bottom: 1.3em !important;
     }
     .rong-max-window {
       video{
@@ -309,10 +309,10 @@ export default {
       }
     }
     .video-info{
-      width: 1.7em;
-      height: 1.7em;
+      width: 1.3em;
+      height: 1.3em;
       position: absolute;
-      bottom : 1.5em;
+      bottom : -0.19em;
       left : calc(50% - 0.8em);
       z-index:999999;
       .video-time{
@@ -327,10 +327,10 @@ export default {
       }
       .hug-btn{
         display: block;
-        width: 1em;
-        height: 1em;
+        width: 0.8em;
+        height: 0.8em;
         background:url(./assets/icon_videoff.png) no-repeat center center;
-        background-size: 1em 1em;
+        background-size: 0.8em 0.8em;
         cursor: pointer;
         margin: 0.16em auto;
       }
@@ -374,7 +374,8 @@ export default {
   .call-info-wrap{
     width: 3.08em;
     height: 3.78em;
-
+    padding-top: 0.8em;
+    padding-left: 0.1em;
     &.invite-info-wrap{
       span{
         display: block;
