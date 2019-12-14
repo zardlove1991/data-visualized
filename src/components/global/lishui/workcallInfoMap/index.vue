@@ -622,7 +622,6 @@ export default {
         // 添加文字说明
         // 设置样式
         div.style.cursor = 'pointer'
-        div.style.border = '1px solid gray'
         div.style.width = '0.5em'
         div.style.height = '0.5em'
         div.style.background = 'url(' + require('./assets/position.png') + ')'
