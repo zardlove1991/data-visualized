@@ -604,6 +604,40 @@ export default {
         this._color = color
         this._mid = mid
       }
+
+      // 以下方法添加自定义控件，用来重回原点
+      /* eslint-disable */
+      // 定义一个控件类，即function
+      function ZoomControl(anchor = DEFAULT_ANCHOR, offset = new BMap.Size(10, 10)) { 
+        // 设置默认停靠位置和偏移量
+        this.defaultAnchor = anchor
+        this.defaultOffset = offset
+      }
+      /* eslint-enable */
+      // 通过JavaScript的prototype属性继承于BMap.Control
+      ZoomControl.prototype = new BMap.Control()
+      ZoomControl.prototype.initialize = function (map) {
+        // 创建一个DOM元素
+        var div = document.createElement('div')
+        // 添加文字说明
+        // 设置样式
+        div.style.cursor = 'pointer'
+        div.style.border = '1px solid gray'
+        div.style.width = '0.5em'
+        div.style.height = '0.5em'
+        div.style.background = 'url(' + require('./assets/position.png') + ') no-repeat center center'
+        // 绑定事件，点击回到原点
+        div.onclick = function (e) {
+          map.centerAndZoom(new BMap.Point(_this.center.lng, _this.center.lat), 17)
+        }
+        // 添加DOM元素到地图中
+        map.getContainer().appendChild(div)
+        // 将DOM元素返回
+        return div
+      }
+      var myZoomCtrl = new ZoomControl()
+      // 添加到地图当中
+      map.addControl(myZoomCtrl)
     },
     hideCurrent () {
       this.currentActive = false
