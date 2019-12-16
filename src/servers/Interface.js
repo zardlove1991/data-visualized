@@ -44,7 +44,7 @@ export const getWorkCallConnectList = (currentViewId) => createAPI(`${httpsbaseU
 export const getIndexMemberDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getIndexMemberDetail?user_id=${id}`)
 
 /* 溧水运营数据 */
-export const getOperateData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperateData&view_id=${currentViewId}`)
+export const getOperateData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperationalData&view_id=${currentViewId}`)
 
 /* 成稿产出 */
 export const getM2OPlusPublish = (count = 5, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?count=${count}&page=${page}&view_id=${currentViewId}`)
