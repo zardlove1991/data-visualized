@@ -26,8 +26,8 @@
     <div class="call-info-wrap" v-if="!invite_call">
       <span class="reporter-name overhidden">{{info_item.member_name}}</span>
       <span class="info-list">手机号：{{info_item.mobile}}</span>
-      <span class="info-list">职 位：{{info_item.role_title}}</span>
-      <span class="info-list overhidden">部 门：{{info_item.org_title}}</span>
+      <span class="info-list">职&nbsp;&nbsp;&nbsp;&nbsp;位：{{info_item.role_title}}</span>
+      <span class="info-list overhidden">部&nbsp;&nbsp;&nbsp;&nbsp;门：{{info_item.org_title}}</span>
       <!-- <span class="info-list overhidden">当前位置：{{info_item.address}}</span> -->
       <!-- <span class="info-list overhidden">采访事件：</span> -->
     </div>
@@ -35,7 +35,8 @@
       <span class="invite-name">{{info_item.member_name}}</span>
       <span class="invite-tip">{{invite_tip}}</span>
     </div>
-    <span class="close-btn" @click="close"></span>
+    <!-- <el-button class="close-btn" @click="close">返回</el-button> -->
+    <span class="close-btn" @click="close">返回</span>
   </div>
 </template>
 
@@ -396,12 +397,12 @@ export default {
       width: 100%;
       height: 1em;
       line-height: 1em;
-      text-indent: 1em;
+      // text-indent: 1em;
       font-size:0.36em!important;
       text-align: left;
       color: #00ffea;
-      background: url(./assets/pic_arrow_big.png) no-repeat center left;
-      background-size : 0.82em 0.28em;
+      // background: url(./assets/pic_arrow_big.png) no-repeat center left;
+      // background-size : 0.82em 0.28em;
     }
     .info-list{
       display: block;
@@ -422,11 +423,19 @@ export default {
     display: block;
     bottom: 0.5em;
     right: 0.5em;
-    width: 0.97em;
-    height: 0.28em;
-    background:url(./assets/btn_return.png) no-repeat center center;
-    background-size: 0.97em 0.28em;
+    left: 25.5em;
+    // width: 4em;
+    height: 2em;
+    line-height: 2em;
+    font-size: 0.3em;
+    color: #02ffea;
+    border: 0.01em solid #02ffea;
+    // background:url(./assets/btn_return.png) no-repeat center center;
+    // background-size: 0.97em 0.28em;
     cursor: pointer;
+    &.close-btn:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>
