@@ -579,7 +579,7 @@ export default {
           }
         })
         this.keyWordsList = fakeDataList[fakeDataIndex].keyWordsList
-      }, 10000)
+      }, this.frequency)
     }
   }
 }
