@@ -198,7 +198,7 @@ export default {
                 length: 1,
                 // formatter: '{b}:{d}%',
                 formatter: function (data) {
-                  return  data.percent.toFixed(1) + '%'
+                  return data.percent.toFixed(1) + '%'
                 },
                 position: 'outside'
               },
