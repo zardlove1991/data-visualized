@@ -70,6 +70,9 @@ export default {
             }, 100)
             if (this.isPaging) {
               this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
             }
           } else {
             if (this.page !== 1) {
