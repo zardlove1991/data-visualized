@@ -195,9 +195,11 @@ export default {
             label: {
               normal: {
                 show: true,
-                length: 2,
+                length: 1,
                 // formatter: '{b}:{d}%',
-                formatter: '{d}%',
+                formatter: function (data) {
+                  return  data.percent.toFixed(1) + '%'
+                },
                 position: 'outside'
               },
               emphasis: {
@@ -211,8 +213,8 @@ export default {
             labelLine: {
               normal: {
                 show: true,
-                length: 20,
-                length2: 20
+                length: 10,
+                length2: 10
               }
             },
             data: []
