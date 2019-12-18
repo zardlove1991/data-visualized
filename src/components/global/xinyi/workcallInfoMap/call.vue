@@ -35,7 +35,7 @@
       <span class="invite-name">{{info_item.member_name}}</span>
       <span class="invite-tip">{{invite_tip}}</span>
     </div>
-    <span class="close-btn" @click="close"></span>
+    <span class="close-btn" @click="close">返回</span>
   </div>
 </template>
 
@@ -216,32 +216,29 @@ export default {
 <style lang="scss" scoped>
 .call-wrap{
   // width: 14.5em;
-  height: 7.6em;
-  padding: 0.46em 0.9em;
-  border : 0.02em solid rgba(96, 186, 236,0.2);
-  margin : 0.23em;
+  height: 100%;
+  // padding: 0.46em;
+  // border : 0.02em solid rgba(96, 186, 236,0.2);
+  // margin : 0.23em;
   background:rgba(31,57,103,1);
   position: absolute;
-  top : calc( 50% - 3.8em );
-  left: calc( 50% - 6em );
+  // top : calc( 50% - 3.8em );
+  left: calc( 50% - 7.5em );
   z-index: 10;
   #call-main{
     width: 7.5em;
-    height: 7.5em;
+    height: 100%;
     margin : 0 auto;
     background: #000;
     position: relative;
     overflow: hidden;
     padding: 0.1em;
-    margin-top: -0.4em;
     .rong-min-window-wrap{
-      top: 0.3em;
-      position: relative;
+      bottom: 0.1em;
       width: 100%;
-      height: 1.2em;
       display: flex;
       position: absolute;
-      height: 1.2em;
+      height: 1em;
       overflow: hidden;
       overflow-x: scroll;
       .min-window-list{
@@ -269,7 +266,7 @@ export default {
       width: calc(100% - 0.2em);
       height: calc(100% - 1.3em);
       position: absolute;
-      top: 1.2em;
+      bottom: 1.3em !important;
     }
     .rong-max-window {
       video{
@@ -312,10 +309,10 @@ export default {
       }
     }
     .video-info{
-      width: 1.7em;
-      height: 1.7em;
+      width: 1.3em;
+      height: 1.3em;
       position: absolute;
-      bottom : 0.3em;
+      bottom : -0.19em;
       left : calc(50% - 0.8em);
       z-index:999999;
       .video-time{
@@ -330,10 +327,10 @@ export default {
       }
       .hug-btn{
         display: block;
-        width: 1em;
-        height: 1em;
+        width: 0.8em;
+        height: 0.8em;
         background:url(./assets/icon_videoff.png) no-repeat center center;
-        background-size: 1em 1em;
+        background-size: 0.8em 0.8em;
         cursor: pointer;
         margin: 0.16em auto;
       }
@@ -377,10 +374,8 @@ export default {
   .call-info-wrap{
     width: 3.08em;
     height: 3.78em;
-    background: url(./assets/pic_message_border.png) no-repeat center center;
-    background-size: 5.08em 5.78em;
-    margin-right: 0.8em;
-    // padding: 1em;
+    padding-top: 0.8em;
+    padding-left: 0.1em;
     &.invite-info-wrap{
       span{
         display: block;
@@ -401,12 +396,12 @@ export default {
       width: 100%;
       height: 1em;
       line-height: 1em;
-      text-indent: 1em;
+      // text-indent: 1em;
       font-size:0.36em!important;
       text-align: left;
       color: #00ffea;
-      background: url(./assets/pic_arrow_big.png) no-repeat center left;
-      background-size : 0.82em 0.28em;
+      // background: url(./assets/pic_arrow_big.png) no-repeat center left;
+      // background-size : 0.82em 0.28em;
     }
     .info-list{
       display: block;
@@ -423,12 +418,23 @@ export default {
     }
   }
   .close-btn{
+    position: absolute;
     display: block;
-    width: 0.97em;
-    height: 0.28em;
-    background:url(./assets/btn_return.png) no-repeat center center;
-    background-size: 0.97em 0.28em;
+    bottom: 0.5em;
+    right: 0.5em;
+    left: 25.5em;
+    // width: 4em;
+    height: 2em;
+    line-height: 2em;
+    font-size: 0.3em;
+    color: #02ffea;
+    border: 0.01em solid #02ffea;
+    // background:url(./assets/btn_return.png) no-repeat center center;
+    // background-size: 0.97em 0.28em;
     cursor: pointer;
+    &.close-btn:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>
