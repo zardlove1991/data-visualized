@@ -41,7 +41,7 @@ export default {
           lable: 'yesterday_click_num',
           value: 0
         }, {
-          text: '今日新消息数：',
+          text: '昨日评论数：',
           lable: 'today_msg_num',
           value: 0
         }, {
@@ -64,11 +64,11 @@ export default {
           lable: 'today_publish_num',
           value: 0
         }, {
-          text: '新增注册数：',
+          text: '新增用户数：',
           lable: 'new_user_num',
           value: 0
         }, {
-          text: '累计注册数：',
+          text: '累计用户数：',
           lable: 'cumulative_user_num',
           value: 0
         }
@@ -83,11 +83,11 @@ export default {
           lable: 'yesterday_like_num',
           value: 0
         }, {
-          text: '新增粉丝数：',
+          text: '新增注册数：',
           lable: 'new_user_num',
           value: 0
         }, {
-          text: '累计粉丝数：',
+          text: '累计注册数：',
           lable: 'cumulative_user_num',
           value: 0
         }
