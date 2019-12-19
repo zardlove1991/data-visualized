@@ -1,41 +1,43 @@
 <template>
-  <div class="call-wrap sys-flex" v-if="call_Show">
-    <div class="sys-flex-one" v-show="online">
-      <div id="call-main" class="rong-container">
-        <div class="rong-min-window-wrap">
-          <div id="rong-min-window-list" class="min-window-list"></div>
-        </div>
-        <div class="video-info">
-          <span class="video-time">{{time}}</span>
-          <span class="hug-btn" @click="hangUp"></span>
+  <div class="qingxu-call">
+    <div class="call-wrap sys-flex" v-if="call_Show">
+      <div class="sys-flex-one" v-show="online">
+        <div id="call-main" class="rong-container">
+          <div class="rong-min-window-wrap">
+            <div id="rong-min-window-list" class="min-window-list"></div>
+          </div>
+          <div class="video-info">
+            <span class="video-time">{{time}}</span>
+            <span class="hug-btn" @click="hangUp"></span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="main-wrap sys-flex-one" v-show="!online">
-      <img class="call-reporter-avatar" v-if="info_item.avatar" v-bind:src="info_item.avatar.uri">
-      <img class="call-reporter-avatar" v-if="!info_item.avatar" src="./assets/default_avatar.png" />
-      <img class="call-reporter-line" src="../workcallInfoMap/assets/pic_soundwave.png">
-      <span class="call-status">连接中...</span>
-      <div class="sys-flex sys-flex-center flex-justify-center">
-        <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
-        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
-        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="close">
-      </div>
+      <div class="main-wrap sys-flex-one" v-show="!online">
+        <img class="call-reporter-avatar" v-if="info_item.avatar" v-bind:src="info_item.avatar.uri">
+        <img class="call-reporter-avatar" v-if="!info_item.avatar" src="./assets/default_avatar.png" />
+        <img class="call-reporter-line" src="../workcallInfoMap/assets/pic_soundwave.png">
+        <span class="call-status">连接中...</span>
+        <div class="sys-flex sys-flex-center flex-justify-center">
+          <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
+          <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
+          <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="close">
+        </div>
 
+      </div>
+      <div class="call-info-wrap" v-if="!invite_call">
+        <span class="reporter-name overhidden">{{info_item.member_name}}</span>
+        <span class="info-list">手机号：{{info_item.mobile}}</span>
+        <span class="info-list">职 位：{{info_item.role_title}}</span>
+        <span class="info-list overhidden">部 门：{{info_item.org_title}}</span>
+        <!-- <span class="info-list overhidden">当前位置：{{info_item.address}}</span> -->
+        <!-- <span class="info-list overhidden">采访事件：</span> -->
+      </div>
+      <div class="call-info-wrap invite-info-wrap" v-if="invite_call">
+        <span class="invite-name">{{info_item.member_name}}</span>
+        <span class="invite-tip">{{invite_tip}}</span>
+      </div>
+      <span class="close-btn" @click="close"></span>
     </div>
-    <div class="call-info-wrap" v-if="!invite_call">
-      <span class="reporter-name overhidden">{{info_item.member_name}}</span>
-      <span class="info-list">手机号：{{info_item.mobile}}</span>
-      <span class="info-list">职 位：{{info_item.role_title}}</span>
-      <span class="info-list overhidden">部 门：{{info_item.org_title}}</span>
-      <!-- <span class="info-list overhidden">当前位置：{{info_item.address}}</span> -->
-      <!-- <span class="info-list overhidden">采访事件：</span> -->
-    </div>
-    <div class="call-info-wrap invite-info-wrap" v-if="invite_call">
-      <span class="invite-name">{{info_item.member_name}}</span>
-      <span class="invite-tip">{{invite_tip}}</span>
-    </div>
-    <span class="close-btn" @click="close"></span>
   </div>
 </template>
 
@@ -213,222 +215,224 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.call-wrap{
-  // width: 14.5em;
-  height: 7.6em;
-  padding: 0.46em 0.9em;
-  border : 0.02em solid rgba(96, 186, 236,0.2);
-  margin : 0.23em;
-  background:rgba(31,57,103,1);
-  position: absolute;
-  top : calc( 50% - 3.8em );
-  left: calc( 50% - 6em );
-  z-index: 10;
-  #call-main{
-    width: 7.5em;
-    height: 7.5em;
-    margin : 0 auto;
-    background: #000;
-    position: relative;
-    overflow: hidden;
-    padding: 0.1em;
-    margin-top: -0.4em;
-    .rong-min-window-wrap{
-      top: 0.3em;
+<style lang="scss">
+.qingxu-call {
+  .call-wrap{
+    // width: 14.5em;
+    height: 7.6em;
+    padding: 0.46em 0.9em;
+    border : 0.02em solid rgba(96, 186, 236,0.2);
+    margin : 0.23em;
+    background:rgba(31,57,103,1);
+    position: absolute;
+    top : calc( 50% - 3.8em );
+    left: calc( 50% - 6em );
+    z-index: 10;
+    #call-main{
+      width: 7.5em;
+      height: 7.5em;
+      margin : 0 auto;
+      background: #000;
       position: relative;
-      width: 100%;
-      height: 1.2em;
-      display: flex;
-      position: absolute;
-      height: 1.2em;
       overflow: hidden;
-      overflow-x: scroll;
-      .min-window-list{
+      padding: 0.1em;
+      margin-top: -0.4em;
+      .rong-min-window-wrap{
+        top: 0.3em;
+        position: relative;
+        width: 100%;
+        height: 1.2em;
         display: flex;
-      }
-    }
-    .rong-min-window{
-      width: 1.2em;
-      height: 0.9em;
-      cursor: pointer;
-      border: 0.01em solid #ddd;
-      border-radius: 0.03em;
-      overflow: hidden;
-      background: rgba(0,0,0,0.4);
-      margin-right: 0.1em;
-      span{
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-size: 0.5em;
-        color: #ddd;
-      }
-    }
-    .rong-max-window {
-      width: calc(100% - 0.2em);
-      height: calc(100% - 1.3em);
-      position: absolute;
-      top: 1.2em;
-    }
-    .rong-max-window {
-      video{
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .rong-min-window{
-      video{
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .rong-calllib-emote{
-      canvas{
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%!important;
-        height: 100%!important;
-        // width: 3.25em!important;
-        // height: 5.78em!important;
-        z-index: 9;
+        height: 1.2em;
+        overflow: hidden;
+        overflow-x: scroll;
+        .min-window-list{
+          display: flex;
+        }
       }
-    }
-    div{
-      &:nth-of-type(2){
+      .rong-min-window{
+        width: 1.2em;
+        height: 0.9em;
+        cursor: pointer;
+        border: 0.01em solid #ddd;
+        border-radius: 0.03em;
+        overflow: hidden;
+        background: rgba(0,0,0,0.4);
+        margin-right: 0.1em;
+        span{
+          display: block;
+          width: 100%;
+          text-align: center;
+          font-size: 0.5em;
+          color: #ddd;
+        }
+      }
+      .rong-max-window {
+        width: calc(100% - 0.2em);
+        height: calc(100% - 1.3em);
+        position: absolute;
+        top: 1.2em;
+      }
+      .rong-max-window {
+        video{
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+  
+      .rong-min-window{
+        video{
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+  
+      .rong-calllib-emote{
         canvas{
           position: absolute;
           top: 0;
           right: 0;
-          width: 1em!important;
-          height: 1em!important;
-          z-index: 99999!important;
+          width: 100%!important;
+          height: 100%!important;
+          // width: 3.25em!important;
+          // height: 5.78em!important;
+          z-index: 9;
         }
       }
-    }
-    .video-info{
-      width: 1.7em;
-      height: 1.7em;
-      position: absolute;
-      bottom : 0.3em;
-      left : calc(50% - 0.8em);
-      z-index:999999;
-      .video-time{
-        display: block;
-        height: 0.5em;
-        line-height: 0.5em;
-        background:rgba(0,0,0,0.5);
-        border-radius:0.25em;
-        text-align: center;
-        font-size: 0.24em;
-        color: #00FDFE;
+      div{
+        &:nth-of-type(2){
+          canvas{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1em!important;
+            height: 1em!important;
+            z-index: 99999!important;
+          }
+        }
       }
-      .hug-btn{
+      .video-info{
+        width: 1.7em;
+        height: 1.7em;
+        position: absolute;
+        bottom : 0.3em;
+        left : calc(50% - 0.8em);
+        z-index:999999;
+        .video-time{
+          display: block;
+          height: 0.5em;
+          line-height: 0.5em;
+          background:rgba(0,0,0,0.5);
+          border-radius:0.25em;
+          text-align: center;
+          font-size: 0.24em;
+          color: #00FDFE;
+        }
+        .hug-btn{
+          display: block;
+          width: 1em;
+          height: 1em;
+          background:url(./assets/icon_videoff.png) no-repeat center center;
+          background-size: 1em 1em;
+          cursor: pointer;
+          margin: 0.16em auto;
+        }
+  
+      }
+  
+    }
+    .main-wrap{
+      .call-reporter-avatar{
+        display: block;
+        width: 2.5em;
+        height: 2.5em;
+        margin: 0 auto;
+        border-radius: 50%;
+      }
+      .call-reporter-line{
+        display: block;
+        width: 5.6em;
+        height: 2.49em;
+        margin: 0 auto;
+      }
+      .call-status{
+        display: block;
+        color: #FFF34A;
+        font-size: 0.24em;
+        margin-top: -0.8em;
+        margin-bottom: 0.2em;
+        text-align: center;
+      }
+      .call-btn{
         display: block;
         width: 1em;
         height: 1em;
-        background:url(./assets/icon_videoff.png) no-repeat center center;
-        background-size: 1em 1em;
+        margin: 0 0.2em;
         cursor: pointer;
-        margin: 0.16em auto;
-      }
-
-    }
-
-  }
-  .main-wrap{
-    .call-reporter-avatar{
-      display: block;
-      width: 2.5em;
-      height: 2.5em;
-      margin: 0 auto;
-      border-radius: 50%;
-    }
-    .call-reporter-line{
-      display: block;
-      width: 5.6em;
-      height: 2.49em;
-      margin: 0 auto;
-    }
-    .call-status{
-      display: block;
-      color: #FFF34A;
-      font-size: 0.24em;
-      margin-top: -0.8em;
-      margin-bottom: 0.2em;
-      text-align: center;
-    }
-    .call-btn{
-      display: block;
-      width: 1em;
-      height: 1em;
-      margin: 0 0.2em;
-      cursor: pointer;
-      &:hover{
-        opacity: 0.8;
-      }
-    }
-  }
-  .call-info-wrap{
-    width: 3.08em;
-    height: 3.78em;
-    background: url(./assets/pic_message_border.png) no-repeat center center;
-    background-size: 5.08em 5.78em;
-    margin-right: 0.8em;
-    // padding: 1em;
-    &.invite-info-wrap{
-      span{
-        display: block;
-        text-align: center;
-        font-size: 0.3em;
-        color: #fff;
-        margin-top: 0.3em;
-        &.invite-name{
-          font-size: 0.5em;
-          margin-top: 0.5em;
-          font-weight: bold;
-          color: #02ffea;
+        &:hover{
+          opacity: 0.8;
         }
       }
     }
-    .reporter-name{
-      display: block;
-      width: 100%;
-      height: 1em;
-      line-height: 1em;
-      text-indent: 1em;
-      font-size:0.36em!important;
-      text-align: left;
-      color: #00ffea;
-      background: url(./assets/pic_arrow_big.png) no-repeat center left;
-      background-size : 0.82em 0.28em;
-    }
-    .info-list{
-      display: block;
-      text-align: left;
-      font-size:0.24em;
-      color:#00ffea;
-      margin : 0.2em 0;
-      &.introduce{
-        height: 0.28em;
-        background-image:url(./assets/icon_date.png);
-        background-position: center left;
-        background-size:1em
+    .call-info-wrap{
+      width: 3.08em;
+      height: 3.78em;
+      background: url(./assets/pic_message_border.png) no-repeat center center;
+      background-size: 5.08em 5.78em;
+      margin-right: 0.8em;
+      // padding: 1em;
+      &.invite-info-wrap{
+        span{
+          display: block;
+          text-align: center;
+          font-size: 0.3em;
+          color: #fff;
+          margin-top: 0.3em;
+          &.invite-name{
+            font-size: 0.5em;
+            margin-top: 0.5em;
+            font-weight: bold;
+            color: #02ffea;
+          }
+        }
+      }
+      .reporter-name{
+        display: block;
+        width: 100%;
+        height: 1em;
+        line-height: 1em;
+        text-indent: 1em;
+        font-size:0.36em!important;
+        text-align: left;
+        color: #00ffea;
+        background: url(./assets/pic_arrow_big.png) no-repeat center left;
+        background-size : 0.82em 0.28em;
+      }
+      .info-list{
+        display: block;
+        text-align: left;
+        font-size:0.24em;
+        color:#00ffea;
+        margin : 0.2em 0;
+        &.introduce{
+          height: 0.28em;
+          background-image:url(./assets/icon_date.png);
+          background-position: center left;
+          background-size:1em
+        }
       }
     }
-  }
-  .close-btn{
-    display: block;
-    width: 0.97em;
-    height: 0.28em;
-    background:url(./assets/btn_return.png) no-repeat center center;
-    background-size: 0.97em 0.28em;
-    cursor: pointer;
+    .close-btn{
+      display: block;
+      width: 0.97em;
+      height: 0.28em;
+      background:url(./assets/btn_return.png) no-repeat center center;
+      background-size: 0.97em 0.28em;
+      cursor: pointer;
+    }
   }
 }
 </style>
