@@ -74,3 +74,7 @@ export const jiangningcomponentReport = getComponent('jiangning/report')
 export const jiangningcomponentProject = getComponent('jiangning/project')
 export const jiangningcomponentPublish = getComponent('jiangning/publish')
 export const jiangningcomponentNews = getComponent('jiangning/news')
+
+/* 标准套系01 */
+export const common01componentManuscript = getComponent('common01/manuscript')
+export const common01componentMessage = getComponent('common01/message')
