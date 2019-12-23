@@ -40,7 +40,7 @@ export default {
         clearInterval(this.countNum)
         this.count = 0
       }
-      getcivilizationJN().then(res => {
+      getcivilizationJN(30).then(res => {
         if (!res.data.error_code) {
           this.list = res.data.result
           this.topList = this.list.splice(0, 2)

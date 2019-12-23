@@ -1,0 +1,160 @@
+<template>
+  <div class="common01-project">
+    <div class="project-wrap common01-border">
+      <div class="common01-title">选题展示</div>
+      <div class="wrap-content">
+        <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+          <div class="title common01-ft40 overhidden">{{v.title}}</div>
+          <div class="name common01-ft32">{{v.project_user_name}}</div>
+          <div class="project-status common01-ft32" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{v.status_show}}</div>
+          <div class="project-progress common01-ft32 sys-flex sys-flex-center overhidden">
+            <div class="progress-total">
+              <span class="progress" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}" :style="{'width' : v.percent + '%'}"></span>
+            </div>
+            <div class="percent common01-ft32" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{Math.ceil(v.percent)}}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: 'report',
+  data () {
+    return {
+      projectList: [{
+        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
+        project_user_name: '周卉',
+        status: 1,
+        status_show: '进行中',
+        percent: 72
+      }, {
+        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
+        project_user_name: '周卉',
+        status: 2,
+        status_show: '已完成',
+        percent: 100
+      }, {
+        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
+        project_user_name: '周卉',
+        status: 3,
+        status_show: '进行中',
+        percent: 36
+      }, {
+        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
+        project_user_name: '周卉',
+        status: 3,
+        status_show: '进行中',
+        percent: 96
+      }, {
+        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
+        project_user_name: '周卉',
+        status: 4,
+        status_show: '已终止',
+        percent: 44
+      }]
+    }
+  }
+}
+</script>
+<style lang="scss">
+@import '~@/styles/index.scss';
+.common01-project {
+  width: 100%;
+  height: 100%;
+  padding: pxrem(40px);
+  .project-wrap {
+    padding: pxrem(250px) pxrem(96px) pxrem(95px) pxrem(78px);
+    color: #fff;
+    .wrap-content {
+      .item-list {
+        margin-bottom: pxrem(90px);
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+        .title {
+          text-align: left;
+          width: 55%;
+        }
+        .project-status {
+          &.on-progress {
+            color: #0272ff;
+          }
+          &.on-stop {
+            color: #ff3366;
+          }
+          &.on-done {
+            color: #09de74;
+          }
+        }
+        .project-progress {
+          .progress-total {
+            width: pxrem(220px);
+            height: pxrem(16px);
+            background: #2B3A58;
+            border-radius: pxrem(8px);
+            overflow: hidden;
+            .progress {
+              display: block;
+              height: 100%;
+              border-radius: pxrem(8px);
+              &.on-progress {
+                background: -webkit-linear-gradient(left, #0272ff, #80bfff);
+                background: -o-linear-gradient(right, #0272ff, #80bfff);
+                background: -moz-linear-gradient(right, #0272ff, #80bfff);
+                background: linear-gradient(to right, #0272ff, #80bfff);
+              }
+              &.on-stop {
+                background: #ff3366;
+              }
+              &.on-done {
+                background: -webkit-linear-gradient(left, #09de74, #2ff6c5);
+                background: -o-linear-gradient(right, #09de74, #2ff6c5);
+                background: -moz-linear-gradient(right, #09de74, #2ff6c5);
+                background: linear-gradient(to right, #09de74, #2ff6c5);
+              }
+            }
+          }
+          .percent {
+            margin-left: pxrem(20px);
+            &.on-progress {
+              color: #0272ff;
+            }
+            &.on-stop {
+              color: #ff3366;
+            }
+            &.on-done {
+              color: #09de74;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.common01-border {
+  width: 100%;
+  height: 100%;
+  background: url("../../../../assets/common/common01Border.png") no-repeat center;
+  background-size: 100% 100%;
+  position: relative;
+}
+.common01-title {
+  font-size: pxrem(58px);
+  font-weight: 500;
+  text-shadow: 0 pxrem(16px) pxrem(16px) rgba(0, 222, 255, 0.2);
+  position: absolute;
+  top: pxrem(54px);
+  left: pxrem(72px);
+}
+.common01-ft40 {
+  font-size: pxrem(40px);
+}
+.common01-ft32 {
+  font-size: pxrem(32px);
+}
+.common01-ft30 {
+  font-size: pxrem(30px);
+}
+</style>

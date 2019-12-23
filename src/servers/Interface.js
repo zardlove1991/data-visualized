@@ -89,7 +89,7 @@ export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${G
 // 江宁新华社
 export const getM2OPLUSArticleList = (count = 5, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?source=159664&latest_days=1&count=${count}&page=${page}`)
 // 文明江宁
-export const getcivilizationJN = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationJN`)
+export const getcivilizationJN = (count) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationJN?count=${count}`)
 // 选题汇总
 export const getJnProject = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectPie?model=d`)
 // 报题展示

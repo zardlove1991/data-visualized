@@ -1,16 +1,9 @@
 <template>
-  <div class="common01-cluegather">
+  <div class="common-operatedata01">
     <div class="cluegather-wrap common01-border">
       <div class="common01-title">线索汇聚</div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
-          <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="source common01-ft32">{{v.source}}</div>
-          <div class="read common01-ft32 sys-flex sys-flex-center">
-            <img src="../../../../assets/common/read.png" />
-            <span>{{v.read}}</span>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -46,8 +39,8 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '~@/styles/index.scss';
-.common01-cluegather {
+@import '~@/styles/global/index.scss';
+.common-cluegather {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
