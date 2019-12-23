@@ -19,6 +19,11 @@ const allRoutes = [
     component: getPage('commandSystem')
   },
   {
+    path: '/callMember',
+    name: 'callMember',
+    component: getPage('callMember')
+  },
+  {
     path: '/login',
     name: 'login',
     component: getPage('commandSystem/login')
