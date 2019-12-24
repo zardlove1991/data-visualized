@@ -107,6 +107,7 @@ export default {
   position: absolute;
   top: pxrem(54px);
   left: pxrem(72px);
+  color: #fff;
 }
 .common01-ft40 {
   font-size: pxrem(40px);
