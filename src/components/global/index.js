@@ -78,9 +78,12 @@ export const jiangningcomponentNews = getComponent('jiangning/news')
 /* 标准套系01 */
 export const common01componentClueGather = getComponent('common01/clueGather')
 export const common01componentManuscript = getComponent('common01/manuscript')
-export const common01componentMessage = getComponent('common01/message')
+export const common01componentMessage = getComponent('common01/message') // 消息汇总
 export const common01componentReport = getComponent('common01/report')
 export const common01componentProject = getComponent('common01/project')
 export const common01componentTaskShow = getComponent('common01/taskShow')
 export const common01componentNewArticle = getComponent('common01/newArticle')
 export const common01componentClickRank = getComponent('common01/clickRank')
+export const common01componentEffect = getComponent('common01/effect') // 传播效果
+export const common01componentProduction = getComponent('common01/production') // 内容生产
+export const common01componentOperateData02 = getComponent('common01/operateData02') // 运营数据

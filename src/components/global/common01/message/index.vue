@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-message">
+  <div class="common01-message" id="common01-message">
     <div class="message-wrap common01-border">
       <div class="common01-title">消息汇总</div>
       <div class="count-wrap">
@@ -27,7 +27,7 @@
             <div v-for="(item, index) in typeList" class="pie-chart-type">
               <chart v-if="item.opt" :options="item.opt" :autoResize="true"></chart>
               <div class="label-wrap">
-                <span class="label-value">{{Math.ceil(item.value / typeTotal * 100)}}%</span><br><span class="label-name">{{item.name}}</span>
+                <div class="label-value">{{Math.ceil(item.value / typeTotal * 100)}}%</div><div class="label-name">{{item.name}}</div>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default {
           {
             name: '发布渠道占比',
             type: 'pie',
-            center: ['45%', '40%'],
+            center: ['50%', '40%'],
             radius: ['40%', '60%'],
             minAngle: 5,
             avoidLabelOverlap: true,
@@ -212,6 +212,7 @@ export default {
     }
   },
   mounted () {
+    this.setFontsize('common01-message')
     this.initTypes()
   },
   methods: {
@@ -239,6 +240,7 @@ export default {
 
 <style lang="scss">
 @import '~@/styles/index.scss';
+@import '../style/index.scss';
 .common01-message{
   width: 100%;
   height: 100%;
@@ -286,7 +288,7 @@ export default {
       }
     }
     .pie-chart{
-      width: 100%!important;
+      width: 80%!important;
       height: pxrem(500px)!important;
       .echarts {
         width: 100%;
@@ -308,6 +310,7 @@ export default {
       .label-wrap{
         position: absolute;
         width: 100px;
+        height: 100px;
         top: calc(50% - 40px);
         left: calc(50% - 50px);
         text-align: center;
