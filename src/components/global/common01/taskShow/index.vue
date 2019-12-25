@@ -5,13 +5,13 @@
       <div class="wrap-content">
         <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status-title sys-flex sys-flex-center common01-ft40">
-            <div class="status" :class="{'one': v.status === '0', 'two': v.status === '1'}">【{{v.status === '0' ? '普通' : '紧急'}}】</div>
+            <div class="status" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3'}">【{{v.priority === '1' ? '普通' : v.priority === '2' ? '紧急' : '加急'}}】</div>
             <div class="title overhidden">{{v.title}}</div>
           </div>
           <div class="project-name sys-flex sys-flex-center common01-ft32">
-            <div class="project overhidden">所属选题：{{v.project}}</div>
-            <div class="name">负责人：{{v.name}}</div>
-            <div class="time">{{v.time}}</div>
+            <div class="project overhidden">所属选题：{{v.project_title}}</div>
+            <div class="name">负责人：{{v.task_user_name}}</div>
+            <div class="time">{{v.update_time | dateFormat(0, 16)}}</div>
           </div>
         </div>
       </div>
@@ -19,35 +19,47 @@
   </div>
 </template>
 <script>
+import { getWorkCallTaskList } from '@/servers/interface'
 export default {
   name: 'taskShow',
   data () {
     return {
-      dataList: [{
-        status: '0',
-        title: '太可爱！全民男神第一次上综艺就火了！喂饱十几亿人的他，原来最爱吃鱼香肉丝',
-        project: '武汉揭晓必吃名菜小吃 花样楚菜迎接中外来宾',
-        name: '周卉',
-        time: '10-22 14:26'
-      }, {
-        status: '1',
-        title: '太可爱！全民男神第一次上综艺就火了！喂饱十几亿人的他，原来最爱吃鱼香肉丝',
-        project: '武汉揭晓必吃名菜小吃 花样楚菜迎接中外来宾',
-        name: '周卉',
-        time: '10-22 14:26'
-      }, {
-        status: '0',
-        title: '太可爱！全民男神第一次上综艺就火了！喂饱十几亿人的他，原来最爱吃鱼香肉丝',
-        project: '武汉揭晓必吃名菜小吃 花样楚菜迎接中外来宾',
-        name: '周卉',
-        time: '10-22 14:26'
-      }, {
-        status: '1',
-        title: '太可爱！全民男神第一次上综艺就火了！喂饱十几亿人的他，原来最爱吃鱼香肉丝',
-        project: '武汉揭晓必吃名菜小吃 花样楚菜迎接中外来宾',
-        name: '周卉',
-        time: '10-22 14:26'
-      }]
+      page: 1,
+      isPaging: true,
+      frequency: 15000,
+      maxPage: 3,
+      dataList: []
+    }
+  },
+  created () {
+    this.getWorkCallTaskList()
+    setInterval(() => {
+      this.getWorkCallTaskList()
+    }, this.frequency)
+  },
+  methods: {
+    getWorkCallTaskList () {
+      getWorkCallTaskList(4, this.page, this.currentViewId).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.data
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
+            }
+          } else {
+            if (this.page !== 1) {
+              this.page = 1
+              this.getWorkCallTaskList()
+            }
+          }
+        }
+      })
     }
   }
 }
@@ -74,6 +86,9 @@ export default {
             }
             &.two {
               color: #FEA32C;
+            }
+            &.three {
+              color: RGBA(217, 67, 110, 1);
             }
           }
         }

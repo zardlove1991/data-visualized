@@ -6,44 +6,55 @@
         <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status common01-ft30" :class="{'one': v.audit_status === '0', 'two': v.audit_status === '1', 'three': v.audit_status === '2', 'four': v.audit_status === '4'}">{{v.audit_status === '0' ? '待审核' : v.audit_status === '1' ? '通过' : v.audit_status === '2' ? '打回' : '报审'}}</div>
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="name common01-ft32">{{v.name}}</div>
-          <div class="time common01-ft32">{{v.time}}</div>
+          <div class="name common01-ft32">{{v.project_user_name}}</div>
+          <div class="time common01-ft32">{{v.update_time | dateFormat}}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { getWorkCallReportList } from '@/servers/interface'
 export default {
   name: 'report',
   data () {
     return {
-      dataList: [{
-        audit_status: '0',
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        name: '周卉',
-        time: '10-22 14:26'
-      }, {
-        audit_status: '1',
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        name: '周卉',
-        time: '10-22 14:26'
-      }, {
-        audit_status: '2',
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        name: '周卉',
-        time: '10-22 14:26'
-      }, {
-        audit_status: '4',
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        name: '周卉',
-        time: '10-22 14:26'
-      }, {
-        audit_status: '0',
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        name: '周卉',
-        time: '10-22 14:26'
-      }]
+      page: 1,
+      isPaging: true,
+      frequency: 15000,
+      maxPage: 3,
+      dataList: []
+    }
+  },
+  created () {
+    this.getWorkCallReportList()
+    setInterval(() => {
+      this.getWorkCallReportList()
+    }, this.frequency)
+  },
+  methods: {
+    getWorkCallReportList () {
+      getWorkCallReportList(5, this.page, this.currentViewId).then((res) => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.data
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
+            }
+          } else {
+            if (this.page !== 1) {
+              this.page = 1
+              this.getWorkCallReportList()
+            }
+          }
+        }
+      })
     }
   }
 }

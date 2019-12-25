@@ -3,12 +3,12 @@
     <div class="clickrank-wrap common01-border">
       <div class="common01-title">点击量排行</div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
-          <div class="index"></div>
+        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+          <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
           <div class="read common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/read.png" />
-            <span>{{v.read}}</span>
+            <span>{{v.click_num}}</span>
           </div>
         </div>
       </div>
@@ -16,37 +16,64 @@
   </div>
 </template>
 <script>
+import { getClickArticleList } from '@/servers/interface'
 export default {
   name: 'clickRank',
   data () {
     return {
-      dataList: [{
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        read: 36045
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        read: 36045
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        read: 36045
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        read: 36045
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        read: 36045
-      }]
+      frequency: 15000,
+      count: 0,
+      dataList: []
+    }
+  },
+  created () {
+    this.getClickArticleList()
+  },
+  methods: {
+    getClickArticleList () {
+      if (this.countNum) {
+        this.dataList = []
+        clearInterval(this.countNum)
+        this.count = 0
+      }
+      getClickArticleList().then(res => {
+        if (!res.data.error_code) {
+          this.list = res.data.result
+          this.initList()
+        }
+      })
+    },
+    initList () {
+      this.dataList = this.list.slice(
+        this.count,
+        this.count + 5 > this.list.length ? this.list.length : this.count + 5
+      )
+      this.count += 5
+      this.countNum = setInterval(() => {
+        if (this.count < this.list.length) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = this.list.slice(this.count, this.count + 5)
+            this.count += 5
+          }, 100)
+        } else {
+          this.dataList = []
+          clearInterval(this.countNum)
+          this.count = 0
+          this.getClickArticleList()
+        }
+      }, this.frequency)
     }
   }
 }
 </script>
 <style lang="scss">
 @import '~@/styles/index.scss';
-.common01-report {
+.common01-clickrank {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
-  .report-wrap {
+  .clickrank-wrap {
     padding: pxrem(250px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
@@ -55,31 +82,37 @@ export default {
         &:last-of-type {
           margin-bottom: 0;
         }
-        .status {
-          width: pxrem(120px);
-          height: pxrem(50px);
-          line-height: pxrem(50px);
-          border-radius: pxrem(2px);
+        .index {
+          width: pxrem(60px);
+          height: pxrem(60px);
+          background: no-repeat center;
+          background-size: 100%;
+          line-height: pxrem(60px);
           &.one {
-            background-color: #0466FF;
+            background-image: url("./assets/one.png");
           }
           &.two {
-            background-color: #39C78D;
+            background-image: url("./assets/two.png");
           }
           &.three {
-            background-color: #EA4A68;
+            background-image: url("./assets/three.png");
           }
           &.four {
-            background-color: #FF9A02;
+            background-image: url("./assets/four.png");
           }
         }
         .title {
           text-align: left;
-          width: 60%;
-          margin: 0 pxrem(175px) 0 pxrem(37px);
+          width: 70%;
+          margin-left: pxrem(43px);
         }
-        .time {
+        .read {
           margin-left: auto;
+          img {
+            width: pxrem(42px);
+            height: pxrem(30px);
+            margin-right: pxrem(18px);
+          }
         }
       }
     }

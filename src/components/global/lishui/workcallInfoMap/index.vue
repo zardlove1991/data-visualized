@@ -25,7 +25,7 @@
                           <div class="depart">溧水区融媒体中心-{{v.rc_status ? (v.rc_status === 1 ? '离线':'登出') : '在线'}}</div>
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
-                      
+
                       <div class="connect connect-video" @click="callvideo(v)"></div>
                       <!-- @click="callvideo(v)" -->
                     </div>
@@ -473,6 +473,7 @@ export default {
   },
   created () {
     getDataConfig().then(res => {
+      console.log(res)
       this.center = {lng: +res.lng, lat: +res.lat}
     })
   },
@@ -608,7 +609,7 @@ export default {
       // 以下方法添加自定义控件，用来重回原点
       /* eslint-disable */
       // 定义一个控件类，即function
-      function ZoomControl(anchor = BMAP_ANCHOR_BOTTOM_RIGHT, offset = new BMap.Size(10, 10)) { 
+      function ZoomControl(anchor = BMAP_ANCHOR_BOTTOM_RIGHT, offset = new BMap.Size(10, 10)) {
         // 设置默认停靠位置和偏移量
         this.defaultAnchor = anchor
         this.defaultOffset = offset

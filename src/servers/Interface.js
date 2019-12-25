@@ -82,10 +82,17 @@ export const getM2OPlusWorkRank = (count = 8, page = 1, currentViewId) => create
 /* 部门统计 */
 export const getM2OPlusWorkDepartRank = (count = 8, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkDepartRank?count=${count}&page=${page}&view_id=${currentViewId}`)
 
+/* 通用组件01线索汇聚 */
+export const getHotsNewsList = (page = 1, count = 5) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?page=${page}&count=${count}`)
+/* 通用组件01最新稿件 */
+export const getNewArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getNewArticleList`)
+/* 通用组件01发稿量排行 */
+export const getPublishDataRank = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getPublishDataRank`)
+/* 通用组件01发稿量排行 */
+export const getClickArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getClickArticleList`)
+
 // 江宁思想与实践
 export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)
-// 江宁荔枝云
-// export const getLitchiCloud = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getLitchiCloud`)
 // 江宁新华社
 export const getM2OPLUSArticleList = (count = 5, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?source=159664&latest_days=1&count=${count}&page=${page}`)
 // 文明江宁

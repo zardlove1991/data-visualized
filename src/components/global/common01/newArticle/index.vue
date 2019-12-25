@@ -6,38 +6,60 @@
         <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
           <div class="source common01-ft32">{{v.source}}</div>
-          <div class="time common01-ft32">{{v.time}}</div>
+          <div class="time common01-ft32">{{v.create_time.replace('T', ' ').slice(5)}}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { getNewArticleList } from '@/servers/interface'
 export default {
   name: 'newArticle',
   data () {
     return {
-      dataList: [{
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        source: '人民网',
-        time: '10-22 14:26'
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        source: '人民网',
-        time: '10-22 14:26'
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        source: '人民网',
-        time: '10-22 14:26'
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        source: '人民网',
-        time: '10-22 14:26'
-      }, {
-        title: '深度解析蹴鞠在中国历史上的发展：生于战国，盛于唐宋，亡于明清',
-        source: '人民网',
-        time: '10-22 14:26'
-      }]
+      frequency: 15000,
+      count: 0,
+      dataList: []
+    }
+  },
+  created () {
+    this.getNewArticleList()
+  },
+  methods: {
+    getNewArticleList () {
+      if (this.countNum) {
+        this.dataList = []
+        clearInterval(this.countNum)
+        this.count = 0
+      }
+      getNewArticleList().then(res => {
+        if (!res.data.error_code) {
+          this.list = res.data.result
+          this.initList()
+        }
+      })
+    },
+    initList () {
+      this.dataList = this.list.slice(
+        this.count,
+        this.count + 5 > this.list.length ? this.list.length : this.count + 5
+      )
+      this.count += 5
+      this.countNum = setInterval(() => {
+        if (this.count < this.list.length) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = this.list.slice(this.count, this.count + 5)
+            this.count += 5
+          }, 100)
+        } else {
+          this.dataList = []
+          clearInterval(this.countNum)
+          this.count = 0
+          this.getNewArticleList()
+        }
+      }, this.frequency)
     }
   }
 }

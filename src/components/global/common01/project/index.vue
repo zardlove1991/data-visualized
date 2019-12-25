@@ -19,41 +19,47 @@
   </div>
 </template>
 <script>
+import { getWorkCallSubjectList } from '@/servers/interface'
 export default {
-  name: 'report',
+  name: 'project',
   data () {
     return {
-      projectList: [{
-        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
-        project_user_name: '周卉',
-        status: 1,
-        status_show: '进行中',
-        percent: 72
-      }, {
-        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
-        project_user_name: '周卉',
-        status: 2,
-        status_show: '已完成',
-        percent: 100
-      }, {
-        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
-        project_user_name: '周卉',
-        status: 3,
-        status_show: '进行中',
-        percent: 36
-      }, {
-        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
-        project_user_name: '周卉',
-        status: 3,
-        status_show: '进行中',
-        percent: 96
-      }, {
-        title: '世界最“任性”桥，红灯一亮就折叠，“挂”桥上的车咋办',
-        project_user_name: '周卉',
-        status: 4,
-        status_show: '已终止',
-        percent: 44
-      }]
+      page: 1,
+      isPaging: true,
+      frequency: 15000,
+      maxPage: 3,
+      projectList: []
+    }
+  },
+  created () {
+    this.getWorkCallSubjectList()
+    setInterval(() => {
+      this.getWorkCallSubjectList()
+    }, this.frequency)
+  },
+  methods: {
+    getWorkCallSubjectList () {
+      getWorkCallSubjectList(5, this.page, this.currentViewId).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data.length) {
+            this.projectList = []
+            setTimeout(() => {
+              this.projectList = res.data.result.data
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
+            }
+          } else {
+            if (this.page !== 1) {
+              this.page = 1
+              this.getWorkCallSubjectList()
+            }
+          }
+        }
+      })
     }
   }
 }
