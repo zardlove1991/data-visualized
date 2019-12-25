@@ -89,4 +89,5 @@ export const common01componentProduction = getComponent('common01/production') /
 export const common01componentOperateData02 = getComponent('common01/operateData02') // 运营数据
 export const common01componentPersonRank = getComponent('common01/personRank') // 个人排行
 export const common01componentHotSpots = getComponent('common01/hotSpots') // 市县热点
-export const common01componentAdvertisingAlliance = getComponent('common01/advertisingAlliance') // 广告联盟数据分析
+export const common01componentAdvertisingAlliance = getComponent('common01/advertisingAlliance') // 客户分布
+export const common01componentMengDian = getComponent('common01/mengDian') // 蒙点号

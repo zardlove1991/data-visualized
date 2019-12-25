@@ -30,6 +30,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/styles/index.scss';
+@import '../style/index.scss';
 .common-cluegather{
 	.manuscript-page{
 		padding:0 0.7rem;
@@ -75,13 +77,6 @@ export default {
 		  margin-right:0.2rem;
 		}
 		
-	}
-	.common01-border{
-	  width: 100%;
-	  height: 100%;
-	  background: url("../../../../assets/common/common01Border.png") no-repeat center;
-	  background-size: 100% 100%;
-	  position: relative;
 	}
 }
 
