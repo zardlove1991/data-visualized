@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const initRong = (rongInfo) =>{
+export const initRong = (rongInfo = {}) =>{
     (function(dependencies) {
 
         var global = dependencies.global;
@@ -136,8 +136,8 @@ export const initRong = (rongInfo) =>{
         RongIMLib: RongIMLib
     });
     var param = {
-      appKey : rongInfo.appKey || 'tdrvipkstqck5',
-      token : rongInfo.token || 'cez/mQexK+aO55h8l5cP79iVkPEyVSJcjkIWfeYSNHJZrF3aEQpQzyrRZaodzKJkXN9FWxAtPxHrj7Xml3rc7Q=='
+      appKey : rongInfo.appKey || 'cpj2xarlcs9qn',
+      token : rongInfo.token || 'uQsyq0I9k7U8s0Q9ykCHTPqXxfxXe2n83O+dCCVo2f4kksQMgDyrvmMqzwh1t5eGJNkY97iIp70bqyS08MO5cw=='
     }
     IMLib.init(param,()=>{});
 

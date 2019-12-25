@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {getRouterConfig} from '@/utils/model'
+import {getRouterConfig, getDataConfig} from '@/utils/model'
 import componentsView from '../componentsView'
 export default {
   name: 'layoutView',
@@ -20,11 +20,15 @@ export default {
   data () {
     return {
       view: '',
+      extend: '',
       config: ''
     }
   },
   methods: {
     reload () {
+      getDataConfig().then(res => {
+        this.extend = res
+      })
       getRouterConfig().then(data => {
         this.view = data[this.viewId]
         if (this.view.view === 'screen') {
@@ -58,10 +62,25 @@ export default {
       return subItemClass
     },
     defineBg (config) {
+      // 组件自身背景图
       if (config.viewAttr && config.viewAttr.bg) {
         return `
           background: url(${config.viewAttr.bg}) no-repeat center center;
           background-size: 100% 100%
+        `
+      }
+      // 全局背景图
+      if (this.extend.globalImage) {
+        return `
+          background: url(${this.extend.globalImage}) no-repeat center center;
+          background-size: 100% 100%
+        `
+      }
+      // 全局背景色
+      if (this.extend.bg) {
+        return `
+          background-color: ${this.extend.bg};
+          background-image: none;
         `
       }
     }
