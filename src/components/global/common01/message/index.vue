@@ -63,9 +63,12 @@ export default {
           x: 'center',
           y: 'bottom',
           icon: 'rect',
+          itemWidth: 25,
+          itemHeight: 25,
+          itemGap: 20,
           textStyle: {
             color: '#fff',
-            fontSize: 32
+            fontSize: 25
           },
           formatter: (name) => {
             let data = this.pieOptions.series[0].data
@@ -86,7 +89,7 @@ export default {
           {
             name: '发布渠道占比',
             type: 'pie',
-            center: ['50%', '40%'],
+            center: ['50%', '35%'],
             radius: ['40%', '60%'],
             minAngle: 5,
             avoidLabelOverlap: true,
@@ -99,11 +102,12 @@ export default {
                   name: {
                     color: '#fff',
                     fontSize: 25,
+                    padding: [5, 0, 0, 0],
                     align: 'center'
                   },
                   per: {
                     color: '#fff',
-                    fontSize: 30,
+                    fontSize: 37,
                     fontWeight: 'bold',
                     align: 'center'
                   }
