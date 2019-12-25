@@ -50,6 +50,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/styles/index.scss';
+@import '../style/index.scss';
 .common-personRank{
 	.personRank-page{
 		padding:0 0.7rem;
@@ -113,13 +115,6 @@ export default {
 			background:rgba(192,49,251,0.45);
 		}
 	}
-	.common01-border{
-	  width: 100%;
-	  height: 100%;
-	  background: url("../../../../assets/common/common01Border.png") no-repeat center;
-	  background-size: 100% 100%;
-	  position: relative;
-	}
 	.person-info{
 	  padding-left:0.46rem;
 	  align-items:center;
@@ -128,6 +123,7 @@ export default {
 		  height:0.88rem;
 		  border:1px solid #078DFF;
 		  border-radius:50%;
+		  overflow:hidden;
 		}
 		.person-name{
 		  font-size:0.4rem;
