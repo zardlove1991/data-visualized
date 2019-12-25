@@ -67,6 +67,9 @@ export default {
           }
         },
         legend: {
+          itemWidth: 24,
+          itemHeight: 24,
+          itemGap: 40,
           data: [{
             name: '阅读量',
             textStyle: {
@@ -137,12 +140,12 @@ export default {
           type: 'line',
           smooth: true,
           showAllSymbol: true,
-          symbol: 'emptyCircle',
+          symbol: 'circle',
           symbolSize: 20,
           yAxisIndex: 1,
           itemStyle: {
             normal: {
-              color: '#F02FC2',
+              color: '#00F8BD',
               width: 5
             }
           },
