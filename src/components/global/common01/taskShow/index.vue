@@ -91,6 +91,10 @@ export default {
               color: RGBA(217, 67, 110, 1);
             }
           }
+          .title {
+            width: 80%;
+            text-align: left;
+          }
         }
         .project-name {
           color: #05D9FF;

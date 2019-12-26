@@ -194,13 +194,13 @@ export default {
         color: #fff;
         text-align: center;
         display: block;
-        font-size: 0.4rem;
+        font-size: 0.3rem;
         margin-top: -0.05rem;
       }
       .call-reporter-avatar {
-        width: 3rem;
-        height: 3rem;
-        margin: 1.5rem auto 0 auto;
+        width: 2rem;
+        height: 2rem;
+        margin: 1rem auto 0 auto;
         display: block;
         border-radius: 50%;
       }
@@ -227,15 +227,15 @@ export default {
       }
     }
     .rong-max-window {
-      width: 9rem;
-      height: 8rem;
+      width: 5rem;
+      height: 4rem;
       background: rgba(0, 0, 0, 0.4);
-      border: 0.01rem solid #ddd;
-      border-radius: 0.015rem;
+      // border: 1px solid #ddd;
+      border-radius: 0.02rem;
       cursor: pointer;
       position: absolute;
       overflow: hidden;
-      top: 0.5rem;
+      top: 0.9rem;
       right: 0.25rem;
     }
     .rong-max-window {
@@ -290,18 +290,18 @@ export default {
         background: rgba(0, 0, 0, 0.5);
         border-radius: 0.125rem;
         text-align: center;
-        font-size: 0.4rem;
+        font-size: 0.3rem;
         color: #00fdfe;
         margin: 0 auto;
         margin-bottom: 0.25rem;
       }
       .hug-btn {
         display: block;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1rem;
+        height: 1rem;
         background: url(./assets/icon_videoff.png) no-repeat
           center center;
-        background-size: 1.5rem 1.5rem;
+        background-size: 1rem 1rem;
         cursor: pointer;
         margin: 0 auto;
       }
