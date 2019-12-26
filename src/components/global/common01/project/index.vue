@@ -3,9 +3,9 @@
     <div class="project-wrap common01-border">
       <div class="common01-title">选题展示</div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="name common01-ft32">{{v.project_user_name}}</div>
+          <div class="name overhidden common01-ft32">{{v.project_user_name}}</div>
           <div class="project-status common01-ft32" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{v.status_show}}</div>
           <div class="project-progress common01-ft32 sys-flex sys-flex-center overhidden">
             <div class="progress-total">
@@ -83,6 +83,10 @@ export default {
           text-align: left;
           width: 55%;
         }
+        .name {
+          width: 10%;
+          margin-right: pxrem(80px);
+        }
         .project-status {
           &.on-progress {
             color: #0272ff;
@@ -95,6 +99,7 @@ export default {
           }
         }
         .project-progress {
+          margin-left: auto;
           .progress-total {
             width: pxrem(220px);
             height: pxrem(16px);
@@ -124,6 +129,7 @@ export default {
           }
           .percent {
             margin-left: pxrem(20px);
+            width: pxrem(120px);
             &.on-progress {
               color: #0272ff;
             }

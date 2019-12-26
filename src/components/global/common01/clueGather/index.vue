@@ -16,7 +16,8 @@
   </div>
 </template>
 <script>
-import { getHotsNewsList } from '@/servers/interface'
+// import { getHotsNewsList } from '@/servers/interface'
+import { getCluesTogether } from '@/servers/interface'
 export default {
   name: 'clueGather',
   data () {
@@ -29,14 +30,14 @@ export default {
     }
   },
   created () {
-    this.getHotsNewsList()
+    this.getCluesTogether()
     setInterval(() => {
-      this.getHotsNewsList()
+      this.getCluesTogether()
     }, this.frequency)
   },
   methods: {
-    getHotsNewsList () {
-      getHotsNewsList(this.page, 5).then(res => {
+    getCluesTogether () {
+      getCluesTogether('website', 5, this.page).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -52,7 +53,7 @@ export default {
           } else {
             if (this.page !== 1) {
               this.page = 1
-              this.getHotsNewsList()
+              this.getCluesTogether()
             }
           }
         }
@@ -77,7 +78,7 @@ export default {
           margin-bottom: 0;
         }
         .title {
-          width: 70%;
+          width: 60%;
           text-align: left;
         }
         .read {

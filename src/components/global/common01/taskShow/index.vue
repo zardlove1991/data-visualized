@@ -71,11 +71,11 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .taskshow-wrap {
-    padding: pxrem(250px) pxrem(96px) pxrem(80px) pxrem(78px);
+    padding: pxrem(200px) pxrem(96px) pxrem(80px) pxrem(78px);
     color: #fff;
     .wrap-content {
       .item-list {
-        margin-bottom: pxrem(72px);
+        margin-bottom: pxrem(70px);
         &:last-of-type {
           margin-bottom: 0;
         }
