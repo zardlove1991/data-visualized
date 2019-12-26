@@ -1,6 +1,6 @@
 <template>
   <div class="layout-item flex">
-    <component class="flex-one" :is="style + 'component-' + config.component" :data="config"></component>
+    <component class="flex-one" :is="style + 'component-' + config.component" :data="config" :screenConfig="screenConfig"></component>
   </div>
 </template>
 
@@ -11,7 +11,8 @@ import { getPlatId } from '@/utils/appinfo'
 export default {
   name: 'componentsView',
   props: {
-    config: Object
+    config: Object,
+    screenConfig: Object
   },
   data () {
     return {

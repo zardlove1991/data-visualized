@@ -45,24 +45,31 @@ import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 export default {
   name: 'contentProduction',
+  props: {
+    screenConfig: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
+      multiple: 1,
       barOptions: {
         legend: {
-          itemWidth: 60,
-          itemHeight: 30,
-          itemGap: 50,
+          itemWidth: 30 * this.multiple,
+          itemHeight: 30 * this.multiple,
+          itemGap: 50 * this.multiple,
           data: [{
             name: '已通过',
             textStyle: {
               color: '#fff',
-              fontSize: 30
+              fontSize: 30 * this.multiple
             }
           }, {
             name: '已过审',
             textStyle: {
               color: '#fff',
-              fontSize: 30
+              fontSize: 30 * this.multiple
             }
           }]
         },
@@ -72,9 +79,9 @@ export default {
           axisLabel: {
             interval: 0,
             color: '#fff',
-            fontSize: 30,
+            fontSize: 30 * this.multiple,
             fontWeight: 'bold',
-            margin: 15
+            margin: 15 * this.multiple
           },
           axisLine: {
             lineStyle: {
@@ -108,7 +115,7 @@ export default {
           type: 'bar',
           name: '已通过',
           stack: 'sum',
-          barWidth: 60,
+          barWidth: 60 * this.multiple,
           itemStyle: {
             normal: {
               color: function (params) {
@@ -122,7 +129,7 @@ export default {
           type: 'bar',
           name: '已过审',
           stack: 'sum',
-          barWidth: 60,
+          barWidth: 60 * this.multiple,
           itemStyle: {
             normal: {
               color: function (params) {
@@ -163,6 +170,9 @@ export default {
   },
   mounted () {
     this.setFontsize('common01-contentproduction')
+    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
+      this.multiple = +this.screenConfig.multiple
+    }
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.dateList.length) {

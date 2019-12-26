@@ -42,8 +42,15 @@ import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/pie'
 export default {
+  props: {
+    screenConfig: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
+      multiple: 1,
       typeTotal: 0,
       pieOptions: {
         color: ['#0066FF', '#E88559', '#44CF98'],
@@ -51,7 +58,7 @@ export default {
           text: '',
           textStyle: {
             color: '#fff',
-            fontSize: 12
+            fontSize: 12 * this.multiple
           }
         },
         tooltip: {
@@ -101,13 +108,13 @@ export default {
                 rich: {
                   name: {
                     color: '#fff',
-                    fontSize: 25,
-                    padding: [5, 0, 0, 0],
+                    fontSize: 25 * this.multiple,
+                    padding: [5 * this.multiple, 0, 0, 0],
                     align: 'center'
                   },
                   per: {
                     color: '#fff',
-                    fontSize: 37,
+                    fontSize: 37 * this.multiple,
                     fontWeight: 'bold',
                     align: 'center'
                   }
@@ -116,7 +123,7 @@ export default {
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: '30',
+                  fontSize: 30 * this.multiple,
                   fontWeight: 'bold'
                 }
               }
@@ -124,8 +131,8 @@ export default {
             labelLine: {
               normal: {
                 show: false,
-                length: 10,
-                length2: 10
+                length: 10 * this.multiple,
+                length2: 10 * this.multiple
               }
             },
             data: [{
@@ -217,6 +224,9 @@ export default {
   },
   mounted () {
     this.setFontsize('common01-message')
+    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
+      this.multiple = +this.screenConfig.multiple
+    }
     this.initTypes()
   },
   methods: {
@@ -315,8 +325,8 @@ export default {
         position: absolute;
         width: 100px;
         height: 100px;
-        top: calc(50% - 40px);
-        left: calc(50% - 50px);
+        top: 33%;
+        left: 31%;
         text-align: center;
         color: #fff;
         .label-value{

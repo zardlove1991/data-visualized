@@ -3,7 +3,7 @@
     <div :class="layoutClass()" v-if="view">
       <div :class="subItemClass(id, viewId)" class="overflow" v-for="id in view.subviews" :key="id" >
         <layout-view v-if="config[id].view === 'layout'" :viewId="id"></layout-view>
-        <components-view :style="defineBg(config[id])" class="bg" v-else :config="config[id]"></components-view>
+        <components-view :style="defineBg(config[id])" class="bg" v-else :config="config[id]" :screenConfig="screenConfig"></components-view>
       </div>
     </div>
   </div>
@@ -21,7 +21,8 @@ export default {
     return {
       view: '',
       extend: '',
-      config: ''
+      config: '', // 当前组件信息
+      screenConfig: '' // 当前页面信息：缩放倍数
     }
   },
   methods: {
@@ -40,6 +41,9 @@ export default {
           document.documentElement.style.fontSize = (document.documentElement.clientWidth / 1920) * 100 * multiple * (this.view.multiple || 1) + 'px'
         }
         this.config = data
+        if (this.$route.meta && this.$route.meta.viewId) {
+          this.screenConfig = data[this.$route.meta.viewId]
+        }
       })
     },
     layoutClass () {

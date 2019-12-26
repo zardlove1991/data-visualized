@@ -35,8 +35,15 @@ import 'echarts/lib/component/legend'
 
 export default {
   name: 'communicationEffect',
+  props: {
+    screenConfig: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
+      multiple: 1,
       readNum: 0,
       commentNum: 0,
       frequency: 25000,
@@ -47,7 +54,7 @@ export default {
           y: 0,
           textStyle: {
             color: '#B4B4B4',
-            fontSize: 16,
+            fontSize: 16 * this.multiple,
             fontWeight: 'normal'
           }
         },
@@ -67,22 +74,22 @@ export default {
           }
         },
         legend: {
-          itemWidth: 24,
-          itemHeight: 24,
-          itemGap: 40,
+          itemWidth: 24 * this.multiple,
+          itemHeight: 24 * this.multiple,
+          itemGap: 40 * this.multiple,
           data: [{
             name: '阅读量',
             textStyle: {
               color: '#fff',
-              fontSize: 30,
-              width: 100,
-              height: 100
+              fontSize: 30 * this.multiple,
+              width: 100 * this.multiple,
+              height: 100 * this.multiple
             }
           }, {
             name: '评论量',
             textStyle: {
               color: '#fff',
-              fontSize: 30
+              fontSize: 30 * this.multiple
             }
           }],
           top: '7%'
@@ -93,9 +100,9 @@ export default {
           axisLabel: {
             interval: 0,
             color: '#fff',
-            fontSize: 25,
+            fontSize: 25 * this.multiple,
             fontWeight: 'bold',
-            margin: 20
+            margin: 20 * this.multiple
           },
           axisLine: {
             lineStyle: {
@@ -116,7 +123,7 @@ export default {
             axisLabel: {
               formatter: '{value}',
               color: '#fff',
-              fontSize: 25,
+              fontSize: 25 * this.multiple,
               fontWeight: 'bold'
             }
           },
@@ -130,7 +137,7 @@ export default {
             axisLabel: {
               formatter: '{value}',
               color: '#fff',
-              fontSize: 25,
+              fontSize: 25 * this.multiple,
               fontWeight: 'bold'
             }
           }
@@ -141,7 +148,7 @@ export default {
           smooth: true,
           showAllSymbol: true,
           symbol: 'circle',
-          symbolSize: 20,
+          symbolSize: 20 * this.multiple,
           yAxisIndex: 1,
           itemStyle: {
             normal: {
@@ -150,13 +157,13 @@ export default {
             }
           },
           lineStyle: {
-            width: 5
+            width: 5 * this.multiple
           },
           data: []
         }, {
           name: '阅读量',
           type: 'bar',
-          barWidth: 45,
+          barWidth: 45 * this.multiple,
           itemStyle: {
             normal: {
               barBorderRadius: 5,
@@ -181,6 +188,9 @@ export default {
   },
   mounted () {
     this.setFontsize('common01-effect')
+    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
+      this.multiple = +this.screenConfig.multiple
+    }
     this.getDataList()
   },
   methods: {

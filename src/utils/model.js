@@ -66,6 +66,9 @@ export const initRouter = (router) => {
         defineRouters.push({
           path: `/${item.router}`,
           name: item.router,
+          meta: {
+            viewId: key
+          },
           component: {
             template: `<layout-view viewId='${key}'></layout-view>`
           }
