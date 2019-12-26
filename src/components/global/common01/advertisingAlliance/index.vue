@@ -11,8 +11,15 @@ import echarts from 'echarts'
 import 'echarts/map/js/china.js'
 export default {
   name: 'report',
+  props: {
+    screenConfig: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
+      multiple: 1,
       option: {
         geo: {
           map: 'china',
@@ -35,7 +42,7 @@ export default {
             type: 'effectScatter',
             coordinateSystem: 'geo',
             data: [],
-            symbolSize: '14',
+            symbolSize: 14 * this.multiple,
             showEffectOn: 'render',
             rippleEffect: {
               brushType: 'stroke'
@@ -51,7 +58,7 @@ export default {
             itemStyle: {
               normal: {
                 color: '#f4e925',
-                shadowBlur: 10,
+                shadowBlur: 10 * this.multiple,
                 shadowColor: '#333'
               }
             },
@@ -89,6 +96,9 @@ export default {
   mounted () {
     this.setFontsize('common01-advertising')
     this.initMap()
+    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
+      this.multiple = +this.screenConfig.multiple
+    }
   },
   methods: {
     initMap () {
