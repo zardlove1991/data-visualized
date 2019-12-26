@@ -17,7 +17,7 @@
                 <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
               </div>
               <div class="member-name">
-                <div class="name common01-ft58">{{v.member_name}}</div>
+                <div class="name common01-ft58 overhidden">{{v.member_name}}</div>
                 <div class="role common01-ft38 overhidden">{{v.org_title}}-{{v.role_title}}</div>
               </div>
               <div class="connect connect-audio" @click="callaudio(v)"></div>
@@ -49,7 +49,1429 @@ export default {
       callShow: false,
       callType: 'video',
       coordinateList: [],
-      unlinecoordinateList: []
+      unlinecoordinateList: [],
+      mapStyle: {
+        styleJson: [
+          {
+            featureType: 'land',
+            elementType: 'geometry',
+            stylers: {
+              color: '#16254aff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#0d5ec9ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'building',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#0b193bff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'building',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000722ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'water',
+            elementType: 'geometry',
+            stylers: {
+              color: '#092f70ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'village',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'town',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'district',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'country',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#65a5ecff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'city',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#65a5ecff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'continent',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#65a5ecff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'poilabel',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'poilabel',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'scenicspotslabel',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'scenicspotslabel',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#092f70ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'transportationlabel',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#092f70ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'transportationlabel',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'airportlabel',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#092f70ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'airportlabel',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000006ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: {
+              weight: 3
+            }
+          },
+          {
+            featureType: 'green',
+            elementType: 'geometry',
+            stylers: {
+              color: '#0a2e6dff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'scenicspots',
+            elementType: 'geometry',
+            stylers: {
+              color: '#16254aff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'scenicspots',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3c70b6ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'scenicspots',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              weight: 1,
+              color: '#092157ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'continent',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'country',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'city',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'city',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'scenicspotslabel',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'airportlabel',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'transportationlabel',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'railway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'subway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'highwaysign',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'nationalwaysign',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'nationalwaysign',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'provincialwaysign',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'provincialwaysign',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'tertiarywaysign',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'tertiarywaysign',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'subwaylabel',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'subwaylabel',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#092f70ff',
+              visibility: 'on',
+              weight: 90
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'shopping',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'scenicspots',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'scenicspotslabel',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'manmade',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'manmade',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'highwaysign',
+            elementType: 'labels.icon',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#0a2e6d00',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'road',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'road',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'road',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'road',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels.text',
+            stylers: {
+              fontsize: 24
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#092963ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#093d8bff'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#092f70ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'geometry',
+            stylers: {
+              weight: 3
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#1c4f7eff'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#566b92ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'geometry',
+            stylers: {
+              weight: 3
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'arterial',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'tertiaryway',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'fourlevelway',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'local',
+            elementType: 'geometry.fill',
+            stylers: {
+              color: '#17192eff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000006ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000006ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'arterial',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000006ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'tertiaryway',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000006ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'fourlevelway',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000006ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'local',
+            elementType: 'geometry.stroke',
+            stylers: {
+              color: '#000006ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'local',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3460a3ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'local',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'fourlevelway',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#566b92ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'tertiaryway',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#566b92ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'arterial',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#566b92ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#566b92ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#566b92ff',
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'arterial',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'tertiaryway',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'fourlevelway',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff',
+              visibility: 'on',
+              weight: 1
+            }
+          },
+          {
+            featureType: 'fourlevelway',
+            elementType: 'geometry',
+            stylers: {
+              weight: 1
+            }
+          },
+          {
+            featureType: 'tertiaryway',
+            elementType: 'geometry',
+            stylers: {
+              weight: 1
+            }
+          },
+          {
+            featureType: 'local',
+            elementType: 'geometry',
+            stylers: {
+              weight: 1
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'geometry',
+            stylers: {
+              weight: 3
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'geometry',
+            stylers: {
+              weight: 3
+            }
+          },
+          {
+            featureType: 'arterial',
+            elementType: 'geometry',
+            stylers: {
+              weight: 3
+            }
+          },
+          {
+            featureType: 'highway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'highway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'highway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'highway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'highway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'nationalway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '8,10',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '8,10',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '8,10',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '8,10',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '8,10',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'provincialway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '8,10',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '6'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '7'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '8'
+            }
+          },
+          {
+            featureType: 'cityhighway',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '6,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'arterial',
+            stylers: {
+              curZoomRegionId: '0',
+              curZoomRegion: '9,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'arterial',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '9,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'arterial',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'off',
+              curZoomRegionId: '0',
+              curZoomRegion: '9,9',
+              level: '9'
+            }
+          },
+          {
+            featureType: 'education',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3c70b6ff'
+            }
+          },
+          {
+            featureType: 'medical',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3c70b6ff'
+            }
+          },
+          {
+            featureType: 'transportation',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3c70b6ff'
+            }
+          },
+          {
+            featureType: 'district',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3a71baff'
+            }
+          },
+          {
+            featureType: 'village',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3a71baff'
+            }
+          },
+          {
+            featureType: 'town',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#3a71baff'
+            }
+          },
+          {
+            featureType: 'district',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff'
+            }
+          },
+          {
+            featureType: 'town',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff'
+            }
+          },
+          {
+            featureType: 'village',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#092157ff'
+            }
+          },
+          {
+            featureType: 'medical',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'transportation',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'estate',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'transportation',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#1a274bff'
+            }
+          },
+          {
+            featureType: 'entertainment',
+            elementType: 'geometry',
+            stylers: {
+              color: '#0a2e6dff',
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'medical',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#1a274bff'
+            }
+          },
+          {
+            featureType: 'education',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'education',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#1a274bff'
+            }
+          },
+          {
+            featureType: 'subwaystation',
+            elementType: 'geometry',
+            stylers: {
+              visibility: 'off'
+            }
+          },
+          {
+            featureType: 'transportationlabel',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'transportation',
+            elementType: 'labels',
+            stylers: {
+              visibility: 'on'
+            }
+          },
+          {
+            featureType: 'manmade',
+            elementType: 'labels.text.fill',
+            stylers: {
+              color: '#0d5ec9ff'
+            }
+          },
+          {
+            featureType: 'manmade',
+            elementType: 'labels.text.stroke',
+            stylers: {
+              color: '#0a2e6dff'
+            }
+          }
+        ]
+      }
     }
   },
   components: {
@@ -57,6 +1479,7 @@ export default {
   },
   created () {
     getDataConfig().then(res => {
+      console.log(res)
       this.center = { lng: +res.lng, lat: +res.lat }
     })
   },
@@ -75,6 +1498,7 @@ export default {
       var BMap = window.BMap
       let map = this.map = new BMap.Map('my-map')
       map.addControl(new BMap.NavigationControl())
+      map.setMapStyle(this.mapStyle)
       // 绘制带图标注
       var _this = this
       SquareOverlay.prototype = new BMap.Overlay()
@@ -94,38 +1518,38 @@ export default {
         img.style.position = 'absolute'
         img.style['border-radius'] = '50%'
         img.style.overflow = 'hidden'
-        img.style.width = '1.3rem'
-        img.style.height = '1.3rem'
+        img.style.width = '0.65rem'
+        img.style.height = '0.65rem'
         img.style.top = '0'
         img.style.left = '0'
         img.style.zIndex = 10
         img2.style.position = 'absolute'
         img2.style['border-radius'] = '50%'
         img2.style.overflow = 'hidden'
-        img2.style.width = '0.6rem'
-        img2.style.height = '0.6rem'
+        img2.style.width = '0.3rem'
+        img2.style.height = '0.3rem'
         img2.style.bottom = '0'
-        img2.style.left = '1.3rem'
+        img2.style.left = '0.65rem'
         img2.style.background = 'url(' + require('./assets/landmark.png') + ') no-repeat center center'
         img2.style.backgroundSize = '100%'
         span.style.position = 'absolute'
-        span.style.borderRadius = '0.43rem'
+        span.style.borderRadius = '0.215rem'
         span.style.overflow = 'hidden'
-        span.style.width = '2.37rem'
-        span.style.height = '0.93rem'
-        span.style.top = '0.2rem'
-        span.style.left = '0.6rem'
+        span.style.width = '1.185rem'
+        span.style.height = '0.465rem'
+        span.style.top = '0.1rem'
+        span.style.left = '0.3rem'
         span.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
         span.style.color = 'rgb(255, 255, 255)'
         span.zIndex = 9
         span2.style.position = 'absolute'
-        span2.style.top = '0.15rem'
+        span2.style.top = '0.075rem'
         span2.style.left = '40%'
-        span2.style.fontSize = '0.4rem'
+        span2.style.fontSize = '0.2rem'
         span2.innerText = item.member_name
         div.style.position = 'absolute'
-        div.style.width = '3rem'
-        div.style.height = '1.85rem'
+        div.style.width = '1.5rem'
+        div.style.height = '0.925rem'
         map.getPanes().markerPane.appendChild(div)
         this._div = div
         div.onclick = function () {
@@ -164,7 +1588,7 @@ export default {
         }
       })
       // 绘制带图标注结束
-      map.centerAndZoom(new BMap.Point(this.center.lng, this.center.lat), 17)
+      map.centerAndZoom(new BMap.Point(this.center.lng, this.center.lat), 15)
       map.addControl(new BMap.NavigationControl())
       function SquareOverlay (center, length, color, src, mid) {
         this._src = src
@@ -198,11 +1622,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/index.scss';
+@import "~@/styles/index.scss";
 .common01-workmap {
   width: 100%;
   height: 100%;
-  padding: pxrem(40px);
+  padding: pxrem(20px);
   .reporter-map-wrap {
     width: 100%;
     height: 100%;
@@ -210,37 +1634,32 @@ export default {
     background: url("./assets/mapBorder.png") no-repeat center;
     background-size: 100% 100%;
     color: #fff;
-    .no-data {
-      font-size: pxrem(70px);
-      color: #ebebeb;
-      padding: 2em;
-    }
     .reporter-map {
       width: calc(100% - 10px);
       height: calc(100% - 10px);
     }
     .reporter-list-wrap {
-      width: pxrem(1010px);
+      width: pxrem(505px);
       position: absolute;
-      top: pxrem(70px);
-      right: pxrem(64px);
+      top: pxrem(35px);
+      right: pxrem(32px);
       .reporter-title {
         width: 100%;
-        height: pxrem(160px);
-        line-height: pxrem(160px);
+        height: pxrem(80px);
+        line-height: pxrem(80px);
         background: #174EC1;
       }
       .reporter-body {
         width: 100%;
-        height: pxrem(1770px);
+        height: pxrem(885px);
         background: #0B2152;
         overflow-y: scroll;
         overflow-x: hidden;
         .reporter-list {
           .avatar-box {
-            width: pxrem(160px);
-            height: pxrem(160px);
-            border-radius: pxrem(10px);
+            width: pxrem(80px);
+            height: pxrem(80px);
+            border-radius: pxrem(5px);
             img {
               width: 100%;
               height: 100%;
@@ -250,31 +1669,31 @@ export default {
           }
           .member-name {
             width: 38%;
-            margin: 0 pxrem(80px) 0 pxrem(42px);
+            margin: 0 pxrem(40px) 0 pxrem(21px);
             .name {
-              margin-bottom: pxrem(6px);
+              margin-bottom: pxrem(3px);
             }
           }
           .connect {
-            width: pxrem(110px);
-            height: pxrem(110px);
+            width: pxrem(55px);
+            height: pxrem(55px);
             background: no-repeat center right;
-            background-size: pxrem(110px) pxrem(110px);
+            background-size: pxrem(55px) pxrem(55px);
             cursor: pointer;
             &.connect-audio {
               background-image: url("./assets/audio.png");
-              margin-right: pxrem(40px);
+              margin-right: pxrem(20px);
             }
             &.connect-video {
               background-image: url("./assets/video.png");
             }
           }
           .list-body {
-            padding: pxrem(55px) pxrem(60px) pxrem(63px);
+            padding: pxrem(27.5px) pxrem(30px) pxrem(31.5px);
           }
           .border-line{
             width: 100%;
-            height: pxrem(10px);
+            height: pxrem(5px);
             background: url('./assets/line.png') no-repeat bottom;
             background-size: 100%;
           }
@@ -282,21 +1701,21 @@ export default {
       }
       .no-data{
         width: 100%;
-        height: pxrem(1770px);
+        height: pxrem(885px);
         background: #0B2152;
-        font-size: pxrem(70px);
+        font-size: pxrem(35px);
         color: #ebebeb;
       }
     }
   }
 }
 .common01-ft70 {
-  font-size: pxrem(70px);
+  font-size: pxrem(35px);
 }
 .common01-ft58 {
-  font-size: pxrem(58px);
+  font-size: pxrem(29px);
 }
 .common01-ft38 {
-  font-size: pxrem(38px);
+  font-size: pxrem(19px);
 }
 </style>

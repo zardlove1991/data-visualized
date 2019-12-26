@@ -169,7 +169,7 @@ export default {
 .call-wrap {
   width: 100%;
   height: 100%;
-  border: pxrem(2px) solid rgba(96, 186, 236, 0.2);
+  border: pxrem(1px) solid rgba(96, 186, 236, 0.2);
   background: rgba(31, 57, 103, 0.2);
   position: absolute;
   top: 0;
@@ -182,7 +182,7 @@ export default {
     background: #000;
     position: relative;
     overflow: hidden;
-    padding: 0.1rem;
+    padding: 0.05rem;
     .call-user {
       position: absolute;
       width: 100%;
@@ -194,20 +194,20 @@ export default {
         color: #fff;
         text-align: center;
         display: block;
-        font-size: 0.8rem;
-        margin-top: -0.1rem;
+        font-size: 0.4rem;
+        margin-top: -0.05rem;
       }
       .call-reporter-avatar {
-        width: 6rem;
-        height: 6rem;
-        margin: 3rem auto 0 auto;
+        width: 3rem;
+        height: 3rem;
+        margin: 1.5rem auto 0 auto;
         display: block;
         border-radius: 50%;
       }
       .call-reporter-line {
-        width: 5.6rem;
-        height: 1.25rem;
-        margin: 0.5rem auto;
+        width: 2.8rem;
+        height: 0.625rem;
+        margin: 0.25rem auto;
         display: block;
       }
     }
@@ -222,21 +222,21 @@ export default {
         display: block;
         width: 100%;
         text-align: center;
-        font-size: 0.5rem;
+        font-size: 0.25rem;
         color: #ddd;
       }
     }
     .rong-max-window {
-      width: 18rem;
-      height: 16rem;
+      width: 9rem;
+      height: 8rem;
       background: rgba(0, 0, 0, 0.4);
       border: 0.01rem solid #ddd;
-      border-radius: 0.03rem;
+      border-radius: 0.015rem;
       cursor: pointer;
       position: absolute;
       overflow: hidden;
-      top: 1rem;
-      right: 0.5rem;
+      top: 0.5rem;
+      right: 0.25rem;
     }
     .rong-max-window {
       video {
@@ -269,39 +269,39 @@ export default {
           position: absolute;
           top: 0;
           right: 0;
-          width: 1rem !important;
-          height: 1rem !important;
+          width: 0.5rem !important;
+          height: 0.5rem !important;
           z-index: 99999 !important;
         }
       }
     }
     .video-info {
-      width: 3rem;
-      height: 3rem;
+      width: 1.5rem;
+      height: 1.5rem;
       position: absolute;
-      bottom: 3rem;
-      left: calc(50% - 1.5rem);
+      bottom: 1.5rem;
+      left: calc(50% - 0.75rem);
       z-index: 999999;
       .video-time {
         display: block;
-        width: 2rem;
-        height: 1rem;
-        line-height: 1rem;
+        width: 1rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
         background: rgba(0, 0, 0, 0.5);
-        border-radius: 0.25rem;
+        border-radius: 0.125rem;
         text-align: center;
-        font-size: 0.8rem;
+        font-size: 0.4rem;
         color: #00fdfe;
         margin: 0 auto;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
       }
       .hug-btn {
         display: block;
-        width: 3rem;
-        height: 3rem;
+        width: 1.5rem;
+        height: 1.5rem;
         background: url(./assets/icon_videoff.png) no-repeat
           center center;
-        background-size: 3rem 3rem;
+        background-size: 1.5rem 1.5rem;
         cursor: pointer;
         margin: 0 auto;
       }
@@ -310,30 +310,30 @@ export default {
   .main-wrap {
     .call-reporter-avatar {
       display: block;
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 1.25rem;
+      height: 1.25rem;
       margin: 0 auto;
       border-radius: 50%;
     }
     .call-reporter-line {
       display: block;
-      width: 5.6rem;
-      height: 2.49rem;
+      width: 2.8rem;
+      height: 1.25rem;
       margin: 0 auto;
     }
     .call-status {
       display: block;
       color: #fff34a;
-      font-size: 0.8rem;
-      margin-top: -0.8rem;
-      margin-bottom: 0.2rem;
+      font-size: 0.4rem;
+      margin-top: -0.4rem;
+      margin-bottom: 0.1rem;
       text-align: center;
     }
     .call-btn {
       display: block;
-      width: 1rem;
-      height: 1rem;
-      margin: 0 0.2rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      margin: 0 0.1rem;
       cursor: pointer;
       &:hover {
         opacity: 0.8;
@@ -341,21 +341,21 @@ export default {
     }
   }
   .call-info-wrap {
-    width: 3.08rem;
-    height: 3.78rem;
-    background-size: 5.08rem 5.78rem;
-    margin-right: 0.8rem;
-    padding: 1rem;
+    width: 1.54rem;
+    height: 1.89rem;
+    background-size: 2.54rem 2.89rem;
+    margin-right: 0.4rem;
+    padding: 0.5rem;
     &.invite-info-wrap {
       span {
         display: block;
         text-align: center;
-        font-size: 0.3rem;
+        font-size: 0.15rem;
         color: #fff;
-        margin-top: 0.3rem;
+        margin-top: 0.15rem;
         &.invite-name {
-          font-size: 0.5rem;
-          margin-top: 0.5rem;
+          font-size: 0.25rem;
+          margin-top: 0.25rem;
           font-weight: bold;
           color: #02ffea;
         }
@@ -364,32 +364,32 @@ export default {
     .reporter-name {
       display: block;
       width: 100%;
-      height: 0.6rem;
-      line-height: 0.6rem;
-      text-indent: 1rem;
-      font-size: 0.36rem !important;
+      height: 0.3rem;
+      line-height: 0.3rem;
+      text-indent: 0.5rem;
+      font-size: 0.18rem !important;
       text-align: left;
       color: #00ffea;
-      background-size: 0.82rem 0.28rem;
+      background-size: 0.41rem 0.14rem;
     }
     .info-list {
       display: block;
       text-align: left;
-      font-size: 0.24rem;
+      font-size: 0.12rem;
       color: #00ffea;
-      margin: 0.2rem 0;
+      margin: 0.1rem 0;
       &.introduce {
-        height: 0.28rem;
+        height: 0.14rem;
         background-position: center left;
-        background-size: 1rem;
+        background-size: 0.5rem;
       }
     }
   }
   .close-btn {
     display: block;
-    width: 0.97rem;
-    height: 0.28rem;
-    background-size: 0.97rem 0.28rem;
+    width: 0.485rem;
+    height: 0.14rem;
+    background-size: 0.485rem 0.14rem;
     cursor: pointer;
   }
 }
