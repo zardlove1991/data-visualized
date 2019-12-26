@@ -8,12 +8,12 @@
             <img src="./assets/app.png" />
           </div>
           <div class="one-left mr100">
-            <div class="mbt12">当月新增稿件数</div>
-            <numCount :num-info="manuscript_total" :fontcolor="'yellow'"></numCount>
+            <div class="mbt12 common01-ft40">今日稿件发布数</div>
+            <numCount :num-info="today_publish_num" :fontcolor="'yellow'"></numCount>
           </div>
           <div class="one-right">
-            <div class="mbt12">今日新增稿件数</div>
-            <numCount :num-info="manuscript_today" :fontcolor="'yellow'"></numCount>
+            <div class="mbt12 common01-ft40">今日新增用户数</div>
+            <numCount :num-info="new_user" :fontcolor="'yellow'"></numCount>
           </div>
         </div>
         <div class="operate-line mtt22"></div>
@@ -22,12 +22,12 @@
             <img src="./assets/web.png" />
           </div>
           <div class="two-left mr100">
-            <div class="mbt12">累计网站访问量</div>
-            <numCount :num-info="web_total" :fontcolor="'red'"></numCount>
+            <div class="mbt12 common01-ft40">累计网站访问量</div>
+            <numCount :num-info="click_count" :fontcolor="'red'"></numCount>
           </div>
           <div class="two-right">
-            <div class="mbt12">当日网站访问量</div>
-            <numCount :num-info="web_regist" :fontcolor="'red'"></numCount>
+            <div class="mbt12 common01-ft40">当日网站访问量</div>
+            <numCount :num-info="daily_click_count" :fontcolor="'red'"></numCount>
           </div>
         </div>
         <div class="operate-line mtt22"></div>
@@ -36,12 +36,12 @@
             <img src="./assets/wechat.png" />
           </div>
           <div class="three-left mr100">
-            <div class="mbt12">累计微信粉丝总数</div>
-            <numCount :num-info="wechat_total" :fontcolor="'green'"></numCount>
+            <div class="mbt12 common01-ft40">累计微信粉丝总数</div>
+            <numCount :num-info="cumulate_user" :fontcolor="'green'"></numCount>
           </div>
           <div class="three-right">
-            <div class="mbt12">昨日阅读总数</div>
-            <numCount :num-info="wechat_regist" :fontcolor="'green'"></numCount>
+            <div class="mbt12 common01-ft40">当日阅读总数</div>
+            <numCount :num-info="int_page_read_count" :fontcolor="'green'"></numCount>
           </div>
         </div>
       </div>
@@ -49,17 +49,18 @@
   </div>
 </template>
 <script>
+import { getOperationalData01 } from '@/servers/interface'
 import numCount from './numCount'
 export default {
   name: 'operateDate',
   data () {
     return {
-      manuscript_total: [0, 0, 0, 0, 0, 0, 0, 0],
-      manuscript_today: [0, 0, 0, 0, 0, 0, 0, 0],
-      web_total: [0, 0, 0, 0, 0, 0, 0, 0],
-      web_regist: [0, 0, 0, 0, 0, 0, 0, 0],
-      wechat_total: [0, 0, 0, 0, 0, 0, 0, 0],
-      wechat_regist: [0, 0, 0, 0, 0, 0, 0, 0],
+      today_publish_num: [0, 0, 0, 0, 0, 0, 0, 0],
+      new_user: [0, 0, 0, 0, 0, 0, 0, 0],
+      click_count: [0, 0, 0, 0, 0, 0, 0, 0],
+      daily_click_count: [0, 0, 0, 0, 0, 0, 0, 0],
+      cumulate_user: [0, 0, 0, 0, 0, 0, 0, 0],
+      int_page_read_count: [0, 0, 0, 0, 0, 0, 0, 0],
       frequency: 35000
     }
   },
@@ -77,44 +78,20 @@ export default {
   },
   methods: {
     getDataList () {
-      this.getArticleData()
-      this.getWebsiteData()
-      this.getWechatData()
-    },
-    getArticleData () {
-      // this.$api.getArticleData().then(res => {
-      //   if (res && res.data && res.data.result) {
-      //     setTimeout(() => {
-      //       this.manuscript_total = this.preFixInterge(res.data.result.article_month_amount, 8)
-      //       this.manuscript_today = this.preFixInterge(res.data.result.article_today_amount, 8)
-      //     }, 10);
-      //   }
-      // })
-      setTimeout(() => {
-        this.manuscript_total = this.preFixInterge('572', 8)
-        this.manuscript_today = this.preFixInterge('22', 8)
-      }, 100)
-    },
-    getWebsiteData () {
-      setTimeout(() => {
-        this.web_total = this.preFixInterge('8652', 8)
-        this.web_regist = this.preFixInterge('651', 8)
-      }, 100)
-    },
-    getWechatData () {
-      // this.$api.getWeixinTotal().then((res) => {
-      //   if(res && res.data && res.data.result){
-      //     setTimeout(() => {
-      //       // 微信总数
-      //       this.wechat_total = this.preFixInterge(res.data.result.cumulate_user, 8)
-      //       this.wechat_regist = this.preFixInterge(res.data.result.int_page_read_count, 8)
-      //     },100)
-      //   }
-      // })
-      setTimeout(() => {
-        this.wechat_total = this.preFixInterge('186537', 8)
-        this.wechat_regist = this.preFixInterge('15636', 8)
-      }, 100)
+      getOperationalData01('website,weChat,app,weiBo,shortVideo', this.currentViewId).then(res => {
+        let data = res.data.result
+        setTimeout(() => {
+          // 稿件总数
+          this.today_publish_num = this.preFixInterge(data.app.today_publish_num, 8)
+          this.new_user = this.preFixInterge(data.app.new_user, 8)
+          // 微信总数
+          this.int_page_read_count = this.preFixInterge(data.weChat.int_page_read_count, 8)
+          this.cumulate_user = this.preFixInterge(data.weChat.cumulate_user, 8)
+          // 网站总数
+          this.click_count = this.preFixInterge(data.website.click_count, 8)
+          this.daily_click_count = this.preFixInterge(data.website.daily_click_count, 8)
+        }, 100)
+      })
     },
     preFixInterge (num, n) {
       return (Array(n).join(0) + num).slice(-n).split('')
