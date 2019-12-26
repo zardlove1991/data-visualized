@@ -19,7 +19,7 @@
       <div class="chart flex flex-one">
         <div class="source-wrap">
           <div class="message-label flex flex-center common01-ft40"><div class="message-icon"></div>消息来源</div>
-          <chart class="pie-chart" :options="pieOptions" :autoResize="true"></chart>
+          <chart class="pie-chart" v-if="pieOptions" :options="pieOptions" :autoResize="true"></chart>
         </div>
         <div class="flex-one">
           <div class="message-label flex flex-center common01-ft40"><div class="message-icon"></div>消息类型</div>
@@ -250,7 +250,6 @@ export default {
         data[1].value = item.value
         data[1].name = item.name
         item.opt = opt
-        console.log(item.opt, 'optttt')
       })
     }
   },

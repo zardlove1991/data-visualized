@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="bottom-right">
-          <chart :options="barOptions" :autoResize="true"></chart>
+          <chart v-if="barOptions" :options="barOptions" :autoResize="true"></chart>
         </div>
       </div>
     </div>
