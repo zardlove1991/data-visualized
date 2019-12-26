@@ -81,7 +81,7 @@ export default {
         { 'name': '无锡', 'value': 0 },
         { 'name': '浙江', 'value': 0 },
         { 'name': '四川', 'value': 0 },
-        { 'name': '武汉', 'value': 0 },
+        { 'name': '湖北', 'value': 0 },
         { 'name': '湖南', 'value': 0 },
         { 'name': '江西', 'value': 0 },
         { 'name': '福州', 'value': 0 },
@@ -134,7 +134,7 @@ export default {
         '黑龙江': [126.63, 45.75],
         '河北': [114.48, 38.03],
         '湖南': [112, 27.21],
-        '武汉': [114.31, 30.52],
+        '湖北': [114.31, 30.52],
         '吉林': [126.56, 43.87],
         '内蒙古': [113.11, 43.02],
         '西藏': [91.11, 29.66],
@@ -160,7 +160,7 @@ export default {
 .common01-advertising {
   width: 100%;
   height: 100%;
-  padding: 0 pxrem(40px);
+  padding: pxrem(40px);
   .advertising-wrap {
     padding: 0 pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
@@ -169,7 +169,7 @@ export default {
     margin: 0 auto;
     width: 100%;
     // height: pxrem(950px);
-    height: pxrem(1150px);
+    height: pxrem(1100px);
     position: relative;
   }
 }

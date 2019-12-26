@@ -35,7 +35,7 @@ export default {
       }
       getNewArticleList().then(res => {
         if (!res.data.error_code) {
-          this.list = res.data.result
+          this.list = res.data.result.data
           this.initList()
         }
       })
