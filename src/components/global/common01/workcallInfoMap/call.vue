@@ -22,6 +22,8 @@
 <script>
 import { initRong } from '@/rongyun/init'
 import { server } from '@/rongyun/callServer'
+import loadRongyun from '@/utils/loadRongyun.js'
+import { getDataConfig } from '@/utils/model'
 
 export default {
   name: 'call',
@@ -59,12 +61,16 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      initRong()
-      this.RongCall = server(res => {
-        this.commandMap(res)
+    let _this = this
+    loadRongyun().then(() => {
+      getDataConfig().then((data) => {
+        console.log(data)
+        initRong(data.rongInfo)
+        _this.RongCall = server((res) => {
+          _this.commandMap(res)
+        })
       })
-    }, '2000')
+    })
   },
   methods: {
     commandMap (res) {
