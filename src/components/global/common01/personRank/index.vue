@@ -5,7 +5,7 @@
 	   	<div class="rank-list">
 	   	  <div class="list-item">
 	   	    <div class="flex item-detail">
-	   	    	<div class="item-index index-1">1</div>
+	   	    	<div class="item-index index-0">1</div>
 	   	    	<div class="flex-one person-info flex">
 	   	    	  <div class="person-avatar"></div>
 	   	    	  <div class="person-name">张良</div>
@@ -17,7 +17,7 @@
 	   	  </div>
 	   	  <div class="list-item">
 	   	    <div class="flex item-detail">
-	   	    	<div class="item-index index-2">2</div>
+	   	    	<div class="item-index index-1">2</div>
 	   	    	<div class="flex-one person-info flex">
 	   	    	  <div class="person-avatar"></div>
 	   	    	  <div class="person-name">张良</div>
@@ -29,7 +29,7 @@
 	   	  </div>
 	   	  <div class="list-item">
 	   	    <div class="flex item-detail">
-	   	    	<div class="item-index index-3">3</div>
+	   	    	<div class="item-index index-2">3</div>
 	   	    	<div class="flex-one person-info flex">
 	   	    	  <div class="person-avatar"></div>
 	   	    	  <div class="person-name">张良</div>
@@ -105,13 +105,13 @@ export default {
 			line-height:0.6rem;
 			font-family:PingFangSC-Medium;
 		}
-		.index-1{
+		.index-0{
 		  background:rgba(251,49,97,0.45);
 		}
-		.index-2{
+		.index-1{
 			background:rgba(251,173,49,0.45);
 		}
-		.index-3{
+		.index-2{
 			background:rgba(192,49,251,0.45);
 		}
 	}

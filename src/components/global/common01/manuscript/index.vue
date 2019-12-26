@@ -10,7 +10,7 @@
 	        </div>
 	        <div class="list-viewer flex">
 	          <div class="img-icon">
-	          	<img src="@/assets/common/reader.png" />
+	          	<img src="@/assets/common/time.png" />
 	          </div>
 	        12345</div>
 	        <div class="list-time flex">
@@ -20,12 +20,92 @@
 	        12345</div>
 	      </div>
 	    </div>
+	    <div class="manuscriptoutput-wrap">
+	      <div
+	        class="wrap-list sys-flex sys-flex-center animated"
+	        :class="{'flipInX' : v.title}"
+	        :style="{'animation-delay' : k/2 + 's'}"
+	        v-for="(v, k) in dataList"
+	        :key="k"
+	      >
+        <div class="list-status sys-flex sys-flex-center">
+          <img v-if="k === 0" />
+          <span v-if="k !== 0">【{{v.typeName}}】</span>
+        </div>
+        <div class="list-text overhidden">{{v.title}}</div>
+        <div class="list-time list-span sys-flex sys-flex-center">
+          <img src="@/assets/common/time.png" />
+          <span>{{v.publish_time.slice(5, 16)}}</span>
+        </div>
+        <div class="list-read list-span sys-flex sys-flex-center">
+          <img src="@/assets/common/reader.png" />
+          <span>{{v.click_num}}</span>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getM2OPlusPublish } from '@/servers/interface'
 export default {
+  name: 'manuscriptOutput',
+  data () {
+    return {
+      dataList: [],
+      count: 5,
+      page: 1,
+      isPaging: true,
+      typeList: {
+        article: '文稿',
+        gallery: '图集',
+        topic: '专题',
+        link: '外链',
+        video: '视频'
+      },
+      frequency: 25000
+    }
+  },
+  created () {
+    this.getDataList()
+  },
+  mounted () {
+    this.setFontsize('lishui-manuscriptoutput')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
+  },
+  methods: {
+    getDataList () {
+      getM2OPlusPublish(this.count, this.page, this.currentViewId).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data && res.data.result.data.length) {
+            this.dataList = []
+            setTimeout(() => {
+              this.dataList = res.data.result.data.map(v => {
+                return {
+                  ...v,
+                  typeName: this.typeList[(v.type)]
+                }
+              })
+            }, 100)
+            if (this.isPaging) {
+              this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
+            }
+          } else {
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
+          }
+        }
+      })
+    }
+  }
 }
 </script>
 
