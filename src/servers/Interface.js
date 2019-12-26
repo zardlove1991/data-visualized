@@ -85,7 +85,7 @@ export const getM2OPlusWorkDepartRank = (count = 8, page = 1, currentViewId) => 
 /* 通用组件01线索汇聚 */
 export const getHotsNewsList = (page = 1, count = 5) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?page=${page}&count=${count}`)
 /* 通用组件01最新稿件 */
-export const getNewArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getNewArticleList`)
+export const getNewArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusArticleList`)
 /* 通用组件01发稿量排行 */
 export const getPublishDataRank = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getPublishDataRank`)
 /* 通用组件01点击量排行 */
