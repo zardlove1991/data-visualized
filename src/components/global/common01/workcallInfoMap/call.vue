@@ -230,7 +230,6 @@ export default {
       width: 5rem;
       height: 4rem;
       background: rgba(0, 0, 0, 0.4);
-      // border: 1px solid #ddd;
       border-radius: 0.02rem;
       cursor: pointer;
       position: absolute;

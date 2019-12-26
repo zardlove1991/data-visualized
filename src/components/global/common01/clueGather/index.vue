@@ -8,7 +8,7 @@
           <div class="source common01-ft32">{{v.source}}</div>
           <div class="read common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/time.png" />
-            <span>{{v.date | dateFormat}}</span>
+            <span>{{v.date.slice(5, 16)}}</span>
           </div>
         </div>
       </div>
