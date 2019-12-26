@@ -4,28 +4,28 @@
       <div class="common01-title">内容生产</div>
       <div class="wrap-top sys-flex sys-flex-center">
         <div class="top-total sys-flex sys-flex-center">
-          <div class="total-text">总内容：</div>
+          <div class="total-text common01-ft40">总内容：</div>
           <div class="total-num sys-flex sys-flex-center">
             <div class="num-list hg-flex" v-for="(v, k) in testList" :key="k"><span>{{v}}</span></div>
           </div>
         </div>
         <div class="top-right top-pass sys-flex sys-flex-center">
-          <span>已通过：</span>
-          <span>8433</span>
+          <span class="common01-ft40">已通过：</span>
+          <span class="common01-ft40">8433</span>
         </div>
         <div class="top-right sys-flex sys-flex-center flex-justify-between">
-          <span>未过审：</span>
-          <span>346</span>
+          <span class="common01-ft40">未过审：</span>
+          <span class="common01-ft40">346</span>
         </div>
       </div>
       <div class="wrap-bottom sys-flex sys-flex-center flex-justify-between">
         <div class="bottom-left">
           <div class="left-list sys-flex sys-flex-center flex-justify-between" v-for="(v, k) in dateList" :key="k" :class="{'active': k === currentIndex}">
             <div class="list-date sys-flex sys-flex-center">
-              <span>{{v.text}}：</span>
+              <span class="common01-ft40">{{v.text}}：</span>
               <span>{{v.date}}</span>
             </div>
-            <div class="list-rank">
+            <div class="list-rank common01-ft32">
               部门日排行：{{v.num}}
             </div>
           </div>

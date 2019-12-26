@@ -105,3 +105,7 @@ export const getJnReport = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/ge
 export const getOperationalData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperationalData?source=app,weiBo,weChat,shortVideo`)
 // 稿件统计
 export const getWorkCallSubjectPie = (model) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkRate?model=${model}`)
+
+// 标准套系01
+// 运营数据
+export const getOperationalData01 = (source, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperationalData?source=${source}&view_id=${currentViewId}`)

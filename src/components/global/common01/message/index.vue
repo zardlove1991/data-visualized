@@ -4,25 +4,25 @@
       <div class="common01-title">消息汇总</div>
       <div class="count-wrap">
         <div class="count-item flex flex-center">
-          <span class="count-title">消息总数</span>
+          <span class="count-title common01-ft40">消息总数</span>
           <span class="count">12,501</span>
         </div>
         <div class="count-item flex flex-center">
-          <span class="count-title">参与人数</span>
+          <span class="count-title common01-ft40">参与人数</span>
           <span class="count">19</span>
         </div>
         <div class="count-item flex flex-center">
-          <span class="count-title">人均消息数</span>
+          <span class="count-title common01-ft40">人均消息数</span>
           <span class="count">627</span>
         </div>
       </div>
       <div class="chart flex flex-one">
         <div class="source-wrap">
-          <div class="message-label flex flex-center"><div class="message-icon"></div>消息来源</div>
+          <div class="message-label flex flex-center common01-ft40"><div class="message-icon"></div>消息来源</div>
           <chart class="pie-chart" :options="pieOptions" :autoResize="true"></chart>
         </div>
         <div class="flex-one">
-          <div class="message-label flex flex-center"><div class="message-icon"></div>消息类型</div>
+          <div class="message-label flex flex-center common01-ft40"><div class="message-icon"></div>消息类型</div>
           <div class="mt20 flex flex-center type-wrap">
             <div v-for="(item, index) in typeList" class="pie-chart-type">
               <chart v-if="item.opt" :options="item.opt" :autoResize="true"></chart>
