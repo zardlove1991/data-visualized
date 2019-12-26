@@ -191,7 +191,7 @@ export default {
             let data = res.data.result
             this.readNum = data.total_click_num
             this.commentNum = data.total_comment_num
-            let arr = data.list.map(v => v.time)
+            let arr = data.list.map(v => v.time.substring(5))
             this.barOptions.xAxis.data = arr
             this.barOptions.series[1].data = data.list.map(v => v.click_num)
             this.barOptions.series[0].data = data.list.map(v => v.comment_num)
