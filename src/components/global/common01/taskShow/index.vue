@@ -10,7 +10,7 @@
           </div>
           <div class="project-name sys-flex sys-flex-center common01-ft32">
             <div class="project overhidden">所属选题：{{v.project_title}}</div>
-            <div class="name">负责人：{{v.task_user_name}}</div>
+            <div class="name overhidden">负责人：{{v.task_user_name}}</div>
             <div class="time">{{v.update_time | dateFormat(0, 16)}}</div>
           </div>
         </div>
@@ -100,7 +100,7 @@ export default {
           color: #05D9FF;
           padding: pxrem(10px) 0 0 pxrem(130px);
           .project {
-            width: 55%;
+            width: 50%;
             text-align: left;
           }
           .name {
