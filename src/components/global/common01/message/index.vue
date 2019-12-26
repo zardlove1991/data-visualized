@@ -52,13 +52,59 @@ export default {
     return {
       multiple: 1,
       typeTotal: 0,
-      pieOptions: {
+      pieOptions: '',
+      pieOptionsType: '',
+      typeList: [{
+        name: '文本',
+        value: 12,
+        opt: ''
+      }, {
+        name: '图片',
+        value: 12,
+        opt: ''
+      }, {
+        name: '视频',
+        value: 13,
+        opt: ''
+      }, {
+        name: '语音',
+        value: 14,
+        opt: ''
+      }, {
+        name: '位置',
+        value: 48,
+        opt: ''
+      }, {
+        name: '链接',
+        value: 10,
+        opt: ''
+      }],
+      pieOptions0: '',
+      pieOptions1: '',
+      pieOptions2: '',
+      pieOptions3: '',
+      pieOptions4: '',
+      pieOptions5: ''
+    }
+  },
+  mounted () {
+    this.setFontsize('common01-message')
+    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
+      this.multiple = +this.screenConfig.multiple
+    }
+    this.initCharts1()
+    this.initCharts2()
+    this.initTypes()
+  },
+  methods: {
+    initCharts1 () {
+      this.pieOptions = {
         color: ['#0066FF', '#E88559', '#44CF98'],
         title: {
           text: '',
           textStyle: {
             color: '#fff',
-            fontSize: 12 / 3
+            fontSize: 12 * this.multiple
           }
         },
         tooltip: {
@@ -70,12 +116,12 @@ export default {
           x: 'center',
           y: 'bottom',
           icon: 'rect',
-          itemWidth: 25 / 3,
-          itemHeight: 25 / 3,
-          itemGap: 20 / 3,
+          itemWidth: 25 * this.multiple,
+          itemHeight: 25 * this.multiple,
+          itemGap: 20 * this.multiple,
           textStyle: {
             color: '#fff',
-            fontSize: 25 / 3
+            fontSize: 25 * this.multiple
           },
           formatter: (name) => {
             let data = this.pieOptions.series[0].data
@@ -108,13 +154,13 @@ export default {
                 rich: {
                   name: {
                     color: '#fff',
-                    fontSize: 25 / 3,
-                    padding: [5 / 3, 0, 0, 0],
+                    fontSize: 25 * this.multiple,
+                    padding: [5 * this.multiple, 0, 0, 0],
                     align: 'center'
                   },
                   per: {
                     color: '#fff',
-                    fontSize: 37 / 3,
+                    fontSize: 37 * this.multiple,
                     fontWeight: 'bold',
                     align: 'center'
                   }
@@ -123,7 +169,7 @@ export default {
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: 30 / 3,
+                  fontSize: 30 * this.multiple,
                   fontWeight: 'bold'
                 }
               }
@@ -131,8 +177,8 @@ export default {
             labelLine: {
               normal: {
                 show: false,
-                length: 10 / 3,
-                length2: 10 / 3
+                length: 10 * this.multiple,
+                length2: 10 * this.multiple
               }
             },
             data: [{
@@ -144,8 +190,10 @@ export default {
             }]
           }
         ]
-      },
-      pieOptionsType: {
+      }
+    },
+    initCharts2 () {
+      this.pieOptionsType = {
         series: [
           {
             type: 'pie',
@@ -188,48 +236,8 @@ export default {
             }]
           }
         ]
-      },
-      typeList: [{
-        name: '文本',
-        value: 12,
-        opt: ''
-      }, {
-        name: '图片',
-        value: 12,
-        opt: ''
-      }, {
-        name: '视频',
-        value: 13,
-        opt: ''
-      }, {
-        name: '语音',
-        value: 14,
-        opt: ''
-      }, {
-        name: '位置',
-        value: 48,
-        opt: ''
-      }, {
-        name: '链接',
-        value: 10,
-        opt: ''
-      }],
-      pieOptions0: '',
-      pieOptions1: '',
-      pieOptions2: '',
-      pieOptions3: '',
-      pieOptions4: '',
-      pieOptions5: ''
-    }
-  },
-  mounted () {
-    this.setFontsize('common01-message')
-    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
-      this.multiple = +this.screenConfig.multiple
-    }
-    this.initTypes()
-  },
-  methods: {
+      }
+    },
     initTypes () {
       this.typeTotal = 0
       this.typeList.forEach(item => {
