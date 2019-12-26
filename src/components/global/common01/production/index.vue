@@ -56,20 +56,20 @@ export default {
       multiple: 1,
       barOptions: {
         legend: {
-          itemWidth: 30 * this.multiple,
-          itemHeight: 30 * this.multiple,
-          itemGap: 50 * this.multiple,
+          itemWidth: 60 / 3,
+          itemHeight: 30 / 3,
+          itemGap: 50 / 3,
           data: [{
             name: '已通过',
             textStyle: {
               color: '#fff',
-              fontSize: 30 * this.multiple
+              fontSize: 30 / 3
             }
           }, {
             name: '已过审',
             textStyle: {
               color: '#fff',
-              fontSize: 30 * this.multiple
+              fontSize: 30 / 3
             }
           }]
         },
@@ -79,9 +79,9 @@ export default {
           axisLabel: {
             interval: 0,
             color: '#fff',
-            fontSize: 30 * this.multiple,
+            fontSize: 30 / 3,
             fontWeight: 'bold',
-            margin: 15 * this.multiple
+            margin: 15 / 3
           },
           axisLine: {
             lineStyle: {
@@ -115,7 +115,7 @@ export default {
           type: 'bar',
           name: '已通过',
           stack: 'sum',
-          barWidth: 60 * this.multiple,
+          barWidth: 60 / 3,
           itemStyle: {
             normal: {
               color: function (params) {
@@ -129,7 +129,7 @@ export default {
           type: 'bar',
           name: '已过审',
           stack: 'sum',
-          barWidth: 60 * this.multiple,
+          barWidth: 60 / 3,
           itemStyle: {
             normal: {
               color: function (params) {

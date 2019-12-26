@@ -58,7 +58,7 @@ export default {
           text: '',
           textStyle: {
             color: '#fff',
-            fontSize: 12 * this.multiple
+            fontSize: 12 / 3
           }
         },
         tooltip: {
@@ -70,12 +70,12 @@ export default {
           x: 'center',
           y: 'bottom',
           icon: 'rect',
-          itemWidth: 25,
-          itemHeight: 25,
-          itemGap: 20,
+          itemWidth: 25 / 3,
+          itemHeight: 25 / 3,
+          itemGap: 20 / 3,
           textStyle: {
             color: '#fff',
-            fontSize: 25
+            fontSize: 25 / 3
           },
           formatter: (name) => {
             let data = this.pieOptions.series[0].data
@@ -108,13 +108,13 @@ export default {
                 rich: {
                   name: {
                     color: '#fff',
-                    fontSize: 25 * this.multiple,
-                    padding: [5 * this.multiple, 0, 0, 0],
+                    fontSize: 25 / 3,
+                    padding: [5 / 3, 0, 0, 0],
                     align: 'center'
                   },
                   per: {
                     color: '#fff',
-                    fontSize: 37 * this.multiple,
+                    fontSize: 37 / 3,
                     fontWeight: 'bold',
                     align: 'center'
                   }
@@ -123,7 +123,7 @@ export default {
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: 30 * this.multiple,
+                  fontSize: 30 / 3,
                   fontWeight: 'bold'
                 }
               }
@@ -131,8 +131,8 @@ export default {
             labelLine: {
               normal: {
                 show: false,
-                length: 10 * this.multiple,
-                length2: 10 * this.multiple
+                length: 10 / 3,
+                length2: 10 / 3
               }
             },
             data: [{
@@ -326,7 +326,7 @@ export default {
         width: 100px;
         height: 100px;
         top: 33%;
-        left: 31%;
+        left: calc( 50% - 50px );
         text-align: center;
         color: #fff;
         .label-value{
