@@ -4,25 +4,25 @@
       <div class="common01-title">运营数据</div>
       <div class="wrap-content sys-flex">
         <div class="icon-box">
-          <div class="wechat img-box">
-            <img :src="currentIndex === 0 ? wechat02 : wechat01" />
+          <div class="app img-box" @click="changeTab(0)">
+            <img :src="currentIndex === 0 ? app02 : app01" />
           </div>
-          <div class="app img-box">
-            <img :src="currentIndex === 1 ? app02 : app01" />
+          <div class="wechat img-box" @click="changeTab(1)">
+            <img :src="currentIndex === 1 ? wechat02 : wechat01" />
           </div>
         </div>
         <div class="data-list sys-flex-one">
           <div class="title sys-flex sys-flex-center common01-ft36">
             <div v-for="(v, k) in titleList" :key="k">{{v}}</div>
           </div>
-          <div class="body sys-flex sys-flex-center common01-ft38" v-for="(v, k) in dataList" :key="k">
+          <div class="body sys-flex sys-flex-center common01-ft38 animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
             <div class="img-title sys-flex sys-flex-center flex-justify-center">
-              <img :src="v.img" />
-              <span>{{v.title}}</span>
+              <img :src="v.avatar" />
+              <span class="overhidden">{{v.name}}</span>
             </div>
-            <div class="one">{{v.one}}</div>
-            <div class="two">{{v.two}}</div>
-            <div class="three">{{v.three}}</div>
+            <div class="one">{{currentIndex === 0 ? v.app_install_amount : v.int_page_read_user}}</div>
+            <div class="two">{{currentIndex === 0 ? v.new_user_count_channel_num : v.int_page_read_count}}</div>
+            <div class="three">{{currentIndex === 0 ? v.user_count_num : v.share_count}}</div>
           </div>
         </div>
       </div>
@@ -30,53 +30,100 @@
   </div>
 </template>
 <script>
+import { getAppStatisticalData, getMicroOperationData } from '@/servers/interface'
 export default {
   name: 'clueGather',
   data () {
     return {
+      frequency: 15000,
+      count: 0,
       currentIndex: 0,
       wechat01: require('./assets/wechat01.png'),
       wechat02: require('./assets/wechat02.png'),
       app01: require('./assets/app01.png'),
       app02: require('./assets/app02.png'),
-      titleList: ['名称', '安装量', '注册用户', '日活量'],
-      dataList: [{
-        img: 'http://dmimg.5054399.com/allimg/pkm/pk/22.jpg',
-        title: '智慧翁牛特',
-        one: 32102145,
-        two: 32102145,
-        three: 32102145
-      }, {
-        img: 'http://dmimg.5054399.com/allimg/pkm/pk/22.jpg',
-        title: '智慧翁牛特',
-        one: 32102145,
-        two: 32102145,
-        three: 32102145
-      }, {
-        img: 'http://dmimg.5054399.com/allimg/pkm/pk/22.jpg',
-        title: '智慧翁牛特',
-        one: 32102145,
-        two: 32102145,
-        three: 32102145
-      }, {
-        img: 'http://dmimg.5054399.com/allimg/pkm/pk/22.jpg',
-        title: '智慧翁牛特',
-        one: 32102145,
-        two: 32102145,
-        three: 32102145
-      }, {
-        img: 'http://dmimg.5054399.com/allimg/pkm/pk/22.jpg',
-        title: '智慧翁牛特',
-        one: 32102145,
-        two: 32102145,
-        three: 32102145
-      }]
+      titleList: [],
+      dataList: []
+    }
+  },
+  created () {
+    this.getData()
+  },
+  methods: {
+    getData () {
+      if (this.currentIndex === 0) {
+        clearInterval(this.countNum)
+        this.dataList = []
+        this.count = 0
+        this.list = []
+        this.titleList = ['名称', '安装量', '注册用户', '日活量']
+        this.getAppStatisticalData()
+      } else {
+        clearInterval(this.countNum)
+        this.dataList = []
+        this.count = 0
+        this.list = []
+        this.titleList = ['名称', '粉丝量', '点击量', '转发量']
+        this.getMicroOperationData()
+      }
+    },
+    getAppStatisticalData () {
+      if (this.countNum) {
+        this.dataList = []
+        clearInterval(this.countNum)
+        this.count = 0
+      }
+      getAppStatisticalData().then(res => {
+        if (!res.data.error_code) {
+          this.list = res.data.result
+          this.initList()
+        }
+      })
+    },
+    getMicroOperationData () {
+      if (this.countNum) {
+        this.dataList = []
+        clearInterval(this.countNum)
+        this.count = 0
+      }
+      getMicroOperationData().then(res => {
+        if (!res.data.error_code) {
+          this.list = res.data.result
+          this.initList()
+        }
+      })
+    },
+    initList () {
+      this.dataList = this.list.slice(
+        this.count,
+        this.count + 5 > this.list.length ? this.list.length : this.count + 5
+      )
+      this.count += 5
+      this.countNum = setInterval(() => {
+        if (this.count < this.list.length) {
+          this.dataList = []
+          setTimeout(() => {
+            this.dataList = this.list.slice(this.count, this.count + 5)
+            this.count += 5
+          }, 100)
+        } else {
+          this.dataList = []
+          clearInterval(this.countNum)
+          this.count = 0
+          this.getData()
+        }
+      }, this.frequency)
+    },
+    changeTab (index) {
+      this.currentIndex = index
+      this.getData()
     }
   }
 }
 </script>
 <style lang="scss">
-@import '~@/styles/global/index.scss';
+@import "~@/styles/index.scss";
+@import '../style/index.scss';
 .common-operatedata01 {
   width: 100%;
   height: 100%;
@@ -93,7 +140,7 @@ export default {
     .wrap-content {
       .icon-box {
         margin-right: pxrem(36px);
-        .wechat {
+        .app {
           margin-bottom: pxrem(40px);
         }
         .img-box {
@@ -123,43 +170,21 @@ export default {
             width: 25%;
           }
           .img-title {
+            padding-left: pxrem(20px);
             img {
               width: pxrem(75px);
               height: pxrem(75px);
               border-radius: 50%;
               margin-right: pxrem(20px);
             }
+            span {
+              width: 60%;
+              text-align: left;
+            }
           }
         }
       }
     }
   }
-}
-.common01-border {
-  width: 100%;
-  height: 100%;
-  background: url("../../../../assets/common/common01Border.png") no-repeat center;
-  background-size: 100% 100%;
-  position: relative;
-}
-.common01-title {
-  font-size: pxrem(58px);
-  font-weight: 500;
-  text-shadow: 0 pxrem(16px) pxrem(16px) rgba(0, 222, 255, 0.2);
-  position: absolute;
-  top: pxrem(54px);
-  left: pxrem(72px);
-}
-.common01-ft40 {
-  font-size: pxrem(40px);
-}
-.common01-ft38 {
-  font-size: pxrem(38px);
-}
-.common01-ft36 {
-  font-size: pxrem(36px);
-}
-.common01-ft32 {
-  font-size: pxrem(32px);
 }
 </style>

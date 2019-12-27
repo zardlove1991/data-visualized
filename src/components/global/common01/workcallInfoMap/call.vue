@@ -64,7 +64,6 @@ export default {
     let _this = this
     loadRongyun().then(() => {
       getDataConfig().then((data) => {
-        console.log(data)
         initRong(data.rongInfo)
         _this.RongCall = server((res) => {
           _this.commandMap(res)

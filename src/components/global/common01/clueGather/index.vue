@@ -70,7 +70,7 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .cluegather-wrap {
-    padding: pxrem(250px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
       .item-list {

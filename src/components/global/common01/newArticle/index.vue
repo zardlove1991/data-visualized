@@ -3,10 +3,10 @@
     <div class="newarticle-wrap common01-border">
       <div class="common01-title">最新稿件</div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="source common01-ft32">{{v.source}}</div>
-          <div class="time common01-ft32">{{v.create_time.replace('T', ' ').slice(5)}}</div>
+          <div class="source common01-ft32 overhidden">{{v.source}}</div>
+          <div class="time common01-ft32">{{v.create_time.slice(5, 16)}}</div>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@ export default {
       }
       getNewArticleList().then(res => {
         if (!res.data.error_code) {
-          this.list = res.data.result.data
+          this.list = res.data.result
           this.initList()
         }
       })
@@ -72,20 +72,22 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .newarticle-wrap {
-    padding: pxrem(250px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
       .item-list {
-        margin-bottom: pxrem(90px);
+        margin-bottom: pxrem(80px);
         &:last-of-type {
           margin-bottom: 0;
         }
         .title {
           text-align: left;
-          width: 72%;
+          width: 55%;
         }
         .source {
-          margin: 0 pxrem(98px) 0 auto;
+          width: 15%;
+          text-align: left;
+          margin: 0 pxrem(58px) 0 auto;
         }
       }
     }

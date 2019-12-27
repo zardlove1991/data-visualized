@@ -1479,7 +1479,6 @@ export default {
   },
   created () {
     getDataConfig().then(res => {
-      console.log(res)
       this.center = { lng: +res.lng, lat: +res.lat }
     })
   },
@@ -1529,7 +1528,7 @@ export default {
         img2.style.width = '0.3rem'
         img2.style.height = '0.3rem'
         img2.style.bottom = '0'
-        img2.style.left = '0.95rem'
+        img2.style.left = '0.75rem'
         img2.style.background = 'url(' + require('./assets/landmark.png') + ') no-repeat center center'
         img2.style.backgroundSize = '100%'
         span.style.position = 'absolute'
@@ -1600,7 +1599,6 @@ export default {
     },
     getReporter () {
       getWorkCallConnectList().then(res => {
-        console.log(res)
         if (!res.data.error_code && res.data.result.length) {
           this.reporterList = res.data.result
         }

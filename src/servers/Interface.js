@@ -87,9 +87,13 @@ export const getHotsNewsList = (page = 1, count = 5) => createAPI(`${httpsbaseUr
 /* 通用组件01最新稿件 */
 export const getNewArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusArticleList`)
 /* 通用组件01发稿量排行 */
-export const getPublishDataRank = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getPublishDataRank`)
+export const getPublishDataRank = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkDepartRank`)
 /* 通用组件01点击量排行 */
 export const getClickArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList`)
+/* 通用组件01运营数据APP */
+export const getAppStatisticalData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getAppStatisticalData?is_test=true`)
+/* 通用组件01运营数据微运营 */
+export const getMicroOperationData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?is_test=true`)
 
 // 江宁思想与实践
 export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)

@@ -2,11 +2,20 @@
   <div class="common01-dispatchrank">
     <div class="dispatchrank-wrap common01-border">
       <div class="common01-title">发稿量排行</div>
-      <div class="wrap-content sys-flex sys-flex-center sys-flex-wrap">
-        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
-          <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
-          <div class="title common01-ft40">{{v}}</div>
-          <div class="num common01-ft36"><span class="common01-ft60">{{dataArr[v]}}</span>条</div>
+      <div class="wrap-content sys-flex flex-justify-between">
+        <div class="content-left">
+          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
+            <div class="title common01-ft40">{{v}}</div>
+            <div class="num common01-ft36"><span class="common01-ft60">{{dataArr[v]}}</span>条</div>
+          </div>
+        </div>
+        <div class="content-right" v-if="rightList && rightList[0]">
+          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+            <div class="index common01-ft40" :class="{'one': k + 7 === 0, 'two': k + 7 === 1, 'three': k + 7 === 2, 'four':k + 7 > 2}">{{k + 8}}</div>
+            <div class="title common01-ft40">{{v}}</div>
+            <div class="num common01-ft36"><span class="common01-ft60">{{dataArr[v]}}</span>条</div>
+          </div>
         </div>
       </div>
     </div>
@@ -19,7 +28,8 @@ export default {
   data () {
     return {
       dataArr: {},
-      dataList: []
+      leftList: [],
+      rightList: []
     }
   },
   created () {
@@ -33,7 +43,13 @@ export default {
       getPublishDataRank().then(res => {
         if (!res.data.error_code) {
           this.dataArr = res.data.result
-          this.dataList = Object.keys(this.dataArr)
+          let dataList = Object.keys(this.dataArr)
+          if (dataList && dataList.length > 7) {
+            this.leftList = dataList.slice(0, 7)
+            this.rightList = dataList.slice(7)
+          } else {
+            this.leftList = dataList
+          }
         }
       })
     }
@@ -41,7 +57,8 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '~@/styles/index.scss';
+@import "~@/styles/index.scss";
+@import '../style/index.scss';
 .common01-dispatchrank {
   width: 100%;
   height: 100%;
@@ -50,6 +67,21 @@ export default {
     padding: pxrem(159px) pxrem(96px) pxrem(57px) pxrem(74px);
     color: #fff;
     .wrap-content {
+      .content-left {
+        .item-list {
+          margin-right: pxrem(70px);
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .content-right {
+        .item-list {
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
       .item-list {
         width: pxrem(800px);
         height: pxrem(100px);
@@ -57,12 +89,6 @@ export default {
         background-size: 100%;
         padding: 0 pxrem(82px) 0 pxrem(38px);
         margin-bottom: pxrem(14px);
-        &:nth-of-type(odd) {
-          margin-right: pxrem(70px);
-        }
-        &:nth-of-type(n+13) {
-          margin-bottom: 0;
-        }
         .index {
           width: pxrem(60px);
           height: pxrem(60px);
@@ -94,35 +120,5 @@ export default {
       }
     }
   }
-}
-.common01-border {
-  width: 100%;
-  height: 100%;
-  background: url("../../../../assets/common/common01Border.png") no-repeat center;
-  background-size: 100% 100%;
-  position: relative;
-}
-.common01-title {
-  font-size: pxrem(58px);
-  font-weight: 500;
-  text-shadow: 0 pxrem(16px) pxrem(16px) rgba(0, 222, 255, 0.2);
-  position: absolute;
-  top: pxrem(54px);
-  left: pxrem(72px);
-}
-.common01-ft60 {
-  font-size: pxrem(60px);
-}
-.common01-ft40 {
-  font-size: pxrem(40px);
-}
-.common01-ft36 {
-  font-size: pxrem(36px);
-}
-.common01-ft32 {
-  font-size: pxrem(32px);
-}
-.common01-ft30 {
-  font-size: pxrem(30px);
 }
 </style>

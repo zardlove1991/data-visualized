@@ -3,10 +3,10 @@
     <div class="report-wrap common01-border">
       <div class="common01-title">报题展示</div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status common01-ft30" :class="{'one': v.audit_status === '0', 'two': v.audit_status === '1', 'three': v.audit_status === '2', 'four': v.audit_status === '4'}">{{v.audit_status === '0' ? '待审核' : v.audit_status === '1' ? '通过' : v.audit_status === '2' ? '打回' : '报审'}}</div>
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="name common01-ft32">{{v.project_user_name}}</div>
+          <div class="name common01-ft32 overhidden">{{v.project_user_name}}</div>
           <div class="time common01-ft32">{{v.update_time | dateFormat}}</div>
         </div>
       </div>
@@ -67,11 +67,11 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .report-wrap {
-    padding: pxrem(250px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
       .item-list {
-        margin-bottom: pxrem(90px);
+        margin-bottom: pxrem(80px);
         &:last-of-type {
           margin-bottom: 0;
         }
@@ -95,8 +95,12 @@ export default {
         }
         .title {
           text-align: left;
-          width: 60%;
-          margin: 0 pxrem(175px) 0 pxrem(37px);
+          width: 55%;
+          margin: 0 pxrem(135px) 0 pxrem(37px);
+        }
+        .name {
+          width: 12%;
+          text-align: left;
         }
         .time {
           margin-left: auto;
