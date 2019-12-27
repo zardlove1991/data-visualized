@@ -65,7 +65,8 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '~@/styles/index.scss';
+@import "~@/styles/index.scss";
+@import '../style/index.scss';
 .common01-taskshow {
   width: 100%;
   height: 100%;
@@ -104,35 +105,13 @@ export default {
             text-align: left;
           }
           .name {
-            margin: 0 pxrem(72px) 0 auto;
+            width: 22%;
+            text-align: left;
+            margin: 0 pxrem(32px) 0 auto;
           }
         }
       }
     }
   }
-}
-.common01-border {
-  width: 100%;
-  height: 100%;
-  background: url("../../../../assets/common/common01Border.png") no-repeat center;
-  background-size: 100% 100%;
-  position: relative;
-}
-.common01-title {
-  font-size: pxrem(58px);
-  font-weight: 500;
-  text-shadow: 0 pxrem(16px) pxrem(16px) rgba(0, 222, 255, 0.2);
-  position: absolute;
-  top: pxrem(54px);
-  left: pxrem(72px);
-}
-.common01-ft40 {
-  font-size: pxrem(40px);
-}
-.common01-ft32 {
-  font-size: pxrem(32px);
-}
-.common01-ft30 {
-  font-size: pxrem(30px);
 }
 </style>
