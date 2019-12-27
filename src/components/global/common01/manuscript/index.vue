@@ -33,7 +33,7 @@
 <script>
 import { getM2OPlusPublish } from '@/servers/interface'
 export default {
-  name: 'manuscriptOutput',
+  name: 'manuscript',
   data () {
     return {
       dataList: [{
