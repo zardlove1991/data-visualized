@@ -36,32 +36,7 @@ export default {
   name: 'manuscript',
   data () {
     return {
-      dataList: [{
-        typeName: '文稿',
-        title: '刷脸取件被小学生“破解”！丰巢紧急下线',
-        click_num: 111,
-        publish_time: '2019-10-12 12:13'
-      }, {
-        typeName: '图集',
-        title: '手绘长卷:今年总书记这10个妙喻深入人心',
-        click_num: 1211,
-        publish_time: '2019-10-21 12:13'
-      }, {
-        typeName: '专题',
-        title: '2020年起，这些新规将影响你我生活！',
-        click_num: 1211,
-        publish_time: '2019-10-20 12:13'
-      }, {
-        typeName: '视频',
-        title: '变害为利 造福人民——习近平生态文明思想在福建木兰溪的先行探索',
-        click_num: 1211,
-        publish_time: '2019-10-18 12:13'
-      }, {
-        typeName: '图集',
-        title: '国家市场监管总局：明年食品安全抽检合格率要达到98%',
-        click_num: 1211,
-        publish_time: '2019-10-02 12:13'
-      }],
+      dataList: [],
       count: 5,
       page: 1,
       isPaging: true,
@@ -158,7 +133,7 @@ export default {
 		}
     .list-text {
       font-size: 0.38rem;
-      width: 60%;
+      width: 40%;
       text-align: left;
     }
 		.list-viewer{
