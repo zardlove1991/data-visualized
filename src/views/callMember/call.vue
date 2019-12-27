@@ -1,5 +1,5 @@
 <template>
-  <div class="call-wrap sys-flex" v-if="call_Show">
+  <div class="member-call-wrap sys-flex" v-if="call_Show">
     <div class="sys-flex-one" v-show="online">
       <div id="call-main" class="rong-container">
         <div class="rong-min-window-wrap">
@@ -217,8 +217,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.call-wrap{
+<style lang="scss">
+.member-call-wrap{
   height: 100%;
   background:rgba(31,57,103,1);
   position: absolute;
