@@ -22,6 +22,8 @@ export const getMemberInfo = (memberId) => createAPI(`${httpsbaseUrl}/index.php?
 export const doLogin = (data) => axios.post(`${workcallUrl}/sys/login/dologin?password=${data.password}&user_name=${data.user_name}`)
 // 大屏用户详情
 export const getUserDetail = () => createXietongAPI(`${workcallUrl}/Apisys/members/detail`, 'post')
+// 查询其他用户详情
+export const getOtherUserDetail = (userId) => createXietongAPI(`${workcallUrl}/Apisys/members/other_user_detail?user_id=${userId}`, 'post')
 // 指挥连线用户详情
 export const getUserInfo = (memberId) => createXietongAPI(`${workcallUrl}/Apisys/organization/memberDetail?member_id=${memberId}`)
 /* 通用 end */

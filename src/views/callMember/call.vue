@@ -25,9 +25,9 @@
     </div>
     <div class="call-info-wrap" v-if="!invite_call">
       <span class="reporter-name overhidden">{{info_item.member_name}}</span>
-      <span class="info-list">手机号：{{info_item.mobile}}</span>
-      <span class="info-list">职 位：{{info_item.role_title}}</span>
-      <span class="info-list overhidden">部 门：{{info_item.org_title}}</span>
+      <span class="info-list" v-if="info_item.displayData && info_item.displayData.mobile">手机号：{{info_item.displayData.mobile.value}}</span>
+      <span class="info-list" v-if="info_item.displayData && info_item.displayData.role_id">职 位：{{info_item.displayData.role_id.value}}</span>
+      <span class="info-list overhidden" v-if="info_item.displayData && info_item.displayData.org_info">部 门：{{info_item.displayData.org_info.value}}</span>
     </div>
     <div class="call-info-wrap invite-info-wrap" v-if="invite_call">
       <span class="invite-name">{{info_item.member_name}}</span>
@@ -91,9 +91,9 @@ export default {
         _this.RongCall = server((res) => {
           _this.commandMap(res)
         })
-        if (this.$route.query && this.$route.query.access_token) {
+        if (this.$route.query && this.$route.query.access_token && this.$route.query.userid) {
           setTimeout(() => {
-            this.getUserInfo(this.$route.query.access_token)
+            this.getUserInfo(this.$route.query.access_token, this.$route.query.userid)
           }, 1500)
         }
       })
@@ -207,20 +207,15 @@ export default {
       this.invite_tip = '邀请您进行视频会议'
     },
     // 自动呼叫
-    getUserInfo (accessToken) {
+    getUserInfo (accessToken, userId) {
       storage.set('access_token', accessToken)
-      // this.$store.dispatch('global/GET_USER_DETAIL').then(res => {
-      //   if (res.data && res.data.data) {
-      //     this.autoCallvideo(res.data.data)
-      //   }
-      // })
-      if (this.reporterList && this.reporterList[0] && this.$route.query.userid) {
-        let user = this.reporterList.filter(member => member.member_id === this.$route.query.userid)
-        this.autoCallvideo(user[0])
-      }
+      this.$store.dispatch('global/GET_OTHER_USER_DETAIL', userId).then(data => {
+        if (data && data.member_id) {
+          this.autoCallvideo(data)
+        }
+      })
     },
     autoCallvideo (reporter) {
-      console.log(reporter, 'reporterreporterreporter')
       this.info_item = reporter
       this.callType = 'video'
       this.call_Show = true
