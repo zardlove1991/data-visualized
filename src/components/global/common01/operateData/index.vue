@@ -155,7 +155,12 @@ export default {
           background: #0F4BB1;
           color: #00EAFF;
           div {
-            width: 25%;
+            width: 18%;
+            &:first-of-type {
+              width: 46%;
+              text-align: left;
+              padding-left: pxrem(200px);
+            }
           }
         }
         .body {
@@ -167,10 +172,12 @@ export default {
             background: #10398C;
           }
           div {
-            width: 25%;
+            width: 18%;
+            &:first-of-type {
+              width: 46%;
+            }
           }
           .img-title {
-            padding-left: pxrem(20px);
             img {
               width: pxrem(75px);
               height: pxrem(75px);

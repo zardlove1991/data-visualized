@@ -4,7 +4,7 @@
       <div class="common01-title">点击量排行</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
-          <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
+          <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + count - 4}}</div>
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
           <div class="read common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/read.png" />

@@ -21,7 +21,7 @@
 
 <script>
 import { initRong } from '@/rongyun/init'
-import { server } from '@/rongyun/callServer'
+import { server } from '@/rongyun/callServer02'
 import loadRongyun from '@/utils/loadRongyun.js'
 import { getDataConfig } from '@/utils/model'
 
