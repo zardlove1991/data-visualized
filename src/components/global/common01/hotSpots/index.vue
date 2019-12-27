@@ -9,8 +9,8 @@
 	    <div class="hot-list">
 	      <div class="list-item flex sys-flex-center animated"
 	        :class="{'flipInX' : v.title}"
-          	:style="{'animation-delay' : k/2 + 's'}" 
-          	 v-for="(v, k) in dataList">
+          :style="{'animation-delay' : k/2 + 's'}" 
+          v-for="(v, k) in dataList">
 	        <div class="list-title overhidden">
 	        	{{v.title}}
 	        </div>
@@ -64,7 +64,7 @@ export default {
       }],
       wulanList: [{
         typeName: '文稿',
-        title: '刷脸取件被小学生“破解”！丰巢紧急下线12',
+        title: '刷脸取件被小学生“破解”！丰巢紧急下线',
         click_num: 111,
         publish_time: '2019-10-12 12:13'
       }, {
@@ -100,6 +100,7 @@ export default {
       if (this.active === 'wulan') {
         this.dataList = this.wulanList
       } else {
+        this.dataList = []
         this.dataList = this.chiList
       }
     }
