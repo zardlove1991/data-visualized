@@ -25,9 +25,9 @@
     </div>
     <div class="call-info-wrap" v-if="!invite_call">
       <span class="reporter-name overhidden">{{info_item.member_name}}</span>
-      <span class="info-list" v-if="info_item.displayData && info_item.displayData.mobile">手机号：{{info_item.displayData.mobile.value}}</span>
-      <span class="info-list" v-if="info_item.displayData && info_item.displayData.role_id">职 位：{{info_item.displayData.role_id.value}}</span>
-      <span class="info-list overhidden" v-if="info_item.displayData && info_item.displayData.org_info">部 门：{{info_item.displayData.org_info.value}}</span>
+      <span class="info-list">手机号：{{info_item.mobile}}</span>
+      <span class="info-list">职 位：{{info_item.role_title}}</span>
+      <span class="info-list overhidden">部 门：{{info_item.org_title}}</span>
     </div>
     <div class="call-info-wrap invite-info-wrap" v-if="invite_call">
       <span class="invite-name">{{info_item.member_name}}</span>
@@ -44,6 +44,7 @@ import {getDataConfig} from '@/utils/model'
 import {server} from '@/rongyun/callServer'
 // import { getIndexMemberDetail } from '@/servers/interface'
 import loadRongyun from '@/utils/loadRongyun.js'
+import { getWorkCallConnectList } from '@/servers/interface'
 
 export default {
   name: 'call',
@@ -55,6 +56,7 @@ export default {
       info_item: {},
       call_Show: false,
       invite_call: false,
+      reporterList: [],
       invite_tip: '邀请您进行视频会议'
     }
   },
@@ -82,6 +84,7 @@ export default {
   },
   mounted () {
     let _this = this
+    this.getWorkCallConnectList()
     loadRongyun().then(() => {
       getDataConfig().then((data) => {
         initRong(data.rongInfo)
@@ -98,7 +101,13 @@ export default {
   },
 
   methods: {
-
+    getWorkCallConnectList () {
+      getWorkCallConnectList().then(res => {
+        if (!res.data.error_code && res.data.result.length) {
+          this.reporterList = res.data.result
+        }
+      })
+    },
     commandMap (res) {
       switch (res.messageType) {
         case 'InviteMessage':
@@ -200,11 +209,15 @@ export default {
     // 自动呼叫
     getUserInfo (accessToken) {
       storage.set('access_token', accessToken)
-      this.$store.dispatch('global/GET_USER_DETAIL').then(res => {
-        if (res.data && res.data.data) {
-          this.autoCallvideo(res.data.data)
-        }
-      })
+      // this.$store.dispatch('global/GET_USER_DETAIL').then(res => {
+      //   if (res.data && res.data.data) {
+      //     this.autoCallvideo(res.data.data)
+      //   }
+      // })
+      if (this.reporterList && this.reporterList[0] && this.$route.query.userid) {
+        let user = this.reporterList.filter(member => member.member_id === this.$route.query.userid)
+        this.autoCallvideo(user[0])
+      }
     },
     autoCallvideo (reporter) {
       console.log(reporter, 'reporterreporterreporter')
