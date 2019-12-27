@@ -4,15 +4,20 @@
 	    <div class="title">蒙点号</div>
 	   	<div class="member-info">
 	   	  <div class="member-all flex">
-	   	    <div class="member-title flex-one">入驻商家:</div>
-	   	    <div class="member-num flex-one">111</div>
+	   	    <div class="member-title flex-one">
+	   	    <img class="icon" src="./assets/icon.png" />
+	   	    入驻商家:</div>
+	   	    <div class="member-num flex-one">2</div>
 	   	  </div>
 	   	  <div class="member-list">
-	   	    <div class="member-item">
+	   	    <div class="member-item animated" 
+	   	    :class="{'flipInX' : v.title}"
+            :style="{'animation-delay' : k/2 + 's'}" 
+            v-for="(v, k) in dataList">
 	   	      <div class="member-icon">
-	   	        <img src="" />
+	   	        <img src="./assets/title-img.png" />
 	   	      </div>
-	   	      <div class="member-name">智慧内蒙古</div>
+	   	      <div class="member-name">{{v.title}}</div>
 	   	    </div>
 	   	  </div>
 	   	</div>
@@ -22,6 +27,15 @@
 
 <script>
 export default {
+  data () {
+    return {
+      dataList: [{
+        title: '智慧内蒙古'
+      }, {
+        title: '智慧内蒙古'
+      }]
+    }
+  }
 }
 </script>
 
@@ -76,15 +90,23 @@ export default {
 		.member-icon{
 		  width:1.5rem;
 		  height:1.5rem;
-		  border:3px solid #fff;
+		  overflow:hidden;
 		  border-radius:0.05rem;
 		  margin-bottom:0.28rem;
 		  display:inline-block;
+		  img{
+		    width:100%;
+		    height:100%;
+		  }
 		}
 		.member-name{
 		  font-size:0.34rem;
 		  color:#fff;
 		}
+	}
+	.icon{
+	  width:0.46rem;
+	  height:0.4rem;
 	}
 }
 
