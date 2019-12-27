@@ -12,7 +12,8 @@
 	   	    	</div>
 	   	    	<div class="item-num">
 	   	    	  <div class="num">11</div>
-	   	    	  <span class="num-label">条</span></div>
+	   	    	  <span class="num-label">条</span>
+	   	    	</div>
 	   	    </div>
 	   	  </div>
 	   	  <div class="list-item">
