@@ -3,7 +3,7 @@
     <div class="personRank-page common01-border">
 	    <div class="title">个人排行</div>
 	   	<div class="rank-list">
-	   	  <div class="list-item animated" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
+	   	  <div class="list-item animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
 	   	    <div class="flex item-detail">
 	   	    	<div class="item-index" :class="'index-' + k">{{k+1}}</div>
 	   	    	<div class="flex-one person-info flex">
@@ -31,11 +31,18 @@ export default {
     return {
       dataList: [],
       isPaging: false,
-      defaultImg: require('../../../../assets/avatar/touxiang.png')
+      defaultImg: require('../../../../assets/avatar/touxiang.png'),
+      frequency: 25000
     }
   },
   created () {
     this.getDataList()
+  },
+  mounted () {
+    this.setFontsize('lishui-personalranking')
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     getDataList () {
