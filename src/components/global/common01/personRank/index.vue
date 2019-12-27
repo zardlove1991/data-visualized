@@ -7,11 +7,13 @@
 	   	    <div class="flex item-detail">
 	   	    	<div class="item-index" :class="'index-' + k">{{k+1}}</div>
 	   	    	<div class="flex-one person-info flex">
-	   	    	  <div class="person-avatar"></div>
+	   	    	  <div class="person-avatar">
+	   	    	    <img :src="v && v.avatar ? v.avatar.host + v.avatar.filepath + v.avatar.filename : defaultImg" />
+	   	    	  </div>
 	   	    	  <div class="person-name">{{v.name}}</div>
 	   	    	</div>
 	   	    	<div class="item-num">
-	   	    	  <div class="num">{{v.num}}</div>
+	   	    	  <div class="num">{{v.publish}}</div>
 	   	    	  <span class="num-label">条</span>
 	   	    	</div>
 	   	    </div>
@@ -22,27 +24,44 @@
 </template>
 
 <script>
+import { getM2OPlusWorkRank } from '@/servers/interface'
 export default {
   name: 'manuscript',
   data () {
     return {
-      dataList: [{
-        name: '张良',
-        num: '99',
-        img: ''
-      }, {
-        name: '宋江',
-        num: '81',
-        img: ''
-      }, {
-        name: '武松',
-        num: '70',
-        img: ''
-      }, {
-        name: '吕布',
-        num: '32',
-        img: ''
-      }]
+      dataList: [],
+      isPaging: false,
+      defaultImg: require('../../../../assets/avatar/touxiang.png')
+    }
+  },
+  created () {
+    this.getDataList()
+  },
+  methods: {
+    getDataList () {
+      getM2OPlusWorkRank(this.count, this.page, this.currentViewId).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.length) {
+            this.dataList = []
+            res.data.result.forEach((item, index) => {
+              if (index < 8) {
+                this.dataList.push(item)
+              }
+            })
+            if (this.isPaging) {
+              this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
+            }
+          } else {
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
+          }
+        }
+      })
     }
   }
 }
@@ -123,6 +142,10 @@ export default {
 		  border:1px solid #078DFF;
 		  border-radius:50%;
 		  overflow:hidden;
+		}
+		img{
+		  width:100%;
+		  height:100%;
 		}
 		.person-name{
 		  font-size:0.4rem;
