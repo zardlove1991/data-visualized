@@ -101,7 +101,7 @@ export default {
           color: #05D9FF;
           padding: pxrem(10px) 0 0 pxrem(130px);
           .project {
-            width: 55%;
+            width: 50%;
             text-align: left;
           }
           .name {

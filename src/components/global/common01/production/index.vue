@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="bottom-right">
-          <chart :options="barOptions" :autoResize="true"></chart>
+          <chart v-if="barOptions" :options="barOptions" :autoResize="true"></chart>
         </div>
       </div>
     </div>
@@ -54,22 +54,63 @@ export default {
   data () {
     return {
       multiple: 1,
-      barOptions: {
+      barOptions: '',
+      testList: [0, 0, 0, 1, 5, 6, 8, 4],
+      dateList: [{
+        text: '日',
+        date: '52',
+        num: '2'
+      }, {
+        text: '周',
+        date: '374',
+        num: '4'
+      }, {
+        text: '月',
+        date: '1307',
+        num: '3'
+      }, {
+        text: '年',
+        date: '10689',
+        num: '3'
+      }],
+      currentIndex: 0,
+      frequency: 25000
+    }
+  },
+  components: {
+    chart: echarts
+  },
+  mounted () {
+    this.setFontsize('common01-contentproduction')
+    this.initChart()
+    setInterval(() => {
+      this.currentIndex++
+      if (this.currentIndex >= this.dateList.length) {
+        this.currentIndex = 0
+      }
+    }, this.frequency)
+  },
+  methods: {
+    initChart () {
+      if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
+        this.multiple = +this.screenConfig.multiple
+      }
+      this.barOptions = {
         legend: {
-          itemWidth: 60 / 3,
-          itemHeight: 30 / 3,
-          itemGap: 50 / 3,
+          itemWidth: 30 * this.multiple,
+          itemHeight: 30 * this.multiple,
+          itemGap: 50 * this.multiple,
           data: [{
             name: '已通过',
             textStyle: {
               color: '#fff',
-              fontSize: 30 / 3
+              fontSize: 30 * this.multiple
             }
           }, {
             name: '已过审',
             textStyle: {
               color: '#fff',
-              fontSize: 30 / 3
+              fontSize: 30 * this.multiple
             }
           }]
         },
@@ -79,9 +120,9 @@ export default {
           axisLabel: {
             interval: 0,
             color: '#fff',
-            fontSize: 30 / 3,
+            fontSize: 30 * this.multiple,
             fontWeight: 'bold',
-            margin: 15 / 3
+            margin: 15 * this.multiple
           },
           axisLine: {
             lineStyle: {
@@ -115,7 +156,7 @@ export default {
           type: 'bar',
           name: '已通过',
           stack: 'sum',
-          barWidth: 60 / 3,
+          barWidth: 60 * this.multiple,
           itemStyle: {
             normal: {
               color: function (params) {
@@ -129,7 +170,7 @@ export default {
           type: 'bar',
           name: '已过审',
           stack: 'sum',
-          barWidth: 60 / 3,
+          barWidth: 60 * this.multiple,
           itemStyle: {
             normal: {
               color: function (params) {
@@ -140,45 +181,8 @@ export default {
           },
           data: [25, 10, 20, 5]
         }]
-      },
-      testList: [0, 0, 0, 1, 5, 6, 8, 4],
-      dateList: [{
-        text: '日',
-        date: '52',
-        num: '2'
-      }, {
-        text: '周',
-        date: '374',
-        num: '4'
-      }, {
-        text: '月',
-        date: '1307',
-        num: '3'
-      }, {
-        text: '年',
-        date: '10689',
-        num: '3'
-      }],
-      currentIndex: 0,
-      frequency: 25000
-    }
-  },
-  components: {
-    chart: echarts
-  },
-  created () {
-  },
-  mounted () {
-    this.setFontsize('common01-contentproduction')
-    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
-      this.multiple = +this.screenConfig.multiple
-    }
-    setInterval(() => {
-      this.currentIndex++
-      if (this.currentIndex >= this.dateList.length) {
-        this.currentIndex = 0
       }
-    }, this.frequency)
+    }
   }
 }
 </script>
