@@ -1,4 +1,4 @@
-import {getUserDetail} from '@/servers/api'
+import {getUserDetail, getOtherUserDetail} from '@/servers/api'
 export default {
   namespaced: true,
   state: {
@@ -16,6 +16,13 @@ export default {
           commit('GET_USER_DETAIL', res.data.data)
         }
         return res
+      })
+    },
+    GET_OTHER_USER_DETAIL ({commit}, config) {
+      return getOtherUserDetail(config).then((res) => {
+        if (res && res.data) {
+          return res.data.data
+        }
       })
     }
   }

@@ -2,47 +2,30 @@
   <div class="common-cluegather ">
     <div class="manuscript-page common01-border">
 	    <div class="title">稿件生产</div>
-	    <div class="report-list">
-	      <div class="list-item flex">
-	        <div class="type-area">【文稿】</div>
-	        <div class="list-title flex-one">
-	          地球碳循环已经严重失衡，我们正身处一个物种大灭
-	        </div>
-	        <div class="list-viewer flex">
-	          <div class="img-icon">
-	          	<img src="@/assets/common/time.png" />
-	          </div>
-	        12345</div>
-	        <div class="list-time flex">
-	           <div class="img-icon">
-	          	<img src="@/assets/common/reader.png" />
-	          </div>
-	        12345</div>
-	      </div>
-	    </div>
-	    <div class="manuscriptoutput-wrap">
-	      <div
-	        class="wrap-list sys-flex sys-flex-center animated"
-	        :class="{'flipInX' : v.title}"
-	        :style="{'animation-delay' : k/2 + 's'}"
-	        v-for="(v, k) in dataList"
-	        :key="k"
-	      >
-        <div class="list-status sys-flex sys-flex-center">
-          <img v-if="k === 0" />
-          <span v-if="k !== 0">【{{v.typeName}}】</span>
-        </div>
-        <div class="list-text overhidden">{{v.title}}</div>
-        <div class="list-time list-span sys-flex sys-flex-center">
-          <img src="@/assets/common/time.png" />
-          <span>{{v.publish_time.slice(5, 16)}}</span>
-        </div>
-        <div class="list-read list-span sys-flex sys-flex-center">
-          <img src="@/assets/common/reader.png" />
-          <span>{{v.click_num}}</span>
-        </div>
+	    <div class="list-title">
+        <div class="list-item flex sys-flex-center animated"
+          :class="{'flipInX' : v.title}"
+          :style="{'animation-delay' : k/2 + 's'}"
+          v-for="(v, k) in dataList"
+          :key="k">
+          <div class="type-area sys-flex sys-flex-center">
+            <img v-if="k === 0" src="./assets/new.png" />
+            <span v-if="k !== 0">【{{v.typeName}}】</span>
+          </div>
+          <div class="list-text overhidden">{{v.title}}</div>
+          <div class="list-time flex">
+            <div class="img-icon">
+              <img src="@/assets/common/time.png" />
+            </div>
+          {{v.publish_time.slice(5, 16)}}</div>
+          <div class="list-read flex">
+             <div class="img-icon">
+              <img src="@/assets/common/reader.png" />
+            </div>
+          {{v.click_num}}</div>
       </div>
-    </div>
+	    </div>
+	    
     </div>
   </div>
 </template>
@@ -50,7 +33,7 @@
 <script>
 import { getM2OPlusPublish } from '@/servers/interface'
 export default {
-  name: 'manuscriptOutput',
+  name: 'manuscript',
   data () {
     return {
       dataList: [],
@@ -132,7 +115,15 @@ export default {
 		}
 		.type-area{
 		  color:#0AFBF2;
-		  font-size:0.38rem;
+      span {
+        font-size:0.38rem;
+        color: #0afbf2;
+      }
+      img {
+        width: 1.07rem;
+        height: 0.48rem;
+        margin: 0 0.225rem;
+      }
 		}
 		.list-title{
 		  color:#fff;
@@ -140,23 +131,34 @@ export default {
 		  margin-right:1.12rem;
 		  text-align:left;
 		}
+    .list-text {
+      font-size: 0.38rem;
+      width: 40%;
+      text-align: left;
+    }
 		.list-viewer{
 		  font-size:0.32rem;
 		  color:#fff;
 		  margin-right:0.71rem;
 		  align-items:center;
 		}
-		.list-time{
-		  font-size:0.32rem;
-		  color:#fff;
-		  align-items:center;
-		}
-		.img-icon{
-		  width:0.42rem;
-		  height:0.3rem;
-		  margin-right:0.2rem;
-		}
-		
+    .list-time {
+      margin: 0 0.8rem 0 0.65rem;
+      font-size:0.32rem;
+      .img-icon {
+        width: 0.3rem;
+        height: 0.3rem;
+        margin-right: 0.2rem;
+      }
+    }
+    .list-read {
+      font-size:0.32rem;
+      .img-icon {
+        width: 0.42rem;
+        height: 0.3rem;
+        margin-right: 0.2rem;
+      }
+    }
 	}
 }
 

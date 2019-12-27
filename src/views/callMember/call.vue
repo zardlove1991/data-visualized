@@ -1,5 +1,5 @@
 <template>
-  <div class="call-wrap sys-flex" v-if="call_Show">
+  <div class="member-call-wrap sys-flex" v-if="call_Show">
     <div class="sys-flex-one" v-show="online">
       <div id="call-main" class="rong-container">
         <div class="rong-min-window-wrap">
@@ -44,6 +44,7 @@ import {getDataConfig} from '@/utils/model'
 import {server} from '@/rongyun/callServer'
 // import { getIndexMemberDetail } from '@/servers/interface'
 import loadRongyun from '@/utils/loadRongyun.js'
+import { getWorkCallConnectList } from '@/servers/interface'
 
 export default {
   name: 'call',
@@ -55,6 +56,7 @@ export default {
       info_item: {},
       call_Show: false,
       invite_call: false,
+      reporterList: [],
       invite_tip: '邀请您进行视频会议'
     }
   },
@@ -82,15 +84,16 @@ export default {
   },
   mounted () {
     let _this = this
+    this.getWorkCallConnectList()
     loadRongyun().then(() => {
       getDataConfig().then((data) => {
         initRong(data.rongInfo)
         _this.RongCall = server((res) => {
           _this.commandMap(res)
         })
-        if (this.$route.query && this.$route.query.access_token) {
+        if (this.$route.query && this.$route.query.access_token && this.$route.query.userid) {
           setTimeout(() => {
-            this.getUserInfo(this.$route.query.access_token)
+            this.getUserInfo(this.$route.query.access_token, this.$route.query.userid)
           }, 1500)
         }
       })
@@ -98,7 +101,13 @@ export default {
   },
 
   methods: {
-
+    getWorkCallConnectList () {
+      getWorkCallConnectList().then(res => {
+        if (!res.data.error_code && res.data.result.length) {
+          this.reporterList = res.data.result
+        }
+      })
+    },
     commandMap (res) {
       switch (res.messageType) {
         case 'InviteMessage':
@@ -198,16 +207,15 @@ export default {
       this.invite_tip = '邀请您进行视频会议'
     },
     // 自动呼叫
-    getUserInfo (accessToken) {
+    getUserInfo (accessToken, userId) {
       storage.set('access_token', accessToken)
-      this.$store.dispatch('global/GET_USER_DETAIL').then(res => {
-        if (res.data && res.data.data) {
-          this.autoCallvideo(res.data.data)
+      this.$store.dispatch('global/GET_OTHER_USER_DETAIL', userId).then(data => {
+        if (data && data.member_id) {
+          this.autoCallvideo(data)
         }
       })
     },
     autoCallvideo (reporter) {
-      console.log(reporter, 'reporterreporterreporter')
       this.info_item = reporter
       this.callType = 'video'
       this.call_Show = true
@@ -217,8 +225,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.call-wrap{
+<style lang="scss">
+.member-call-wrap{
   height: 100%;
   background:rgba(31,57,103,1);
   position: absolute;

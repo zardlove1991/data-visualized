@@ -3,40 +3,17 @@
     <div class="personRank-page common01-border">
 	    <div class="title">个人排行</div>
 	   	<div class="rank-list">
-	   	  <div class="list-item">
+	   	  <div class="list-item animated" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
 	   	    <div class="flex item-detail">
-	   	    	<div class="item-index index-0">1</div>
+	   	    	<div class="item-index" :class="'index-' + k">{{k+1}}</div>
 	   	    	<div class="flex-one person-info flex">
 	   	    	  <div class="person-avatar"></div>
-	   	    	  <div class="person-name">张良</div>
+	   	    	  <div class="person-name">{{v.name}}</div>
 	   	    	</div>
 	   	    	<div class="item-num">
-	   	    	  <div class="num">11</div>
-	   	    	  <span class="num-label">条</span></div>
-	   	    </div>
-	   	  </div>
-	   	  <div class="list-item">
-	   	    <div class="flex item-detail">
-	   	    	<div class="item-index index-1">2</div>
-	   	    	<div class="flex-one person-info flex">
-	   	    	  <div class="person-avatar"></div>
-	   	    	  <div class="person-name">张良</div>
+	   	    	  <div class="num">{{v.num}}</div>
+	   	    	  <span class="num-label">条</span>
 	   	    	</div>
-	   	    	<div class="item-num">
-	   	    	  <div class="num">11</div>
-	   	    	  <span class="num-label">条</span></div>
-	   	    </div>
-	   	  </div>
-	   	  <div class="list-item">
-	   	    <div class="flex item-detail">
-	   	    	<div class="item-index index-2">3</div>
-	   	    	<div class="flex-one person-info flex">
-	   	    	  <div class="person-avatar"></div>
-	   	    	  <div class="person-name">张良</div>
-	   	    	</div>
-	   	    	<div class="item-num">
-	   	    	  <div class="num">11</div>
-	   	    	  <span class="num-label">条</span></div>
 	   	    </div>
 	   	  </div>
 	   	</div>
@@ -46,6 +23,28 @@
 
 <script>
 export default {
+  name: 'manuscript',
+  data () {
+    return {
+      dataList: [{
+        name: '张良',
+        num: '99',
+        img: ''
+      }, {
+        name: '宋江',
+        num: '81',
+        img: ''
+      }, {
+        name: '武松',
+        num: '70',
+        img: ''
+      }, {
+        name: '吕布',
+        num: '32',
+        img: ''
+      }]
+    }
+  }
 }
 </script>
 
