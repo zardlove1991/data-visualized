@@ -6,16 +6,16 @@
         <div class="top-total sys-flex sys-flex-center">
           <div class="total-text common01-ft40">总内容：</div>
           <div class="total-num sys-flex sys-flex-center">
-            <div class="num-list hg-flex" v-for="(v, k) in testList" :key="k"><span>{{v}}</span></div>
+            <div class="num-list hg-flex" v-for="(v, k) in totalContent" :key="k"><span>{{v}}</span></div>
           </div>
         </div>
         <div class="top-right top-pass sys-flex sys-flex-center">
           <span class="common01-ft40">已通过：</span>
-          <span class="common01-ft40">8433</span>
+          <span class="common01-ft40">{{workdata.publish || 0}}</span>
         </div>
         <div class="top-right sys-flex sys-flex-center flex-justify-between">
           <span class="common01-ft40">未过审：</span>
-          <span class="common01-ft40">346</span>
+          <span class="common01-ft40">{{workdata.audit || 0}}</span>
         </div>
       </div>
       <div class="wrap-bottom sys-flex sys-flex-center flex-justify-between">
@@ -38,6 +38,7 @@
   </div>
 </template>
 <script>
+import { getM2OPlusWorkRate, getM2OPlusWorkChartSummary } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
@@ -55,21 +56,26 @@ export default {
     return {
       multiple: 1,
       barOptions: '',
-      testList: [0, 0, 0, 1, 5, 6, 8, 4],
+      workdata: {},
+      totalContent: [0, 0, 0, 0, 0, 0, 0, 0],
       dateList: [{
         text: '日',
+        type: 'd',
         date: '52',
         num: '2'
       }, {
         text: '周',
+        type: 'w',
         date: '374',
         num: '4'
       }, {
         text: '月',
+        type: 'm',
         date: '1307',
         num: '3'
       }, {
         text: '年',
+        type: 'y',
         date: '10689',
         num: '3'
       }],
@@ -82,16 +88,34 @@ export default {
   },
   mounted () {
     this.setFontsize('common01-contentproduction')
-    this.initChart()
+    this.initData()
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.dateList.length) {
         this.currentIndex = 0
       }
+      this.initData(this.dateList[this.currentIndex].type)
     }, this.frequency)
   },
   methods: {
-    initChart () {
+    initData (type = 'd') {
+      getM2OPlusWorkRate(type, this.currentViewId).then(res => {
+        if (res.data && res.data.result) {
+          this.workdata = res.data.result
+        } else {
+          this.workdata = {}
+        }
+        this.totalContent = this.preFixInterge(+this.workdata.create + +this.workdata.audit + +this.workdata.publish, 8)
+      })
+      getM2OPlusWorkChartSummary(type, this.currentViewId).then(res => {
+        if (res.data && res.data.result) {
+          this.initChart(res.data.result)
+        }
+      })
+    },
+    initChart (data = {}) {
+      let publishList = [data.article.publish || 0, data.gallery.publish || 0, data.video.publish || 0, data.link.publish || 0]
+      let auditList = [data.article.create || 0, data.gallery.create || 0, data.video.create || 0, data.link.create || 0]
       if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
         this.multiple = +this.screenConfig.multiple
       }
@@ -107,7 +131,7 @@ export default {
               fontSize: 30 * this.multiple
             }
           }, {
-            name: '已过审',
+            name: '未过审',
             textStyle: {
               color: '#fff',
               fontSize: 30 * this.multiple
@@ -165,10 +189,10 @@ export default {
               }
             }
           },
-          data: [70, 30, 50, 15]
+          data: publishList
         }, {
           type: 'bar',
-          name: '已过审',
+          name: '未过审',
           stack: 'sum',
           barWidth: 60 * this.multiple,
           itemStyle: {
@@ -179,9 +203,12 @@ export default {
               }
             }
           },
-          data: [25, 10, 20, 5]
+          data: auditList
         }]
       }
+    },
+    preFixInterge (num, n) {
+      return (Array(n).join(0) + num).slice(-n).split('')
     }
   }
 }

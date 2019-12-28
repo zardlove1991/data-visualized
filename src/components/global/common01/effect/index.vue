@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="wrap-bottom">
-          <chart :options="barOptions" :autoResize="true"></chart>
+          <chart v-if="barOptions" :options="barOptions" :autoResize="true"></chart>
         </div>
       </div>
     </div>
@@ -47,7 +47,41 @@ export default {
       readNum: 0,
       commentNum: 0,
       frequency: 25000,
-      barOptions: {
+      barOptions: ''
+    }
+  },
+  components: {
+    chart: echarts
+  },
+  created () {
+  },
+  mounted () {
+    this.setFontsize('common01-effect')
+    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
+      this.multiple = +this.screenConfig.multiple
+    }
+    this.getDataList()
+  },
+  methods: {
+    getDataList () {
+      getM2OPlusChart(this.currentViewId).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.list) {
+            let data = res.data.result
+            this.readNum = data.total_click_num
+            this.commentNum = data.total_comment_num
+            this.initChart(data.list)
+          } else {
+            this.initChart([])
+          }
+        }
+      })
+    },
+    initChart (list) {
+      let xdata = list.map(v => v.time.substring(5))
+      let ydata0 = list.map(v => v.comment_num)
+      let ydata1 = list.map(v => v.click_num)
+      this.barOptions = {
         title: {
           text: '',
           x: 'center',
@@ -96,7 +130,6 @@ export default {
         },
         xAxis: {
           type: 'category',
-          data: [],
           axisLabel: {
             interval: 0,
             color: '#fff',
@@ -108,7 +141,8 @@ export default {
             lineStyle: {
               color: '#4A6AA8'
             }
-          }
+          },
+          data: xdata
         },
         yAxis: [
           {
@@ -159,7 +193,7 @@ export default {
           lineStyle: {
             width: 5 * this.multiple
           },
-          data: []
+          data: ydata0
         }, {
           name: '阅读量',
           type: 'bar',
@@ -176,38 +210,9 @@ export default {
               }])
             }
           },
-          data: []
+          data: ydata1
         }]
       }
-    }
-  },
-  components: {
-    chart: echarts
-  },
-  created () {
-  },
-  mounted () {
-    this.setFontsize('common01-effect')
-    if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
-      this.multiple = +this.screenConfig.multiple
-    }
-    this.getDataList()
-  },
-  methods: {
-    getDataList () {
-      getM2OPlusChart(this.currentViewId).then(res => {
-        if (!res.data.error_code) {
-          if (res.data.result.list) {
-            let data = res.data.result
-            this.readNum = data.total_click_num
-            this.commentNum = data.total_comment_num
-            let arr = data.list.map(v => v.time.substring(5))
-            this.barOptions.xAxis.data = arr
-            this.barOptions.series[1].data = data.list.map(v => v.click_num)
-            this.barOptions.series[0].data = data.list.map(v => v.comment_num)
-          }
-        }
-      })
     }
   }
 }

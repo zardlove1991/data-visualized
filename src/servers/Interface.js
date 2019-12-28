@@ -116,3 +116,6 @@ export const getOperationalData01 = (source, currentViewId) => createAPI(`${http
 // 消息汇总
 export const getSoundBeansMessagesCount = (channelId, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getSoundBeansMessagesCount?channel_id=${channelId}&view_id=${currentViewId}`)
 export const getSoundBeansAllProgramMonitor = (channelId, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getSoundBeansAllProgramMonitor?channel_id=${channelId}&view_id=${currentViewId}`)
+// 内容生产
+export const getM2OPlusWorkRate = (model, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkRate?model=${model}&view_id=${currentViewId}`)
+export const getM2OPlusWorkChartSummary = (model, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkChartSummary?model=${model}&view_id=${currentViewId}`)
