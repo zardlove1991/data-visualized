@@ -113,3 +113,6 @@ export const getWorkCallSubjectPie = (model) => createAPI(`${httpsbaseUrl}/Apida
 // 标准套系01
 // 运营数据
 export const getOperationalData01 = (source, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperationalData?source=${source}&view_id=${currentViewId}`)
+// 消息汇总
+export const getSoundBeansMessagesCount = (channelId, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getSoundBeansMessagesCount?channel_id=${channelId}&view_id=${currentViewId}`)
+export const getSoundBeansAllProgramMonitor = (channelId, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getSoundBeansAllProgramMonitor?channel_id=${channelId}&view_id=${currentViewId}`)

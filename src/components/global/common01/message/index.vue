@@ -5,15 +5,15 @@
       <div class="count-wrap">
         <div class="count-item flex flex-center">
           <span class="count-title common01-ft40">消息总数</span>
-          <span class="count">12,501</span>
+          <span class="count">{{totalmessage.messages_count || 0}}</span>
         </div>
         <div class="count-item flex flex-center">
           <span class="count-title common01-ft40">参与人数</span>
-          <span class="count">19</span>
+          <span class="count">{{totalmessage.participators_count || 0}}</span>
         </div>
         <div class="count-item flex flex-center">
           <span class="count-title common01-ft40">人均消息数</span>
-          <span class="count">627</span>
+          <span class="count">{{totalmessage.messages_count / totalmessage.participators_count === 0 ? 1 : totalmessage.participators_count}}</span>
         </div>
       </div>
       <div class="chart flex flex-one">
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { getSoundBeansMessagesCount, getSoundBeansAllProgramMonitor, getM2OPlusChannelList } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/pie'
@@ -54,37 +55,15 @@ export default {
       typeTotal: 0,
       pieOptions: '',
       pieOptionsType: '',
-      typeList: [{
-        name: '文本',
-        value: 12,
-        opt: ''
-      }, {
-        name: '图片',
-        value: 12,
-        opt: ''
-      }, {
-        name: '视频',
-        value: 13,
-        opt: ''
-      }, {
-        name: '语音',
-        value: 14,
-        opt: ''
-      }, {
-        name: '位置',
-        value: 48,
-        opt: ''
-      }, {
-        name: '链接',
-        value: 10,
-        opt: ''
-      }],
+      typeList: [],
       pieOptions0: '',
       pieOptions1: '',
       pieOptions2: '',
       pieOptions3: '',
       pieOptions4: '',
-      pieOptions5: ''
+      pieOptions5: '',
+      channelId: '11',
+      totalmessage: ''
     }
   },
   mounted () {
@@ -92,12 +71,59 @@ export default {
     if (!isNaN(+this.screenConfig.multiple) && +this.screenConfig.multiple !== 0) {
       this.multiple = +this.screenConfig.multiple
     }
-    this.initCharts1()
     this.initCharts2()
-    this.initTypes()
+    this.initData()
   },
   methods: {
-    initCharts1 () {
+    initData () {
+      getM2OPlusChannelList(this.currentViewId).then(res => {
+        if (res.data && res.data.result && res.data.result[0]) {
+          this.channelId = res.data.result[0].id
+        }
+        getSoundBeansMessagesCount(this.channelId, this.currentViewId).then(res => {
+          if (res && res.data && res.data.result) {
+            this.totalmessage = res.data.result || {}
+          }
+        })
+        getSoundBeansAllProgramMonitor(this.channelId, this.currentViewId).then(res => {
+          let result = res.data.result
+          // 消息来源
+          if (result.messages_source_count) {
+            this.initCharts1(result.messages_source_count)
+          }
+          // 消息类型
+          if (result.messages_source_distribution) {
+            this.typeList = [{
+              name: '文本',
+              value: result.messages_source_distribution.messages_text_count || 0,
+              opt: ''
+            }, {
+              name: '图片',
+              value: result.messages_source_distribution.messages_unknown_count || 0,
+              opt: ''
+            }, {
+              name: '视频',
+              value: result.messages_source_distribution.messages_video_count || 0,
+              opt: ''
+            }, {
+              name: '语音',
+              value: result.messages_source_distribution.messages_voice_count || 0,
+              opt: ''
+            }, {
+              name: '位置',
+              value: result.messages_source_distribution.messages_location_count || 0,
+              opt: ''
+            }, {
+              name: '链接',
+              value: result.messages_source_distribution.messages_link_count || 0,
+              opt: ''
+            }]
+          }
+          this.initTypes()
+        })
+      })
+    },
+    initCharts1 (result) {
       this.pieOptions = {
         color: ['#0066FF', '#E88559', '#44CF98'],
         title: {
@@ -133,7 +159,11 @@ export default {
                 tarValue = item.value
               }
             })
+            if (total === 0) {
+              total = 1
+            }
             let p = Math.ceil(tarValue / total * 100)
+            // 没数据默认 0%
             return ` ${name}：    ${p}%    ${tarValue}条`
           },
           data: ['微博', '微信', 'H5']
@@ -182,11 +212,11 @@ export default {
               }
             },
             data: [{
-              name: '微博', value: '11'
+              name: '微博', value: result.messages_weibo_count || 0
             }, {
-              name: '微信', value: '14'
+              name: '微信', value: result.messages_weixin_count || 0
             }, {
-              name: 'H5', value: '8'
+              name: 'H5', value: result.messages_h5_count || 0
             }]
           }
         ]
@@ -243,10 +273,13 @@ export default {
       this.typeList.forEach(item => {
         this.typeTotal += item.value
       })
+      if (this.typeTotal === 0) {
+        this.typeTotal = 1
+      }
       this.typeList.forEach(item => {
         let opt = JSON.parse(JSON.stringify(this.pieOptionsType))
         let data = opt.series[0].data
-        data[0].value = this.typeTotal
+        data[0].value = this.typeTotal // 没数据默认 0%
         data[1].value = item.value
         data[1].name = item.name
         item.opt = opt

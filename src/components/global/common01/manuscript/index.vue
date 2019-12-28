@@ -1,7 +1,7 @@
 <template>
   <div class="common-cluegather ">
     <div class="manuscript-page common01-border">
-	    <div class="title">稿件生产</div>
+      <div class="common01-title">稿件生产</div>
 	    <div class="list-title">
         <div class="list-item flex sys-flex-center animated"
           :class="{'flipInX' : v.title}"
@@ -10,22 +10,19 @@
           :key="k">
           <div class="type-area sys-flex sys-flex-center">
             <img v-if="k === 0" src="./assets/new.png" />
-            <span v-if="k !== 0">【{{v.typeName}}】</span>
+            <span class="common01-ft38" v-if="k !== 0">【{{v.typeName}}】</span>
           </div>
-          <div class="list-text overhidden">{{v.title}}</div>
-          <div class="list-time flex">
-            <div class="img-icon">
-              <img src="@/assets/common/time.png" />
-            </div>
-          {{v.publish_time.slice(5, 16)}}</div>
-          <div class="list-read flex">
-             <div class="img-icon">
-              <img src="@/assets/common/reader.png" />
-            </div>
-          {{v.click_num}}</div>
-      </div>
+          <div class="list-text overhidden common01-ft38 flex-one">{{v.title}}</div>
+          <div class="list-read flex flex-center">
+            <img class="img-icon" src="@/assets/common/reader.png" />
+            <span class="common01-ft32">{{v.click_num}}</span>
+          </div>
+          <div class="list-time flex flex-center">
+            <img class="img-icon" src="@/assets/common/time.png" />
+            <span class="">{{v.publish_time.slice(5, 16)}}</span>
+          </div>
+        </div>
 	    </div>
-	    
     </div>
   </div>
 </template>
@@ -96,27 +93,18 @@ export default {
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
 .common-cluegather{
+  width: 100%;
+  height: 100%;
+  padding: pxrem(40px);
 	.manuscript-page{
-		padding:0 0.7rem;
-		.title{
-		  color:#fff;
-		  font-size:0.58rem;
-		  text-align:left;
-		  padding-top:0.53rem;
-		  margin-bottom:1.30rem;
-		}
-		.report-list{
-		  padding:0 0.26rem;
-		  font-size:0.38rem;
-		}
+    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
 		.list-item{
-		  margin-bottom:1.11rem;
+		  margin-bottom: pxrem(110px);
 		  align-items:center;
 		}
 		.type-area{
 		  color:#0AFBF2;
       span {
-        font-size:0.38rem;
         color: #0afbf2;
       }
       img {
@@ -132,19 +120,10 @@ export default {
 		  text-align:left;
 		}
     .list-text {
-      font-size: 0.38rem;
       width: 40%;
       text-align: left;
     }
-		.list-viewer{
-		  font-size:0.32rem;
-		  color:#fff;
-		  margin-right:0.71rem;
-		  align-items:center;
-		}
     .list-time {
-      margin: 0 0.8rem 0 0.65rem;
-      font-size:0.32rem;
       .img-icon {
         width: 0.3rem;
         height: 0.3rem;
@@ -152,6 +131,7 @@ export default {
       }
     }
     .list-read {
+      margin: 0 0.8rem 0 0.65rem;
       font-size:0.32rem;
       .img-icon {
         width: 0.42rem;
