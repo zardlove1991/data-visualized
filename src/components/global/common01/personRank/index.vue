@@ -1,7 +1,7 @@
 <template>
   <div class="common-personRank ">
     <div class="personRank-page common01-border">
-	    <div class="title">个人排行</div>
+      <div class="common01-title">个人排行</div>
 	   	<div class="rank-list">
 	   	  <div class="list-item animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
 	   	    <div class="flex item-detail">
@@ -78,15 +78,11 @@ export default {
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
 .common-personRank{
+  width: 100%;
+  height: 100%;
+  padding: pxrem(40px);
 	.personRank-page{
-		padding:0 0.7rem;
-		.title{
-		  color:#fff;
-		  font-size:0.58rem;
-		  text-align:left;
-		  padding-top:0.53rem;
-		  margin-bottom:0.9rem;
-		}
+    padding: pxrem(200px) pxrem(96px) pxrem(95px) pxrem(78px);
 		.rank-list{
 		  text-align:left;
 		  .list-item{

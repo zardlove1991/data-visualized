@@ -1,7 +1,7 @@
 <template>
   <div class="common-mengdian ">
     <div class="mengdian-page common01-border">
-	    <div class="title">蒙点号</div>
+      <div class="common01-title">蒙点号</div>
 	   	<div class="member-info">
 	   	  <div class="member-all flex">
 	   	    <div class="member-title flex-one">
@@ -10,9 +10,9 @@
 	   	    <div class="member-num flex-one">2</div>
 	   	  </div>
 	   	  <div class="member-list">
-	   	    <div class="member-item animated" 
+	   	    <div class="member-item animated"
 	   	    :class="{'flipInX' : v.title}"
-            :style="{'animation-delay' : k/2 + 's'}" 
+            :style="{'animation-delay' : k/2 + 's'}"
             v-for="(v, k) in dataList">
 	   	      <div class="member-icon">
 	   	        <img src="./assets/title-img.png" />
@@ -43,8 +43,11 @@ export default {
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
 .common-mengdian{
+  width: 100%;
+  height: 100%;
+  padding: pxrem(40px);
 	.mengdian-page{
-		padding:0 0.7rem;
+    padding: pxrem(167px) pxrem(96px) pxrem(95px) pxrem(78px);
 		.title{
 		  color:#fff;
 		  font-size:0.58rem;

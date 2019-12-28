@@ -161,7 +161,8 @@ export default {
 @import 'src/styles/index.scss';
 .xy-tv {
   width: 100%;
-  padding: 0.25vh 0.1vw;
+  height: 100%;
+  padding: pxrem(40px);
   .tv-main {
     position: relative;
     width: 100%;
