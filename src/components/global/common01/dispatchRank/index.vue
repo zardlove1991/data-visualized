@@ -4,17 +4,17 @@
       <div class="common01-title">发稿量排行</div>
       <div class="wrap-content sys-flex flex-justify-between">
         <div class="content-left">
-          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
             <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
-            <div class="title common01-ft40">{{v}}</div>
-            <div class="num common01-ft36"><span class="common01-ft60">{{dataArr[v]}}</span>条</div>
+            <div class="title common01-ft40">{{v.name}}</div>
+            <div class="num common01-ft36"><span class="common01-ft60">{{v.publish}}</span>条</div>
           </div>
         </div>
         <div class="content-right" v-if="rightList && rightList[0]">
-          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
             <div class="index common01-ft40" :class="{'one': k + 7 === 0, 'two': k + 7 === 1, 'three': k + 7 === 2, 'four':k + 7 > 2}">{{k + 8}}</div>
-            <div class="title common01-ft40">{{v}}</div>
-            <div class="num common01-ft36"><span class="common01-ft60">{{dataArr[v]}}</span>条</div>
+            <div class="title common01-ft40">{{v.name}}</div>
+            <div class="num common01-ft36"><span class="common01-ft60">{{v.publish}}</span>条</div>
           </div>
         </div>
       </div>
@@ -27,7 +27,6 @@ export default {
   name: 'dispatchRank',
   data () {
     return {
-      dataArr: {},
       leftList: [],
       rightList: []
     }
@@ -42,8 +41,7 @@ export default {
     getPublishDataRank () {
       getPublishDataRank(this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          this.dataArr = res.data.result
-          let dataList = Object.keys(this.dataArr)
+          let dataList = res.data.result.data
           if (dataList && dataList.length > 7) {
             this.leftList = dataList.slice(0, 7)
             this.rightList = dataList.slice(7)

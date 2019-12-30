@@ -25,7 +25,7 @@ plateForm:类型{
   weBo: '微博'
 }
 */
-export const getCluesTogether = (plateForm = 'website', count = 6, page = 1, source, currentViewId) => (source ? createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}&source=${source}&view_id=${currentViewId}`) : createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}&view_id=${currentViewId}`))
+export const getCluesTogether = (plateForm = 'website', count = 6, page = 1, currentViewId, source) => (source ? createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}&source=${source}&view_id=${currentViewId}`) : createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}&view_id=${currentViewId}`))
 
 /* 稿件排行
 desc：类型{
