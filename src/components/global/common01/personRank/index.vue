@@ -48,9 +48,9 @@ export default {
     getDataList () {
       getM2OPlusWorkRank(this.count, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result.length) {
+          if (res.data.result && res.data.result.data.length) {
             this.dataList = []
-            res.data.result.forEach((item, index) => {
+            res.data.result.data.forEach((item, index) => {
               if (index < 8) {
                 this.dataList.push(item)
               }

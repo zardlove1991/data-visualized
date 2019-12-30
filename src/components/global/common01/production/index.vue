@@ -105,7 +105,7 @@ export default {
         } else {
           this.workdata = {}
         }
-        this.totalContent = this.preFixInterge(+this.workdata.create + +this.workdata.audit + +this.workdata.publish, 8)
+        this.totalContent = this.preFixInterge(+(this.workdata.create || '') + +(this.workdata.audit || '') + +(this.workdata.publish || ''), 8)
       })
       getM2OPlusWorkChartSummary(type, this.currentViewId).then(res => {
         if (res.data && res.data.result) {
