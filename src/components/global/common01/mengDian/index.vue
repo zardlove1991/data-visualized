@@ -7,17 +7,17 @@
 	   	    <div class="member-title flex-one">
 	   	    <img class="icon" src="./assets/icon.png" />
 	   	    入驻商家:</div>
-	   	    <div class="member-num flex-one">2</div>
+	   	    <div class="member-num flex-one">{{dataList.length}}</div>
 	   	  </div>
 	   	  <div class="member-list">
 	   	    <div class="member-item animated"
-	   	    :class="{'flipInX' : v.title}"
+	   	    :class="{'flipInX' : v.name}"
             :style="{'animation-delay' : k/2 + 's'}"
             v-for="(v, k) in dataList">
 	   	      <div class="member-icon">
-	   	        <img src="./assets/title-img.png" />
+	   	        <img :src='v.indexpic.host + v.indexpic.filename' />
 	   	      </div>
-	   	      <div class="member-name">{{v.title}}</div>
+	   	      <div class="member-name">{{v.name}}</div>
 	   	    </div>
 	   	  </div>
 	   	</div>
@@ -26,14 +26,47 @@
 </template>
 
 <script>
+import { getM2OPlusSubscribeIndex } from '@/servers/interface'
 export default {
   data () {
     return {
-      dataList: [{
-        title: '智慧内蒙古'
-      }, {
-        title: '智慧内蒙古'
-      }]
+      dataList: [],
+      frequency: 25000
+    }
+  },
+  created () {
+    this.getDataList()
+  },
+  mounted () {
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
+  },
+  methods: {
+    getDataList () {
+      getM2OPlusSubscribeIndex(this.count, this.page, this.currentViewId).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.length) {
+            this.dataList = []
+            res.data.result.forEach((item, index) => {
+              if (index < 8) {
+                this.dataList.push(item)
+              }
+            })
+            if (this.isPaging) {
+              this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
+            }
+          } else {
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
+          }
+        }
+      })
     }
   }
 }

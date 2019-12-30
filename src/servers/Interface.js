@@ -48,7 +48,8 @@ export const getOperateData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apid
 
 /* 成稿产出 */
 export const getM2OPlusPublish = (count = 5, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?count=${count}&page=${page}&view_id=${currentViewId}`)
-
+/* 蒙点号 */
+export const getM2OPlusSubscribeIndex = (count = 5, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusSubscribeIndex?count=${count}&page=${page}&view_id=${currentViewId}`)
 /* 辅屏传播效果 */
 export const getM2OPlusChart = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusChart&view_id=${currentViewId}`)
 
