@@ -33,7 +33,7 @@ export default {
         clearInterval(this.countNum)
         this.count = 0
       }
-      getNewArticleList().then(res => {
+      getNewArticleList(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           this.list = res.data.result.data
           this.initList()

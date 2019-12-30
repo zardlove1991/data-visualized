@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-// import { getHotsNewsList } from '@/servers/interface'
 import { getCluesTogether } from '@/servers/interface'
 export default {
   name: 'clueGather',
@@ -37,7 +36,7 @@ export default {
   },
   methods: {
     getCluesTogether () {
-      getCluesTogether('website', 5, this.page).then(res => {
+      getCluesTogether('website', 5, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []

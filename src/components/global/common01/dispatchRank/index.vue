@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getPublishDataRank () {
-      getPublishDataRank().then(res => {
+      getPublishDataRank(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           this.dataArr = res.data.result
           let dataList = Object.keys(this.dataArr)

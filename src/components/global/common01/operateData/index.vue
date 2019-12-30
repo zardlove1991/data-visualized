@@ -73,7 +73,7 @@ export default {
         clearInterval(this.countNum)
         this.count = 0
       }
-      getAppStatisticalData().then(res => {
+      getAppStatisticalData(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           this.list = res.data.result
           this.initList()
@@ -86,7 +86,7 @@ export default {
         clearInterval(this.countNum)
         this.count = 0
       }
-      getMicroOperationData().then(res => {
+      getMicroOperationData(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           this.list = res.data.result
           this.initList()

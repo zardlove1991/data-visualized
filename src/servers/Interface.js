@@ -25,7 +25,7 @@ plateForm:类型{
   weBo: '微博'
 }
 */
-export const getCluesTogether = (plateForm = 'website', count = 6, page = 1, source) => (source ? createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}&source=${source}`) : createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}`))
+export const getCluesTogether = (plateForm = 'website', count = 6, page = 1, source, currentViewId) => (source ? createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}&source=${source}&view_id=${currentViewId}`) : createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCluesTogether?plateForm=${plateForm}&count=${count}&page=${page}&view_id=${currentViewId}`))
 
 /* 稿件排行
 desc：类型{
@@ -83,18 +83,16 @@ export const getM2OPlusWorkRank = (count = 8, page = 1, currentViewId) => create
 /* 部门统计 */
 export const getM2OPlusWorkDepartRank = (count = 8, page = 1, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkDepartRank?count=${count}&page=${page}&view_id=${currentViewId}`)
 
-/* 通用组件01线索汇聚 */
-export const getHotsNewsList = (page = 1, count = 5) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?page=${page}&count=${count}`)
 /* 通用组件01最新稿件 */
-export const getNewArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusArticleList`)
+export const getNewArticleList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusArticleList?view_id=${currentViewId}`)
 /* 通用组件01发稿量排行 */
-export const getPublishDataRank = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkDepartRank`)
+export const getPublishDataRank = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkDepartRank?view_id=${currentViewId}`)
 /* 通用组件01点击量排行 */
-export const getClickArticleList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList`)
+export const getClickArticleList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?view_id=${currentViewId}`)
 /* 通用组件01运营数据APP */
-export const getAppStatisticalData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getAppStatisticalData?is_test=true`)
+export const getAppStatisticalData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getAppStatisticalData?is_test=true&view_id=${currentViewId}`)
 /* 通用组件01运营数据微运营 */
-export const getMicroOperationData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?is_test=true`)
+export const getMicroOperationData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?is_test=true&view_id=${currentViewId}`)
 
 // 江宁思想与实践
 export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)
