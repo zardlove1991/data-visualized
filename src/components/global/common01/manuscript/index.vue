@@ -10,7 +10,7 @@
           :key="k">
           <div class="type-area sys-flex sys-flex-center">
             <img v-if="k === 0" src="./assets/new.png" />
-            <span class="common01-ft38" v-if="k !== 0">【{{v.typeName}}】</span>
+            <span class="common01-ft38" v-if="k !== 0">【{{v.typeName || '文稿'}}】</span>
           </div>
           <div class="list-text overhidden common01-ft38 flex-one">{{v.title}}</div>
           <div class="list-read flex flex-center">
