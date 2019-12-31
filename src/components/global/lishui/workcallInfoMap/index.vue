@@ -15,7 +15,7 @@
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
           <div class="reporter-list-wrap">
               <div class="reporter-list-content" v-if="reporterList && reporterList.length">
-                <div class="reporter-list" v-for="(v,k) in reporterList" :key="k">
+                <div class="reporter-list" v-for="(v,k) in reporterList" v-if="v.rc_status === 0" :key="k">
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
                       <img class="avatar" v-if="v.avatar" :src="v.avatar && v.avatar.uri" />
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
@@ -576,10 +576,10 @@ export default {
             }, 60, 'red', img, vv)
             setTimeout(function () {
               if (vv.rc_status === 0) {
-                mySquare['_div'].classList.add('landmark-red')
+                map.addOverlay(mySquare)
+                // mySquare['_div'].classList.add('landmark-red')
               }
             }, 100)
-            map.addOverlay(mySquare)
             // 设置地图的最佳视图
             this.coordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
           } else {
