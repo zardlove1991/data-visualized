@@ -1,5 +1,5 @@
 <template>
-  <div class="call-wrap sys-flex" v-if="call_Show">
+  <div class="lishui-call-wrap sys-flex" v-if="call_Show">
     <div class="sys-flex-one" v-show="online">
       <div id="call-main" class="rong-container">
         <div class="rong-min-window-wrap">
@@ -214,8 +214,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.call-wrap{
+<style lang="scss">
+.lishui-call-wrap{
   // width: 14.5em;
   height: 100%;
   // padding: 0.46em;

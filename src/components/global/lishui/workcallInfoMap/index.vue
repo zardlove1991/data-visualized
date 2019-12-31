@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="ls-workcallInfoMap">
+  <div class="lishui-workcallmap-container" id="ls-workcallInfoMap">
     <div class="container-title sys-flex sys-flex-center flex-justify-center">
       <div class="title-image"></div>
     </div>
@@ -735,7 +735,7 @@ export default {
 .anchorBL{
   display:none!important;
 }
-.container {
+.lishui-workcallmap-container {
   width: 100%;
   height: 100%;
   position: relative;
