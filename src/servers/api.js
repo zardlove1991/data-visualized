@@ -79,3 +79,19 @@ Vue.mixin({
     }
   }
 })
+
+instance.interceptors.response.use((res, xhr) => {
+  return res
+}, (error) => {
+  if (error && error.response) {
+    switch (error.response.status) {
+      case 403:
+        window.ddVue.$router.push({
+          path: '/error'
+        })
+        break
+      default:
+    }
+  }
+  return Promise.reject(error)
+})

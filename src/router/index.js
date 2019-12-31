@@ -27,6 +27,11 @@ const allRoutes = [
     path: '/login',
     name: 'login',
     component: getPage('commandSystem/login')
+  },
+  {
+    path: '/error',
+    name: 'error',
+    component: getPage('error')
   }
 ]
 
