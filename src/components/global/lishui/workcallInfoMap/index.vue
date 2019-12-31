@@ -682,7 +682,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 // px转em,第二个参数可以控制倍数
 @function pxem($px-values,$base-multiple: 18.75, $baseline-px:16px,$support-for-ie:false){
   //Conver the baseline into rems
