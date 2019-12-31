@@ -13,7 +13,7 @@
             :call-type.sync="callType">
           </call>
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
-          <div class="reporter-list-wrap">
+          <div class="reporter-list-wrap" v-if="reporterList && reporterList.length">
               <div class="reporter-list-content" v-if="reporterList && reporterList.length">
                 <div class="reporter-list" v-for="(v,k) in reporterList" v-if="v.rc_status === 0" :key="k">
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
@@ -647,7 +647,7 @@ export default {
     getReporter () {
       getWorkCallConnectList().then(res => {
         if (!res.data.error_code && res.data.result.length) {
-          this.reporterList = res.data.result
+          this.reporterList = res.data.result.filter(item => item.rc_status === 0)
         }
         this.rMap()
       })

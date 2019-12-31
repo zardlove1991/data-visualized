@@ -235,6 +235,8 @@ export default {
     overflow: hidden;
     padding: 0.1em;
     .rong-min-window-wrap{
+      top: 0;
+      z-index: 1;
       bottom: 0.1em;
       width: 100%;
       display: flex;
