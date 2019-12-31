@@ -56,7 +56,7 @@ export default {
     return {
       center: '',
       reporterList: [],
-      frequency: 120000,
+      frequency: 60000,
       currentActive: false,
       callInfo: {},
       callShow: false,
@@ -482,11 +482,12 @@ export default {
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getReporter()
-        setInterval(() => {
-          this.getReporter()
-        }, this.frequency)
       })
     })
+    let _this = this
+    setInterval(() => {
+      _this.getReporter()
+    }, this.frequency)
   },
   methods: {
     rMap () {
