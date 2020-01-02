@@ -36,6 +36,7 @@ export const maanshancomponentTask = getComponent('maanshan/task')
 /* 溧水套系 */
 // 主屏部分
 export const lishuicomponentWorkcallInfoMap = getComponent('lishui/workcallInfoMap')
+export const lishuicomponentWorkcallInfoMap1 = getComponent('lishui/workcallInfoMap1')
 export const lishuicomponentDayTask = getComponent('lishui/dayTask')
 export const lishuicomponentDataAnalysis = getComponent('lishui/dataAnalysis')
 export const lishuicomponentOperateData = getComponent('lishui/operateData')
