@@ -13,8 +13,10 @@
             :call-type.sync="callType">
           </call>
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
-          <div class="reporter-list-wrap" v-if="reporterList && reporterList.length">
-              <div class="reporter-list-content" v-if="reporterList && reporterList.length">
+          <div class="reporter-list-wrap" v-if="reporterList && reporterList.length" :class="{'hide-list': !isOpen}">
+              <div class="shouqi" @click="isOpen = false" v-if="isOpen"></div>
+              <div class="zhankai" @click="isOpen = true" v-if="!isOpen"></div>
+              <div class="reporter-list-content" v-if="isOpen">
                 <div class="reporter-list" v-for="(v,k) in reporterList" :key="k">
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
                       <img class="avatar" v-if="v.avatar" :src="v.avatar && v.avatar.uri" />
@@ -31,9 +33,6 @@
                     </div>
                     <!-- <div class="border-line"></div> -->
                 </div>
-              </div>
-              <div class="no-data" v-else>
-                暂无数据
               </div>
           </div>
         </div>
@@ -54,6 +53,7 @@ export default {
   name: 'workcallInfoMap',
   data () {
     return {
+      isOpen: true,
       center: '',
       reporterList: [],
       frequency: 60000,
@@ -503,56 +503,58 @@ export default {
       SquareOverlay.prototype = new BMap.Overlay()
       SquareOverlay.prototype.initialize = function (map) {
         this._map = map
-        let div = document.createElement('div')
-        let img = document.createElement('img')
-        let img2 = document.createElement('img')
-        let span = document.createElement('span')
-        let span2 = document.createElement('span')
-        div.appendChild(img)
-        div.appendChild(img2)
-        div.appendChild(span)
-        span.appendChild(span2)
+        var div = document.createElement('div')
         var item = this._mid
-        img.src = this._src
-        img.style.position = 'absolute'
-        img.style['border-radius'] = '50%'
-        img.style.overflow = 'hidden'
-        img.style.width = '0.5em'
-        img.style.height = '0.5em'
-        img.style.top = '0'
-        img.style.left = '0'
-        img.style.zIndex = 10
-        img2.style.position = 'absolute'
-        img2.style['border-radius'] = '50%'
-        img2.style.overflow = 'hidden'
-        img2.style.width = '0.2em'
-        img2.style.height = '0.2em'
-        img2.style.bottom = '0'
-        img2.style.left = '0.45em'
-        img2.style.background = 'url(' + require('./assets/landmark.png') + ') no-repeat center center'
-        img2.style.backgroundSize = '100%'
-        span.style.position = 'absolute'
-        span.style.borderRadius = '0.5em'
-        span.style.overflow = 'hidden'
-        span.style.width = '0.9em'
-        span.style.height = '0.35em'
-        span.style.top = '0.1em'
-        span.style.left = '0.25em'
-        span.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
-        span.style.color = 'rgb(255, 255, 255)'
-        span.zIndex = 9
-        span2.style.position = 'absolute'
-        span2.style.top = '0.4em'
-        span2.style.left = '30%'
-        span2.style.fontSize = '0.16rem'
-        span2.innerText = item.member_name
-        div.style.position = 'absolute'
-        div.style.width = '1.1em'
-        div.style.height = '0.7em'
+        div.id = item.id
+        div.className = 'member-wrap'
+        var addDiv = `
+          <div class="avatar-wrap">
+            <img src="${(item.avatar && item.avatar.uri) ||
+              require('./assets/default_avatar.png')}" alt="" />
+          </div>
+          <div class="wrap sys-flex sys-flex-center">
+            <div class="sys-flex sys-flex-center member-info">
+              <img class="member-avatar" src="${(item.avatar && item.avatar.uri) ||
+                require('./assets/default_avatar.png')}" alt="" />
+              <div>
+                ${item.member_name}
+                <div class="status">当前状态：未连线</div>
+              </div>
+            </div>
+            <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}${item.role_title}</div>
+            <div class="other-info"><i class="icon-item time-icon"></i>${new Date().toDateString()}</div>
+            <div class="other-info"><i class="icon-item lo-icon"></i>${item.address}</div>
+            <div class="close">x</div>
+            <div class="audio"></div>
+            <div class="video"></div>
+          </div>`
+        div.insertAdjacentHTML('beforeEnd', addDiv)
         map.getPanes().markerPane.appendChild(div)
         this._div = div
-        div.onclick = function () {
-          _this.callvideo(item)
+        // 点击显示浮窗
+        div.onmouseover = function () {
+          var doms = document.getElementsByClassName('member-wrap show-detail')
+          for (let i = 0; i < doms.length; i += doms.length) {
+            doms[i].className = 'member-wrap'
+          }
+          div.className = 'member-wrap show-detail'
+        }
+        var parent = div.childNodes
+        if (parent[3] && parent[3].childNodes) {
+          var childs = parent[3].childNodes
+          childs[11].onclick = function () {
+            _this.callaudio(item)
+          }
+          childs[13].onclick = function () {
+            _this.callvideo(item)
+          }
+        }
+        div.onmouseout = function () {
+          var doms = document.getElementsByClassName('member-wrap show-detail')
+          for (let i = 0; i < doms.length; i += doms.length) {
+            doms[i].className = 'member-wrap'
+          }
+          div.className = 'member-wrap hide-detail'
         }
         return div
       }
@@ -781,10 +783,28 @@ export default {
         .reporter-list-wrap {
           width: 23%;
           padding: pxem(70px);
-          overflow-y: hidden;
-          overflow-x: scroll;
           position: relative;
-          background: #021E61;
+          background: #0157AF;
+          .shouqi{
+            cursor: pointer;
+            width: pxrem(79px);
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: pxrem(-79px);
+            background-image: url("./assets/unopen.png");
+            background-size: 100%;
+          }
+          .zhankai{
+            cursor: pointer;
+            width: pxrem(79px);
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: pxrem(-79px);
+            background-image: url("./assets/isopen.png");
+            background-size: 100%;
+          }
           .reporter-list-content{
             height: 100%;
             overflow: scroll;
@@ -794,24 +814,17 @@ export default {
             height: pxem(300px);
             padding: pxem(50px);
             margin-bottom: pxem(50px);
-            background-color: #123371;
+            background-color: #02499F;
             &:hover {
-              background-color: #0A43B7;
+              background-color: #056BE8;
             }
-            // .border-line{
-            //   width: 100%;
-            //   margin-top: 0.4em;
-            //   height: 0.03em;
-            //   background: url('./assets/border-line.png') no-repeat bottom;
-            //   background-size: 100%;
-            // }
             .avatar {
               width: pxrem(190px);
               height: pxrem(190px);
-              border-radius: 50%;
               overflow: hidden;
-              border: solid 0.02em #fff;
-              margin-right: pxrem(60px);
+              border:1px solid rgba(255,255,255,1);
+              margin-right: pxrem(39px);
+              object-fit: cover;
             }
             .info {
               height: 100%;
@@ -819,15 +832,16 @@ export default {
               text-align: left;
               .name {
                 font-size: pxrem(70px);
-                font-family: PingFangSC-Regular;
-                font-weight: 400;
+                font-family:PingFang SC;
+                font-weight: 700;
                 color: rgba(255, 255, 255, 1);
+                margin-bottom: 0.05rem;
               }
               .depart {
                 font-size: pxrem(48px);
                 font-family: PingFangSC-Light;
                 font-weight: 400;
-                color: #00BAFF;
+                color: #64C7FF;
               }
             }
             .connect {
@@ -839,13 +853,139 @@ export default {
               &.connect-audio {
                 background-image: url("./assets/audio.png");
                 margin-right: pxrem(30px);
+                &:hover{
+                  background-image: url("./assets/audio-hover.png");
+                }
               }
               &.connect-video {
                 background-image: url("./assets/video.png");
+                &:hover{
+                  background-image: url("./assets/video-hover.png");
+                }
               }
             }
           }
         }
+        .hide-list{
+          width: 0%;
+          padding: 0;
+        }
+      }
+    }
+  }
+  /*
+    标注
+  */
+  .member-wrap{
+    width: 2.4rem;
+    height: 1.9rem;
+    border-radius: 0.07rem;
+    position: absolute;
+    padding: 0.2rem;
+    font-size: 0.25rem;
+    color: #fff;
+    .member-avatar{
+      width: pxrem(200px);
+      height: pxrem(200px);
+      border-radius: 50%;
+      margin-right: 0.12rem;
+      overflow: hidden;
+    }
+    .avatar-wrap{
+      width: pxrem(209px);
+      height: pxrem(265px);
+      background-repeat: no-repeat;
+      background-image: url("./assets/lo.png");
+      background-size: 100%;
+      position: relative;
+      img{
+        border-radius: 50%;
+        position: absolute;
+        width: pxrem(154px);
+        height: pxrem(154px);
+        top: pxrem(20px);
+        left: pxrem(20px);
+        overflow: hidden;
+      }
+    }
+    .wrap{
+      padding: pxrem(75px) pxrem(153px);
+      top: pxrem(-209px);
+      left: pxrem(250px);
+      position: absolute;
+      display: none;
+      width: pxrem(1377px);
+      height: pxrem(1000px);
+      background-image: url("./assets/reporter-bg.png");
+      background-size: 100%;
+      overflow: hidden;
+    }
+  }
+  .show-detail{
+    .wrap{
+      display: block;
+      .member-info{
+        font-size: pxrem(84px);
+        font-weight: 600;
+        margin-bottom: pxrem(100px);
+        .status{
+          font-size: pxrem(52px);
+          color: #92D7FF;
+        }
+      }
+      .other-info{
+        font-size: pxrem(58px);
+        margin-bottom: pxrem(30px);
+      }
+      .icon-item{
+        display: inline-block;
+        margin-right: pxrem(32px);
+      }
+      .lo-icon{
+        width: pxrem(42px);
+        height: pxrem(53px);
+        background-image: url("./assets/lo-icon.png");
+        background-size: 100%;
+      }
+      .org-icon{
+        width: pxrem(50px);
+        height: pxrem(48px);
+        background-image: url("./assets/org-icon.png");
+        background-size: 100%;
+      }
+      .time-icon{
+        width: pxrem(47px);
+        height: pxrem(48px);
+        background-image: url("./assets/time-icon.png");
+        background-size: 100%;
+      }
+      .audio{
+        position: absolute;
+        bottom: 0.3rem;
+        left: 0.6rem;
+        width: pxrem(480px);
+        height: pxrem(130px);
+        cursor: pointer;
+        background-size: 100% 100%;
+        background-image: url("./assets/audiocall.png");
+      }
+      .video{
+        position: absolute;
+        bottom: 0.3rem;
+        left: 2.6rem;
+        width: pxrem(480px);
+        height: pxrem(130px);
+        cursor: pointer;
+        background-size: 100% 100%;
+        background-image: url("./assets/videocall.png");
+      }
+      .close{
+        font-size: 0.5rem;
+        font-weight: bold;
+        display: none;
+        position: absolute;
+        right: 0.25rem;
+        top: 0.2rem;
       }
     }
   }
