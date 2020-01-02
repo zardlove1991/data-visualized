@@ -39,6 +39,10 @@ export default {
             multiple = (1920 / 1080) / a
           }
           document.documentElement.style.fontSize = (document.documentElement.clientWidth / 1920) * 100 * multiple * (this.view.multiple || 1) + 'px'
+          // 初始化浏览器title
+          if (this.view.docTitle) {
+            document.title = this.view.docTitle || ''
+          }
         }
         this.config = data
         if (this.$route.meta && this.$route.meta.viewId) {

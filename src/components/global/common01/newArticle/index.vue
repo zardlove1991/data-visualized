@@ -85,9 +85,9 @@ export default {
           width: 55%;
         }
         .source {
-          width: 15%;
+          width: 25%;
           text-align: left;
-          margin: 0 pxrem(58px) 0 auto;
+          margin: 0 pxrem(38px) 0 auto;
         }
       }
     }
