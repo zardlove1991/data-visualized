@@ -582,7 +582,6 @@ export default {
                 // mySquare['_div'].classList.add('landmark-red')
               }
             }, 100)
-            map.addOverlay(mySquare)
             // 设置地图的最佳视图
             this.coordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
           } else {
