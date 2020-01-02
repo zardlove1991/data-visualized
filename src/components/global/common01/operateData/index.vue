@@ -20,7 +20,7 @@
               <img :src="v.avatar" />
               <span class="overhidden">{{v.name}}</span>
             </div>
-            <div class="one">{{currentIndex === 0 ? v.app_install_amount : v.int_page_read_user}}</div>
+            <div class="one">{{currentIndex === 0 ? v.app_install_amount : v.cumulate_user}}</div>
             <div class="two">{{currentIndex === 0 ? v.new_user_count_channel_num : v.int_page_read_count}}</div>
             <div class="three">{{currentIndex === 0 ? v.user_count_num : v.share_count}}</div>
           </div>
@@ -63,7 +63,7 @@ export default {
         this.dataList = []
         this.count = 0
         this.list = []
-        this.titleList = ['名称', '粉丝量', '点击量', '转发量']
+        this.titleList = ['名称', '总粉丝量', '昨日点击量', '昨日转发量']
         this.getMicroOperationData()
       }
     },
