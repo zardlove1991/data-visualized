@@ -323,6 +323,7 @@ export default {
     .rong-min-window-wrap{
       width: 8rem;
       height: 7.2rem;
+      border: solid 0.02rem #00E4FF;
       background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
       overflow: hidden;
       overflow-x: scroll;
@@ -362,6 +363,7 @@ export default {
       top: calc(50% - 4rem);
       right: calc(50% - 8.2rem);
       background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
+      border: solid 0.02rem #00E4FF;
       position: absolute;
       z-index: 1;
       .times-info{
