@@ -26,7 +26,7 @@
             <div class="user-name">指挥调度中心</div>
           </div>
           <div class="times-info">
-            <span class="video-time">{{time}}</span>
+            <span class="video-time" v-if="!isFull">{{time}}</span>
             <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
             <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
             <img class="hangUp-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="hangUp">
@@ -49,6 +49,7 @@ export default {
   name: 'call',
   data () {
     return {
+      isFull: false,
       defaultAvatar: require('./assets/default_avatar.png'),
       defaultLogo: require('./assets/logo.jpg'),
       online: false,
@@ -428,7 +429,7 @@ export default {
       left: 0;
       z-index: 3;
       .times-info{
-        bottom: 15%;
+        bottom: 5%;
       }
     }
     .full_screen2{
