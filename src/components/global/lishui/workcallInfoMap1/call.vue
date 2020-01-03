@@ -1,10 +1,10 @@
 <template>
   <div class="lishui-call-wrap sys-flex" v-if="call_Show">
-    <div class="connect-wrap" v-show="online">
+    <div class="connect-wrap" @click="fullScreen('')" v-show="online">
       <div id="call-main" class="flex flex-center">
         <!-- 对方 -->
         <div class="rong-min-window-wrap">
-          <div class="screen_all"></div>
+          <div class="screen_all" @click.stop="fullScreen('min')"></div>
           <div class="call-info">
             <img class="user-avatar" :src="(info_item.avatar && info_item.avatar.uri) || defaultAvatar" alt="" />
             <div class="user-name">{{info_item.member_name}}</div>
@@ -19,7 +19,7 @@
         <!-- 调试用 主叫方 -->
         <!-- <div class="rong-max-window"><video id="18358" autoplay="" userid="18358"></video></div> -->
         <div class="max-window-prepare">
-          <div class="screen_all"></div>
+          <div class="screen_all" @click.stop="fullScreen('max')"></div>
           <div class="call-info">
             <img class="user-avatar" :src="defaultLogo" alt="" />
             <div class="user-name">指挥调度中心</div>
@@ -211,6 +211,23 @@ export default {
       this.$emit('update:infoItem', {})
       this.invite_call = false
       this.invite_tip = '邀请您进行视频会议'
+    },
+    fullScreen (type) {
+      let min = document.getElementsByClassName('rong-min-window-wrap')[0] || {}
+      let max = document.getElementsByClassName('rong-max-window')[0] || {}
+      let maxprepare = document.getElementsByClassName('max-window-prepare')[0] || {}
+      clearClass()
+      if (type === 'min') {
+        min.className = 'rong-min-window-wrap full_screen'
+      } else if (type === 'max') {
+        max.className = 'rong-max-window full_screen2'
+        maxprepare.className = 'max-window-prepare full_screen'
+      }
+      function clearClass () {
+        min.className = 'rong-min-window-wrap'
+        max.className = 'rong-max-window'
+        maxprepare.className = 'max-window-prepare'
+      }
     }
   }
 }
@@ -248,15 +265,21 @@ export default {
   left: 0;
   z-index: 10;
   .connect-wrap{
-    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    position: absolute;
   }
   #call-main{
-    width: pxrem(5000px);
+    margin: 0;
+    width: 100%;
     height: 100%;
     background: transparent;
     position: relative;
     overflow: hidden;
     padding: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     .screen_all{
       cursor: pointer;
       position: absolute;
@@ -298,12 +321,14 @@ export default {
     }
     // 对方
     .rong-min-window-wrap{
-      width: pxrem(2400px);
+      width: 8rem;
+      height: 7.2rem;
       background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
-      height: 100%;
       overflow: hidden;
       overflow-x: scroll;
-      position: relative;
+      position: absolute;
+      top: calc(50% - 4rem);
+      left: calc(50% - 8.2rem);
       .min-window-list{
         position: absolute;
         width: 80%;
@@ -332,12 +357,12 @@ export default {
     }
     // 主叫准备
     .max-window-prepare{
-      width: pxrem(2400px);
+      width: 8rem;
+      height: 7.2rem;
+      top: calc(50% - 4rem);
+      right: calc(50% - 8.2rem);
       background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
       position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
       z-index: 1;
       .times-info{
         z-index: 3;
@@ -367,17 +392,32 @@ export default {
     }
     // 主叫方
     .rong-max-window {
-      width: pxrem(2400px);
+      width: 8rem;
+      height: 4.7rem;
+      top: calc(50% - 3rem);
+      right: calc(50% - 8.2rem);
       position: absolute;
-      top: pxrem(370px);
-      right: 0;
-      height: pxrem(1400px);
       z-index: 2;
       video{
         display: block;
         width: 100%;
         height: 100%;
       }
+    }
+    // 全屏样式
+    .full_screen{
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+    .full_screen2{
+      width: 100%;
+      height: 80%;
+      top: 8%;
+      left: 0;
+      z-index: 3;
     }
     .rong-calllib-emote{
       canvas{

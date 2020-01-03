@@ -1,17 +1,17 @@
 <template>
   <div class="lishui-workcallmap-container1" id="ls-workcallInfoMap">
+    <call
+      @updateList="getReporter"
+      :info-item.sync="callInfo"
+      :call-show.sync="callShow"
+      :call-type.sync="callType">
+    </call>
     <div class="container-title sys-flex sys-flex-center flex-justify-center">
       <div class="title-image"></div>
     </div>
     <div class="container-inner">
       <div class="main-wrap">
         <div class="reporter-map-wrap flex">
-          <call
-            @updateList="getReporter"
-            :info-item.sync="callInfo"
-            :call-show.sync="callShow"
-            :call-type.sync="callType">
-          </call>
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
           <div class="reporter-list-wrap" v-if="reporterList && reporterList.length" :class="{'hide-list': !isOpen}">
               <div class="shouqi" @click="isOpen = false" v-if="isOpen"></div>
