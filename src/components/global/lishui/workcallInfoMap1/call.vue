@@ -328,7 +328,7 @@ export default {
     }
     // 对方
     .rong-min-window-wrap{
-      width: 8rem;
+      width: 9rem;
       height: 7.2rem;
       border: solid 0.02rem #00E4FF;
       background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
@@ -336,7 +336,7 @@ export default {
       overflow-x: scroll;
       position: absolute;
       top: calc(50% - 4rem);
-      left: calc(50% - 8.2rem);
+      left: calc(50% - 9.2rem);
       .min-window-list{
         position: absolute;
         width: 80%;
@@ -365,10 +365,10 @@ export default {
     }
     // 主叫准备
     .max-window-prepare{
-      width: 8rem;
+      width: 9rem;
       height: 7.2rem;
       top: calc(50% - 4rem);
-      right: calc(50% - 8.2rem);
+      right: calc(50% - 9.2rem);
       background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
       border: solid 0.02rem #00E4FF;
       position: absolute;
@@ -401,10 +401,10 @@ export default {
     }
     // 主叫方
     .rong-max-window {
-      width: 8rem;
+      width: 9rem;
       height: 4.7rem;
       top: calc(50% - 3rem);
-      right: calc(50% - 8.2rem);
+      right: calc(50% - 9.2rem);
       position: absolute;
       z-index: 2;
       video{
