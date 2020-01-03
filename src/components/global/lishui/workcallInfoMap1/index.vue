@@ -14,8 +14,8 @@
         <div class="reporter-map-wrap flex">
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
           <div class="reporter-list-wrap" v-if="reporterList && reporterList.length" :class="{'hide-list': !isOpen}">
-              <div class="shouqi" @click="isOpen = false" v-if="isOpen"></div>
-              <div class="zhankai" @click="isOpen = true" v-if="!isOpen"></div>
+              <div class="shouqi" @click.stop="isOpen = false" v-if="isOpen"></div>
+              <div class="zhankai" @click.stop="isOpen = true" v-if="!isOpen"></div>
               <div class="reporter-list-content" v-if="isOpen">
                 <div class="reporter-list" v-for="(v,k) in reporterList" :key="k">
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
@@ -23,7 +23,7 @@
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
                       <div class="info overhidden sys-flex-one">
                           <div class="name overhidden">{{v.member_name}}</div>
-                          <div class="depart">{{`溧水区融媒体中心-${v.role_title}`}}</div>
+                          <div class="depart overhidden">{{`溧水区融媒体中心-${v.role_title}`}}</div>
                           <!-- <div class="depart">溧水区融媒体中心-{{v.rc_status ? (v.rc_status === 1 ? '离线':'登出') : '在线'}}</div> -->
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
@@ -48,7 +48,6 @@ import loadBMap from '@/utils/loadBMap.js'
 import { getWorkCallConnectList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 import { formatDate } from '@/utils/utils'
-import { storage } from '@/utils/storage'
 export default {
   name: 'workcallInfoMap',
   data () {
@@ -528,7 +527,7 @@ export default {
                 require('./assets/default_avatar.png')}" alt="" />
               <div>
                 ${item.member_name}
-                <div class="status">当前状态：${item.rc_status === 0 ? '已连线' : '未连线'}</div>
+                <div class="status">当前状态：${item.is_connection === 1 ? '连线中' : '未连线'}</div>
               </div>
             </div>
             <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}-${item.role_title}</div>
@@ -799,7 +798,7 @@ export default {
           background: #202b67;
         }
         .reporter-list-wrap {
-          width: 23%;
+          width: pxrem(1300px);
           padding: pxem(70px);
           position: relative;
           background: #0157AF;
@@ -927,18 +926,18 @@ export default {
         width: pxrem(154px);
         height: pxrem(154px);
         top: pxrem(20px);
-        left: pxrem(51px);
+        left: pxrem(50px);
         overflow: hidden;
       }
     }
     .wrap{
-      padding: pxrem(75px) pxrem(153px) 0;
+      padding: pxrem(45px) pxrem(145px);
       top: pxrem(-209px);
       left: pxrem(300px);
       position: absolute;
       display: none;
-      width: pxrem(1377px);
-      height: pxrem(1000px);
+      width: pxrem(1607px);
+      height: pxrem(800px);
       background-image: url("./assets/reporter-bg.png");
       background-size: 100%;
       overflow: hidden;
@@ -950,15 +949,15 @@ export default {
       .member-info{
         font-size: pxrem(84px);
         font-weight: 600;
-        margin-bottom: pxrem(80px);
+        margin-bottom: pxrem(60px);
         .status{
           font-size: pxrem(52px);
           color: #92D7FF;
         }
       }
       .other-info{
-        font-size: pxrem(58px);
-        margin-bottom: pxrem(30px);
+        font-size: pxrem(58px)!important;
+        margin: 0 0 pxrem(15px) pxrem(40px);
       }
       .icon-item{
         display: inline-block;
@@ -984,9 +983,9 @@ export default {
       }
       .audio{
         position: absolute;
-        bottom: 0.3rem;
-        left: 0.6rem;
-        width: pxrem(480px);
+        bottom: pxrem(50px);
+        left: pxrem(182px);
+        width: pxrem(520px);
         height: pxrem(130px);
         cursor: pointer;
         background-size: 100% 100%;
@@ -994,9 +993,9 @@ export default {
       }
       .video{
         position: absolute;
-        bottom: 0.3rem;
-        left: 2.6rem;
-        width: pxrem(480px);
+        bottom: pxrem(50px);
+        left: pxrem(762px);
+        width: pxrem(520px);
         height: pxrem(130px);
         cursor: pointer;
         background-size: 100% 100%;

@@ -427,6 +427,9 @@ export default {
       top: 0;
       left: 0;
       z-index: 3;
+      .times-info{
+        bottom: 15%;
+      }
     }
     .full_screen2{
       width: 100%;
