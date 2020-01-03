@@ -10,7 +10,7 @@
             <div class="user-name">{{info_item.member_name}}</div>
             <div class="user-role">溧水区融媒体中心-{{info_item.role_title}}</div>
             <div class="loading" v-if="!invite_call">等待连线...</div>
-            <div class="loading" v-if="invite_call">邀请您进行视频会议</div>
+            <div class="loading" v-if="invite_call">{{invite_tip}}</div>
           </div>
           <div id="rong-min-window-list" class="min-window-list">
             <!-- 调试用 -->
@@ -34,12 +34,6 @@
         </div>
       </div>
     </div>
-    <!-- 邀请连线 正在连线-->
-    <div class="call-info-wrap invite-info-wrap" v-if="invite_call">
-      <span class="invite-name">{{info_item.member_name}}</span>
-      <span class="invite-tip">{{invite_tip}}</span>
-    </div>
-    <!-- <span class="close-btn" @click="close">返回</span> -->
   </div>
 </template>
 
@@ -440,157 +434,6 @@ export default {
       top: 8%;
       left: 0;
       z-index: 4;
-    }
-    .rong-calllib-emote{
-      canvas{
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%!important;
-        height: 100%!important;
-        // width: 3.25em!important;
-        // height: 5.78em!important;
-        z-index: 9;
-      }
-    }
-    div{
-      &:nth-of-type(2){
-        canvas{
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 1em!important;
-          height: 1em!important;
-          z-index: 99999!important;
-        }
-      }
-    }
-    .video-info{
-      width: 1.3em;
-      height: 1.3em;
-      position: absolute;
-      bottom : -0.19em;
-      left : calc(50% - 0.8em);
-      z-index:999999;
-      .video-time{
-        display: block;
-        height: 0.5em;
-        line-height: 0.5em;
-        background:rgba(0,0,0,0.5);
-        border-radius:0.25em;
-        text-align: center;
-        font-size: 0.24em;
-        color: #00FDFE;
-      }
-      .hug-btn{
-        display: block;
-        width: 0.8em;
-        height: 0.8em;
-        background:url(./assets/icon_videoff.png) no-repeat center center;
-        background-size: 0.8em 0.8em;
-        cursor: pointer;
-        margin: 0.16em auto;
-      }
-
-    }
-
-  }
-  .main-wrap{
-    .call-reporter-avatar{
-      display: block;
-      width: 2.5em;
-      height: 2.5em;
-      margin: 0 auto;
-      border-radius: 50%;
-    }
-    .call-reporter-line{
-      display: block;
-      width: 5.6em;
-      height: 2.49em;
-      margin: 0 auto;
-    }
-    .call-status{
-      display: block;
-      color: #FFF34A;
-      font-size: 0.24em;
-      margin-top: -0.8em;
-      margin-bottom: 0.2em;
-      text-align: center;
-    }
-    .call-btn{
-      display: block;
-      width: 1em;
-      height: 1em;
-      margin: 0 0.2em;
-      cursor: pointer;
-      &:hover{
-        opacity: 0.8;
-      }
-    }
-  }
-  .call-info-wrap{
-    width: 3.08em;
-    height: 3.78em;
-    padding-top: 0.8em;
-    padding-left: 0.1em;
-    &.invite-info-wrap{
-      span{
-        display: block;
-        text-align: center;
-        font-size: 0.3em;
-        color: #fff;
-        margin-top: 0.3em;
-        &.invite-name{
-          font-size: 0.5em;
-          margin-top: 0.5em;
-          font-weight: bold;
-          color: #02ffea;
-        }
-      }
-    }
-    .reporter-name{
-      display: block;
-      width: 100%;
-      height: 1em;
-      line-height: 1em;
-      // text-indent: 1em;
-      font-size:0.36em!important;
-      text-align: left;
-      color: #00ffea;
-      // background: url(./assets/pic_arrow_big.png) no-repeat center left;
-      // background-size : 0.82em 0.28em;
-    }
-    .info-list{
-      display: block;
-      text-align: left;
-      font-size:0.24em;
-      color:#00ffea;
-      margin : 0.2em 0;
-      &.introduce{
-        height: 0.28em;
-        background-image:url(./assets/icon_date.png);
-        background-position: center left;
-        background-size:1em
-      }
-    }
-  }
-  .close-btn{
-    position: absolute;
-    display: block;
-    bottom: 0.5em;
-    right: 0.5em;
-    left: 25.5em;
-    // width: 4em;
-    height: 2em;
-    line-height: 2em;
-    font-size: 0.3em;
-    color: #02ffea;
-    border: 0.01em solid #02ffea;
-    // background:url(./assets/btn_return.png) no-repeat center center;
-    // background-size: 0.97em 0.28em;
-    cursor: pointer;
-    &.close-btn:hover {
-      cursor: pointer;
     }
   }
 }

@@ -29,9 +29,7 @@
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
 
                       <div class="connect connect-video" @click="callvideo(v)"></div>
-                      <!-- @click="callvideo(v)" -->
                     </div>
-                    <!-- <div class="border-line"></div> -->
                 </div>
               </div>
           </div>
@@ -55,8 +53,6 @@ export default {
   name: 'workcallInfoMap',
   data () {
     return {
-      curDay: Math.ceil(+new Date() / 10000000),
-      connectedconfig: storage.get('connected-id') || {},
       isOpen: true,
       center: '',
       reporterList: [],
@@ -514,7 +510,6 @@ export default {
       // 绘制带图标注
       var _this = this
       var currenttime = formatDate(+new Date() / 1000, 'YYYY-MM-DD hh:mm')
-      if (!this.connectedconfig[this.curDay]) this.connectedconfig[this.curDay] = []
       SquareOverlay.prototype = new BMap.Overlay()
       SquareOverlay.prototype.initialize = function (map) {
         this._map = map
@@ -522,7 +517,6 @@ export default {
         var item = this._mid
         div.id = item.id
         div.className = 'member-wrap'
-        var connected = _this.connectedconfig[_this.curDay].indexOf(item.member_id) > -1
         var addDiv = `
           <div class="avatar-wrap">
             <img src="${(item.avatar && item.avatar.uri) ||
@@ -534,7 +528,7 @@ export default {
                 require('./assets/default_avatar.png')}" alt="" />
               <div>
                 ${item.member_name}
-                <div class="status">当前状态：${connected ? '已连线' : '未连线'}</div>
+                <div class="status">当前状态：${item.rc_status === 0 ? '已连线' : '未连线'}</div>
               </div>
             </div>
             <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}-${item.role_title}</div>
@@ -555,10 +549,12 @@ export default {
             doms[i].className = 'member-wrap'
           }
           div.className = 'member-wrap show-detail'
+          _this.reporterLocate(item)
         }
         var parent = div.childNodes
         if (parent[3] && parent[3].childNodes) {
           var childs = parent[3].childNodes
+          // 关闭
           childs[9].onclick = function (e) {
             e.stopPropagation()
             var doms = document.getElementsByClassName('member-wrap show-detail')
@@ -568,9 +564,11 @@ export default {
             var dom = e.target.parentNode.parentNode
             dom.className = 'member-wrap hide-detail'
           }
+          // 语音
           childs[11].onclick = function () {
             _this.callaudio(item)
           }
+          // 视频
           childs[13].onclick = function () {
             _this.callvideo(item)
           }
@@ -681,18 +679,11 @@ export default {
       this.callShow = true
     },
     callvideo (reporter) {
-      this.setConnect(reporter)
       this.isOpen = false
       this.getReporter()
       this.callInfo = reporter
       this.callType = 'video'
       this.callShow = true
-    },
-    setConnect (reporter) {
-      if (!this.connectedconfig[this.curDay]) this.connectedconfig[this.curDay] = []
-      this.connectedconfig[this.curDay].push(reporter.member_id)
-      this.connectedconfig[this.curDay] = Array.from(new Set(this.connectedconfig[this.curDay]))
-      storage.set('connected-id', this.connectedconfig)
     },
     // 定位记者中心
     reporterLocate (reporter) {
@@ -936,7 +927,7 @@ export default {
         width: pxrem(154px);
         height: pxrem(154px);
         top: pxrem(20px);
-        left: pxrem(52px);
+        left: pxrem(51px);
         overflow: hidden;
       }
     }
