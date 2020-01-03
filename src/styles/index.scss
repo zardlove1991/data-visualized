@@ -257,3 +257,7 @@ html, body, #app {
 .anchorBL {
   display: none !important;
 }
+/* 文本截断 */
+.txt-overflow {
+  @include line-overflow(1);
+}

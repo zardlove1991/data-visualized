@@ -49,10 +49,14 @@ import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
 import { getWorkCallConnectList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
+import { formatDate } from '@/utils/utils'
+import { storage } from '@/utils/storage'
 export default {
   name: 'workcallInfoMap',
   data () {
     return {
+      curDay: Math.ceil(+new Date() / 10000000),
+      connectedconfig: storage.get('connected-id') || {},
       isOpen: true,
       center: '',
       reporterList: [],
@@ -471,6 +475,13 @@ export default {
     swiper,
     swiperSlide
   },
+  watch: {
+    callShow (res) {
+      if (!res) {
+        this.isOpen = this.reporterList && this.reporterList.length > 0
+      }
+    }
+  },
   created () {
     getDataConfig().then(res => {
       console.log(res)
@@ -500,6 +511,8 @@ export default {
       map.addControl(new BMap.NavigationControl())
       // 绘制带图标注
       var _this = this
+      var currenttime = formatDate(+new Date() / 1000, 'YYYY-MM-DD hh:mm')
+      if (!this.connectedconfig[this.curDay]) this.connectedconfig[this.curDay] = []
       SquareOverlay.prototype = new BMap.Overlay()
       SquareOverlay.prototype.initialize = function (map) {
         this._map = map
@@ -507,6 +520,7 @@ export default {
         var item = this._mid
         div.id = item.id
         div.className = 'member-wrap'
+        var connected = _this.connectedconfig[_this.curDay].indexOf(item.member_id) > -1
         var addDiv = `
           <div class="avatar-wrap">
             <img src="${(item.avatar && item.avatar.uri) ||
@@ -518,12 +532,12 @@ export default {
                 require('./assets/default_avatar.png')}" alt="" />
               <div>
                 ${item.member_name}
-                <div class="status">当前状态：未连线</div>
+                <div class="status">当前状态：${connected ? '已连线' : '未连线'}</div>
               </div>
             </div>
             <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}${item.role_title}</div>
-            <div class="other-info"><i class="icon-item time-icon"></i>${new Date().toDateString()}</div>
-            <div class="other-info"><i class="icon-item lo-icon"></i>${item.address}</div>
+            <div class="other-info"><i class="icon-item time-icon"></i>${currenttime}</div>
+            <div class="other-info txt-overflow"><i class="icon-item lo-icon"></i>${item.address}</div>
             <div class="close">x</div>
             <div class="audio"></div>
             <div class="video"></div>
@@ -655,16 +669,25 @@ export default {
       })
     },
     callaudio (reporter) {
+      this.isOpen = false
       this.getReporter()
       this.callInfo = reporter
       this.callType = 'audio'
       this.callShow = true
     },
     callvideo (reporter) {
+      this.setConnect(reporter)
+      this.isOpen = false
       this.getReporter()
       this.callInfo = reporter
       this.callType = 'video'
       this.callShow = true
+    },
+    setConnect (reporter) {
+      if (!this.connectedconfig[this.curDay]) this.connectedconfig[this.curDay] = []
+      this.connectedconfig[this.curDay].push(reporter.member_id)
+      this.connectedconfig[this.curDay] = Array.from(new Set(this.connectedconfig[this.curDay]))
+      storage.set('connected-id', this.connectedconfig)
     },
     // 定位记者中心
     reporterLocate (reporter) {
@@ -786,22 +809,24 @@ export default {
           background: #0157AF;
           .shouqi{
             cursor: pointer;
-            width: pxrem(79px);
+            width: pxrem(160px);
             height: 100%;
             position: absolute;
             top: 0;
-            left: pxrem(-79px);
+            left: pxrem(-100px);
             background-image: url("./assets/unopen.png");
+            background-repeat: no-repeat;
             background-size: 100%;
           }
           .zhankai{
             cursor: pointer;
-            width: pxrem(79px);
+            width: pxrem(160px);
             height: 100%;
             position: absolute;
             top: 0;
-            left: pxrem(-79px);
+            left: pxrem(-100px);
             background-image: url("./assets/isopen.png");
+            background-repeat: no-repeat;
             background-size: 100%;
           }
           .reporter-list-content{
@@ -809,6 +834,7 @@ export default {
             overflow: scroll;
           }
           .reporter-list {
+            cursor: pointer;
             position: relative;
             height: pxem(300px);
             padding: pxem(50px);
@@ -891,8 +917,8 @@ export default {
       overflow: hidden;
     }
     .avatar-wrap{
-      width: pxrem(209px);
-      height: pxrem(265px);
+      width: pxrem(250px);
+      height: pxrem(320px);
       background-repeat: no-repeat;
       background-image: url("./assets/lo.png");
       background-size: 100%;
@@ -903,18 +929,18 @@ export default {
         width: pxrem(154px);
         height: pxrem(154px);
         top: pxrem(20px);
-        left: pxrem(20px);
+        left: pxrem(52px);
         overflow: hidden;
       }
     }
     .wrap{
-      padding: pxrem(75px) pxrem(153px);
+      padding: pxrem(75px) pxrem(153px) 0;
       top: pxrem(-209px);
-      left: pxrem(250px);
+      left: pxrem(300px);
       position: absolute;
       display: none;
-      width: pxrem(1377px);
-      height: pxrem(1000px);
+      width: pxrem(1644px);
+      height: pxrem(1200px);
       background-image: url("./assets/reporter-bg.png");
       background-size: 100%;
       overflow: hidden;
@@ -926,7 +952,7 @@ export default {
       .member-info{
         font-size: pxrem(84px);
         font-weight: 600;
-        margin-bottom: pxrem(100px);
+        margin-bottom: pxrem(80px);
         .status{
           font-size: pxrem(52px);
           color: #92D7FF;

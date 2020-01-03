@@ -93,11 +93,62 @@ const timeFormat = (inputTime) => {
   return time.slice(5, 10)
 }
 
+/**
+ * [字符串时间转换兼容]
+ * @param  {[string]} utcstr [时间 "2019-08-23 09:58:22.392397+08"]
+ */
+const formatTimeStr = (utcstr) => {
+  let equipmentVersion = navigator.userAgent.toLowerCase()
+  if (/iphone|ipad|ipod|safari/.test(equipmentVersion) && !/chrome/.test(equipmentVersion) && utcstr.indexOf('T') === -1) {
+    utcstr = utcstr.replace(/-/g, '/')
+    utcstr = utcstr.split('.')[0]
+  }
+  return utcstr
+}
+
+/**
+ * [格式化时间戳]
+ * @param  {[number]} utcstr [时间戳]
+ * @param  {[string]} format [时间格式，支持的格式自定义，需在该方法中配置]
+ * @return {[string]}        [转化后的时间格式]
+ */
+const formatDate = (utcstr, format = 'YYYY-MM-DD hh:mm:ss') => {
+  let _format = function (num) {
+    if (num < 10) {
+      num = '0' + num
+    } else {
+      num = num + ''
+    }
+    return num
+  }
+  if (typeof utcstr === 'number') {
+    utcstr = utcstr * 1000
+  }
+  if (typeof utcstr === 'string') {
+    utcstr = formatTimeStr(utcstr)
+  }
+  let newDate = ''
+  newDate = new Date(utcstr)
+  let year = newDate.getFullYear()
+  let month = newDate.getMonth() + 1
+  let dd = newDate.getDate()
+  let hour = newDate.getHours()
+  let min = newDate.getMinutes()
+  let sec = newDate.getSeconds()
+  return format
+    .replace('YYYY', _format(year))
+    .replace('MM', _format(month))
+    .replace('DD', _format(dd))
+    .replace('hh', _format(hour))
+    .replace('mm', _format(min))
+    .replace('ss', _format(sec))
+}
+
 // 把数字转化成数组
 const preFixInterge = (num, n) => {
   return (Array(n).join(0) + num).slice(-n).split('')
 }
 
 export {
-  gaodeTobaidu, getImageUrl, getcurrentDateTime, preFixInterge, timeFormat
+  gaodeTobaidu, getImageUrl, getcurrentDateTime, preFixInterge, timeFormat, formatDate
 }

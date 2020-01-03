@@ -1,42 +1,42 @@
 <template>
   <div class="lishui-call-wrap sys-flex" v-if="call_Show">
-    <div class="sys-flex-one" v-show="online">
-      <div id="call-main" class="rong-container">
+    <div class="connect-wrap" v-show="online">
+      <div id="call-main" class="flex flex-center">
+        <!-- 对方 -->
         <div class="rong-min-window-wrap">
-          <div id="rong-min-window-list" class="min-window-list"></div>
+          <div class="screen_all"></div>
+          <div class="call-info">
+            <img class="user-avatar" :src="(info_item.avatar && info_item.avatar.uri) || defaultAvatar" alt="" />
+            <div class="user-name">{{info_item.member_name}}</div>
+            <div class="user-role">{{info_item.org_title}}-{{info_item.role_title}}</div>
+            <div class="loading">等待连线...</div>
+          </div>
+          <div id="rong-min-window-list" class="min-window-list">
+            <!-- 调试用 -->
+            <!-- <div class="rong-min-window"><video id="18357" autoplay="" userid="18357"></video></div> -->
+          </div>
         </div>
-        <div class="video-info">
-          <span class="video-time">{{time}}</span>
-          <span class="hug-btn" @click="hangUp"></span>
+        <!-- 调试用 主叫方 -->
+        <!-- <div class="rong-max-window"><video id="18358" autoplay="" userid="18358"></video></div> -->
+        <div class="max-window-prepare">
+          <div class="screen_all"></div>
+          <div class="call-info">
+            <img class="user-avatar" :src="defaultLogo" alt="" />
+            <div class="user-name">指挥调度中心</div>
+          </div>
+          <div class="times-info">
+            <span class="video-time">{{time}}</span>
+            <img class="hangUp-btn" src="./assets/icon_voiceoff.png" @click="hangUp">
+          </div>
         </div>
       </div>
     </div>
-    <div class="main-wrap sys-flex-one" v-show="!online">
-      <img class="call-reporter-avatar" v-if="info_item.avatar" v-bind:src="info_item.avatar.uri">
-      <img class="call-reporter-avatar" v-if="!info_item.avatar" src="./assets/default_avatar.png" />
-      <img class="call-reporter-line" src="../workcallInfoMap/assets/pic_soundwave.png">
-      <span class="call-status">连接中...</span>
-      <div class="sys-flex sys-flex-center flex-justify-center">
-        <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
-        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
-        <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="close">
-      </div>
-
-    </div>
-    <div class="call-info-wrap" v-if="!invite_call">
-      <span class="reporter-name overhidden">{{info_item.member_name}}</span>
-      <span class="info-list">手机号：{{info_item.mobile}}</span>
-      <span class="info-list">职&nbsp;&nbsp;&nbsp;&nbsp;位：{{info_item.role_title}}</span>
-      <span class="info-list overhidden">部&nbsp;&nbsp;&nbsp;&nbsp;门：{{info_item.org_title}}</span>
-      <!-- <span class="info-list overhidden">当前位置：{{info_item.address}}</span> -->
-      <!-- <span class="info-list overhidden">采访事件：</span> -->
-    </div>
+    <!-- 邀请连线 正在连线-->
     <div class="call-info-wrap invite-info-wrap" v-if="invite_call">
       <span class="invite-name">{{info_item.member_name}}</span>
       <span class="invite-tip">{{invite_tip}}</span>
     </div>
-    <!-- <el-button class="close-btn" @click="close">返回</el-button> -->
-    <span class="close-btn" @click="close">返回</span>
+    <!-- <span class="close-btn" @click="close">返回</span> -->
   </div>
 </template>
 
@@ -52,6 +52,8 @@ export default {
   name: 'call',
   data () {
     return {
+      defaultAvatar: require('@/assets/avatar/touxiang.png'),
+      defaultLogo: require('./assets/logo.png'),
       online: false,
       time: '00:00',
       onlineTime: 0,
@@ -215,78 +217,168 @@ export default {
 </script>
 
 <style lang="scss">
+// px转rem,第二个参数可以控制倍数
+@function pxrem($px-values,$base-multiple: 18.75, $baseline-px:16px,$support-for-ie:false){
+  //Conver the baseline into rems
+  $baseline-rem: $baseline-px / 1rem * $base-multiple;
+  //Print the first line in pixel values
+  @if $support-for-ie {
+      @return $px-values;
+  }
+  //if there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"{
+      @return $px-values / $baseline-rem;
+  }
+  @else {
+      //Create an empty list that we can dump values into
+      $rem-values:();
+      @each $value in $px-values{
+          // If the value is zero or not a number, return it
+          @if $value == 0 or type-of($value) != "number"{
+              $rem-values: append($rem-values, $value / $baseline-rem);
+          }
+      }
+      @return $rem-values;
+  }
+}
 .lishui-call-wrap{
-  // width: 14.5em;
   height: 100%;
-  // padding: 0.46em;
-  // border : 0.02em solid rgba(96, 186, 236,0.2);
-  // margin : 0.23em;
-  background:rgba(31,57,103,1);
+  width: 100%;
   position: absolute;
-  // top : calc( 50% - 3.8em );
-  left: calc( 50% - 7.5em );
+  left: 0;
   z-index: 10;
+  .connect-wrap{
+    margin: 0 auto;
+  }
   #call-main{
-    width: 7.5em;
+    width: pxrem(5000px);
     height: 100%;
-    margin : 0 auto;
-    background: #000;
+    background: transparent;
     position: relative;
     overflow: hidden;
-    padding: 0.1em;
-    .rong-min-window-wrap{
-      top: 0;
-      z-index: 1;
-      bottom: 0.1em;
-      width: 100%;
-      display: flex;
+    padding: 0;
+    .screen_all{
+      cursor: pointer;
       position: absolute;
-      height: 1em;
+      top: pxrem(65px);
+      right: pxrem(88px);
+      width: pxrem(70px);
+      height: pxrem(70px);
+      background-image:url(./assets/screen_all.png);
+      background-size: 100%;
+    }
+    .call-info{
+      z-index: 1;
+      width: pxrem(800px);
+      position: absolute;
+      top: pxrem(450px);
+      left: 50%;
+      transform: translate(-50%, 0%);
+      .user-avatar{
+        background: #fff;
+        width: pxrem(400px);
+        height: pxrem(400px);
+        border-radius: 50%;
+        border: solid 0.03rem #00E4FF;
+        overflow: hidden;
+      }
+      .user-name{
+        font-size: pxrem(90px);
+        color: #00E4FF;
+      }
+      .user-role{
+        font-size: pxrem(72px);
+        color: #00E4FF;
+      }
+      .loading{
+        margin-top: pxrem(600px);
+        color: #fff;
+        font-size: pxrem(88px);
+      }
+    }
+    // 对方
+    .rong-min-window-wrap{
+      width: pxrem(2400px);
+      background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
+      height: 100%;
       overflow: hidden;
       overflow-x: scroll;
+      position: relative;
       .min-window-list{
+        position: absolute;
+        width: 80%;
+        height: 100%;
+        top: 0;
+        left: 10%;
+        z-index: 2;
         display: flex;
+        flex: 1;
+        .rong-min-window{
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          border: 0.01em solid #ddd;
+          border-radius: 0.03em;
+          overflow: hidden;
+          background: rgba(0,0,0,0.4);
+          margin-right: 0.1em;
+          video{
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
     }
-    .rong-min-window{
-      width: 1.2em;
-      height: 0.9em;
-      cursor: pointer;
-      border: 0.01em solid #ddd;
-      border-radius: 0.03em;
-      overflow: hidden;
-      background: rgba(0,0,0,0.4);
-      margin-right: 0.1em;
-      span{
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-size: 0.5em;
-        color: #ddd;
-      }
-    }
-    .rong-max-window {
-      width: calc(100% - 0.2em);
-      height: calc(100% - 1.3em);
+    // 主叫准备
+    .max-window-prepare{
+      width: pxrem(2400px);
+      background:linear-gradient(0deg,rgba(1,24,87,1),rgba(1,47,83,1));
       position: absolute;
-      bottom: 1.3em !important;
+      top: 0;
+      right: 0;
+      height: 100%;
+      z-index: 1;
+      .times-info{
+        z-index: 3;
+        position: absolute;
+        bottom: pxrem(50px);
+        left: 50%;
+        transform: translate(-50%, 0%);
+        .video-time{
+          margin-bottom: pxrem(46px);
+          display: block;
+          border-radius:0.25em;
+          text-align: center;
+          font-size: pxrem(60px);
+          color: #fff;
+        }
+        .hangUp-btn{
+          margin: 0 auto;
+          display: block;
+          width: pxrem(164px);
+          height: pxrem(164px);
+          cursor: pointer;
+          &:hover{
+            opacity: 0.8;
+          }
+        }
+      }
     }
+    // 主叫方
     .rong-max-window {
+      width: pxrem(2400px);
+      position: absolute;
+      top: pxrem(370px);
+      right: 0;
+      height: pxrem(1400px);
+      z-index: 2;
       video{
         display: block;
         width: 100%;
         height: 100%;
       }
     }
-
-    .rong-min-window{
-      video{
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
     .rong-calllib-emote{
       canvas{
         position: absolute;
