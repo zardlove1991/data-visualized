@@ -1,6 +1,6 @@
 <template>
   <div class="lishui-call-wrap1 sys-flex" v-if="call_Show">
-    <div class="connect-wrap" v-show="online">
+    <div class="connect-wrap" v-show="online || invite_call">
       <div id="call-main" class="flex flex-center">
         <!-- 对方 -->
         <div class="rong-min-window-wrap">
@@ -8,8 +8,9 @@
           <div class="call-info">
             <img class="user-avatar" :src="(info_item.avatar && info_item.avatar.uri) || defaultAvatar" alt="" />
             <div class="user-name">{{info_item.member_name}}</div>
-            <div class="user-role">{{info_item.org_title}}-{{info_item.role_title}}</div>
-            <div class="loading">等待连线...</div>
+            <div class="user-role">溧水区融媒体中心-{{info_item.role_title}}</div>
+            <div class="loading" v-if="!invite_call">等待连线...</div>
+            <div class="loading" v-if="invite_call">邀请您进行视频会议</div>
           </div>
           <div id="rong-min-window-list" class="min-window-list">
             <!-- 调试用 -->
@@ -26,7 +27,9 @@
           </div>
           <div class="times-info">
             <span class="video-time">{{time}}</span>
-            <img class="hangUp-btn" src="./assets/icon_voiceoff.png" @click="hangUp">
+            <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
+            <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
+            <img class="hangUp-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="hangUp">
           </div>
         </div>
       </div>
@@ -52,8 +55,8 @@ export default {
   name: 'call',
   data () {
     return {
-      defaultAvatar: require('@/assets/avatar/touxiang.png'),
-      defaultLogo: require('./assets/logo.png'),
+      defaultAvatar: require('./assets/default_avatar.png'),
+      defaultLogo: require('./assets/logo.jpg'),
       online: false,
       time: '00:00',
       onlineTime: 0,
@@ -113,6 +116,7 @@ export default {
             this.RongCall.ring()
             this.$emit('updateList')
             this.call_Show = true
+            this.$emit('update:callShow', true)
             this.invite_call = true
           })
           break
@@ -151,7 +155,7 @@ export default {
         } else {
           this.RongCall.callAudio(params, 'call-main')
         }
-      }, '1000')
+      }, '10')
     },
 
     accept () {
@@ -160,6 +164,7 @@ export default {
       this.RongCall.acceptVideo('call-main')
       this.invite_tip = '正在连线'
       this.online = true
+      this.invite_call = false
     },
 
     reject () {
@@ -299,13 +304,12 @@ export default {
     }
     .call-info{
       z-index: 1;
-      width: pxrem(800px);
+      width: pxrem(900px);
       position: absolute;
       top: pxrem(450px);
       left: 50%;
       transform: translate(-50%, 0%);
       .user-avatar{
-        background: #fff;
         width: pxrem(400px);
         height: pxrem(400px);
         border-radius: 50%;
@@ -386,6 +390,15 @@ export default {
           text-align: center;
           font-size: pxrem(60px);
           color: #fff;
+        }
+        .call-btn{
+          width: pxrem(164px);
+          height: pxrem(164px);
+          margin: 0 auto;
+          cursor: pointer;
+          &:hover{
+            opacity: 0.8;
+          }
         }
         .hangUp-btn{
           margin: 0 auto;

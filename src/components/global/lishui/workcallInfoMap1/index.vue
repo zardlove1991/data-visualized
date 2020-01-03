@@ -23,8 +23,8 @@
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
                       <div class="info overhidden sys-flex-one">
                           <div class="name overhidden">{{v.member_name}}</div>
-                          <!-- <div class="depart">{{`${v.role_title}-${v.org_title}`}}</div> -->
-                          <div class="depart">溧水区融媒体中心-{{v.rc_status ? (v.rc_status === 1 ? '离线':'登出') : '在线'}}</div>
+                          <div class="depart">{{`溧水区融媒体中心-${v.role_title}`}}</div>
+                          <!-- <div class="depart">溧水区融媒体中心-{{v.rc_status ? (v.rc_status === 1 ? '离线':'登出') : '在线'}}</div> -->
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
 
@@ -479,6 +479,8 @@ export default {
     callShow (res) {
       if (!res) {
         this.isOpen = this.reporterList && this.reporterList.length > 0
+      } else {
+        this.isOpen = false
       }
     }
   },
@@ -535,7 +537,7 @@ export default {
                 <div class="status">当前状态：${connected ? '已连线' : '未连线'}</div>
               </div>
             </div>
-            <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}${item.role_title}</div>
+            <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}-${item.role_title}</div>
             <div class="other-info"><i class="icon-item time-icon"></i>${currenttime}</div>
             <div class="other-info txt-overflow"><i class="icon-item lo-icon"></i>${item.address}</div>
             <div class="close"></div>
@@ -812,7 +814,7 @@ export default {
           background: #0157AF;
           .shouqi{
             cursor: pointer;
-            width: pxrem(160px);
+            width: pxrem(120px);
             height: 100%;
             position: absolute;
             top: 0;
@@ -820,10 +822,11 @@ export default {
             background-image: url("./assets/unopen.png");
             background-repeat: no-repeat;
             background-size: 100%;
+            background-position: center;
           }
           .zhankai{
             cursor: pointer;
-            width: pxrem(160px);
+            width: pxrem(120px);
             height: 100%;
             position: absolute;
             top: 0;
@@ -831,6 +834,7 @@ export default {
             background-image: url("./assets/isopen.png");
             background-repeat: no-repeat;
             background-size: 100%;
+            background-position: center;
           }
           .reporter-list-content{
             height: 100%;
@@ -942,8 +946,8 @@ export default {
       left: pxrem(300px);
       position: absolute;
       display: none;
-      width: pxrem(1644px);
-      height: pxrem(1200px);
+      width: pxrem(1377px);
+      height: pxrem(1000px);
       background-image: url("./assets/reporter-bg.png");
       background-size: 100%;
       overflow: hidden;
