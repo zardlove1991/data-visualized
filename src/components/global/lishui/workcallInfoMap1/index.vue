@@ -1,15 +1,15 @@
 <template>
   <div class="lishui-workcallmap-container1" id="ls-workcallInfoMap">
-    <call
-      @updateList="getReporter"
-      :info-item.sync="callInfo"
-      :call-show.sync="callShow"
-      :call-type.sync="callType">
-    </call>
     <div class="container-title sys-flex sys-flex-center flex-justify-center">
       <div class="title-image"></div>
     </div>
     <div class="container-inner">
+      <call
+        @updateList="getReporter"
+        :info-item.sync="callInfo"
+        :call-show.sync="callShow"
+        :call-type.sync="callType">
+      </call>
       <div class="main-wrap">
         <div class="reporter-map-wrap flex">
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
@@ -538,7 +538,7 @@ export default {
             <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}${item.role_title}</div>
             <div class="other-info"><i class="icon-item time-icon"></i>${currenttime}</div>
             <div class="other-info txt-overflow"><i class="icon-item lo-icon"></i>${item.address}</div>
-            <div class="close">x</div>
+            <div class="close"></div>
             <div class="audio"></div>
             <div class="video"></div>
           </div>`
@@ -546,7 +546,8 @@ export default {
         map.getPanes().markerPane.appendChild(div)
         this._div = div
         // 点击显示浮窗
-        div.onmouseover = function () {
+        div.onclick = function (e) {
+          e.stopPropagation()
           var doms = document.getElementsByClassName('member-wrap show-detail')
           for (let i = 0; i < doms.length; i += doms.length) {
             doms[i].className = 'member-wrap'
@@ -556,19 +557,21 @@ export default {
         var parent = div.childNodes
         if (parent[3] && parent[3].childNodes) {
           var childs = parent[3].childNodes
+          childs[9].onclick = function (e) {
+            e.stopPropagation()
+            var doms = document.getElementsByClassName('member-wrap show-detail')
+            for (let i = 0; i < doms.length; i += doms.length) {
+              doms[i].className = 'member-wrap'
+            }
+            var dom = e.target.parentNode.parentNode
+            dom.className = 'member-wrap hide-detail'
+          }
           childs[11].onclick = function () {
             _this.callaudio(item)
           }
           childs[13].onclick = function () {
             _this.callvideo(item)
           }
-        }
-        div.onmouseout = function () {
-          var doms = document.getElementsByClassName('member-wrap show-detail')
-          for (let i = 0; i < doms.length; i += doms.length) {
-            doms[i].className = 'member-wrap'
-          }
-          div.className = 'member-wrap hide-detail'
         }
         return div
       }
@@ -1005,12 +1008,14 @@ export default {
         background-image: url("./assets/videocall.png");
       }
       .close{
-        font-size: 0.5rem;
         font-weight: bold;
-        display: none;
         position: absolute;
         right: 0.25rem;
         top: 0.2rem;
+        width: pxrem(46px);
+        height: pxrem(46px);
+        background-size: 100% 100%;
+        background-image: url("./assets/close-icon.png");
       }
     }
   }

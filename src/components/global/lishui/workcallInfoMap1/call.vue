@@ -1,6 +1,6 @@
 <template>
-  <div class="lishui-call-wrap sys-flex" v-if="call_Show">
-    <div class="connect-wrap" @click="fullScreen('')" v-show="online">
+  <div class="lishui-call-wrap1 sys-flex" v-if="call_Show">
+    <div class="connect-wrap" v-show="online">
       <div id="call-main" class="flex flex-center">
         <!-- 对方 -->
         <div class="rong-min-window-wrap">
@@ -217,11 +217,17 @@ export default {
       let max = document.getElementsByClassName('rong-max-window')[0] || {}
       let maxprepare = document.getElementsByClassName('max-window-prepare')[0] || {}
       clearClass()
+      if (this.isFull) {
+        this.isFull = false
+        return
+      }
       if (type === 'min') {
         min.className = 'rong-min-window-wrap full_screen'
+        this.isFull = true
       } else if (type === 'max') {
         max.className = 'rong-max-window full_screen2'
         maxprepare.className = 'max-window-prepare full_screen'
+        this.isFull = true
       }
       function clearClass () {
         min.className = 'rong-min-window-wrap'
@@ -258,12 +264,13 @@ export default {
       @return $rem-values;
   }
 }
-.lishui-call-wrap{
+.lishui-call-wrap1{
   height: 100%;
   width: 100%;
   position: absolute;
   left: 0;
   z-index: 10;
+  background:rgba(0,0,0,0.6);
   .connect-wrap{
     width: 100%;
     height: 100%;
@@ -412,14 +419,14 @@ export default {
       height: 100%;
       top: 0;
       left: 0;
-      z-index: 2;
+      z-index: 3;
     }
     .full_screen2{
       width: 100%;
       height: 80%;
       top: 8%;
       left: 0;
-      z-index: 3;
+      z-index: 4;
     }
     .rong-calllib-emote{
       canvas{
