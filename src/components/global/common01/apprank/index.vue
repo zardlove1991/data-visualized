@@ -1,6 +1,6 @@
 <template>
-  <div class="common01-clickrank">
-    <div class="clickrank-wrap common01-border">
+  <div class="common01-apprank">
+    <div class="apprank-wrap common01-border">
       <div class="common01-title">APP一周热门内容排行</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
@@ -26,7 +26,7 @@
 <script>
 import { getClickArticleList } from '@/servers/interface'
 export default {
-  name: 'clickRank',
+  name: 'appRank',
   data () {
     return {
       frequency: 15000,
@@ -78,11 +78,11 @@ export default {
 <style lang="scss">
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
-.common01-clickrank {
+.common01-apprank {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
-  .clickrank-wrap {
+  .apprank-wrap {
     padding: pxrem(220px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
