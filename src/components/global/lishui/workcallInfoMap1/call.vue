@@ -25,12 +25,12 @@
             <img class="user-avatar" :src="defaultLogo" alt="" />
             <div class="user-name">指挥调度中心</div>
           </div>
-          <div class="times-info">
-            <span class="video-time" v-if="!isFull">{{time}}</span>
-            <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
-            <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
-            <img class="hangUp-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="hangUp">
-          </div>
+        </div>
+        <div class="times-info">
+          <span class="video-time" v-if="!isFull">{{time}}</span>
+          <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
+          <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
+          <img class="hangUp-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="hangUp">
         </div>
       </div>
     </div>
@@ -216,6 +216,7 @@ export default {
       let min = document.getElementsByClassName('rong-min-window-wrap')[0] || {}
       let max = document.getElementsByClassName('rong-max-window')[0] || {}
       let maxprepare = document.getElementsByClassName('max-window-prepare')[0] || {}
+      let timesinfo = document.getElementsByClassName('times-info')[0] || {}
       clearClass()
       if (this.isFull) {
         this.isFull = false
@@ -227,12 +228,14 @@ export default {
       } else if (type === 'max') {
         max.className = 'rong-max-window full_screen2'
         maxprepare.className = 'max-window-prepare full_screen'
+        timesinfo.className = 'times-info times-info2'
         this.isFull = true
       }
       function clearClass () {
         min.className = 'rong-min-window-wrap'
         max.className = 'rong-max-window'
         maxprepare.className = 'max-window-prepare'
+        timesinfo.className = 'times-info'
       }
     }
   }
@@ -372,47 +375,47 @@ export default {
       border: solid 0.02rem #00E4FF;
       position: absolute;
       z-index: 1;
-      .times-info{
-        z-index: 3;
-        position: absolute;
-        bottom: pxrem(50px);
-        left: 50%;
-        transform: translate(-50%, 0%);
-        .video-time{
-          margin-bottom: pxrem(46px);
-          display: block;
-          border-radius:0.25em;
-          text-align: center;
-          font-size: pxrem(60px);
-          color: #fff;
+    }
+    .times-info{
+      z-index: 3;
+      position: absolute;
+      top: calc(50% + 1.5rem);
+      right: calc(50% - 4.6rem);
+      transform: translate(50%, 0%);
+      .video-time{
+        margin-bottom: pxrem(46px);
+        display: block;
+        border-radius:0.25em;
+        text-align: center;
+        font-size: pxrem(60px);
+        color: #fff;
+      }
+      .call-btn{
+        width: pxrem(164px);
+        height: pxrem(164px);
+        margin: 0 auto;
+        cursor: pointer;
+        &:hover{
+          opacity: 0.8;
         }
-        .call-btn{
-          width: pxrem(164px);
-          height: pxrem(164px);
-          margin: 0 auto;
-          cursor: pointer;
-          &:hover{
-            opacity: 0.8;
-          }
-        }
-        .hangUp-btn{
-          margin: 0 auto;
-          display: block;
-          width: pxrem(164px);
-          height: pxrem(164px);
-          cursor: pointer;
-          &:hover{
-            opacity: 0.8;
-          }
+      }
+      .hangUp-btn{
+        margin: 0 auto;
+        display: block;
+        width: pxrem(164px);
+        height: pxrem(164px);
+        cursor: pointer;
+        &:hover{
+          opacity: 0.8;
         }
       }
     }
     // 主叫方
     .rong-max-window {
-      width: 9rem;
-      height: 5.5rem;
-      top: 1rem;
-      right: calc(50% - 9.2rem);
+      width: 7.8rem;
+      height: 7.2rem;
+      top: 0.4rem;
+      right: calc(50% - 8.6rem);
       position: absolute;
       z-index: 2;
       video{
@@ -427,17 +430,22 @@ export default {
       height: 100%;
       top: 0;
       left: 0;
-      z-index: 3;
-      .times-info{
-        bottom: 5%;
+      z-index: 4;
+      .min-window-list{
+        z-index: 4;
       }
     }
     .full_screen2{
       width: 80%;
-      height: 86%;
+      height: 100%;
       top: 0;
       left: 10%;
       z-index: 4;
+    }
+    .times-info2{
+      z-index: 5;
+      top: calc(100% - 1.5rem)!important;
+      right: 50%!important;
     }
   }
 }
