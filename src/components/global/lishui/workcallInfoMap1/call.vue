@@ -410,8 +410,8 @@ export default {
     // 主叫方
     .rong-max-window {
       width: 9rem;
-      height: 4.7rem;
-      top: calc(50% - 3rem);
+      height: 5.5rem;
+      top: 1rem;
       right: calc(50% - 9.2rem);
       position: absolute;
       z-index: 2;
@@ -433,10 +433,10 @@ export default {
       }
     }
     .full_screen2{
-      width: 100%;
-      height: 80%;
-      top: 8%;
-      left: 0;
+      width: 80%;
+      height: 86%;
+      top: 0;
+      left: 10%;
       z-index: 4;
     }
   }
