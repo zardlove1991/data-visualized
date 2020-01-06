@@ -1,6 +1,6 @@
 <template>
   <div class="lishui-call-wrap1 sys-flex" v-if="call_Show">
-    <div class="connect-wrap" v-show="online">
+    <div class="connect-wrap" v-show="online || invite_call">
       <div id="call-main" class="flex flex-center">
         <!-- 对方 -->
         <div class="rong-min-window-wrap">
@@ -8,8 +8,9 @@
           <div class="call-info">
             <img class="user-avatar" :src="(info_item.avatar && info_item.avatar.uri) || defaultAvatar" alt="" />
             <div class="user-name">{{info_item.member_name}}</div>
-            <div class="user-role">{{info_item.org_title}}-{{info_item.role_title}}</div>
-            <div class="loading">等待连线...</div>
+            <div class="user-role">溧水区融媒体中心-{{info_item.role_title}}</div>
+            <div class="loading" v-if="!invite_call">等待连线...</div>
+            <div class="loading" v-if="invite_call">{{invite_tip}}</div>
           </div>
           <div id="rong-min-window-list" class="min-window-list">
             <!-- 调试用 -->
@@ -24,19 +25,15 @@
             <img class="user-avatar" :src="defaultLogo" alt="" />
             <div class="user-name">指挥调度中心</div>
           </div>
-          <div class="times-info">
-            <span class="video-time">{{time}}</span>
-            <img class="hangUp-btn" src="./assets/icon_voiceoff.png" @click="hangUp">
-          </div>
+        </div>
+        <div class="times-info">
+          <span class="video-time" v-if="!isFull">{{time}}</span>
+          <img class="call-btn" src="./assets/accept.png" v-if="invite_call" @click="accept">
+          <img class="call-btn" src="./assets/icon_voiceoff.png" v-if="invite_call" @click="reject">
+          <img class="hangUp-btn" src="./assets/icon_voiceoff.png" v-if="!invite_call" @click="hangUp">
         </div>
       </div>
     </div>
-    <!-- 邀请连线 正在连线-->
-    <div class="call-info-wrap invite-info-wrap" v-if="invite_call">
-      <span class="invite-name">{{info_item.member_name}}</span>
-      <span class="invite-tip">{{invite_tip}}</span>
-    </div>
-    <!-- <span class="close-btn" @click="close">返回</span> -->
   </div>
 </template>
 
@@ -52,8 +49,9 @@ export default {
   name: 'call',
   data () {
     return {
-      defaultAvatar: require('@/assets/avatar/touxiang.png'),
-      defaultLogo: require('./assets/logo.png'),
+      isFull: false,
+      defaultAvatar: require('./assets/default_avatar.png'),
+      defaultLogo: require('./assets/logo.jpg'),
       online: false,
       time: '00:00',
       onlineTime: 0,
@@ -113,6 +111,7 @@ export default {
             this.RongCall.ring()
             this.$emit('updateList')
             this.call_Show = true
+            this.$emit('update:callShow', true)
             this.invite_call = true
           })
           break
@@ -151,7 +150,7 @@ export default {
         } else {
           this.RongCall.callAudio(params, 'call-main')
         }
-      }, '1000')
+      }, '10')
     },
 
     accept () {
@@ -160,6 +159,7 @@ export default {
       this.RongCall.acceptVideo('call-main')
       this.invite_tip = '正在连线'
       this.online = true
+      this.invite_call = false
     },
 
     reject () {
@@ -216,6 +216,7 @@ export default {
       let min = document.getElementsByClassName('rong-min-window-wrap')[0] || {}
       let max = document.getElementsByClassName('rong-max-window')[0] || {}
       let maxprepare = document.getElementsByClassName('max-window-prepare')[0] || {}
+      let timesinfo = document.getElementsByClassName('times-info')[0] || {}
       clearClass()
       if (this.isFull) {
         this.isFull = false
@@ -227,12 +228,14 @@ export default {
       } else if (type === 'max') {
         max.className = 'rong-max-window full_screen2'
         maxprepare.className = 'max-window-prepare full_screen'
+        timesinfo.className = 'times-info times-info2'
         this.isFull = true
       }
       function clearClass () {
         min.className = 'rong-min-window-wrap'
         max.className = 'rong-max-window'
         maxprepare.className = 'max-window-prepare'
+        timesinfo.className = 'times-info'
       }
     }
   }
@@ -299,13 +302,12 @@ export default {
     }
     .call-info{
       z-index: 1;
-      width: pxrem(800px);
+      width: pxrem(900px);
       position: absolute;
       top: pxrem(450px);
       left: 50%;
       transform: translate(-50%, 0%);
       .user-avatar{
-        background: #fff;
         width: pxrem(400px);
         height: pxrem(400px);
         border-radius: 50%;
@@ -373,38 +375,47 @@ export default {
       border: solid 0.02rem #00E4FF;
       position: absolute;
       z-index: 1;
-      .times-info{
-        z-index: 3;
-        position: absolute;
-        bottom: pxrem(50px);
-        left: 50%;
-        transform: translate(-50%, 0%);
-        .video-time{
-          margin-bottom: pxrem(46px);
-          display: block;
-          border-radius:0.25em;
-          text-align: center;
-          font-size: pxrem(60px);
-          color: #fff;
+    }
+    .times-info{
+      z-index: 3;
+      position: absolute;
+      top: calc(50% + 1.5rem);
+      right: calc(50% - 4.6rem);
+      transform: translate(50%, 0%);
+      .video-time{
+        margin-bottom: pxrem(46px);
+        display: block;
+        border-radius:0.25em;
+        text-align: center;
+        font-size: pxrem(60px);
+        color: #fff;
+      }
+      .call-btn{
+        width: pxrem(164px);
+        height: pxrem(164px);
+        margin: 0 auto;
+        cursor: pointer;
+        &:hover{
+          opacity: 0.8;
         }
-        .hangUp-btn{
-          margin: 0 auto;
-          display: block;
-          width: pxrem(164px);
-          height: pxrem(164px);
-          cursor: pointer;
-          &:hover{
-            opacity: 0.8;
-          }
+      }
+      .hangUp-btn{
+        margin: 0 auto;
+        display: block;
+        width: pxrem(164px);
+        height: pxrem(164px);
+        cursor: pointer;
+        &:hover{
+          opacity: 0.8;
         }
       }
     }
     // 主叫方
     .rong-max-window {
-      width: 9rem;
-      height: 4.7rem;
-      top: calc(50% - 3rem);
-      right: calc(50% - 9.2rem);
+      width: 7.8rem;
+      height: 7.2rem;
+      top: 0.4rem;
+      right: calc(50% - 8.6rem);
       position: absolute;
       z-index: 2;
       video{
@@ -419,165 +430,22 @@ export default {
       height: 100%;
       top: 0;
       left: 0;
-      z-index: 3;
+      z-index: 4;
+      .min-window-list{
+        z-index: 4;
+      }
     }
     .full_screen2{
-      width: 100%;
-      height: 80%;
-      top: 8%;
-      left: 0;
+      width: 80%;
+      height: 100%;
+      top: 0;
+      left: 10%;
       z-index: 4;
     }
-    .rong-calllib-emote{
-      canvas{
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%!important;
-        height: 100%!important;
-        // width: 3.25em!important;
-        // height: 5.78em!important;
-        z-index: 9;
-      }
-    }
-    div{
-      &:nth-of-type(2){
-        canvas{
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 1em!important;
-          height: 1em!important;
-          z-index: 99999!important;
-        }
-      }
-    }
-    .video-info{
-      width: 1.3em;
-      height: 1.3em;
-      position: absolute;
-      bottom : -0.19em;
-      left : calc(50% - 0.8em);
-      z-index:999999;
-      .video-time{
-        display: block;
-        height: 0.5em;
-        line-height: 0.5em;
-        background:rgba(0,0,0,0.5);
-        border-radius:0.25em;
-        text-align: center;
-        font-size: 0.24em;
-        color: #00FDFE;
-      }
-      .hug-btn{
-        display: block;
-        width: 0.8em;
-        height: 0.8em;
-        background:url(./assets/icon_videoff.png) no-repeat center center;
-        background-size: 0.8em 0.8em;
-        cursor: pointer;
-        margin: 0.16em auto;
-      }
-
-    }
-
-  }
-  .main-wrap{
-    .call-reporter-avatar{
-      display: block;
-      width: 2.5em;
-      height: 2.5em;
-      margin: 0 auto;
-      border-radius: 50%;
-    }
-    .call-reporter-line{
-      display: block;
-      width: 5.6em;
-      height: 2.49em;
-      margin: 0 auto;
-    }
-    .call-status{
-      display: block;
-      color: #FFF34A;
-      font-size: 0.24em;
-      margin-top: -0.8em;
-      margin-bottom: 0.2em;
-      text-align: center;
-    }
-    .call-btn{
-      display: block;
-      width: 1em;
-      height: 1em;
-      margin: 0 0.2em;
-      cursor: pointer;
-      &:hover{
-        opacity: 0.8;
-      }
-    }
-  }
-  .call-info-wrap{
-    width: 3.08em;
-    height: 3.78em;
-    padding-top: 0.8em;
-    padding-left: 0.1em;
-    &.invite-info-wrap{
-      span{
-        display: block;
-        text-align: center;
-        font-size: 0.3em;
-        color: #fff;
-        margin-top: 0.3em;
-        &.invite-name{
-          font-size: 0.5em;
-          margin-top: 0.5em;
-          font-weight: bold;
-          color: #02ffea;
-        }
-      }
-    }
-    .reporter-name{
-      display: block;
-      width: 100%;
-      height: 1em;
-      line-height: 1em;
-      // text-indent: 1em;
-      font-size:0.36em!important;
-      text-align: left;
-      color: #00ffea;
-      // background: url(./assets/pic_arrow_big.png) no-repeat center left;
-      // background-size : 0.82em 0.28em;
-    }
-    .info-list{
-      display: block;
-      text-align: left;
-      font-size:0.24em;
-      color:#00ffea;
-      margin : 0.2em 0;
-      &.introduce{
-        height: 0.28em;
-        background-image:url(./assets/icon_date.png);
-        background-position: center left;
-        background-size:1em
-      }
-    }
-  }
-  .close-btn{
-    position: absolute;
-    display: block;
-    bottom: 0.5em;
-    right: 0.5em;
-    left: 25.5em;
-    // width: 4em;
-    height: 2em;
-    line-height: 2em;
-    font-size: 0.3em;
-    color: #02ffea;
-    border: 0.01em solid #02ffea;
-    // background:url(./assets/btn_return.png) no-repeat center center;
-    // background-size: 0.97em 0.28em;
-    cursor: pointer;
-    &.close-btn:hover {
-      cursor: pointer;
+    .times-info2{
+      z-index: 5;
+      top: calc(100% - 1.5rem)!important;
+      right: 50%!important;
     }
   }
 }

@@ -14,8 +14,8 @@
         <div class="reporter-map-wrap flex">
           <div id="my-map" ref="allmap" class="reporter-map flex-one"></div>
           <div class="reporter-list-wrap" v-if="reporterList && reporterList.length" :class="{'hide-list': !isOpen}">
-              <div class="shouqi" @click="isOpen = false" v-if="isOpen"></div>
-              <div class="zhankai" @click="isOpen = true" v-if="!isOpen"></div>
+              <div class="shouqi" @click.stop="isOpen = false" v-if="isOpen"></div>
+              <div class="zhankai" @click.stop="isOpen = true" v-if="!isOpen"></div>
               <div class="reporter-list-content" v-if="isOpen">
                 <div class="reporter-list" v-for="(v,k) in reporterList" :key="k">
                     <div class="sys-flex sys-flex-center" @click="reporterLocate(v)">
@@ -23,15 +23,13 @@
                       <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
                       <div class="info overhidden sys-flex-one">
                           <div class="name overhidden">{{v.member_name}}</div>
-                          <!-- <div class="depart">{{`${v.role_title}-${v.org_title}`}}</div> -->
-                          <div class="depart">溧水区融媒体中心-{{v.rc_status ? (v.rc_status === 1 ? '离线':'登出') : '在线'}}</div>
+                          <div class="depart overhidden">{{`溧水区融媒体中心-${v.role_title}`}}</div>
+                          <!-- <div class="depart">溧水区融媒体中心-{{v.rc_status ? (v.rc_status === 1 ? '离线':'登出') : '在线'}}</div> -->
                       </div>
                       <div class="connect connect-audio" @click="callaudio(v)"></div>
 
                       <div class="connect connect-video" @click="callvideo(v)"></div>
-                      <!-- @click="callvideo(v)" -->
                     </div>
-                    <!-- <div class="border-line"></div> -->
                 </div>
               </div>
           </div>
@@ -50,13 +48,10 @@ import loadBMap from '@/utils/loadBMap.js'
 import { getWorkCallConnectList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 import { formatDate } from '@/utils/utils'
-import { storage } from '@/utils/storage'
 export default {
   name: 'workcallInfoMap',
   data () {
     return {
-      curDay: Math.ceil(+new Date() / 10000000),
-      connectedconfig: storage.get('connected-id') || {},
       isOpen: true,
       center: '',
       reporterList: [],
@@ -479,6 +474,8 @@ export default {
     callShow (res) {
       if (!res) {
         this.isOpen = this.reporterList && this.reporterList.length > 0
+      } else {
+        this.isOpen = false
       }
     }
   },
@@ -512,7 +509,6 @@ export default {
       // 绘制带图标注
       var _this = this
       var currenttime = formatDate(+new Date() / 1000, 'YYYY-MM-DD hh:mm')
-      if (!this.connectedconfig[this.curDay]) this.connectedconfig[this.curDay] = []
       SquareOverlay.prototype = new BMap.Overlay()
       SquareOverlay.prototype.initialize = function (map) {
         this._map = map
@@ -520,7 +516,6 @@ export default {
         var item = this._mid
         div.id = item.id
         div.className = 'member-wrap'
-        var connected = _this.connectedconfig[_this.curDay].indexOf(item.member_id) > -1
         var addDiv = `
           <div class="avatar-wrap">
             <img src="${(item.avatar && item.avatar.uri) ||
@@ -532,10 +527,10 @@ export default {
                 require('./assets/default_avatar.png')}" alt="" />
               <div>
                 ${item.member_name}
-                <div class="status">当前状态：${connected ? '已连线' : '未连线'}</div>
+                <div class="status">当前状态：${item.is_connection === 1 ? '连线中' : '未连线'}</div>
               </div>
             </div>
-            <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}${item.role_title}</div>
+            <div class="other-info"><i class="icon-item org-icon"></i>${item.org_title}-${item.role_title}</div>
             <div class="other-info"><i class="icon-item time-icon"></i>${currenttime}</div>
             <div class="other-info txt-overflow"><i class="icon-item lo-icon"></i>${item.address}</div>
             <div class="close"></div>
@@ -553,10 +548,12 @@ export default {
             doms[i].className = 'member-wrap'
           }
           div.className = 'member-wrap show-detail'
+          _this.reporterLocate(item)
         }
         var parent = div.childNodes
         if (parent[3] && parent[3].childNodes) {
           var childs = parent[3].childNodes
+          // 关闭
           childs[9].onclick = function (e) {
             e.stopPropagation()
             var doms = document.getElementsByClassName('member-wrap show-detail')
@@ -566,9 +563,11 @@ export default {
             var dom = e.target.parentNode.parentNode
             dom.className = 'member-wrap hide-detail'
           }
+          // 语音
           childs[11].onclick = function () {
             _this.callaudio(item)
           }
+          // 视频
           childs[13].onclick = function () {
             _this.callvideo(item)
           }
@@ -679,18 +678,11 @@ export default {
       this.callShow = true
     },
     callvideo (reporter) {
-      this.setConnect(reporter)
       this.isOpen = false
       this.getReporter()
       this.callInfo = reporter
       this.callType = 'video'
       this.callShow = true
-    },
-    setConnect (reporter) {
-      if (!this.connectedconfig[this.curDay]) this.connectedconfig[this.curDay] = []
-      this.connectedconfig[this.curDay].push(reporter.member_id)
-      this.connectedconfig[this.curDay] = Array.from(new Set(this.connectedconfig[this.curDay]))
-      storage.set('connected-id', this.connectedconfig)
     },
     // 定位记者中心
     reporterLocate (reporter) {
@@ -806,13 +798,13 @@ export default {
           background: #202b67;
         }
         .reporter-list-wrap {
-          width: 23%;
+          width: pxrem(1300px);
           padding: pxem(70px);
           position: relative;
           background: #0157AF;
           .shouqi{
             cursor: pointer;
-            width: pxrem(160px);
+            width: pxrem(120px);
             height: 100%;
             position: absolute;
             top: 0;
@@ -820,10 +812,11 @@ export default {
             background-image: url("./assets/unopen.png");
             background-repeat: no-repeat;
             background-size: 100%;
+            background-position: center;
           }
           .zhankai{
             cursor: pointer;
-            width: pxrem(160px);
+            width: pxrem(120px);
             height: 100%;
             position: absolute;
             top: 0;
@@ -831,6 +824,7 @@ export default {
             background-image: url("./assets/isopen.png");
             background-repeat: no-repeat;
             background-size: 100%;
+            background-position: center;
           }
           .reporter-list-content{
             height: 100%;
@@ -932,18 +926,18 @@ export default {
         width: pxrem(154px);
         height: pxrem(154px);
         top: pxrem(20px);
-        left: pxrem(52px);
+        left: pxrem(50px);
         overflow: hidden;
       }
     }
     .wrap{
-      padding: pxrem(75px) pxrem(153px) 0;
+      padding: pxrem(45px) pxrem(145px);
       top: pxrem(-209px);
       left: pxrem(300px);
       position: absolute;
       display: none;
-      width: pxrem(1644px);
-      height: pxrem(1200px);
+      width: pxrem(1607px);
+      height: pxrem(800px);
       background-image: url("./assets/reporter-bg.png");
       background-size: 100%;
       overflow: hidden;
@@ -955,15 +949,15 @@ export default {
       .member-info{
         font-size: pxrem(84px);
         font-weight: 600;
-        margin-bottom: pxrem(80px);
+        margin-bottom: pxrem(60px);
         .status{
           font-size: pxrem(52px);
           color: #92D7FF;
         }
       }
       .other-info{
-        font-size: pxrem(58px);
-        margin-bottom: pxrem(30px);
+        font-size: pxrem(58px)!important;
+        margin: 0 0 pxrem(15px) pxrem(40px);
       }
       .icon-item{
         display: inline-block;
@@ -989,9 +983,9 @@ export default {
       }
       .audio{
         position: absolute;
-        bottom: 0.3rem;
-        left: 0.6rem;
-        width: pxrem(480px);
+        bottom: pxrem(50px);
+        left: pxrem(182px);
+        width: pxrem(520px);
         height: pxrem(130px);
         cursor: pointer;
         background-size: 100% 100%;
@@ -999,9 +993,9 @@ export default {
       }
       .video{
         position: absolute;
-        bottom: 0.3rem;
-        left: 2.6rem;
-        width: pxrem(480px);
+        bottom: pxrem(50px);
+        left: pxrem(762px);
+        width: pxrem(520px);
         height: pxrem(130px);
         cursor: pointer;
         background-size: 100% 100%;
