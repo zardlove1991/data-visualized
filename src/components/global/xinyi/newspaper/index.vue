@@ -1,6 +1,5 @@
 <template>
   <div class="xy-newspaper" id="xy-newspaper">
-    <!--  :class="[{'warp-bg' : showDefault}]"  -->
     <div class="newspaper-wrap sys-flex sys-vertical">
       <div class="newspaper-title sys-flex sys-flex-center">{{newspaperTitle}}</div>
       <div class="newspaper-box">
@@ -15,11 +14,8 @@ export default {
   data () {
     return {
       newspaperTitle: '数字报',
-      url: 'http://szb.xy.gov.cn/'
+      url: 'http://epaper.routeryun.com/Home/Page/index/mdid/95353.html'
     }
-  },
-  created () {
-    // this.url = 'http://szb.xy.gov.cn/'
   },
   mounted () {
     this.setFontsize('xy-newspaper')

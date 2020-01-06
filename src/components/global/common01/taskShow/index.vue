@@ -6,6 +6,7 @@
         <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status-title sys-flex sys-flex-center common01-ft40">
             <div class="status" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3'}">【{{v.priority === '1' ? '普通' : v.priority === '2' ? '紧急' : '加急'}}】</div>
+            <div class="status-show" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3'}">【{{v.status_show}}】</div>
             <div class="title overhidden">{{v.title}}</div>
           </div>
           <div class="project-name sys-flex sys-flex-center common01-ft32">
@@ -81,19 +82,17 @@ export default {
           margin-bottom: 0;
         }
         .status-title {
-          .status {
-            &.one {
-              color: #05D9FF;
-            }
-            &.two {
-              color: #FEA32C;
-            }
-            &.three {
-              color: RGBA(217, 67, 110, 1);
-            }
+          .one {
+            color: #05D9FF;
+          }
+          .two {
+            color: #FEA32C;
+          }
+          .three {
+            color: RGBA(217, 67, 110, 1);
           }
           .title {
-            width: 80%;
+            width: 60%;
             text-align: left;
           }
         }
