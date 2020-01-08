@@ -7,7 +7,7 @@
 	   	    <div class="member-title flex-one">
 	   	    <img class="icon" src="./assets/icon.png" />
 	   	    入驻商家:</div>
-	   	    <div class="member-num flex-one">{{dataList.length}}</div>
+	   	    <div class="member-num flex-one">{{total}}</div>
 	   	  </div>
 	   	  <div class="member-list">
 	   	    <div class="member-item animated"
@@ -31,7 +31,10 @@ export default {
   data () {
     return {
       dataList: [],
-      frequency: 25000
+      frequency: 25000,
+      count: 8,
+      page: 1,
+      total: 0
     }
   },
   created () {
@@ -46,9 +49,10 @@ export default {
     getDataList () {
       getM2OPlusSubscribeIndex(this.count, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result.length) {
+          this.total = res.data.result.total
+          if (res.data.result.data.length) {
             this.dataList = []
-            res.data.result.forEach((item, index) => {
+            res.data.result.data.forEach((item, index) => {
               if (index < 8) {
                 this.dataList.push(item)
               }
@@ -119,7 +123,8 @@ export default {
 		}
 		.member-item{
 		  display:inline-block;
-		  margin-right:1.47rem;
+		  margin-right:1%;
+		  width:24%;
 		  margin-bottom:1rem;
 		  text-align:center;
 		}
