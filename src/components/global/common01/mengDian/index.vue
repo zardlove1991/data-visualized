@@ -7,7 +7,7 @@
 	   	    <div class="member-title flex-one">
 	   	    <img class="icon" src="./assets/icon.png" />
 	   	    入驻商家:</div>
-	   	    <div class="member-num flex-one">{{total}}</div>
+	   	    <div class="member-num flex-one">{{total || 0}}</div>
 	   	  </div>
 	   	  <div class="member-list">
 	   	    <div class="member-item animated"
