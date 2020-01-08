@@ -34,7 +34,9 @@ export default {
       frequency: 25000,
       count: 8,
       page: 1,
-      total: 0
+      total: 0,
+      maxPage: 9,
+      isPaging: true
     }
   },
   created () {
@@ -59,6 +61,7 @@ export default {
             })
             if (this.isPaging) {
               this.page += 1
+              console.log(this.maxPage)
               if (this.page > this.maxPage) {
                 this.page = 1
               }
@@ -105,7 +108,7 @@ export default {
 		  margin-botttom:0.6rem;
 		}
 		.member-title{
-			font-size:0.4rem;
+		  font-size:0.4rem;
 		  color:#fff;
 		  text-align:right;
 		  padding-right:0.88rem;
