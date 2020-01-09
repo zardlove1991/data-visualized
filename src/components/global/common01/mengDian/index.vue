@@ -53,7 +53,7 @@ export default {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
-          	this.total = res.data.result.total
+            this.total = res.data.result.total
             res.data.result.data.forEach((item, index) => {
               if (index < 8) {
                 this.dataList.push(item)
