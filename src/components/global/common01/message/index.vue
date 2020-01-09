@@ -1,7 +1,7 @@
 <template>
   <div class="common01-message" id="common01-message">
     <div class="message-wrap common01-border">
-      <div class="common01-title">消息汇总</div>
+      <div class="common01-title">{{viewAttr.header || '消息汇总'}}</div>
       <div class="count-wrap">
         <div class="count-item flex flex-center">
           <span class="count-title common01-ft40">消息总数</span>
