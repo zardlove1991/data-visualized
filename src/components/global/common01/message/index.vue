@@ -13,7 +13,7 @@
         </div>
         <div class="count-item flex flex-center">
           <span class="count-title common01-ft40">人均消息数</span>
-          <span class="count">{{totalmessage.messages_count / totalmessage.participators_count === 0 ? 1 : totalmessage.participators_count}}</span>
+          <span class="count">{{Math.ceil(totalmessage.messages_count / (totalmessage.participators_count === 0 ? 1 : totalmessage.participators_count))}}</span>
         </div>
       </div>
       <div class="chart flex flex-one">
