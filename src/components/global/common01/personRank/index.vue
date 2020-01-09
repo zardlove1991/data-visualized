@@ -1,7 +1,7 @@
 <template>
   <div class="common-personRank ">
     <div class="personRank-page common01-border">
-      <div class="common01-title">个人排行</div>
+      <div class="common01-title">{{viewAttr.header || '个人排行'}}</div>
 	   	<div class="rank-list">
 	   	  <div class="list-item animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
 	   	    <div class="flex item-detail">

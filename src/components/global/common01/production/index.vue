@@ -1,7 +1,7 @@
 <template>
   <div class="common01-contentproduction" id="common01-contentproduction">
     <div class="contentproduction-wrap common01-border">
-      <div class="common01-title">内容生产</div>
+      <div class="common01-title">{{viewAttr.header || '内容生产'}}</div>
       <div class="wrap-top sys-flex sys-flex-center">
         <div class="top-total sys-flex sys-flex-center">
           <div class="total-text common01-ft40">总内容：</div>

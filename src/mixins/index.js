@@ -29,9 +29,7 @@ export default {
     if (this.data) {
       this.currentViewId = this.data.id || '' // 组件id
     }
-    if (this.data && this.data.viewAttr) {
-      this.viewAttr = this.data.viewAttr || {}
-    }
+    this.viewAttr = (this.data && this.data.viewAttr) || {}
   },
   mounted () {
     this.pageAnimated = true

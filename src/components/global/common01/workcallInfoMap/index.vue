@@ -8,7 +8,7 @@
       ></call>
       <div id="my-map" ref="allmap" class="reporter-map"></div>
       <div class="reporter-list-wrap">
-        <div class="reporter-title common01-ft70">记者列表</div>
+        <div class="reporter-title common01-ft70">{{viewAttr.header || '记者列表'}}</div>
         <div class="reporter-body" v-if="reporterList && reporterList.length">
           <div class="reporter-list" v-for="(v, k) in reporterList" :key="k">
             <div class="sys-flex list-body sys-flex-center">

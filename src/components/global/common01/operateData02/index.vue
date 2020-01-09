@@ -1,7 +1,7 @@
 <template>
   <div class="common01-operatedata02" id="common01-operatedata02">
     <div class="operate-wrap sys-flex sys-vertical common01-border">
-      <div class="common01-title">运营数据</div>
+      <div class="common01-title">{{viewAttr.header || '运营数据'}}</div>
       <div class="operate-list sys-flex sys-vertical">
         <div class="sys-flex">
           <div class="one-img img-box">
