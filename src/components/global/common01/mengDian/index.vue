@@ -35,7 +35,7 @@ export default {
       count: 8,
       page: 1,
       total: 0,
-      maxPage: 9,
+      maxPage: 10,
       isPaging: true
     }
   },
