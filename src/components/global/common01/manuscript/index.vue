@@ -34,7 +34,7 @@ export default {
   data () {
     return {
       dataList: [],
-      count: 5,
+      count: 12,
       page: 1,
       isPaging: true,
       typeList: {

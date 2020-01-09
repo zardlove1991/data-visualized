@@ -6,7 +6,7 @@
 	   	  <div class="member-all flex">
 	   	    <div class="member-title flex-one">
 	   	    <img class="icon" src="./assets/icon.png" />
-	   	    入驻商家:</div>
+	   	    入驻蒙点号数:</div>
 	   	    <div class="member-num flex-one">{{total || 0}}</div>
 	   	  </div>
 	   	  <div class="member-list">
@@ -86,7 +86,7 @@ export default {
   height: 100%;
   padding: pxrem(40px);
 	.mengdian-page{
-    padding: pxrem(167px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(167px) pxrem(80px) pxrem(80px) pxrem(78px);
 		.title{
 		  color:#fff;
 		  font-size:0.58rem;
@@ -145,6 +145,8 @@ export default {
 		.member-name{
 		  font-size:0.34rem;
 		  color:#fff;
+		  height:0.5rem;
+		  overflow:hidden;
 		}
 	}
 	.icon{
