@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       dataList: [],
-      frequency: 25000,
+      frequency: 10000,
       count: 8,
       page: 1,
       total: 0,
@@ -61,7 +61,6 @@ export default {
             })
             if (this.isPaging) {
               this.page += 1
-              console.log(this.maxPage)
               if (this.page > this.maxPage) {
                 this.page = 1
               }
