@@ -1,7 +1,7 @@
 <template>
   <div class="common-mengdian ">
     <div class="mengdian-page common01-border">
-      <div class="common01-title">蒙点号</div>
+      <div class="common01-title">{{viewAttr.header || '蒙点号'}}</div>
 	   	<div class="member-info">
 	   	  <div class="member-all flex">
 	   	    <div class="member-title flex-one">

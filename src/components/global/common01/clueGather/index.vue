@@ -1,7 +1,7 @@
 <template>
   <div class="common01-cluegather">
     <div class="cluegather-wrap common01-border">
-      <div class="common01-title">线索汇聚</div>
+      <div class="common01-title">{{viewAttr.header || '线索汇聚'}}</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>

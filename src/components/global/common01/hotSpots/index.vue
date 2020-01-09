@@ -1,7 +1,7 @@
 <template>
   <div class="common-hotspots ">
     <div class="hotspots-page common01-border">
-      <div class="common01-title">市县热点</div>
+      <div class="common01-title">{{viewAttr.header || '市县热点'}}</div>
 	    <div class="tab-line">
 	      <div class="tabs-item common01-ft42" :class="{'active': active === 'chifeng'}" @click="changeTab('chifeng')">赤峰</div>
 	      <div class="tabs-item common01-ft42" :class="{'active': active === 'wulan'}" @click="changeTab('wulan')">乌兰察布</div>

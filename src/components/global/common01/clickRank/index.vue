@@ -1,7 +1,7 @@
 <template>
   <div class="common01-clickrank">
     <div class="clickrank-wrap common01-border">
-      <div class="common01-title">点击量排行</div>
+      <div class="common01-title">{{viewAttr.header || '点击量排行'}}</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + count - 4}}</div>

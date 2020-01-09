@@ -1,7 +1,7 @@
 <template>
   <div class="common-operatedata01">
     <div class="operatedata01-wrap common01-border">
-      <div class="common01-title">运营数据</div>
+      <div class="common01-title">{{viewAttr.header || '运营数据'}}</div>
       <div class="wrap-content sys-flex">
         <div class="icon-box">
           <div class="app img-box" @click="changeTab(0)">

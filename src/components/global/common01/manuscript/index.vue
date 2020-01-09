@@ -1,7 +1,7 @@
 <template>
   <div class="common-cluegather ">
     <div class="manuscript-page common01-border">
-      <div class="common01-title">稿件生产</div>
+      <div class="common01-title">{{viewAttr.header || '稿件生产'}}</div>
 	    <div class="list-title">
         <div class="list-item flex sys-flex-center animated"
           :class="{'flipInX' : v.title}"

@@ -1,7 +1,7 @@
 <template>
   <div class="common01-effect" id="common01-effect">
     <div class="common01-border">
-      <div class="common01-title">传播效果</div>
+      <div class="common01-title">{{viewAttr.header || '传播效果'}}</div>
       <div class="communicationeffect-wrap">
         <div class="wrap-top sys-flex sys-flex-center flex-justify-between">
           <div class="top-left top-common sys-flex sys-flex-center flex-justify-center">
