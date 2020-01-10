@@ -21,15 +21,13 @@
         <div class="source overhidden">来源：{{detailData.source}}</div>
         <div class="author overhidden">作者：{{detailData.author}}</div>
         <div class="time">{{detailData.create_time}}</div>
-        <div class="read sys-flex sys-flex-center">
+        <div class="read sys-flex sys-flex-center" v-if="detailData.click_num">
           <img src="./assets/read.png" />
-          <!-- <span>{{detailData.read}}</span> -->
-          <span>12345</span>
+          <span>{{detailData.click_num}}</span>
         </div>
-        <div class="comment sys-flex sys-flex-center">
+        <div class="comment sys-flex sys-flex-center" v-if="detailData.comment_num">
           <img src="./assets/comment.png" />
-          <!-- <span>{{detailData.comment}}</span> -->
-          <span>12345</span>
+          <span>{{detailData.comment_num}}</span>
         </div>
       </div>
       <div class="detail-content common01-ft36">
