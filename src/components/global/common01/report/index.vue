@@ -1,7 +1,7 @@
 <template>
   <div class="common01-report">
     <div class="report-wrap common01-border">
-      <div class="common01-title">报题展示</div>
+      <div class="common01-title">{{viewAttr.header || '报题展示'}}</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status common01-ft30" :class="{'one': v.audit_status === '0', 'two': v.audit_status === '1', 'three': v.audit_status === '2', 'four': v.audit_status === '4'}">{{v.audit_status === '0' ? '待审核' : v.audit_status === '1' ? '通过' : v.audit_status === '2' ? '打回' : '报审'}}</div>

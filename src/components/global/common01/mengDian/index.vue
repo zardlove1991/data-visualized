@@ -1,12 +1,12 @@
 <template>
   <div class="common-mengdian ">
     <div class="mengdian-page common01-border">
-      <div class="common01-title">蒙点号</div>
+      <div class="common01-title">{{viewAttr.header || '蒙点号'}}</div>
 	   	<div class="member-info">
 	   	  <div class="member-all flex">
 	   	    <div class="member-title flex-one">
 	   	    <img class="icon" src="./assets/icon.png" />
-	   	    入驻商家:</div>
+	   	    入驻蒙点号数:</div>
 	   	    <div class="member-num flex-one">{{total || 0}}</div>
 	   	  </div>
 	   	  <div class="member-list">
@@ -35,7 +35,7 @@ export default {
       count: 8,
       page: 1,
       total: 0,
-      maxPage: 9,
+      maxPage: 10,
       isPaging: true
     }
   },
@@ -51,9 +51,9 @@ export default {
     getDataList () {
       getM2OPlusSubscribeIndex(this.count, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          this.total = res.data.result.total
           if (res.data.result.data.length) {
             this.dataList = []
+            this.total = res.data.result.total
             res.data.result.data.forEach((item, index) => {
               if (index < 8) {
                 this.dataList.push(item)
@@ -86,7 +86,7 @@ export default {
   height: 100%;
   padding: pxrem(40px);
 	.mengdian-page{
-    padding: pxrem(167px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(167px) pxrem(80px) pxrem(80px) pxrem(78px);
 		.title{
 		  color:#fff;
 		  font-size:0.58rem;
@@ -145,6 +145,8 @@ export default {
 		.member-name{
 		  font-size:0.34rem;
 		  color:#fff;
+		  height:0.5rem;
+		  overflow:hidden;
 		}
 	}
 	.icon{

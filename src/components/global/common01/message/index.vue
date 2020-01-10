@@ -1,7 +1,7 @@
 <template>
   <div class="common01-message" id="common01-message">
     <div class="message-wrap common01-border">
-      <div class="common01-title">消息汇总</div>
+      <div class="common01-title">{{viewAttr.header || '消息汇总'}}</div>
       <div class="count-wrap">
         <div class="count-item flex flex-center">
           <span class="count-title common01-ft40">消息总数</span>
@@ -13,7 +13,8 @@
         </div>
         <div class="count-item flex flex-center">
           <span class="count-title common01-ft40">人均消息数</span>
-          <span class="count">{{totalmessage.messages_count / totalmessage.participators_count === 0 ? 1 : totalmessage.participators_count}}</span>
+          <span class="count" v-if="totalmessage">{{Math.ceil(totalmessage.messages_count / (totalmessage.participators_count === 0 ? 1 : totalmessage.participators_count))}}</span>
+          <span class="count" v-else>0</span>
         </div>
       </div>
       <div class="chart flex flex-one">

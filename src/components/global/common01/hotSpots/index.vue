@@ -1,7 +1,7 @@
 <template>
   <div class="common-hotspots ">
     <div class="hotspots-page common01-border">
-      <div class="common01-title">市县热点</div>
+      <div class="common01-title">{{viewAttr.header || '市县热点'}}</div>
 	    <div class="tab-line">
 	      <div class="tabs-item common01-ft42" :class="{'active': active === 'chifeng'}" @click="changeTab('chifeng')">赤峰</div>
 	      <div class="tabs-item common01-ft42" :class="{'active': active === 'wulan'}" @click="changeTab('wulan')">乌兰察布</div>
@@ -28,78 +28,67 @@
 </template>
 
 <script>
+import {getM2OPlusHotPublish} from '@/servers/interface'
 export default {
   data () {
     return {
       active: 'chifeng',
       dataList: [],
-      chiList: [{
-        typeName: '文稿',
-        title: '刷脸取件被小学生“破解”！丰巢紧急下线',
-        click_num: 111,
-        publish_time: '2019-10-12 12:13'
-      }, {
-        typeName: '图集',
-        title: '手绘长卷:今年总书记这10个妙喻深入人心',
-        click_num: 1211,
-        publish_time: '2019-10-21 12:13'
-      }, {
-        typeName: '专题',
-        title: '2020年起，这些新规将影响你我生活！',
-        click_num: 1211,
-        publish_time: '2019-10-20 12:13'
-      }, {
-        typeName: '视频',
-        title: '变害为利 造福人民——习近平生态文明思想在福建木兰溪的先行探索',
-        click_num: 1211,
-        publish_time: '2019-10-18 12:13'
-      }, {
-        typeName: '图集',
-        title: '国家市场监管总局：明年食品安全抽检合格率要达到98%',
-        click_num: 1211,
-        publish_time: '2019-10-02 12:13'
-      }],
-      wulanList: [{
-        typeName: '文稿',
-        title: '刷脸取件被小学生“破解”！丰巢紧急下线',
-        click_num: 111,
-        publish_time: '2019-10-12 12:13'
-      }, {
-        typeName: '图集',
-        title: '手绘长卷:今年总书记这10个妙喻深入人心',
-        click_num: 1211,
-        publish_time: '2019-10-21 12:13'
-      }, {
-        typeName: '专题',
-        title: '2020年起，这些新规将影响你我生活！',
-        click_num: 1211,
-        publish_time: '2019-10-20 12:13'
-      }, {
-        typeName: '视频',
-        title: '变害为利 造福人民——习近平生态文明思想在福建木兰溪的先行探索',
-        click_num: 1211,
-        publish_time: '2019-10-18 12:13'
-      }, {
-        typeName: '图集',
-        title: '国家市场监管总局：明年食品安全抽检合格率要达到98%',
-        click_num: 1211,
-        publish_time: '2019-10-02 12:13'
-      }]
+      siteId: 14,
+      frequency: 10000,
+      count: 4,
+      page: 1,
+      isPaging: true
     }
   },
   created () {
-    this.dataList = this.chiList
+    this.getDataList()
+  },
+  mounted () {
+    setInterval(() => {
+      this.getDataList()
+    }, this.frequency)
   },
   methods: {
     changeTab (item) {
       this.active = item
       this.dataList = []
       if (this.active === 'wulan') {
-        this.dataList = this.wulanList
+        this.siteId = 96
+        this.page = 1
+        this.getDataList()
       } else {
         this.dataList = []
-        this.dataList = this.chiList
+        this.siteId = 14
+        this.page = 1
+        this.getDataList()
       }
+    },
+    getDataList () {
+      getM2OPlusHotPublish(this.count, this.page, this.currentViewId, this.siteId).then(res => {
+        if (!res.data.error_code) {
+          this.total = res.data.result.total
+          if (res.data.result.data.length) {
+            this.dataList = []
+            res.data.result.data.forEach((item, index) => {
+              if (index < 8) {
+                this.dataList.push(item)
+              }
+            })
+            if (this.isPaging) {
+              this.page += 1
+              if (this.page > this.maxPage) {
+                this.page = 1
+              }
+            }
+          } else {
+            if (this.page !== 1) {
+              this.page = 1
+              this.getDataList()
+            }
+          }
+        }
+      })
     }
   }
 }

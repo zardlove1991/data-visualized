@@ -1,7 +1,7 @@
 <template>
   <div class="common01-taskshow">
     <div class="taskshow-wrap common01-border">
-      <div class="common01-title">任务展示</div>
+      <div class="common01-title">{{viewAttr.header || '任务展示'}}</div>
       <div class="wrap-content">
         <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status-title sys-flex sys-flex-center common01-ft40">

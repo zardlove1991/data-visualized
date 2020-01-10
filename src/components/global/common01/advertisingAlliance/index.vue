@@ -1,7 +1,7 @@
 <template>
   <div class="common01-advertising" id="common01-advertising">
     <div class="advertising-wrap common01-border">
-      <div class="common01-title">客户分布</div>
+      <div class="common01-title">{{viewAttr.header || '客户分布'}}</div>
       <div class="map-wrap" id="map-wrap"></div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="common01-dispatchrank">
     <div class="dispatchrank-wrap common01-border">
-      <div class="common01-title">发稿量排行</div>
+      <div class="common01-title">{{viewAttr.header || '发稿量排行'}}</div>
       <div class="wrap-content sys-flex flex-justify-between">
         <div class="content-left">
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">

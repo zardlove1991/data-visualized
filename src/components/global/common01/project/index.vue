@@ -1,7 +1,7 @@
 <template>
   <div class="common01-project">
     <div class="project-wrap common01-border">
-      <div class="common01-title">选题展示</div>
+      <div class="common01-title">{{viewAttr.header || '选题展示'}}</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
