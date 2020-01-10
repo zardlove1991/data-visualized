@@ -3,7 +3,7 @@
     <div :class="layoutClass()" v-if="view">
       <div :class="subItemClass(id, viewId)" class="overflow" v-for="id in view.subviews" :key="id" >
         <layout-view v-if="config[id].view === 'layout'" :viewId="id"></layout-view>
-        <components-view :style="defineBg(config[id])" class="bg" v-else :config="config[id]" :screenConfig="screenConfig"></components-view>
+        <components-view :style="defineBg(config[id])" class="bg" v-else :config="config[id]" :screenConfig="screenConfig" :viewId="viewId"></components-view>
       </div>
     </div>
   </div>

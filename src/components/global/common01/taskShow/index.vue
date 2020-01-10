@@ -5,7 +5,7 @@
       <div class="wrap-content">
         <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status-title sys-flex sys-flex-center common01-ft40">
-            <div class="status" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3'}">【{{v.priority === '1' ? '普通' : v.priority === '2' ? '紧急' : '加急'}}】</div>
+            <div class="status" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3' || v.priority === '4'}">【{{v.priority === '1' ? '一级' : v.priority === '2' ? '二级' : v.priority === '3' ? '三级' : '四级'}}】</div>
             <div class="status-show" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3'}">【{{v.status_show}}】</div>
             <div class="title overhidden">{{v.title}}</div>
           </div>
