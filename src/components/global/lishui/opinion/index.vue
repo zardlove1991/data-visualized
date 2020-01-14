@@ -50,14 +50,13 @@ export default {
       }, {
         title: '广成北门车库作为商铺严重影响小区环境和治安',
         url: 'http://www.lsxww.net/thread-60422-1-1.html'
-      }, {
-        title: '强烈建议，天鸿国际到机场路改为单向一车道 ',
-        url: 'http://www.ls114.cn/thread-486786-1-1.html'
       }]
     }
   },
   created () {
-    this.initList()
+    setTimeout(() => {
+      this.initList()
+    }, 100)
   },
   methods: {
     initList () {
@@ -77,7 +76,9 @@ export default {
           this.dataList = []
           clearInterval(this.countNum)
           this.count = 0
-          this.initList()
+          setTimeout(() => {
+            this.initList()
+          }, 100)
         }
       }, 15000)
     },
@@ -109,6 +110,7 @@ export default {
       font-size: pxrem(40px);
       text-align: left;
       margin-bottom: pxrem(100px);
+      cursor: pointer;
       &:last-child {
         margin-bottom: 0;
       }
