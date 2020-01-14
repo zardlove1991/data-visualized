@@ -122,3 +122,7 @@ export const getSoundBeansAllProgramMonitor = (channelId, currentViewId) => crea
 // 内容生产
 export const getM2OPlusWorkRate = (model, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkRate?model=${model}&view_id=${currentViewId}`)
 export const getM2OPlusWorkChartSummary = (model, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkChartSummary?model=${model}&view_id=${currentViewId}`)
+
+// 溧水全网热点
+export const getNewsList = (page, count) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?page=${page}&count=${count}`)
+export const getHotWordsList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
