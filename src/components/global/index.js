@@ -102,3 +102,4 @@ export const common01componentApprank = getComponent('common01/apprank') // app�
 export const common01componentLiveRank = getComponent('common01/liveRank') // 直播排行
 export const common01componentContentEffect = getComponent('common01/contentEffect') // 作品影响力
 export const common01componentUserHeatmap = getComponent('common01/userHeatmap') // 用户热力图
+export const common01componentWeiboHotpoint = getComponent('common01/weiboHotpoint') // 微博热点

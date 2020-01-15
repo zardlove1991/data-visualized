@@ -101,6 +101,8 @@ export const getMicroOperationData = (currentViewId) => createAPI(`${httpsbaseUr
 export const getLiveRankList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
 /* 通用组件01作品影响力 */
 export const getContentEffectList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
+/* 通用组件01微博热点 */
+export const getWeiboHotList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
 
 // 江宁思想与实践
 export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)
