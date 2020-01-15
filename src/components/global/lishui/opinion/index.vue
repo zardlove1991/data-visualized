@@ -1,7 +1,7 @@
 <template>
   <div class="lishui-opinion">
     <div class="opinion-wrap" v-if="!showDetail">
-      <div class="wrap-list overhidden animated" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}" @click="showContentDetail(v)" v-for="(v, k) in dataList" :key="k">{{v.title}}</div>
+      <div class="wrap-list overhidden" @click="showContentDetail(v)" v-for="(v, k) in dataList" :key="k">{{v.title}}</div>
     </div>
     <div class="opinion-detail" v-if="showDetail">
       <div class="back" @click="backList">
