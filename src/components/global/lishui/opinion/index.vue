@@ -1,6 +1,7 @@
 <template>
   <div class="lishui-opinion">
     <div class="opinion-wrap" v-if="!showDetail">
+      <div class="common01-title">{{viewAttr.header || '民生热点'}}</div>
       <div class="wrap-list sys-flex sys-flex-center flex-justify-between" @click="showContentDetail(v)" v-for="(v, k) in dataList" :key="k">
         <div class="title overhidden">{{v.title}}</div>
         <div class="time sys-flex sys-flex-center">
@@ -106,6 +107,16 @@ export default {
   height: 100%;
   padding: pxrem(33px) pxrem(26px) pxrem(53px) pxrem(50px);
   color: #fff;
+  position: relative;
+  .common01-title{
+    font-family: PingFangSC-Semibold;
+    font-size: pxrem(70px);
+    position: absolute;
+    top: pxrem(-25px);
+    left: calc(50% - 20px);
+    transform: translate(-50%, 0);
+    letter-spacing: pxrem(10px);
+  }
   .opinion-wrap {
     width: 100%;
     height: 100%;
@@ -166,8 +177,16 @@ export default {
       margin-top: pxrem(40px);
       overflow-y: scroll;
       text-align: left;
+      .imgs{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
       img {
-        width: 100%;
+        display: block;
+        width: pxrem(600px);
         margin-top: pxrem(20px);
       }
     }

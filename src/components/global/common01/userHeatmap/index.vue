@@ -6,7 +6,7 @@
         <div class="heat-map flex-one">
 
         </div>
-        <div class="">
+        <div class="user-info">
           <div class="user-label flex flex-center common01-ft40"><div class="user-icon"></div>省内用户TOP5</div>
           <div class="" v-for="(item, index) in provinceList" :key="index">
             <span>{{item.name}}</span>
@@ -59,15 +59,21 @@ export default {
   padding: pxrem(40px);
   color: #fff;
   .heatmap-wrap {
+    padding: pxrem(200px) pxrem(96px) pxrem(80px) pxrem(78px);
+    color: #fff;
     .heat-map{
       width: 100%;
       height: 100%;
       background: url("./assets/back.png") no-repeat center;
       background-size: 100% 100%;
     }
+    .user-info{
+      width: pxrem(530px);
+      padding: pxrem(40px);
+    }
     .user-label{
       color: #49F1DF;
-      font-size: pxrem(36px);
+      font-size: pxrem(34px);
       .user-icon{
         width: pxrem(36px);
         height: pxrem(33px);
