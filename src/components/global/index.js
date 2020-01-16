@@ -104,3 +104,5 @@ export const common01componentContentEffect = getComponent('common01/contentEffe
 export const common01componentUserHeatmap = getComponent('common01/userHeatmap') // 用户热力图
 export const common01componentWeiboHotpoint = getComponent('common01/weiboHotpoint') // 微博热点
 export const common01componentWorkDepartRank = getComponent('common01/workDepartRank') // 部门排行
+export const common01componentWebHotpoint = getComponent('common01/webHotpoint') // 网站热点
+export const common01componentWechatHotPoint = getComponent('common01/wechatHotpoint') // 微信热点
