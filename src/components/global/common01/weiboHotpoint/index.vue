@@ -11,7 +11,7 @@
             <span>{{v.click_num}}</span>
           </div> -->
           <div class="time common01-ft32 sys-flex sys-flex-center">
-            <img src="../../../../assets/common/time.png" />
+            <img src="../../../../assets/common/timeblue.png" />
             <span>{{v.date.substring(5,16)}}</span>
           </div>
         </div>
