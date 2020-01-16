@@ -6,17 +6,17 @@
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + count - 4}}</div>
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="share common01-ft32 sys-flex sys-flex-center">
+          <!-- <div class="share common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/share.png" />
             <span>{{v.share_num}}</span>
+          </div> -->
+          <div class="comment common01-ft32 sys-flex sys-flex-center">
+            <img src="../../../../assets/common/comment.png" />
+            <span>{{v.comment_num}}</span>
           </div>
           <div class="read common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/read.png" />
             <span>{{v.click_num}}</span>
-          </div>
-          <div class="comment common01-ft32 sys-flex sys-flex-center">
-            <img src="../../../../assets/common/comment.png" />
-            <span>{{v.comment_num}}</span>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import { getLiveRankList } from '@/servers/interface'
+import { getM2OLiveList } from '@/servers/interface'
 export default {
   name: 'liveRank',
   data () {
@@ -44,7 +44,7 @@ export default {
         clearInterval(this.countNum)
         this.count = 0
       }
-      getLiveRankList(this.currentViewId).then(res => {
+      getM2OLiveList(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           this.list = res.data.result
           this.initList()

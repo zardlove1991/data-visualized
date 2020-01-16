@@ -97,12 +97,14 @@ export const getClickArticleList = (currentViewId) => createAPI(`${httpsbaseUrl}
 export const getAppStatisticalData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getAppStatisticalData?view_id=${currentViewId}`)
 /* 通用组件01运营数据微运营 */
 export const getMicroOperationData = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
-/* 通用组件01直播排行 */
-export const getLiveRankList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
 /* 通用组件01作品影响力 */
 export const getM2ORankList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2ORankList?view_id=${currentViewId}`)
 /* 通用组件01微博热点 */
 export const getWeiboHotList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
+/* 通用组件01部门排行 */
+export const getM2OWorkDepartRank = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OWorkDepartRank?view_id=${currentViewId}`)
+/* 通用组件01直播排行 */
+export const getM2OLiveList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OLiveList?view_id=${currentViewId}`)
 
 // 江宁思想与实践
 export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)

@@ -6,13 +6,13 @@
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + count - 4}}</div>
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="read common01-ft32 sys-flex sys-flex-center">
+          <!-- <div class="read common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/read.png" />
             <span>{{v.click_num}}</span>
-          </div>
+          </div> -->
           <div class="time common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/time.png" />
-            <span>{{v.time}}</span>
+            <span>{{v.date.substring(5,16)}}</span>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { getWeiboHotList } from '@/servers/interface'
+import { getCluesTogether } from '@/servers/interface'
 export default {
   name: 'weiboHotNews',
   data () {
@@ -40,9 +40,9 @@ export default {
         clearInterval(this.countNum)
         this.count = 0
       }
-      getWeiboHotList(this.currentViewId).then(res => {
+      getCluesTogether('weiBo', 20, 1, this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          this.list = res.data.result
+          this.list = res.data.result.data
           this.initList()
         }
       })
@@ -112,6 +112,7 @@ export default {
           margin-left: pxrem(43px);
         }
         .read {
+          color: #36E5F0;
           margin-left: auto;
           img {
             width: pxrem(42px);
@@ -120,9 +121,10 @@ export default {
           }
         }
         .time {
+          color: #36E5F0;
           margin-left: auto;
           img {
-            width: pxrem(42px);
+            width: pxrem(30px);
             height: pxrem(30px);
             margin-right: pxrem(18px);
           }
