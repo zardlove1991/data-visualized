@@ -88,11 +88,11 @@ export default {
           margin-bottom: 0;
         }
         .index {
-          width: pxrem(60px);
-          height: pxrem(60px);
+          width: pxrem(57px);
+          height: pxrem(63px);
           background: no-repeat center;
           background-size: 100%;
-          line-height: pxrem(60px);
+          line-height: pxrem(55px);
           &.one {
             background-image: url("./assets/one.png");
           }
@@ -105,6 +105,18 @@ export default {
           &.four {
             background-image: url("./assets/four.png");
           }
+          &::after{
+            content: '';
+            width: pxrem(1px);
+            height: pxrem(128px);
+            position: absolute;
+            top: pxrem(63px);
+            left: pxrem(29px);
+            background-color: #0061E6;
+          }
+        }
+        &:last-child .index::after{
+          display: none;
         }
         .title {
           text-align: left;
