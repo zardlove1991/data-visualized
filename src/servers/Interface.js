@@ -105,6 +105,8 @@ export const getWeiboHotList = (currentViewId) => createAPI(`${httpsbaseUrl}/Api
 export const getM2OWorkDepartRank = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OWorkDepartRank?view_id=${currentViewId}`)
 /* 通用组件01直播排行 */
 export const getM2OLiveList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OLiveList?view_id=${currentViewId}`)
+/* 通用组件01用户热力图 */
+export const getM2OUserHot = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OUserHot?view_id=${currentViewId}`)
 
 // 江宁思想与实践
 export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)

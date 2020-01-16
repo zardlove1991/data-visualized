@@ -2,7 +2,7 @@
   <div class="lishui-opinion">
     <div class="opinion-wrap" v-if="!showDetail">
       <div class="common01-title">{{viewAttr.header || '民生热点'}}</div>
-      <div class="wrap-list sys-flex sys-flex-center flex-justify-between" @click="showContentDetail(v)" v-for="(v, k) in dataList" :key="k">
+      <div class="wrap-list sys-flex sys-flex-center flex-justify-between" @click="showContentDetail(v)" v-for="(v, k) in currentData" :key="k">
         <div class="title overhidden">{{v.title}}</div>
         <div class="time sys-flex sys-flex-center">
           <img src="../manuscriptOutput/assets/time.png" />
@@ -57,6 +57,11 @@ export default {
         content: '石湫政府领导，请求领导百忙之中，过问一下石山公园的蓝球架，有架无板了，是因为前不久学生打球所致，盼近期修复，谢谢',
         url: 'http://www.ls114.cn/thread-486838-1-1.html'
       }, {
+        title: '城区主要交通干道的建设问题',
+        time: '2020-01-13 14:02',
+        content: '在我们溧水城区主要交通干道的扩建中，部分断头路还没彻底打通，例如：淮源街向北至交通路，现状是丁字路，再向北至中山河永寿路，距离交通路近200多米，十几年来始终没有打通。',
+        url: ''
+      }, {
         title: '请问开发区沙河村的过渡费什么时候发？',
         time: '2020-01-13 10:44',
         content: '永阳镇都发了，开发区什么时候发？年前还能不能发？',
@@ -86,8 +91,80 @@ export default {
         time: '2020-01-13 08:33',
         content: '改为单向一车道双向两车道后 ，司机们才有更多的时间看花坛风景，理解设计者的苦衷',
         url: 'http://www.ls114.cn/thread-486786-1-1.html'
-      }]
+      }, {
+        title: '锦绣家园物业问题',
+        time: '2020-01-14 11:51',
+        content: '小区漆黑，晚上也不开路灯，一到下雨，路面积水。偶尔开路灯的地方，跟萤火虫一样。这个就成了死循环么？物业会说：收不上物业。没交业主会说：路灯不点。楼梯不扫。车被撞了，被告之无监控。就成了死循环么？',
+        url: 'http://www.ls114.cn/thread-486944-1-1.html'
+      }, {
+        title: '恒大金碧天下湖光苑广场舞扰民',
+        time: '2020-01-14 13:46',
+        content: '感谢区公安分局的重视，据官方回复已经过去几天了，楼下仍歌舞升平，音乐一首跟着一首，我想问一下，你们确定你们和组织者联系过了，让她音量小一些了，是吗？？我想问一下，居民楼楼下，跳广场只是调小音量就可以了吗？？试问，如果我们人人都拎着音响在楼下听歌，跳舞，锻炼身体这样可以吗？恒大小区有这么多的健身器材，就是为了居民强身健体的，小区地方空旷，也有那么多地方既不扰民还可以一展舞姿，就为了就近而非要在居民楼楼下跳舞吗？？我们为了孩子，搬家到此，就为了有一个安静的环境，现在就为了仅仅几个人的愉快，非要我妥协？还是再次搬家呢？我的诉求是，请她们到别处跳，爱怎么跳怎么跳，前提不能扰民',
+        url: 'http://www.ls114.cn/thread-486964-1-1.html'
+      }, {
+        title: '如此“四网合一”谁来管？',
+        time: '2020-01-15 10:37',
+        content: '庆丰小区园村淮源街东片区刚出新好，楼道里刚粉刷干净。“四网合一”整理线路，把楼道里整理成这样（如图）几乎每幢楼都这样，把东西拆了就不管了，过去几个星期了无人过问。如此工作态度让市民惊讶。楼道里出新有何用？电信、移动、联通、广电------“四网合一”谁来负责擦屁股？？',
+        imgs: ['http://cdn.ls114.cn/forum/202001/15/103321adsrrsx010crux1b.jpg', 'http://cdn.ls114.cn/forum/202001/15/103403s0qsxxs44der0qb8.jpg', 'http://cdn.ls114.cn/forum/202001/15/103419ck9uctsfe0gzsrst.jpg', 'http://cdn.ls114.cn/forum/202001/15/103428tvxhlosfolixxzfx.jpg'],
+        url: 'http://www.ls114.cn/thread-487052-1-1.html'
+      }, {
+        title: '东屏街道的主干道常溧公路的灯问题',
+        time: '2020-01-11 08:33',
+        content: '昨天小雨下了一下午，东屏街道的主干道常溧公路的灯到六点还没有全亮，有些车辆开启了远光灯，路面是漆黑黑的一片，能见度极低。我想问发生交通事故东屏街道负责吗？希望能得到东屏街道领导的足够重视。谢谢！',
+        url: 'http://www.ls114.cn/thread-486643-1-1.html'
+      }, {
+        title: '栖凤北路红绿灯路口路面好长时间没有修复',
+        time: '2020-01-13 12:08',
+        content: '栖凤北路红绿灯路口路面好长时间没有修复，大概有4个月了，存在安全隐患。',
+        imgs: ['http://cdnapp.ls114.cn/pic/20200113/1578859801213837_977.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20', 'http://cdnapp.ls114.cn/pic/20200113/1578859801229212_334.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20'],
+        url: 'http://www.ls114.cn/thread-486764-1-1.html'
+      }, {
+        title: '关于福田社区蝉山村新农村建设村容村貌的疑问',
+        time: '2020-01-11 14:42',
+        content: '2019年10月份溧水区响应中央文件精神，花巨资对开发区福田社区蝉山村的村容村貌的进行了整治，当时使村里的环境焕然一新，可这次回村却发现村里的环境又恢复到了整治前的那样一塌糊涂，建筑垃圾，生活垃圾到处堆放无人清理，村里的道路两边护栏被损坏无人修补，触目惊心，当初耗费钱财人力去做整治为了应付领导的视察，可领导视察完后福田社区和蝉村委会就不管不问，请问福田社区和村委会的各位领导你们就是如此应付工作的吗？财政拨款的资金到底被你们如此挥霍，你们不觉得可耻和浪费吗？请福田社区的领导不要整天在办公室喝茶聊天玩手机了到村上去实地走访看下吧，毕竟福田社区办公场所就在蝉山村进村口，把图片晒出来给你们领导看看吧，你们这是为人民办事吗',
+        imgs: [
+          'http://cdnapp.ls114.cn/pic/20200111/157868361476795994.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20',
+          'http://cdnapp.ls114.cn/pic/20200111/1578683615577206731.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20',
+          'http://cdnapp.ls114.cn/pic/20200111/1578683616344884458.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20',
+          'http://cdnapp.ls114.cn/pic/20200111/1578683617172663762.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20',
+          'http://cdnapp.ls114.cn/pic/20200111/1578683618000944423.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20',
+          'http://cdnapp.ls114.cn/pic/20200111/1578683618798217263.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20',
+          'http://cdnapp.ls114.cn/pic/20200111/1578683679889084419.jpg?x-oss-process=image/watermark,image_cGljLzIwMTgwNzI1L29zc18xNTMyNTA4NzI1NjEzXzQyXzc1OV81NTkucG5n,t_50,g_se,x_20,y_20'
+        ],
+        url: 'http://www.ls114.cn/thread-486608-1-1.html'
+      }, {
+        title: '15路公交新规划问题',
+        time: '2020-01-13 09:21',
+        content: '弱弱的问一句，现在溧水人民医院附近15路路线怎么规划的，体育公园人民医院北门施工什么时候竣工，说好的1月15日结束，现在也没有结束迹象。最近公交车老是等不到，不知道是改路线了还是请告知一下，以往是坐公交车上班，现在只能打的。',
+        url: 'http://www.ls114.cn/thread-487134-1-1.html'
+      }, {
+        title: '和凤镇骆驼桥村断修路，何时铺',
+        time: '2020-01-15 15:16',
+        content: '老家房子在和凤镇骆驼桥村村东头池塘边，之前新农村建设，从村头修了水泥路。结果距离我家十几米处就断修了。每到下雨就非常泥泞，车子行驶打滑，好几次差点滑进旁边田里，人员经过也易摔倒。别的村水泥路都是根据村民房子修的，请问为什么一直不给铺？何时给铺？',
+        imgs: ['http://cdn.ls114.cn/forum/202001/15/154244n0za5t0prqsffrt0.jpeg', 'http://cdn.ls114.cn/forum/202001/15/154226jtxgtz2ddaxxg71d.jpeg', 'http://cdn.ls114.cn/forum/202001/15/154218jw9ix4kl9x2f2999.jpeg'],
+        url: 'http://www.ls114.cn/thread-487100-1-1.html'
+      }, {
+        title: '省溧中东门路段路灯问题',
+        time: '2020-01-13 09:27',
+        content: '省溧中东门路段这两天路灯不亮、交通安全有隐患、望关注尽快解决',
+        url: 'http://www.ls114.cn/thread-486842-1-1.html'
+      }],
+      currentIndex: 0,
+      currentData: [],
+      currentData2: []
     }
+  },
+  mounted () {
+    this.currentData = this.dataList.slice(0, 10)
+    setInterval(() => {
+      if (this.currentIndex === 0) {
+        this.currentData = this.dataList.slice(0, 10)
+        this.currentIndex = 1
+      } else {
+        this.currentData = this.dataList.slice(10, 20)
+        this.currentIndex = 0
+      }
+    }, 15000)
   },
   methods: {
     showContentDetail (value) {

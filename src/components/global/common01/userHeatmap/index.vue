@@ -32,6 +32,7 @@
   </div>
 </template>
 <script>
+import { getM2OUserHot } from '@/servers/interface'
 import echarts from 'echarts'
 import 'echarts/extension/bmap/bmap'
 import 'echarts/map/js/china.js'
@@ -39,7 +40,7 @@ import 'echarts/lib/chart/pie'
 import vueecharts from 'vue-echarts/components/ECharts'
 import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
-import listData from './data.json'
+import mapstyle from '@/config/mapstyle/darkblue.json'
 
 export default {
   name: 'userHeatmap',
@@ -95,20 +96,26 @@ export default {
   },
   methods: {
     getUserHeat () {
-      this.initMap(listData)
+      getM2OUserHot().then(res => {
+        this.initMap(res.data.result)
+      })
     },
     initMap (data) {
-      var BMap = window.BMap
       let myChart = echarts.init(document.getElementById('my-map'))
       var points = [].concat.apply([], data.map(function (track) {
-        return track.map(function (seg) {
-          return seg.coord.concat([1])
-        })
+        return [[track.longitude, track.latitude, 1]]
       }))
+      /* points示例：
+        [
+          [lng, lat, 1],
+          [lng, lat, 1],
+          [lng, lat, 1]
+        ]
+      */
       myChart.setOption({
         animation: false,
         bmap: {
-          center: [120.14322240845, 30.236064370321],
+          center: [120.169125, 33.335470],
           zoom: 14,
           roam: true
         },
@@ -120,7 +127,8 @@ export default {
           seriesIndex: 0,
           calculable: true,
           inRange: {
-            color: ['blue', 'blue', 'green', 'yellow', 'red']
+            color: ['#2d45ff', '#36b7ff', '#50ffe2', '#ecffb6', '#ff43b6']
+            // color: ['blue', 'blue', 'green', 'yellow', 'red']
           }
         },
         series: [{
@@ -133,8 +141,7 @@ export default {
       })
       // 添加百度地图插件
       var bmap = myChart.getModel().getComponent('bmap').getBMap()
-      bmap.addControl(new BMap.MapTypeControl())
-      bmap.setMapStyle({style: 'light'})
+      bmap.setMapStyle(mapstyle)
     },
     initCharts () {
       this.pieOptions = {
@@ -227,6 +234,7 @@ export default {
       z-index: 2;
       background: url("./assets/back.png") no-repeat center;
       background-size: 100% 100%;
+      border: solid pxrem(1px) #00BAFF;
     }
     .heat-map{
       width: 100%;
