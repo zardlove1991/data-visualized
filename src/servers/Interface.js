@@ -100,7 +100,7 @@ export const getMicroOperationData = (currentViewId) => createAPI(`${httpsbaseUr
 /* 通用组件01直播排行 */
 export const getLiveRankList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
 /* 通用组件01作品影响力 */
-export const getContentEffectList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
+export const getM2ORankList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2ORankList?view_id=${currentViewId}`)
 /* 通用组件01微博热点 */
 export const getWeiboHotList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationData?view_id=${currentViewId}`)
 

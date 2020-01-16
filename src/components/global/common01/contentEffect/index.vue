@@ -8,7 +8,7 @@
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
           <div class="read common01-ft32 sys-flex sys-flex-center">
             <img src="../../../../assets/common/read.png" />
-            <span>{{v.click_num}}</span>
+            <span>{{v.access_nums}}</span>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { getContentEffectList } from '@/servers/interface'
+import { getM2ORankList } from '@/servers/interface'
 export default {
   name: 'contentEffect',
   data () {
@@ -36,9 +36,9 @@ export default {
         clearInterval(this.countNum)
         this.count = 0
       }
-      getContentEffectList(this.currentViewId).then(res => {
+      getM2ORankList(this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          this.list = res.data.result
+          this.list = res.data.result.data
           this.initList()
         }
       })

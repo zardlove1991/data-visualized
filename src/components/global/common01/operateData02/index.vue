@@ -7,13 +7,22 @@
           <div class="one-img img-box">
             <img src="./assets/app.png" />
           </div>
-          <div class="one-left mr100">
-            <div class="mbt12 common01-ft40">今日稿件发布数</div>
-            <numCount :num-info="today_publish_num" :fontcolor="'yellow'"></numCount>
+          <div class="custom-wrap flex flex-justify-between flex-one" v-if="customConfig.app && customConfig.app.length">
+            <div v-for="(item, index) in customConfig.app" :key="index">
+              <div class="mbt12 common01-ft40">{{item.name}}</div>
+              <numCount :num-info="item.number" :fontcolor="'yellow'"></numCount>
+            </div>
           </div>
-          <div class="one-right">
-            <div class="mbt12 common01-ft40">今日新增用户数</div>
-            <numCount :num-info="new_user" :fontcolor="'yellow'"></numCount>
+          <div class="flex" v-else>
+            <!-- 默认项 -->
+            <div class="one-left mr100">
+              <div class="mbt12 common01-ft40">今日稿件发布数</div>
+              <numCount :num-info="today_publish_num" :fontcolor="'yellow'"></numCount>
+            </div>
+            <div class="one-right">
+              <div class="mbt12 common01-ft40">今日新增用户数</div>
+              <numCount :num-info="new_user" :fontcolor="'yellow'"></numCount>
+            </div>
           </div>
         </div>
         <div class="operate-line mtt22"></div>
@@ -21,13 +30,21 @@
           <div class="two-img img-box">
             <img src="./assets/web.png" />
           </div>
-          <div class="two-left mr100">
-            <div class="mbt12 common01-ft40">累计网站访问量</div>
-            <numCount :num-info="click_count" :fontcolor="'red'"></numCount>
+          <div class="custom-wrap flex flex-justify-between flex-one" v-if="customConfig.website && customConfig.website.length">
+            <div v-for="(item, index) in customConfig.website" :key="index">
+              <div class="mbt12 common01-ft40">{{item.name}}</div>
+              <numCount :num-info="item.number" :fontcolor="'red'"></numCount>
+            </div>
           </div>
-          <div class="two-right">
-            <div class="mbt12 common01-ft40">当日网站访问量</div>
-            <numCount :num-info="daily_click_count" :fontcolor="'red'"></numCount>
+          <div class="flex" v-else>
+            <div class="two-left mr100">
+              <div class="mbt12 common01-ft40">累计网站访问量</div>
+              <numCount :num-info="click_count" :fontcolor="'red'"></numCount>
+            </div>
+            <div class="two-right">
+              <div class="mbt12 common01-ft40">当日网站访问量</div>
+              <numCount :num-info="daily_click_count" :fontcolor="'red'"></numCount>
+            </div>
           </div>
         </div>
         <div class="operate-line mtt22"></div>
@@ -35,13 +52,21 @@
           <div class="three-img img-box">
             <img src="./assets/wechat.png" />
           </div>
-          <div class="three-left mr100">
-            <div class="mbt12 common01-ft40">累计微信粉丝总数</div>
-            <numCount :num-info="cumulate_user" :fontcolor="'green'"></numCount>
+          <div class="custom-wrap flex flex-justify-between flex-one" v-if="customConfig.weChat && customConfig.weChat.length">
+            <div v-for="(item, index) in customConfig.weChat" :key="index">
+              <div class="mbt12 common01-ft40">{{item.name}}</div>
+              <numCount :num-info="item.number" :fontcolor="'green'"></numCount>
+            </div>
           </div>
-          <div class="three-right">
-            <div class="mbt12 common01-ft40">当日阅读总数</div>
-            <numCount :num-info="int_page_read_count" :fontcolor="'green'"></numCount>
+          <div class="flex" v-else>
+            <div class="three-left mr100">
+              <div class="mbt12 common01-ft40">累计微信粉丝总数</div>
+              <numCount :num-info="cumulate_user" :fontcolor="'green'"></numCount>
+            </div>
+            <div class="three-right">
+              <div class="mbt12 common01-ft40">当日阅读总数</div>
+              <numCount :num-info="int_page_read_count" :fontcolor="'green'"></numCount>
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +86,8 @@ export default {
       daily_click_count: [0, 0, 0, 0, 0, 0, 0, 0],
       cumulate_user: [0, 0, 0, 0, 0, 0, 0, 0],
       int_page_read_count: [0, 0, 0, 0, 0, 0, 0, 0],
-      frequency: 35000
+      frequency: 35000,
+      customConfig: {}
     }
   },
   components: {
@@ -78,7 +104,8 @@ export default {
   },
   methods: {
     getDataList () {
-      getOperationalData01('website,weChat,app,weiBo,shortVideo', this.currentViewId).then(res => {
+      let params = this.viewAttr.operateParams || 'website,weChat,app,weiBo,shortVideo'
+      getOperationalData01(params, this.currentViewId).then(res => {
         let data = res.data.result
         setTimeout(() => {
           // 稿件总数
@@ -90,8 +117,31 @@ export default {
           // 网站总数
           this.click_count = this.preFixInterge(data.website.click_count, 8)
           this.daily_click_count = this.preFixInterge(data.website.daily_click_count, 8)
+
+          // 自定义字段数据（可配项）
+          if (this.viewAttr.weChat && this.viewAttr.weChat.key) {
+            this.initConfig('weChat', data)
+          }
+          if (this.viewAttr.website && this.viewAttr.website.key) {
+            this.initConfig('website', data)
+          }
+          if (this.viewAttr.app && this.viewAttr.app.key) {
+            this.initConfig('app', data)
+          }
         }, 100)
       })
+    },
+    initConfig (key, data) {
+      this.customConfig[key] = []
+      let keys = this.viewAttr[key].key.split(',')
+      let names = this.viewAttr[key].name.split(',')
+      keys.forEach((item, index) => {
+        this.customConfig[key].push({
+          name: names[index],
+          number: this.preFixInterge((data[key][item] || '00000000'), 8)
+        })
+      })
+      // this.customConfig = JSON.parse(JSON.stringify(this.customConfig))
     },
     preFixInterge (num, n) {
       return (Array(n).join(0) + num).slice(-n).split('')
@@ -143,6 +193,9 @@ export default {
   }
   .mr100 {
     margin-right: 2em;
+  }
+  .custom-wrap{
+    padding: 0 pxrem(120px) 0 0;
   }
 }
 </style>

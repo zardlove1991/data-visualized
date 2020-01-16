@@ -23,8 +23,11 @@ export default {
     numInfo: Array,
     fontcolor: String
   },
-  watch: {
-    numInfo (res) {
+  mounted () {
+    this.initNumInfo(this.numInfo)
+  },
+  methods: {
+    initNumInfo (res) {
       if (res.length) {
         for (let i = 0; i < res.length; i++) {
           if (parseInt(this.nums[i]) !== parseInt(res[i])) {
@@ -37,6 +40,11 @@ export default {
           }
         }
       }
+    }
+  },
+  watch: {
+    numInfo (res) {
+      this.initNumInfo(res)
     }
   }
 }
