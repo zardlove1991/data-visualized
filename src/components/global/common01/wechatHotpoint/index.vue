@@ -109,7 +109,7 @@ export default {
         .item-source, .item-read{
           font-size:pxrem(30px);
           color:#36E5F0;
-          margin-right:px2rem(42px);
+          margin-right:pxrem(42px);
         }
         .read {
           margin-left: auto;
