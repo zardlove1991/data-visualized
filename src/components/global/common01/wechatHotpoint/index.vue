@@ -104,6 +104,7 @@ export default {
           line-height:pxrem(60px);
           margin-bottom:pxrem(50px);
           height:pxrem(120px);
+          overflow:hidden;
         }
         .item-source, .item-read{
           font-size:pxrem(30px);
