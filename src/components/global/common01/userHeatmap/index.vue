@@ -49,20 +49,20 @@ export default {
       frequency: 15000,
       total: 60,
       provinceList: [{
-        count: 12,
-        name: '123'
+        count: 32560,
+        name: '徐州'
       }, {
-        count: 12,
-        name: '123'
+        count: 20110,
+        name: '盐城'
       }, {
-        count: 12,
-        name: '123'
+        count: 13017,
+        name: '无锡'
       }, {
-        count: 12,
-        name: '123'
+        count: 9356,
+        name: '苏州'
       }, {
-        count: 12,
-        name: '123'
+        count: 7104,
+        name: '淮安'
       }],
       cityTotal: 30,
       cityList: [{
