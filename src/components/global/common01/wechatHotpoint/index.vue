@@ -7,18 +7,18 @@
           <div class="item-info">
             <div class="item-title">{{v.title}}</div>
             <div class="item-tips sys-flex sys-flex-center">
-              <div class="item-source sys-flex-one">{{v.source}}</div>
-              <div class="item-read sys-flex-one">
+              <div class="item-source">{{v.source}}</div>
+              <div class="item-read">
                 <img src="./assets/read.png" />
-                {{v.read}}
+                333
               </div>
-              <div class="item-read sys-flex-one">
+              <div class="item-read">
                 <img src="./assets/zan.png" />
-                {{v.read}}
+                1111
               </div>
-              <div class="item-read sys-flex-one">
+              <div class="item-read">
                 <img src="./assets/star.png" />
-                {{v.read}}
+                2222
               </div>
             </div>
           </div>
@@ -109,9 +109,7 @@ export default {
         .item-source, .item-read{
           font-size:pxrem(30px);
           color:#36E5F0;
-        }
-        .item-source{
-          margin-right:pxrem(42px);
+          margin-right:px2rem(42px);
         }
         .read {
           margin-left: auto;
