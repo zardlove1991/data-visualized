@@ -1,6 +1,6 @@
 <template>
-  <div class="common01-clickrank">
-    <div class="clickrank-wrap common01-border">
+  <div class="common01-web">
+    <div class="web-wrap common01-border">
       <div class="common01-title">{{viewAttr.header || '网站热点'}}</div>
       <div class="wrap-content">
         <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
@@ -74,11 +74,11 @@ export default {
 <style lang="scss">
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
-.common01-clickrank {
+.common01-web {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
-  .clickrank-wrap {
+  .web-wrap {
     padding: pxrem(220px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
