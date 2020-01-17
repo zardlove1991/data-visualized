@@ -27,7 +27,7 @@ export default {
   name: 'clickRank',
   data () {
     return {
-      frequency: 1500000,
+      frequency: 15000,
       count: 0,
       List: [{
         title: '打造现代版“富春山居图”乡村旅游 敲开四川百姓致富门',
