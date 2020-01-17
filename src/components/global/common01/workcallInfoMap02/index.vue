@@ -223,8 +223,8 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    line-height: pxrem(160px);
-    font-size: pxrem(70px);
+    line-height: pxrem(140px);
+    font-size: pxrem(73px);
     z-index: 3;
     font-family:PingFang SC;
     font-weight:600;
