@@ -5,7 +5,7 @@
       <div class="wrap-content">
         <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="sys-flex sys-flex">
-          <div class="img-box">
+          <div class="img-box" v-if="v.img">
             <img :src=v.img />
           </div>
           <div class="item-info">
@@ -106,14 +106,6 @@ export default {
         }
         .item-source{
           margin-right:pxrem(42px);
-        }
-        .read {
-          margin-left: auto;
-          img {
-            width: pxrem(42px);
-            height: pxrem(30px);
-            margin-right: pxrem(18px);
-          }
         }
       }
     }

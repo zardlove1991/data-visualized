@@ -8,16 +8,16 @@
             <div class="item-title">{{v.title}}</div>
             <div class="item-tips sys-flex sys-flex-center">
               <div class="item-source">{{v.source}}</div>
-              <div class="item-read">
-                <img src="./assets/read.png" />
+              <div class="item-read sys-flex">
+                <div class="read"><img src="./assets/read.png" /></div>
                 333
               </div>
-              <div class="item-read">
-                <img src="./assets/zan.png" />
+              <div class="item-read sys-flex">
+                <div class="read"><img src="./assets/zan.png" /></div>
                 1111
               </div>
-              <div class="item-read">
-                <img src="./assets/star.png" />
+              <div class="item-read sys-flex">
+                <div class="read"><img src="./assets/star.png" /></div>
                 2222
               </div>
             </div>
@@ -90,11 +90,11 @@ export default {
     .wrap-content {
       text-align:left;
       .item-list {
-        margin-bottom: pxrem(60px);
+        margin-bottom: pxrem(20px);
         padding:pxrem(36px);
         width:24%;
         display:inline-block;
-        background: url("./assets/bg.png") no-repeat center;
+        background: url("./assets/background.png") no-repeat center;
         background-size: 100% 100%;
         margin-right:1%;
         background-color:rgba(0,96,255,0.2);
