@@ -90,6 +90,7 @@ export const common01componentClickRank = getComponent('common01/clickRank')
 export const common01componentDispatchRank = getComponent('common01/dispatchRank')
 export const common01componentOperateData = getComponent('common01/operateData')
 export const common01componentWorkcallInfoMap = getComponent('common01/workcallInfoMap')
+export const common01componentWorkcallInfoMap02 = getComponent('common01/workcallInfoMap02') // 在线记者，带大标题
 export const common01componentEffect = getComponent('common01/effect') // 传播效果
 export const common01componentProduction = getComponent('common01/production') // 内容生产
 export const common01componentOperateData02 = getComponent('common01/operateData02') // 运营数据
