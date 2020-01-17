@@ -224,7 +224,7 @@ export default {
   }
   .heatmap-wrap {
     position: relative;
-    height: pxrem(720px);
+    height: pxrem(740px);
     .bg{
       position: absolute;
       top: 0;
