@@ -35,12 +35,6 @@ export default {
     return {
       frequency: 15000,
       count: 0,
-      List: [{
-        title: '打造现代版“富春山居图”乡村旅游 敲开四川百姓致富门',
-        img: '',
-        source: '光明网',
-        read: '12870'
-      }],
       dataList: []
     }
   },
