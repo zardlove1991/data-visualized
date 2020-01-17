@@ -33,14 +33,8 @@ export default {
   name: 'clickRank',
   data () {
     return {
-      frequency: 1500000,
+      frequency: 15000,
       count: 0,
-      List: [{
-        title: '打造现代版“富春山居图”乡村旅游 敲开四川百姓致富门',
-        img: '',
-        source: '光明网',
-        read: '12870'
-      }],
       dataList: []
     }
   },
@@ -85,7 +79,7 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .wechat-wrap {
-    padding: pxrem(220px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(170px) pxrem(96px) pxrem(95px) pxrem(78px);
     background: url("./assets/background.png") no-repeat center;
     background-size: 100% 100%;
     color: #fff;
