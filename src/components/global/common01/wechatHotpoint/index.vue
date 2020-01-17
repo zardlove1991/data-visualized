@@ -85,7 +85,7 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .wechat-wrap {
-    padding: pxrem(220px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(170px) pxrem(96px) pxrem(95px) pxrem(78px);
     background: url("./assets/background.png") no-repeat center;
     background-size: 100% 100%;
     color: #fff;
