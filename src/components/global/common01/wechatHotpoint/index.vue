@@ -86,6 +86,8 @@ export default {
   padding: pxrem(40px);
   .wechat-wrap {
     padding: pxrem(220px) pxrem(96px) pxrem(95px) pxrem(78px);
+    background: url("./assets/background.png") no-repeat center;
+    background-size: 100% 100%;
     color: #fff;
     .wrap-content {
       text-align:left;
@@ -94,7 +96,7 @@ export default {
         padding:pxrem(36px);
         width:24%;
         display:inline-block;
-        background: url("./assets/background.png") no-repeat center;
+        background: url("./assets/bg.png") no-repeat center;
         background-size: 100% 100%;
         margin-right:1%;
         background-color:rgba(0,96,255,0.2);
