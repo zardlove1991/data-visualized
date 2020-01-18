@@ -8,7 +8,7 @@
             <div class="item-title">{{v.title}}</div>
             <div class="item-tips sys-flex sys-flex-center">
               <div class="item-source">{{v.source}}</div>
-              <div class="item-read sys-flex">
+              <!-- <div class="item-read sys-flex">
                 <div class="read"><img src="./assets/read.png" /></div>
                 333
               </div>
@@ -19,7 +19,7 @@
               <div class="item-read sys-flex">
                 <div class="read"><img src="./assets/star.png" /></div>
                 2222
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

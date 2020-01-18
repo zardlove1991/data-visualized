@@ -12,7 +12,7 @@
             <div class="item-title">{{v.title}}</div>
             <div class="item-tips sys-flex">
               <div class="item-source">{{v.source}}</div>
-              <div class="item-read">123阅读</div>
+              <div class="item-read">阅读</div>
             </div>
           </div>
           </div>
