@@ -61,6 +61,7 @@ export default {
       }, {
         title: '城区主要交通干道的建设问题',
         time: '2020-01-13 14:02',
+        imgs: ['https://m-team.cloud.hoge.cn/81/materials/materials/image/2020/0119/9d4c3426b6cd4d3198e83439baf17b3d.png', 'https://m-team.cloud.hoge.cn/81/materials/materials/image/2020/0119/4513c770504cad0a4bdd2a5ebdacbaea.png'],
         content: '在我们溧水城区主要交通干道的扩建中，部分断头路还没彻底打通，例如：淮源街向北至交通路，现状是丁字路，再向北至中山河永寿路，距离交通路近200多米，十几年来始终没有打通。',
         url: ''
       }, {
