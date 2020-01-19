@@ -6,13 +6,13 @@
         <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="sys-flex sys-flex">
           <div class="img-box" v-if="v.img">
-            <img :src=v.img />
+            <img :src="v.img" />
           </div>
           <div class="item-info">
             <div class="item-title">{{v.title}}</div>
-            <div class="item-tips sys-flex">
+            <div class="item-tips sys-flex flex-center">
               <div class="item-source">{{v.source}}</div>
-              <div class="item-read">阅读</div>
+              <div class="item-time">{{v.date}}</div>
             </div>
           </div>
           </div>
@@ -100,7 +100,7 @@ export default {
           margin-bottom:pxrem(50px);
           height:pxrem(120px);
         }
-        .item-source, .item-read{
+        .item-source, .item-time{
           font-size:pxrem(30px);
           color:#36E5F0;
         }

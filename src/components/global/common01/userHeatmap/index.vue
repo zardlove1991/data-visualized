@@ -47,7 +47,7 @@ export default {
   data () {
     return {
       frequency: 15000,
-      total: 60,
+      total: '',
       provinceList: [{
         count: 32560,
         name: '徐州'
@@ -64,13 +64,13 @@ export default {
         count: 7104,
         name: '淮安'
       }],
-      cityTotal: 30,
+      cityTotal: 43,
       cityList: [{
         name: '广州',
-        value: 10
+        value: 20
       }, {
         name: '上海',
-        value: 10
+        value: 13
       }, {
         name: '南京',
         value: 10
@@ -87,6 +87,10 @@ export default {
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getUserHeat()
+        // 半天更新一次
+        this.time = setInterval(() => {
+          this.getUserHeat()
+        }, 43200000)
       })
     })
   },
@@ -205,6 +209,12 @@ export default {
         data[1].value = item.value
         data[1].name = item.name
         item.opt = opt
+      })
+
+      // 省内top5
+      this.total = 0
+      this.provinceList.forEach(item => {
+        this.total += item.count
       })
     }
   }
