@@ -1,6 +1,8 @@
 <template>
   <div class="lishui-opinion">
     <div class="opinion-wrap" v-if="!showDetail">
+      <el-button class="btn-page pre" type="text" @click="goTo(0)">上一页</el-button>
+      <el-button class="btn-page next" type="text" @click="goTo(1)">下一页</el-button>
       <div class="common01-title">{{viewAttr.header || '民生热点'}}</div>
       <div class="wrap-list sys-flex sys-flex-center flex-justify-between" @click="showContentDetail(v)" v-for="(v, k) in currentData" :key="k">
         <div class="title overhidden">{{v.title}}</div>
@@ -156,17 +158,16 @@ export default {
   },
   mounted () {
     this.currentData = this.dataList.slice(0, 10)
-    setInterval(() => {
-      if (this.currentIndex === 0) {
-        this.currentData = this.dataList.slice(0, 10)
-        this.currentIndex = 1
-      } else {
-        this.currentData = this.dataList.slice(10, 20)
-        this.currentIndex = 0
-      }
-    }, 15000)
   },
   methods: {
+    goTo (val) {
+      this.currentIndex = val
+      if (this.currentIndex === 0) {
+        this.currentData = this.dataList.slice(0, 10)
+      } else {
+        this.currentData = this.dataList.slice(10, 20)
+      }
+    },
     showContentDetail (value) {
       this.showDetail = true
       this.detail = value
@@ -200,7 +201,7 @@ export default {
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
     position: relative;
-    padding: pxrem(150px) pxrem(100px) pxrem(50px);
+    padding: pxrem(100px);
     .wrap-list {
       font-size: pxrem(40px);
       margin-bottom: pxrem(22px);
@@ -221,6 +222,22 @@ export default {
           margin-right: pxrem(18px);
         }
       }
+    }
+    .btn-page{
+      bottom: 0.2rem;
+      color: #fff;
+      position: absolute;
+      text-align: center;
+      cursor: pointer;
+      width: 1.5rem;
+      height: 0.6rem;
+      font-size: 0.34rem;
+    }
+    .next{
+      right: 0.8rem;
+    }
+    .pre{
+      left: 0.8rem;
     }
   }
   .opinion-detail {
