@@ -1,17 +1,17 @@
 <template>
   <div class="common01-project">
     <div class="project-wrap common01-border">
-      <div class="common01-title">{{viewAttr.header || '选题展示'}}</div>
+      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '选题展示'}}</div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
-          <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="name overhidden common01-ft32">{{v.project_user_name}}</div>
-          <div class="project-status common01-ft32" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{v.status_show}}</div>
-          <div class="project-progress common01-ft32 sys-flex sys-flex-center overhidden">
+        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title, 'marginBottom75': customSize}" :style="{'animation-delay' : k/2+'s'}">
+          <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.title}}</div>
+          <div class="name overhidden common01-ft32" :style="setFontSize(45)">{{v.project_user_name}}</div>
+          <div class="project-status common01-ft32" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{v.status_show}}</div>
+          <div class="project-progress common01-ft32 sys-flex sys-flex-center overhidden" :style="setFontSize(45)">
             <div class="progress-total">
               <span class="progress" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}" :style="{'width' : v.percent + '%'}"></span>
             </div>
-            <div class="percent common01-ft32" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{Math.ceil(v.percent)}}%</div>
+            <div class="percent common01-ft32" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{Math.ceil(v.percent)}}%</div>
           </div>
         </div>
       </div>
@@ -20,6 +20,7 @@
 </template>
 <script>
 import { getWorkCallSubjectList } from '@/servers/interface'
+import { getDataConfig } from '@/utils/model'
 export default {
   name: 'project',
   data () {
@@ -28,16 +29,27 @@ export default {
       isPaging: true,
       frequency: 15000,
       maxPage: 3,
-      projectList: []
+      projectList: [],
+      customSize: false
     }
   },
   created () {
+    getDataConfig().then(res => {
+      if (Number(res.customSize)) {
+        this.customSize = true
+      }
+    })
     this.getWorkCallSubjectList()
     setInterval(() => {
       this.getWorkCallSubjectList()
     }, this.frequency)
   },
   methods: {
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
+    },
     getWorkCallSubjectList () {
       getWorkCallSubjectList(5, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
@@ -75,6 +87,9 @@ export default {
     padding: pxrem(250px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
+      .marginBottom75 {
+        margin-bottom: pxrem(75px)!important;
+      }
       .item-list {
         margin-bottom: pxrem(90px);
         &:last-of-type {

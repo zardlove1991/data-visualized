@@ -8,7 +8,7 @@
       ></call>
       <div id="my-map" ref="allmap" class="reporter-map"></div>
       <div class="reporter-list-wrap">
-        <div class="reporter-title common01-ft70">{{viewAttr.header || '记者列表'}}</div>
+        <div class="reporter-title common01-ft70" :style="setFontSize(40)">{{viewAttr.header || '记者列表'}}</div>
         <div class="reporter-body" v-if="reporterList && reporterList.length">
           <div class="reporter-list" v-for="(v, k) in reporterList" :key="k">
             <div class="sys-flex list-body sys-flex-center">
@@ -17,8 +17,8 @@
                 <img class="avatar" v-if="!v.avatar" src="./assets/default_avatar.png" />
               </div>
               <div class="member-name">
-                <div class="name common01-ft58 overhidden">{{v.member_name}}</div>
-                <div class="role common01-ft38 overhidden">{{v.org_title}}-{{v.role_title}}</div>
+                <div class="name common01-ft58 overhidden" :style="setFontSize(35)">{{v.member_name}}</div>
+                <div class="role common01-ft38 overhidden" :style="setFontSize(25)">{{v.org_title}}-{{v.role_title}}</div>
               </div>
               <div class="connect connect-audio" @click="callaudio(v)"></div>
               <div class="connect connect-video" @click="callvideo(v)"></div>
@@ -53,7 +53,8 @@ export default {
       callType: 'video',
       coordinateList: [],
       unlinecoordinateList: [],
-      mapStyle: ''
+      mapStyle: '',
+      customSize: false
     }
   },
   components: {
@@ -62,6 +63,9 @@ export default {
   created () {
     getDataConfig().then(res => {
       this.center = { lng: +res.lng, lat: +res.lat }
+      if (Number(res.customSize)) {
+        this.customSize = true
+      }
     })
     getRouterConfig().then(data => {
       if (data[this.viewId].mapStyle) {
@@ -80,6 +84,11 @@ export default {
     })
   },
   methods: {
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
+    },
     rMap () {
       var BMap = window.BMap
       let map = this.map = new BMap.Map('my-map')

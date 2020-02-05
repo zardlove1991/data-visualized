@@ -1,13 +1,13 @@
 <template>
   <div class="common01-report">
     <div class="report-wrap common01-border">
-      <div class="common01-title">{{viewAttr.header || '报题展示'}}</div>
+      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '报题展示'}}</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="status common01-ft30" :class="{'one': v.audit_status === '0', 'two': v.audit_status === '1', 'three': v.audit_status === '2', 'four': v.audit_status === '4'}">{{v.audit_status === '0' ? '待审核' : v.audit_status === '1' ? '通过' : v.audit_status === '2' ? '打回' : '报审'}}</div>
-          <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="name common01-ft32 overhidden">{{v.project_user_name}}</div>
-          <div class="time common01-ft32">{{v.update_time | dateFormat}}</div>
+          <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.title}}</div>
+          <div class="name common01-ft32 overhidden" :style="setFontSize(45)">{{v.project_user_name}}</div>
+          <div class="time common01-ft32" :style="setFontSize(45)">{{v.update_time | dateFormat}}</div>
         </div>
       </div>
     </div>
@@ -15,6 +15,7 @@
 </template>
 <script>
 import { getWorkCallReportList } from '@/servers/interface'
+import { getDataConfig } from '@/utils/model'
 export default {
   name: 'report',
   data () {
@@ -23,16 +24,27 @@ export default {
       isPaging: true,
       frequency: 15000,
       maxPage: 3,
-      dataList: []
+      dataList: [],
+      customSize: false
     }
   },
   created () {
+    getDataConfig().then(res => {
+      if (Number(res.customSize)) {
+        this.customSize = true
+      }
+    })
     this.getWorkCallReportList()
     setInterval(() => {
       this.getWorkCallReportList()
     }, this.frequency)
   },
   methods: {
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
+    },
     getWorkCallReportList () {
       getWorkCallReportList(5, this.page, this.currentViewId).then((res) => {
         if (!res.data.error_code) {

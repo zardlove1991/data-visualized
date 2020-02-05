@@ -1,7 +1,7 @@
 <template>
   <div class="common-operatedata01">
     <div class="operatedata01-wrap common01-border">
-      <div class="common01-title">{{viewAttr.header || '运营数据'}}</div>
+      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '运营数据'}}</div>
       <div class="wrap-content sys-flex">
         <div class="icon-box">
           <div class="app img-box" @click="changeTab(0)">
@@ -12,17 +12,17 @@
           </div>
         </div>
         <div class="data-list sys-flex-one">
-          <div class="title sys-flex sys-flex-center common01-ft36">
+          <div class="title sys-flex sys-flex-center common01-ft36" :style="setFontSize(40)">
             <div v-for="(v, k) in titleList" :key="k">{{v}}</div>
           </div>
           <div class="body sys-flex sys-flex-center common01-ft38 animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="img-title sys-flex sys-flex-center flex-justify-center">
+            <div class="img-title sys-flex sys-flex-center flex-justify-center" :style="setFontSize(45)">
               <img :src="v.avatar" />
               <span class="overhidden">{{v.name}}</span>
             </div>
-            <div class="one">{{currentIndex === 0 ? v.app_install_amount : v.cumulate_user}}</div>
-            <div class="two">{{currentIndex === 0 ? v.new_user_count_channel_num : v.int_page_read_count}}</div>
-            <div class="three">{{currentIndex === 0 ? v.user_count_num : v.share_count}}</div>
+            <div class="one" :style="setFontSize(45)">{{currentIndex === 0 ? v.app_install_amount : v.cumulate_user}}</div>
+            <div class="two" :style="setFontSize(45)">{{currentIndex === 0 ? v.new_user_count_channel_num : v.int_page_read_count}}</div>
+            <div class="three" :style="setFontSize(45)">{{currentIndex === 0 ? v.user_count_num : v.share_count}}</div>
           </div>
         </div>
       </div>
@@ -31,6 +31,7 @@
 </template>
 <script>
 import { getAppStatisticalData, getMicroOperationData } from '@/servers/interface'
+import { getDataConfig } from '@/utils/model'
 export default {
   name: 'clueGather',
   data () {
@@ -43,13 +44,24 @@ export default {
       app01: require('./assets/app01.png'),
       app02: require('./assets/app02.png'),
       titleList: [],
-      dataList: []
+      dataList: [],
+      customSize: false
     }
   },
   created () {
+    getDataConfig().then(res => {
+      if (Number(res.customSize)) {
+        this.customSize = true
+      }
+    })
     this.getData()
   },
   methods: {
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
+    },
     getData () {
       if (this.currentIndex === 0) {
         clearInterval(this.countNum)

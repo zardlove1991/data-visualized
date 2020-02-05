@@ -1,12 +1,12 @@
 <template>
   <div class="common01-clickrank">
     <div class="clickrank-wrap common01-border" v-if="!showDetail">
-      <div class="common01-title">{{viewAttr.header || '点击量排行'}}</div>
+      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '点击量排行'}}</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" @click="showContentDetail(v)" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + count - 4}}</div>
-          <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="read common01-ft32 sys-flex sys-flex-center">
+          <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.title}}</div>
+          <div class="read common01-ft32 sys-flex sys-flex-center" :style="setFontSize(45)">
             <img src="../../../../assets/common/read.png" />
             <span>{{v.click_num}}</span>
           </div>
@@ -18,9 +18,9 @@
         <div class="back" @click="backList">
           <img src="../newArticle/assets/back.png" />
         </div>
-        <div class="title common01-ft60 overhidden">{{detailData.title}}</div>
+        <div class="title common01-ft60 overhidden" :style="setFontSize(65)">{{detailData.title}}</div>
       </div>
-      <div class="detail-list sys-flex sys-flex-center common01-ft30">
+      <div class="detail-list sys-flex sys-flex-center common01-ft30" :style="setFontSize(40)">
         <div class="source overhidden">来源：{{detailData.source}}</div>
         <div class="author overhidden">作者：{{detailData.author}}</div>
         <div class="time">{{detailData.create_time}}</div>
@@ -33,7 +33,7 @@
           <span>{{detailData.comment_num}}</span>
         </div>
       </div>
-      <div class="detail-content common01-ft36">
+      <div class="detail-content common01-ft36" :style="setFontSize(40)">
         <div class="news" v-if="detailData.listType === 'weChat' || (detailData.listType === 'm2o' && detailData.type === 'news')" v-html="detailData.listType === 'weChat' ? handelHtml(detailData.content) : handelHtml(detailData.content.html)"></div>
         <div class="pic" v-if="detailData.listType === 'm2o' && detailData.type === 'tuji'">
           <img :src="v.pic" v-for="(v, k) in detailData.content" :key="k" />
@@ -56,6 +56,7 @@ import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
 import 'videojs-contrib-hls'
 import { getClickArticleList, getM2OPLUSArticleDetail } from '@/servers/interface'
+import { getDataConfig } from '@/utils/model'
 export default {
   name: 'clickRank',
   data () {
@@ -64,16 +65,27 @@ export default {
       count: 0,
       dataList: [],
       detailData: {},
-      showDetail: false
+      showDetail: false,
+      customSize: false
     }
   },
   created () {
+    getDataConfig().then(res => {
+      if (Number(res.customSize)) {
+        this.customSize = true
+      }
+    })
     this.getClickArticleList()
   },
   components: {
     videoPlayer
   },
   methods: {
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
+    },
     handelHtml (html) {
       let rel = /style\s*?=\s*?([‘"])[\s\S]*?\1/gi
       return html.replace(rel, '')
