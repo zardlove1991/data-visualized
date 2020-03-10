@@ -108,3 +108,4 @@ export const common01componentWeiboHotpoint = getComponent('common01/weiboHotpoi
 export const common01componentWorkDepartRank = getComponent('common01/workDepartRank') // 部门排行
 export const common01componentWebHotpoint = getComponent('common01/webHotpoint') // 网站热点
 export const common01componentWechatHotPoint = getComponent('common01/wechatHotpoint') // 微信热点
+export const common01componentDataSystem = getComponent('common01/dataSystem') // 数据系统

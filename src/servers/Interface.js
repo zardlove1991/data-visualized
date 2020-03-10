@@ -136,3 +136,6 @@ export const getM2OPlusWorkChartSummary = (model, currentViewId) => createAPI(`$
 // 溧水全网热点
 export const getNewsList = (page, count) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?page=${page}&count=${count}`)
 export const getHotWordsList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
+
+// 盐城大屏  传播力数据系统
+export const getPropagationForceData = (model) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getPropagationForceData?model=${model}`)
