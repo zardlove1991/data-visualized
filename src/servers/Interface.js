@@ -139,3 +139,7 @@ export const getHotWordsList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GU
 
 // 盐城大屏  传播力数据系统
 export const getPropagationForceData = (model) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getPropagationForceData?model=${model}`)
+
+// 杭州  选题上大屏
+export const getWorkCallSubjectSort = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectSort`)
+export const getWorkCallSubjectSortList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectList?sort_id=${id}`)
