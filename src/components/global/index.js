@@ -113,3 +113,4 @@ export const common01componentNewProject = getComponent('common01/newProject') /
 export const common01componentActivityInfo = getComponent('common01/activityInfo') // 活动资讯
 export const common01componentOrderSheet = getComponent('common01/orderSheet') // 点单中心
 export const common01componentOrgStructure = getComponent('common01/orgStructure') // 组织架构
+export const common01componentCivilizationRank = getComponent('common01/civilizationRank') // 盐湖大屏 文明管理
