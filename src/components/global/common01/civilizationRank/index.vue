@@ -26,19 +26,26 @@
         <div class="content-left">
           <div class="title">志愿组织排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
-            <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.name}}</div>
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + 1}}</div>
+            <div class="img-box">
+              <div>
+                <img src="../clickRank/assets/two.png" alt="">  
+              </div>
+            </div>
+            <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.name}}</div>
             <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.publish}}</span>h</div>
           </div>
         </div>
         <div class="content-right" v-if="rightList && rightList[0]">
           <div class="title">志愿者排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
-            <div class="img">
-              <img src="../clickRank/assets/two.png" alt="">
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + 1}}</div>
+            <div class="img-box">
+              <div>
+                <img src="../clickRank/assets/two.png" alt="">
+              </div>
             </div>
-            <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.name}}</div>
+            <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.name}}</div>
             <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.publish}}</span>h</div>
           </div>
         </div>
@@ -54,16 +61,14 @@ export default {
   data () {
     return {
       leftList: [
-        {name: 'appleappleappleappleappleappleappleappleappleappleappleappleappleappleappleapple', publish: 1234567},
-        {name: 'orange', publish: 1234},
-        {name: 'banana', publish: 1234},
-        {name: 'juice', publish: 1234}
+        {name: '呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕', publish: 1234567},
+        {name: '南城公益爱心服务队', publish: 1234},
+        {name: 'banana', publish: 1234}
       ],
       rightList: [
-        {name: '苹果', publish: 1234},
+        {name: '南城公益爱心服务队', publish: 1234},
         {name: '橙子', publish: 1234},
-        {name: '香蕉', publish: 1234},
-        {name: '果汁', publish: 1234}
+        {name: '香蕉', publish: 1234}
       ],
       customSize: false
     }
@@ -109,69 +114,88 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .dispatchrank-wrap {
-    padding: pxrem(159px) pxrem(96px) pxrem(57px) pxrem(74px);
+    padding: pxrem(154px) pxrem(70px) pxrem(61px) pxrem(70px);
     color: #fff;
+    .common01-title {
+        top: pxrem(53px);
+        height: pxrem(56px);
+        font-weight: 600;
+        line-height: 1;
+        text-shadow:0px 16px 16px rgba(7,222,255,0.2);
+    }
     .title-tab {
       width: 100%;
       padding-bottom: pxrem(8px);
       .item {
         flex: 1;
         position: relative;
-        font-size: pxrem(40px);
-        background: #115ea2;
-        padding: pxrem(5px) 0;
+        font-size: pxrem(36px);
+        background: rgba(13, 99, 223, 0.15);
+        height: pxrem(160px);
+        box-sizing: border-box;
         >div{
           display: inline-block;
+          height:pxrem(35px);
+          font-size:pxrem(36px);
+          color:rgba(255,255,255,1);
+          line-height:1;
+          margin-top: pxrem(31px);
           >p{
             text-align: left;
-            color: #4545ec;
+            font-size: pxrem(50px);
+            margin-top: pxrem(20px);
+            color: #00C0FF;
           }  
         }  
       }
       >.item:not(:last-child)::after{
         display: block;
         content: '';
-        width: pxrem(1px);
-        height: 80%;
+        width:pxrem(3px);
+        height:pxrem(100px);
+        background:linear-gradient(90deg,rgba(64,107,173,0) 0%,rgba(64,107,173,0.99) 48%,rgba(64,107,173,0) 100%);
         position: absolute;
         right: 0;
-        top: 10%;
-        background-color: #fff;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
       }
     }
     .wrap-content {
       .content-left {
-        >div.title {
-          text-align: left;
-          font-size: pxrem(40px);
-          .unit {font-size: pxrem(25px);}
-        }
         .item-list {
-          margin-right: pxrem(70px);
+          margin-right: pxrem(40px);
+          width: pxrem(900px);
           &:last-of-type {
             margin-bottom: 0;
           }
         }
       }
       .content-right {
-        >div.title{
-          text-align: left;
-          font-size: pxrem(40px);
-          .unit {font-size: pxrem(25px);}
-        }  
         .item-list {
+          width: pxrem(760px);
           &:last-of-type {
             margin-bottom: 0;
           }
         }
       }
+      .content-left>div.title, .content-right>div.title {
+        text-align: left;
+        font-size: pxrem(38px);
+        height: pxrem(38px);
+        line-height: 1;
+        margin: pxrem(39px) 0 pxrem(30px);
+        .unit {font-size: pxrem(30px);}
+      }
       .item-list {
-        width: pxrem(800px);
-        height: pxrem(100px);
+        height: pxrem(140px);
         background: url("./assets/back.png") no-repeat center;
-        background-size: 100%;
-        padding: 0 pxrem(38px) 0 pxrem(38px);
-        margin-bottom: pxrem(14px);
+        background-size: 100% 100%;
+        padding: 0 pxrem(60px) 0 pxrem(50px);
+        margin-bottom: pxrem(50px);
         .index {
           width: pxrem(60px);
           height: pxrem(60px);
@@ -191,21 +215,27 @@ export default {
             background-image: url("../clickRank/assets/four.png");
           }
         }
-        .img{
-          width: pxrem(70px);
-          height: pxrem(70px);
-          border-radius: 50%;
-          overflow: hidden;
-          margin-left: pxrem(40px);
-          >img{
-            width: 100%;
-            height: 100%;
+        .img-box{
+          width: pxrem(170px);
+          height: pxrem(88px);
+          padding-left: pxrem(57px);
+          padding-right: pxrem(25px);
+          >div{
+            width: pxrem(88px);
+            height: pxrem(88px);
+            border-radius: 50%;
+            overflow: hidden;
+            >img{
+              width: 100%;
+              height: 100%;
+            }
           }
         }
-        .title {
+        >.title {
           text-align: left;
-          width: pxrem(400px);
-          margin-left: pxrem(20px);
+          width: pxrem(357px);
+          line-height: 1;
+          margin: pxrem(50px) 0 pxrem(52px);
         }
         .num {
           margin-left: auto;
