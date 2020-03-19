@@ -26,7 +26,7 @@
         <div class="content-left">
           <div class="title">志愿组织排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated flipInX" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.member.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + count + 1}}</div>
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + leftCount + 1}}</div>
             <div class="img-box">
               <div>
                 <img :src="v.member.avatar?v.member.avatar:defaultImg" alt="">  
@@ -39,7 +39,7 @@
         <div class="content-right" v-if="rightList && rightList[0]">
           <div class="title">志愿者排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.member.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + count + 1}}</div>
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + rightCount + 1}}</div>
             <div class="img-box">
               <div>
                 <img :src="v.member.avatar?v.member.avatar:defaultImg" alt="">
@@ -64,7 +64,8 @@ export default {
       timeTotalNum: 0,
       teamTotalNum: 0,
       memberTotalNum: 0,
-      count: 0,
+      leftCount: 0,
+      rightCount: 0,
       leftList: [],
       rightList: [],
       customSize: false
@@ -90,17 +91,26 @@ export default {
       }
     },
     getCivilizationCenterRankList (type) {
-      getCivilizationCenterRankList(this.currentViewId).then(res => {
+      getCivilizationCenterRankList().then(res => {
         if (!res.data.error_code) {
           if (!type || type !== 'first') {
-            this.count += 3
+            this.leftCount += 3
+            this.rightCount += 3
           }
           let _result = res.data.result
           if (_result.WorkRank.data) {
             this.rightList = _result.WorkRank.data
+            // 判断是否是重新加载的第一页
+            if (this.rightCount >= _result.WorkRank.total) {
+              this.rightCount = 0
+            }
           }
           if (_result.WorkDepartRank.data) {
             this.leftList = _result.WorkDepartRank.data
+            // 判断是否是重新加载的第一页 （这里的total在外层）
+            if (this.leftCount >= _result.total) {
+              this.leftCount = 0
+            }
           }
           this.timeTotalNum = _result.time_total_num
           this.teamTotalNum = _result.team_total_num
