@@ -148,3 +148,7 @@ export const getWorkCallSubjectSortList = (id) => createAPI(`${httpsbaseUrl}/Api
 // 盐湖大屏
 // 文明排行
 export const getCivilizationCenterRankList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterRankList`)
+// 点单列表
+export const getOrderSheet = (count = 4, page = 1, status) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrderList?count=${count}&page=${page}&status=${status}`)
+// 点单详情
+export const getOrderDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrderDetail?id=${id}`)

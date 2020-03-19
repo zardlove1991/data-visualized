@@ -1,73 +1,173 @@
 <template>
   <div class="common-orderSheet ">
     <div class="orderSheet-page common01-border">
-    	<div class="today-weather sys-flex">
-            <div class="icon">
-                <img :src="icon" />
-            </div>
-            <div class="temp">{{temp}}</div>
+      <div v-if="!showDetail">
+      	<div class="today-weather sys-flex">
+      		<div class="day">{{day}}</div>
+      		<div class="weekday">{{weekday}}</div>
+              <div class="temp">{{temp}}</div>
+              <div class="icon">
+                  <img :src="icon" />
+              </div>
           </div>
-	   	<div class="rank-list">
-	   	  <div class="list-item animated" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
-	   	    <div class="flex item-detail">
-	   	    	<div class="item-index" :class="'index-' + k">{{k+1}}</div>
-	   	    	<div class="flex-one person-info flex">
-	   	    	  <div class="person-avatar">
-	   	    	    <img :src="v && v.avatar ? v.avatar.host + v.avatar.filepath + v.avatar.filename : defaultImg" />
-	   	    	  </div>
-	   	    	  <div class="person-name">{{v.name}}</div>
-	   	    	</div>
-	   	    	<div class="item-num">
-	   	    	  <div class="num">{{v.publish}}</div>
-	   	    	  <span class="num-label">条</span>
-	   	    	</div>
-	   	    </div>
-	   	  </div>
-	   	</div>
+        <div class="title">盐湖区新时代文明实践中心</div>
+  	    <div class="order-list sys-flex">
+  	      <div class="type-list">
+  	        <div class="type-item" @click="changType('new')" :class="{'check-item': type === 'new'}">
+  	          <div class="new-img order-img">
+  	            <img src="./assets/new_pre.png" v-if="type === 'new'">
+  	            <img src="./assets/new.png" v-else>
+  	          </div>
+  	          <div class="type-name">
+  	            最新点单
+  	          </div>
+  	        </div>
+  	        <div class="type-item" @click="changType('process')"  :class="{'check-item': type === 'process'}">
+  	          <div class="order-img">
+  	            <img src="./assets/process_pre.png" v-if="type === 'process'">
+  	            <img src="./assets/process.png" v-else>
+  	          </div>
+  	          <div class="type-name">
+  	            点单进程
+  	          </div>
+  	        </div>
+  	        <div class="type-item" @click="changType('complete')"  :class="{'check-item': type === 'complete'}">
+  	          <div class="order-img">
+  	            <img src="./assets/complete_pre.png" v-if="type === 'complete'">
+  	            <img src="./assets/complete.png" v-else>
+  	          </div>
+  	          <div class="type-name">
+  	            完成点单
+  	          </div>
+  	        </div>
+  	      </div>
+  	      <div class="list-content sys-flex-one">
+  	        <div class="list-item sys-flex animated"
+            @click="changeDetail(v)" 
+            :class="{'flipInX' : v.title}"
+            :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
+  	        	<div class="list-country">【{{v.region}}】</div>
+  	        	<div class="list-title txt-overflow sys-flex-one">{{v.title}}</div>
+  	        	<div class="list-time">{{v.create_time}}</div>
+  	        </div>
+  	      </div>
+  	    </div>
+      </div>
+      <div class="content-detail" v-if="showDetail">
+        <div class="back-line">
+          <div @click="backList()" class="back">
+            <div class="back-img">
+              <img src="./assets/icon_back.png">
+            </div>
+            <span class="back-text">返回</span>
+          </div>
+        </div>
+        <div class="detail-info">
+          <div class="title-line sys-flex">
+            <div class="status-img">
+              <img src="./assets/doing.png">
+            </div>
+            <div class="detail-title txt-overflow sys-flex-one">
+              {{detail.title}}
+            </div>
+          </div>
+          <div class="detail-content sys-flex">
+            <div class="help-info">
+              <div class="help-title sys-flex">
+                <div class="help-img">
+                  <img src="./assets/arrow_list.png" />
+                </div>
+                <div class="help-text">求助信息：</div>
+              </div>
+              <div class="help-brief">
+                {{detail.help_info}}
+              </div>
+            </div>
+            <div class="process-info sys-flex-one">
+              <div class="help-title sys-flex">
+                <div class="help-img">
+                  <img src="./assets/arrow_list.png" />
+                </div>
+                <div class="help-text">处理进度：</div>
+              </div>
+              <div class="process-brief">
+                <div class="process-item" v-for="item in detail.progress">
+                  <div class="status-name">{{item.status_name}}</div>
+                  <div class="process-org" v-if="item.organization">{{item.organization}}</div>
+                  <div class="process-member sys-flex" v-if="item.member">志愿者：<div class="member-name">{{item.member}}</div> 已接单</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getM2OPlusWorkRank, getJiangningWeather } from '@/servers/interface'
+import { getJiangningWeather, getOrderSheet, getOrderDetail } from '@/servers/interface'
 export default {
   name: 'manuscript',
   data () {
     return {
       dataList: [],
+      type: 'new',
       temp: '',
       icon: '',
       wstr: '',
+      day: '',
+      weekday: '',
+      count: 4,
+      page: 1,
       isPaging: false,
-      defaultImg: require('../../../../assets/avatar/touxiang.png'),
+      detail: {},
+      showDetail: false,
       frequency: 25000
     }
   },
   created () {
-    this.getDataList()
     this.getWeather()
+    this.getList()
+    this.getToday('')
   },
   mounted () {
-    this.setFontsize('lishui-personalranking')
     setInterval(() => {
-      this.getDataList()
+      this.getList()
     }, this.frequency)
   },
   methods: {
-    getWeather () {
-      let city = '南京'
-      getJiangningWeather(city).then(res => {
-        if (res && res.data && res.data.result && res.data.result.basic) {
-          let data = res.data.result.basic
-          this.temp = `${data.now.tmp}℃`
-          this.icon = `${data.now.cond.icon.host}${data.now.cond.icon.dir}${data.now.cond.icon.filepath}${data.now.cond.icon.filename}`
+    backList () {
+      this.showDetail = false
+      this.getList('')
+      this.type = 'new'
+    },
+    changeDetail (item) {
+      this.showDetail = true
+      getOrderDetail(item.id).then(res => {
+        if (!res.error_code) {
+          this.detail = res.data.result
         }
       })
     },
-    getDataList () {
-      getM2OPlusWorkRank(this.count, this.page, this.currentViewId).then(res => {
+    changType (type) {
+      this.type = type
+      if (this.type === 'new') {
+        this.dataList = []
+        this.getList('')
+      } else if (this.type === 'process') {
+        this.dataList = []
+        this.getList(1)
+      } else {
+        this.dataList = []
+        this.getList(2)
+      }
+    },
+    getList (status) {
+      getOrderSheet(this.count, this.page, status).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result && res.data.result.data.length) {
+          this.total = res.data.result.total
+          if (res.data.result.data.length) {
             this.dataList = []
             res.data.result.data.forEach((item, index) => {
               if (index < 8) {
@@ -83,11 +183,33 @@ export default {
           } else {
             if (this.page !== 1) {
               this.page = 1
-              this.getDataList()
+              this.getList()
             }
           }
         }
       })
+    },
+    getWeather () {
+      let city = '南京'
+      getJiangningWeather(city).then(res => {
+        if (res && res.data && res.data.result && res.data.result.basic) {
+          let data = res.data.result.basic
+          this.temp = `${data.now.tmp}℃`
+          this.icon = `${data.now.cond.icon.host}${data.now.cond.icon.dir}${data.now.cond.icon.filepath}${data.now.cond.icon.filename}`
+        }
+      })
+    },
+    getToday () {
+      let date = new Date()
+      let week = date.getDay()
+      let weeklist = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      let month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+      let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+      let hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
+      let minute = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
+      this.time = `${hour}:${minute}`
+      this.weekday = weeklist[week - 1]
+      this.day = `${month}月${day}日 `
     }
   }
 }
@@ -99,98 +221,222 @@ export default {
 .common-orderSheet{
   width: 100%;
   height: 100%;
+  background-color:#0a1742;
   padding: pxrem(40px);
 	.orderSheet-page{
-    padding: pxrem(200px) pxrem(96px) pxrem(95px) pxrem(78px);
-		.rank-list{
-		  text-align:left;
-		  .list-item{
-		    width:45%;
-		    height:1.4rem;
-		    padding:0 0.4rem;
-		    margin-bottom:0.5rem;
-		    background:linear-gradient(0deg,rgba(7,141,255,0.7) 0%,rgba(37,132,250,0.01) 52%,rgba(7,141,255,0.7) 100%);
-				border-radius:5px;
-				display:inline-block;
-				&:nth-child(odd) {
-				  margin-right:8%;
-				}
-				.item-detail{
-				  align-items:center;
-				  height:100%;
-				}
-		  }
-		  .item-num{
-		    .num{
-		      font-size:0.6rem;
-		    	color:#0BFCFF;
-		      display:inline-block;
-		    }
-		    .num-label{
-		      font-size:0.36rem;
-		      color:#0BFCFF;
-		      display:inline-block;
-		    }
-		  }
+    padding: 0.57rem 0.6rem 0.76rem 0.6rem;
+		.title{
+		  color:#00FFFA;
+		  font-size:1.2rem;
+		  text-align:center;
+		  font-family:PingFang-SC-Bold;
+		  font-weight:bold;
+		  letter-spacing: 0.1rem;
+		  line-height:1.2rem;
+		  margin-top:0.8rem;
+		  margin-bottom:0.6rem;
 		}
-		.item-index{
-		  width:0.6rem;
-			height:0.6rem;
-			background:rgba(0,108,255,0.45);
-			border:1px solid rgba(251, 49, 97, 1);
-			border-radius:5px;
-			color:#fff;
-			font-size:0.4rem;
-			text-align:center;
-			line-height:0.6rem;
-			font-family:PingFangSC-Medium;
-		}
-		.index-0{
-		  background:rgba(251,49,97,0.45);
-		}
-		.index-1{
-			background:rgba(251,173,49,0.45);
-		}
-		.index-2{
-			background:rgba(192,49,251,0.45);
-		}
-	}
-	.today-weather {
-        font-size: 0.8rem;
-        color: #fff;
-        .icon {
-          width: 1.45rem;
-          height: 0.95rem;
-          margin: 0 0.1rem 0 0.24rem;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-        .temp{
-          font-size:0.9rem;
+		.today-weather {
+      font-size: 0.35rem;
+      line-height:0.35rem;
+      align-items:center;
+      color: #fff;
+      .icon {
+        width: 0.47rem;
+        margin: 0 0.1rem 0 0.24rem;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
-	.person-info{
-	  padding-left:0.46rem;
-	  align-items:center;
-	  .person-avatar{
-		  width:0.88rem;
-		  height:0.88rem;
-		  border:1px solid #078DFF;
-		  border-radius:50%;
-		  overflow:hidden;
-		}
-		img{
-		  width:100%;
-		  height:100%;
-		}
-		.person-name{
-		  font-size:0.4rem;
-		  color:#fff;
-		  margin-left:0.4rem;
-		}
+      .weekday{
+      	margin-left: 0.15rem;
+      	margin-right: 0.2rem;
+      }
+    }
+    .type-list{
+      margin-right:0.35rem;
+    }
+    .type-item{
+      width:1.5rem;
+      height:1.5rem;
+      padding-top:0.24rem;
+      text-align:center;
+      margin-bottom:0.4rem;
+      background:url('./assets/orderbox.png') no-repeat 100%;
+    }
+    .type-name{
+    	font-size:0.28rem;
+    	line-height:0.28rem;
+    	margin-top:0.18rem;
+      color:rgba(252,255,255,0.6);
+      font-family:PingFang-SC-Medium;
+    }
+    .check-item{
+      background:url('./assets/orderbox_pre.png') no-repeat 100%;
+      .type-name{
+        color:rgba(252,255,255,1);
+      }
+    }
+    .order-img{
+    	width:0.6rem;
+    	height:0.6rem;
+    	display:inline-block;
+    }
+    .process-img{
+      background:url('./assets/process.png') no-repeat 100%;
+    }
+    .complete-img{
+      background:url('./assets/complete.png') no-repeat 100%;
+    }
+    .list-item{
+      height:1.45rem;
+      align-items:center;
+      color:#fff;
+      padding-left:0.55rem;
+      padding-right:0.6rem;
+    }
+    .list-item:nth-child(odd){
+      background-color:rgba(13,99,223,0.2);
+    }
+    .list-item:nth-child(even){
+      background-color:rgba(13,99,223,0.1);
+    }
+    .list-country{
+      font-size:0.38rem;
+      color:#00D2FF;
+      margin-right:0.1rem;
+      font-family:PingFang-SC-Bold;
+    }
+    .list-title{
+      font-size:0.38rem;
+      font-family:PingFang-SC-Bold;
+      text-align:left;
+    }
+    .list-time{
+      font-size:0.32rem;
+      font-family:PingFang-SC-Regular;
+      margin-left:0.72rem;
+    }
+    .content-detail{
+      text-align:left;
+    }
+    .back-line{
+      margin-bottom:0.45rem;
+    }
+    .back{
+      display:inline-block;
+    }
+    .back-text{
+      font-size:0.34rem;
+      color:#00FFEA;
+    }
+    .back-img{
+      display:inline-block;
+      width:0.36rem;
+      hieght:0.28rem;
+      margin-right:0.2rem;
+    }
+    .detail-title{
+      font-size:0.52rem;
+      line-height:0.6rem;
+      color:#fff;
+      font-family:PingFangSC-Regular;
+    }
+    .title-line{
+      padding-bottom:0.46rem;
+      border-bottom:1px solid #3073D4;
+      width:100%;
+      margin-bottom:0.64rem;
+    }
+    .status-img{
+      width:1.54rem;
+      height:0.6rem;
+      display:inline-block;
+      margin-right:0.22rem;
+    }
+    .help-info{
+      margin-right:0.8rem;
+    }
+    .help-title{
+      align-items:center;
+      margin-bottom:0.23rem;
+    }
+    .help-img{
+      width:0.8rem;
+      height:0.28rem;
+      margin-right:0.23rem;
+    }
+    .help-text{
+      font-size:0.42rem;
+      color:#fff;
+      font-family:PingFangSC-Regular;
+    }
+    .help-brief{
+      width:5.36rem;
+      height:5.1rem;
+      overflow-y:scroll;
+      padding:0.46rem 0.55rem 0 0.5rem;
+      background-color:rgba(13,99,223,0.15);
+      color:#fff;
+      font-size:0.36rem;
+      line-height:0.6rem;
+      font-family:PingFang-SC-Medium;
+    }
+    .process-brief{
+      width:100%;
+      height:5.1rem;
+      background-color:rgba(13,99,223,0.15);
+      overflow-y:scroll;
+      padding:0.5rem;
+    }
+    .status-name{
+      font-size:0.42rem;
+      color:#fff;
+      padding-left:0.3rem;
+    }
+    .process-item{
+      padding-bottom:0.74rem;
+      border-left:0.03rem solid #4DEFE8;
+      line-height:0.42rem;
+      position:relative;
+    }
+    .process-item:before{
+      content: '';
+      width:0.42rem;
+      height:0.42rem;
+      background:url('./assets/icon_finish.png') no-repeat 100%;
+      position:absolute;
+      left:-0.21rem;
+      top:-0.04rem;
+      background-color:rgba(13,99,223,0.15);
+    }
+    .process-item:last-child{
+      border-left:0;
+    }
+    .process-item:nth-last-child(2) {
+      border-image:linear-gradient(to bottom,#4DFFE8,#FFE84B) 1 10;
+    }
+    .process-org{
+      color:#fff;
+      font-size:0.34rem;
+      line-height:0.34rem;
+      margin-bottom:0.3rem;
+      margin-top:0.27rem;
+      font-family:PingFang-SC-Medium;
+      padding-left:0.25rem;
+    }
+    .process-member{
+      color:#fff;
+      font-size:0.34rem;
+      padding-left:0.25rem;
+      line-height:0.34rem;
+      font-family:PingFang-SC-Medium;
+    }
+    .member-name{
+      color:#0BFCFF;
+    }
 	}
 }
 
