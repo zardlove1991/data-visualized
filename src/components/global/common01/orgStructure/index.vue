@@ -1,16 +1,240 @@
 <template>
-  <div class="common-orgStructure ">
-    <div class="orgStructure-page common01-border">
+  <div class="common-orgStructure">
+    <!-- 一级页面 -->
+    <div class="orgStructure-page common01-border" v-if="!showDetailPage">
       <div class="common01-title">{{viewAttr.header || '组织架构'}}</div>
+      <div class="tab-btn sys-flex">
+        <div :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'" @click="showOrg=!showOrg">组织机构</div>
+        <div :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'" @click="showOrg=!showOrg">成员名单</div>
+      </div>
+      <div class="org-div" v-if="showOrg">
+        <div class="total">
+          <p>文明总队</p>
+          <span>{{orgIndexData.total}}</span>
+        </div>
+        <div class="name common01-ft36 animated flipInX top-info" @click="showChildDetail(orgIndexData.topInfo.id)">{{orgIndexData.topInfo.title}}</div>
+        <div class="name common01-ft36 animated flipInX left-top-info" @click="showChildDetail(orgIndexData.leftTopInfo.id)">{{orgIndexData.leftTopInfo.title}}</div>
+        <div class="name common01-ft36 animated flipInX left-bottom-info" @click="showChildDetail(orgIndexData.leftBottomInfo.id)">{{orgIndexData.leftBottomInfo.title}}</div>
+        <div class="name common01-ft36 animated flipInX right-top-info" @click="showChildDetail(orgIndexData.rightTopInfo.id)">{{orgIndexData.rightTopInfo.title}}</div>
+        <div class="name common01-ft36 animated flipInX right-bottom-info" @click="showChildDetail(orgIndexData.rightBottomInfo.id)">{{orgIndexData.rightBottomInfo.title}}</div>
+
+        <div class="number top-info" @click="showChildDetail(orgIndexData.topInfo.id)">{{orgIndexData.topInfo.score}}</div>
+        <div class="number left-top-info" @click="showChildDetail(orgIndexData.leftTopInfo.id)">{{orgIndexData.leftTopInfo.score}}</div>
+        <div class="number left-bottom-info" @click="showChildDetail(orgIndexData.leftBottomInfo.id)">{{orgIndexData.leftBottomInfo.score}}</div>
+        <div class="number right-top-info" @click="showChildDetail(orgIndexData.rightTopInfo.id)">{{orgIndexData.rightTopInfo.score}}</div>
+        <div class="number right-bottom-info" @click="showChildDetail(orgIndexData.rightBottomInfo.id)">{{orgIndexData.rightBottomInfo.score}}</div>
+      </div>
+      <!-- 成员名单 -->
+      <div class="member-div sys-flex" v-if="!showOrg">
+        <div class="left-part">
+          <div class="title">
+            <div class="img-div">
+              <img src="./assets/arrow_list.png" alt="">
+            </div>
+            <span>{{memberIndexData.leftMember.title}}</span>
+          </div>
+          <div class="member-list">
+            <div :class="item.work === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.leftMember.data" :key="index">
+              <div class="type-title">
+                <span>{{item.work}}</span>:
+              </div>
+              <div class="member sys-flex" v-for="(item2, index2) in item.members" :key="index2">
+                <div class="name"><span>{{item2.name}}</span></div>
+                <div class="position">{{item2.position}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right-part">
+          <div class="title">
+            <div class="img-div">
+              <img src="./assets/arrow_list.png" alt="">
+            </div>
+            <span>{{memberIndexData.rightMember.title}}</span>
+          </div>
+          <div class="member-list">
+            <div :class="item.work === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.rightMember.data" :key="index">
+              <div class="type-title">
+                <span>{{item.work}}</span>:
+              </div>
+              <div class="member sys-flex" v-for="(item2, index2) in item.members" :key="index2">
+                <div class="name"><span>{{item2.name}}</span></div>
+                <div class="position">{{item2.position}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 二级页面 -->
+    <div class="orgStructure-detail-page common01-border" v-if="showDetailPage">
+      <div class="back-btn common01-ft36" @click="childDetailPageBack">返回</div>
+      <div class="box">
+        <div class="top-part">
+          <div class="page-title">
+            <div class="title-box">
+              <div class="sys-flex">
+                <div class="title-left">
+                  <img src="./assets/namebox_left.png" alt="">
+                </div>
+                <div class="title">
+                  {{detailTitle}}
+                  <span class="num" v-if="detailInfo && detailInfo.length > 0">({{detailInfo.length}})</span>
+                </div>
+                <div class="title-right">
+                  <img src="./assets/namebox_right.png" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="bg-div">
+              <img src="./assets/bg_ladder.png" alt="">
+            </div>
+          </div>
+          <div class="list-line sys-flex">
+            <div class="first-line line" v-if="detailInfo && detailInfo.length > 0"></div>
+            <div class="line" v-if="detailInfo && detailInfo.length > 1"></div>
+            <div class="line" v-if="detailInfo && detailInfo.length > 2"></div>
+            <div class="line" v-if="detailInfo && detailInfo.length > 3"></div>
+            <div class="line" v-if="detailInfo && detailInfo.length > 4"></div>
+            <div class="line" v-if="detailInfo && detailInfo.length > 5"></div>
+          </div>
+        </div>
+        <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
+          <div class="item" v-for="(item, index) in detailInfo" :key="index">
+            <div class="img-box">
+              <img src="./assets/icon_group.png" alt="">
+            </div>
+            <div class="name"><span>{{item.title}}</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getCivilizationCenterOrganizationalList, getCivilizationCenterOrganizationalChildList, getCivilizationCenterOrganizationalMember } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
     return {
+      showOrg: true,
+      orgIndexData: {
+        total: 184,
+        topInfo: {
+          title: '',
+          score: 0,
+          id: ''
+        },
+        leftTopInfo: {
+          title: '',
+          score: 0,
+          id: ''
+        },
+        leftBottomInfo: {
+          title: '',
+          score: 0,
+          id: ''
+        },
+        rightTopInfo: {
+          title: '',
+          score: 0,
+          id: ''
+        },
+        rightBottomInfo: {
+          title: '',
+          score: 0,
+          id: ''
+        }
+      },
+      memberIndexData: {
+        leftMember: {
+          title: '',
+          data: []
+        },
+        rightMember: {
+          title: '',
+          data: []
+        }
+      },
+      // 二级页面
+      showDetailPage: false,
+      detailTitle: '',
+      detailInfo: []
+    }
+  },
+  created () {
+    this.getCivilizationCenterOrganizationalList()
+    this.getCivilizationCenterOrganizationalMember()
+  },
+  methods: {
+    // 获取组织架构
+    getCivilizationCenterOrganizationalList () {
+      getCivilizationCenterOrganizationalList().then(res => {
+        if (!res.data.error_code) {
+          let _result = res.data.result
+          if (_result && _result.length > 0) {
+            _result.forEach(e => {
+              if (e.title === '文明总队') {
+                this.orgIndexData.total = e.score
+              }
+              if (e.title === '专业服务队') {
+                this.orgIndexData.topInfo = e
+              }
+              if (e.title === '区直服务队') {
+                this.orgIndexData.leftTopInfo = e
+              }
+              if (e.title === '六大平台服务队') {
+                this.orgIndexData.leftBottomInfo = e
+              }
+              if (e.title === '乡镇服务队') {
+                this.orgIndexData.rightTopInfo = e
+              }
+              if (e.title === '社会志愿服务队') {
+                this.orgIndexData.rightBottomInfo = e
+              }
+            })
+          }
+        }
+      })
+    },
+    // 获取组织架构（子组织）
+    showChildDetail (id) {
+      getCivilizationCenterOrganizationalChildList(id).then(res => {
+        if (!res.data.error_code) {
+          let _result = res.data.result
+          if (_result) {
+            this.detailTitle = _result.title
+            this.detailInfo = _result.child
+            this.showDetailPage = true
+          }
+        }
+      })
+    },
+    // 二级页面返回
+    childDetailPageBack () {
+      this.showDetailPage = false
+      this.detailInfo = []
+      this.detailTitle = ''
+    },
+    // 成员名单
+    getCivilizationCenterOrganizationalMember () {
+      getCivilizationCenterOrganizationalMember().then(res => {
+        if (!res.data.error_code) {
+          let _result = res.data.result
+          if (_result) {
+            _result.forEach(e => {
+              if (/实践中心/.test(e.title)) {
+                this.memberIndexData.leftMember.title = e.title
+                this.memberIndexData.leftMember.data = e.data
+              } else {
+                this.memberIndexData.rightMember.title = e.title
+                this.memberIndexData.rightMember.data = e.data
+              }
+            })
+          }
+        }
+      })
     }
   }
 }
@@ -23,123 +247,352 @@ export default {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
+  background: #0a1742;
+  *{
+    font-family:'PingFang SC';
+  }
   .orgStructure-page{
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
-    .list-item{
-      margin-bottom: pxrem(110px);
-      align-items:center;
+    .common01-title {
+      height: pxrem(56px);
+      font-weight: 600;
+      line-height: 1;
+      text-shadow:0px 16px 16px rgba(7,222,255,0.2);
     }
-    .type-area{
-      color:#0AFBF2;
-      span {
-        color: #0afbf2;
+    .tab-btn{
+      position: absolute;
+      z-index: 2;
+      top: pxrem(90px);
+      right: pxrem(77px);
+      .btn{
+        width: pxrem(253px);
+        height: pxrem(94px);
+        line-height: pxrem(94px);
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        background: url('./assets/rectangle.png') no-repeat center;
+        background-size: 100%;
       }
-      img {
-        width: 1.07rem;
-        height: 0.48rem;
-        margin: 0 0.225rem;
-      }
-    }
-    .list-title{
-      color:#fff;
-      font-size:0.38rem;
-      margin-right:1.12rem;
-      text-align:left;
-    }
-    .list-text {
-      width: 40%;
-      text-align: left;
-    }
-    .list-time {
-      .img-icon {
-        width: 0.3rem;
-        height: 0.3rem;
-        margin-right: 0.2rem;
+      .btn.act{
+        background: url('./assets/rectangle_pre.png') no-repeat center;
+        background-size: 100%;
       }
     }
-    .list-read {
-      margin: 0 0.8rem 0 0.65rem;
-      font-size:0.32rem;
-      .img-icon {
-        width: 0.42rem;
-        height: 0.3rem;
-        margin-right: 0.2rem;
+    .org-div{
+      position: absolute;
+      width: pxrem(1678px);
+      height: pxrem(810px);
+      bottom: pxrem(35px);
+      background: url('./assets/bg_group.png') no-repeat center;
+      background-size: 100%;
+      .total, .name, .number{position: absolute;}
+      .total{
+        width: pxrem(314px);
+        height: pxrem(189px);
+        text-align: center;
+        top: pxrem(338px);
+        left: pxrem(662px);
+        p{
+          font-size: pxrem(52px);
+          height: pxrem(50px);
+          line-height: 1;
+          letter-spacing: pxrem(3px);
+          margin-top: pxrem(32px);
+          color: #fff;
+        }
+        span{
+          font-size: pxrem(68px);
+          color: #00F6FF;
+          font-weight:800;
+          letter-spacing: 11px;
+        }
+      }
+      .name {
+        height: pxrem(76px);
+        line-height: pxrem(76px);
+        color: #fff;
+        font-weight: bold;
+        letter-spacing: pxrem(2px);
+      }
+      .name.top-info{
+        width: pxrem(294px);
+        top: pxrem(15px);
+        left: pxrem(354px);
+      }
+      .name.left-top-info{
+        width: pxrem(294px);
+        top: pxrem(195px);
+        left: pxrem(7px);
+      }
+      .name.left-bottom-info{
+        width: pxrem(374px);
+        bottom: pxrem(38px);
+        left: 0;
+      }
+      .name.right-top-info{
+        width: pxrem(294px);
+        top: pxrem(195px);
+        right: pxrem(44px);
+      }
+      .name.right-bottom-info{
+        width: pxrem(408px);
+        bottom: pxrem(54px);
+        right: 0;
+      }
+      .number{
+        width: pxrem(138px);
+        height: pxrem(138px);
+        text-align: center;
+        font-size: pxrem(48px);
+        line-height: pxrem(138px);
+        font-weight: bold;
+        letter-spacing: pxrem(2px);
+        color: #BECFFF;
+      }
+      .number.top-info{
+        top: pxrem(20px);
+        left: pxrem(750px);
+      }
+      .number.left-top-info{
+        top: pxrem(248px);
+        left: pxrem(428px);
+        color: #0CE7E6;
+      }
+      .number.left-bottom-info{
+        bottom: pxrem(96px);
+        left: pxrem(482px);
+      }
+      .number.right-top-info{
+        top: pxrem(250px);
+        right: pxrem(462px);
+        color: #0CE7E6;
+      }
+      .number.right-bottom-info{
+        bottom: pxrem(96px);
+        right: pxrem(514px);
+      }
+    }
+    .member-div{
+      .left-part{margin-right: pxrem(80px);}
+      .title{
+        height: 40px;
+        font-size: pxrem(42px);
+        line-height: 1;
+        text-align: left;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: pxrem(33px);
+        .img-div{
+          display: inline-block;
+          width: pxrem(80px);
+          height: pxrem(28px);
+          >img{
+            width: 100%;
+          }
+        }
+      }
+      .member-list{
+        width: pxrem(800px);
+        height: pxrem(629px);
+        background: rgba(0, 132, 255, 0.15);
+        padding-left: pxrem(51px);
+        overflow-y: scroll;
+        .item.type-leader{
+          background: url('./assets/icon_leader.png')no-repeat;
+          background-size: pxrem(29px) pxrem(36px);
+          background-position: 0 pxrem(45px);
+        }
+        .item.type-member{
+          background: url('./assets/icon_member.png')no-repeat;
+          background-size: pxrem(41px) pxrem(26px);
+          background-position: 0 pxrem(50px);
+        }
+        .item{
+          padding: pxrem(43px) 0 0 pxrem(51px);
+          text-align: left;
+          font-size: pxrem(36px);
+          line-height: pxrem(36px);
+          color: #fff;
+          .type-title{
+            span{
+              display: inline-block;
+              min-width: pxrem(105px);
+              text-align-last:justify;
+              text-align:justify;
+              text-justify:distribute-all-lines;
+            }
+          }
+          .member{
+            margin-top: pxrem(34px);
+            .name{
+              width: pxrem(181px);
+              color: #0BFCFF;
+              font-weight: bold;
+              >span{
+                display: inline-block;
+                min-width: pxrem(105px);
+                text-align-last:justify;
+                text-align:justify;
+                text-justify:distribute-all-lines;
+              }
+            }
+            .position{
+              font-size: pxrem(30px);
+            }
+          }
+        }
+        >.item:last-child{
+          padding-bottom: pxrem(43px);
+        }
       }
     }
   }
-  .activityInfo-detail {
-    padding: pxrem(100px) pxrem(72px) pxrem(10px);
-    img {
-      width: 100%;
+  // 二级页面
+  .orgStructure-detail-page{
+    .box{
       height: 100%;
-      object-fit: cover;
+      position: relative;
+    }
+    .box::after{
+      position: absolute;
       display: block;
-    }
-    .detail-title {
-      .back {
-        width: pxrem(44px);
-        height: pxrem(44px);
-        margin-right: pxrem(40px);
-      }
-      .title {
-        font-weight: bold;
-      }
-    }
-    .detail-list {
-      color: #05D9FF;
-      border-bottom: pxrem(2px) dashed #00EAFF;
-      padding: pxrem(40px) pxrem(20px) pxrem(35px) pxrem(80px);
-      .source {
-        width: 30%;
-        text-align: left;
-        margin-right: pxrem(15px);
-      }
-      .author {
-        width: 17%;
-        text-align: left;
-        margin-right: pxrem(15px);
-      }
-      .read {
-        margin-left: auto;
-        img {
-          width: pxrem(42px);
-          height: pxrem(30px);
-          margin-right: pxrem(10px);
-        }
-      }
-      .comment {
-        margin-left: pxrem(50px);
-        img {
-          width: pxrem(34px);
-          height: pxrem(31px);
-          margin-right: pxrem(10px);
-        }
-      }
-    }
-    .detail-content {
+      content: '';
+      bottom: pxrem(23px);
       width: 100%;
-      height: 6.2rem;
-      overflow: hidden;
-      margin-top: pxrem(40px);
-      &>div {
-        width: 100%;
-        height: 100%;
-        overflow-y: scroll;
-      }
-      .pic {
-        img {
-          margin-bottom: pxrem(20px);
+      box-shadow: 0px 8px 22px 12px rgba(14, 34, 84, 0.7);
+    }
+    .back-btn {
+      position: absolute;
+      z-index: 1;
+      left: pxrem(80px);
+      top: pxrem(80px);
+      padding-left: pxrem(55px);
+      color: #00FFEA;
+      background: url('./assets/icon_back.png') no-repeat;
+      background-size: pxrem(36px) pxrem(28px);
+      background-position: 0 pxrem(8px);
+    }
+    .top-part{
+      padding-top: pxrem(150px);
+      .page-title{
+        .title-box{
+          display: inline-block;
+          position: relative;
+          z-index: 1;
+          font-size: pxrem(56px);
+          color: #fff;
+          line-height: pxrem(131px);
+          justify-content: center;
+          box-shadow: 0px pxrem(25px) pxrem(40px) rgba(14, 34, 84, 0.7);
+          .title{
+            background: url('./assets/namebox_mid.png')no-repeat center;
+            background-size: 100% 100%;
+            .num{
+              font-size:pxrem(60px);
+              color:#00FFFA;
+            }
+          }
+          >div{
+            height: pxrem(131px);
+            >img{
+              height: 100%;
+            }
+          }
+        }
+        .bg-div{
+          width: pxrem(1451px);
+          height: pxrem(70px);
+          margin: pxrem(-20px) auto 0;
+          position: relative;
+          >img{
+            width: 100%;
+            height: 100%;
+          }
         }
       }
-      .video {
-        .vjs-custom-skin {
-          width: 100%;
-          height: 100%;
+      .list-line{
+        height: pxrem(121px);
+        width: pxrem(1464px);
+        padding-top: pxrem(51px);
+        padding-bottom: pxrem(10px);
+        margin: 0 auto;
+        .line{
+          position: relative;
+          width: pxrem(291px);
+          border-top:pxrem(2px) solid #03F6FF;
+        }
+        .line::before, .line::after{
+          display: block;
+          content: '';
+          position: absolute;
+        }
+        .line::before{
+          right: 0;
+          top: pxrem(2px);
+          width: pxrem(2px);
+          height: pxrem(58px);
+          background:#03F6FF;
+        }
+        .line::after{
+          width: pxrem(10px);
+          height: pxrem(10px);
+          border-radius: 50%;
+          background: #03F6FF;
+          bottom: pxrem(-10px);
+          right: 0;
+          -webkit-transform: translateX(pxrem(4px));
+          -moz-transform: translateX(pxrem(4px));
+          -ms-transform: translateX(pxrem(4px));
+          -o-transform: translateX(pxrem(4px));
+          transform: translateX(pxrem(4px));
+          box-shadow: 0px 0px pxrem(10px) pxrem(4px) #05e8f1;
+        }
+        .first-line{
+          width: pxrem(2px);
+          height: pxrem(60px);
+        }
+      }
+    }
+    .list-box{
+      position: relative;
+      width: pxrem(1758px);
+      height: pxrem(480px);
+      overflow-y: scroll;
+      flex-flow: row wrap;
+      margin: pxrem(59px) auto 0;
+      .item{
+        width: pxrem(293px);
+        height: pxrem(283px);
+        padding-bottom: pxrem(16px);
+        .img-box{
+          margin-bottom: pxrem(16px);
+          img{
+            width: pxrem(150px);
+            height: pxrem(150px);
+          }
+        }
+        .name{
+          display: -webkit-box;
+          font-size: pxrem(34px);
+          color: #fff;
+          width: pxrem(277px);
+          height: pxrem(96px);
+          margin: 0 auto;
           overflow: hidden;
+          text-overflow: ellipsis;
+          word-wrap: normal;
+          word-break: break-all;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-align: center;
+          >span{
+            display: inline-block;
+            text-align: left;
+          }
         }
       }
     }
   }
 }
-
 </style>

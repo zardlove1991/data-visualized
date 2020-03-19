@@ -152,3 +152,9 @@ export const getCivilizationCenterRankList = () => createAPI(`${httpsbaseUrl}/Ap
 export const getOrderSheet = (count = 4, page = 1, status) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrderList?count=${count}&page=${page}&status=${status}`)
 // 点单详情
 export const getOrderDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrderDetail?id=${id}`)
+// 组织架构
+export const getCivilizationCenterOrganizationalList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalList`)
+// 组织结构（子组织）
+export const getCivilizationCenterOrganizationalChildList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalChildList?id=${id}`)
+// 组织架构 成员名单
+export const getCivilizationCenterOrganizationalMember = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalMember`)
