@@ -50,10 +50,10 @@ export default {
       total: '',
       provinceList: [{
         count: 32560,
-        name: '徐州'
+        name: '盐城'
       }, {
         count: 20110,
-        name: '盐城'
+        name: '徐州'
       }, {
         count: 13017,
         name: '无锡'
@@ -66,13 +66,13 @@ export default {
       }],
       cityTotal: 43,
       cityList: [{
-        name: '广州',
+        name: '江苏',
         value: 20
       }, {
         name: '上海',
         value: 13
       }, {
-        name: '南京',
+        name: '浙江',
         value: 10
       }],
       pieOptions: '',
