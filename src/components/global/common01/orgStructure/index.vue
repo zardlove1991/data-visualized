@@ -493,7 +493,7 @@ export default {
               color:#00FFFA;
             }
           }
-          >div{
+          .sys-flex>div{
             height: pxrem(131px);
             >img{
               height: 100%;
