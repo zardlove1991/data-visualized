@@ -6,47 +6,47 @@
           <div class="item">
             <div>
               <h4>志愿服务总时长(时)</h4>
-              <p>2093</p>
+              <p>{{timeTotalNum}}</p>
             </div>
           </div>
           <div class="item">
               <div>
                 <h4>服务队总数(个)</h4>
-                <p>137</p>
+                <p>{{teamTotalNum}}</p>
               </div>
           </div>
           <div class="item">
               <div>
                 <h4>志愿者总数(人)</h4>
-                <p>751</p>
+                <p>{{memberTotalNum}}</p>
               </div>
           </div>
       </div>
       <div class="wrap-content sys-flex flex-justify-between">
         <div class="content-left">
           <div class="title">志愿组织排行<span class="unit">(时长/h)</span></div>
-          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + 1}}</div>
+          <div class="item-list sys-flex sys-flex-center animated flipInX" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.member.name}" :style="{'animation-delay' : k/2+'s'}">
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + count + 1}}</div>
             <div class="img-box">
               <div>
-                <img src="../clickRank/assets/two.png" alt="">  
+                <img :src="v.member.avatar?v.member.avatar:defaultImg" alt="">  
               </div>
             </div>
-            <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.name}}</div>
-            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.publish}}</span>h</div>
+            <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.member.name}}</div>
+            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.time.replace('h','')}}</span>h</div>
           </div>
         </div>
         <div class="content-right" v-if="rightList && rightList[0]">
           <div class="title">志愿者排行<span class="unit">(时长/h)</span></div>
-          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + 1}}</div>
+          <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.member.name}" :style="{'animation-delay' : k/2+'s'}">
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + count + 1}}</div>
             <div class="img-box">
               <div>
-                <img src="../clickRank/assets/two.png" alt="">
+                <img :src="v.member.avatar?v.member.avatar:defaultImg" alt="">
               </div>
             </div>
-            <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.name}}</div>
-            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.publish}}</span>h</div>
+            <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.member.name}}</div>
+            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.time.replace('h','')}}</span>h</div>
           </div>
         </div>
       </div>
@@ -54,35 +54,34 @@
   </div>
 </template>
 <script>
-import { getPublishDataRank } from '@/servers/interface'
+import { getCivilizationCenterRankList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'civilizationRank',
   data () {
     return {
-      leftList: [
-        {name: '呀呀呀呀呀呀晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕晕', publish: 1234567},
-        {name: '南城公益爱心服务队', publish: 1234},
-        {name: 'banana', publish: 1234}
-      ],
-      rightList: [
-        {name: '南城公益爱心服务队', publish: 1234},
-        {name: '橙子', publish: 1234},
-        {name: '香蕉', publish: 1234}
-      ],
+      defaultImg: require('../../../../assets/avatar/touxiang.png'),
+      timeTotalNum: 0,
+      teamTotalNum: 0,
+      memberTotalNum: 0,
+      count: 0,
+      leftList: [],
+      rightList: [],
       customSize: false
     }
   },
   created () {
-    // getDataConfig().then(res => {
-    //   if (Number(res.customSize)) {
-    //     this.customSize = true
-    //   }
-    // })
-    // this.getPublishDataRank()
-    // setInterval(() => {
-    //   this.getPublishDataRank()
-    // }, 60000)
+    getDataConfig().then(res => {
+      if (Number(res.customSize)) {
+        this.customSize = true
+      }
+    })
+    this.getCivilizationCenterRankList('first')
+    setInterval(() => {
+      this.leftList = []
+      this.rightList = []
+      this.getCivilizationCenterRankList()
+    }, 60000)
   },
   methods: {
     setFontSize (size) {
@@ -90,16 +89,22 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getPublishDataRank () {
-      getPublishDataRank(this.currentViewId).then(res => {
+    getCivilizationCenterRankList (type) {
+      getCivilizationCenterRankList(this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          let dataList = res.data.result.data
-          if (dataList && dataList.length > 7) {
-            this.leftList = dataList.slice(0, 7)
-            this.rightList = dataList.slice(7)
-          } else {
-            this.leftList = dataList
+          if (!type || type !== 'first') {
+            this.count += 3
           }
+          let _result = res.data.result
+          if (_result.WorkRank.data) {
+            this.rightList = _result.WorkRank.data
+          }
+          if (_result.WorkDepartRank.data) {
+            this.leftList = _result.WorkDepartRank.data
+          }
+          this.timeTotalNum = _result.time_total_num
+          this.teamTotalNum = _result.team_total_num
+          this.memberTotalNum = _result.member_total_num
         }
       })
     }
@@ -113,10 +118,15 @@ export default {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
+  background: #0a1742;
+  *{
+    font-family:'PingFang SC';
+  }
   .dispatchrank-wrap {
     padding: pxrem(154px) pxrem(70px) pxrem(61px) pxrem(70px);
     color: #fff;
     .common01-title {
+        font-family: 'PingFangSC-Semibold';
         top: pxrem(53px);
         height: pxrem(56px);
         font-weight: 600;
@@ -145,6 +155,8 @@ export default {
             font-size: pxrem(50px);
             margin-top: pxrem(20px);
             color: #00C0FF;
+            font-weight: bold;
+            letter-spacing: pxrem(3px);
           }  
         }  
       }
@@ -240,6 +252,7 @@ export default {
         .num {
           margin-left: auto;
           color: #00FCFF;
+          font-weight: 600;
         }
       }
     }
