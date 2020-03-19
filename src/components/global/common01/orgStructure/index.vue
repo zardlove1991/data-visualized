@@ -91,12 +91,12 @@
             </div>
           </div>
           <div class="list-line sys-flex">
-            <div class="first-line line" v-if="detailInfo && detailInfo.length > 0"></div>
-            <div class="line" v-if="detailInfo && detailInfo.length > 1"></div>
-            <div class="line" v-if="detailInfo && detailInfo.length > 2"></div>
-            <div class="line" v-if="detailInfo && detailInfo.length > 3"></div>
-            <div class="line" v-if="detailInfo && detailInfo.length > 4"></div>
-            <div class="line" v-if="detailInfo && detailInfo.length > 5"></div>
+            <div class="first-line line" v-if="checkCanShow(0)"></div>
+            <div class="line" v-if="checkCanShow(1)"></div>
+            <div class="line" v-if="checkCanShow(2)"></div>
+            <div class="line" v-if="checkCanShow(3)"></div>
+            <div class="line" v-if="checkCanShow(4)"></div>
+            <div class="line" v-if="checkCanShow(5)"></div>
           </div>
         </div>
         <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
@@ -168,6 +168,14 @@ export default {
     this.getCivilizationCenterOrganizationalMember()
   },
   methods: {
+    //
+    checkCanShow (num) {
+      if (this.detailInfo && this.detailInfo.length > num) {
+        return true
+      } else {
+        return false
+      }
+    },
     // 获取组织架构
     getCivilizationCenterOrganizationalList () {
       getCivilizationCenterOrganizationalList().then(res => {
