@@ -7,7 +7,7 @@
           :class="{'flipInX' : v.title}"
           :style="{'animation-delay' : k/2 + 's'}"
           v-for="(v, k) in dataList"
-          @click="showContentDetail(v)"
+          @click="getDetail(v)"
           :key="k">
           <div class="type-area sys-flex sys-flex-center">
             <img v-if="k === 0" src="./assets/new.png" />
@@ -18,34 +18,22 @@
             <img class="img-icon" src="@/assets/common/reader.png" />
             <span class="common01-ft32">{{v.click_num}}</span>
           </div>
-          <div class="list-time flex flex-center">
-            <img class="img-icon" src="@/assets/common/time.png" />
-            <span class="">{{v.publish_time.slice(5, 16)}}</span>
-          </div>
         </div>
       </div>
     </div>
     <div class="activityInfo-detail common01-border" v-if="showDetail">
-      <div class="detail-title sys-flex sys-flex-center">
-        <div class="back" @click="backList">
-          <img src="../newArticle/assets/back.png" />
-        </div>
-        <div class="title common01-ft60 overhidden">{{detailData.title}}</div>
-      </div>
-      <div class="detail-list sys-flex sys-flex-center common01-ft30">
-        <div class="source overhidden">来源：{{detailData.source}}</div>
-        <div class="author overhidden">作者：{{detailData.author}}</div>
-        <div class="time">{{detailData.create_time}}</div>
-        <div class="read sys-flex sys-flex-center" v-if="detailData.click_num">
-          <img src="../newArticle/assets/read.png" />
-          <span>{{detailData.click_num}}</span>
-        </div>
-        <div class="comment sys-flex sys-flex-center" v-if="detailData.comment_num">
-          <img src="../newArticle/assets/comment.png" />
-          <span>{{detailData.comment_num}}</span>
-        </div>
-      </div>
-      <div class="detail-content common01-ft36">
+      <swiper :options="swiperOption" ref="mySwiper">
+        <swiper-slide v-for="(v, k) in dataList" :key="k" >
+          <div class="detail-title common01-ft60 overhidden">{{v.title}}</div>
+          <div class="detail-list">
+            <div class="source">来源：{{v.source}}</div>
+            <div class="author">发布时间：{{v.create_time}}</div>
+          </div>
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-button-prev swiper-button-white" @click="goBefore()"></div>
+      <div class="swiper-button-next swiper-button-white" @click="goNext"></div>
+      <!--<div class="detail-content common01-ft36">
         <div class="news" v-if="detailData.listType === 'weChat' || (detailData.listType === 'm2o' && detailData.type === 'news')" v-html="detailData.listType === 'weChat' ? handelHtml(detailData.content) : handelHtml(detailData.content.html)"></div>
         <div class="pic" v-if="detailData.listType === 'm2o' && detailData.type === 'tuji'">
           <img :src="v.pic" v-for="(v, k) in detailData.content" :key="k" />
@@ -59,13 +47,15 @@
             customEventName="customstatechangedeventname"
           ></video-player>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import { getM2OPlusPublish, getM2OPLUSArticleDetail } from '@/servers/interface'
+import { getActivityInfo } from '@/servers/interface'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'manuscript',
   data () {
@@ -75,6 +65,7 @@ export default {
       detailData: {},
       showDetail: false,
       page: 1,
+      showIndex: 0,
       isPaging: true,
       typeList: {
         article: '文稿',
@@ -83,7 +74,24 @@ export default {
         link: '外链',
         video: '视频'
       },
-      frequency: 25000
+      frequency: 25000,
+      swiperOption: {
+        notNextTick: true,
+        initialSlide: 0,
+        speed: 1000,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        direction: 'horizontal',
+        loop: true,
+        observer: true,
+        observeParents: true,
+        paginationClickable: true
+      }
     }
   },
   created () {
@@ -92,60 +100,45 @@ export default {
   mounted () {
     this.setFontsize('lishui-manuscriptoutput')
     setInterval(() => {
-      this.getDataList()
+      if (!this.showDetail) {
+        this.getDataList()
+      }
     }, this.frequency)
   },
   methods: {
+    goBefore () {
+      console.log(this.$refs.mySwiper.swiper.realIndex + 1)
+    },
+    goNext () {
+      if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
+        this.getMoreList()
+      }
+    },
+    getDetail (item) {
+      this.showDetail = true
+      this.showIndex = 0
+      this.dataList.forEach((v, index) => {
+        if (v.id === item.id) {
+          this.showIndex = index
+        }
+      })
+      this.swiperOption.initialSlide = this.showIndex - 1
+    },
     backList () {
       this.showDetail = false
     },
-    showContentDetail (value) {
-      this.showDetail = true
-      getM2OPLUSArticleDetail(value.id, value.type, this.currentViewId).then(res => {
-        if (res && res.data && res.data.result) {
-          this.detailData = res.data.result
-          this.detailData.listType = value.type
-          if (this.detailData.listType === 'm2o' && this.detailData.type === 'vod') {
-            this.detailData.content = {
-              autoplay: true, // 自动播放
-              controls: true, // 是否显示控制栏
-              muted: true,
-              fluid: true,
-              width: 820,
-              sourceOrder: true,
-              flash: { hls: { withCredentials: false } },
-              html5: { hls: { withCredentials: false } },
-              sources: [
-                {
-                  withCredentials: false,
-                  type: 'application/x-mpegURL',
-                  src: this.detailData.content
-                }
-              ],
-              poster: this.detailData.thumb_url, // 播放器默认图片
-              controlBar: {
-                // 配置控制栏
-                timeDivider: false, // 时间分割线
-                durationDisplay: false, // 总时间
-                progressControl: true, // 进度条
-                customControlSpacer: true, // 未知
-                fullscreenToggle: true // 全屏
-              }
-            }
-          }
-        }
-      })
+    getMoreList () { // 接口需要调整 获取更多
+      this.dataList = this.dataList.concat(this.dataList)
     },
     getDataList () {
-      getM2OPlusPublish(this.count, this.page, this.currentViewId).then(res => {
+      getActivityInfo(this.count, this.page).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
               this.dataList = res.data.result.data.map(v => {
                 return {
-                  ...v,
-                  typeName: this.typeList[(v.type)]
+                  ...v
                 }
               })
             }, 100)
@@ -164,6 +157,10 @@ export default {
         }
       })
     }
+  },
+  components: {
+    swiper,
+    swiperSlide
   }
 }
 </script>
@@ -228,44 +225,25 @@ export default {
       display: block;
     }
     .detail-title {
-      .back {
-        width: pxrem(44px);
-        height: pxrem(44px);
-        margin-right: pxrem(40px);
-      }
-      .title {
         font-weight: bold;
-      }
+        font-size:0.52rem;
+        line-height:0.52rem;
+        color:#fff;
+        margin-bottom:0.38rem;
+        text-align:center;
     }
     .detail-list {
-      color: #05D9FF;
-      border-bottom: pxrem(2px) dashed #00EAFF;
-      padding: pxrem(40px) pxrem(20px) pxrem(35px) pxrem(80px);
+      color: #fff;
+      margin:0 auto;
+      text-align:center;
       .source {
-        width: 30%;
-        text-align: left;
-        margin-right: pxrem(15px);
+        margin-right: 0.34rem;
+        display:inline-block;
+        font-size:0.28rem;
       }
-      .author {
-        width: 17%;
-        text-align: left;
-        margin-right: pxrem(15px);
-      }
-      .read {
-        margin-left: auto;
-        img {
-          width: pxrem(42px);
-          height: pxrem(30px);
-          margin-right: pxrem(10px);
-        }
-      }
-      .comment {
-        margin-left: pxrem(50px);
-        img {
-          width: pxrem(34px);
-          height: pxrem(31px);
-          margin-right: pxrem(10px);
-        }
+      .author{
+        display:inline-block;
+        font-size:0.28rem;
       }
     }
     .detail-content {
@@ -290,6 +268,23 @@ export default {
           overflow: hidden;
         }
       }
+    }
+    .swiper-slide{
+      width:100%!important;
+    }
+    .swiper-button-prev{
+      background-image:url(./assets/icon_left.png)!important;
+      width:0.4rem;
+      height:0.78rem;
+      background-size:100%;
+      cursor: none;
+    }
+    .swiper-button-next{
+      background-image:url(./assets/icon_right.png)!important;
+      width:0.4rem;
+      height:0.78rem;
+      background-size:100%;
+      cursor: none;
     }
   }
 }

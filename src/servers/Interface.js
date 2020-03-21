@@ -158,3 +158,5 @@ export const getCivilizationCenterOrganizationalList = () => createAPI(`${httpsb
 export const getCivilizationCenterOrganizationalChildList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalChildList?id=${id}`)
 // 组织架构 成员名单
 export const getCivilizationCenterOrganizationalMember = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalMember`)
+// 活动资讯
+export const getActivityInfo = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterActivityInformation`)
