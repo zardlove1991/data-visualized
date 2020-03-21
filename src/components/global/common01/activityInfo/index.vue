@@ -114,7 +114,6 @@ export default {
       console.log(this.$refs.mySwiper.swiper.realIndex + 1)
     },
     goNext () {
-      console.log(this.$refs.mySwiper.swiper.realIndex)
       if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
         this.getMoreList()
       }
@@ -133,7 +132,6 @@ export default {
       this.showDetail = false
     },
     getMoreList () { // 接口需要调整 获取更多
-      console.log(this.dataList)
       this.dataList = this.dataList.concat(this.dataList)
     },
     getDataList () {
