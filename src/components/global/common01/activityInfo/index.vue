@@ -18,6 +18,10 @@
             <img class="img-icon" src="@/assets/common/reader.png" />
             <span class="common01-ft32">{{v.click_num}}</span>
           </div>
+          <div class="list-time flex flex-center">
+            <img class="img-icon" src="@/assets/common/time.png" />
+            <span class="common01-ft32">{{v.click_num}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -110,6 +114,7 @@ export default {
       console.log(this.$refs.mySwiper.swiper.realIndex + 1)
     },
     goNext () {
+      console.log(this.$refs.mySwiper.swiper.realIndex)
       if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
         this.getMoreList()
       }
@@ -128,6 +133,7 @@ export default {
       this.showDetail = false
     },
     getMoreList () { // 接口需要调整 获取更多
+      console.log(this.dataList)
       this.dataList = this.dataList.concat(this.dataList)
     },
     getDataList () {
@@ -192,7 +198,6 @@ export default {
     .list-title{
       color:#fff;
       font-size:0.38rem;
-      margin-right:1.12rem;
       text-align:left;
     }
     .list-text {
@@ -277,14 +282,14 @@ export default {
       width:0.4rem;
       height:0.78rem;
       background-size:100%;
-      cursor: none;
+      cursor:pointer;
     }
     .swiper-button-next{
       background-image:url(./assets/icon_right.png)!important;
       width:0.4rem;
       height:0.78rem;
       background-size:100%;
-      cursor: none;
+      cursor:pointer;
     }
   }
 }
