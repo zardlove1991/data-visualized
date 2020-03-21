@@ -282,14 +282,14 @@ export default {
       width:0.4rem;
       height:0.78rem;
       background-size:100%;
-      cursor:pointer;
+      cursor:none;
     }
     .swiper-button-next{
       background-image:url(./assets/icon_right.png)!important;
       width:0.4rem;
       height:0.78rem;
       background-size:100%;
-      cursor:pointer;
+      cursor:none;
     }
   }
 }
