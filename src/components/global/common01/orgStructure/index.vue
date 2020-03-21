@@ -537,7 +537,7 @@ export default {
         }
         .line::before{
           right: 0;
-          top: pxrem(2px);
+          top: 0;
           width: pxrem(2px);
           height: pxrem(58px);
           background:#03F6FF;
