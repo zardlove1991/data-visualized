@@ -45,10 +45,11 @@
   	        <div class="list-item sys-flex animated"
             @click="changeDetail(v)" 
             :class="{'flipInX' : v.title}"
-            :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList">
+            :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList"
+            :key="k">
   	        	<div class="list-country">【{{v.region}}】</div>
   	        	<div class="list-title txt-overflow sys-flex-one">{{v.title}}</div>
-  	        	<div class="list-time">{{v.create_time}}</div>
+  	        	<div class="list-time">{{v.date}}</div>
   	        </div>
   	      </div>
   	    </div>
@@ -80,7 +81,7 @@
                 <div class="help-text">求助信息：</div>
               </div>
               <div class="help-brief">
-                {{detail.help_info}}
+                {{detail.brief}}
               </div>
             </div>
             <div class="process-info sys-flex-one">
@@ -91,7 +92,7 @@
                 <div class="help-text">处理进度：</div>
               </div>
               <div class="process-brief">
-                <div class="process-item" v-for="item in detail.progress">
+                <div class="process-item" v-for="(item, index) in detail.progress" :key="index">
                   <div class="status-name">{{item.status_name}}</div>
                   <div class="process-org" v-if="item.organization">{{item.organization}}</div>
                   <div class="process-member sys-flex" v-if="item.member">志愿者：<div class="member-name">{{item.member}}</div> 已接单</div>
@@ -106,7 +107,7 @@
 </template>
 
 <script>
-import { getJiangningWeather, getOrderSheet, getOrderDetail } from '@/servers/interface'
+import { getJiangningWeather, getVolunteerHelpList, getVolunteerHelpDetail } from '@/servers/interface'
 export default {
   name: 'manuscript',
   data () {
@@ -144,7 +145,7 @@ export default {
     },
     changeDetail (item) {
       this.showDetail = true
-      getOrderDetail(item.id).then(res => {
+      getVolunteerHelpDetail(item.id).then(res => {
         if (!res.error_code) {
           this.detail = res.data.result
         }
@@ -164,12 +165,18 @@ export default {
       }
     },
     getList (status) {
-      getOrderSheet(this.count, this.page, status).then(res => {
+      getVolunteerHelpList(this.count, this.page, status).then(res => {
         if (!res.data.error_code) {
           this.total = res.data.result.total
           if (res.data.result.data.length) {
             this.dataList = []
             res.data.result.data.forEach((item, index) => {
+              let _date = new Date(item.create_time)
+              let month = (_date.getMonth() + 1).toString().padStart(2, '0')
+              let day = _date.getDate().toString().padStart(2, '0')
+              let hour = _date.getHours().toString().padStart(2, '0')
+              let min = _date.getMinutes().toString().padStart(2, '0')
+              item.date = month + '-' + day + '  ' + hour + ':' + min
               if (index < 8) {
                 this.dataList.push(item)
               }
@@ -180,6 +187,7 @@ export default {
                 this.page = 1
               }
             }
+            console.log(this.dataList)
           } else {
             if (this.page !== 1) {
               this.page = 1
@@ -335,7 +343,7 @@ export default {
     .back-img{
       display:inline-block;
       width:0.36rem;
-      hieght:0.28rem;
+      height:0.28rem;
       margin-right:0.2rem;
     }
     .detail-title{
@@ -406,11 +414,13 @@ export default {
       content: '';
       width:0.42rem;
       height:0.42rem;
-      background:url('./assets/icon_finish.png') no-repeat 100%;
+      background:url('./assets/icon_finish.png') no-repeat;
       position:absolute;
       left:-0.21rem;
       top:-0.04rem;
       background-color:rgba(13,99,223,0.15);
+      background-position: center;
+      background-size: 100% 100%;
     }
     .process-item:last-child{
       border-left:0;

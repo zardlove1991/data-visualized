@@ -26,12 +26,38 @@
       </div>
     </div>
     <div class="activityInfo-detail common01-border" v-if="showDetail">
+      <div class="back-line">
+        <div @click="backList()" class="back">
+          <div class="back-img">
+            <img src="./assets/icon_back.png">
+          </div>
+          <span class="back-text">返回</span>
+        </div>
+      </div>
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(v, k) in dataList" :key="k" >
           <div class="detail-title common01-ft60 overhidden">{{v.title}}</div>
           <div class="detail-list">
             <div class="source">来源：{{v.source}}</div>
-            <div class="author">发布时间：{{v.create_time}}</div>
+            <div class="author">发布时间：{{v.created_at}}</div>
+            <div class="bg-line">
+              <p class="line"></p>
+            </div>
+          </div>
+          <div class="detail-content common01-ft36" :style="setFontSize(40)">
+            <div class="news" v-if="detailData.listType === 'weChat' || (detailData.listType === 'm2o' && detailData.type === 'news')" v-html="detailData.listType === 'weChat' ? handelHtml(detailData.content) : handelHtml(detailData.content.html)"></div>
+            <div class="pic" v-if="detailData.listType === 'm2o' && detailData.type === 'tuji'">
+              <img :src="v.pic" v-for="(v, k) in detailData.content" :key="k" />
+            </div>
+            <div class="video" v-if="detailData.listType === 'm2o' && detailData.type === 'vod'">
+              <video-player
+                class="vjs-custom-skin"
+                ref="videoPlayer"
+                :options="detailData.content"
+                :playsinline="true"
+                customEventName="customstatechangedeventname"
+              ></video-player>
+            </div>
           </div>
         </swiper-slide>
       </swiper>
@@ -136,11 +162,12 @@ export default {
     },
     getDataList () {
       getActivityInfo(this.count, this.page).then(res => {
+        console.log(res)
         if (!res.data.error_code) {
-          if (res.data.result.data && res.data.result.data.length) {
+          if (res.data.result && res.data.result.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.result.data.map(v => {
+              this.dataList = res.data.result.map(v => {
                 return {
                   ...v
                 }
@@ -152,6 +179,7 @@ export default {
                 this.page = 1
               }
             }
+            console.log(this.dataList)
           } else {
             if (this.page !== 1) {
               this.page = 1
@@ -160,6 +188,15 @@ export default {
           }
         }
       })
+    },
+    handelHtml (html) {
+      let rel = /style\s*?=\s*?([‘"])[\s\S]*?\1/gi
+      return html.replace(rel, '')
+    },
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
     }
   },
   components: {
@@ -221,6 +258,26 @@ export default {
   }
   .activityInfo-detail {
     padding: pxrem(100px) pxrem(72px) pxrem(10px);
+    .back-line{
+      margin-bottom:0.45rem;
+      position: absolute;
+      z-index: 10;
+      top: pxrem(80px);
+      left: pxrem(80px);
+    }
+    .back{
+      display:inline-block;
+    }
+    .back-text{
+      font-size:0.34rem;
+      color:#00FFEA;
+    }
+    .back-img{
+      display:inline-block;
+      width:0.36rem;
+      height:0.28rem;
+      margin-right:0.2rem;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -247,6 +304,15 @@ export default {
       .author{
         display:inline-block;
         font-size:0.28rem;
+      }
+      .bg-line{
+        margin-top: pxrem(12px);
+        .line{
+          width: pxrem(1017px);
+          height: pxrem(2px);
+          margin: 0 auto;
+          background: linear-gradient(90deg,rgba(64,107,173,0) 0%,rgba(64,107,173,0.99) 48%,rgba(64,107,173,0) 100%);
+        }
       }
     }
     .detail-content {
@@ -280,14 +346,15 @@ export default {
       width:0.4rem;
       height:0.78rem;
       background-size:100%;
-      cursor:none;
     }
     .swiper-button-next{
       background-image:url(./assets/icon_right.png)!important;
       width:0.4rem;
       height:0.78rem;
       background-size:100%;
-      cursor:none;
+    }
+    .swiper-button-prev:focus, .swiper-button-next:focus{
+      outline: none;
     }
   }
 }

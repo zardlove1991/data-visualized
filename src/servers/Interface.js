@@ -147,16 +147,16 @@ export const getWorkCallSubjectSortList = (id) => createAPI(`${httpsbaseUrl}/Api
 
 // 盐湖大屏
 // 文明排行
-export const getCivilizationCenterRankList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterRankList`)
+export const getVolunteerRank = (page = 1, count = 3) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerRank?page=${page}&count=${count}`)
 // 点单列表
-export const getOrderSheet = (count = 4, page = 1, status) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrderList?count=${count}&page=${page}&status=${status}`)
+export const getVolunteerHelpList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerHelpList?count=${count}&page=${page}`)
 // 点单详情
-export const getOrderDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrderDetail?id=${id}`)
+export const getVolunteerHelpDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerHelpDetail?id=${id}`)
 // 组织架构
-export const getCivilizationCenterOrganizationalList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalList`)
+export const getVolunteerOrganizeList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerOrganizeList`)
 // 组织结构（子组织）
-export const getCivilizationCenterOrganizationalChildList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalChildList?id=${id}`)
+export const getVolunteerOrganizeDetail = (id, count = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerOrganizeDetail?id=${id}&count=${count}`)
 // 组织架构 成员名单
-export const getCivilizationCenterOrganizationalMember = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterOrganizationalMember`)
+export const getVolunteerMemberList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerMemberList`)
 // 活动资讯
-export const getActivityInfo = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getCivilizationCenterActivityInformation`)
+export const getActivityInfo = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?type=article`)

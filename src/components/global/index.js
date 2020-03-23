@@ -78,6 +78,12 @@ export const jiangningcomponentProject = getComponent('jiangning/project')
 export const jiangningcomponentPublish = getComponent('jiangning/publish')
 export const jiangningcomponentNews = getComponent('jiangning/news')
 
+/* 柳河套系 */
+export const liuhecomponentActivityInfo = getComponent('liuhe/activityInfo') // 活动资讯
+export const liuhecomponentOrderSheet = getComponent('liuhe/orderSheet') // 点单中心
+export const liuhecomponentOrgStructure = getComponent('liuhe/orgStructure') // 组织架构
+export const liuhecomponentCivilizationRank = getComponent('liuhe/civilizationRank') // 盐湖大屏 文明管理
+
 /* 标准套系01 */
 export const common01componentTitle = getComponent('common01/title') // 标题
 export const common01componentClueGather = getComponent('common01/clueGather')
@@ -110,7 +116,4 @@ export const common01componentWebHotpoint = getComponent('common01/webHotpoint')
 export const common01componentWechatHotPoint = getComponent('common01/wechatHotpoint') // 微信热点
 export const common01componentDataSystem = getComponent('common01/dataSystem') // 数据系统
 export const common01componentNewProject = getComponent('common01/newProject') // 杭州选题上大屏
-export const common01componentActivityInfo = getComponent('common01/activityInfo') // 活动资讯
-export const common01componentOrderSheet = getComponent('common01/orderSheet') // 点单中心
-export const common01componentOrgStructure = getComponent('common01/orgStructure') // 组织架构
-export const common01componentCivilizationRank = getComponent('common01/civilizationRank') // 盐湖大屏 文明管理
+

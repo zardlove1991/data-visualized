@@ -12,17 +12,17 @@
           <p>文明总队</p>
           <span>{{orgIndexData.total}}</span>
         </div>
-        <div class="name common01-ft36 animated flipInX top-info" @click="showChildDetail(orgIndexData.topInfo.id)">{{orgIndexData.topInfo.title}}</div>
-        <div class="name common01-ft36 animated flipInX left-top-info" @click="showChildDetail(orgIndexData.leftTopInfo.id)">{{orgIndexData.leftTopInfo.title}}</div>
-        <div class="name common01-ft36 animated flipInX left-bottom-info" @click="showChildDetail(orgIndexData.leftBottomInfo.id)">{{orgIndexData.leftBottomInfo.title}}</div>
-        <div class="name common01-ft36 animated flipInX right-top-info" @click="showChildDetail(orgIndexData.rightTopInfo.id)">{{orgIndexData.rightTopInfo.title}}</div>
-        <div class="name common01-ft36 animated flipInX right-bottom-info" @click="showChildDetail(orgIndexData.rightBottomInfo.id)">{{orgIndexData.rightBottomInfo.title}}</div>
+        <div v-if="orgIndexData.topInfo.name" class="name common01-ft36 animated flipInX top-info" @click="showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)">{{orgIndexData.topInfo.name}}</div>
+        <div v-if="orgIndexData.leftTopInfo.name" class="name common01-ft36 animated flipInX left-top-info" @click="showChildDetail(orgIndexData.leftTopInfo.id, orgIndexData.leftTopInfo.name)">{{orgIndexData.leftTopInfo.name}}</div>
+        <div v-if="orgIndexData.leftBottomInfo.name" class="name common01-ft36 animated flipInX left-bottom-info" @click="showChildDetail(orgIndexData.leftBottomInfo.id, orgIndexData.leftBottomInfo.name)">{{orgIndexData.leftBottomInfo.name}}</div>
+        <div v-if="orgIndexData.rightTopInfo.name" class="name common01-ft36 animated flipInX right-top-info" @click="showChildDetail(orgIndexData.rightTopInfo.id, orgIndexData.rightTopInfo.name)">{{orgIndexData.rightTopInfo.name}}</div>
+        <div v-if="orgIndexData.rightBottomInfo.name" class="name common01-ft36 animated flipInX right-bottom-info" @click="showChildDetail(orgIndexData.rightBottomInfo.id, orgIndexData.rightBottomInfo.name)">{{orgIndexData.rightBottomInfo.name}}</div>
 
-        <div class="number top-info" @click="showChildDetail(orgIndexData.topInfo.id)">{{orgIndexData.topInfo.score}}</div>
-        <div class="number left-top-info" @click="showChildDetail(orgIndexData.leftTopInfo.id)">{{orgIndexData.leftTopInfo.score}}</div>
-        <div class="number left-bottom-info" @click="showChildDetail(orgIndexData.leftBottomInfo.id)">{{orgIndexData.leftBottomInfo.score}}</div>
-        <div class="number right-top-info" @click="showChildDetail(orgIndexData.rightTopInfo.id)">{{orgIndexData.rightTopInfo.score}}</div>
-        <div class="number right-bottom-info" @click="showChildDetail(orgIndexData.rightBottomInfo.id)">{{orgIndexData.rightBottomInfo.score}}</div>
+        <div class="number top-info" @click="showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)">{{orgIndexData.topInfo.number}}</div>
+        <div class="number left-top-info" @click="showChildDetail(orgIndexData.leftTopInfo.id, orgIndexData.leftTopInfo.name)">{{orgIndexData.leftTopInfo.number}}</div>
+        <div class="number left-bottom-info" @click="showChildDetail(orgIndexData.leftBottomInfo.id, orgIndexData.leftBottomInfo.name)">{{orgIndexData.leftBottomInfo.number}}</div>
+        <div class="number right-top-info" @click="showChildDetail(orgIndexData.rightTopInfo.id, orgIndexData.rightTopInfo.name)">{{orgIndexData.rightTopInfo.number}}</div>
+        <div class="number right-bottom-info" @click="showChildDetail(orgIndexData.rightBottomInfo.id, orgIndexData.rightBottomInfo.name)">{{orgIndexData.rightBottomInfo.number}}</div>
       </div>
       <!-- 成员名单 -->
       <div class="member-div sys-flex" v-if="!showOrg">
@@ -34,13 +34,13 @@
             <span>{{memberIndexData.leftMember.title}}</span>
           </div>
           <div class="member-list">
-            <div :class="item.work === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.leftMember.data" :key="index">
+            <div :class="item.title === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.leftMember.data" :key="index">
               <div class="type-title">
-                <span>{{item.work}}</span>:
+                <span>{{item.title}}</span>:
               </div>
-              <div class="member sys-flex" v-for="(item2, index2) in item.members" :key="index2">
-                <div class="name"><span>{{item2.name}}</span></div>
-                <div class="position">{{item2.position}}</div>
+              <div class="member sys-flex" v-for="(item2, index2) in item.data" :key="index2">
+                <div class="name"><div><span>{{item2.name}}</span></div></div>
+                <div class="position">{{item2.duty}}</div>
               </div>
             </div>
           </div>
@@ -53,13 +53,13 @@
             <span>{{memberIndexData.rightMember.title}}</span>
           </div>
           <div class="member-list">
-            <div :class="item.work === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.rightMember.data" :key="index">
+            <div :class="item.title === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.rightMember.data" :key="index">
               <div class="type-title">
-                <span>{{item.work}}</span>:
+                <span>{{item.title}}</span>:
               </div>
-              <div class="member sys-flex" v-for="(item2, index2) in item.members" :key="index2">
-                <div class="name"><span>{{item2.name}}</span></div>
-                <div class="position">{{item2.position}}</div>
+              <div class="member sys-flex" v-for="(item2, index2) in item.data" :key="index2">
+                <div class="name"><div><span>{{item2.name}}</span></div></div>
+                <div class="position">{{item2.duty}}</div>
               </div>
             </div>
           </div>
@@ -102,9 +102,10 @@
         <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
             <div class="img-box">
-              <img src="./assets/icon_group.png" alt="">
+              <img v-if="item.head_pic" :src="item.head_pic" alt="">
+              <img v-else src="./assets/icon_group.png" alt="">
             </div>
-            <div class="name"><span>{{item.title}}</span></div>
+            <div class="name"><span>{{item.name}}</span></div>
           </div>
         </div>
       </div>
@@ -113,14 +114,15 @@
 </template>
 
 <script>
-import { getCivilizationCenterOrganizationalList, getCivilizationCenterOrganizationalChildList, getCivilizationCenterOrganizationalMember } from '@/servers/interface'
+import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
     return {
+      orgImg: require('./assets/icon_group.png'),
       showOrg: true,
       orgIndexData: {
-        total: 184,
+        total: 0,
         topInfo: {
           title: '',
           score: 0,
@@ -164,8 +166,8 @@ export default {
     }
   },
   created () {
-    this.getCivilizationCenterOrganizationalList()
-    this.getCivilizationCenterOrganizationalMember()
+    this.getVolunteerOrganizeList()
+    this.getVolunteerMemberList()
   },
   methods: {
     //
@@ -177,28 +179,27 @@ export default {
       }
     },
     // 获取组织架构
-    getCivilizationCenterOrganizationalList () {
-      getCivilizationCenterOrganizationalList().then(res => {
+    getVolunteerOrganizeList () {
+      getVolunteerOrganizeList().then(res => {
         if (!res.data.error_code) {
-          let _result = res.data.result
+          let _result = res.data.result.organize_cate
+          console.log(_result)
           if (_result && _result.length > 0) {
             _result.forEach(e => {
-              if (e.title === '文明总队') {
-                this.orgIndexData.total = e.score
-              }
-              if (e.title === '专业服务队') {
+              this.orgIndexData.total = res.data.result.total
+              if (/专业/.test(e.name)) {
                 this.orgIndexData.topInfo = e
               }
-              if (e.title === '区直服务队') {
+              if (/区直/.test(e.name)) {
                 this.orgIndexData.leftTopInfo = e
               }
-              if (e.title === '六大平台服务队') {
+              if (/六大/.test(e.name)) {
                 this.orgIndexData.leftBottomInfo = e
               }
-              if (e.title === '乡镇服务队') {
+              if (/乡镇/.test(e.name)) {
                 this.orgIndexData.rightTopInfo = e
               }
-              if (e.title === '社会志愿服务队') {
+              if (/社会/.test(e.name)) {
                 this.orgIndexData.rightBottomInfo = e
               }
             })
@@ -207,13 +208,14 @@ export default {
       })
     },
     // 获取组织架构（子组织）
-    showChildDetail (id) {
-      getCivilizationCenterOrganizationalChildList(id).then(res => {
+    showChildDetail (id, name) {
+      getVolunteerOrganizeDetail(id).then(res => {
+        console.log(res, name)
         if (!res.data.error_code) {
           let _result = res.data.result
           if (_result) {
-            this.detailTitle = _result.title
-            this.detailInfo = _result.child
+            this.detailTitle = name
+            this.detailInfo = _result.data
             this.showDetailPage = true
           }
         }
@@ -226,18 +228,19 @@ export default {
       this.detailTitle = ''
     },
     // 成员名单
-    getCivilizationCenterOrganizationalMember () {
-      getCivilizationCenterOrganizationalMember().then(res => {
+    getVolunteerMemberList () {
+      getVolunteerMemberList().then(res => {
         if (!res.data.error_code) {
           let _result = res.data.result
+          console.log(res.data)
           if (_result) {
             _result.forEach(e => {
               if (/实践中心/.test(e.title)) {
                 this.memberIndexData.leftMember.title = e.title
-                this.memberIndexData.leftMember.data = e.data
+                this.memberIndexData.leftMember.data = e.relation
               } else {
                 this.memberIndexData.rightMember.title = e.title
-                this.memberIndexData.rightMember.data = e.data
+                this.memberIndexData.rightMember.data = e.relation
               }
             })
           }
@@ -292,7 +295,7 @@ export default {
       width: pxrem(1678px);
       height: pxrem(810px);
       bottom: pxrem(35px);
-      background: url('./assets/bg_group.png') no-repeat center;
+      background: url('./assets/bg_group_new2.png') no-repeat center;
       background-size: 100%;
       .total, .name, .number{position: absolute;}
       .total{
@@ -322,31 +325,52 @@ export default {
         color: #fff;
         font-weight: bold;
         letter-spacing: pxrem(2px);
+        background: url('./assets/box_3.png')no-repeat center;
+        background-size: 100% 100%;
+      }
+      .name::before{
+        display: inline-block;
+        content: '';
+        width: pxrem(30px);
+        height: 100%;
+        background: url('./assets/box_1.png')no-repeat center;
+        background-size: 100% 100%;
+        vertical-align: top;
+      }
+      .name::after{
+        display: inline-block;
+        content: '';
+        width: pxrem(30px);
+        height: 100%;
+        background: url('./assets/box_2.png')no-repeat center;
+        background-size: 100% 100%;
+        vertical-align: top;
       }
       .name.top-info{
-        width: pxrem(294px);
+        // width: pxrem(294px);
         top: pxrem(15px);
-        left: pxrem(354px);
+        // left: pxrem(354px);
+        right: pxrem(1029px);
       }
       .name.left-top-info{
-        width: pxrem(294px);
-        top: pxrem(195px);
-        left: pxrem(7px);
+        // width: pxrem(294px);
+        top: pxrem(230px);
+        left: pxrem(-30px);
       }
       .name.left-bottom-info{
-        width: pxrem(374px);
+        // width: pxrem(374px);
         bottom: pxrem(38px);
-        left: 0;
+        right: pxrem(1306px);
       }
       .name.right-top-info{
-        width: pxrem(294px);
-        top: pxrem(195px);
-        right: pxrem(44px);
+        // width: pxrem(294px);
+        top: pxrem(180px);
+        left: pxrem(1270px);
       }
       .name.right-bottom-info{
-        width: pxrem(408px);
+        // width: pxrem(408px);
         bottom: pxrem(54px);
-        right: 0;
+        left: pxrem(1270px);
       }
       .number{
         width: pxrem(138px);
@@ -433,13 +457,16 @@ export default {
           }
           .member{
             margin-top: pxrem(34px);
+            padding-right: pxrem(30px);
             .name{
-              width: pxrem(181px);
               color: #0BFCFF;
               font-weight: bold;
-              >span{
+              >div{
+                width: pxrem(181px);
+              }
+              span{
                 display: inline-block;
-                min-width: pxrem(105px);
+                width: pxrem(110px);
                 text-align-last:justify;
                 text-align:justify;
                 text-justify:distribute-all-lines;
@@ -578,6 +605,7 @@ export default {
           img{
             width: pxrem(150px);
             height: pxrem(150px);
+            border-radius: pxrem(20px);
           }
         }
         .name{
