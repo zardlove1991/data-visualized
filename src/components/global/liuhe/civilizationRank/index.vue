@@ -116,7 +116,6 @@ export default {
           this.timeTotalNum = _result.duration
           this.teamTotalNum = _result.organize_number
           this.memberTotalNum = _result.volunteer_number
-          
         }
       })
     }

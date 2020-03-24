@@ -201,7 +201,7 @@ export default {
     },
     getContent (k) {
       getActivityInfoDetail(this.swiperDataList[k].id).then(res => {
-        if(!res.data.error_code) {
+        if (!res.data.error_code) {
           if (res.data.result.content) {
             this.swiperDataList[k].contentDetail = res.data.result.content
           }

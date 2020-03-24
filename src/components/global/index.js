@@ -116,4 +116,3 @@ export const common01componentWebHotpoint = getComponent('common01/webHotpoint')
 export const common01componentWechatHotPoint = getComponent('common01/wechatHotpoint') // 微信热点
 export const common01componentDataSystem = getComponent('common01/dataSystem') // 数据系统
 export const common01componentNewProject = getComponent('common01/newProject') // 杭州选题上大屏
-
