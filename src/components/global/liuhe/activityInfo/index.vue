@@ -232,6 +232,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
+  background: #0a1742;;
   .activityInfo-page{
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
     .list-item{
