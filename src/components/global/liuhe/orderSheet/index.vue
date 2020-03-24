@@ -242,20 +242,20 @@ export default {
   height: 100%;
   background-color:#0a1742;
   padding: pxrem(40px);
-	.orderSheet-page{
+  .orderSheet-page{
     padding: 0.57rem 0.6rem 0.76rem 0.6rem;
-		.title{
-		  color:#00FFFA;
-		  font-size:px2rem(120px);
-		  text-align:center;
-		  font-family:PingFang-SC-Bold;
-		  font-weight:bold;
-		  letter-spacing: px2rem(10px);
-		  line-height:px2rem(120px);
-		  margin-top:px2rem(80px);
-		  margin-bottom:px2rem(60px);
-		}
-		.today-weather {
+    .title{
+      color:#00FFFA;
+      font-size:1.2rem;
+      text-align:center;
+      font-family:PingFang-SC-Bold;
+      font-weight:bold;
+      letter-spacing: 0.1rem;
+      line-height:1.2rem;
+      margin-top:0.8rem;
+      margin-bottom:0.6rem;
+    }
+    .today-weather {
       font-size: 0.35rem;
       line-height:0.35rem;
       align-items:center;
@@ -270,8 +270,8 @@ export default {
         }
       }
       .weekday{
-      	margin-left: 0.15rem;
-      	margin-right: 0.2rem;
+        margin-left: 0.15rem;
+        margin-right: 0.2rem;
       }
     }
     .type-list{
@@ -286,9 +286,9 @@ export default {
       background:url('./assets/orderbox.png') no-repeat 100%;
     }
     .type-name{
-    	font-size:0.28rem;
-    	line-height:0.28rem;
-    	margin-top:0.18rem;
+      font-size:0.28rem;
+      line-height:0.28rem;
+      margin-top:0.18rem;
       color:rgba(252,255,255,0.6);
       font-family:PingFang-SC-Medium;
     }
@@ -299,9 +299,9 @@ export default {
       }
     }
     .order-img{
-    	width:0.6rem;
-    	height:0.6rem;
-    	display:inline-block;
+      width:0.6rem;
+      height:0.6rem;
+      display:inline-block;
     }
     .process-img{
       background:url('./assets/process.png') no-repeat 100%;
@@ -459,7 +459,8 @@ export default {
     .member-name{
       color:#0BFCFF;
     }
-	}
+  }
 }
 
 </style>
+
