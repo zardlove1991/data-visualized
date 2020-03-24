@@ -230,7 +230,6 @@ export default {
       getVolunteerMemberList().then(res => {
         if (!res.data.error_code) {
           let _result = res.data.result
-          console.log(res.data)
           if (_result) {
             _result.forEach(e => {
               if (/实践中心/.test(e.title)) {

@@ -36,7 +36,7 @@
       </div>
       <swiper :options="swiperOption" ref="mySwiper" @slideNextTransitionEnd="goNext" @slidePrevTransitionEnd="goBefore">
         <swiper-slide v-for="(v, k) in swiperDataList" :key="k" >
-          <div class="detail-title common01-ft60 overhidden">{{v.title}}</div>
+          <div class="detail-title">{{v.title}}</div>
           <div class="detail-list">
             <div class="source">来源：{{v.source}}</div>
             <div class="author">发布时间：{{v.showTime}}</div>
@@ -45,40 +45,12 @@
             </div>
           </div>
           <div class="detail-content common01-ft36" :style="setFontSize(40)" v-if="v.contentDetail||getContent(k)">
-            <div class="contnet-detail-div" v-html="handelHtml(v.contentDetail)"></div>
-            <!-- <div class="news" v-if="detailData.listType === 'weChat' || (detailData.listType === 'm2o' && detailData.type === 'news')" v-html="detailData.listType === 'weChat' ? handelHtml(detailData.content) : handelHtml(detailData.content.html)"></div>
-            <div class="pic" v-if="detailData.listType === 'm2o' && detailData.type === 'tuji'">
-              <img :src="v.pic" v-for="(v, k) in detailData.content" :key="k" />
-            </div>
-            <div class="video" v-if="detailData.listType === 'm2o' && detailData.type === 'vod'">
-              <video-player
-                class="vjs-custom-skin"
-                ref="videoPlayer"
-                :options="detailData.content"
-                :playsinline="true"
-                customEventName="customstatechangedeventname"
-              ></video-player>
-            </div> -->
+            <div class="contnet-detail-div" v-html="v.contentDetail"></div>
           </div>
         </swiper-slide>
       </swiper>
       <div class="swiper-button-prev swiper-button-white" @click="goBefore()"></div>
       <div class="swiper-button-next swiper-button-white" @click="goNext"></div>
-      <!--<div class="detail-content common01-ft36">
-        <div class="news" v-if="detailData.listType === 'weChat' || (detailData.listType === 'm2o' && detailData.type === 'news')" v-html="detailData.listType === 'weChat' ? handelHtml(detailData.content) : handelHtml(detailData.content.html)"></div>
-        <div class="pic" v-if="detailData.listType === 'm2o' && detailData.type === 'tuji'">
-          <img :src="v.pic" v-for="(v, k) in detailData.content" :key="k" />
-        </div>
-        <div class="video" v-if="detailData.listType === 'm2o' && detailData.type === 'vod'">
-          <video-player
-            class="vjs-custom-skin"
-            ref="videoPlayer"
-            :options="detailData.content"
-            :playsinline="true"
-            customEventName="customstatechangedeventname"
-          ></video-player>
-        </div>
-      </div>-->
     </div>
   </div>
 </template>
@@ -125,11 +97,6 @@ export default {
         observer: true,
         observeParents: true,
         paginationClickable: true
-      },
-      on: {
-        slideNextTransitionEnd: function() {
-          console.log('next')
-        }
       }
     }
   },
@@ -146,13 +113,11 @@ export default {
   },
   methods: {
     goBefore () {
-      console.log(this.$refs.mySwiper.swiper.realIndex + 1)
       if (this.swiperLeftPage > 1 && this.$refs.mySwiper.swiper.realIndex < 2) {
         this.getMoreList(this.swiperLeftPage--, 'left')
       }
     },
     goNext () {
-      console.log('next')
       if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
         this.getMoreList(this.swiperRightPage++, 'right')
       }
@@ -177,7 +142,6 @@ export default {
     },
     // 滑动获取更多
     getMoreList (pageNum, type) { // 接口需要调整 获取更多
-      console.log('获取更多：', pageNum, this.originPage)
       getActivityInfo(pageNum, this.count).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
@@ -203,7 +167,6 @@ export default {
     },
     getDataList () {
       getActivityInfo(this.page, this.count).then(res => {
-        console.log(res)
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
             this.dataList = []
@@ -237,9 +200,7 @@ export default {
       })
     },
     getContent (k) {
-      // console.log(this.swiperDataList[k].id)
       getActivityInfoDetail(this.swiperDataList[k].id).then(res => {
-        console.log(res)
         if(!res.data.error_code) {
           if (res.data.result.content) {
             this.swiperDataList[k].contentDetail = res.data.result.content
@@ -344,6 +305,8 @@ export default {
       display: block;
     }
     .detail-title {
+      display: inline-block;
+      width: pxrem(1250px);
         font-weight: bold;
         font-size:0.52rem;
         line-height:0.52rem;
