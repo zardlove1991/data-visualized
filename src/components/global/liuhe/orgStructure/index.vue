@@ -183,7 +183,6 @@ export default {
       getVolunteerOrganizeList().then(res => {
         if (!res.data.error_code) {
           let _result = res.data.result.organize_cate
-          console.log(_result)
           if (_result && _result.length > 0) {
             _result.forEach(e => {
               this.orgIndexData.total = res.data.result.total
@@ -210,7 +209,6 @@ export default {
     // 获取组织架构（子组织）
     showChildDetail (id, name) {
       getVolunteerOrganizeDetail(id).then(res => {
-        console.log(res, name)
         if (!res.data.error_code) {
           let _result = res.data.result
           if (_result) {
@@ -504,6 +502,7 @@ export default {
       top: pxrem(80px);
       padding-left: pxrem(55px);
       color: #00FFEA;
+      font-weight: bold;
       background: url('./assets/icon_back.png') no-repeat;
       background-size: pxrem(36px) pxrem(28px);
       background-position: 0 pxrem(8px);

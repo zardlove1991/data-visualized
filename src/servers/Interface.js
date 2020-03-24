@@ -149,7 +149,7 @@ export const getWorkCallSubjectSortList = (id) => createAPI(`${httpsbaseUrl}/Api
 // 文明排行
 export const getVolunteerRank = (page = 1, count = 3) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerRank?page=${page}&count=${count}`)
 // 点单列表
-export const getVolunteerHelpList = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerHelpList?count=${count}&page=${page}`)
+export const getVolunteerHelpList = (count = 4, page = 1, status = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerHelpList?count=${count}&page=${page}&status=${status}`)
 // 点单详情
 export const getVolunteerHelpDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerHelpDetail?id=${id}`)
 // 组织架构
@@ -159,4 +159,6 @@ export const getVolunteerOrganizeDetail = (id, count = '') => createAPI(`${https
 // 组织架构 成员名单
 export const getVolunteerMemberList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerMemberList`)
 // 活动资讯
-export const getActivityInfo = (count = 4, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?type=article`)
+export const getActivityInfo = (page = 1, count = 4) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?type=article&page=${page}&count=${count}`)
+// 活动咨询详情
+export const getActivityInfoDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublishDetail?id=${id}`)

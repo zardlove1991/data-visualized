@@ -11,7 +11,7 @@
           :key="k">
           <div class="type-area sys-flex sys-flex-center">
             <img v-if="k === 0" src="./assets/new.png" />
-            <span class="common01-ft38" v-if="k !== 0">【{{v.typeName || '文稿'}}】</span>
+            <img v-if="k === 1" src="./assets/icon_hot.png" />
           </div>
           <div class="list-text overhidden common01-ft38 flex-one">{{v.title}}</div>
           <div class="list-read flex flex-center">
@@ -20,7 +20,7 @@
           </div>
           <div class="list-time flex flex-center">
             <img class="img-icon" src="@/assets/common/time.png" />
-            <span class="common01-ft32">{{v.click_num}}</span>
+            <span class="common01-ft32">{{v.showTime}}</span>
           </div>
         </div>
       </div>
@@ -34,18 +34,19 @@
           <span class="back-text">返回</span>
         </div>
       </div>
-      <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(v, k) in dataList" :key="k" >
+      <swiper :options="swiperOption" ref="mySwiper" @slideNextTransitionEnd="goNext" @slidePrevTransitionEnd="goBefore">
+        <swiper-slide v-for="(v, k) in swiperDataList" :key="k" >
           <div class="detail-title common01-ft60 overhidden">{{v.title}}</div>
           <div class="detail-list">
             <div class="source">来源：{{v.source}}</div>
-            <div class="author">发布时间：{{v.created_at}}</div>
+            <div class="author">发布时间：{{v.showTime}}</div>
             <div class="bg-line">
               <p class="line"></p>
             </div>
           </div>
-          <div class="detail-content common01-ft36" :style="setFontSize(40)">
-            <div class="news" v-if="detailData.listType === 'weChat' || (detailData.listType === 'm2o' && detailData.type === 'news')" v-html="detailData.listType === 'weChat' ? handelHtml(detailData.content) : handelHtml(detailData.content.html)"></div>
+          <div class="detail-content common01-ft36" :style="setFontSize(40)" v-if="v.contentDetail||getContent(k)">
+            <div class="contnet-detail-div" v-html="handelHtml(v.contentDetail)"></div>
+            <!-- <div class="news" v-if="detailData.listType === 'weChat' || (detailData.listType === 'm2o' && detailData.type === 'news')" v-html="detailData.listType === 'weChat' ? handelHtml(detailData.content) : handelHtml(detailData.content.html)"></div>
             <div class="pic" v-if="detailData.listType === 'm2o' && detailData.type === 'tuji'">
               <img :src="v.pic" v-for="(v, k) in detailData.content" :key="k" />
             </div>
@@ -57,7 +58,7 @@
                 :playsinline="true"
                 customEventName="customstatechangedeventname"
               ></video-player>
-            </div>
+            </div> -->
           </div>
         </swiper-slide>
       </swiper>
@@ -83,7 +84,7 @@
 </template>
 
 <script>
-import { getActivityInfo } from '@/servers/interface'
+import { getActivityInfo, getActivityInfoDetail } from '@/servers/interface'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
@@ -91,10 +92,13 @@ export default {
   data () {
     return {
       dataList: [],
-      count: 12,
+      swiperDataList: [],
+      count: 5,
       detailData: {},
       showDetail: false,
       page: 1,
+      swiperLeftPage: 1, // 定位swiper滑动边界页码
+      swiperRightPage: 1, // 定位swiper滑动边界页码
       showIndex: 0,
       isPaging: true,
       typeList: {
@@ -121,6 +125,11 @@ export default {
         observer: true,
         observeParents: true,
         paginationClickable: true
+      },
+      on: {
+        slideNextTransitionEnd: function() {
+          console.log('next')
+        }
       }
     }
   },
@@ -138,36 +147,75 @@ export default {
   methods: {
     goBefore () {
       console.log(this.$refs.mySwiper.swiper.realIndex + 1)
+      if (this.swiperLeftPage > 1 && this.$refs.mySwiper.swiper.realIndex < 2) {
+        this.getMoreList(this.swiperLeftPage--, 'left')
+      }
     },
     goNext () {
+      console.log('next')
       if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
-        this.getMoreList()
+        this.getMoreList(this.swiperRightPage++, 'right')
       }
     },
     getDetail (item) {
-      this.showDetail = true
+      // 保存swiper所需数据
+      this.swiperLeftPage = this.page
+      this.swiperRightPage = this.page
+
       this.showIndex = 0
       this.dataList.forEach((v, index) => {
         if (v.id === item.id) {
           this.showIndex = index
         }
       })
+      this.swiperDataList = [...this.dataList]
+      this.showDetail = true
       this.swiperOption.initialSlide = this.showIndex - 1
     },
     backList () {
       this.showDetail = false
     },
-    getMoreList () { // 接口需要调整 获取更多
-      this.dataList = this.dataList.concat(this.dataList)
+    // 滑动获取更多
+    getMoreList (pageNum, type) { // 接口需要调整 获取更多
+      console.log('获取更多：', pageNum, this.originPage)
+      getActivityInfo(pageNum, this.count).then(res => {
+        if (!res.data.error_code) {
+          if (res.data.result.data && res.data.result.data.length) {
+            let newSwiperData = res.data.result.data
+            newSwiperData.map(v => {
+              v.contentDetail = ''
+              let _date = new Date(v.create_time)
+              let month = (_date.getMonth() + 1).toString().padStart(2, '0')
+              let day = _date.getDate().toString().padStart(2, '0')
+              let hour = _date.getHours().toString().padStart(2, '0')
+              let min = _date.getMinutes().toString().padStart(2, '0')
+              v.showTime = month + '-' + day + '  ' + hour + ':' + min
+            })
+            if (type === 'right') {
+              this.swiperDataList = [...this.swiperDataList, ...newSwiperData]
+            }
+            if (type === 'left') {
+              this.swiperDataList = [...newSwiperData, ...this.swiperDataList]
+            }
+          }
+        }
+      })
     },
     getDataList () {
-      getActivityInfo(this.count, this.page).then(res => {
+      getActivityInfo(this.page, this.count).then(res => {
         console.log(res)
         if (!res.data.error_code) {
-          if (res.data.result && res.data.result.length) {
+          if (res.data.result.data && res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-              this.dataList = res.data.result.map(v => {
+              this.dataList = res.data.result.data.map(v => {
+                let _date = new Date(v.create_time)
+                let month = (_date.getMonth() + 1).toString().padStart(2, '0')
+                let day = _date.getDate().toString().padStart(2, '0')
+                let hour = _date.getHours().toString().padStart(2, '0')
+                let min = _date.getMinutes().toString().padStart(2, '0')
+                v.showTime = month + '-' + day + '  ' + hour + ':' + min
+                v.contentDetail = ''
                 return {
                   ...v
                 }
@@ -179,12 +227,22 @@ export default {
                 this.page = 1
               }
             }
-            console.log(this.dataList)
           } else {
             if (this.page !== 1) {
               this.page = 1
               this.getDataList()
             }
+          }
+        }
+      })
+    },
+    getContent (k) {
+      // console.log(this.swiperDataList[k].id)
+      getActivityInfoDetail(this.swiperDataList[k].id).then(res => {
+        console.log(res)
+        if(!res.data.error_code) {
+          if (res.data.result.content) {
+            this.swiperDataList[k].contentDetail = res.data.result.content
           }
         }
       })
@@ -267,6 +325,7 @@ export default {
     }
     .back{
       display:inline-block;
+      font-weight: bold;
     }
     .back-text{
       font-size:0.34rem;
@@ -336,6 +395,10 @@ export default {
           height: 100%;
           overflow: hidden;
         }
+      }
+      .contnet-detail-div{
+        font-size: pxrem(40px);
+        color: #EEEEEE;
       }
     }
     .swiper-slide{

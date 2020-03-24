@@ -26,7 +26,7 @@
         <div class="content-left">
           <div class="title">志愿组织排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated flipInX" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + pageNum}}</div>
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + (pageNum - 1) * count + 1}}</div>
             <div class="img-box">
               <div>
                 <img :src="v.head_pic?v.head_pic:defaultImg" alt="">  
@@ -39,7 +39,7 @@
         <div class="content-right" v-if="rightList && rightList[0]">
           <div class="title">志愿者排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.real_name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + pageNum}}</div>
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + (pageNum - 1) * count + 1}}</div>
             <div class="img-box">
               <div>
                 <img :src="v.head_pic?v.head_pic:defaultImg" alt="">
@@ -67,6 +67,7 @@ export default {
       // leftCount: 0,
       // rightCount: 0,
       pageNum: 1,
+      count: 3,
       leftList: [],
       rightList: [],
       customSize: false
@@ -78,8 +79,11 @@ export default {
         this.customSize = true
       }
     })
-    this.getVolunteerRank('first')
+    this.getVolunteerRank()
     setInterval(() => {
+      this.pageNum += 1
+      this.leftList = []
+      this.rightList = []
       this.getVolunteerRank()
     }, 60000)
   },
@@ -90,10 +94,8 @@ export default {
       }
     },
     getVolunteerRank (type) {
-      getVolunteerRank(this.pageNum).then(res => {
+      getVolunteerRank(this.pageNum, this.count).then(res => {
         if (!res.data.error_code) {
-          this.leftList = []
-          this.rightList = []
           let _result = res.data.result
           if (_result.volunteerRank.data) {
             this.rightList = _result.volunteerRank.data
@@ -114,11 +116,7 @@ export default {
           this.timeTotalNum = _result.duration
           this.teamTotalNum = _result.organize_number
           this.memberTotalNum = _result.volunteer_number
-          if (!type || type !== 'first') {
-            // this.leftCount += 3
-            // this.rightCount += 3
-            this.pageNum += 1
-          }
+          
         }
       })
     }

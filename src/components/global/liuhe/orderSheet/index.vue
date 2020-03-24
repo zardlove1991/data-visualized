@@ -13,18 +13,18 @@
         <div class="title">盐湖区新时代文明实践中心</div>
   	    <div class="order-list sys-flex">
   	      <div class="type-list">
-  	        <div class="type-item" @click="changType('new')" :class="{'check-item': type === 'new'}">
+  	        <div class="type-item" @click="changType('latest')" :class="{'check-item': type === 'latest'}">
   	          <div class="new-img order-img">
-  	            <img src="./assets/new_pre.png" v-if="type === 'new'">
+  	            <img src="./assets/new_pre.png" v-if="type === 'latest'">
   	            <img src="./assets/new.png" v-else>
   	          </div>
   	          <div class="type-name">
   	            最新点单
   	          </div>
   	        </div>
-  	        <div class="type-item" @click="changType('process')"  :class="{'check-item': type === 'process'}">
+  	        <div class="type-item" @click="changType('ongoing')"  :class="{'check-item': type === 'ongoing'}">
   	          <div class="order-img">
-  	            <img src="./assets/process_pre.png" v-if="type === 'process'">
+  	            <img src="./assets/process_pre.png" v-if="type === 'ongoing'">
   	            <img src="./assets/process.png" v-else>
   	          </div>
   	          <div class="type-name">
@@ -47,7 +47,7 @@
             :class="{'flipInX' : v.title}"
             :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList"
             :key="k">
-  	        	<div class="list-country">【{{v.region}}】</div>
+  	        	<div class="list-country">【{{v.type.title}}】</div>
   	        	<div class="list-title txt-overflow sys-flex-one">{{v.title}}</div>
   	        	<div class="list-time">{{v.date}}</div>
   	        </div>
@@ -92,10 +92,16 @@
                 <div class="help-text">处理进度：</div>
               </div>
               <div class="process-brief">
-                <div class="process-item" v-for="(item, index) in detail.progress" :key="index">
-                  <div class="status-name">{{item.status_name}}</div>
-                  <div class="process-org" v-if="item.organization">{{item.organization}}</div>
-                  <div class="process-member sys-flex" v-if="item.member">志愿者：<div class="member-name">{{item.member}}</div> 已接单</div>
+                <div class="process-item" v-if="detail.status">
+                  <div class="status-name">{{detail.status === 1?'待审核':'已通过'}}</div>
+                </div>
+                <div class="process-item" v-if="detail.volunteer||detail.organize">
+                  <div class="status-name">{{detail.volunteer?'已接单':detail.organize?'已受理':''}}</div>
+                  <div class="process-org" v-if="detail.organize">{{detail.organize.name}}已受理</div>
+                  <div class="process-member sys-flex" v-if="detail.volunteer">志愿者：<div class="member-name">{{detail.volunteer.member_name}}</div> 已接单</div>
+                </div>
+                <div class="process-item" v-if="detail.status && detail.status !== 1">
+                  <div class="status-name">{{detail.status_name}}</div>
                 </div>
               </div>
             </div>
@@ -113,7 +119,7 @@ export default {
   data () {
     return {
       dataList: [],
-      type: 'new',
+      type: 'latest',
       temp: '',
       icon: '',
       wstr: '',
@@ -134,17 +140,20 @@ export default {
   },
   mounted () {
     setInterval(() => {
+      this.getWeather()
       this.getList()
+      this.getToday('')
     }, this.frequency)
   },
   methods: {
     backList () {
       this.showDetail = false
       this.getList('')
-      this.type = 'new'
+      this.type = 'latest'
     },
     changeDetail (item) {
       this.showDetail = true
+      this.detail = []
       getVolunteerHelpDetail(item.id).then(res => {
         if (!res.error_code) {
           this.detail = res.data.result
@@ -153,18 +162,21 @@ export default {
     },
     changType (type) {
       this.type = type
-      if (this.type === 'new') {
+      if (this.type === 'latest') {
         this.dataList = []
-        this.getList('')
-      } else if (this.type === 'process') {
+        this.page = 1
+        this.getList('latest')
+      } else if (this.type === 'ongoing') {
         this.dataList = []
-        this.getList(1)
+        this.page = 1
+        this.getList('ongoing')
       } else {
         this.dataList = []
-        this.getList(2)
+        this.page = 1
+        this.getList('completed')
       }
     },
-    getList (status) {
+    getList (status = this.type) {
       getVolunteerHelpList(this.count, this.page, status).then(res => {
         if (!res.data.error_code) {
           this.total = res.data.result.total
@@ -187,7 +199,6 @@ export default {
                 this.page = 1
               }
             }
-            console.log(this.dataList)
           } else {
             if (this.page !== 1) {
               this.page = 1
@@ -335,6 +346,7 @@ export default {
     }
     .back{
       display:inline-block;
+      font-weight: bold;
     }
     .back-text{
       font-size:0.34rem;
