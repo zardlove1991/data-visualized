@@ -246,14 +246,14 @@ export default {
     padding: 0.57rem 0.6rem 0.76rem 0.6rem;
 		.title{
 		  color:#00FFFA;
-		  font-size:1.2rem;
+		  font-size:px2rem(120px);
 		  text-align:center;
 		  font-family:PingFang-SC-Bold;
 		  font-weight:bold;
-		  letter-spacing: 0.1rem;
-		  line-height:1.2rem;
-		  margin-top:0.8rem;
-		  margin-bottom:0.6rem;
+		  letter-spacing: px2rem(10px);
+		  line-height:px2rem(120px);
+		  margin-top:px2rem(80px);
+		  margin-bottom:px2rem(60px);
 		}
 		.today-weather {
       font-size: 0.35rem;
