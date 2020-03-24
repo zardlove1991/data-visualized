@@ -244,6 +244,10 @@ export default {
   padding: pxrem(40px);
   .orderSheet-page{
     padding: 0.57rem 0.6rem 0.76rem 0.6rem;
+    img{
+      width:100%;
+      height:100%;
+    }
     .title{
       color:#00FFFA;
       font-size:1.2rem;
