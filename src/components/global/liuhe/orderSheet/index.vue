@@ -130,7 +130,7 @@ export default {
       isPaging: false,
       detail: {},
       showDetail: false,
-      frequency: 25000
+      frequency: 10000
     }
   },
   created () {

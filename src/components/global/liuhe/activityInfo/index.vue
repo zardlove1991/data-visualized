@@ -80,7 +80,7 @@ export default {
         link: '外链',
         video: '视频'
       },
-      frequency: 25000,
+      frequency: 10000,
       swiperOption: {
         notNextTick: true,
         initialSlide: 0,

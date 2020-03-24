@@ -80,12 +80,12 @@ export default {
       }
     })
     this.getVolunteerRank()
-    setInterval(() => {
-      this.pageNum += 1
-      this.leftList = []
-      this.rightList = []
-      this.getVolunteerRank()
-    }, 60000)
+    // setInterval(() => {
+    //   this.pageNum += 1
+    //   this.leftList = []
+    //   this.rightList = []
+    //   this.getVolunteerRank()
+    // }, 60000)
   },
   methods: {
     setFontSize (size) {
