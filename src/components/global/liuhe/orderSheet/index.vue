@@ -242,6 +242,9 @@ export default {
   height: 100%;
   background-color:#0a1742;
   padding: pxrem(40px);
+  *{
+    font-family:'PingFang SC';
+  }
   .orderSheet-page{
     padding: 0.57rem 0.6rem 0.76rem 0.6rem;
     img{
@@ -287,7 +290,8 @@ export default {
       padding-top:0.24rem;
       text-align:center;
       margin-bottom:0.4rem;
-      background:url('./assets/orderbox.png') no-repeat 100%;
+      background:url('./assets/orderbox.png') no-repeat center;
+      background-size: 100% 100%;
     }
     .type-name{
       font-size:0.28rem;
@@ -297,7 +301,8 @@ export default {
       font-family:PingFang-SC-Medium;
     }
     .check-item{
-      background:url('./assets/orderbox_pre.png') no-repeat 100%;
+      background:url('./assets/orderbox_pre.png') no-repeat center;
+      background-size: 100% 100%;
       .type-name{
         color:rgba(252,255,255,1);
       }
@@ -391,6 +396,9 @@ export default {
       width:0.8rem;
       height:0.28rem;
       margin-right:0.23rem;
+      img{
+        vertical-align: top;
+      }
     }
     .help-text{
       font-size:0.42rem;
@@ -443,6 +451,9 @@ export default {
     }
     .process-item:nth-last-child(2) {
       border-image:linear-gradient(to bottom,#4DFFE8,#FFE84B) 1 10;
+      border-right: 0;
+      border-top: 0;
+      border-bottom: 0;
     }
     .process-org{
       color:#fff;

@@ -1,7 +1,7 @@
 <template>
   <div class="common-activityInfo ">
     <div class="activityInfo-page common01-border" v-if="!showDetail">
-      <div class="common01-title">{{viewAttr.header || '活动资讯'}}</div>
+      <div class="common01-title page-title">{{viewAttr.header || '活动资讯'}}</div>
       <div class="list-title">
         <div class="list-item flex sys-flex-center animated"
           :class="{'flipInX' : v.title}"
@@ -35,7 +35,7 @@
         </div>
       </div>
       <swiper :options="swiperOption" ref="mySwiper" @slideNextTransitionEnd="goNext" @slidePrevTransitionEnd="goBefore">
-        <swiper-slide v-for="(v, k) in swiperDataList" :key="k" >
+        <swiper-slide v-for="(v, k) in swiperDataList" :key="k" class="content-swiper">
           <div class="detail-title">{{v.title}}</div>
           <div class="detail-list">
             <div class="source">来源：{{v.source}}</div>
@@ -148,7 +148,8 @@ export default {
             let newSwiperData = res.data.result.data
             newSwiperData.map(v => {
               v.contentDetail = ''
-              let _date = new Date(v.create_time)
+              let newDate = v.create_time.split('-').join('/')
+              let _date = new Date(newDate)
               let month = (_date.getMonth() + 1).toString().padStart(2, '0')
               let day = _date.getDate().toString().padStart(2, '0')
               let hour = _date.getHours().toString().padStart(2, '0')
@@ -172,7 +173,8 @@ export default {
             this.dataList = []
             setTimeout(() => {
               this.dataList = res.data.result.data.map(v => {
-                let _date = new Date(v.create_time)
+                let newDate = v.create_time.split('-').join('/')
+                let _date = new Date(newDate)
                 let month = (_date.getMonth() + 1).toString().padStart(2, '0')
                 let day = _date.getDate().toString().padStart(2, '0')
                 let hour = _date.getHours().toString().padStart(2, '0')
@@ -232,9 +234,15 @@ export default {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
-  background: #0a1742;;
+  background: #0a1742;
+  *{
+    font-family:'PingFang SC';
+  }
   .activityInfo-page{
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
+    .page-title{
+      font-weight: 600;
+    }
     .list-item{
       margin-bottom: pxrem(110px);
       align-items:center;
@@ -277,7 +285,11 @@ export default {
     }
   }
   .activityInfo-detail {
-    padding: pxrem(100px) pxrem(72px) pxrem(10px);
+    padding: pxrem(120px) pxrem(72px) pxrem(10px);
+    .content-swiper {
+      height: pxrem(800px);
+      overflow-y: scroll;
+    }
     .back-line{
       margin-bottom:0.45rem;
       position: absolute;
@@ -340,9 +352,10 @@ export default {
     }
     .detail-content {
       width: 100%;
-      height: 6.2rem;
+      // height: 6.2rem;
       overflow: hidden;
       margin-top: pxrem(40px);
+      padding: 0 pxrem(30px);
       &>div {
         width: 100%;
         height: 100%;

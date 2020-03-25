@@ -36,7 +36,7 @@
           <div class="member-list">
             <div :class="item.title === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.leftMember.data" :key="index">
               <div class="type-title">
-                <span>{{item.title}}</span>:
+                <span>{{item.title}}</span><span>:</span>
               </div>
               <div class="member sys-flex" v-for="(item2, index2) in item.data" :key="index2">
                 <div class="name"><div><span>{{item2.name}}</span></div></div>
@@ -55,7 +55,7 @@
           <div class="member-list">
             <div :class="item.title === '成员'?'item type-member':'item type-leader'" v-for="(item, index) in memberIndexData.rightMember.data" :key="index">
               <div class="type-title">
-                <span>{{item.title}}</span>:
+                <span>{{item.title}}</span><span>:</span>
               </div>
               <div class="member sys-flex" v-for="(item2, index2) in item.data" :key="index2">
                 <div class="name"><div><span>{{item2.name}}</span></div></div>
@@ -351,7 +351,7 @@ export default {
       }
       .name.top-info{
         // width: pxrem(294px);
-        top: pxrem(15px);
+        top: 0;
         // left: pxrem(354px);
         right: pxrem(1029px);
       }
@@ -453,9 +453,16 @@ export default {
             span{
               display: inline-block;
               min-width: pxrem(105px);
-              text-align-last:justify;
               text-align:justify;
+              text-align-last:justify;
               text-justify:distribute-all-lines;
+            }
+            span::after{
+              display:inline-block;
+              content:'';
+              overflow:hidden;
+              width:100%;
+              height: 0;
             }
           }
           .member{
@@ -473,6 +480,13 @@ export default {
                 text-align-last:justify;
                 text-align:justify;
                 text-justify:distribute-all-lines;
+              }
+              span::after{
+                display:inline-block;
+                content:'';
+                overflow:hidden;
+                width:100%;
+                height: 0;
               }
             }
             .position{
@@ -591,6 +605,7 @@ export default {
         .first-line{
           width: pxrem(2px);
           height: pxrem(60px);
+          border-left:pxrem(2px) solid #03F6FF;
         }
       }
     }
