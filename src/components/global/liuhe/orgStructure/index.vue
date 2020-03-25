@@ -90,7 +90,8 @@
               <img src="./assets/bg_ladder.png" alt="">
             </div>
           </div>
-          <div class="list-line sys-flex">
+        </div>
+        <div class="list-line sys-flex">
             <div class="first-line line" v-if="checkCanShow(0)"></div>
             <div class="line" v-if="checkCanShow(1)"></div>
             <div class="line" v-if="checkCanShow(2)"></div>
@@ -98,7 +99,6 @@
             <div class="line" v-if="checkCanShow(4)"></div>
             <div class="line" v-if="checkCanShow(5)"></div>
           </div>
-        </div>
         <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
             <div class="img-box">
@@ -564,12 +564,14 @@ export default {
           }
         }
       }
-      .list-line{
+    }
+    .list-line{
         height: pxrem(121px);
         width: pxrem(1464px);
         padding-top: pxrem(51px);
         padding-bottom: pxrem(10px);
         margin: 0 auto;
+        justify-content: center;
         .line{
           position: relative;
           width: pxrem(291px);
@@ -606,9 +608,9 @@ export default {
           width: pxrem(2px);
           height: pxrem(60px);
           border-left:pxrem(2px) solid #03F6FF;
+          border-right: none;
         }
       }
-    }
     .list-box{
       position: relative;
       width: pxrem(1758px);
@@ -616,6 +618,7 @@ export default {
       overflow-y: scroll;
       flex-flow: row wrap;
       margin: pxrem(59px) auto 0;
+      justify-content: center;
       .item{
         width: pxrem(293px);
         height: pxrem(283px);

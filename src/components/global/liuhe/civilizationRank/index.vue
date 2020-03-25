@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.name}}</div>
-            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.activity_duration}}</span>h</div>
+            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.duration}}</span>h</div>
           </div>
         </div>
         <div class="content-right" v-if="rightList && rightList[0]">
@@ -46,7 +46,7 @@
               </div>
             </div>
             <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.real_name}}</div>
-            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.activity_duration}}</span>h</div>
+            <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.duration}}</span>h</div>
           </div>
         </div>
       </div>
@@ -259,6 +259,7 @@ export default {
           margin-left: auto;
           color: #00FCFF;
           font-weight: 600;
+          word-break: keep-all;
         }
       }
     }
