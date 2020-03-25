@@ -23,7 +23,7 @@
           </div>
       </div>
       <div class="wrap-content sys-flex flex-justify-between">
-        <div class="content-left">
+        <div class="content-left sys-flex-one">
           <div class="title">志愿组织排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated flipInX" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
             <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + (pageNum - 1) * count + 1}}</div>
@@ -68,6 +68,7 @@ export default {
       // rightCount: 0,
       pageNum: 1,
       count: 3,
+      frequency: 10000,
       leftList: [],
       rightList: [],
       customSize: false
@@ -80,12 +81,16 @@ export default {
       }
     })
     this.getVolunteerRank()
-    // setInterval(() => {
-    //   this.pageNum += 1
-    //   this.leftList = []
-    //   this.rightList = []
-    //   this.getVolunteerRank()
-    // }, 60000)
+    setInterval(() => {
+      if (this.pageNum > 3) {
+        this.pageNum = 1
+      } else {
+        this.pageNum += 1
+      }
+      this.leftList = []
+      this.rightList = []
+      this.getVolunteerRank()
+    }, this.frequency)
   },
   methods: {
     setFontSize (size) {
@@ -99,19 +104,9 @@ export default {
           let _result = res.data.result
           if (_result.volunteerRank.data) {
             this.rightList = _result.volunteerRank.data
-            // 判断是否是重新加载的第一页
-            if (this.pageNum >= _result.volunteerRank.total) {
-              // this.rightCount = 0
-              this.pageNum = 1
-            }
           }
           if (_result.organizeRank.data) {
             this.leftList = _result.organizeRank.data
-            // 判断是否是重新加载的第一页 （这里的total在外层）
-            if (this.pageNum >= _result.organizeRank.total) {
-              // this.leftCount = 0
-              this.pageNum = 1
-            }
           }
           this.timeTotalNum = _result.duration
           this.teamTotalNum = _result.organize_number
@@ -191,7 +186,7 @@ export default {
       .content-left {
         .item-list {
           margin-right: pxrem(40px);
-          width: pxrem(900px);
+          // width: pxrem(900px);
           &:last-of-type {
             margin-bottom: 0;
           }

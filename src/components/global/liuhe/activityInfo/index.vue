@@ -308,12 +308,12 @@ export default {
     .detail-title {
       display: inline-block;
       width: pxrem(1250px);
-        font-weight: bold;
-        font-size:0.52rem;
-        line-height:0.52rem;
-        color:#fff;
-        margin-bottom:0.38rem;
-        text-align:center;
+      font-weight: bold;
+      font-size:0.52rem;
+      // line-height:0.52rem;
+      color:#fff;
+      margin-bottom:0.38rem;
+      text-align:center;
     }
     .detail-list {
       color: #fff;

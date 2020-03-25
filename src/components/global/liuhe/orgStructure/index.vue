@@ -26,7 +26,7 @@
       </div>
       <!-- 成员名单 -->
       <div class="member-div sys-flex" v-if="!showOrg">
-        <div class="left-part">
+        <div class="left-part sys-flex-one">
           <div class="title">
             <div class="img-div">
               <img src="./assets/arrow_list.png" alt="">
@@ -45,7 +45,7 @@
             </div>
           </div>
         </div>
-        <div class="right-part">
+        <div class="right-part sys-flex-one">
           <div class="title">
             <div class="img-div">
               <img src="./assets/arrow_list.png" alt="">
@@ -294,6 +294,12 @@ export default {
       bottom: pxrem(35px);
       background: url('./assets/bg_group_new2.png') no-repeat center;
       background-size: 100%;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      transform: translateX(-50%);
       .total, .name, .number{position: absolute;}
       .total{
         width: pxrem(314px);
@@ -313,7 +319,7 @@ export default {
           font-size: pxrem(68px);
           color: #00F6FF;
           font-weight:800;
-          letter-spacing: 11px;
+          letter-spacing: pxrem(11px);
         }
       }
       .name {
@@ -405,7 +411,7 @@ export default {
     .member-div{
       .left-part{margin-right: pxrem(80px);}
       .title{
-        height: 40px;
+        height: pxrem(40px);
         font-size: pxrem(42px);
         line-height: 1;
         text-align: left;
@@ -422,7 +428,7 @@ export default {
         }
       }
       .member-list{
-        width: pxrem(800px);
+        // width: pxrem(800px);
         height: pxrem(629px);
         background: rgba(0, 132, 255, 0.15);
         padding-left: pxrem(51px);
@@ -554,6 +560,7 @@ export default {
           position: relative;
           width: pxrem(291px);
           border-top:pxrem(2px) solid #03F6FF;
+          border-right:pxrem(2px) solid #03F6FF;
         }
         .line::before, .line::after{
           display: block;
@@ -561,11 +568,11 @@ export default {
           position: absolute;
         }
         .line::before{
-          right: 0;
-          top: 0;
-          width: pxrem(2px);
-          height: pxrem(58px);
-          background:#03F6FF;
+          // right: 0;
+          // top: 0;
+          // width: pxrem(2px);
+          // height: pxrem(58px);
+          // background:#03F6FF;
         }
         .line::after{
           width: pxrem(10px);
