@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="detail-content common01-ft36" :style="setFontSize(40)" v-if="v.contentDetail||getContent(k)">
-            <div class="contnet-detail-div" v-html="v.contentDetail"></div>
+            <div class="contnet-detail-div" v-html="handelHtml(v.contentDetail)"></div>
           </div>
         </swiper-slide>
       </swiper>
@@ -285,7 +285,7 @@ export default {
     }
   }
   .activityInfo-detail {
-    padding: pxrem(120px) pxrem(72px) pxrem(10px);
+    padding: pxrem(130px) pxrem(72px) pxrem(10px);
     .content-swiper {
       height: pxrem(800px);
       overflow-y: scroll;
@@ -376,6 +376,10 @@ export default {
       .contnet-detail-div{
         font-size: pxrem(40px);
         color: #EEEEEE;
+        img{
+          width: auto;
+          max-width: 100%;
+        }
       }
     }
     .swiper-slide{

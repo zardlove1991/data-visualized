@@ -275,7 +275,7 @@ export default {
       .btn{
         width: pxrem(253px);
         height: pxrem(94px);
-        line-height: pxrem(94px);
+        line-height: pxrem(98px);
         text-align: center;
         font-weight: bold;
         color: #fff;

@@ -81,7 +81,9 @@
                 <div class="help-text">求助信息：</div>
               </div>
               <div class="help-brief">
-                {{detail.brief}}
+                <div>
+                  {{detail.brief}}
+                </div>
               </div>
             </div>
             <div class="process-info sys-flex-one">
@@ -255,7 +257,6 @@ export default {
       color:#00FFFA;
       font-size:1.2rem;
       text-align:center;
-      font-family:PingFang-SC-Bold;
       font-weight:bold;
       letter-spacing: 0.1rem;
       line-height:1.2rem;
@@ -298,7 +299,6 @@ export default {
       line-height:0.28rem;
       margin-top:0.18rem;
       color:rgba(252,255,255,0.6);
-      font-family:PingFang-SC-Medium;
     }
     .check-item{
       background:url('./assets/orderbox_pre.png') no-repeat center;
@@ -335,16 +335,13 @@ export default {
       font-size:0.38rem;
       color:#00D2FF;
       margin-right:0.1rem;
-      font-family:PingFang-SC-Bold;
     }
     .list-title{
       font-size:0.38rem;
-      font-family:PingFang-SC-Bold;
       text-align:left;
     }
     .list-time{
       font-size:0.32rem;
-      font-family:PingFang-SC-Regular;
       margin-left:0.72rem;
     }
     .content-detail{
@@ -371,7 +368,6 @@ export default {
       font-size:0.52rem;
       line-height:0.6rem;
       color:#fff;
-      font-family:PingFangSC-Regular;
     }
     .title-line{
       padding-bottom:0.46rem;
@@ -403,18 +399,17 @@ export default {
     .help-text{
       font-size:0.42rem;
       color:#fff;
-      font-family:PingFangSC-Regular;
     }
     .help-brief{
       width:5.36rem;
       height:5.1rem;
       overflow-y:scroll;
-      padding:0.46rem 0.55rem 0 0.5rem;
+      padding:0.46rem 0.55rem 0.2rem 0.5rem;
       background-color:rgba(13,99,223,0.15);
       color:#fff;
       font-size:0.36rem;
       line-height:0.6rem;
-      font-family:PingFang-SC-Medium;
+      word-break: break-word;
     }
     .process-brief{
       width:100%;
@@ -461,7 +456,6 @@ export default {
       line-height:0.34rem;
       margin-bottom:0.3rem;
       margin-top:0.27rem;
-      font-family:PingFang-SC-Medium;
       padding-left:0.25rem;
     }
     .process-member{
@@ -469,7 +463,6 @@ export default {
       font-size:0.34rem;
       padding-left:0.25rem;
       line-height:0.34rem;
-      font-family:PingFang-SC-Medium;
     }
     .member-name{
       color:#0BFCFF;

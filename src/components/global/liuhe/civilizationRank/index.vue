@@ -26,7 +26,7 @@
         <div class="content-left sys-flex-one">
           <div class="title">志愿组织排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated flipInX" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + (pageNum - 1) * count + 1}}</div>
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}"><div>{{k + (pageNum - 1) * count + 1}}</div></div>
             <div class="img-box">
               <div>
                 <img :src="v.head_pic?v.head_pic:defaultImg" alt="">  
@@ -39,7 +39,7 @@
         <div class="content-right" v-if="rightList && rightList[0]">
           <div class="title">志愿者排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.real_name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}">{{k + (pageNum - 1) * count + 1}}</div>
+            <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2}"><div>{{k + (pageNum - 1) * count + 1}}</div></div>
             <div class="img-box">
               <div>
                 <img :src="v.head_pic?v.head_pic:defaultImg" alt="">
@@ -231,6 +231,10 @@ export default {
           }
           &.four {
             background-image: url("./assets/four.png");
+          }
+          >div{
+            width: pxrem(60px);
+            height: pxrem(60px);
           }
         }
         .img-box{
