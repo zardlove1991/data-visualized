@@ -125,7 +125,7 @@
                   <div class="status-name">待沟通</div>
                 </div>
                 <!-- 3 接单中 -->
-                <div class="process-item" v-if="detail.status && detail.status === 4">
+                <div class="process-item during" v-if="detail.status && detail.status === 4">
                   <div class="status-name">{{detail.status_name}}</div>
                 </div>
                 <div class="process-item waiting" v-if="detail.status && detail.status === 4">
