@@ -226,7 +226,7 @@ export default {
           if (res.data.result.data.length) {
             this.dataList = []
             res.data.result.data.forEach((item, index) => {
-              let _date = new Date(item.create_time)
+              let _date = new Date(item.create_time * 1000)
               let month = (_date.getMonth() + 1).toString().padStart(2, '0')
               let day = _date.getDate().toString().padStart(2, '0')
               let hour = _date.getHours().toString().padStart(2, '0')
