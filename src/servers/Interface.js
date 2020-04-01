@@ -159,6 +159,6 @@ export const getVolunteerOrganizeDetail = (id, count = '') => createAPI(`${https
 // 组织架构 成员名单
 export const getVolunteerMemberList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerMemberList`)
 // 活动资讯
-export const getActivityInfo = (page = 1, count = 4) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?type=article&page=${page}&count=${count}`)
+export const getActivityInfo = (page = 1, count = 4, status = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?type=article&page=${page}&count=${count}&status=${status}`)
 // 活动咨询详情
 export const getActivityInfoDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublishDetail?id=${id}`)
