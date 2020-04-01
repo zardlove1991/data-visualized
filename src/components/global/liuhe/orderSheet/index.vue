@@ -114,6 +114,16 @@
                 <div class="process-item waiting" v-if="detail.status && detail.status === 1">
                   <div class="status-name">待沟通</div>
                 </div>
+                <!-- 2.1 -->
+                <div class="process-item" v-if="detail.status && detail.status === 2">
+                  <div class="status-name">{{detail.status_name}}</div>
+                </div>
+                <div class="process-item during" v-if="detail.status && detail.status === 2">
+                  <div class="status-name">接单中</div>
+                </div>
+                <div class="process-item waiting" v-if="detail.status && detail.status === 2">
+                  <div class="status-name">待沟通</div>
+                </div>
                 <!-- 3 接单中 -->
                 <div class="process-item" v-if="detail.status && detail.status === 4">
                   <div class="status-name">{{detail.status_name}}</div>
@@ -125,15 +135,15 @@
                   <div class="status-name">待沟通</div>
                 </div>
                 <!-- 4 已通过 -->
-                <div class="process-item" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4">
+                <div class="process-item" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2">
                   <div class="status-name">已通过</div>
                 </div>
-                <div :class="detail.volunteer&&detail.organize?'process-item':'process-item during'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4">
+                <div :class="detail.volunteer&&detail.organize?'process-item':'process-item during'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2">
                   <div class="status-name">{{detail.volunteer?'已接单':detail.organize?'已受理':''}}</div>
                   <div class="process-org" v-if="detail.organize">{{detail.organize.name}}已受理</div>
                   <div class="process-member sys-flex" v-if="detail.volunteer">志愿者：<div class="member-name">{{detail.volunteer.member_name}}</div> 已接单</div>
                 </div>
-                <div :class="detail.status === 8 ? 'process-item during':detail.status === 10 ? 'process-item':'process-item waiting'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4">
+                <div :class="detail.status === 8 ? 'process-item during':detail.status === 10 ? 'process-item':'process-item waiting'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2">
                   <div class="status-name">{{detail.status === 10 ?detail.status_name:'待沟通'}}</div>
                 </div>
               </div>
