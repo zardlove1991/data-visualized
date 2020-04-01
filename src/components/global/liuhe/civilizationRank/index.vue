@@ -82,7 +82,7 @@ export default {
     })
     this.getVolunteerRank()
     setInterval(() => {
-      if (this.pageNum > 3) {
+      if (this.pageNum >= 3) {
         this.pageNum = 1
       } else {
         this.pageNum += 1

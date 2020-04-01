@@ -94,16 +94,47 @@
                 <div class="help-text">处理进度：</div>
               </div>
               <div class="process-brief">
-                <div class="process-item" v-if="detail.status">
-                  <div class="status-name">{{detail.status === 1?'待审核':'已通过'}}</div>
+                <!-- 1 已打回 -->
+                <div class="process-item back" v-if="detail.status && detail.status === 3">
+                  <div class="status-name">{{detail.status_name}}</div>
                 </div>
-                <div class="process-item" v-if="detail.volunteer||detail.organize">
+                <div class="process-item waiting" v-if="detail.status && detail.status === 3">
+                  <div class="status-name">待接单</div>
+                </div>
+                <div class="process-item waiting" v-if="detail.status && detail.status === 3">
+                  <div class="status-name">待沟通</div>
+                </div>
+                <!-- 2 审核中 -->
+                <div class="process-item during" v-if="detail.status && detail.status === 1">
+                  <div class="status-name">{{detail.status_name}}</div>
+                </div>
+                <div class="process-item waiting" v-if="detail.status && detail.status === 1">
+                  <div class="status-name">待接单</div>
+                </div>
+                <div class="process-item waiting" v-if="detail.status && detail.status === 1">
+                  <div class="status-name">待沟通</div>
+                </div>
+                <!-- 3 接单中 -->
+                <div class="process-item" v-if="detail.status && detail.status === 4">
+                  <div class="status-name">{{detail.status_name}}</div>
+                </div>
+                <div class="process-item waiting" v-if="detail.status && detail.status === 4">
+                  <div class="status-name">待接单</div>
+                </div>
+                <div class="process-item waiting" v-if="detail.status && detail.status === 4">
+                  <div class="status-name">待沟通</div>
+                </div>
+                <!-- 4 已通过 -->
+                <div class="process-item" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4">
+                  <div class="status-name">已通过</div>
+                </div>
+                <div :class="detail.volunteer&&detail.organize?'process-item':'process-item during'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4">
                   <div class="status-name">{{detail.volunteer?'已接单':detail.organize?'已受理':''}}</div>
                   <div class="process-org" v-if="detail.organize">{{detail.organize.name}}已受理</div>
                   <div class="process-member sys-flex" v-if="detail.volunteer">志愿者：<div class="member-name">{{detail.volunteer.member_name}}</div> 已接单</div>
                 </div>
-                <div class="process-item" v-if="detail.status && detail.status !== 1">
-                  <div class="status-name">{{detail.status_name}}</div>
+                <div :class="detail.status === 8 ? 'process-item during':detail.status === 10 ? 'process-item':'process-item waiting'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4">
+                  <div class="status-name">{{detail.status === 10 ?detail.status_name:'待沟通'}}</div>
                 </div>
               </div>
             </div>
@@ -441,14 +472,54 @@ export default {
       background-position: center;
       background-size: 100% 100%;
     }
-    .process-item:last-child{
-      border-left:0;
+    .process-item.during:before{
+      content: '';
+      width:0.42rem;
+      height:0.42rem;
+      background:url('./assets/icon_during.png') no-repeat;
+      position:absolute;
+      left:-0.21rem;
+      top:-0.04rem;
+      background-color:rgba(13,99,223,0.15);
+      background-position: center;
+      background-size: 100% 100%;
+    }
+    .process-item.waiting:before{
+      content: '';
+      width:0.42rem;
+      height:0.42rem;
+      background:url('./assets/icon_waiting.png') no-repeat;
+      position:absolute;
+      left:-0.21rem;
+      top:-0.04rem;
+      background-color:rgba(13,99,223,0.15);
+      background-position: center;
+      background-size: 100% 100%;
+    }
+    .process-item.back:before{
+      content: '';
+      width:0.42rem;
+      height:0.42rem;
+      background:url('./assets/icon_refuse.png') no-repeat;
+      position:absolute;
+      left:-0.21rem;
+      top:-0.04rem;
+      background-color:rgba(13,99,223,0.15);
+      background-position: center;
+      background-size: 100% 100%;
     }
     .process-item:nth-last-child(2) {
       border-image:linear-gradient(to bottom,#4DFFE8,#FFE84B) 1 10;
       border-right: 0;
       border-top: 0;
       border-bottom: 0;
+    }
+    .process-item.during, .process-item.waiting, .process-item.back{
+      border-image: none;
+      border-left: 0.03rem solid #738cbe;
+    }
+    .process-item:last-child{
+      border-left:0;
     }
     .process-org{
       color:#fff;
