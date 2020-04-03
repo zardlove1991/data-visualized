@@ -1,9 +1,7 @@
 <template>
-  <div class="common-activityInfo ">
+  <div class="common-activityInfo">
     <div class="activityInfo-page common01-border" v-if="!showDetail">
-      <div class="common01-title page-title">
-        {{ viewAttr.header || '活动资讯' }}
-      </div>
+      <div class="common01-title page-title">{{ viewAttr.header || '活动资讯' }}</div>
       <div class="list-title">
         <div
           class="list-item flex sys-flex-center animated"
@@ -17,9 +15,7 @@
             <img v-if="k === 0" src="./assets/new.png" />
             <img v-if="k === 1" src="./assets/icon_hot.png" />
           </div>
-          <div class="list-text overhidden common01-ft38 flex-one">
-            {{ v.title }}
-          </div>
+          <div class="list-text overhidden common01-ft38 flex-one">{{ v.title }}</div>
           <div class="list-read flex flex-center">
             <img class="img-icon" src="@/assets/common/reader.png" />
             <span class="common01-ft32">{{ v.click_num }}</span>
@@ -46,11 +42,7 @@
         @slideNextTransitionEnd="goNext"
         @slidePrevTransitionEnd="goBefore"
       >
-        <swiper-slide
-          v-for="(v, k) in swiperDataList"
-          :key="k"
-          class="content-swiper"
-        >
+        <swiper-slide v-for="(v, k) in swiperDataList" :key="k" class="content-swiper">
           <div class="detail-title">{{ v.title }}</div>
           <div class="detail-list">
             <div class="source">来源：{{ v.source }}</div>
@@ -64,17 +56,11 @@
             :style="setFontSize(40)"
             v-if="v.contentDetail || getContent(k)"
           >
-            <div
-              class="contnet-detail-div"
-              v-html="handelHtml(v.contentDetail)"
-            ></div>
+            <div class="contnet-detail-div" v-html="handelHtml(v.contentDetail)"></div>
           </div>
         </swiper-slide>
       </swiper>
-      <div
-        class="swiper-button-prev swiper-button-white"
-        @click="goBefore()"
-      ></div>
+      <div class="swiper-button-prev swiper-button-white" @click="goBefore()"></div>
       <div class="swiper-button-next swiper-button-white" @click="goNext"></div>
     </div>
   </div>
@@ -86,7 +72,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'manuscript',
-  data() {
+  data () {
     return {
       dataList: [],
       swiperDataList: [],
@@ -126,10 +112,10 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.getDataList()
   },
-  mounted() {
+  mounted () {
     this.setFontsize('lishui-manuscriptoutput')
     setInterval(() => {
       if (!this.showDetail) {
@@ -138,17 +124,17 @@ export default {
     }, this.frequency)
   },
   methods: {
-    goBefore() {
+    goBefore () {
       if (this.swiperLeftPage > 1 && this.$refs.mySwiper.swiper.realIndex < 2) {
         this.getMoreList(this.swiperLeftPage--, 'left')
       }
     },
-    goNext() {
+    goNext () {
       if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
         this.getMoreList(this.swiperRightPage++, 'right')
       }
     },
-    getDetail(item) {
+    getDetail (item) {
       // 保存swiper所需数据
       this.swiperLeftPage = this.page
       this.swiperRightPage = this.page
@@ -163,11 +149,11 @@ export default {
       this.showDetail = true
       this.swiperOption.initialSlide = this.showIndex - 1
     },
-    backList() {
+    backList () {
       this.showDetail = false
     },
     // 滑动获取更多
-    getMoreList(pageNum, type) {
+    getMoreList (pageNum, type) {
       // 接口需要调整 获取更多
       getActivityInfo(pageNum, this.count).then(res => {
         if (!res.data.error_code) {
@@ -202,7 +188,7 @@ export default {
         }
       })
     },
-    getDataList() {
+    getDataList () {
       getActivityInfo(this.page, this.count).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
@@ -246,7 +232,7 @@ export default {
         }
       })
     },
-    getContent(k) {
+    getContent (k) {
       getActivityInfoDetail(this.swiperDataList[k].id).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.content) {
@@ -255,11 +241,11 @@ export default {
         }
       })
     },
-    handelHtml(html) {
+    handelHtml (html) {
       let rel = /style\s*?=\s*?([‘"])[\s\S]*?\1/gi
       return html.replace(rel, '')
     },
-    setFontSize(size) {
+    setFontSize (size) {
       if (this.customSize && size && size > 0) {
         return `font-size: ${size / 100}rem!important`
       }
@@ -273,15 +259,15 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/styles/index.scss';
-@import '../style/index.scss';
+@import "~@/styles/index.scss";
+@import "../style/index.scss";
 .common-activityInfo {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
   background: #0a1742;
   * {
-    font-family: 'PingFang SC';
+    font-family: "PingFang SC";
   }
   .activityInfo-page {
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
