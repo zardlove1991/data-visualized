@@ -1,26 +1,32 @@
 <template>
   <div class="common-activityInfo ">
     <div class="activityInfo-page common01-border" v-if="!showDetail">
-      <div class="common01-title page-title">{{viewAttr.header || '活动资讯'}}</div>
+      <div class="common01-title page-title">
+        {{ viewAttr.header || '活动资讯' }}
+      </div>
       <div class="list-title">
-        <div class="list-item flex sys-flex-center animated"
-          :class="{'flipInX' : v.title}"
-          :style="{'animation-delay' : k/2 + 's'}"
+        <div
+          class="list-item flex sys-flex-center animated"
+          :class="{ flipInX: v.title }"
+          :style="{ 'animation-delay': k / 2 + 's' }"
           v-for="(v, k) in dataList"
           @click="getDetail(v)"
-          :key="k">
+          :key="k"
+        >
           <div class="type-area sys-flex sys-flex-center">
             <img v-if="k === 0" src="./assets/new.png" />
             <img v-if="k === 1" src="./assets/icon_hot.png" />
           </div>
-          <div class="list-text overhidden common01-ft38 flex-one">{{v.title}}</div>
+          <div class="list-text overhidden common01-ft38 flex-one">
+            {{ v.title }}
+          </div>
           <div class="list-read flex flex-center">
             <img class="img-icon" src="@/assets/common/reader.png" />
-            <span class="common01-ft32">{{v.click_num}}</span>
+            <span class="common01-ft32">{{ v.click_num }}</span>
           </div>
           <div class="list-time flex flex-center">
             <img class="img-icon" src="@/assets/common/time.png" />
-            <span class="common01-ft32">{{v.showTime}}</span>
+            <span class="common01-ft32">{{ v.showTime }}</span>
           </div>
         </div>
       </div>
@@ -29,27 +35,46 @@
       <div class="back-line">
         <div @click="backList()" class="back">
           <div class="back-img">
-            <img src="./assets/icon_back.png">
+            <img src="./assets/icon_back.png" />
           </div>
           <span class="back-text">返回</span>
         </div>
       </div>
-      <swiper :options="swiperOption" ref="mySwiper" @slideNextTransitionEnd="goNext" @slidePrevTransitionEnd="goBefore">
-        <swiper-slide v-for="(v, k) in swiperDataList" :key="k" class="content-swiper">
-          <div class="detail-title">{{v.title}}</div>
+      <swiper
+        :options="swiperOption"
+        ref="mySwiper"
+        @slideNextTransitionEnd="goNext"
+        @slidePrevTransitionEnd="goBefore"
+      >
+        <swiper-slide
+          v-for="(v, k) in swiperDataList"
+          :key="k"
+          class="content-swiper"
+        >
+          <div class="detail-title">{{ v.title }}</div>
           <div class="detail-list">
-            <div class="source">来源：{{v.source}}</div>
-            <div class="author">发布时间：{{v.showTime}}</div>
+            <div class="source">来源：{{ v.source }}</div>
+            <div class="author">发布时间：{{ v.showTime }}</div>
             <div class="bg-line">
               <p class="line"></p>
             </div>
           </div>
-          <div class="detail-content common01-ft36" :style="setFontSize(40)" v-if="v.contentDetail||getContent(k)">
-            <div class="contnet-detail-div" v-html="handelHtml(v.contentDetail)"></div>
+          <div
+            class="detail-content common01-ft36"
+            :style="setFontSize(40)"
+            v-if="v.contentDetail || getContent(k)"
+          >
+            <div
+              class="contnet-detail-div"
+              v-html="handelHtml(v.contentDetail)"
+            ></div>
           </div>
         </swiper-slide>
       </swiper>
-      <div class="swiper-button-prev swiper-button-white" @click="goBefore()"></div>
+      <div
+        class="swiper-button-prev swiper-button-white"
+        @click="goBefore()"
+      ></div>
       <div class="swiper-button-next swiper-button-white" @click="goNext"></div>
     </div>
   </div>
@@ -61,7 +86,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'manuscript',
-  data () {
+  data() {
     return {
       dataList: [],
       swiperDataList: [],
@@ -69,6 +94,7 @@ export default {
       detailData: {},
       showDetail: false,
       page: 1,
+      maxPage: 3,
       swiperLeftPage: 1, // 定位swiper滑动边界页码
       swiperRightPage: 1, // 定位swiper滑动边界页码
       showIndex: 0,
@@ -100,10 +126,10 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     this.getDataList()
   },
-  mounted () {
+  mounted() {
     this.setFontsize('lishui-manuscriptoutput')
     setInterval(() => {
       if (!this.showDetail) {
@@ -112,17 +138,17 @@ export default {
     }, this.frequency)
   },
   methods: {
-    goBefore () {
+    goBefore() {
       if (this.swiperLeftPage > 1 && this.$refs.mySwiper.swiper.realIndex < 2) {
         this.getMoreList(this.swiperLeftPage--, 'left')
       }
     },
-    goNext () {
+    goNext() {
       if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
         this.getMoreList(this.swiperRightPage++, 'right')
       }
     },
-    getDetail (item) {
+    getDetail(item) {
       // 保存swiper所需数据
       this.swiperLeftPage = this.page
       this.swiperRightPage = this.page
@@ -137,11 +163,12 @@ export default {
       this.showDetail = true
       this.swiperOption.initialSlide = this.showIndex - 1
     },
-    backList () {
+    backList() {
       this.showDetail = false
     },
     // 滑动获取更多
-    getMoreList (pageNum, type) { // 接口需要调整 获取更多
+    getMoreList(pageNum, type) {
+      // 接口需要调整 获取更多
       getActivityInfo(pageNum, this.count).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
@@ -151,9 +178,18 @@ export default {
               let newDate = v.create_time.split('-').join('/')
               let _date = new Date(newDate)
               let month = (_date.getMonth() + 1).toString().padStart(2, '0')
-              let day = _date.getDate().toString().padStart(2, '0')
-              let hour = _date.getHours().toString().padStart(2, '0')
-              let min = _date.getMinutes().toString().padStart(2, '0')
+              let day = _date
+                .getDate()
+                .toString()
+                .padStart(2, '0')
+              let hour = _date
+                .getHours()
+                .toString()
+                .padStart(2, '0')
+              let min = _date
+                .getMinutes()
+                .toString()
+                .padStart(2, '0')
               v.showTime = month + '-' + day + '  ' + hour + ':' + min
             })
             if (type === 'right') {
@@ -166,7 +202,7 @@ export default {
         }
       })
     },
-    getDataList () {
+    getDataList() {
       getActivityInfo(this.page, this.count).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
@@ -176,9 +212,18 @@ export default {
                 let newDate = v.create_time.split('-').join('/')
                 let _date = new Date(newDate)
                 let month = (_date.getMonth() + 1).toString().padStart(2, '0')
-                let day = _date.getDate().toString().padStart(2, '0')
-                let hour = _date.getHours().toString().padStart(2, '0')
-                let min = _date.getMinutes().toString().padStart(2, '0')
+                let day = _date
+                  .getDate()
+                  .toString()
+                  .padStart(2, '0')
+                let hour = _date
+                  .getHours()
+                  .toString()
+                  .padStart(2, '0')
+                let min = _date
+                  .getMinutes()
+                  .toString()
+                  .padStart(2, '0')
                 v.showTime = month + '-' + day + '  ' + hour + ':' + min
                 v.contentDetail = ''
                 return {
@@ -201,7 +246,7 @@ export default {
         }
       })
     },
-    getContent (k) {
+    getContent(k) {
       getActivityInfoDetail(this.swiperDataList[k].id).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.content) {
@@ -210,11 +255,11 @@ export default {
         }
       })
     },
-    handelHtml (html) {
+    handelHtml(html) {
       let rel = /style\s*?=\s*?([‘"])[\s\S]*?\1/gi
       return html.replace(rel, '')
     },
-    setFontSize (size) {
+    setFontSize(size) {
       if (this.customSize && size && size > 0) {
         return `font-size: ${size / 100}rem!important`
       }
@@ -230,25 +275,25 @@ export default {
 <style lang="scss">
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common-activityInfo{
+.common-activityInfo {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
   background: #0a1742;
-  *{
-    font-family:'PingFang SC';
+  * {
+    font-family: 'PingFang SC';
   }
-  .activityInfo-page{
+  .activityInfo-page {
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
-    .page-title{
+    .page-title {
       font-weight: 600;
     }
-    .list-item{
+    .list-item {
       margin-bottom: pxrem(110px);
-      align-items:center;
+      align-items: center;
     }
-    .type-area{
-      color:#0AFBF2;
+    .type-area {
+      color: #0afbf2;
       span {
         color: #0afbf2;
       }
@@ -258,10 +303,10 @@ export default {
         margin: 0 0.225rem;
       }
     }
-    .list-title{
-      color:#fff;
-      font-size:0.38rem;
-      text-align:left;
+    .list-title {
+      color: #fff;
+      font-size: 0.38rem;
+      text-align: left;
     }
     .list-text {
       width: 40%;
@@ -276,7 +321,7 @@ export default {
     }
     .list-read {
       margin: 0 0.8rem 0 0.65rem;
-      font-size:0.32rem;
+      font-size: 0.32rem;
       .img-icon {
         width: 0.42rem;
         height: 0.3rem;
@@ -290,26 +335,26 @@ export default {
       height: pxrem(800px);
       overflow-y: scroll;
     }
-    .back-line{
-      margin-bottom:0.45rem;
+    .back-line {
+      margin-bottom: 0.45rem;
       position: absolute;
       z-index: 10;
       top: pxrem(80px);
       left: pxrem(80px);
     }
-    .back{
-      display:inline-block;
+    .back {
+      display: inline-block;
       font-weight: bold;
     }
-    .back-text{
-      font-size:0.34rem;
-      color:#00FFEA;
+    .back-text {
+      font-size: 0.34rem;
+      color: #00ffea;
     }
-    .back-img{
-      display:inline-block;
-      width:0.36rem;
-      height:0.28rem;
-      margin-right:0.2rem;
+    .back-img {
+      display: inline-block;
+      width: 0.36rem;
+      height: 0.28rem;
+      margin-right: 0.2rem;
     }
     img {
       width: 100%;
@@ -321,32 +366,37 @@ export default {
       display: inline-block;
       width: pxrem(1250px);
       font-weight: bold;
-      font-size:0.52rem;
+      font-size: 0.52rem;
       // line-height:0.52rem;
-      color:#fff;
-      margin-bottom:0.38rem;
-      text-align:center;
+      color: #fff;
+      margin-bottom: 0.38rem;
+      text-align: center;
     }
     .detail-list {
       color: #fff;
-      margin:0 auto;
-      text-align:center;
+      margin: 0 auto;
+      text-align: center;
       .source {
         margin-right: 0.34rem;
-        display:inline-block;
-        font-size:0.28rem;
+        display: inline-block;
+        font-size: 0.28rem;
       }
-      .author{
-        display:inline-block;
-        font-size:0.28rem;
+      .author {
+        display: inline-block;
+        font-size: 0.28rem;
       }
-      .bg-line{
+      .bg-line {
         margin-top: pxrem(12px);
-        .line{
+        .line {
           width: pxrem(1017px);
           height: pxrem(2px);
           margin: 0 auto;
-          background: linear-gradient(90deg,rgba(64,107,173,0) 0%,rgba(64,107,173,0.99) 48%,rgba(64,107,173,0) 100%);
+          background: linear-gradient(
+            90deg,
+            rgba(64, 107, 173, 0) 0%,
+            rgba(64, 107, 173, 0.99) 48%,
+            rgba(64, 107, 173, 0) 100%
+          );
         }
       }
     }
@@ -356,7 +406,7 @@ export default {
       overflow: hidden;
       margin-top: pxrem(40px);
       padding: 0 pxrem(30px);
-      &>div {
+      & > div {
         width: 100%;
         height: 100%;
         overflow-y: scroll;
@@ -373,34 +423,34 @@ export default {
           overflow: hidden;
         }
       }
-      .contnet-detail-div{
+      .contnet-detail-div {
         font-size: pxrem(40px);
-        color: #EEEEEE;
-        img{
+        color: #eeeeee;
+        img {
           width: auto;
           max-width: 100%;
         }
       }
     }
-    .swiper-slide{
-      width:100%!important;
+    .swiper-slide {
+      width: 100% !important;
     }
-    .swiper-button-prev{
-      background-image:url(./assets/icon_left.png)!important;
-      width:0.4rem;
-      height:0.78rem;
-      background-size:100%;
+    .swiper-button-prev {
+      background-image: url(./assets/icon_left.png) !important;
+      width: 0.4rem;
+      height: 0.78rem;
+      background-size: 100%;
     }
-    .swiper-button-next{
-      background-image:url(./assets/icon_right.png)!important;
-      width:0.4rem;
-      height:0.78rem;
-      background-size:100%;
+    .swiper-button-next {
+      background-image: url(./assets/icon_right.png) !important;
+      width: 0.4rem;
+      height: 0.78rem;
+      background-size: 100%;
     }
-    .swiper-button-prev:focus, .swiper-button-next:focus{
+    .swiper-button-prev:focus,
+    .swiper-button-next:focus {
       outline: none;
     }
   }
 }
-
 </style>
