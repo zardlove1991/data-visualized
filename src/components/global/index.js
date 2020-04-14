@@ -106,6 +106,7 @@ export const common01componentHotSpots = getComponent('common01/hotSpots') // �
 export const common01componentAdvertisingAlliance = getComponent('common01/advertisingAlliance') // 客户分布
 export const common01componentMengDian = getComponent('common01/mengDian') // 蒙点号
 export const common01componentTv = getComponent('common01/tv') // tv
+export const common01componentTv02 = getComponent('common01/tv02') // tv2
 export const common01componentApprank = getComponent('common01/apprank') // app排行
 export const common01componentLiveRank = getComponent('common01/liveRank') // 直播排行
 export const common01componentContentEffect = getComponent('common01/contentEffect') // 作品影响力
