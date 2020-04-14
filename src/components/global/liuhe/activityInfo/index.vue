@@ -11,18 +11,30 @@
           @click="getDetail(v)"
           :key="k"
         >
-          <div class="type-area sys-flex sys-flex-center">
-            <img v-if="k === 0" src="./assets/new.png" />
-            <img v-if="k === 1" src="./assets/icon_hot.png" />
+          <!--  -->
+          <div class="list-text overhidden common01-ft38 flex-one">
+            <div class="flex">
+              <div class="type-area sys-flex sys-flex-center">
+                <img v-if="k === 0" src="./assets/new.png" />
+                <img v-if="k === 1" src="./assets/icon_hot.png" />
+              </div>
+              <div :class="k<2?'title-div haveico':'title-div'">
+                <p>{{ v.title }}</p>
+              </div>
+            </div>
           </div>
-          <div class="list-text overhidden common01-ft38 flex-one">{{ v.title }}</div>
-          <div class="list-read flex flex-center">
-            <img class="img-icon" src="@/assets/common/reader.png" />
-            <span class="common01-ft32">{{ v.click_num }}</span>
-          </div>
-          <div class="list-time flex flex-center">
-            <img class="img-icon" src="@/assets/common/time.png" />
-            <span class="common01-ft32">{{ v.showTime }}</span>
+          <!--  -->
+          <div class="right-part">
+            <div class="flex">
+              <div class="list-read flex flex-center">
+                <img class="img-icon" src="@/assets/common/reader.png" />
+                <span class="common01-ft32 click-span">{{ v.click_num }}</span>
+              </div>
+              <div class="list-time flex flex-center">
+                <img class="img-icon" src="@/assets/common/time.png" />
+                <span class="common01-ft32">{{ v.showTime }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -305,9 +317,29 @@ export default {
         margin-right: 0.2rem;
       }
     }
+    .title-div {
+      width: 100%;
+      &.haveico {
+        width: calc(100% - 1.06rem);
+      }
+      > p {
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+      }
+    }
+    .right-part {
+      width: 5.4rem;
+    }
     .list-read {
-      margin: 0 0.8rem 0 0.65rem;
+      margin: 0 0.3rem 0 0.45rem;
       font-size: 0.32rem;
+      .click-span {
+        display: inline-block;
+        width: 1.2rem;
+      }
       .img-icon {
         width: 0.42rem;
         height: 0.3rem;
