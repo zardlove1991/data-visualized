@@ -3,7 +3,7 @@
     <div class="newproject-wrap common01-border">
       <div class="common01-title">{{viewAttr.header || '选题展示'}}</div>
       <div class="select-content">
-        <el-select v-model="value" placeholder="请选择" @change="changeSort">
+        <el-select v-model="value" placeholder="全部" @change="changeSort">
           <el-option
             v-for="item in sortList"
             :key="item.id"
@@ -52,6 +52,10 @@ export default {
       getWorkCallSubjectSort().then(res => {
         if (res && res.data && res.data.result) {
           this.sortList = res.data.result
+          this.sortList.unshift({
+            id: '',
+            sort: '全部'
+          })
           this.changeSort(this.sortList[0].id)
         }
       })
