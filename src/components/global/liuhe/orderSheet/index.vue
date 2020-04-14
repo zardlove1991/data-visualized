@@ -1,64 +1,73 @@
 <template>
-  <div class="common-orderSheet ">
+  <div class="common-orderSheet">
     <div class="orderSheet-page common01-border">
       <div v-if="!showDetail">
-      	<div class="today-weather sys-flex">
-      		<div class="day">{{day}}</div>
-      		<div class="weekday">{{weekday}}</div>
-              <div class="temp">{{temp}}</div>
-              <div class="icon">
-                  <img :src="icon" />
-              </div>
+        <div class="today-weather sys-flex">
+          <div class="day">{{day}}</div>
+          <div class="weekday">{{weekday}}</div>
+          <div class="temp">{{temp}}</div>
+          <div class="icon">
+            <img :src="icon" />
           </div>
+        </div>
         <div class="title">盐湖区新时代文明实践中心</div>
-  	    <div class="order-list sys-flex">
-  	      <div class="type-list">
-  	        <div class="type-item" @click="changType('latest')" :class="{'check-item': type === 'latest'}">
-  	          <div class="new-img order-img">
-  	            <img src="./assets/new_pre.png" v-if="type === 'latest'">
-  	            <img src="./assets/new.png" v-else>
-  	          </div>
-  	          <div class="type-name">
-  	            最新点单
-  	          </div>
-  	        </div>
-  	        <div class="type-item" @click="changType('ongoing')"  :class="{'check-item': type === 'ongoing'}">
-  	          <div class="order-img">
-  	            <img src="./assets/process_pre.png" v-if="type === 'ongoing'">
-  	            <img src="./assets/process.png" v-else>
-  	          </div>
-  	          <div class="type-name">
-  	            点单进程
-  	          </div>
-  	        </div>
-  	        <div class="type-item" @click="changType('complete')"  :class="{'check-item': type === 'complete'}">
-  	          <div class="order-img">
-  	            <img src="./assets/complete_pre.png" v-if="type === 'complete'">
-  	            <img src="./assets/complete.png" v-else>
-  	          </div>
-  	          <div class="type-name">
-  	            完成点单
-  	          </div>
-  	        </div>
-  	      </div>
-  	      <div class="list-content sys-flex-one">
-  	        <div class="list-item sys-flex animated"
-            @click="changeDetail(v)" 
-            :class="{'flipInX' : v.title}"
-            :style="{'animation-delay' : k/2 + 's'}" v-for="(v, k) in dataList"
-            :key="k">
-  	        	<div class="list-country">【{{v.type.title}}】</div>
-  	        	<div class="list-title txt-overflow sys-flex-one">{{v.title}}</div>
-  	        	<div class="list-time">{{v.date}}</div>
-  	        </div>
-  	      </div>
-  	    </div>
+        <div class="order-list sys-flex">
+          <div class="type-list">
+            <div
+              class="type-item"
+              @click="changType('latest')"
+              :class="{'check-item': type === 'latest'}"
+            >
+              <div class="new-img order-img">
+                <img src="./assets/new_pre.png" v-if="type === 'latest'" />
+                <img src="./assets/new.png" v-else />
+              </div>
+              <div class="type-name">最新点单</div>
+            </div>
+            <div
+              class="type-item"
+              @click="changType('ongoing')"
+              :class="{'check-item': type === 'ongoing'}"
+            >
+              <div class="order-img">
+                <img src="./assets/process_pre.png" v-if="type === 'ongoing'" />
+                <img src="./assets/process.png" v-else />
+              </div>
+              <div class="type-name">点单进程</div>
+            </div>
+            <div
+              class="type-item"
+              @click="changType('complete')"
+              :class="{'check-item': type === 'complete'}"
+            >
+              <div class="order-img">
+                <img src="./assets/complete_pre.png" v-if="type === 'complete'" />
+                <img src="./assets/complete.png" v-else />
+              </div>
+              <div class="type-name">完成点单</div>
+            </div>
+          </div>
+          <div class="list-content sys-flex-one">
+            <div
+              class="list-item sys-flex animated"
+              @click="changeDetail(v)"
+              :class="{'flipInX' : v.title}"
+              :style="{'animation-delay' : k/2 + 's'}"
+              v-for="(v, k) in dataList"
+              :key="k"
+            >
+              <div class="list-country">【{{v.type.title}}】</div>
+              <div class="list-title txt-overflow sys-flex-one">{{v.title}}</div>
+              <div class="list-time">{{v.date}}</div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="content-detail" v-if="showDetail">
         <div class="back-line">
           <div @click="backList()" class="back">
             <div class="back-img">
-              <img src="./assets/icon_back.png">
+              <img src="./assets/icon_back.png" />
             </div>
             <span class="back-text">返回</span>
           </div>
@@ -66,11 +75,9 @@
         <div class="detail-info">
           <div class="title-line sys-flex">
             <div class="status-img">
-              <img src="./assets/doing.png">
+              <img src="./assets/doing.png" />
             </div>
-            <div class="detail-title txt-overflow sys-flex-one">
-              {{detail.title}}
-            </div>
+            <div class="detail-title txt-overflow sys-flex-one">{{detail.title}}</div>
           </div>
           <div class="detail-content sys-flex">
             <div class="help-info">
@@ -81,9 +88,7 @@
                 <div class="help-text">求助信息：</div>
               </div>
               <div class="help-brief">
-                <div>
-                  {{detail.brief}}
-                </div>
+                <div>{{detail.brief}}</div>
               </div>
             </div>
             <div class="process-info sys-flex-one">
@@ -135,15 +140,27 @@
                   <div class="status-name">待沟通</div>
                 </div>
                 <!-- 4 已通过 -->
-                <div class="process-item" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2">
+                <div
+                  class="process-item"
+                  v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2"
+                >
                   <div class="status-name">已通过</div>
                 </div>
-                <div :class="detail.volunteer&&detail.organize?'process-item':'process-item during'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2">
+                <div
+                  :class="detail.volunteer&&detail.organize?'process-item':'process-item during'"
+                  v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2"
+                >
                   <div class="status-name">{{detail.volunteer?'已接单':detail.organize?'已受理':''}}</div>
                   <div class="process-org" v-if="detail.organize">{{detail.organize.name}}已受理</div>
-                  <div class="process-member sys-flex" v-if="detail.volunteer">志愿者：<div class="member-name">{{detail.volunteer.member_name}}</div> 已接单</div>
+                  <div class="process-member sys-flex" v-if="detail.volunteer">
+                    志愿者：
+                    <div class="member-name">{{detail.volunteer.member_name}}</div>已接单
+                  </div>
                 </div>
-                <div :class="detail.status === 8 ? 'process-item during':detail.status === 10 ? 'process-item':'process-item waiting'" v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2">
+                <div
+                  :class="detail.status === 8 ? 'process-item during':detail.status === 10 ? 'process-item':'process-item waiting'"
+                  v-if="detail.status !== 1 && detail.status !== 3 && detail.status !== 4 && detail.status !== 2"
+                >
                   <div class="status-name">{{detail.status === 10 ?detail.status_name:'待沟通'}}</div>
                 </div>
               </div>
@@ -173,14 +190,15 @@ export default {
       isPaging: false,
       detail: {},
       showDetail: false,
-      frequency: 10000
+      frequency: 10000,
+      firstLoad: true
     }
   },
-  created () {
-    this.getWeather()
-    this.getList()
-    this.getToday('')
-  },
+  // created () {
+  //   this.getWeather()
+  //   this.getList()
+  //   this.getToday('')
+  // },
   mounted () {
     setInterval(() => {
       this.getWeather()
@@ -246,13 +264,19 @@ export default {
             if (this.page !== 1) {
               this.page = 1
               this.getList()
+            } else {
+              // 首次进入“最新点单”没有数据，进入“完成点单”
+              if (this.firstLoad) {
+                this.firstLoad = false
+                this.changType('complete')
+              }
             }
           }
         }
       })
     },
     getWeather () {
-      let city = '南京'
+      let city = '运城'
       getJiangningWeather(city).then(res => {
         if (res && res.data && res.data.result && res.data.result.basic) {
           let data = res.data.result.basic
@@ -278,36 +302,36 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/styles/index.scss';
-@import '../style/index.scss';
-.common-orderSheet{
+@import "~@/styles/index.scss";
+@import "../style/index.scss";
+.common-orderSheet {
   width: 100%;
   height: 100%;
-  background-color:#0a1742;
+  background-color: #0a1742;
   padding: pxrem(40px);
-  *{
-    font-family:'PingFang SC';
+  * {
+    font-family: "PingFang SC";
   }
-  .orderSheet-page{
+  .orderSheet-page {
     padding: 0.57rem 0.6rem 0.76rem 0.6rem;
-    img{
-      width:100%;
-      height:100%;
+    img {
+      width: 100%;
+      height: 100%;
     }
-    .title{
-      color:#00FFFA;
-      font-size:1.2rem;
-      text-align:center;
-      font-weight:bold;
+    .title {
+      color: #00fffa;
+      font-size: 1.2rem;
+      text-align: center;
+      font-weight: bold;
       letter-spacing: 0.1rem;
-      line-height:1.2rem;
-      margin-top:0.8rem;
-      margin-bottom:0.6rem;
+      line-height: 1.2rem;
+      margin-top: 0.8rem;
+      margin-bottom: 0.6rem;
     }
     .today-weather {
       font-size: 0.35rem;
-      line-height:0.35rem;
-      align-items:center;
+      line-height: 0.35rem;
+      align-items: center;
       color: #fff;
       .icon {
         width: 0.47rem;
@@ -318,238 +342,239 @@ export default {
           object-fit: cover;
         }
       }
-      .weekday{
+      .weekday {
         margin-left: 0.15rem;
         margin-right: 0.2rem;
       }
     }
-    .type-list{
-      margin-right:0.35rem;
+    .type-list {
+      margin-right: 0.35rem;
     }
-    .type-item{
-      width:1.5rem;
-      height:1.5rem;
-      padding-top:0.24rem;
-      text-align:center;
-      margin-bottom:0.4rem;
-      background:url('./assets/orderbox.png') no-repeat center;
+    .type-item {
+      width: 1.5rem;
+      height: 1.5rem;
+      padding-top: 0.24rem;
+      text-align: center;
+      margin-bottom: 0.4rem;
+      background: url("./assets/orderbox.png") no-repeat center;
       background-size: 100% 100%;
     }
-    .type-name{
-      font-size:0.28rem;
-      line-height:0.28rem;
-      margin-top:0.18rem;
-      color:rgba(252,255,255,0.6);
+    .type-name {
+      font-size: 0.28rem;
+      line-height: 0.28rem;
+      margin-top: 0.18rem;
+      color: rgba(252, 255, 255, 0.6);
     }
-    .check-item{
-      background:url('./assets/orderbox_pre.png') no-repeat center;
+    .check-item {
+      background: url("./assets/orderbox_pre.png") no-repeat center;
       background-size: 100% 100%;
-      .type-name{
-        color:rgba(252,255,255,1);
+      .type-name {
+        color: rgba(252, 255, 255, 1);
       }
     }
-    .order-img{
-      width:0.6rem;
-      height:0.6rem;
-      display:inline-block;
+    .order-img {
+      width: 0.6rem;
+      height: 0.6rem;
+      display: inline-block;
     }
-    .process-img{
-      background:url('./assets/process.png') no-repeat 100%;
+    .process-img {
+      background: url("./assets/process.png") no-repeat 100%;
     }
-    .complete-img{
-      background:url('./assets/complete.png') no-repeat 100%;
+    .complete-img {
+      background: url("./assets/complete.png") no-repeat 100%;
     }
-    .list-item{
-      height:1.45rem;
-      align-items:center;
-      color:#fff;
-      padding-left:0.55rem;
-      padding-right:0.6rem;
+    .list-item {
+      height: 1.45rem;
+      align-items: center;
+      color: #fff;
+      padding-left: 0.55rem;
+      padding-right: 0.6rem;
     }
-    .list-item:nth-child(odd){
-      background-color:rgba(13,99,223,0.2);
+    .list-item:nth-child(odd) {
+      background-color: rgba(13, 99, 223, 0.2);
     }
-    .list-item:nth-child(even){
-      background-color:rgba(13,99,223,0.1);
+    .list-item:nth-child(even) {
+      background-color: rgba(13, 99, 223, 0.1);
     }
-    .list-country{
-      font-size:0.38rem;
-      color:#00D2FF;
-      margin-right:0.1rem;
+    .list-country {
+      font-size: 0.38rem;
+      color: #00d2ff;
+      margin-right: 0.1rem;
     }
-    .list-title{
-      font-size:0.38rem;
-      text-align:left;
+    .list-title {
+      font-size: 0.38rem;
+      text-align: left;
     }
-    .list-time{
-      font-size:0.32rem;
-      margin-left:0.72rem;
+    .list-time {
+      font-size: 0.32rem;
+      margin-left: 0.72rem;
     }
-    .content-detail{
-      text-align:left;
+    .content-detail {
+      text-align: left;
     }
-    .back-line{
-      margin-bottom:0.45rem;
+    .back-line {
+      margin-bottom: 0.45rem;
     }
-    .back{
-      display:inline-block;
+    .back {
+      display: inline-block;
       font-weight: bold;
     }
-    .back-text{
-      font-size:0.34rem;
-      color:#00FFEA;
+    .back-text {
+      font-size: 0.34rem;
+      color: #00ffea;
     }
-    .back-img{
-      display:inline-block;
-      width:0.36rem;
-      height:0.28rem;
-      margin-right:0.2rem;
+    .back-img {
+      display: inline-block;
+      width: 0.36rem;
+      height: 0.28rem;
+      margin-right: 0.2rem;
     }
-    .detail-title{
-      font-size:0.52rem;
-      line-height:0.6rem;
-      color:#fff;
+    .detail-title {
+      font-size: 0.52rem;
+      line-height: 0.6rem;
+      color: #fff;
     }
-    .title-line{
-      padding-bottom:0.46rem;
-      border-bottom:1px solid #3073D4;
-      width:100%;
-      margin-bottom:0.64rem;
+    .title-line {
+      padding-bottom: 0.46rem;
+      border-bottom: 1px solid #3073d4;
+      width: 100%;
+      margin-bottom: 0.64rem;
     }
-    .status-img{
-      width:1.54rem;
-      height:0.6rem;
-      display:inline-block;
-      margin-right:0.22rem;
+    .status-img {
+      width: 1.54rem;
+      height: 0.6rem;
+      display: inline-block;
+      margin-right: 0.22rem;
     }
-    .help-info{
-      margin-right:0.8rem;
+    .help-info {
+      margin-right: 0.8rem;
     }
-    .help-title{
-      align-items:center;
-      margin-bottom:0.23rem;
+    .help-title {
+      align-items: center;
+      margin-bottom: 0.23rem;
     }
-    .help-img{
-      width:0.8rem;
-      height:0.28rem;
-      margin-right:0.23rem;
-      img{
+    .help-img {
+      width: 0.8rem;
+      height: 0.28rem;
+      margin-right: 0.23rem;
+      img {
         vertical-align: top;
       }
     }
-    .help-text{
-      font-size:0.42rem;
-      color:#fff;
+    .help-text {
+      font-size: 0.42rem;
+      color: #fff;
     }
-    .help-brief{
-      width:5.36rem;
-      height:5.1rem;
-      overflow-y:scroll;
-      padding:0.46rem 0.55rem 0.2rem 0.5rem;
-      background-color:rgba(13,99,223,0.15);
-      color:#fff;
-      font-size:0.36rem;
-      line-height:0.6rem;
+    .help-brief {
+      width: 5.36rem;
+      height: 5.1rem;
+      overflow-y: scroll;
+      padding: 0.46rem 0.55rem 0.2rem 0.5rem;
+      background-color: rgba(13, 99, 223, 0.15);
+      color: #fff;
+      font-size: 0.36rem;
+      line-height: 0.6rem;
       word-break: break-word;
     }
-    .process-brief{
-      width:100%;
-      height:5.1rem;
-      background-color:rgba(13,99,223,0.15);
-      overflow-y:scroll;
-      padding:0.5rem;
+    .process-brief {
+      width: 100%;
+      height: 5.1rem;
+      background-color: rgba(13, 99, 223, 0.15);
+      overflow-y: scroll;
+      padding: 0.5rem;
     }
-    .status-name{
-      font-size:0.42rem;
-      color:#fff;
-      padding-left:0.3rem;
+    .status-name {
+      font-size: 0.42rem;
+      color: #fff;
+      padding-left: 0.3rem;
     }
-    .process-item{
-      padding-bottom:0.74rem;
-      border-left:0.03rem solid #4DEFE8;
-      line-height:0.42rem;
-      position:relative;
+    .process-item {
+      padding-bottom: 0.74rem;
+      border-left: 0.03rem solid #4defe8;
+      line-height: 0.42rem;
+      position: relative;
     }
-    .process-item:before{
-      content: '';
-      width:0.42rem;
-      height:0.42rem;
-      background:url('./assets/icon_finish.png') no-repeat;
-      position:absolute;
-      left:-0.21rem;
-      top:-0.04rem;
-      background-color:rgba(13,99,223,0.15);
+    .process-item:before {
+      content: "";
+      width: 0.42rem;
+      height: 0.42rem;
+      background: url("./assets/icon_finish.png") no-repeat;
+      position: absolute;
+      left: -0.21rem;
+      top: -0.04rem;
+      background-color: rgba(13, 99, 223, 0.15);
       background-position: center;
       background-size: 100% 100%;
     }
-    .process-item.during:before{
-      content: '';
-      width:0.42rem;
-      height:0.42rem;
-      background:url('./assets/icon_during.png') no-repeat;
-      position:absolute;
-      left:-0.21rem;
-      top:-0.04rem;
-      background-color:rgba(13,99,223,0.15);
+    .process-item.during:before {
+      content: "";
+      width: 0.42rem;
+      height: 0.42rem;
+      background: url("./assets/icon_during.png") no-repeat;
+      position: absolute;
+      left: -0.21rem;
+      top: -0.04rem;
+      background-color: rgba(13, 99, 223, 0.15);
       background-position: center;
       background-size: 100% 100%;
     }
-    .process-item.waiting:before{
-      content: '';
-      width:0.42rem;
-      height:0.42rem;
-      background:url('./assets/icon_waiting.png') no-repeat;
-      position:absolute;
-      left:-0.21rem;
-      top:-0.04rem;
-      background-color:rgba(13,99,223,0.15);
+    .process-item.waiting:before {
+      content: "";
+      width: 0.42rem;
+      height: 0.42rem;
+      background: url("./assets/icon_waiting.png") no-repeat;
+      position: absolute;
+      left: -0.21rem;
+      top: -0.04rem;
+      background-color: rgba(13, 99, 223, 0.15);
       background-position: center;
       background-size: 100% 100%;
     }
-    .process-item.back:before{
-      content: '';
-      width:0.42rem;
-      height:0.42rem;
-      background:url('./assets/icon_refuse.png') no-repeat;
-      position:absolute;
-      left:-0.21rem;
-      top:-0.04rem;
-      background-color:rgba(13,99,223,0.15);
+    .process-item.back:before {
+      content: "";
+      width: 0.42rem;
+      height: 0.42rem;
+      background: url("./assets/icon_refuse.png") no-repeat;
+      position: absolute;
+      left: -0.21rem;
+      top: -0.04rem;
+      background-color: rgba(13, 99, 223, 0.15);
       background-position: center;
       background-size: 100% 100%;
     }
     .process-item:nth-last-child(2) {
-      border-image:linear-gradient(to bottom,#4DFFE8,#FFE84B) 1 10;
+      border-image: linear-gradient(to bottom, #4dffe8, #ffe84b) 1 10;
       border-right: 0;
       border-top: 0;
       border-bottom: 0;
     }
-    .process-item.during, .process-item.waiting, .process-item.back{
+    .process-item.during,
+    .process-item.waiting,
+    .process-item.back {
       border-image: none;
       border-left: 0.03rem solid #738cbe;
     }
-    .process-item:last-child{
-      border-left:0;
+    .process-item:last-child {
+      border-left: 0;
     }
-    .process-org{
-      color:#fff;
-      font-size:0.34rem;
-      line-height:0.34rem;
-      margin-bottom:0.3rem;
-      margin-top:0.27rem;
-      padding-left:0.25rem;
+    .process-org {
+      color: #fff;
+      font-size: 0.34rem;
+      line-height: 0.34rem;
+      margin-bottom: 0.3rem;
+      margin-top: 0.27rem;
+      padding-left: 0.25rem;
     }
-    .process-member{
-      color:#fff;
-      font-size:0.34rem;
-      padding-left:0.25rem;
-      line-height:0.34rem;
+    .process-member {
+      color: #fff;
+      font-size: 0.34rem;
+      padding-left: 0.25rem;
+      line-height: 0.34rem;
     }
-    .member-name{
-      color:#0BFCFF;
+    .member-name {
+      color: #0bfcff;
     }
   }
 }
-
 </style>
 
