@@ -194,11 +194,11 @@ export default {
       firstLoad: true
     }
   },
-  // created () {
-  //   this.getWeather()
-  //   this.getList()
-  //   this.getToday('')
-  // },
+  created () {
+    this.getWeather()
+    this.getList()
+    this.getToday('')
+  },
   mounted () {
     setInterval(() => {
       this.getWeather()
