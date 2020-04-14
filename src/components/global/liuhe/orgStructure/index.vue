@@ -426,7 +426,7 @@ export default {
       .name.left-top-info {
         // width: pxrem(294px);
         top: pxrem(230px);
-        left: pxrem(-30px);
+        right: pxrem(1300px);
       }
       .name.left-bottom-info {
         // width: pxrem(374px);
