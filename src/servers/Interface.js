@@ -107,7 +107,8 @@ export const getM2OWorkDepartRank = (currentViewId) => createAPI(`${httpsbaseUrl
 export const getM2OLiveList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OLiveList?view_id=${currentViewId}`)
 /* 通用组件01用户热力图 */
 export const getM2OUserHot = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OUserHot?view_id=${currentViewId}`)
-
+/* 通用组件01用户热力图 获取省份和城市排名 */
+export const getM2OCityList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OUserCity?view_id=${currentViewId}`)
 // 江宁思想与实践
 export const getThoughtPractice = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getThoughtPractice`)
 // 江宁新华社

@@ -69,6 +69,9 @@ export default {
     call
   },
   created () {
+    if (this.$router.options.base === 'ZWFlOTE4Mm/') {
+      this.viewAttr.titletext = '盐城广电全媒体采编指挥中心'
+    }
     getDataConfig().then(res => {
       this.center = { lng: +res.lng, lat: +res.lat }
     })

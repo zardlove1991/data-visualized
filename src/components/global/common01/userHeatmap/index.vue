@@ -11,18 +11,18 @@
         <!-- 用户统计汇总 -->
         <div class="user-info">
           <div class="user-label flex flex-center"><div class="user-icon"></div>省内用户TOP5</div>
-          <div class="user-item flex flex-center" v-for="(item, index) in provinceList" :key="index">
+          <div class="user-item flex flex-center" v-for="(item, index) in cityList" :key="index">
             <span class="name">{{item.name}}</span>
             <div class="flex flex-center flex-one">
               <div class="progress-bar" :style="{width: Math.ceil((item.count / total) * 100) + '%'}"></div>
-              <span class="name">{{item.count}}</span>
+              <span class="name">{{(item.count / total * 100).toFixed(1)}}%</span>
             </div>
           </div>
           <div class="user-label flex flex-center"><div class="user-icon"></div>国内前三占比</div>
           <div class="flex flex-center flex-justify-between">
-            <div v-for="(item, index) in cityList" class="pie-chart-city">
+            <div v-for="(item, index) in provinceList" :key="index" class="pie-chart-city">
               <chart v-if="item.opt" :options="item.opt" :autoResize="true"></chart>
-              <div class="label-percent">{{Math.ceil(item.value / cityTotal * 100)}}%</div>
+              <div class="label-percent">{{(item.count / total * 100).toFixed(1)}}%</div>
               <div class="label-name">{{item.name}}</div>
             </div>
           </div>
@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import { getM2OUserHot } from '@/servers/interface'
+import { getM2OUserHot, getM2OCityList } from '@/servers/interface'
 import echarts from 'echarts'
 import 'echarts/extension/bmap/bmap'
 import 'echarts/map/js/china.js'
@@ -47,34 +47,10 @@ export default {
   data () {
     return {
       frequency: 15000,
-      total: '',
-      provinceList: [{
-        count: 32560,
-        name: '盐城'
-      }, {
-        count: 20110,
-        name: '徐州'
-      }, {
-        count: 13017,
-        name: '无锡'
-      }, {
-        count: 9356,
-        name: '苏州'
-      }, {
-        count: 7104,
-        name: '淮安'
-      }],
-      cityTotal: 43,
-      cityList: [{
-        name: '江苏',
-        value: 20
-      }, {
-        name: '上海',
-        value: 13
-      }, {
-        name: '浙江',
-        value: 10
-      }],
+      total: 0,
+      cityTotal: 0,
+      cityList: [],
+      provinceList: [],
       pieOptions: '',
       colors: ['#F35467', '#E4BD53', '#36E892'],
       myChart: ''
@@ -87,21 +63,42 @@ export default {
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getUserHeat()
+        this.getCity()
         // 半天更新一次
         this.time = setInterval(() => {
           this.getUserHeat()
+          this.getCity()
         }, 43200000)
       })
     })
   },
   created () {
     this.initCharts()
-    this.initData()
   },
   methods: {
     getUserHeat () {
       getM2OUserHot().then(res => {
         this.initMap(res.data.result)
+      })
+    },
+    getCity () {
+      getM2OCityList().then(res => {
+        if (res.data.result.length) {
+          const { provinceList, cityList, count } = res.data.result[0]
+          this.provinceList = provinceList
+          this.cityList = cityList
+          this.cityTotal = provinceList[0].count
+          this.total = count
+          this.provinceList.forEach((item, index) => {
+            let opt = JSON.parse(JSON.stringify(this.pieOptions))
+            opt.series[0].data[1].itemStyle.normal.color = this.colors[index]
+            let data = opt.series[0].data
+            data[0].value = this.total// 没数据默认 0%
+            data[1].value = item.count * 10
+            data[1].name = item.name
+            item.opt = opt
+          })
+        }
       })
     },
     initMap (data) {
@@ -192,30 +189,6 @@ export default {
           }
         ]
       }
-    },
-    initData () {
-      this.cityTotal = 0
-      this.cityList.forEach(item => {
-        this.cityTotal += item.value
-      })
-      if (this.cityTotal === 0) {
-        this.cityTotal = 1
-      }
-      this.cityList.forEach((item, index) => {
-        let opt = JSON.parse(JSON.stringify(this.pieOptions))
-        opt.series[0].data[1].itemStyle.normal.color = this.colors[index]
-        let data = opt.series[0].data
-        data[0].value = this.cityTotal // 没数据默认 0%
-        data[1].value = item.value
-        data[1].name = item.name
-        item.opt = opt
-      })
-
-      // 省内top5
-      this.total = 0
-      this.provinceList.forEach(item => {
-        this.total += item.count
-      })
     }
   }
 }
