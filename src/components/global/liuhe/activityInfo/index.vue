@@ -338,7 +338,7 @@ export default {
       font-size: 0.32rem;
       .click-span {
         display: inline-block;
-        width: 1.2rem;
+        width: 1.1rem;
       }
       .img-icon {
         width: 0.42rem;

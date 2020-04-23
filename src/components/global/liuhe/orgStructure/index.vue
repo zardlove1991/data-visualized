@@ -20,7 +20,7 @@
         </div>
         <div
           v-if="orgIndexData.topInfo.name"
-          class="name common01-ft36 animated flipInX top-info"
+          class="name common01-ft36 animated flipInX left-bottom-info"
           @click="showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)"
         >{{orgIndexData.topInfo.name}}</div>
         <div
@@ -30,7 +30,7 @@
         >{{orgIndexData.leftTopInfo.name}}</div>
         <div
           v-if="orgIndexData.leftBottomInfo.name"
-          class="name common01-ft36 animated flipInX left-bottom-info"
+          class="name common01-ft36 animated flipInX top-info"
           @click="showChildDetail(orgIndexData.leftBottomInfo.id, orgIndexData.leftBottomInfo.name)"
         >{{orgIndexData.leftBottomInfo.name}}</div>
         <div
@@ -45,7 +45,7 @@
         >{{orgIndexData.rightBottomInfo.name}}</div>
 
         <div
-          class="number top-info"
+          class="number left-bottom-info"
           @click="showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)"
         >{{orgIndexData.topInfo.number}}</div>
         <div
@@ -53,7 +53,7 @@
           @click="showChildDetail(orgIndexData.leftTopInfo.id, orgIndexData.leftTopInfo.name)"
         >{{orgIndexData.leftTopInfo.number}}</div>
         <div
-          class="number left-bottom-info"
+          class="number top-info"
           @click="showChildDetail(orgIndexData.leftBottomInfo.id, orgIndexData.leftBottomInfo.name)"
         >{{orgIndexData.leftBottomInfo.number}}</div>
         <div
@@ -356,9 +356,10 @@ export default {
       width: pxrem(1678px);
       height: pxrem(810px);
       bottom: pxrem(35px);
-      background: url("./assets/bg_group_new2.png") no-repeat center;
+      // background: url("./assets/bg_group_new2.png") no-repeat center;
+      background: url("./assets/bg_group_new3.png") no-repeat center;
       background-size: 100%;
-      left: 50%;
+      left: 51%;
       -webkit-transform: translateX(-50%);
       -moz-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
@@ -431,7 +432,8 @@ export default {
       .name.left-bottom-info {
         // width: pxrem(374px);
         bottom: pxrem(38px);
-        right: pxrem(1306px);
+        // right: pxrem(1306px);
+        left: pxrem(-60px);
       }
       .name.right-top-info {
         // width: pxrem(294px);
