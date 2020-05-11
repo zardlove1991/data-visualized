@@ -144,7 +144,7 @@ export const getPropagationForceData = (model) => createAPI(`${httpsbaseUrl}/Api
 
 // 杭州  选题上大屏
 export const getWorkCallSubjectSort = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectSort`)
-export const getWorkCallSubjectSortList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectList?sort_id=${id}`)
+export const getWorkCallSubjectSortList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallSubjectList?sort_id=${id}&count=100`)
 
 // 盐湖大屏
 // 文明排行

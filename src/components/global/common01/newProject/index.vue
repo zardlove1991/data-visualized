@@ -15,8 +15,8 @@
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="name overhidden common01-ft32">{{v.project_user_name}}</div>
-          <div class="sort-name common01-ft32">{{v.sort_name}}</div>
+          <div class="name overhidden common01-ft32">{{v.sort_name}}</div>
+          <div class="sort-name common01-ft32">融媒体中心</div>
         </div>
       </div>
     </div>
@@ -28,7 +28,6 @@ export default {
   name: 'newproject',
   data () {
     return {
-      page: 1,
       isPaging: true,
       frequency: 15000,
       maxPage: 3,
@@ -81,6 +80,9 @@ export default {
       right: pxrem(110px);
     }
     .wrap-content {
+      overflow: scroll;
+      height: pxrem(700px);
+      
       .item-list {
         margin-bottom: pxrem(90px);
         &:last-of-type {
