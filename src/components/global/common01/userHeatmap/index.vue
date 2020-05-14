@@ -73,15 +73,7 @@ export default {
       districtList: [],
       pieOptions: '',
       colors: ['#F35467', '#E4BD53', '#36E892'],
-      myChart: '',
-      map: '',
-      gradient: {
-        0.2: '#e803eb',
-        0.4: '#207cca',
-        0.6: '#31ff00',
-        0.8: '#f8ff00',
-        0.95: '#FF0000'
-      }
+      myChart: ''
     }
   },
   components: {
