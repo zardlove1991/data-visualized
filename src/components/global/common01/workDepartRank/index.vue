@@ -42,9 +42,9 @@ export default {
       getM2OWorkDepartRank(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           let dataList = res.data.result
-          if (dataList && dataList.length > 7) {
-            this.leftList = dataList.slice(0, 7)
-            this.rightList = dataList.slice(7)
+          if (dataList && dataList.length > 5) {
+            this.leftList = dataList.slice(0, 5)
+            this.rightList = dataList.slice(5)
           } else {
             this.leftList = dataList
           }
@@ -86,7 +86,7 @@ export default {
         background: url("./assets/back.png") no-repeat center;
         background-size: 100%;
         padding: 0 pxrem(82px) 0 pxrem(38px);
-        margin-bottom: pxrem(14px);
+        margin-bottom: pxrem(70px);
         .index {
           width: pxrem(60px);
           height: pxrem(60px);
