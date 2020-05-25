@@ -6,18 +6,37 @@
         <div class="bg"></div>
         <!-- 热力图 -->
         <div class="flex-one">
-          <div id="my-map" class="heat-map flex-one"></div>
+          <div  id="my-map" class="heat-map flex-one">
+          </div>
         </div>
         <!-- 用户统计汇总 -->
         <div class="user-info">
-          <div class="user-label flex flex-center"><div class="user-icon"></div>省内用户TOP5</div>
-          <div class="user-item flex flex-center" v-for="(item, index) in cityList" :key="index">
-            <span class="name">{{item.name}}</span>
-            <div class="flex flex-center flex-one">
-              <div class="progress-bar" :style="{width: Math.ceil((item.count / total) * 100) + '%'}"></div>
-              <span class="name">{{(item.count / total * 100).toFixed(1)}}%</span>
+         <div class="user-label flex flex-center"><div class="user-icon"></div>本市用户排行</div>
+         <div class="flex flex-center">
+             <div class="user-item sys-vertical flex-center" v-for="(item, index) in districtList" :key="item.district">
+                <div class="user-rank">
+                    <span class="icon index common01-ft40" :class="{'one': index === 0, 'two': index === 1, 'three': index === 2, 'four':index > 2}">{{index + 1}}</span>
+                    <span class="name">{{item.district}}</span>
+                </div>
+                <div>
+                  <!-- <div class="progress-bar" :style="{width: Math.ceil((item.num / total) * 100) + '%'}"></div> -->
+                  <span class="name">{{(item.num / total * 100).toFixed(1)}}%</span>
+                </div>
             </div>
-          </div>
+         </div>
+          <div class="user-label flex flex-center"><div class="user-icon"></div>省内用户排行</div>
+          <div class="flex flex-center">
+             <div class="user-item sys-vertical flex-center" v-for="(item, index) in cityList.slice(0,3)" :key="index">
+                <div class="user-rank">
+                    <span class="icon index common01-ft40" :class="{'one': index === 0, 'two': index === 1, 'three': index === 2, 'four':index > 2}">{{index + 1}}</span>
+                    <span class="name">{{item.name}}市</span>
+                </div>
+                <div>
+                  <!-- <div class="progress-bar" :style="{width: Math.ceil((item.num / total) * 100) + '%'}"></div> -->
+                  <span class="name">{{(item.count / total * 100).toFixed(1)}}%</span>
+                </div>
+            </div>
+         </div>
           <div class="user-label flex flex-center"><div class="user-icon"></div>国内前三占比</div>
           <div class="flex flex-center flex-justify-between">
             <div v-for="(item, index) in provinceList" :key="index" class="pie-chart-city">
@@ -51,6 +70,7 @@ export default {
       cityTotal: 0,
       cityList: [],
       provinceList: [],
+      districtList: [],
       pieOptions: '',
       colors: ['#F35467', '#E4BD53', '#36E892'],
       myChart: ''
@@ -84,9 +104,10 @@ export default {
     getCity () {
       getM2OCityList().then(res => {
         if (res.data.result.length) {
-          const { provinceList, cityList, count } = res.data.result[0]
+          const { provinceList, cityList, districtList, count } = res.data.result[0]
           this.provinceList = provinceList
           this.cityList = cityList
+          this.districtList = districtList
           this.cityTotal = provinceList[0].count
           this.total = count
           this.provinceList.forEach((item, index) => {
@@ -117,7 +138,7 @@ export default {
         animation: false,
         bmap: {
           center: [120.169125, 33.335470],
-          zoom: 14,
+          zoom: 9,
           roam: true
         },
         visualMap: {
@@ -228,10 +249,38 @@ export default {
       padding: pxrem(30px) pxrem(40px) pxrem(40px);
       .user-item{
         margin: 0 0 pxrem(30px) 0;
+        width: 34%;
         .name{
-          display: block;
           font-size: pxrem(30px);
-          margin-right: pxrem(40px);
+          margin-right: pxrem(20px);
+        }
+        .icon {
+          display: inline-block;
+        }
+        .user-rank {
+          margin-bottom: pxrem(12px)
+        }
+        .index {
+          width: pxrem(30px);
+          height: pxrem(30px);
+          background: no-repeat center;
+          background-size: 100%;
+          line-height: pxrem(30px);
+          &.common01-ft40{
+            font-size: pxrem(30px) !important;
+          }
+          &.one {
+            background-image: url("../clickRank/assets/one.png");
+          }
+          &.two {
+            background-image: url("../clickRank/assets/two.png");
+          }
+          &.three {
+            background-image: url("../clickRank/assets/three.png");
+          }
+          &.four {
+            background-image: url("../clickRank/assets/four.png");
+          }
         }
       }
       .progress-bar{

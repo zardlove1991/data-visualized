@@ -1,7 +1,7 @@
 <template>
   <div class="common01-newproject">
     <div class="newproject-wrap common01-border">
-      <div class="common01-title">{{viewAttr.header || '选题展示'}}</div>
+      <div class="common01-title">{{viewAttr.header || '选题展示'}} <span class="time">{{getDate()}}</span>  </div>
       <div class="select-content">
         <el-select v-model="value" placeholder="全部" @change="changeSort">
           <el-option
@@ -15,8 +15,8 @@
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
-          <div class="name overhidden common01-ft32">{{v.project_user_name}}</div>
-          <div class="sort-name common01-ft32">{{v.sort_name}}</div>
+          <div class="name overhidden common01-ft32">{{v.sort_name}}</div>
+          <div class="sort-name common01-ft32">融媒体中心</div>
         </div>
       </div>
     </div>
@@ -28,7 +28,6 @@ export default {
   name: 'newproject',
   data () {
     return {
-      page: 1,
       isPaging: true,
       frequency: 15000,
       maxPage: 3,
@@ -59,7 +58,25 @@ export default {
           this.changeSort(this.sortList[0].id)
         }
       })
-    }
+    },
+    getDate(n) {
+ 
+				var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+  
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + " 年 " + month + " 月 " + strDate + " 日 ";
+        return currentdate;
+        
+			}
   }
 }
 </script>
@@ -71,8 +88,9 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .newproject-wrap {
-    padding: pxrem(250px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(250px) pxrem(96px) pxrem(45px) pxrem(78px);
     color: #fff;
+    overflow: hidden;
     .select-content {
       width: pxrem(200px);
       height: pxrem(30px);
@@ -81,8 +99,11 @@ export default {
       right: pxrem(110px);
     }
     .wrap-content {
+      overflow: scroll;
+      height: pxrem(900px);
+      
       .item-list {
-        margin-bottom: pxrem(90px);
+        margin-bottom: pxrem(60px);
         &:last-of-type {
           margin-bottom: 0;
         }
@@ -91,7 +112,7 @@ export default {
           width: 55%;
         }
         .name {
-          width: 10%;
+          width: 25%;
           margin-right: pxrem(80px);
         }
         .sort-name {

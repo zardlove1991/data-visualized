@@ -12,7 +12,7 @@
         </div>
         <div class="content-right" v-if="rightList && rightList[0]">
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
-            <div class="index common01-ft40" :class="{'one': k + 7 === 0, 'two': k + 7 === 1, 'three': k + 7 === 2, 'four':k + 7 > 2}">{{k + 8}}</div>
+            <div class="index common01-ft40" :class="{'one': k + 5 === 0, 'two': k + 5 === 1, 'three': k + 5 === 2, 'four':k + 5 > 2}">{{k + 6}}</div>
             <div class="title common01-ft40">{{v.name}}</div>
             <div class="num common01-ft36"><span class="common01-ft60">{{v.total}}</span>条</div>
           </div>
@@ -42,9 +42,9 @@ export default {
       getM2OWorkDepartRank(this.currentViewId).then(res => {
         if (!res.data.error_code) {
           let dataList = res.data.result
-          if (dataList && dataList.length > 7) {
-            this.leftList = dataList.slice(0, 7)
-            this.rightList = dataList.slice(7)
+          if (dataList && dataList.length > 5) {
+            this.leftList = dataList.slice(0, 5)
+            this.rightList = dataList.slice(5)
           } else {
             this.leftList = dataList
           }
@@ -86,7 +86,7 @@ export default {
         background: url("./assets/back.png") no-repeat center;
         background-size: 100%;
         padding: 0 pxrem(82px) 0 pxrem(38px);
-        margin-bottom: pxrem(14px);
+        margin-bottom: pxrem(70px);
         .index {
           width: pxrem(60px);
           height: pxrem(60px);
