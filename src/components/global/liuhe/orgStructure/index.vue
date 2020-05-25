@@ -163,7 +163,7 @@
         </div>
         <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
-            <div class="img-box">
+            <div class="img-box" @click="getSixPlatformInfo(item)">
               <img v-if="item.head_pic" :src="item.head_pic" alt />
               <img v-else src="./assets/icon_group.png" alt />
             </div>
@@ -178,7 +178,7 @@
 </template>
 
 <script>
-import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList } from '@/servers/interface'
+import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
@@ -213,6 +213,7 @@ export default {
           id: ''
         }
       },
+      dimensionalArr: [],
       memberIndexData: {
         leftMember: {
           title: '',
@@ -234,6 +235,24 @@ export default {
     this.getVolunteerMemberList()
   },
   methods: {
+    getSixPlatformInfo (item) {
+      if (this.detailTitle !== '六大平台') {
+        return false
+      }
+      getSixPlatformInfo(item.id).then(res => {
+        if (!res.data.error_code) {
+          let _result = res.data.result
+          if (_result) {
+            this.detailTitle = item.name
+            this.dimensionalArr.push({
+              name: item.name,
+              data: _result
+            })
+            this.detailInfo = _result
+          }
+        }
+      })
+    },
     //
     checkCanShow (num) {
       if (this.detailInfo && this.detailInfo.length > num) {
@@ -278,6 +297,10 @@ export default {
           if (_result) {
             this.detailTitle = name
             this.detailInfo = _result.data
+            this.dimensionalArr.push({
+              name: name,
+              data: _result.data
+            })
             this.showDetailPage = true
           }
         }
@@ -285,9 +308,16 @@ export default {
     },
     // 二级页面返回
     childDetailPageBack () {
-      this.showDetailPage = false
-      this.detailInfo = []
-      this.detailTitle = ''
+      if (this.dimensionalArr.length > 1) {
+        this.dimensionalArr = this.dimensionalArr.splice(0, 1)
+        this.detailInfo = this.dimensionalArr[0].data
+        this.detailTitle = this.dimensionalArr[0].name
+      } else {
+        this.showDetailPage = false
+        this.detailInfo = []
+        this.dimensionalArr = []
+        this.detailTitle = ''
+      }
     },
     // 成员名单
     getVolunteerMemberList () {
