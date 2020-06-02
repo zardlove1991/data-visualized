@@ -267,23 +267,28 @@ export default {
         if (!res.data.error_code) {
           let _result = res.data.result.organize_cate
           if (_result && _result.length > 0) {
+            this.orgIndexData.total = res.data.result.total
+            this.orgIndexData.topInfo = _result[3]
+            this.orgIndexData.leftTopInfo = _result[2]
+            this.orgIndexData.leftBottomInfo = _result[1]
+            this.orgIndexData.rightTopInfo = _result[0]
+            this.orgIndexData.rightBottomInfo = _result[4]
             _result.forEach(e => {
-              this.orgIndexData.total = res.data.result.total
-              if (/专业/.test(e.name)) {
-                this.orgIndexData.topInfo = e
-              }
-              if (/区直/.test(e.name)) {
-                this.orgIndexData.leftTopInfo = e
-              }
-              if (/六大/.test(e.name)) {
-                this.orgIndexData.leftBottomInfo = e
-              }
-              if (/乡镇/.test(e.name)) {
-                this.orgIndexData.rightTopInfo = e
-              }
-              if (/社会/.test(e.name)) {
-                this.orgIndexData.rightBottomInfo = e
-              }
+              // if (/专业/.test(e.name)) {
+              //   this.orgIndexData.topInfo = e
+              // }
+              // if (/区直/.test(e.name)) {
+              //   this.orgIndexData.leftTopInfo = e
+              // }
+              // if (/六大/.test(e.name)) {
+              //   this.orgIndexData.leftBottomInfo = e
+              // }
+              // if (/乡镇/.test(e.name)) {
+              //   this.orgIndexData.rightTopInfo = e
+              // }
+              // if (/社会/.test(e.name)) {
+              //   this.orgIndexData.rightBottomInfo = e
+              // }
             })
           }
         }
@@ -389,7 +394,7 @@ export default {
       // background: url("./assets/bg_group_new2.png") no-repeat center;
       background: url("./assets/bg_group_new3.png") no-repeat center;
       background-size: 100%;
-      left: 51%;
+      left: 52%;
       -webkit-transform: translateX(-50%);
       -moz-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
@@ -429,6 +434,7 @@ export default {
         letter-spacing: pxrem(2px);
         background: url("./assets/box_3.png") no-repeat center;
         background-size: 100% 100%;
+        white-space: nowrap;
       }
       .name::before {
         display: inline-block;
@@ -463,7 +469,7 @@ export default {
         // width: pxrem(374px);
         bottom: pxrem(38px);
         // right: pxrem(1306px);
-        left: pxrem(-60px);
+        right: pxrem(1260px);
       }
       .name.right-top-info {
         // width: pxrem(294px);

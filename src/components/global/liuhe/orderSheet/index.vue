@@ -10,7 +10,8 @@
             <img :src="icon" />
           </div>
         </div>
-        <div class="title">盐湖区新时代文明实践中心</div>
+        <!-- <div class="title">盐湖区新时代文明实践中心</div> -->
+        <div class="title">{{title}}</div>
         <div class="order-list sys-flex">
           <div class="type-list">
             <div
@@ -187,6 +188,7 @@ export default {
       weekday: '',
       count: 4,
       page: 1,
+      title: '',
       isPaging: false,
       detail: {},
       showDetail: false,
@@ -198,6 +200,7 @@ export default {
     this.getWeather()
     this.getList()
     this.getToday('')
+    this.setTitle()
   },
   mounted () {
     setInterval(() => {
@@ -207,6 +210,14 @@ export default {
     }, this.frequency)
   },
   methods: {
+    setTitle () {
+      if (/ZTk3ZjE1Ym/.test(location.href)) {
+        this.title = '盐湖区新时代文明实践中心'
+      }
+      if (/NWQ2NzNmNz/.test(location.href)) {
+        this.title = '金山区新时代文明实践中心'
+      }
+    },
     backList () {
       this.showDetail = false
       this.getList('')

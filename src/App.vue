@@ -15,6 +15,9 @@ export default {
       if (/ZTk3ZjE1Ym/.test(location.href)) {
         document.title = '盐湖区新时代文明实践中心'
       }
+      if (/NWQ2NzNmNz/.test(location.href)) {
+        document.title = '金山区新时代文明实践中心'
+      }
     }
   }
 }
