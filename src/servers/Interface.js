@@ -165,9 +165,8 @@ export const getActivityInfo = (page = 1, count = 4, status = 1) => createAPI(`$
 export const getActivityInfoDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublishDetail?id=${id}`)
 export const getSixPlatformInfo = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerSixPlatForms?id=${id}`)
 
-
 // 线索汇聚新闻列表
-export const getCloudNewsList = (page, count, keyword = '', source = '',days = 3) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?&page=${page}&count=${count}&k=${keyword}&source=${source}&latest_days=${days}`)
+export const getCloudNewsList = (page, count, keyword = '', source = '', days = 3) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?&page=${page}&count=${count}&k=${keyword}&source=${source}&latest_days=${days}`)
 // 线索汇聚新闻详情
 export const getCloudNewsDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsDetail?id=${id}`)
 // 线索汇聚热词

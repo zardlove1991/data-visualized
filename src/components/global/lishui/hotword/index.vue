@@ -57,7 +57,7 @@
   </div>
 </template>
 <script>
-import { getNewsList, getHotWordsList , getCloudNewsList , getCloudNewsDetail , getCloudHotword} from '@/servers/interface'
+import {getCloudNewsList, getCloudNewsDetail, getCloudHotword} from '@/servers/interface'
 import echarts from 'echarts'
 import 'echarts-wordcloud'
 export default {
@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       newsList: [],
-      modalNewsList:[],
+      modalNewsList: [],
       index: 0,
       id: null,
       proportion: 1,
@@ -74,10 +74,10 @@ export default {
       page: 1,
       count: 7,
       totalPage: 3,
-      isContent:false,
-      isList:false,
-      ifListContent:false,
-      contentInfo : {},
+      isContent: false,
+      isList: false,
+      ifListContent: false,
+      contentInfo: {}
     }
   },
   created () {
@@ -129,12 +129,12 @@ export default {
       }
       _this.myChart.setOption(_this.options)
       _this.myChart.on('click', function (params) {
-         _this.showList(params.data.name)
-      });
+        _this.showList(params.data.name)
+      })
     },
     getNewsList () {
-      getCloudNewsList(1,this.count,'','[3072709,3073249,3072828,3072624,3073309,47779,218]').then(res=>{
-        if(!res.data.error_code && res.data.result.data){
+      getCloudNewsList(1, this.count, '', '[3072709,3073249,3072828,3072624,3073309,47779,218]').then(res => {
+        if (!res.data.error_code && res.data.result.data) {
           this.newsList = res.data.result.data
           this.getWordsList('溧水')
         }
@@ -152,17 +152,17 @@ export default {
       } else {
         this.page++
       }
-      getCloudNewsList(this.page,this.count,'','[3072709,3073249,3072828,3072624,3073309,47779,218]').then(res=>{
-        if(!res.data.error_code && res.data.result.data){
+      getCloudNewsList(this.page, this.count, '', '[3072709,3073249,3072828,3072624,3073309,47779,218]').then(res => {
+        if (!res.data.error_code && res.data.result.data) {
           this.newsList = []
           setTimeout(() => {
             this.newsList = res.data.result.data
-          }, 100);
+          }, 100)
         }
       })
     },
     getWordsList (k) {
-      getCloudHotword(k).then(res=>{
+      getCloudHotword(k).then(res => {
         if (res.data.result.data && res.data.result.data[0]) {
           let newList = []
           let list = res.data.result.data
@@ -194,41 +194,41 @@ export default {
     //   }
     // },
     showContent (id) {
-      getCloudNewsDetail(id).then(res=>{
-        if(!res.data.error_code){
+      getCloudNewsDetail(id).then(res => {
+        if (!res.data.error_code) {
           this.contentInfo = res.data.result
-          setTimeout(()=>{
-              this.isContent = true;
-          },10)
+          setTimeout(() => {
+            this.isContent = true
+          }, 10)
         }
       })
     },
     hideContent () {
-      this.isContent = false;
+      this.isContent = false
     },
     // 打开新闻列表弹框
     showList (keyword) {
-      getCloudNewsList(1, 10, keyword, '', 7).then(res=>{
-        if(!res.data.error_code && res.data.result.data){
+      getCloudNewsList(1, 10, keyword, '', 7).then(res => {
+        if (!res.data.error_code && res.data.result.data) {
           this.modalNewsList = res.data.result.data
-          setTimeout(()=>{
-              this.isList = true;
-          },10)
+          setTimeout(() => {
+            this.isList = true
+          }, 10)
         }
       })
     },
     hideList () {
-      this.isList = false;
-      this.ifListContent = false;
+      this.isList = false
+      this.ifListContent = false
     },
     // 打开弹框里的详情
     showListContent (id) {
-      getCloudNewsDetail(id).then(res=>{
-        if(!res.data.error_code){
+      getCloudNewsDetail(id).then(res => {
+        if (!res.data.error_code) {
           this.contentInfo = res.data.result
-          setTimeout(()=>{
-              this.ifListContent = true;
-          },10)
+          setTimeout(() => {
+            this.ifListContent = true
+          }, 10)
         }
       })
     }
