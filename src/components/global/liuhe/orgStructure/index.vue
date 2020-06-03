@@ -4,11 +4,17 @@
     <div class="orgStructure-page common01-border" v-if="!showDetailPage">
       <div class="common01-title">{{viewAttr.header || '组织架构'}}</div>
       <div class="tab-btn sys-flex">
+         <div
+          v-if="isJinshan"
+          :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"
+        >组织机构</div>
         <div
+          v-if="!isJinshan"
           :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"
           @click="showOrg=!showOrg"
         >组织机构</div>
         <div
+          v-if="!isJinshan"
           :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'"
           @click="showOrg=!showOrg"
         >成员名单</div>
@@ -233,6 +239,15 @@ export default {
   created () {
     this.getVolunteerOrganizeList()
     this.getVolunteerMemberList()
+  },
+  computed: {
+    isJinshan () {
+      if (/NWQ2NzNmNz/.test(location.href)) {
+        return true
+      } else {
+        return false
+      }
+    }
   },
   methods: {
     getSixPlatformInfo (item) {
