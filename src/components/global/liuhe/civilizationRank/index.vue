@@ -126,13 +126,13 @@ export default {
   padding: pxrem(40px);
   background: #0a1742;
   *{
-    font-family:'PingFang SC';
+    font-family:'SourceHanSansSC-Medium';
   }
   .dispatchrank-wrap {
     padding: pxrem(154px) pxrem(70px) pxrem(61px) pxrem(70px);
     color: #fff;
     .common01-title {
-        font-family: 'PingFangSC-Semibold';
+        font-family: 'SourceHanSansSC-Medium';
         top: pxrem(53px);
         height: pxrem(56px);
         font-weight: 600;

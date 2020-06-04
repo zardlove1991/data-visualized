@@ -4,24 +4,18 @@
     <div class="orgStructure-page common01-border" v-if="!showDetailPage">
       <div class="common01-title">{{viewAttr.header || '组织架构'}}</div>
       <div class="tab-btn sys-flex">
-         <div
-          v-if="isJinshan"
-          :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"
-        >组织机构</div>
         <div
-          v-if="!isJinshan"
           :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"
           @click="showOrg=!showOrg"
         >组织机构</div>
         <div
-          v-if="!isJinshan"
           :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'"
           @click="showOrg=!showOrg"
         >成员名单</div>
       </div>
       <div class="org-div" v-if="showOrg">
         <div class="total">
-          <p>文明总队</p>
+          <p>{{isJinshan? '服务总队' : '文明总队'}}</p>
           <span>{{orgIndexData.total}}</span>
         </div>
         <div
@@ -103,7 +97,7 @@
         </div>
         <div class="right-part sys-flex-one">
           <div class="title">
-            <div class="img-div">
+            <div class="img-div"  v-if="memberIndexData.rightMember.title">
               <img src="./assets/arrow_list.png" alt />
             </div>
             <span>{{memberIndexData.rightMember.title}}</span>
@@ -346,12 +340,23 @@ export default {
           let _result = res.data.result
           if (_result) {
             _result.forEach(e => {
-              if (/实践中心/.test(e.title)) {
-                this.memberIndexData.leftMember.title = e.title
-                this.memberIndexData.leftMember.data = e.relation
-              } else {
-                this.memberIndexData.rightMember.title = e.title
-                this.memberIndexData.rightMember.data = e.relation
+              if (!this.isJinshan) {
+                if (/实践中心/.test(e.title)) {
+                  this.memberIndexData.leftMember.title = e.title
+                  this.memberIndexData.leftMember.data = e.relation
+                } else {
+                  this.memberIndexData.rightMember.title = e.title
+                  this.memberIndexData.rightMember.data = e.relation
+                }
+              }
+              if (this.isJinshan) {
+                if (/金山区/.test(e.title)) {
+                  this.memberIndexData.leftMember.title = e.title
+                  this.memberIndexData.leftMember.data = e.relation
+                } else {
+                  this.memberIndexData.rightMember.title = e.title
+                  this.memberIndexData.rightMember.data = e.relation
+                }
               }
             })
           }
@@ -371,7 +376,7 @@ export default {
   padding: pxrem(40px);
   background: #0a1742;
   * {
-    font-family: "PingFang SC";
+    font-family: "SourceHanSansSC-Medium";
   }
   .orgStructure-page {
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);

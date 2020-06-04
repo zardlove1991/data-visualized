@@ -279,7 +279,7 @@ export default {
   padding: pxrem(40px);
   background: #0a1742;
   * {
-    font-family: "PingFang SC";
+    font-family: "SourceHanSansSC-Medium";
   }
   .activityInfo-page {
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);

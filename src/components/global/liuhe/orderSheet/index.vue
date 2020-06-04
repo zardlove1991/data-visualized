@@ -321,7 +321,7 @@ export default {
   background-color: #0a1742;
   padding: pxrem(40px);
   * {
-    font-family: "PingFang SC";
+    font-family: "SourceHanSansSC-Medium";
   }
   .orderSheet-page {
     padding: 0.57rem 0.6rem 0.76rem 0.6rem;
