@@ -15,7 +15,7 @@
       </div>
       <div class="org-div" v-if="showOrg">
         <div class="total">
-          <p>文明总队</p>
+          <p>服务总队</p>
           <span>{{orgIndexData.total}}</span>
         </div>
         <div
@@ -163,7 +163,7 @@
         </div>
         <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
-            <div class="img-box" @click="getSixPlatformInfo(item)">
+            <div class="img-box">
               <img v-if="item.head_pic" :src="item.head_pic" alt />
               <img v-else src="./assets/icon_group.png" alt />
             </div>
@@ -178,7 +178,7 @@
 </template>
 
 <script>
-import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo } from '@/servers/interface'
+import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
@@ -237,25 +237,6 @@ export default {
   computed: {
   },
   methods: {
-    getSixPlatformInfo (item) {
-      if (this.detailTitle !== '六大平台') {
-        return false
-      }
-      getSixPlatformInfo(item.id).then(res => {
-        if (!res.data.error_code) {
-          let _result = res.data.result
-          if (_result) {
-            this.detailTitle = item.name
-            this.dimensionalArr.push({
-              name: item.name,
-              data: _result
-            })
-            this.detailInfo = _result
-          }
-        }
-      })
-    },
-    //
     checkCanShow (num) {
       if (this.detailInfo && this.detailInfo.length > num) {
         return true
@@ -333,7 +314,7 @@ export default {
           let _result = res.data.result
           if (_result) {
             _result.forEach(e => {
-              if (/实践中心/.test(e.title)) {
+              if (/金山区/.test(e.title)) {
                 this.memberIndexData.leftMember.title = e.title
                 this.memberIndexData.leftMember.data = e.relation
               } else {
@@ -628,8 +609,8 @@ export default {
     .back-btn {
       position: absolute;
       z-index: 1;
-      left: pxrem(80px);
-      top: pxrem(80px);
+      right: pxrem(80px);
+      bottom: pxrem(50px);
       padding-left: pxrem(55px);
       color: #00ffea;
       font-weight: bold;
@@ -638,7 +619,7 @@ export default {
       background-position: 0 pxrem(8px);
     }
     .top-part {
-      padding-top: pxrem(150px);
+      padding-top: 0.95rem;
       .page-title {
         .title-box {
           display: inline-block;
@@ -679,7 +660,7 @@ export default {
     .list-line {
       height: pxrem(121px);
       width: pxrem(1464px);
-      padding-top: pxrem(51px);
+      padding-top: 0.24rem;
       padding-bottom: pxrem(10px);
       margin: 0 auto;
       justify-content: center;
@@ -726,10 +707,10 @@ export default {
     .list-box {
       position: relative;
       width: pxrem(1758px);
-      height: pxrem(480px);
+      height: pxrem(440px);
       overflow-y: scroll;
       flex-flow: row wrap;
-      margin: pxrem(59px) auto 0;
+      margin: 0.33rem auto 0;
       justify-content: center;
       .item {
         width: pxrem(293px);

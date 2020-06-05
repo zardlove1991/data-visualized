@@ -65,14 +65,6 @@
         </div>
       </div>
       <div class="content-detail" v-if="showDetail">
-        <div class="back-line">
-          <div @click="backList()" class="back">
-            <div class="back-img">
-              <img src="./assets/icon_back.png" />
-            </div>
-            <span class="back-text">返回</span>
-          </div>
-        </div>
         <div class="detail-info">
           <div class="title-line sys-flex">
             <div class="status-img">
@@ -168,6 +160,14 @@
             </div>
           </div>
         </div>
+        <div class="back-line">
+          <div @click="backList()" class="back">
+            <div class="back-img">
+              <img src="./assets/icon_back.png" />
+            </div>
+            <span class="back-text">返回</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -188,7 +188,7 @@ export default {
       weekday: '',
       count: 4,
       page: 1,
-      title: '盐湖区新时代文明实践中心',
+      title: '金山区新时代文明实践中心',
       isPaging: false,
       detail: {},
       showDetail: false,
@@ -315,7 +315,7 @@ export default {
     font-family: "SourceHanSansSC-Medium";
   }
   .orderSheet-page {
-    padding: 0.57rem 0.6rem 0.76rem 0.6rem;
+    padding: 0.57rem 0.8rem 0.76rem 0.8rem;
     img {
       width: 100%;
       height: 100%;
@@ -413,9 +413,13 @@ export default {
     }
     .content-detail {
       text-align: left;
+      .detail-info{
+        margin-top: 0.6rem;
+      }
     }
     .back-line {
-      margin-bottom: 0.45rem;
+      text-align: right;
+      margin-top: 0.25rem;
     }
     .back {
       display: inline-block;
@@ -437,7 +441,7 @@ export default {
       color: #fff;
     }
     .title-line {
-      padding-bottom: 0.46rem;
+      padding-bottom: 0.4rem;
       border-bottom: 1px solid #3073d4;
       width: 100%;
       margin-bottom: 0.64rem;
