@@ -1,5 +1,5 @@
 <template>
-  <div class="common-orgStructure">
+  <div class="common-orgStructure-js">
     <!-- 一级页面 -->
     <div class="orgStructure-page common01-border" v-if="!showDetailPage">
       <div class="common01-title">{{viewAttr.header || '组织架构'}}</div>
@@ -352,7 +352,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/index.scss";
 @import "../style/index.scss";
-.common-orgStructure {
+.common-orgStructure-js {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);

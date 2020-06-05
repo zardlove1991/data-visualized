@@ -1,5 +1,5 @@
 <template>
-  <div class="common-activityInfo">
+  <div class="common-activityInfo-js">
     <div class="activityInfo-page common01-border" v-if="!showDetail">
       <div class="common01-title page-title">{{ viewAttr.header || '活动资讯' }}</div>
       <div class="list-title">
@@ -273,7 +273,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/index.scss";
 @import "../style/index.scss";
-.common-activityInfo {
+.common-activityInfo-js {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);

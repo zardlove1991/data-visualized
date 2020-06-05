@@ -1,5 +1,5 @@
 <template>
-  <div class="common-orderSheet">
+  <div class="common-orderSheet-js">
     <div class="orderSheet-page common01-border">
       <div v-if="!showDetail">
         <div class="today-weather sys-flex">
@@ -306,7 +306,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/index.scss";
 @import "../style/index.scss";
-.common-orderSheet {
+.common-orderSheet-js {
   width: 100%;
   height: 100%;
   background-color: #0a1742;
