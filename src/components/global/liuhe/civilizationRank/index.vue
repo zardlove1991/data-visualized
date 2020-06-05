@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-civilizationrank-js">
+  <div class="common01-civilizationrank">
     <div class="dispatchrank-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '文明排行'}}</div>
       <div class="title-tab sys-flex">
@@ -120,7 +120,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
-.common01-civilizationrank-js {
+.common01-civilizationrank {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
