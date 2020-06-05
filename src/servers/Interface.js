@@ -171,4 +171,7 @@ export const getCloudNewsList = (page, count, keyword = '', source = '', days = 
 // 线索汇聚新闻详情
 export const getCloudNewsDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsDetail?id=${id}`)
 // 线索汇聚热词
-export const getCloudHotword = (keyword) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsKeywords?k=${keyword}`)
+export const getCloudHotword = (keyword = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsKeywords?k=${keyword}`)
+
+// 城市新闻
+export const getCityNews = (city = '', page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/city_news?city=${city}&page=${page}&size=${size}`)
