@@ -1,30 +1,80 @@
 <template>
   <div class="common01-report">
-    <div class="report-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '我的盐城'}}</div>
+    <div class="report-wrap">
       <div class="content-wrap sys-flex">
-          <div class="left"></div>
+          <div class="left sys-flex sys-vertical flex-justify-between">
+            <div class="left-item" v-for="(item,i) in leftList" :key="i">
+              <div class="title-box sys-flex sys-flex-center">
+                <p>{{item.name}}</p>
+                <img class="title-icon" src="./assets/left_icon.png"/>
+              </div>
+              <p class="name-text">{{item.num}}</p>
+              <img class="split" src="./assets/split.png" alt="">
+            </div>
+          </div>
           <div class="center">
-              <div class="rank-list"></div>
+              <div class="common-title-box">
+                <img src="./assets/title.png" alt="">
+                <p>部门服务使用总量排行</p>
+              </div>
+              <div class="rank-list">
+                <div class="rank-item sys-flex sys-flex-center animated" v-for="(item,i) in rankList" :key="i" :class="{'flipInX' : item.title}" :style="{'animation-delay' : i/2+'s'}">
+                  <div class="rank-num" :class="{'rank-one':i === 0,'rank-two':i === 1,'rank-three':i === 2}">{{i+1}}</div>
+                  <div class="rank-title">{{item.title}}</div>
+                  <div class="rank-count">{{item.count}}</div>
+                </div>
+              </div>
+              <div class="common-title-box" style="margin-bottom:0;">
+                <img src="./assets/title.png" alt="">
+                <p>前7天新增用户数</p>
+              </div>
               <div class="new-user-chart">
-                  <div class="chart-box">
+                  <div class="chart-box" style="height:80%;">
                     <chart :options="newuserOpt" :autoResize="true"></chart>
                   </div>
               </div>
           </div>
           <div class="right">
               <div class="right-top sys-flex sys-flex-wrap">
-                  <div class="chart-box" style="width:50%;">
-                    <chart :options="userfromOpt" :autoResize="true"></chart>
+                  <div class="right-top-box" style="width:40%;">
+                    <div class="common-title-box">
+                      <img src="./assets/title.png" alt="">
+                      <p>用户渠道分布</p>
+                    </div>
+                    <div class="chart-box" style="height:50%;">
+                      <chart :options="userfromOpt" :autoResize="true"></chart>
+                    </div>
                   </div>
-                  <div class="chart-box sys-flex sys-flex-wrap" style="width:50%;">
-                    <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
-                    <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
-                    <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
-                    <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                  <div class="right-top-box" style="width:60%">
+                    <div class="common-title-box">
+                      <img src="./assets/title.png" alt="">
+                      <p>高频服务分布TOP4</p>
+                    </div>
+                    <div class="chart-box sys-flex sys-flex-wrap" style="height:70%;">
+                      <div class="percent-box">
+                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <div class="percent-title">公积金服务</div>
+                      </div>
+                      <div class="percent-box">
+                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <div class="percent-title">预约挂号服务</div>
+                      </div>
+                      <div class="percent-box" style="margin-top:0.2rem;">
+                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <div class="percent-title">社保服务</div>
+                      </div>
+                      <div class="percent-box" style="margin-top:0.2rem;">
+                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <div class="percent-title">生活缴费服务</div>
+                      </div>
+                    </div>
                   </div>
               </div>
-              <div class="right-bottom">
+              <div class="right-bottom" style="height:42%;">
+                  <div class="common-title-box" style="margin-bottom:0;">
+                      <img src="./assets/title.png" alt="">
+                      <p>各委办局接入服务排行</p>
+                  </div>
                   <div class="chart-box">
                     <chart :options="geoOpt" :autoResize="true"></chart>
                   </div>
@@ -59,7 +109,21 @@ export default {
       maxPage: 3,
       dataList: [],
       customSize: false,
-      proportion: 1
+      proportion: 1,
+      leftList: [
+        {name: '总下载量', num: 7056},
+        {name: '总注册量', num: 2749},
+        {name: '总实名用户', num: 1652},
+        {name: '日活跃量', num: 1588}
+      ],
+      rankList: [
+        {title: '盐城市公积金中心', count: 26550},
+        {title: '盐城市城市建设投资集团有限公司', count: 21678},
+        {title: '盐城市人力资源和社会保障局', count: 20032},
+        {title: '盐城市城市医疗保障局', count: 19860},
+        {title: '盐城市卫生健康委员会', count: 16504},
+        {title: '盐城市交通投资控股集团有限公司', count: 13900}
+      ]
     }
   },
   computed: {
@@ -205,7 +269,7 @@ export default {
                 type: 'solid'
               }
             },
-            data: ['盐城', '盐城', '盐城', '盐城', '盐城', '盐城', '盐城']
+            data: ['盐城市公积金中心', '盐城', '盐城', '盐城', '盐城', '盐城', '盐城']
           }
         ],
         yAxis: [
@@ -288,13 +352,14 @@ export default {
           orient: 'vertical',
           left: 100,
           bottom: 10,
-          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+          show: false
         },
         series: [
           {
             name: '访问来源',
             type: 'pie',
-            center: ['50%', '40%'], // 设置饼图位置
+            center: ['50%', '50%'], // 设置饼图位置
             radius: ['50%', '70%'],
             avoidLabelOverlap: false,
             label: {
@@ -402,47 +467,139 @@ export default {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
-  .content-wrap {
-      width: 100%;
-      height: 100%;
-      padding: pxrem(125px) pxrem(45px) pxrem(6
-      5px);
-      .left{
-        width: 20%;
-        height: 100%;
-      }
-      .center{
-        width: 30%;
-        height: 100%;
-        .rank-list{
-            height: 60%;
-        }
-        .new-user-chart{
-            height: 40%;
-        }
-      }
-      .right{
-        width: 50%;
-        height: 100%;
-        .right-top{
-            height: 60%;
-        }
-        .right-bottom{
-            height: 40%;
-        }
-      }
-      .chart-box{
+  .report-wrap{
+    width: 100%;
+    height: 100%;
+    background: url("./assets/border.png") no-repeat center;
+    background-size: 100% 100%;
+    position: relative;
+    .content-wrap {
         width: 100%;
         height: 100%;
-        .percent-chart{
-            width: 50% !important;
-            height: 50% !important;
+        padding: pxrem(125px) pxrem(45px) pxrem(65px);
+        .left{
+          width: pxrem(250px);
+          height: 100%;
+          background: url("./assets/left_bg.png") no-repeat center;
+          background-size: 100% 100%;
+          position: relative;
+          padding: pxrem(45px) pxrem(30px);
+          margin-right: 50px;
+          .left-item{
+            text-align: left;
+            .title-box{
+              p{
+                font-size:pxrem(22px);
+                color: #fff;
+              }
+              .title-icon{
+                width: pxrem(33px);
+                height: pxrem(15px);
+                margin-left: pxrem(10px);
+              }
+            }
+            .name-text{
+              font-size:pxrem(40px);
+              color: #4AFBE8;
+              padding: pxrem(18px) 0 pxrem(15px);
+            }
+            .split{
+              height: pxrem(8px);
+            }
+          }
         }
-        .echarts {
-            width: 100%;
-            height: 100%;
+        .center{
+          width: 30%;
+          height: 100%;
+          margin-right: pxrem(100px);
+          .rank-list{
+            margin-bottom: pxrem(72px);
+            .rank-item{
+              margin-bottom: pxrem(30px);
+              .rank-num{
+                width: pxrem(30px);
+                height: pxrem(30px);
+                line-height: pxrem(30px);
+                font-size:pxrem(20px);
+                color: #fff;
+                background:rgba(0,108,255,0.45);
+                border-radius:5px;
+                &.rank-one{
+                  background:rgba(251,49,97,0.45);
+                }
+                &.rank-two{
+                  background:rgba(251,173,49,0.45);
+                }
+                &.rank-three{
+                  background:rgba(192,49,251,0.45);
+                }
+              }
+              .rank-title{
+                flex: 1;
+                font-size:pxrem(22px);
+                color: #fff;
+                text-align: left;
+                padding-left: 17px;
+              }
+              .rank-count{
+                font-size:pxrem(22px);
+                color: #0BA0FF;
+              }
+            }
+          }
+          .new-user-chart{
+              height: 50%;
+          }
         }
-     }
+        .right{
+          width: 50%;
+          height: 100%;
+          .right-top{
+              height: 63%;
+              .right-top-box{
+                width: 50%;
+                .percent-box{
+                  width: 50%;
+                  height: 50%;
+                  .percent-title{
+                    color: #fff;
+                    font-size:pxrem(22px);
+                  }
+                }
+              }
+          }
+          .right-bottom{
+              height: 37%;
+          }
+        }
+        .chart-box{
+          width: 100%;
+          height: 100%;
+          .percent-chart{
+              width: 100% !important;
+              height: 80% !important;
+          }
+          .echarts {
+              width: 100%;
+              height: 100%;
+          }
+       }
+    }
+  }
+  .common-title-box{
+    display: flex;
+    align-items: center;
+    margin-bottom: pxrem(60px);
+    img{
+      width: pxrem(21px);
+      height: pxrem(20px);
+      margin-right: pxrem(10px);
+    }
+    p{
+      font-size: pxrem(22px);
+      color: #49F1DF;
+      font-weight:600;
+    }
   }
 }
 </style>

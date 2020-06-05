@@ -175,3 +175,5 @@ export const getCloudHotword = (keyword = '') => createAPI(`${httpsbaseUrl}/Apid
 
 // 城市新闻
 export const getCityNews = (city = '', page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/city_news?city=${city}&page=${page}&size=${size}`)
+// 全网新闻
+export const getWebNews = (page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/news?page=${page}&size=${size}`)

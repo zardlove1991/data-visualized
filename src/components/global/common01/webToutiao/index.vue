@@ -1,15 +1,17 @@
 <template>
   <div class="common01-web">
-      <div class="toutiao-wrap common01-border">
-        <div class="common01-title">全网头条</div>
+      <div class="toutiao-wrap">
         <div class="list">
             <div class="list-item sys-flex animated" v-for="(item,k) in list" :key="k" :class="{'flipInX' : item.title}" :style="{'animation-delay' : k/2+'s'}">
-                <div class="list-left"></div>
+                <div class="list-left sys-flex sys-flex-center sys-vertical flex-justify-center">
+                  <img class="hot-icon" src="./assets/hot.png" alt="">
+                  <p>{{item.news_click_num}}</p>
+                </div>
                 <div class="list-right sys-flex sys-vertical flex-justify-center">
                     <div class="title overhidden">{{item.title}}</div>
                     <div class="info">
-                        <span class="source">{{item.project_user_name}}</span>
-                        <span>{{item.update_time | dateFormat}}</span>
+                        <span class="source" v-if="item.source">{{item.source}}</span>
+                        <span>{{item.date.substring(0,16)}}</span>
                     </div>
                 </div>
             </div>
@@ -18,7 +20,7 @@
   </div>
 </template>
 <script>
-import { getWorkCallReportList } from '@/servers/interface'
+import { getWebNews } from '@/servers/interface'
 export default {
   name: 'webToutiao',
   data () {
@@ -39,12 +41,12 @@ export default {
   },
   methods: {
     getList () {
-      getWorkCallReportList(7, this.page, this.currentViewId).then((res) => {
+      getWebNews(this.page, 7).then((res) => {
         if (!res.data.error_code) {
-          if (res.data.result.data.length) {
+          if (res.data.result.length) {
             this.list = []
             setTimeout(() => {
-              this.list = res.data.result.data
+              this.list = res.data.result
             }, 100)
             if (this.isPaging) {
               this.page += 1
@@ -73,26 +75,43 @@ export default {
   padding: pxrem(40px);
   .toutiao-wrap{
       padding: pxrem(200px) pxrem(72px) pxrem(72px);
+      width: 100%;
+      height: 100%;
+      background: url("./assets/border.png") no-repeat center;
+      background-size: 100% 100%;
+      position: relative;
      .list{
         height: 100%;
         .list-item{
             height: pxrem(218px);
             margin-bottom: pxrem(44px);
-            background-color: rgb(3,45,123);
+            background: url("./assets/item_bg.png") no-repeat center;
+            background-size: 100% 100%;
+            position: relative;
             &:last-of-type {
               margin-bottom: 0;
             }
             .list-left{
-                width: pxrem(200px);
-                height: 100%;
+              width: pxrem(220px);
+              height: 100%;
+              .hot-icon{
+                width: pxrem(45px);
+                height: pxrem(57px);
+              }
+              p{
+                color: #fff;
+                font-size: pxrem(56px);
+                padding-top: pxrem(24px);
+              }
             }
             .list-right{
                 padding: pxrem(40px) 0;
+                padding-left: pxrem(55px);
                 text-align: left;
                 .title{
                     color: #fff;
                     font-size: pxrem(44px);
-                    flex: 1;
+                    width: 1300px;
                 }
                 .info{
                     padding-top: pxrem(20px);

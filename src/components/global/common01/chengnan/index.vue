@@ -1,14 +1,13 @@
 <template>
   <div class="common01-web">
-      <div class="toutiao-wrap common01-border">
-        <div class="common01-title">城南聚焦</div>
+      <div class="toutiao-wrap">
         <div class="list">
             <div class="list-item sys-flex animated" v-for="(item,k) in list" :key="k" :class="{'flipInX' : item.title}" :style="{'animation-delay' : k/2+'s'}">
                 <div class="list-right sys-flex sys-vertical flex-justify-center">
                     <div class="title overhidden">{{item.title}}</div>
                     <div class="info">
-                        <span class="source">{{item.project_user_name}}</span>
-                        <span>{{item.update_time | dateFormat}}</span>
+                        <span class="source">{{item.source}}</span>
+                        <span>{{item.date.substring(0,16)}}</span>
                     </div>
                 </div>
             </div>
@@ -17,7 +16,7 @@
   </div>
 </template>
 <script>
-import { getWorkCallReportList } from '@/servers/interface'
+import { getCityNews } from '@/servers/interface'
 export default {
   name: 'chengnan',
   data () {
@@ -38,12 +37,12 @@ export default {
   },
   methods: {
     getList () {
-      getWorkCallReportList(7, this.page, this.currentViewId).then((res) => {
+      getCityNews('盐城', this.page, 7).then((res) => {
         if (!res.data.error_code) {
-          if (res.data.result.data.length) {
+          if (res.data.result.length) {
             this.list = []
             setTimeout(() => {
-              this.list = res.data.result.data
+              this.list = res.data.result
             }, 100)
             if (this.isPaging) {
               this.page += 1
@@ -72,12 +71,19 @@ export default {
   padding: pxrem(40px);
   .toutiao-wrap{
       padding: pxrem(200px) pxrem(72px) pxrem(72px);
+      width: 100%;
+      height: 100%;
+      background: url("./assets/border.png") no-repeat center;
+      background-size: 100% 100%;
+      position: relative;
      .list{
         height: 100%;
         .list-item{
             height: pxrem(218px);
             margin-bottom: pxrem(44px);
-            background-color: rgb(3,45,123);
+            background: url("./assets/item_bg.png") no-repeat center;
+            background-size: 100% 100%;
+            position: relative;
             &:last-of-type {
               margin-bottom: 0;
             }

@@ -1,7 +1,6 @@
 <template>
  <div class="common01-web">
-      <div class="hot-wrap common01-border">
-        <div class="common01-title">热点词云</div>
+      <div class="hot-wrap">
         <div class="hotword-wrap flex" id="word-cloud">
             <div class="word-cloud" ref="wordcloud" v-if="hotWordsList.length"></div>
         </div>
@@ -97,6 +96,11 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .hot-wrap{
+    width: 100%;
+    height: 100%;
+    background: url("./assets/border.png") no-repeat center;
+    background-size: 100% 100%;
+    position: relative;
     .hotword-wrap {
         width: 100%;
         height: 100%;

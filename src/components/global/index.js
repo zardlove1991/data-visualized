@@ -131,3 +131,4 @@ export const common01componentDataAnalysis = getComponent('common01/dataAnalysis
 export const common01componentMyYancheng = getComponent('common01/myYancheng') // 盐城舆情分析
 export const common01componentLiveCamera = getComponent('common01/liveCamera') // 盐城直播摄像头
 export const common01componentYanchengGather = getComponent('common01/yanchengGather') // 盐城聚合信息
+export const common01componentYanchengScreen = getComponent('common01/yanchengScreen') // 盐城聚合信息

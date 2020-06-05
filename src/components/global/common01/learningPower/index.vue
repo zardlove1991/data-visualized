@@ -1,12 +1,12 @@
 <template>
   <div class="common01-report">
-    <div class="report-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '学习强国'}}</div>
+    <div class="report-wrap">
+      <!-- <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '学习强国'}}</div> -->
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
-          <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.title}}</div>
+          <div class="title common01-ft40 overhidden" :style="setFontSize(50)" style="margin-right:1.5rem;">{{v.title}}</div>
           <div class="name common01-ft32 overhidden" :style="setFontSize(45)">{{v.author}}</div>
-          <div class="time common01-ft32" :style="setFontSize(45)">{{v.time}}</div>
+          <div class="time common01-ft32" :style="setFontSize(45)" style="margin-left:1.4rem;">{{v.time}}</div>
         </div>
       </div>
     </div>
@@ -89,8 +89,13 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .report-wrap {
-    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(230px) pxrem(90px) pxrem(78px);
     color: #fff;
+    width: 100%;
+    height: 100%;
+    background: url("./assets/border.png") no-repeat center;
+    background-size: 100% 100%;
+    position: relative;
     .wrap-content {
       .item-list {
         margin-bottom: pxrem(80px);
@@ -118,7 +123,7 @@ export default {
         .title {
           text-align: left;
           width: 55%;
-          margin: 0 pxrem(135px) 0 pxrem(37px);
+          margin-right: pxrem(37px);
         }
         .name {
           width: 12%;
