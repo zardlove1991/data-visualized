@@ -1,11 +1,12 @@
+
 <template>
   <div class="common01-report">
-    <div class="report-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '盐城市微信排行榜'}}</div>
+    <div class="report-wrap common01-border wechatRankbg">
+      <!-- <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '盐城市微信排行榜'}}</div> -->
       <div class="wrap-content sys-flex sys-flex-wrap">
           <div class="list-item sys-flex sys-flex-center flex-justify-between animated" :class="{'mr70': k % 2 == 0, 'flipInX' : item.name}" v-for="(item,k) in list" :key="k" :style="{'animation-delay' : k/2+'s'}">
-              <div class="rank-text">{{k+1}}</div>
-              <img class="avatar" src="" alt="">
+              <div class="rank-text" :class="{'rank-first': k==0,'rank-sec': k==1,'rank-third': k==2,'rank-other': k>2}">{{k+1}}</div>
+              <img class="avatar" :src="item.img" alt="">
               <div class="title">{{item.name}}</div>
               <div class="num-box">
                   {{item.num}}<span>条</span>
@@ -28,7 +29,14 @@ export default {
       maxPage: 3,
       dataList: [],
       customSize: false,
-      list: [{name: '黄海发布', num: 96}, {name: '城南财政', num: 84}, {name: '盐城教育发布', num: 77}, {name: '平安盐南', num: 73}, {name: '城南清风', num: 65}, {name: '城南高新区河长办', num: 60}, {name: '青春盐南', num: 53}, {name: '城南社保', num: 50}]
+      list: [{name: '黄海发布', num: 96,img:require('./assets/hhfb.png')}, 
+      {name: '城南财政', num: 84, img:require('./assets/cncz.png')}, 
+      {name: '盐城教育发布', num: 77, img:require('./assets/ynjy.png')}, 
+      {name: '平安盐南', num: 73, img:require('./assets/payn.png')}, 
+      {name: '城南清风', num: 65, img:require('./assets/cnqf.png')}, 
+      {name: '城南高新区河长办', num: 60, img:require('./assets/yngxqhcb.png')}, 
+      {name: '青春盐南', num: 53, img:require('./assets/qcyn.png')}, 
+      {name: '城南社保', num: 50, img:require('./assets/cnsb.png')}]
     }
   },
   created () {
@@ -81,6 +89,9 @@ export default {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
+  .wechatRankbg{
+    background: url('./assets/back.png')
+  }
   .report-wrap {
     padding: pxrem(200px) pxrem(84px) pxrem(40px);
     color: #fff;
@@ -89,7 +100,9 @@ export default {
         .list-item{
             width: pxrem(800px);
             height: pxrem(140px);
-            border: 1px solid red;
+            background-size: 100%;
+            background: no-repeat center;
+            background-image: url("./assets/listback.png");
             margin-bottom: pxrem(40px);
             padding: pxrem(25px) pxrem(40px);
             font-size: pxrem(50px);
@@ -97,12 +110,28 @@ export default {
                 margin-right: pxrem(70px);
             }
             .rank-text{
+              line-height: pxrem(60px);
               font-size: pxrem(40px);
+              width: pxrem(60px);
+              height: pxrem(60px);
+              background: no-repeat center;
+              background-size: 100%;
+            }
+            .rank-first{
+              background-image: url("./assets/1.png");
+            }
+            .rank-sec{
+              background-image: url("./assets/2.png");
+            }
+            .rank-third{
+              background-image: url("./assets/3.png");
+            }
+            .rank-other{
+              background-image: url("./assets/4.png");
             }
             .avatar{
                 width: pxrem(88px);
                 height: pxrem(88px);
-                border: 1px solid #ccc;
                 margin: 0 pxrem(40px);
                 border-radius: 50%;
             }
