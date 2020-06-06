@@ -23,18 +23,18 @@ export default {
   data () {
     return {
       list: [
-        {name: '黄海发布', num: 100,indexpic:require('../wechatRank/assets/hhfb.png')}, 
-        {name: '千年珠溪', num: 100,indexpic:require('../wechatRank/assets/qnzx.png')}, 
-        {name: '幸福新都', num: 100,indexpic:require('../wechatRank/assets/xfxd.png')}, 
-        {name: '新河街道', num: 100,indexpic:require('../wechatRank/assets/xhjd.png')}, 
-        {name: '城南财政', num: 100,indexpic:require('../wechatRank/assets/cncz.png')}, 
-        {name: '城南社保', num: 100,indexpic:require('../wechatRank/assets/cnsb.png')}, 
-        {name: '城南教育发布', num: 100,indexpic:require('../wechatRank/assets/ynjy.png')}, 
-        {name: '城南清风', num: 100,indexpic:require('../wechatRank/assets/cnqf.png')}, 
-        {name: '青春盐南', num: 100,indexpic:require('../wechatRank/assets/qcyn.png')}, 
-        {name: '盐城盐南公安', num: 100,indexpic:require('../wechatRank/assets/ycynga.png')}, 
-        {name: '平安盐南', num: 100,indexpic:require('../wechatRank/assets/payn.png')}, 
-        {name: '城南高新区河长办', num: 100,indexpic:require('../wechatRank/assets/yngxqhcb.png')}]
+        {name: '黄海发布', num: 100, indexpic: require('../wechatRank/assets/hhfb.png')},
+        {name: '千年珠溪', num: 100, indexpic: require('../wechatRank/assets/qnzx.png')},
+        {name: '幸福新都', num: 100, indexpic: require('../wechatRank/assets/xfxd.png')},
+        {name: '新河街道', num: 100, indexpic: require('../wechatRank/assets/xhjd.png')},
+        {name: '城南财政', num: 100, indexpic: require('../wechatRank/assets/cncz.png')},
+        {name: '城南社保', num: 100, indexpic: require('../wechatRank/assets/cnsb.png')},
+        {name: '城南教育发布', num: 100, indexpic: require('../wechatRank/assets/ynjy.png')},
+        {name: '城南清风', num: 100, indexpic: require('../wechatRank/assets/cnqf.png')},
+        {name: '青春盐南', num: 100, indexpic: require('../wechatRank/assets/qcyn.png')},
+        {name: '盐城盐南公安', num: 100, indexpic: require('../wechatRank/assets/ycynga.png')},
+        {name: '平安盐南', num: 100, indexpic: require('../wechatRank/assets/payn.png')},
+        {name: '城南高新区河长办', num: 100, indexpic: require('../wechatRank/assets/yngxqhcb.png')}]
     }
   },
   created () {

@@ -29,14 +29,14 @@ export default {
       maxPage: 3,
       dataList: [],
       customSize: false,
-      list: [{name: '黄海发布', num: 96,img:require('./assets/hhfb.png')}, 
-      {name: '城南财政', num: 84, img:require('./assets/cncz.png')}, 
-      {name: '盐城教育发布', num: 77, img:require('./assets/ynjy.png')}, 
-      {name: '平安盐南', num: 73, img:require('./assets/payn.png')}, 
-      {name: '城南清风', num: 65, img:require('./assets/cnqf.png')}, 
-      {name: '城南高新区河长办', num: 60, img:require('./assets/yngxqhcb.png')}, 
-      {name: '青春盐南', num: 53, img:require('./assets/qcyn.png')}, 
-      {name: '城南社保', num: 50, img:require('./assets/cnsb.png')}]
+      list: [{name: '黄海发布', num: 96, img: require('./assets/hhfb.png')},
+        {name: '城南财政', num: 84, img: require('./assets/cncz.png')},
+        {name: '盐城教育发布', num: 77, img: require('./assets/ynjy.png')},
+        {name: '平安盐南', num: 73, img: require('./assets/payn.png')},
+        {name: '城南清风', num: 65, img: require('./assets/cnqf.png')},
+        {name: '城南高新区河长办', num: 60, img: require('./assets/yngxqhcb.png')},
+        {name: '青春盐南', num: 53, img: require('./assets/qcyn.png')},
+        {name: '城南社保', num: 50, img: require('./assets/cnsb.png')}]
     }
   },
   created () {
