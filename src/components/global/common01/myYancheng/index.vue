@@ -29,7 +29,7 @@
                 <p>前7天新增用户数</p>
               </div>
               <div class="new-user-chart">
-                  <div class="chart-box" style="height:80%;">
+                  <div class="chart-box" style="height:80%;width:120%;">
                     <chart :options="newuserOpt" :autoResize="true"></chart>
                   </div>
               </div>
@@ -41,9 +41,10 @@
                       <img src="./assets/title.png" alt="">
                       <p>用户渠道分布</p>
                     </div>
-                    <div class="chart-box" style="height:50%;">
+                    <div class="chart-box" style="height:70%;">
                       <chart :options="userfromOpt" :autoResize="true"></chart>
                     </div>
+                    <img class="user-icon" src="./assets/user.png" alt="">
                   </div>
                   <div class="right-top-box" style="width:60%">
                     <div class="common-title-box">
@@ -52,31 +53,31 @@
                     </div>
                     <div class="chart-box sys-flex sys-flex-wrap" style="height:70%;">
                       <div class="percent-box">
-                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <chart class="percent-chart" :options="percentOpt1" :autoResize="true"></chart>
                         <div class="percent-title">公积金服务</div>
                       </div>
                       <div class="percent-box">
-                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <chart class="percent-chart" :options="percentOpt2" :autoResize="true"></chart>
                         <div class="percent-title">预约挂号服务</div>
                       </div>
                       <div class="percent-box" style="margin-top:0.2rem;">
-                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <chart class="percent-chart" :options="percentOpt3" :autoResize="true"></chart>
                         <div class="percent-title">社保服务</div>
                       </div>
                       <div class="percent-box" style="margin-top:0.2rem;">
-                        <chart class="percent-chart" :options="percentOpt" :autoResize="true"></chart>
+                        <chart class="percent-chart" :options="percentOpt4" :autoResize="true"></chart>
                         <div class="percent-title">生活缴费服务</div>
                       </div>
                     </div>
                   </div>
               </div>
-              <div class="right-bottom" style="height:42%;">
+              <div class="right-bottom" style="height:40%;">
                   <div class="common-title-box" style="margin-bottom:0;">
                       <img src="./assets/title.png" alt="">
                       <p>各委办局接入服务排行</p>
                   </div>
                   <div class="chart-box">
-                    <chart :options="geoOpt" :autoResize="true"></chart>
+                    <chart :options="serviceOpt" :autoResize="true"></chart>
                   </div>
               </div>
           </div>
@@ -123,7 +124,23 @@ export default {
         {title: '盐城市城市医疗保障局', count: 19860},
         {title: '盐城市卫生健康委员会', count: 16504},
         {title: '盐城市交通投资控股集团有限公司', count: 13900}
-      ]
+      ],
+      userFromData: [
+        {value: 5, name: '小米'},
+        {value: 15, name: 'VIVO'},
+        {value: 35, name: '华为'},
+        {value: 25, name: '苹果'},
+        {value: 15, name: 'OPPO'},
+        {value: 5, name: '其他'}
+      ],
+      newuserData: {
+        days: ['06-02', '06-03', '06-04', '06-05', '06-06', '06-07', '06-08'],
+        data: [180, 350, 300, 320, 280, 320, 390]
+      },
+      serviceData: {
+        nameList: ['盐城市公积金中心', '人力资源社会保障局', '城市建设投资集团', '交通投资建设控股集团', '盐城市医疗保障局', '盐城市公安局', '盐城市住建局', '盐城市交通运输局'],
+        data: [580, 570, 550, 520, 480, 430, 370, 280]
+      }
     }
   },
   computed: {
@@ -132,6 +149,10 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
+          axisTick: {
+            show: false,
+            alignWithLabel: true
+          },
           axisLabel: {
             show: true,
             margin: 15,
@@ -140,7 +161,15 @@ export default {
               fontSize: 15 // 更改坐标轴文字大小
             }
           },
-          data: ['06-01', '06-01', '06-01', '06-01', '06-01', '06-01', '06-01']
+          axisLine: {
+            lineStyle: {
+              // show:false,
+              color: ['#71a4f2'],
+              width: '1',
+              type: 'solid'
+            }
+          },
+          data: this.newuserData.days
         },
         yAxis: {
           type: 'value',
@@ -151,6 +180,10 @@ export default {
               color: '#fff',
               fontSize: 15 // 更改坐标轴文字大小
             }
+          },
+          axisTick: {
+            show: false,
+            alignWithLabel: true
           },
           axisLine: {
             lineStyle: {
@@ -171,9 +204,10 @@ export default {
           }
         },
         series: [{
-          data: [100, 200, 400, 200, 590, 330, 120],
+          data: this.newuserData.data,
           type: 'line',
           areaStyle: {},
+          symbolSize: 10, // 折线点的大小
           itemStyle: {
             color: {
               type: 'linear',
@@ -182,34 +216,21 @@ export default {
               x2: 0,
               y2: 1,
               colorStops: [{
-                offset: 0, color: '#1CD8D2' // 0% 处的颜色
+                offset: 0, color: 'rgb(2,105,152)' // 0% 处的颜色
               }, {
-                offset: 1, color: '#ffffff' // 100% 处的颜色
+                offset: 1, color: 'rgb(4,52,136)' // 100% 处的颜色
               }],
               global: false // 缺省为 false
             }
           },
           lineStyle: {
-            color: {
-              type: 'linear',
-              x: 0,
-              y: 0,
-              x2: 1,
-              y2: 1,
-              colorStops: [{
-                offset: 0, color: '#ffffff' // 0% 处的颜色
-              }, {
-                offset: 0.5, color: '#5865FF' // 0% 处的颜色
-              }, {
-                offset: 1, color: '#ffffff' // 100% 处的颜色
-              }],
-              global: false // 缺省为 false
-            }
+            color: '#00F8BD',
+            width: 3 // 设置线条粗细
           }
         }]
       }
     },
-    geoOpt () {
+    serviceOpt () {
       return {
         color: ['#4da2fe'],
         tooltip: {
@@ -269,7 +290,7 @@ export default {
                 type: 'solid'
               }
             },
-            data: ['盐城市公积金中心', '盐城', '盐城', '盐城', '盐城', '盐城', '盐城']
+            data: this.serviceData.nameList
           }
         ],
         yAxis: [
@@ -330,7 +351,7 @@ export default {
                 )
               }
             },
-            data: [600, 500, 400, 350, 390, 330, 220]
+            data: this.serviceData.data
           }
         ]
       }
@@ -341,6 +362,7 @@ export default {
           trigger: 'item',
           formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
+        color: ['#44CF98', '#DB4E4E', '#E88559', '#0066FF', '#941BF2', '#B3B834'],
         grid: {
           left: this.proportion * 30,
           right: this.proportion * 60,
@@ -349,17 +371,43 @@ export default {
           containLabel: true
         },
         legend: {
-          orient: 'vertical',
-          left: 100,
-          bottom: 10,
-          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
-          show: false
+          orient: 'horizontal',
+          left: 50,
+          bottom: 0,
+          data: ['小米', 'VIVO', '', '华为', '苹果', '', 'OPPO', '其他'],
+          show: true,
+          itemGap: 20,
+          textStyle: {
+            color: '#fff',
+            fontSize: 14
+          },
+          // 使用回调函数
+          formatter: function (name) {
+            var data = [
+              {value: 5, name: '小米'},
+              {value: 15, name: 'VIVO'},
+              {value: 35, name: '华为'},
+              {value: 25, name: '苹果'},
+              {value: 15, name: 'OPPO'},
+              {value: 5, name: '其他'}
+            ]
+            var total = 0
+            var tarValue
+            for (var i = 0, l = data.length; i < l; i++) {
+              total += data[i].value
+              if (data[i].name === name) {
+                tarValue = data[i].value
+              }
+            }
+            var p = ((tarValue / total) * 100)
+            return name + ' ' + ' ' + p + '%'
+          }
         },
         series: [
           {
             name: '访问来源',
             type: 'pie',
-            center: ['50%', '50%'], // 设置饼图位置
+            center: ['50%', '35%'], // 设置饼图位置
             radius: ['50%', '70%'],
             avoidLabelOverlap: false,
             label: {
@@ -376,22 +424,16 @@ export default {
             labelLine: {
               show: false
             },
-            data: [
-              {value: 335, name: '直接访问'},
-              {value: 310, name: '邮件营销'},
-              {value: 234, name: '联盟广告'},
-              {value: 135, name: '视频广告'},
-              {value: 1548, name: '搜索引擎'}
-            ]
+            data: this.userFromData
           }
         ]
       }
     },
-    percentOpt () {
+    percentOpt1 () {
       return {
         title: {
           show: true,
-          text: '80%',
+          text: '43%',
           x: 'center',
           y: 'center',
           textStyle: {
@@ -418,10 +460,6 @@ export default {
           radius: ['70%', '90%'],
           avoidLabelOverlap: true,
           hoverAnimation: false,
-          // animationDelay: function (idx) {
-          //     // 越往后的数据延迟越大
-          //     return idx * 10000;
-          // },
           label: {
             normal: {
               show: false,
@@ -437,8 +475,164 @@ export default {
             }
           },
           data: [
-            {value: 0.8, name: ''},
-            {value: 1 - 0.8, name: ''}
+            {value: 0.43, name: ''},
+            {value: 1 - 0.43, name: ''}
+          ]
+        }
+      }
+    },
+    percentOpt2 () {
+      return {
+        title: {
+          show: true,
+          text: '28%',
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontSize: 25,
+            color: 'rgba(0,255,246,1)',
+            fontWeight: 'normal'
+          }
+        },
+        color: ['rgb(0,148,240)', 'rgb(15,74,148)'],
+        tooltip: {
+          trigger: 'item',
+          formatter: '{d}%',
+          show: false
+        },
+        legend: {
+          orient: 'vertical',
+          x: 'left',
+          show: false
+        },
+        series:
+        {
+          name: '',
+          type: 'pie',
+          radius: ['70%', '90%'],
+          avoidLabelOverlap: true,
+          hoverAnimation: false,
+          label: {
+            normal: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              show: false
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            {value: 0.28, name: ''},
+            {value: 1 - 0.28, name: ''}
+          ]
+        }
+      }
+    },
+    percentOpt3 () {
+      return {
+        title: {
+          show: true,
+          text: '17%',
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontSize: 25,
+            color: 'rgba(0,255,246,1)',
+            fontWeight: 'normal'
+          }
+        },
+        color: ['rgb(0,148,240)', 'rgb(15,74,148)'],
+        tooltip: {
+          trigger: 'item',
+          formatter: '{d}%',
+          show: false
+        },
+        legend: {
+          orient: 'vertical',
+          x: 'left',
+          show: false
+        },
+        series:
+        {
+          name: '',
+          type: 'pie',
+          radius: ['70%', '90%'],
+          avoidLabelOverlap: true,
+          hoverAnimation: false,
+          label: {
+            normal: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              show: false
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            {value: 0.17, name: ''},
+            {value: 1 - 0.17, name: ''}
+          ]
+        }
+      }
+    },
+    percentOpt4 () {
+      return {
+        title: {
+          show: true,
+          text: '12%',
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontSize: 25,
+            color: 'rgba(0,255,246,1)',
+            fontWeight: 'normal'
+          }
+        },
+        color: ['rgb(0,148,240)', 'rgb(15,74,148)'],
+        tooltip: {
+          trigger: 'item',
+          formatter: '{d}%',
+          show: false
+        },
+        legend: {
+          orient: 'vertical',
+          x: 'left',
+          show: false
+        },
+        series:
+        {
+          name: '',
+          type: 'pie',
+          radius: ['70%', '90%'],
+          avoidLabelOverlap: true,
+          hoverAnimation: false,
+          label: {
+            normal: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              show: false
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            {value: 0.12, name: ''},
+            {value: 1 - 0.12, name: ''}
           ]
         }
       }
@@ -558,6 +752,7 @@ export default {
               height: 63%;
               .right-top-box{
                 width: 50%;
+                position: relative;
                 .percent-box{
                   width: 50%;
                   height: 50%;
@@ -565,6 +760,13 @@ export default {
                     color: #fff;
                     font-size:pxrem(22px);
                   }
+                }
+                .user-icon{
+                  width: pxrem(47px);
+                  height: pxrem(42px);
+                  position: absolute;
+                  top: 2rem;
+                  left: 1.42rem;
                 }
               }
           }

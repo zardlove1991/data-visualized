@@ -6,7 +6,7 @@
                 <div class="list-right sys-flex sys-vertical flex-justify-center">
                     <div class="title overhidden">{{item.title}}</div>
                     <div class="info">
-                        <span class="source">{{item.source}}</span>
+                        <span class="source" v-if="item.source">{{item.source}}</span>
                         <span>{{item.date.substring(0,16)}}</span>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ export default {
                 .title{
                     color: #fff;
                     font-size: pxrem(44px);
-                    flex: 1;
+                    width: 1300px;
                 }
                 .info{
                     padding-top: pxrem(20px);

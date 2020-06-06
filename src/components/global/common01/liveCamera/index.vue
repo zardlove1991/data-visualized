@@ -1,6 +1,8 @@
 <template>
   <div class="common01-report">
-      <img src="./assets/camera.png" alt="">
+      <div class="live-wrap sys-flex sys-flex-center flex-justify-center">
+        <img src="./assets/camera.png" alt="">
+      </div>
   </div>
 </template>
 <script>
@@ -21,9 +23,18 @@ export default {
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
 .common01-report {
-    img{
-        width: 100%;
-        height: 100%;
+    padding: pxrem(40px);
+    width: 100%;
+    height: 100%;
+    .live-wrap{
+      height: 100%;
+      background: url("./assets/border.png") no-repeat center;
+      background-size: 100% 100%;
+      position: relative;
+      img{
+          width: 99%;
+          height: 99%;
+      }
     }
 }
 </style>
