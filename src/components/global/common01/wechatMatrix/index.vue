@@ -1,6 +1,6 @@
 <template>
-  <div class="common01-report">
-    <div class="report-wrap common01-border wechatMatrixbg">
+  <div class="common01-wechatmartix">
+    <div class="wechatmartix-wrap common01-border wechatMatrixbg">
       <!-- <div class="common01-title">{{viewAttr.header || '城南区微信矩阵'}}</div> -->
       <div class="wrap-content">
           <div class="title sys-flex sys-flex-center flex-justify-center">
@@ -46,14 +46,14 @@ export default {
 <style lang="scss">
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common01-report {
+.common01-wechatmartix {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
   .wechatMatrixbg{
     background: url('./assets/back.png')
   }
-  .report-wrap {
+  .wechatmartix-wrap {
       padding: pxrem(180px) pxrem(100px) 0;
       .title{
         width: 100%;

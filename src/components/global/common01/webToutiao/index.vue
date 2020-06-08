@@ -1,6 +1,6 @@
 <template>
   <div class="common01-web">
-      <div class="toutiao-wrap">
+      <div class="web-toutiao-wrap">
         <div class="list">
             <div class="list-item sys-flex animated" v-for="(item,k) in list" :key="k" :class="{'flipInX' : item.title}" :style="{'animation-delay' : k/2+'s'}">
                 <div class="list-left sys-flex sys-flex-center sys-vertical flex-justify-center">
@@ -72,8 +72,8 @@ export default {
 .common01-web {
   width: 100%;
   height: 100%;
-  padding: pxrem(40px);
-  .toutiao-wrap{
+  padding: pxrem(40px) !important;
+  .web-toutiao-wrap{
       padding: pxrem(200px) pxrem(72px) pxrem(72px);
       width: 100%;
       height: 100%;
