@@ -313,15 +313,10 @@ export default {
         if (!res.data.error_code) {
           let _result = res.data.result
           if (_result) {
-            _result.forEach(e => {
-              if (/金山区/.test(e.title)) {
-                this.memberIndexData.leftMember.title = e.title
-                this.memberIndexData.leftMember.data = e.relation
-              } else {
-                this.memberIndexData.rightMember.title = e.title
-                this.memberIndexData.rightMember.data = e.relation
-              }
-            })
+            this.memberIndexData.leftMember.title = _result[0].title
+            this.memberIndexData.leftMember.data = _result[0].relation
+            this.memberIndexData.rightMember.title = _result[1].title
+            this.memberIndexData.rightMember.data = _result[1].relation
           }
         }
       })
