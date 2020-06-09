@@ -1,7 +1,7 @@
 <template>
-  <div class="common01-report">
-    <div class="report-wrap common01-border">
-       <div class="common01-title">{{viewAttr.header || '舆情分析'}}</div>
+  <div class="common01-data">
+    <div class="data-wrap common01-border">
+       <!-- <div class="common01-title">{{viewAttr.header || '舆情分析'}}</div> -->
        <div class="sweiper-box">
            <!-- <img src="./assets/active-bg.png" alt=""> -->
              <el-carousel :autoplay="false" :interval="3000" type="card" height= "100px">
@@ -84,8 +84,8 @@ export default {
       proportion: 1,
       list: [
         '什刹海冰场正式开放 市民排队入场 冰面游人如织',
-        '奥术大师大所多奥术大师大',
-        '奥术大师大多双方各但是广东省防守打法'
+        '什刹海冰场正式开放 市民排队入场 冰面游人如织',
+        '什刹海冰场正式开放 市民排队入场 冰面游人如织'
       ]
     }
   },
@@ -204,12 +204,15 @@ export default {
 <style lang="scss">
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common01-report {
+.common01-data {
   width: 100%;
   height: 100%;
   padding: pxrem(30px);
-  .report-wrap{
+  .data-wrap{
       padding: pxrem(100px);
+      background: url("./assets/border.png") no-repeat center;
+      background-size: 100% 100%;
+      position: relative;
      .chart-box {
         position: relative;
         width: 60%;

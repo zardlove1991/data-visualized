@@ -1,6 +1,6 @@
 <template>
-  <div class="common01-report">
-    <div class="report-wrap">
+  <div class="common01-myyancheng">
+    <div class="myyancheng-wrap">
       <div class="content-wrap sys-flex">
           <div class="left sys-flex sys-vertical flex-justify-between">
             <div class="left-item" v-for="(item,i) in leftList" :key="i">
@@ -140,6 +140,84 @@ export default {
       serviceData: {
         nameList: ['盐城市公积金中心', '人力资源社会保障局', '城市建设投资集团', '交通投资建设控股集团', '盐城市医疗保障局', '盐城市公安局', '盐城市住建局', '盐城市交通运输局'],
         data: [580, 570, 550, 520, 480, 430, 370, 280]
+      },
+      userfromOpt: {
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        color: ['#44CF98', '#DB4E4E', '#E88559', '#0066FF', '#941BF2', '#B3B834'],
+        grid: {
+          left: this.proportion * 30,
+          right: this.proportion * 60,
+          top: this.proportion * 80,
+          bottom: this.proportion * 15,
+          containLabel: true
+        },
+        legend: {
+          orient: 'horizontal',
+          left: 50,
+          bottom: 0,
+          data: ['小米', 'VIVO', '', '华为', '苹果', '', 'OPPO', '其他'],
+          show: true,
+          itemGap: 20,
+          textStyle: {
+            color: '#fff',
+            fontSize: 14
+          },
+          // 使用回调函数
+          formatter: function (name) {
+            var data = [
+              {value: 5, name: '小米'},
+              {value: 15, name: 'VIVO'},
+              {value: 35, name: '华为'},
+              {value: 25, name: '苹果'},
+              {value: 15, name: 'OPPO'},
+              {value: 5, name: '其他'}
+            ]
+            var total = 0
+            var tarValue
+            for (var i = 0, l = data.length; i < l; i++) {
+              total += data[i].value
+              if (data[i].name === name) {
+                tarValue = data[i].value
+              }
+            }
+            var p = ((tarValue / total) * 100)
+            return name + ' ' + ' ' + p + '%'
+          }
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            center: ['50%', '35%'], // 设置饼图位置
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: '30',
+                fontWeight: 'bold'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: [
+              {value: 5, name: '小米'},
+              {value: 15, name: 'VIVO'},
+              {value: 35, name: '华为'},
+              {value: 25, name: '苹果'},
+              {value: 15, name: 'OPPO'},
+              {value: 5, name: '其他'}
+            ]
+          }
+        ]
       }
     }
   },
@@ -352,79 +430,6 @@ export default {
               }
             },
             data: this.serviceData.data
-          }
-        ]
-      }
-    },
-    userfromOpt () {
-      return {
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
-        },
-        color: ['#44CF98', '#DB4E4E', '#E88559', '#0066FF', '#941BF2', '#B3B834'],
-        grid: {
-          left: this.proportion * 30,
-          right: this.proportion * 60,
-          top: this.proportion * 80,
-          bottom: this.proportion * 15,
-          containLabel: true
-        },
-        legend: {
-          orient: 'horizontal',
-          left: 50,
-          bottom: 0,
-          data: ['小米', 'VIVO', '', '华为', '苹果', '', 'OPPO', '其他'],
-          show: true,
-          itemGap: 20,
-          textStyle: {
-            color: '#fff',
-            fontSize: 14
-          },
-          // 使用回调函数
-          formatter: function (name) {
-            var data = [
-              {value: 5, name: '小米'},
-              {value: 15, name: 'VIVO'},
-              {value: 35, name: '华为'},
-              {value: 25, name: '苹果'},
-              {value: 15, name: 'OPPO'},
-              {value: 5, name: '其他'}
-            ]
-            var total = 0
-            var tarValue
-            for (var i = 0, l = data.length; i < l; i++) {
-              total += data[i].value
-              if (data[i].name === name) {
-                tarValue = data[i].value
-              }
-            }
-            var p = ((tarValue / total) * 100)
-            return name + ' ' + ' ' + p + '%'
-          }
-        },
-        series: [
-          {
-            name: '访问来源',
-            type: 'pie',
-            center: ['50%', '35%'], // 设置饼图位置
-            radius: ['50%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-              show: false,
-              position: 'center'
-            },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: '30',
-                fontWeight: 'bold'
-              }
-            },
-            labelLine: {
-              show: false
-            },
-            data: this.userFromData
           }
         ]
       }
@@ -657,11 +662,11 @@ export default {
 <style lang="scss">
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common01-report {
+.common01-myyancheng {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
-  .report-wrap{
+  .myyancheng-wrap{
     width: 100%;
     height: 100%;
     background: url("./assets/border.png") no-repeat center;

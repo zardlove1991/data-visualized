@@ -1,7 +1,7 @@
 
 <template>
-  <div class="common01-report">
-    <div class="report-wrap common01-border wechatRankbg">
+  <div class="common01-wechatrank">
+    <div class="wechatrank-wrap common01-border wechatRankbg">
       <!-- <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '盐城市微信排行榜'}}</div> -->
       <div class="wrap-content sys-flex sys-flex-wrap">
           <div class="list-item sys-flex sys-flex-center flex-justify-between animated" :class="{'mr70': k % 2 == 0, 'flipInX' : item.name}" v-for="(item,k) in list" :key="k" :style="{'animation-delay' : k/2+'s'}">
@@ -85,14 +85,14 @@ export default {
 <style lang="scss">
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common01-report {
+.common01-wechatrank {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
   .wechatRankbg{
     background: url('./assets/back.png')
   }
-  .report-wrap {
+  .wechatrank-wrap {
     padding: pxrem(200px) pxrem(84px) pxrem(40px);
     color: #fff;
     .wrap-content {

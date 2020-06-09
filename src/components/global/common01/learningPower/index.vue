@@ -1,6 +1,6 @@
 <template>
-  <div class="common01-report">
-    <div class="report-wrap">
+  <div class="common01-power">
+    <div class="power-wrap">
       <!-- <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '学习强国'}}</div> -->
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
@@ -84,11 +84,11 @@ export default {
 <style lang="scss">
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common01-report {
+.common01-power {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
-  .report-wrap {
+  .power-wrap {
     padding: pxrem(230px) pxrem(90px) pxrem(78px);
     color: #fff;
     width: 100%;

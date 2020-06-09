@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-report">
+  <div class="common01-live">
       <div class="live-wrap sys-flex sys-flex-center flex-justify-center">
         <img src="./assets/camera.png" alt="">
       </div>
@@ -22,7 +22,7 @@ export default {
 <style lang="scss">
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common01-report {
+.common01-live {
     padding: pxrem(40px);
     width: 100%;
     height: 100%;
