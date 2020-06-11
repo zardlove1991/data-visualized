@@ -176,7 +176,7 @@ export default {
                   return str
                 },
                 lineHeight: 17,
-                fontWeight: 600,
+                fontWeight: 800,
                 position: ['100%', 0],
                 show: true
               }
