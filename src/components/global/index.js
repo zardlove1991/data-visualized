@@ -88,6 +88,7 @@ export const liuhecomponentJSactivityinfo = getComponent('liuhe/JSactivityinfo')
 export const liuhecomponentJSordersheet = getComponent('liuhe/JSordersheet') // 金山大屏 点单中心
 export const liuhecomponentJSorgstructure = getComponent('liuhe/JSorgstructure') // 金山大屏 组织架构
 export const liuhecomponentJScivilizationrank = getComponent('liuhe/JScivilizationrank') // 金山大屏 文明管理
+export const liuhecomponentJScivilizationmap = getComponent('liuhe/JScivilizationmap') // 金山大屏 文明地图
 /* 标准套系01 */
 export const common01componentTitle = getComponent('common01/title') // 标题
 export const common01componentClueGather = getComponent('common01/clueGather')
