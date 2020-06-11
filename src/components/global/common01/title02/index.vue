@@ -30,7 +30,7 @@ export default {
   align-items: center;
   .title-title {
     width: 100%;
-    font-size: pxrem(120px);
+    font-size: pxrem(160px);
     letter-spacing: 0.10em;
     font-weight: bold;
     color: #ffffff;
