@@ -235,12 +235,10 @@ export default {
     pointer-events: none;
     position: absolute;
     top: 0;
-    left: 0.2rem;
-    bottom: 0.2rem;
-    right: 0.2rem;
+    left: 0;
     z-index: 2;
-    // width: 100%;
-    // height: 100%;
+    width: 100%;
+    height: 100%;
     background: url("./assets/mapBorder1.png") no-repeat center;
     background-size: 100% 100%;
   }
