@@ -28,7 +28,7 @@
         <div class="civilization_list_item flex">
           <div v-for="list in currentOrgList" :key="list.name" class="list_item flex flex-center">
             <div class="list_item_left flex-one flex">
-              <span class="list_item_name">{{list.name}}（{{list.value[2]}}人）</span>
+              <span class="list_item_name" @click="toOrgDetail(list)">{{list.name}}（{{list.value[2]}}人）</span>
             </div>
             <img src="./assets/icon_detail@2x.png" alt="" class="item_detail_icon" @click="toOrgDetail(list)">
           </div>
@@ -76,7 +76,8 @@
            </div>
          </div>
        </div>
-        <div class="back-btn common01-ft36" @click="pageBack">返回</div>
+        <div class="back-btn back-btn-last common01-ft36" @click="pageBack">上一级</div>
+        <div class="back-btn common01-ft36" @click="depath = 1">返回</div>
     </div>
   </div>
 </template>
@@ -174,6 +175,8 @@ export default {
                   }
                   return str
                 },
+                lineHeight: 17,
+                fontWeight: 600,
                 position: ['100%', 0],
                 show: true
               }
@@ -475,6 +478,12 @@ export default {
       background: url("./assets/icon_back.png") no-repeat;
       background-size: 0.36rem 0.28rem;
       background-position: 0 0.08rem;
+    }
+    .back-btn-last{
+      background: url("./assets/icon_parent@2x.png") no-repeat;
+      background-size: 0.36rem 0.36rem;
+      background-position: 0 0.08rem;
+      right: 2.8rem;
     }
   }
   .civilization_map{
