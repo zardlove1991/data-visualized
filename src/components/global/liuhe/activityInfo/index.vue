@@ -158,8 +158,10 @@ export default {
         }
       })
       this.swiperDataList = [...this.dataList]
-      this.showDetail = true
-      this.swiperOption.initialSlide = this.showIndex - 1
+      this.swiperOption.initialSlide = this.showIndex
+      setTimeout(() => {
+        this.showDetail = true
+      }, 0)
     },
     backList () {
       this.showDetail = false

@@ -26,7 +26,7 @@
           <!-- <div class="list_top_des">详情</div> -->
         </div>
         <div class="civilization_list_item flex">
-          <div v-for="list in currentOrgList" :key="list.name" class="list_item flex flex-center">
+          <div v-for="list in currentOrgList" :key="list.id" class="list_item flex flex-center">
             <div class="list_item_left flex-one flex">
               <span class="list_item_name" @click="toOrgDetail(list)">{{list.name}}（{{list.value[2]}}人）</span>
             </div>
@@ -137,6 +137,7 @@ export default {
             },
             hoverAnimation: true,
             label: {
+              clickable: true,
               normal: {
                 formatter: '{b}',
                 position: 'right',
@@ -176,7 +177,7 @@ export default {
                   return str
                 },
                 lineHeight: 17,
-                fontWeight: 800,
+                fontWeight: 'bolder',
                 position: ['100%', 0],
                 show: true
               }

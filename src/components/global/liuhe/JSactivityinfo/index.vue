@@ -50,9 +50,8 @@
       </div>
       <swiper
         :options="swiperOption"
+        @slideChangeTransitionEnd='swiperChange'
         ref="mySwiper"
-        @slideNextTransitionEnd="goNext"
-        @slidePrevTransitionEnd="goBefore"
       >
         <swiper-slide v-for="(v, k) in swiperDataList" :key="k" class="content-swiper">
           <div class="detail-title">{{ v.title }}</div>
@@ -66,14 +65,25 @@
           <div
             class="detail-content common01-ft36"
             :style="setFontSize(40)"
-            v-if="v.contentDetail || getContent(k)"
+            v-if="v.contentDetail"
           >
+            <div class="video" v-if="v.videoList.length">
+              <video-player
+                v-for="video in v.videoList"
+                :key="video.file_name"
+                class="vjs-custom-skin"
+                ref="videoPlayer"
+                :options="video.options"
+                :playsinline="true"
+                customEventName="customstatechangedeventname"
+              ></video-player>
+            </div>
             <div class="contnet-detail-div" v-html="handelHtml(v.contentDetail)"></div>
           </div>
         </swiper-slide>
       </swiper>
-      <div class="swiper-button-prev swiper-button-white" @click="goBefore()"></div>
-      <div class="swiper-button-next swiper-button-white" @click="goNext"></div>
+      <div class="swiper-button-prev swiper-button-white"></div>
+      <div class="swiper-button-next swiper-button-white"></div>
     </div>
   </div>
 </template>
@@ -82,6 +92,9 @@
 import { getJSActivityInfo, getActivityInfoDetail } from '@/servers/interface'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'video.js/dist/video-js.css'
+import { videoPlayer } from 'vue-video-player'
+import 'videojs-contrib-hls'
 export default {
   name: 'manuscript',
   data () {
@@ -93,6 +106,7 @@ export default {
       showDetail: false,
       page: 1,
       maxPage: 3,
+      currentPage: 1,
       swiperLeftPage: 1, // 定位swiper滑动边界页码
       swiperRightPage: 1, // 定位swiper滑动边界页码
       showIndex: 0,
@@ -117,7 +131,7 @@ export default {
           el: '.swiper-pagination'
         },
         direction: 'horizontal',
-        loop: true,
+        loop: false,
         observer: true,
         observeParents: true,
         paginationClickable: true
@@ -136,21 +150,26 @@ export default {
     }, this.frequency)
   },
   methods: {
-    goBefore () {
-      if (this.swiperLeftPage > 1 && this.$refs.mySwiper.swiper.realIndex < 2) {
-        this.getMoreList(this.swiperLeftPage--, 'left')
+    swiperChange () {
+      if (this.$refs.videoPlayer && this.$refs.videoPlayer.length) {
+        this.$refs.videoPlayer.forEach(e => {
+          e.player.pause()
+        })
       }
     },
-    goNext () {
-      if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 2) {
-        this.getMoreList(this.swiperRightPage++, 'right')
-      }
-    },
+    // goBefore () {
+    //   console.log(this.swiperDataList)
+    //   if (this.currentPage > 1 && this.$refs.mySwiper.swiper.realIndex < 1) {
+    //     this.getMoreList(this.currentPage--, 'left')
+    //   }
+    // },
+    // goNext () {
+    //   if (this.$refs.mySwiper.swiper.realIndex === this.dataList.length - 1) {
+    //     this.getMoreList(this.currentPage++, 'right')
+    //   }
+    // },
     getDetail (item) {
       // 保存swiper所需数据
-      this.swiperLeftPage = this.page
-      this.swiperRightPage = this.page
-
       this.showIndex = 0
       this.dataList.forEach((v, index) => {
         if (v.id === item.id) {
@@ -158,50 +177,64 @@ export default {
         }
       })
       this.swiperDataList = [...this.dataList]
-      this.showDetail = true
-      this.swiperOption.initialSlide = this.showIndex - 1
+      this.getListcontent()
+      this.swiperOption.initialSlide = this.showIndex
+      setTimeout(() => {
+        this.showDetail = true
+      }, 0)
     },
     backList () {
       this.showDetail = false
     },
-    // 滑动获取更多
-    getMoreList (pageNum, type) {
-      // 接口需要调整 获取更多
-      getJSActivityInfo(pageNum, this.count).then(res => {
-        if (!res.data.error_code) {
-          if (res.data.result.data && res.data.result.data.length) {
-            let newSwiperData = res.data.result.data
-            newSwiperData.map(v => {
-              v.contentDetail = ''
-              let newDate = v.create_time.split('-').join('/')
-              let _date = new Date(newDate)
-              let month = (_date.getMonth() + 1).toString().padStart(2, '0')
-              let day = _date
-                .getDate()
-                .toString()
-                .padStart(2, '0')
-              let hour = _date
-                .getHours()
-                .toString()
-                .padStart(2, '0')
-              let min = _date
-                .getMinutes()
-                .toString()
-                .padStart(2, '0')
-              v.showTime = month + '-' + day + '  ' + hour + ':' + min
-            })
-            if (type === 'right') {
-              this.swiperDataList = [...this.swiperDataList, ...newSwiperData]
-            }
-            if (type === 'left') {
-              this.swiperDataList = [...newSwiperData, ...this.swiperDataList]
-            }
-          }
+    getListcontent () {
+      this.swiperDataList.forEach((val, index) => {
+        if (val.contentDetail) {
+          return false
         }
+        this.getContent(index)
       })
     },
+    // 滑动获取更多
+    // getMoreList (pageNum, type) {
+    //   // 接口需要调整 获取更多
+    //   getJSActivityInfo(pageNum, this.count).then(res => {
+    //     if (!res.data.error_code) {
+    //       if (res.data.result.data && res.data.result.data.length) {
+    //         let newSwiperData = res.data.result.data
+    //         newSwiperData.map(v => {
+    //           v.contentDetail = ''
+    //           let newDate = v.create_time.split('-').join('/')
+    //           let _date = new Date(newDate)
+    //           let month = (_date.getMonth() + 1).toString().padStart(2, '0')
+    //           let day = _date
+    //             .getDate()
+    //             .toString()
+    //             .padStart(2, '0')
+    //           let hour = _date
+    //             .getHours()
+    //             .toString()
+    //             .padStart(2, '0')
+    //           let min = _date
+    //             .getMinutes()
+    //             .toString()
+    //             .padStart(2, '0')
+    //           v.showTime = month + '-' + day + '  ' + hour + ':' + min
+    //         })
+    //         if (type === 'right') {
+    //           this.swiperDataList = [...this.swiperDataList, ...newSwiperData]
+    //           this.getListcontent()
+    //         }
+    //         if (type === 'left') {
+    //           this.swiperDataList = [...newSwiperData, ...this.swiperDataList]
+    //           this.getListcontent()
+    //         }
+    //       }
+    //     }
+    //   })
+    // },
     getDataList () {
       getJSActivityInfo(this.page, this.count).then(res => {
+        this.currentPage = this.page
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
             this.dataList = []
@@ -248,7 +281,38 @@ export default {
       getActivityInfoDetail(this.swiperDataList[k].id).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.content) {
-            this.swiperDataList[k].contentDetail = res.data.result.content
+            let videoList = []
+            this.$set(this.swiperDataList[k], 'contentDetail', res.data.result.content)
+            if (res.data.result.attachments && res.data.result.attachments.length) {
+              res.data.result.attachments.forEach(val => {
+                if (val.type === 'video') {
+                  val.options = {
+                    autoplay: false, // 自动播放
+                    controls: true, // 是否显示控制栏
+                    muted: true,
+                    fluid: true,
+                    width: 820,
+                    sourceOrder: true,
+                    sources: [
+                      {
+                        src: 'http://vodjs.newsjs.net/' + val.file_path + val.file_name
+                      }
+                    ],
+                    poster: 'http://imgjs.newsjs.net/' + val.index_pic, // 播放器默认图片
+                    controlBar: {
+                      // 配置控制栏
+                      timeDivider: false, // 时间分割线
+                      durationDisplay: false, // 总时间
+                      progressControl: true, // 进度条
+                      customControlSpacer: true, // 未知
+                      fullscreenToggle: true // 全屏
+                    }
+                  }
+                  videoList.push(val)
+                }
+              })
+            }
+            this.$set(this.swiperDataList[k], 'videoList', videoList)
           }
         }
       })
@@ -265,7 +329,8 @@ export default {
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    videoPlayer
   }
 }
 </script>
@@ -420,24 +485,29 @@ export default {
     .detail-content {
       width: 100%;
       // height: 6.2rem;
-      overflow: hidden;
+      overflow-y: scroll;
       margin-top: pxrem(40px);
       padding: 0 pxrem(30px);
-      & > div {
-        width: 100%;
-        height: 100%;
-        overflow-y: scroll;
-      }
-      .pic {
-        img {
-          margin-bottom: pxrem(20px);
-        }
-      }
-      .video {
+      .video{
+        margin: 0 auto;
+        width: 12rem;
+        height: 6rem;
         .vjs-custom-skin {
           width: 100%;
           height: 100%;
           overflow: hidden;
+          .vjs-big-play-button{
+            left: calc(50% - 1.5em);
+            top: calc(50% - 0.8em);
+          }
+        }
+      }
+      & > div {
+        width: 100%;
+      }
+      .pic {
+        img {
+          margin-bottom: pxrem(20px);
         }
       }
       .contnet-detail-div {

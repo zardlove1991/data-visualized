@@ -211,8 +211,8 @@ export default {
   methods: {
     backList () {
       this.showDetail = false
-      this.getList('')
-      this.type = 'latest'
+      // this.type = 'latest'
+      this.getList()
     },
     changeDetail (item) {
       this.showDetail = true
