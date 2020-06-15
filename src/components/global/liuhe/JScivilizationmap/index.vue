@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div class="back-btn common01-ft36" @click="pageBack">返回</div>
+      <div class="back-btn common01-ft36" @click="depath = 1; canBack = false">返回</div>
     </div>
     <!-- 三级页面 -->
     <div class="common01-border civilizationmap_twopage" v-if="depath === 3">
@@ -77,7 +77,7 @@
          </div>
        </div>
         <div class="back-btn back-btn-last common01-ft36" @click="pageBack">上一级</div>
-        <div class="back-btn common01-ft36" @click="depath = 1">返回</div>
+        <div class="back-btn common01-ft36" @click="depath = 1; canBack = false">返回</div>
     </div>
   </div>
 </template>
@@ -86,11 +86,12 @@
 import echarts from 'echarts'
 import { getAllOrgList, getOrgNavList, getOrganizeDetail } from '@/servers/interface'
 let JSicon = require('./assets/icon_station@2x.png')
-var jsMap = require(`./jsonData/jsmap.json`)
+let jsMap = require(`./jsonData/jsmap.json`)
 echarts.registerMap('jsmap', jsMap)
 export default {
   data () {
     return {
+      canBack: false,
       depath: 1, // 页面层级
       orgDetailInfo: {}, // 组织详情
       currentOrgList: [], // 当前组织列表
@@ -121,6 +122,51 @@ export default {
           bottom: 20,
           top: 20
         },
+        tooltip: {
+          trigger: 'item',
+          triggerOn: 'click',
+          position: function (point, params, dom, rect, size) {
+            // 鼠标坐标和提示框位置的参考坐标系是：以外层div的左上角那一点为原点，x轴向右，y轴向下
+            // 提示框位置
+            let x = 0 // x坐标位置
+            let y = 0 // y坐标位置
+            // 当前鼠标位置
+            let pointX = point[0]
+            let pointY = point[1]
+            // 外层div大小
+            // let viewWidth = size.viewSize[0];
+            // let viewHeight = size.viewSize[1];
+            // 提示框大小
+            let boxWidth = size.contentSize[0]
+            let boxHeight = size.contentSize[1]
+            // boxWidth > pointX 说明鼠标左边放不下提示框
+            if (boxWidth > pointX) {
+              x = pointX + 10
+            } else { // 左边放的下
+              x = pointX - boxWidth - 20
+            }
+            // boxHeight > pointY 说明鼠标上边放不下提示框
+            if (boxHeight > pointY) {
+              y = pointY
+            } else { // 上边放得下
+              y = pointY - boxHeight + 30
+            }
+            return [x, y]
+          },
+          formatter (params) {
+            let res = '<div id="specialLook"  onclick="tooltipClick(\'' + params.data.id + '\')"><p>站点名称: ' + params.data.name + '</p><p>站点人数: ' + params.data.value[2] + '人</p><p>站点地址: ' + params.data.address + '</p></div>'
+            return res
+          },
+          textStyle: {
+            align: 'left'
+          }
+          // position: function (pos, params, dom, rect, size) {
+          //   // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+          //   let obj = {top: 60}
+          //   obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5
+          //   return obj
+          // }
+        },
         series: [
           {
             name: '金山区新时代文明实践中心',
@@ -135,6 +181,11 @@ export default {
             rippleEffect: {
               brushType: 'stroke'
             },
+            // emphasis: {
+            //   label: {
+            //     color: 'rgba(255, 0, 0, 1)'
+            //   }
+            // },
             hoverAnimation: true,
             label: {
               clickable: true,
@@ -164,6 +215,11 @@ export default {
             rippleEffect: {
               brushType: 'stroke'
             },
+            // emphasis: {
+            //   label: {
+            //     color: 'rgba(255, 0, 0, 1)'
+            //   }
+            // },
             hoverAnimation: true,
             label: {
               normal: {
@@ -197,6 +253,11 @@ export default {
             rippleEffect: {
               brushType: 'stroke'
             },
+            emphasis: {
+              itemStyle: {
+                color: 'rgba(217, 0, 0, 1)'
+              }
+            },
             hoverAnimation: true,
             label: {
               normal: {
@@ -220,6 +281,11 @@ export default {
             rippleEffect: {
               brushType: 'stroke'
             },
+            emphasis: {
+              itemStyle: {
+                color: 'rgba(217, 0, 0, 1)'
+              }
+            },
             hoverAnimation: true,
             label: {
               normal: {
@@ -229,7 +295,7 @@ export default {
               }
             },
             itemStyle: {
-              color: 'rgba(11,252,255)'
+              color: 'rgba(11,252,255,1)'
             },
             zlevel: 1
           }
@@ -247,6 +313,14 @@ export default {
       this.option.series[3].data = this.allOrgData[3]
       myMap.setOption(this.option)
     })
+    let _this = this
+    window.tooltipClick = function (id) {
+      _this.canBack = true
+      myMap.dispatchAction({
+        type: 'hideTip' // 默认显示江苏的提示框
+      })
+      _this.toOrgDetail({ id })
+    }
   },
   methods: {
     // 获取全部组织列表
@@ -315,6 +389,11 @@ export default {
       })
     },
     pageBack () {
+      if (this.canBack) {
+        this.depath = 1
+        this.canBack = false
+        return false
+      }
       this.depath = this.depath - 1
     }
   }
@@ -322,6 +401,9 @@ export default {
 </script>
 
 <style lang="scss">
+#specialLook{
+	pointer-events: all;
+}
 @import "~@/styles/index.scss";
 @import "../style/index.scss";
 .commom-civilizationmap{
