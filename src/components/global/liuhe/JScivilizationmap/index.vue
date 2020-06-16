@@ -10,7 +10,7 @@
              <img src="./assets/icon_station@2x.png" alt="" class="icon_station1" :class="{icon_station2: index === 1}" v-if="index === 0 || index === 1">
               <span class="organize-list-nav-cir" :class="{organize_list_nav_cir1: index === 3}" v-if="index === 2 || index === 3"></span>
            </div>
-           <p class="organize_name">{{item.name}}</p><span class="organize_num">（{{item.number}}）</span>
+           <p class="organize_name">{{item.name}}</p><span class="organize_num"><span v-if="item.number"> （{{item.number}}）</span> </span>
          </div>
        </div>
     </div>
@@ -49,13 +49,17 @@
          <div class="org_detail_info">
            <div class="detail_info_top flex">
              <div class="detail_info_top_left flex-one flex">
-               <div class="detail_info_number">
-                 <img src="./assets/icon_member@2x.png" alt="">
-                 <span class="detail_info_number_span">站点人数&nbsp;&nbsp;{{orgDetailInfo.volunteer_num}}人</span>
+               <div class="detail_info_number  flex" v-if="orgDetailInfo.title">
+                 <img src="./assets/icon_name.png" alt="">
+                 <span class="detail_info_number_span">队伍名称&nbsp;&nbsp;</span><p>{{orgDetailInfo.title}}</p>
                </div>
-               <div class="detail_info_number">
+               <div class="detail_info_number flex">
+                 <img src="./assets/icon_member@2x.png" alt="">
+                 <span class="detail_info_number_span">志愿者人数&nbsp;&nbsp;{{orgDetailInfo.volunteer_num}}人</span>
+               </div>
+               <div class="detail_info_number detail_info_number_add flex">
                  <img src="./assets/icon_location@2x.png"  alt="">
-                 <span class="detail_info_number_span">站点地址&nbsp;&nbsp;{{orgDetailInfo.address}}</span>
+                 <span class="detail_info_number_span">地址&nbsp;&nbsp;</span><p>{{orgDetailInfo.address}}</p>
                </div>
              </div>
              <div class="detail_info_top_right" v-if="orgDetailInfo.image">
@@ -377,6 +381,12 @@ export default {
       })
     },
     toOrgList (item, index) {
+      if (!index) {
+        this.depath = 3
+        this.canBack = true
+        this.toOrgDetail(this.allOrgData[index][0])
+        return false
+      }
       this.currentTitle = item.name
       this.depath = 2
       this.currentOrgList = index ? [...this.allOrgData[index]] : [...this.allOrgData[1]]
@@ -486,26 +496,32 @@ export default {
          overflow-y: auto;
          padding: 0.553rem 0.633rem 0 0.633rem;
          .detail_info_top{
-           height: 1.9rem;
+          //  height: 1.9rem;
+           align-items: center;
            margin-bottom: 0.6rem;
            padding-left: 0.221rem;
            .detail_info_top_left{
              flex-direction: column;
              justify-content: space-between;
              align-items: flex-start;
-             padding: 0.19rem 0;
+            //  padding: 0.19rem 0;
              .detail_info_number{
-               vertical-align: middle;
+               text-align: left;
                color:#ffffff;
                font-size: 0.348rem;
+               margin-bottom: 0.3rem;
                img{
-                  vertical-align: middle;
                   width: 0.348rem;
                   height: 0.348rem;
+                  margin-top: 0.07rem;
+                  margin-right: 0.1rem;
                 }
                .detail_info_number_span{
-                 vertical-align: middle;
+                 white-space: nowrap;
                }
+             }
+             .detail_info_number_add{
+               margin-bottom: 0;
              }
            }
            .detail_info_top_right{
