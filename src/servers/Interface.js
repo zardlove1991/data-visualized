@@ -180,3 +180,17 @@ export const getCloudHotword = (keyword = '', source = '') => createAPI(`${https
 export const getCityNews = (city = '', page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/city_news?city=${city}&page=${page}&size=${size}`)
 // 全网新闻
 export const getWebNews = (page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/news?page=${page}&size=${size}`)
+
+// 雨花台大屏
+// 舆情分析
+export const getYuqing = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicEventNews?id=${id}`)
+// 情感分析
+export const getEmotional = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicEmotion?id=${id}`)
+// 关键字
+export const getKeywords = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
+// 内容类型
+export const getContent = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicContentType?id=${id}`)
+// 媒体占比
+export const getMedia = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicMedia?id=${id}`)
+// 热度趋势
+export const getTrend = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTrend?id=${id}`)

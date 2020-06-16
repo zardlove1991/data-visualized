@@ -6,7 +6,7 @@
       <ul class="leftList">
         <li v-for="(item, index) in leftList.slice(0,8)" :key="index">
           <span class="dian"></span>
-          <p>{{item.name}}</p>  
+          <p>{{item.news_title}}</p>  
         </li>
       </ul>
     </div>
@@ -58,7 +58,7 @@
  </div>
 </template>
 <script>
-// import { getCloudHotword } from '@/servers/interface'
+import { getYuqing, getEmotional, getKeywords, getContent, getMedia, getTrend } from '@/servers/interface'
 import echarts from 'echarts'
 import 'echarts-wordcloud'
 export default {
@@ -67,7 +67,8 @@ export default {
     return {
       proportion: 1,
       leftList: [],
-      hotWordsList: []
+      hotWordsList: [],
+      id: '5886094'
     }
   },
   created () {
@@ -80,28 +81,32 @@ export default {
   },
   methods: {
     getLeftList () {
-      this.leftList = [
-        { name: '阳光宝贝育儿园没有幼儿园资质，' },
-        { name: '阳光宝贝育，要求学校退费并协调安排孩子上其他幼儿园' },
-        { name: '协调安排孩子上其他幼儿园' },
-        { name: '阳光宝贝育儿园没有幼儿园资质，而且给孩子食用过期食物，要求学校退费并协调安排孩子上其他幼儿园' },
-        { name: '阳光宝贝育儿园没' },
-        { name: '阳光宝贝育儿园没有幼儿园资质，而且给孩子食子上其他幼儿园' },
-        { name: '阳光宝贝育儿园没有幼儿退费并协调安排孩子上其他幼儿园' },
-        { name: '阳光宝贝育儿园没有幼儿园资质，而且给孩子食用' },
-        { name: '儿园没有幼儿园资质，而且给孩子食用过期食物，要求学校退费并协调安排孩子上其他幼儿园' },
-        { name: '阳光园' }
-      ]
+      getYuqing(this.id).then(res => {
+        if (res.data.error_code === 0) {
+          this.leftList = res.data.result
+        }
+      })
     },
     getEmotional () {
-      let legendData = ['乐观', '消极', '中立']
-      let seriesData = [
-        { value: 335, name: '乐观', itemStyle: { color: '#003CFF' } },
-        { value: 310, name: '消极', itemStyle: { color: '#DE3766' } },
-        { value: 234, name: '中立', itemStyle: { color: '#DE9937' } }
-      ]
-      this.$nextTick(() => {
-        this.initEmotional(legendData, seriesData)
+      let legendData = []
+      let seriesData = []
+      getEmotional(this.id).then(res => {
+        if (res.data.error_code === 0) {
+          res.data.result.forEach(item => {
+            legendData.push(item.name_zh)
+            seriesData.push({
+              value: item.count,
+              name: item.name_zh,
+              itemStyle: { color: '' }
+            })
+          })
+        }
+        seriesData[0].itemStyle.color = '#003CFF'
+        seriesData[1].itemStyle.color = '#DE3766'
+        seriesData[2].itemStyle.color = '#DE9937'
+        this.$nextTick(() => {
+          this.initEmotional(legendData, seriesData)
+        })
       })
     },
     initEmotional (legendData, seriesData) {
@@ -131,22 +136,22 @@ export default {
           textStyle: { color: '#fff', fontSize: '18', padding: [ 0, 0, 0, 10 ] }
         },
         series: [
-          {
-            name: '访问来源',
-            type: 'pie',
-            selectedMode: 'single',
-            center: ['50%', '38%'],
-            radius: [0, '20%'],
-            label: {
-              position: 'inner'
-            },
-            labelLine: {
-              show: false
-            },
-            data: [
-              { value: 335, name: '乐观', selected: true, itemStyle: { color: '#003CFF' } }
-            ]
-          },
+          // {
+          //   name: '访问来源',
+          //   type: 'pie',
+          //   selectedMode: 'single',
+          //   center: ['50%', '38%'],
+          //   radius: [0, '20%'],
+          //   label: {
+          //     position: 'inner'
+          //   },
+          //   labelLine: {
+          //     show: false
+          //   },
+          //   data: [
+          //     { value: 335, name: '乐观', selected: true, itemStyle: { color: '#003CFF' } }
+          //   ]
+          // },
           {
             name: '访问来源',
             type: 'pie',
@@ -175,30 +180,18 @@ export default {
       _this.myChart.setOption(options)
     },
     getKeywords () {
-      this.hotWordsList = [
-        { name: 'w道', value: 1089 },
-        { name: 'w我', value: 2012 },
-        { name: 'w我也不递', value: 38425 },
-        { name: 'w我也不是', value: 44566 },
-        { name: 'w我也是', value: 5744 },
-        { name: 'w道', value: 11089 },
-        { name: 'w我', value: 20312 },
-        { name: 'w我也不递', value: 48425 },
-        { name: 'w我也不是', value: 64566 },
-        { name: 'w我也是', value: 5844 },
-        { name: 'w道', value: 1099 },
-        { name: 'w我', value: 2012 },
-        { name: 'w我也不递', value: 33425 },
-        { name: 'w我也不是', value: 44466 },
-        { name: 'w我也是', value: 5754 },
-        { name: 'w道', value: 1289 },
-        { name: 'w我', value: 2612 },
-        { name: 'w我也不递', value: 88425 },
-        { name: 'w我也不是', value: 9566 },
-        { name: 'w我也是', value: 5724 }
-      ]
-      this.$nextTick(() => {
-        this.initWordCloud()
+      getKeywords(this.id).then(res => {
+        if (res.data.error_code === 0) {
+          res.data.result.slice(0, 50).forEach(item => {
+            this.hotWordsList.push({
+              name: item.name_zh,
+              value: item.count
+            })
+          })
+          this.$nextTick(() => {
+            this.initWordCloud()
+          })
+        }
       })
     },
     initWordCloud () {
@@ -241,37 +234,41 @@ export default {
       _this.myChart.setOption(options)
     },
     getContentList () {
-      this.$nextTick(() => {
-        this.initContent()
+      let indicator = []
+      let seriesData = []
+      getContent(this.id).then(res => {
+        if (res.data.error_code === 0) {
+          res.data.result.forEach(item => {
+            indicator.push({
+              text: item.name_zh,
+              // max: 100,
+              color: 'rgba(255,255,255,1)'
+            })
+            seriesData.push(item.count)
+          })
+          this.$nextTick(() => {
+            this.initContent(indicator, seriesData)
+          })
+        }
       })
     },
-    initContent () {
+    initContent (indicator, seriesData) {
       const _this = this
       _this.myChart = echarts.init(this.$refs.analysis)
       _this.option = {
-        title: {
-          text: ''
-        },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
           left: 'center',
           textStyle: { // 图例的公用文本样式。
-            fontSize: 15,
+            fontSize: 18,
             color: '#fff'
           }
         },
         radar: [
           {
-            indicator: [
-              {text: '生活', max: 100, color: 'rgba(255,255,255,1)'},
-              {text: '国际', max: 100, color: 'rgba(255,255,255,1)'},
-              {text: '社会', max: 100, color: 'rgba(255,255,255,1)'},
-              {text: '科技', max: 100, color: 'rgba(255,255,255,1)'},
-              {text: '财经', max: 100, color: 'rgba(255,255,255,1)'},
-              {text: '军事', max: 100, color: 'rgba(255,255,255,1)'}
-            ],
+            indicator: indicator,
             center: ['50%', '40%'],
             name: {
               textStyle: {
@@ -325,7 +322,7 @@ export default {
             },
             data: [
               {
-                value: [70, 40, 85, 40, 70, 80]
+                value: seriesData
               }
             ]
           }
@@ -334,17 +331,30 @@ export default {
       _this.myChart.setOption(_this.option)
     },
     getMediaList () {
-      let legendData = ['APP', '微信', '网站', '论坛', '微博', '报刊']
-      let seriesData = [
-        { value: 335, name: 'APP', itemStyle: { color: '#003CFF' } },
-        { value: 310, name: '微信', itemStyle: { color: '#44CF98' } },
-        { value: 234, name: '网站', itemStyle: { color: '#DE9937' } },
-        { value: 335, name: '论坛', itemStyle: { color: '#941BF2' } },
-        { value: 310, name: '微博', itemStyle: { color: '#DE3766' } },
-        { value: 234, name: '报刊', itemStyle: { color: '#DE6E00' } }
-      ]
-      this.$nextTick(() => {
-        this.initMediaChart(legendData, seriesData)
+      let legendData = []
+      let seriesData = []
+      getMedia(this.id).then(res => {
+        if (res.data.error_code === 0) {
+          res.data.result.forEach(item => {
+            seriesData.push({
+              name: item.name_zh,
+              value: item.count,
+              itemStyle: {
+                color: ''
+              }
+            })
+            legendData.push(item.name_zh)
+          })
+          seriesData[0].itemStyle.color = '#003CFF'
+          seriesData[1].itemStyle.color = '#44CF98'
+          seriesData[2].itemStyle.color = '#DE9937'
+          seriesData[3].itemStyle.color = '#941BF2'
+          seriesData[4].itemStyle.color = '#DE3766'
+          seriesData[5].itemStyle.color = '#DE6E00'
+        }
+        this.$nextTick(() => {
+          this.initMediaChart(legendData, seriesData)
+        })
       })
     },
     initMediaChart (legendData, seriesData) {
@@ -402,11 +412,59 @@ export default {
       _this.myChart.setOption(options)
     },
     getHotList () {
-      this.$nextTick(() => {
-        this.initHotChart()
+      let legendData = []
+      let xAxisData = []
+      let colorList = ['rgba(0,61,255,1)', 'rgba(70,207,152,1)', 'rgba(222,153,55,1)', 'rgba(147,29,242,1)', 'rgba(222,55,102,1)', 'rgba(222,110,0,1)', 'rgba(179,227,56,1)', 'rgba(219,134,158,1)']
+      let seriesData = []
+      getTrend(this.id).then(res => {
+        if (res.data.error_code === 0) {
+          seriesData = res.data.result.map((item, index) => {
+            legendData.push(item.name_zh)
+            let arr = []
+            item.count.forEach(itemData => {
+              arr.push(itemData.value)
+            })
+            return {
+              name: item.name_zh,
+              type: 'line',
+              stack: '总量',
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, // 变化度
+                  // 三种由深及浅的颜色
+                  [ {
+                    offset: 0,
+                    color: colorList[index]
+                  }, {
+                    offset: 0.5,
+                    color: colorList[index].replace(',1)', ',0.5)')
+                  }, {
+                    offset: 1,
+                    color: colorList[index].replace(',1)', ',0)')
+                  } ])
+              },
+              itemStyle: {
+                normal: {
+                  color: colorList[index],
+                  lineStyle: {
+                    color: colorList[index]
+                  }
+                }
+              },
+              data: arr
+            }
+          })
+          res.data.result[0].count.forEach(itemCount => {
+            xAxisData.push(itemCount.field.substring(itemCount.field.length - 5))
+          })
+        }
+        console.log(legendData)
+        console.log(xAxisData)
+        this.$nextTick(() => {
+          this.initHotChart(legendData, xAxisData, seriesData)
+        })
       })
     },
-    initHotChart () {
+    initHotChart (legendData, xAxisData, seriesData) {
       const _this = this
       _this.myChart = echarts.init(this.$refs.hotChart)
       _this.option = {
@@ -423,7 +481,7 @@ export default {
           }
         },
         legend: {
-          data: ['微信', '微博', '网站'],
+          data: legendData,
           textStyle: {
             fontSize: '18',
             color: '#fff'
@@ -440,7 +498,7 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
-            data: ['10.11', '10.12', '10.13', '10.14', '10.15', '10.16', '10.17'],
+            data: xAxisData,
             axisLabel: {
               show: true,
               textStyle: {
@@ -493,92 +551,7 @@ export default {
             }
           }
         ],
-        series: [
-          {
-            name: '微信',
-            type: 'line',
-            stack: '总量',
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, // 变化度
-              // 三种由深及浅的颜色
-                [ {
-                  offset: 0,
-                  color: '#0098F8'
-                }, {
-                  offset: 0.5,
-                  color: 'rgba(0,152,248,0.5)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(0,152,248,0)'
-                } ])
-            },
-            itemStyle: {
-              normal: {
-                color: '#0098F8',
-                lineStyle: {
-                  color: '#0098F8'
-                }
-              }
-            },
-            data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-            name: '微博',
-            type: 'line',
-            stack: '总量',
-            itemStyle: {
-              normal: {
-                color: '#9E00F8',
-                lineStyle: {
-                  color: '#9E00F8'
-                }
-              }
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, // 变化度
-              // 三种由深及浅的颜色
-                [ {
-                  offset: 0,
-                  color: '#9E00F8'
-                }, {
-                  offset: 0.5,
-                  color: 'rgba(212,156,59,0.5)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(212,156,59,0)'
-                } ])
-            },
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: '网站',
-            type: 'line',
-            stack: '总量',
-            itemStyle: {
-              normal: {
-                color: '#D49C3B',
-                lineStyle: {
-                  color: '#D49C3B'
-                }
-              }
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, // 变化度
-              // 三种由深及浅的颜色
-                [ {
-                  offset: 0,
-                  color: '#D49C3B'
-                }, {
-                  offset: 0.5,
-                  color: 'rgba(212,156,59, 0.5)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(255,255,255,0)'
-                } ])
-            },
-            data: [150, 232, 201, 154, 190, 330, 410]
-          }
-        ]
+        series: seriesData
       }
       _this.myChart.setOption(_this.option)
     }
