@@ -2,7 +2,7 @@
   <div class="commom-civilizationmap">
     <!-- 一级页面 -->
     <div class="common01-border civilizationmap_onepage" v-show="depath === 1">
-       <div class="common01-title">{{viewAttr.header || '文明地图'}}</div>
+       <div class="common01-title">{{viewAttr.header || '文明项目'}}</div>
        <div class="civilization_map" id="js-map"></div>
        <div class="organize-list">
          <div class="organize-list-nav flex flex-center" v-for="(item, index) in orgNavList" :key="item.name" @click="toOrgList(item, index)">

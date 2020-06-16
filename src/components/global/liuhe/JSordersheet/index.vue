@@ -188,7 +188,7 @@ export default {
       weekday: '',
       count: 4,
       page: 1,
-      title: '文明项目',
+      title: '金山区新时代文明实践中心',
       isPaging: false,
       detail: {},
       showDetail: false,
