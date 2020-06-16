@@ -2,9 +2,9 @@
  <div class="yuhuatai">
    <div class="yuqing flex">
     <div class="left">
-      <div class="title">5G时代</div>
+      <div class="title">{{title}}</div>
       <ul class="leftList">
-        <li v-for="(item, index) in leftList.slice(0,8)" :key="index">
+        <li v-for="(item, index) in leftList.slice(0,7)" :key="index">
           <span class="dian"></span>
           <p>{{item.news_title}}</p>  
         </li>
@@ -58,7 +58,7 @@
  </div>
 </template>
 <script>
-import { getYuqing, getEmotional, getKeywords, getContent, getMedia, getTrend } from '@/servers/interface'
+import { getYuqing, getEmotional, getKeywords, getContent, getMedia, getTrend, getYuqingList } from '@/servers/interface'
 import echarts from 'echarts'
 import 'echarts-wordcloud'
 export default {
@@ -68,18 +68,46 @@ export default {
       proportion: 1,
       leftList: [],
       hotWordsList: [],
-      id: '5886094'
+      yuQingList: [],
+      index: 0,
+      title: '',
+      id: ''
     }
   },
   created () {
-    this.getLeftList()
-    this.getEmotional()
-    this.getKeywords()
-    this.getContentList()
-    this.getMediaList()
-    this.getHotList()
+    this.getYuqingData()
+    setInterval(() => {
+      this.index += 1
+      if (this.index > this.yuQingList.length - 1) {
+        this.index = 0
+      }
+      this.id = this.yuQingList[this.index].tracker_id
+      this.title = this.yuQingList[this.index].name
+      this.hotWordsList = []
+      this.getLeftList()
+      this.getEmotional()
+      this.getKeywordsData()
+      this.getContentList()
+      this.getMediaList()
+      this.getHotList()
+    }, 10000)
   },
   methods: {
+    getYuqingData () {
+      getYuqingList().then(res => {
+        if (res.data.error_code === 0) {
+          this.yuQingList = res.data.result.data
+          this.title = this.yuQingList[0].name
+          this.id = this.yuQingList[0].tracker_id
+          this.getLeftList()
+          this.getEmotional()
+          this.getKeywordsData()
+          this.getContentList()
+          this.getMediaList()
+          this.getHotList()
+        }
+      })
+    },
     getLeftList () {
       getYuqing(this.id).then(res => {
         if (res.data.error_code === 0) {
@@ -136,24 +164,8 @@ export default {
           textStyle: { color: '#fff', fontSize: '18', padding: [ 0, 0, 0, 10 ] }
         },
         series: [
-          // {
-          //   name: '访问来源',
-          //   type: 'pie',
-          //   selectedMode: 'single',
-          //   center: ['50%', '38%'],
-          //   radius: [0, '20%'],
-          //   label: {
-          //     position: 'inner'
-          //   },
-          //   labelLine: {
-          //     show: false
-          //   },
-          //   data: [
-          //     { value: 335, name: '乐观', selected: true, itemStyle: { color: '#003CFF' } }
-          //   ]
-          // },
           {
-            name: '访问来源',
+            name: '',
             type: 'pie',
             radius: ['40%', '55%'],
             center: ['50%', '40%'],
@@ -179,7 +191,7 @@ export default {
       }
       _this.myChart.setOption(options)
     },
-    getKeywords () {
+    getKeywordsData () {
       getKeywords(this.id).then(res => {
         if (res.data.error_code === 0) {
           res.data.result.slice(0, 50).forEach(item => {
@@ -196,6 +208,7 @@ export default {
     },
     initWordCloud () {
       const _this = this
+      _this.myChart = echarts.init(this.$refs.wordcloud)
       let options = {
         series: [
           {
@@ -230,8 +243,7 @@ export default {
           }
         ]
       }
-      _this.myChart = echarts.init(this.$refs.wordcloud)
-      _this.myChart.setOption(options)
+      _this.myChart.setOption(options, true)
     },
     getContentList () {
       let indicator = []
@@ -331,26 +343,21 @@ export default {
       _this.myChart.setOption(_this.option)
     },
     getMediaList () {
+      let colorList = ['#003CFF', '#44CF98', '#DE9937', '#941BF2', '#DE3766', '#DE6E00']
       let legendData = []
       let seriesData = []
       getMedia(this.id).then(res => {
         if (res.data.error_code === 0) {
-          res.data.result.forEach(item => {
+          res.data.result.forEach((item, index) => {
             seriesData.push({
               name: item.name_zh,
               value: item.count,
               itemStyle: {
-                color: ''
+                color: colorList[index]
               }
             })
             legendData.push(item.name_zh)
           })
-          seriesData[0].itemStyle.color = '#003CFF'
-          seriesData[1].itemStyle.color = '#44CF98'
-          seriesData[2].itemStyle.color = '#DE9937'
-          seriesData[3].itemStyle.color = '#941BF2'
-          seriesData[4].itemStyle.color = '#DE3766'
-          seriesData[5].itemStyle.color = '#DE6E00'
         }
         this.$nextTick(() => {
           this.initMediaChart(legendData, seriesData)
@@ -385,7 +392,7 @@ export default {
         },
         series: [
           {
-            name: '访问来源',
+            name: '',
             type: 'pie',
             radius: ['30%', '40%'],
             center: ['50%', '25%'],
@@ -457,8 +464,6 @@ export default {
             xAxisData.push(itemCount.field.substring(itemCount.field.length - 5))
           })
         }
-        console.log(legendData)
-        console.log(xAxisData)
         this.$nextTick(() => {
           this.initHotChart(legendData, xAxisData, seriesData)
         })

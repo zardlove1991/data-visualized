@@ -194,3 +194,5 @@ export const getContent = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/g
 export const getMedia = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicMedia?id=${id}`)
 // 热度趋势
 export const getTrend = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTrend?id=${id}`)
+// 舆情列表
+export const getYuqingList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTracker?custom_id=210&user_id=26388`)
