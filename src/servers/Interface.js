@@ -135,9 +135,6 @@ export const getM2OPlusWorkRate = (model, currentViewId) => createAPI(`${httpsba
 export const getM2OPlusWorkChartSummary = (model, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkChartSummary?model=${model}&view_id=${currentViewId}`)
 // 天气预报
 export const getJiangningWeather = (city) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/ZWZhNDNmMW/getWeather?city_name=${city}`)
-// 溧水全网热点
-export const getNewsList = (page, count) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?page=${page}&count=${count}`)
-export const getHotWordsList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
 
 // 盐城大屏  传播力数据系统
 export const getPropagationForceData = (model) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getPropagationForceData?model=${model}`)
@@ -177,7 +174,7 @@ export const getCloudNewsList = (page, count, keyword = '', source = '', days = 
 // 线索汇聚新闻详情
 export const getCloudNewsDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsDetail?id=${id}`)
 // 线索汇聚热词
-export const getCloudHotword = (keyword = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsKeywords?k=${keyword}`)
+export const getCloudHotword = (keyword = '', source = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsKeywords?k=${keyword}&source=${source}`)
 
 // 城市新闻
 export const getCityNews = (city = '', page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/city_news?city=${city}&page=${page}&size=${size}`)
