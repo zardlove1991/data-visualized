@@ -196,3 +196,5 @@ export const getMedia = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/get
 export const getTrend = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTrend?id=${id}`)
 // 舆情列表
 export const getYuqingList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTracker?custom_id=210&user_id=26388`)
+
+export const getHotsList = (plateform = 0, page, size, source) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?plateform=${plateform}&page=${page}&size=${size}&source=${source}`, 'post')
