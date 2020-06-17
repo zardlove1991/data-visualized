@@ -34,7 +34,8 @@ export default {
       frequency: 15000,
       maxPage: 3,
       dataList: [],
-      customSize: false
+      customSize: false,
+      source: []
     }
   },
   created () {
@@ -49,6 +50,7 @@ export default {
       if (this.activeIdx === 4) {
         this.activeIdx = 0
       }
+      this.dataList = []
       this.getHotsList()
     }, this.frequency)
   },
@@ -61,23 +63,27 @@ export default {
     getHotsList () {
       switch (this.activeIdx) {
         case 0:
-          this.plateform = 0
+          // this.plateform = 0
+          this.plateForm = 'website'
           this.source = []
           break
         case 1:
-          this.plateform = 2
+          // this.plateform = 2
+          this.plateForm = 'weChat'
           this.source = []
           break
         case 2:
-          this.plateform = 1
+          // this.plateform = 1
+          this.plateForm = 'weiBo'
           this.source = []
           break
         case 3:
-          this.plateform = 0
+          // this.plateform = 0
+          this.plateForm = 'website'
           this.source = [170503, 8064]
           break
       }
-      getHotsList(this.plateform, 1, 15, this.source).then(res => {
+      getHotsList(this.plateForm, 1, 10, this.source).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []

@@ -196,5 +196,12 @@ export const getMedia = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/get
 export const getTrend = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTrend?id=${id}`)
 // 舆情列表
 export const getYuqingList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTracker?custom_id=210&user_id=26388`)
-
-export const getHotsList = (plateform = 0, page, size, source) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?plateform=${plateform}&page=${page}&size=${size}&source=${source}`, 'post')
+// 线索汇聚
+export const getHotsList = (plateform = 0, page, size, source = []) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?plateForm=${plateform}&page=${page}&count=${size}&source=${source}&latest_days=7&order=publish_time&use_post=1`)
+// 运营数据
+export const getMicroOperationAppList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationAppList`)
+// 运营数据列表
+export const getMicroOperationYesterday = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationEachYesterday`)
+// 视频列表
+export const getM2OPlusPublishVideo = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?
+column_id=16&orders=order_id,DESC`)

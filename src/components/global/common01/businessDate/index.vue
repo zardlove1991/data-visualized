@@ -6,26 +6,26 @@
         <div class="list-sort sys-flex sys-flex-center flex-justify-around">
             <div class="common01-ft32 weixin sys-flex sys-flex-center flex-justify-center" :class="active ? 'active' : 'normal' ">
                 <img src="./assets/weixin.png" alt="">
-                微信：54
+                微信：{{wechatNum}}
                 </div>
-            <div class="common01-ft32 weibo sys-flex sys-flex-center flex-justify-center" :class="!active ? 'active' : 'normal' ">
+            <!-- <div class="common01-ft32 weibo sys-flex sys-flex-center flex-justify-center" :class="!active ? 'active' : 'normal' ">
                 <img src="./assets/weibo.png" alt="">
                 微博：68
-                </div>
+                </div> -->
         </div>
         <div class="marquee_list">
             <div class="list-content list-title">
                 <span class="common01-ft32">名称</span>
                 <span class="common01-ft32">粉丝数</span>
                 <span class="common01-ft32">阅读量</span>
-                <span class="common01-ft32">转发量</span>
+                <span class="common01-ft32">新用户</span>
             </div>
             <vue-seamless-scroll :data="dateList" :class-option="classOption" style="overflow:hidden">
                 <div class="list-content" v-for="(v,k) in dateList" :key="k">
-                    <span class="common01-ft32">{{v.title}}</span>
-                    <span class="common01-ft32">{{v.num1}}</span>
-                    <span class="common01-ft32">{{v.num2}}</span>
-                    <span class="common01-ft32">{{v.num3}}</span>
+                    <span class="common01-ft32">{{v.account_name}}</span>
+                    <span class="common01-ft32">{{v.cumulate_user}}</span>
+                    <span class="common01-ft32">{{v.int_page_read_count}}</span>
+                    <span class="common01-ft32">{{v.new_user}}</span>
                 </div>
             </vue-seamless-scroll>
         </div>
@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-import { getCluesTogether } from '@/servers/interface'
+import { getMicroOperationYesterday } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 import vueSeamlessScroll from 'vue-seamless-scroll'
 export default {
@@ -44,19 +44,13 @@ export default {
   },
   data () {
     return {
+      wechatNum: 0,
       active: true,
       page: 1,
       isPaging: true,
       frequency: 1500,
       maxPage: 3,
-      dateList: [{title: '按时发生发送方', num1: '1232', num2: '43634', num3: '123123'},
-        {title: '按时发生发送方', num1: '1232', num2: '43634', num3: '123123'},
-        {title: '按时发生发送方', num1: '1232', num2: '43634', num3: '123123'},
-        {title: '按时发生发送方', num1: '1232', num2: '43634', num3: '123123'},
-        {title: '按时发生发送方', num1: '1232', num2: '43634', num3: '123123'},
-        {title: '按时发生发送方', num1: '1232', num2: '43634', num3: '123123'},
-        {title: '按时发生发送方', num1: '1232', num2: '43634', num3: '123123'}
-      ],
+      dateList: [],
       customSize: false
     }
   },
@@ -66,11 +60,11 @@ export default {
         this.customSize = true
       }
     })
-    // this.getCluesTogether()
-    setInterval(() => {
-      this.active = !this.active
-    //   this.getCluesTogether()
-    }, this.frequency)
+    this.getCluesTogether()
+    // setInterval(() => {
+    //   this.active = !this.active
+    // //   this.getCluesTogether()
+    // }, this.frequency)
   },
   methods: {
     setFontSize (size) {
@@ -79,26 +73,15 @@ export default {
       }
     },
     getCluesTogether () {
-      getCluesTogether('website', 5, this.page, this.currentViewId).then(res => {
-        if (!res.data.error_code) {
-          if (res.data.result.data.length) {
-            this.dataList = []
-            setTimeout(() => {
-              this.dataList = res.data.result.data
-            }, 100)
-            if (this.isPaging) {
-              this.page += 1
-              if (this.page > this.maxPage) {
-                this.page = 1
-              }
-            }
-          } else {
-            if (this.page !== 1) {
-              this.page = 1
-              this.getCluesTogether()
-            }
-          }
+      // getMicroOperationAppList().then(res => {
+      //   console.log(res.data, 'getMicroOperationAppList')
+      // })
+      getMicroOperationYesterday().then(res => {
+        if (res.data.error_code === 0) {
+          this.dateList = res.data.result
+          this.wechatNum = this.dateList.length
         }
+        console.log(res.data, 'getMicroOperationYesterday')
       })
     }
   },
