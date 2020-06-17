@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import { getCluesTogether } from '@/servers/interface'
+import { getHotsList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'clueGather2',
@@ -31,25 +31,9 @@ export default {
       activeIdx: 0,
       page: 1,
       isPaging: true,
-      frequency: 1500,
+      frequency: 15000,
       maxPage: 3,
-      dataList: [{title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'},
-        {title: '哈沙发上开发哈克斯返回就是的开发', source: '人民网'}
-      ],
+      dataList: [],
       customSize: false
     }
   },
@@ -59,13 +43,13 @@ export default {
         this.customSize = true
       }
     })
-    // this.getCluesTogether()
+    this.getHotsList()
     setInterval(() => {
       this.activeIdx++
       if (this.activeIdx === 4) {
         this.activeIdx = 0
       }
-    //   this.getCluesTogether()
+      this.getHotsList()
     }, this.frequency)
   },
   methods: {
@@ -74,8 +58,26 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getCluesTogether () {
-      getCluesTogether('website', 5, this.page, this.currentViewId).then(res => {
+    getHotsList () {
+      switch (this.activeIdx) {
+        case 0:
+          this.plateform = 0
+          this.source = []
+          break
+        case 1:
+          this.plateform = 2
+          this.source = []
+          break
+        case 2:
+          this.plateform = 1
+          this.source = []
+          break
+        case 3:
+          this.plateform = 0
+          this.source = [170503, 8064]
+          break
+      }
+      getHotsList(this.plateform, 1, 15, this.source).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -87,11 +89,6 @@ export default {
               if (this.page > this.maxPage) {
                 this.page = 1
               }
-            }
-          } else {
-            if (this.page !== 1) {
-              this.page = 1
-              this.getCluesTogether()
             }
           }
         }
