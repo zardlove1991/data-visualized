@@ -131,6 +131,8 @@ export default {
         text-align: left;
         color: #ffffff;
         position: unset;
+        font-size: pxrem(58px);
+        margin-bottom: pxrem(80px);
     }
     .swiper-container{
       width: 100%;
