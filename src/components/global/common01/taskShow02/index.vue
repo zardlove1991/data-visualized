@@ -130,6 +130,7 @@ export default {
     .common01-title{
         text-align: left;
         color: #ffffff;
+        position: unset;
     }
     .swiper-container{
       width: 100%;
