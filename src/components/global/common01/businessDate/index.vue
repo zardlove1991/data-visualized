@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-cluegather">
+  <div class="common01-cluegather-other">
     <div class="cluegather-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">运营数据</div>
       <div class="wrap-content">
@@ -102,7 +102,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
-.common01-cluegather {
+.common01-cluegather-other {
   width: 100%;
   height: 100%;
   .cluegather-wrap {
