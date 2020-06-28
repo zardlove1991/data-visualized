@@ -77,14 +77,15 @@ export default {
       isContent: false,
       isList: false,
       ifListContent: false,
-      contentInfo: {}
+      contentInfo: {},
+      sourceIds: '[3072709,3073249,3072828,3072624,3073309,47779,218]'
     }
   },
   created () {
     this.getNewsList()
     setInterval(() => {
       this.getMoreNewsList()
-      this.getWordsList('溧水')
+      this.getWordsList('溧水', this.sourceIds)
     }, 15000)
   },
   methods: {
@@ -98,8 +99,8 @@ export default {
             type: 'wordCloud',
             gridSize: this.proportion * 25,
             sizeRange: [60, 100],
-            rotationRange: [0, 90],
-            rotationStep: 90,
+            rotationRange: [0, 0],
+            rotationStep: 0,
             shape: 'square',
             width: '100%',
             height: '100%',
@@ -133,17 +134,12 @@ export default {
       })
     },
     getNewsList () {
-      getCloudNewsList(1, this.count, '', '[3072709,3073249,3072828,3072624,3073309,47779,218]').then(res => {
+      getCloudNewsList(1, this.count, '', this.sourceIds).then(res => {
         if (!res.data.error_code && res.data.result.data) {
           this.newsList = res.data.result.data
-          this.getWordsList('溧水')
+          this.getWordsList('溧水', this.sourceIds)
         }
       })
-      // getNewsList(1, 20).then(res => {
-      //   this.newsList = res.data.result.data || []
-      //   this.id = this.newsList[0] ? this.newsList[0].id : ''
-      //   this.getWordsList(this.id)
-      // })
     },
     // 加载更多新闻
     getMoreNewsList () {
@@ -152,7 +148,7 @@ export default {
       } else {
         this.page++
       }
-      getCloudNewsList(this.page, this.count, '', '[3072709,3073249,3072828,3072624,3073309,47779,218]').then(res => {
+      getCloudNewsList(this.page, this.count, '', this.sourceIds).then(res => {
         if (!res.data.error_code && res.data.result.data) {
           this.newsList = []
           setTimeout(() => {
@@ -161,8 +157,8 @@ export default {
         }
       })
     },
-    getWordsList (k) {
-      getCloudHotword(k).then(res => {
+    getWordsList (k, source) {
+      getCloudHotword(k, source).then(res => {
         if (res.data.result.data && res.data.result.data[0]) {
           let newList = []
           let list = res.data.result.data
@@ -180,19 +176,6 @@ export default {
         }
       })
     },
-    // chaneIndex () {
-    //   if (this.index === this.newsList.length - 1) {
-    //     this.index = 0
-    //     this.id = this.newsList[0].id
-    //     this.getWordsList(this.id)
-    //   } else {
-    //     this.index += 1
-    //     this.id = this.newsList[this.index]
-    //       ? this.newsList[this.index].id
-    //       : ''
-    //     this.getWordsList(this.id)
-    //   }
-    // },
     showContent (id) {
       getCloudNewsDetail(id).then(res => {
         if (!res.data.error_code) {

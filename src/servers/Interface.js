@@ -135,9 +135,6 @@ export const getM2OPlusWorkRate = (model, currentViewId) => createAPI(`${httpsba
 export const getM2OPlusWorkChartSummary = (model, currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkChartSummary?model=${model}&view_id=${currentViewId}`)
 // 天气预报
 export const getJiangningWeather = (city) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/ZWZhNDNmMW/getWeather?city_name=${city}`)
-// 溧水全网热点
-export const getNewsList = (page, count) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicList?page=${page}&count=${count}`)
-export const getHotWordsList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
 
 // 盐城大屏  传播力数据系统
 export const getPropagationForceData = (model) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getPropagationForceData?model=${model}`)
@@ -182,9 +179,34 @@ export const getCloudNewsList = (page, count, keyword = '', source = '', days = 
 // 线索汇聚新闻详情
 export const getCloudNewsDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsDetail?id=${id}`)
 // 线索汇聚热词
-export const getCloudHotword = (keyword = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsKeywords?k=${keyword}`)
+export const getCloudHotword = (keyword = '', source = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsKeywords?k=${keyword}&source=${source}`)
 
 // 城市新闻
 export const getCityNews = (city = '', page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/city_news?city=${city}&page=${page}&size=${size}`)
 // 全网新闻
 export const getWebNews = (page = 1, size = 10) => createAPI(`https://monitor-screen.cloud.hoge.cn/Apidaping/hotspot/news?page=${page}&size=${size}`)
+
+// 雨花台大屏
+// 舆情分析
+export const getYuqing = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicEventNews?id=${id}`)
+// 情感分析
+export const getEmotional = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicEmotion?id=${id}`)
+// 关键字
+export const getKeywords = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
+// 内容类型
+export const getContent = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicContentType?id=${id}`)
+// 媒体占比
+export const getMedia = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicMedia?id=${id}`)
+// 热度趋势
+export const getTrend = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTrend?id=${id}`)
+// 舆情列表
+export const getYuqingList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicTracker?custom_id=210&user_id=26388`)
+// 线索汇聚
+export const getHotsList = (plateform = 0, page, size, source = []) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?plateForm=${plateform}&page=${page}&count=${size}&source=${source}&latest_days=7&order=publish_time&use_post=1`)
+// 运营数据
+export const getMicroOperationAppList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationAppList`)
+// 运营数据列表
+export const getMicroOperationYesterday = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationEachYesterday`)
+// 视频列表
+export const getM2OPlusPublishVideo = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?
+column_id=16&orders=order_id,DESC`)
