@@ -1,7 +1,17 @@
 <template>
   <div class="common-activityInfo-js">
     <div class="activityInfo-page common01-border" v-if="!showDetail">
-      <div class="common01-title page-title">{{ viewAttr.header || '活动资讯' }}</div>
+      <div class="common01-title page-title">{{ viewAttr.header || '资讯信息' }}</div>
+      <!-- <div class="tab-btn sys-flex">
+        <div
+          :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"
+          @click="showOrg=!showOrg"
+        >活动资讯</div>
+        <div
+          :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'"
+          @click="showOrg=!showOrg"
+        >先进典型</div>
+      </div> -->
       <div class="list-title">
         <div
           class="list-item flex sys-flex-center animated"
@@ -38,16 +48,23 @@
           </div>
         </div>
       </div>
+      <div class="scroll_icon"> 
+        <!-- <i class="el-icon-top" :class="{icon_opcity: page === 1}" @click="lastPage"></i>
+        <i class="el-icon-bottom" :class="{icon_opcity: page === PageTotal}"  @click="nextPage"></i> -->
+        <img class="icon_up" :class="{icon_opcity: page === 1}" src="./assets/arrow_up.png" @click="lastPage"/>
+        <img class="icon_up" src="./assets/arrow_down.png" :class="{icon_opcity: page === PageTotal}" @click="nextPage"/>
+      </div>
     </div>
     <div class="activityInfo-detail common01-border" v-if="showDetail">
-      <div class="back-line">
+      <!-- <div class="back-line">
         <div @click="backList()" class="back">
           <div class="back-img">
             <img src="./assets/icon_back.png" />
           </div>
           <span class="back-text">返回</span>
         </div>
-      </div>
+      </div> -->
+      <div class="back-btn common01-ft36" @click="backList()">返回</div>
       <swiper
         :options="swiperOption"
         @slideChangeTransitionEnd='swiperChange'
@@ -99,7 +116,10 @@ export default {
   name: 'manuscript',
   data () {
     return {
+      // showOrg: true,
+      columnId: 0,
       dataList: [],
+      PageTotal: 0,
       swiperDataList: [],
       count: 5,
       detailData: {},
@@ -143,13 +163,31 @@ export default {
   },
   mounted () {
     this.setFontsize('lishui-manuscriptoutput')
-    setInterval(() => {
-      if (!this.showDetail) {
-        this.getDataList()
-      }
-    }, this.frequency)
+    // setInterval(() => {
+    //   if (!this.showDetail) {
+    //     this.getDataList()
+    //   }
+    // }, this.frequency)
+  },
+  watch: {
+    // showOrg (val) {
+    //   this.columnId = val ? 0 : 1246
+    //   this.getDataList()
+    // }
   },
   methods: {
+    // 下一页
+    nextPage () {
+      if (this.page === this.PageTotal) return false
+      this.page += 1
+      this.getDataList()
+    },
+    // 上一页
+    lastPage () {
+      if (this.page === 1) return false
+      this.page -= 1
+      this.getDataList()
+    },
     swiperChange () {
       if (this.$refs.videoPlayer && this.$refs.videoPlayer.length) {
         this.$refs.videoPlayer.forEach(e => {
@@ -233,11 +271,18 @@ export default {
     //   })
     // },
     getDataList () {
-      getJSActivityInfo(this.page, this.count).then(res => {
+      let config = {
+        site_id: 143,
+        page: this.page,
+        count: this.count,
+        status: 1
+      }
+      getJSActivityInfo({ params: config }).then(res => {
         this.currentPage = this.page
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
             this.dataList = []
+            this.PageTotal = Math.ceil(res.data.result.total / 5)
             setTimeout(() => {
               this.dataList = res.data.result.data.map(v => {
                 let newDate = v.create_time.split('-').join('/')
@@ -262,17 +307,17 @@ export default {
                 }
               })
             }, 100)
-            if (this.isPaging) {
-              this.page += 1
-              if (this.page > this.maxPage) {
-                this.page = 1
-              }
-            }
+            // if (this.isPaging) {
+            //   this.page += 1
+            //   if (this.page > this.maxPage) {
+            //     this.page = 1
+            //   }
+            // }
           } else {
-            if (this.page !== 1) {
-              this.page = 1
-              this.getDataList()
-            }
+            // if (this.page !== 1) {
+            //   this.page = 1
+            //   this.getDataList()
+            // }
           }
         }
       })
@@ -344,16 +389,57 @@ export default {
   padding: pxrem(40px);
   background: #0a1742;
   * {
+    outline: 0;
     font-family: "SourceHanSansSC-Medium";
   }
   .activityInfo-page {
-    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
+    position: relative;
+    padding: pxrem(200px) pxrem(120px) pxrem(95px) pxrem(78px);
+    .scroll_icon{
+      position: absolute;
+      right: 0.4rem;
+      top: 5.1rem;
+      display: flex;
+      flex-direction: column;
+      img{
+        margin-top: 0.2rem;
+        width: 0.585rem;
+        height: 0.664rem;;
+      }
+      .icon_opcity{
+        opacity: 0.4;
+      }
+    }
+    .tab-btn {
+      position: absolute;
+      outline: none;
+      z-index: 2;
+      top: pxrem(90px);
+      right: pxrem(77px);
+      .btn {
+        width: pxrem(253px);
+        height: pxrem(94px);
+        line-height: pxrem(98px);
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        background: url("./assets/rectangle.png") no-repeat center;
+        background-size: 100%;
+      }
+      .btn.act {
+        background: url("./assets/rectangle_pre.png") no-repeat center;
+        background-size: 100%;
+      }
+    }
     .page-title {
       font-weight: 600;
     }
     .list-item {
-      margin-bottom: pxrem(110px);
+      padding: 0.2rem 0.2rem 0.2rem 0;
+      margin-bottom: pxrem(60px);
       align-items: center;
+      background: url(/static/img/box@2x.d7de315.png);
+      background-size: 100% 100%;
     }
     .type-area {
       color: #0afbf2;
@@ -414,6 +500,18 @@ export default {
   }
   .activityInfo-detail {
     padding: 0.7rem pxrem(72px) pxrem(10px);
+    .back-btn{
+      position: absolute;
+      z-index: 1;
+      right: 0.8rem;
+      bottom: 0.5rem;
+      padding-left: 0.55rem;
+      color: #00ffea;
+      font-weight: bold;
+      background: url("./assets/icon_back.png") no-repeat;
+      background-size: 0.36rem 0.28rem;
+      background-position: 0 0.11rem;
+    }
     .content-swiper {
       height: pxrem(800px);
       overflow-y: scroll;
@@ -438,12 +536,12 @@ export default {
       height: 0.28rem;
       margin-right: 0.2rem;
     }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    // img {
+    //   width: 100%;
+    //   height: 100%;
+    //   object-fit: cover;
+    //   display: block;
+    // }
     .detail-title {
       display: inline-block;
       width: pxrem(1250px);
@@ -451,7 +549,7 @@ export default {
       font-size: 0.52rem;
       // line-height:0.52rem;
       color: #fff;
-      margin-bottom: 0.38rem;
+      margin-bottom: 0.3rem;
       text-align: center;
     }
     .detail-list {
@@ -511,6 +609,7 @@ export default {
         }
       }
       .contnet-detail-div {
+        line-height: 0.8rem;
         font-size: pxrem(40px);
         color: #eeeeee;
         img {

@@ -2,15 +2,67 @@
   <div class="commom-civilizationmap">
     <!-- 一级页面 -->
     <div class="common01-border civilizationmap_onepage" v-show="depath === 1">
-       <div class="common01-title">{{viewAttr.header || '文明项目'}}</div>
-       <div class="civilization_map" id="js-map"></div>
-       <div class="organize-list">
-         <div class="organize-list-nav flex flex-center" v-for="(item, index) in orgNavList" :key="item.name" @click="toOrgList(item, index)">
+       <!-- <div class="common01-title">{{viewAttr.header || '文明项目'}}</div> -->
+       <!-- <div class="civilization_map" id="js-map"></div> -->
+       <!-- <div class="organize-list">
+         <div class="organize-list-nav flex flex-center" v-for="(item, index) in orgNavList" :key="item.name" @click="toOrgdetail(item, index)">
            <div class="organize-list-nav-icon hg-flex">
              <img src="./assets/icon_station@2x.png" alt="" class="icon_station1" :class="{icon_station2: index === 1}" v-if="index === 0 || index === 1">
               <span class="organize-list-nav-cir" :class="{organize_list_nav_cir1: index === 3}" v-if="index === 2 || index === 3"></span>
            </div>
            <p class="organize_name">{{item.name}}</p><span class="organize_num"><span v-if="item.number"> （{{item.number}}）</span> </span>
+         </div>
+       </div> -->
+       <div class="civilizationmap_bg">
+         <div class="map_image_bg">
+            <div class="civilizationmap_common flex org_position1" @click="toOrgdetail(0, 0)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[0] ? allOrgData[0][0].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position2  flex" @click="toOrgdetail(1, 0)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][0].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common  org_position3 flex" @click="toOrgdetail(1, 1)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][1].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position4 flex" @click="toOrgdetail(1, 2)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][2].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position5 flex" @click="toOrgdetail(1, 3)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][3].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position6 flex" @click="toOrgdetail(1, 4)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][4].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position7 flex" @click="toOrgdetail(1, 5)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][5].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position8 flex" @click="toOrgdetail(1, 6)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][6].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position9 flex" @click="toOrgdetail(1, 7)">
+               <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][7].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position10 flex" @click="toOrgdetail(1, 8)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][8].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position11 flex" @click="toOrgdetail(1, 9)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][9].name : ''}}</p>
+            </div>
+            <div class="civilizationmap_common org_position12 flex" @click="toOrgdetail(1, 10)">
+              <img class="org_icon_base" src="./assets/icon_station@2x.png" />
+              <p class="org_name">{{allOrgData[1] ? allOrgData[1][10].name : ''}}</p>
+            </div>
          </div>
        </div>
     </div>
@@ -25,16 +77,21 @@
           </div>
           <!-- <div class="list_top_des">详情</div> -->
         </div>
-        <div class="civilization_list_item flex">
+        <div class="civilization_list_item flex" ref="civilizationList" @scroll.passive="scrollTo($event)">
           <div v-for="list in currentOrgList" :key="list.id" class="list_item flex flex-center">
             <div class="list_item_left flex-one flex">
-              <span class="list_item_name" @click="toOrgDetail(list)">{{list.name}}（{{list.value[2]}}人）</span>
+              <span class="list_item_name" @click="toOrgdetail(list, 'uniqu')">{{list.name}}（{{list.volunteer_num}}人）</span>
             </div>
-            <img src="./assets/icon_detail@2x.png" alt="" class="item_detail_icon" @click="toOrgDetail(list)">
+            <img src="./assets/icon_detail@2x.png" alt="" class="item_detail_icon" @click="toOrgdetail(list, 'uniqu')">
           </div>
         </div>
+        <div class="scroll_icon" :class="{scroll_icon_add: depath === 2}"> 
+          <img class="icon_up" src="./assets/arrow_up.png" :class="{icon_opcity: scrollHeight === 0}"  @click="scrollList('up', 'list')"/>
+          <img class="icon_up" src="./assets/arrow_down.png" :class="{icon_opcity: scrollHeight === canScrollHeight}" @click="scrollList('down', 'list')"/>
+        </div>
       </div>
-      <div class="back-btn common01-ft36" @click="depath = 1; canBack = false">返回</div>
+      <div class="back-btn back-btn-last common01-ft36" @click="pageBack">上一级</div>
+      <div class="back-btn common01-ft36" @click="goBack">返回</div>
     </div>
     <!-- 三级页面 -->
     <div class="common01-border civilizationmap_twopage" v-if="depath === 3">
@@ -43,15 +100,15 @@
          <div class="civilization_list_top flex flex-center">
             <div class="list_top_info  flex flex-center">
               <img src="./assets/icon_station@2x.png" alt="" class="top_info_image">
-              <span class="top_info_title">{{orgDetailInfo.name}}</span>
+              <span class="top_info_title">{{orgDetailInfo.name}}</span><span class="org_child_num" @click="toOrgList" v-if="orgDetailInfo.child_num">{{orgDetailInfo.child_num}}</span>
             </div>
          </div>
-         <div class="org_detail_info">
+         <div class="org_detail_info" ref="orgDetail" @scroll.passive="scrollTo($event)">
            <div class="detail_info_top flex">
              <div class="detail_info_top_left flex-one flex">
                <div class="detail_info_number  flex" v-if="orgDetailInfo.title">
                  <img src="./assets/icon_name.png" alt="">
-                 <span class="detail_info_number_span">队伍名称&nbsp;&nbsp;</span><p>{{orgDetailInfo.title}}</p>
+                 <span class="detail_info_number_span">队伍名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><p>{{orgDetailInfo.title}}</p>
                </div>
                <div class="detail_info_number flex">
                  <img src="./assets/icon_member@2x.png" alt="">
@@ -59,11 +116,11 @@
                </div>
                <div class="detail_info_number detail_info_number_add flex">
                  <img src="./assets/icon_location@2x.png"  alt="">
-                 <span class="detail_info_number_span">地址&nbsp;&nbsp;</span><p>{{orgDetailInfo.address}}</p>
+                 <span class="detail_info_number_span">地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><p>{{orgDetailInfo.address}}</p>
                </div>
              </div>
              <div class="detail_info_top_right" v-if="orgDetailInfo.image">
-               <img :src="img.host+ '160X120/' + img.filename" alt="" v-for="img in orgDetailInfo.image" :key="img.filename" class="detail_image">
+               <img :src="img.host+ '160X120/' + img.filename" alt="" v-for="(img, index) in orgDetailInfo.image" :key="img.filename" class="detail_image" :class="{detail_image_add: index === orgDetailInfo.image.length-1}">
              </div>
            </div>
            <div class="org_detail_line"></div>
@@ -79,22 +136,29 @@
              </div>
            </div>
          </div>
+         <div class="scroll_icon"> 
+            <img class="icon_up" :class="{icon_opcity: scrollHeight === 0}" src="./assets/arrow_up.png" @click="scrollList('up', 'detail')"/>
+            <img class="icon_up" src="./assets/arrow_down.png"  :class="{icon_opcity: scrollHeight === canScrollHeight}" @click="scrollList('down', 'detail')"/>
+         </div>
        </div>
-        <div class="back-btn back-btn-last common01-ft36" @click="pageBack">上一级</div>
-        <div class="back-btn common01-ft36" @click="depath = 1; canBack = false">返回</div>
+      <div class="back-btn back-btn-last common01-ft36" @click="pageBack">上一级</div>
+      <div class="back-btn common01-ft36" @click="goBack">返回</div>
     </div>
   </div>
 </template>
 
 <script>
 import echarts from 'echarts'
-import { getAllOrgList, getOrgNavList, getOrganizeDetail } from '@/servers/interface'
+import { getAllOrgList, getOrgNavList, getOrganizeDetail, getOrgList } from '@/servers/interface'
 let JSicon = require('./assets/icon_station@2x.png')
 let jsMap = require(`./jsonData/jsmap.json`)
 echarts.registerMap('jsmap', jsMap)
 export default {
   data () {
     return {
+      canScrollHeight: 0, // 列表可滚动高度
+      scrollHeight: 0,
+      navList: [],
       canBack: false,
       depath: 1, // 页面层级
       orgDetailInfo: {}, // 组织详情
@@ -112,15 +176,14 @@ export default {
           },
           roam: false, // 禁止地图放大缩小
           itemStyle: {
-            areaColor: 'rgb(0, 36, 109)',
-            shadowColor: 'rgba(4, 77, 191)',
+            areaColor: 'rgb(0, 36, 109, 1)',
+            shadowColor: 'rgba(4, 77, 191, 1)',
             shadowBlur: 20,
             borderColor: 'rgb(0, 36, 109)',
             emphasis: {
-              color: 'rgba(0, 36, 109)'
+              color: 'rgba(0, 36, 109, 1)'
             }
           },
-
           left: 20,
           right: 30,
           bottom: 20,
@@ -161,6 +224,7 @@ export default {
             let res = '<div id="specialLook"  onclick="tooltipClick(\'' + params.data.id + '\')"><p>站点名称: ' + params.data.name + '</p><p>站点人数: ' + params.data.value[2] + '人</p><p>站点地址: ' + params.data.address + '</p></div>'
             return res
           },
+          backgroundColor: 'rgba(0,23,58,0.6)',
           textStyle: {
             align: 'left'
           }
@@ -259,7 +323,26 @@ export default {
             },
             emphasis: {
               itemStyle: {
-                color: 'rgba(217, 0, 0, 1)'
+                // color: 'rgba(217, 0, 0, 1)'
+                color: {
+                  type: 'radial',
+                  x: 0.5,
+                  y: 0.5,
+                  r: 0.5,
+                  colorStops: [{
+                    offset: 0, color: '#ffffff' // 0% 处的颜色
+                  },
+                  {
+                    offset: 0.4, color: '#ffffff' // 0% 处的颜色
+                  },
+                  {
+                    offset: 0.41, color: '#0EAAFB' // 100% 处的颜色
+                  },
+                  {
+                    offset: 1, color: '#0EAAFB' // 100% 处的颜色
+                  }],
+                  global: false // 缺省为 false
+                }
               }
             },
             hoverAnimation: true,
@@ -271,7 +354,7 @@ export default {
               }
             },
             itemStyle: {
-              color: 'rgba(255,255,0,1)'
+              color: 'rgba(255, 255, 0, 1)'
             },
             zlevel: 2
           },
@@ -308,25 +391,67 @@ export default {
     }
   },
   mounted () {
-    let myMap = echarts.init(document.getElementById('js-map'))
-    this.getOrgNavList()
-    this.getAllOrgList().then(res => {
-      this.option.series[0].data = this.allOrgData[0]
-      this.option.series[1].data = this.allOrgData[1]
-      this.option.series[2].data = this.allOrgData[2]
-      this.option.series[3].data = this.allOrgData[3]
-      myMap.setOption(this.option)
-    })
-    let _this = this
-    window.tooltipClick = function (id) {
-      _this.canBack = true
-      myMap.dispatchAction({
-        type: 'hideTip' // 默认显示江苏的提示框
-      })
-      _this.toOrgDetail({ id })
+    this.getAllOrgList()
+    // let myMap = echarts.init(document.getElementById('js-map'))
+    // this.getOrgNavList()
+    // this.getAllOrgList().then(res => {
+    //   this.option.series[0].data = this.allOrgData[0]
+    //   this.option.series[1].data = this.allOrgData[1]
+    //   this.option.series[2].data = this.allOrgData[2]
+    //   this.option.series[3].data = this.allOrgData[3]
+    //   myMap.setOption(this.option)
+    // })
+    // let _this = this
+    // window.tooltipClick = function (id) {
+    //   _this.canBack = true
+    //   myMap.dispatchAction({
+    //     type: 'hideTip' // 默认显示江苏的提示框
+    //   })
+    //   _this.toOrgDetail({ id })
+    // }
+  },
+  watch: {
+    depath (val) {
+      this.scrollHeight = 0
+      if (val === 2) {
+        setTimeout(() => {
+          console.log(this.$refs.civilizationList.scrollTop)
+          this.$refs.civilizationList.scrollTop = 0
+          this.canScrollHeight = (this.$refs.civilizationList.scrollHeight - this.$refs.civilizationList.clientHeight)
+        }, 100)
+      }
+      if (val === 3) {
+        setTimeout(() => {
+          this.$refs.orgDetail.scrollTop = 0
+          this.canScrollHeight = (this.$refs.orgDetail.scrollHeight - this.$refs.orgDetail.clientHeight)
+        }, 100)
+      }
     }
   },
   methods: {
+    scrollTo (event) {
+      this.scrollHeight = event.target.scrollTop
+    },
+    // 列表滚动
+    scrollList (direction, sign) {
+      let dom = sign === 'list' ? this.$refs.civilizationList : this.$refs.orgDetail
+      let multiple = sign === 'list' ? 4 : 1
+      let height = this.scrollHeight
+      if (direction === 'down') {
+        for (let i = 0; i <= 10; i++) {
+          setTimeout(() => {
+            dom.scrollTop = height + 10 * multiple * i
+          }, i * 20)
+        }
+      }
+      if (direction === 'up') {
+        for (let i = 0; i <= 10; i++) {
+          setTimeout(() => {
+            dom.scrollTop = height - 10 * multiple * i
+          }, i * 20)
+        }
+      }
+    },
     // 获取全部组织列表
     getAllOrgList () {
       return getAllOrgList().then(res => {
@@ -380,31 +505,83 @@ export default {
         this.orgNavList = res.data.result
       })
     },
-    toOrgList (item, index) {
-      if (!index) {
-        this.depath = 3
-        this.canBack = true
-        this.toOrgDetail(this.allOrgData[index][0])
-        return false
-      }
-      this.currentTitle = item.name
-      this.depath = 2
-      this.currentOrgList = index ? [...this.allOrgData[index]] : [...this.allOrgData[1]]
-    },
+    // toOrgdetail (item, index) {
+    //   if (!index) {
+    //     this.depath = 3
+    //     this.canBack = true
+    //     this.toOrgDetail(this.allOrgData[index][0])
+    //     return false
+    //   }
+    //   this.currentTitle = item.name
+    //   this.depath = 2
+    //   this.currentOrgList = index ? [...this.allOrgData[index]] : [...this.allOrgData[1]]
+    //   this.$nextTick(() => {
+    //     this.scrollHeight = 0
+    //     this.canScrollHeight = (this.$refs.civilizationList.scrollHeight - this.$refs.civilizationList.clientHeight)
+    //   })
+    // },
     // 组织详情
-    toOrgDetail (item) {
-      getOrganizeDetail(item.id).then(res => {
+    toOrgdetail (i, j) {
+      let id = ''
+      if (j === 'uniqu') {
+        id = i.id
+      } else {
+        id = this.allOrgData[i][j].id
+      }
+      getOrganizeDetail(id).then(res => {
         this.depath = 3
         this.orgDetailInfo = res.data.result
+        this.navList.push({
+          depath: 3,
+          data: { ...this.orgDetailInfo }
+        })
+      })
+      // getOrganizeDetail(item.id).then(res => {
+      //   this.depath = 3
+      //   this.orgDetailInfo = res.data.result
+      // })
+    },
+    // 组织列表
+    toOrgList () {
+      getOrgList(this.orgDetailInfo.id).then(res => {
+        if (!res.data.error_code) {
+          this.depath = 2
+          this.currentTitle = this.orgDetailInfo.name
+          this.currentOrgList = res.data.result
+          this.navList.push({
+            depath: 2,
+            data: [ ...this.currentOrgList ]
+          })
+        }
       })
     },
+    // 返回上一级
     pageBack () {
-      if (this.canBack) {
+      this.navList.pop()
+      if (this.navList.length) {
+        this.depath = this.navList[this.navList.length - 1].depath
+        if (this.depath === 2) {
+          this.currentOrgList = [ ...this.navList[this.navList.length - 1].data ]
+          this.orgDetailInfo = { ...this.navList[this.navList.length - 2].data }
+          this.currentTitle = this.orgDetailInfo.name
+        }
+        if (this.depath === 3) {
+          this.orgDetailInfo = { ...this.navList[this.navList.length - 1].data }
+        }
+      } else {
         this.depath = 1
-        this.canBack = false
-        return false
       }
-      this.depath = this.depath - 1
+      // if (this.canBack) {
+      //   this.depath = 1
+      //   this.canBack = false
+      //   return false
+      // }
+      // this.depath = this.depath - 1
+    },
+    // 返回主页
+    goBack () {
+      this.depath = 1
+      this.navList = []
     }
   }
 }
@@ -424,9 +601,123 @@ export default {
     * {
     font-family: "SourceHanSansSC-Medium";
   }
+  .civilizationmap_onepage {
+    padding: 0.01rem;
+    .civilizationmap_bg{
+      height: 100%;
+      padding: 0.4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .map_image_bg{
+        background-image: url('./assets/map_bg.png');
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 13.36rem;
+        position: relative;
+      }
+      .civilizationmap_common{
+        font-weight: 500;
+        position: absolute;
+        color: white;
+        align-items: center;
+        .org_icon_base{
+          width: 0.442rem;
+          height: 0.38rem;
+        }
+        .org_name{
+          max-width: 1.44rem;
+          font-size: 0.205rem;
+        }
+      }
+      .org_position1{
+        // padding: 0.05rem 0.1rem;
+        // border-radius: 4px;
+        // background: rgba(200,200,200,0.45);
+        color: #0BFCFF;
+        left: 9.8rem;
+        bottom: 2.5rem;
+        .org_icon_base{
+          width: 0.8rem;
+          height: 0.7rem;
+        }
+        .org_name{
+          max-width: 2rem;
+          margin-left: 0.05rem;
+          font-size: 0.3rem;
+        }
+      }
+      .org_position2{
+        left: 1.1rem;
+        top: 2.3rem;
+      }
+      .org_position3{
+        left: 4.95rem;
+        top: 1.6rem;
+      }
+      .org_position4{
+        left: 8.5rem;
+        top: 2.3rem;
+      }
+      .org_position5{
+        top: 4.9rem;
+        left: 10.6rem;
+      }
+      .org_position6{
+        top: 7.1rem;
+        left: 9.8rem;
+      }
+      .org_position7{
+        top: 7.1rem;
+        left: 7.8rem;
+      }
+      .org_position8{
+        top: 4.55rem;
+        left: 8.15rem;
+      }
+      .org_position9{
+        top: 5.12rem;
+        left: 4.6rem;
+      }
+      .org_position10{
+        top: 3.63rem;
+        left: 5.33rem;
+      }
+      .org_position11{
+        bottom: 0.35rem;
+        left: 8.2rem;
+      }
+      .org_position12{
+        top: 3.4rem;
+        left: 9rem;
+        .org_name{
+          max-width: 1.69rem;
+        }
+      }
+    }
+  }
   .civilizationmap_twopage{
     position: relative;
     padding: 1.61rem 0.743rem 1.223rem 0.743rem;
+    .scroll_icon{
+      position: absolute;
+      right: 0.4rem;
+      top: 5.1rem;
+      display: flex;
+      flex-direction: column;
+      img{
+        margin-top: 0.2rem;
+        width: 0.585rem;
+        height: 0.664rem;;
+      }
+      .icon_opcity{
+        opacity: 0.4;
+      }
+    }
+    .scroll_icon_add{
+      right: 0.7rem;
+    }
     .civilization_list{
       width: 100%;
       height: 100%;
@@ -445,6 +736,15 @@ export default {
             color:rgba(0,255,246,1);
             font-size: 0.443rem;
             margin-left: 0.284rem;
+          }
+          .org_child_num{
+            font-size: 0.443rem;
+            color: #ffffff;
+            padding: 0 0.4rem;
+            border-radius: 0.15rem;
+            border: 0.03rem solid #0F789B;
+            background: #094172;
+            margin-left: 0.5rem;
           }
         }
         .list_top_des{
@@ -487,6 +787,7 @@ export default {
           .item_detail_icon{
             width: 0.316rem;
             height: 0.348rem;
+            margin-left: 0.585rem;
           }
         }
       }
@@ -494,7 +795,7 @@ export default {
          width: 100%;
          height: calc(100% - 1.265rem);
          overflow-y: auto;
-         padding: 0.553rem 0.633rem 0 0.633rem;
+         padding: 0.553rem 0.4rem 0 0.4rem;
          .detail_info_top{
           //  height: 1.9rem;
            align-items: center;
@@ -525,12 +826,16 @@ export default {
              }
            }
            .detail_info_top_right{
+             margin-left: 0.3rem;
              .detail_image{
                display:  inline-block;
                width: 2.53rem;
                height: 1.9rem;
                border-radius:4px;
                margin-right: 0.158rem;
+             }
+             .detail_image_add{
+               margin-right: 0;
              }
            }
          }
@@ -576,12 +881,12 @@ export default {
       font-weight: bold;
       background: url("./assets/icon_back.png") no-repeat;
       background-size: 0.36rem 0.28rem;
-      background-position: 0 0.08rem;
+      background-position: 0 0.11rem;
     }
     .back-btn-last{
       background: url("./assets/icon_parent@2x.png") no-repeat;
       background-size: 0.36rem 0.36rem;
-      background-position: 0 0.08rem;
+      background-position: 0 0.075rem;
       right: 2.8rem;
     }
   }

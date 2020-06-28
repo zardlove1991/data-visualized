@@ -160,14 +160,15 @@
             </div>
           </div>
         </div>
-        <div class="back-line">
+        <!-- <div class="back-line">
           <div @click="backList()" class="back">
             <div class="back-img">
               <img src="./assets/icon_back.png" />
             </div>
             <span class="back-text">返回</span>
           </div>
-        </div>
+        </div> -->
+        <div class="back-btn common01-ft36" @click="backList()">返回</div>
       </div>
     </div>
   </div>
@@ -391,6 +392,8 @@ export default {
       color: #fff;
       padding-left: 0.55rem;
       padding-right: 0.6rem;
+      background: url(/static/img/box@2x.d7de315.png);
+      background-size: 100% 100%;
     }
     .list-item:nth-child(odd) {
       background-color: rgba(13, 99, 223, 0.2);
@@ -413,6 +416,18 @@ export default {
     }
     .content-detail {
       text-align: left;
+      .back-btn{
+      position: absolute;
+      z-index: 1;
+      right: 0.8rem;
+      bottom: 0.5rem;
+      padding-left: 0.55rem;
+      color: #00ffea;
+      font-weight: bold;
+      background: url("./assets/icon_back.png") no-repeat;
+      background-size: 0.36rem 0.28rem;
+      background-position: 0 0.11rem;
+    }
       .detail-info{
         margin-top: 0.6rem;
       }
