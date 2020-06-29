@@ -11,7 +11,8 @@
           </div>
         </div>
         <!-- <div class="title">盐湖区新时代文明实践中心</div> -->
-        <div class="title">{{title}}</div>
+        <div class="title-box" v-if="title === '盐湖区新时代文明实践中心'"><img class="title-logo" src="./assets/logo_bar.png"/><span class="inner-title">{{title}}</span></div>
+        <div class="title" v-if="title !== '盐湖区新时代文明实践中心'">{{title}}</div>
         <div class="order-list sys-flex">
           <div class="type-list">
             <div
@@ -321,14 +322,33 @@ export default {
       height: 100%;
     }
     .title {
+      margin-top: 0.8rem;
+      margin-bottom: 0.6rem;
       color: #00fffa;
       font-size: 1.2rem;
       text-align: center;
       font-weight: bold;
       letter-spacing: 0.1rem;
       line-height: 1.2rem;
+    }
+    .title-box{
+      display: flex;
+      align-items: center;
       margin-top: 0.8rem;
       margin-bottom: 0.6rem;
+    .title-logo{
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-right: 0.2rem;
+    }
+    .inner-title {
+      color: #00fffa;
+      font-size: 1.2rem;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+      line-height: 1.2rem;
+    }
     }
     .today-weather {
       font-size: 0.35rem;
