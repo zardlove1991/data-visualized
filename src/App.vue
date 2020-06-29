@@ -16,7 +16,7 @@ export default {
       configInfo.forEach(val => {
         if (location.href.indexOf(val.guid) > -1) {
           document.title = val.title
-          var link = document.head.querySelector('link')
+          var link = document.head.querySelector("link[rel*='icon']")
           link.href = `/static/${val.favicon}.png`
           document.getElementsByTagName('head')[0].appendChild(link)
         }
