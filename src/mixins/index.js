@@ -1,4 +1,5 @@
 import * as modules from '@/components/_modules'
+import { configInfo } from '@/config/common'
 export default {
   props: {
     data: {
@@ -17,6 +18,7 @@ export default {
   },
   // 配置项赋值提前到创建钩子，组件定时器放在挂载钩子，保证顺序问题
   created () {
+    this.changeTitle()
     if (this.data && this.data.viewAttr && this.data.viewAttr.isPage === '1') {
       this.isPage = true
     }
@@ -39,6 +41,15 @@ export default {
   },
   components: {...modules},
   methods: {
+    changeTitle () {
+      configInfo.forEach(val => {
+        if (location.href.indexOf(val.guid) > -1) {
+          document.title = val.title
+          var link = document.head.querySelector('link')
+          link.href = `/static/${val.favicon}.png`
+        }
+      })
+    },
     setFontsize (id) {
       let dom = document.getElementById(id)
       if (dom) {

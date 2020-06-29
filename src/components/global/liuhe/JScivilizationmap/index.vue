@@ -108,15 +108,15 @@
              <div class="detail_info_top_left flex-one flex">
                <div class="detail_info_number  flex" v-if="orgDetailInfo.title">
                  <img src="./assets/icon_name.png" alt="">
-                 <span class="detail_info_number_span">队伍名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><p>{{orgDetailInfo.title}}</p>
+                 <span class="detail_info_number_span">队伍名称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><p>{{orgDetailInfo.title}}</p>
                </div>
                <div class="detail_info_number flex">
                  <img src="./assets/icon_member@2x.png" alt="">
-                 <span class="detail_info_number_span">志愿者人数&nbsp;&nbsp;{{orgDetailInfo.volunteer_num}}人</span>
+                 <span class="detail_info_number_span">志愿者人数:&nbsp;&nbsp;{{orgDetailInfo.volunteer_num}}人</span>
                </div>
                <div class="detail_info_number detail_info_number_add flex">
                  <img src="./assets/icon_location@2x.png"  alt="">
-                 <span class="detail_info_number_span">地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><p>{{orgDetailInfo.address}}</p>
+                 <span class="detail_info_number_span">地址:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><p>{{orgDetailInfo.address}}</p>
                </div>
              </div>
              <div class="detail_info_top_right" v-if="orgDetailInfo.image">
@@ -125,14 +125,22 @@
            </div>
            <div class="org_detail_line"></div>
            <div class="detail_info_bottom">
-             <div class="org_features flex">
+             <div class="org_features flex" v-if="orgDetailInfo.features.length">
                <img src="./assets/icon_program@2x.png" alt="" >
-               <span class="org_features_span">特色项目&nbsp;&nbsp;</span>
-               <p class="org_features_name flex-one">{{orgDetailInfo.features[0].name}}</p>
+               <span class="org_features_span">特色项目:&nbsp;&nbsp;</span>
+               <p class="org_features_name flex-one">
+                 <span  v-for="(feature,index) in orgDetailInfo.features" :key="feature.name">{{feature.name}}{{index !== orgDetailInfo.features.length -1? '、' : ''}}</span>
+               </p>
              </div>
-             <div class="org_features org_features_dec flex">
-               <span class="features_des">项目简介&nbsp;&nbsp;</span>
-               <p class="flex-one">{{orgDetailInfo.features[0].desc}}</p>
+             <div class="org_features org_features_dec flex" v-if="orgDetailInfo.features.length">
+               <span class="features_des">项目简介:&nbsp;&nbsp;</span>
+               <div class="flex-one">
+                  <p v-for="feature in orgDetailInfo.features" :key="feature.name">{{feature.desc}}</p>
+               </div>
+             </div>
+             <div class="org_features org_features_dec flex" v-if="orgDetailInfo.desc">
+               <span class="features_des">队伍情况:&nbsp;&nbsp;</span>
+               <div class="flex-one">{{orgDetailInfo.desc}}</div>
              </div>
            </div>
          </div>
@@ -415,7 +423,6 @@ export default {
       this.scrollHeight = 0
       if (val === 2) {
         setTimeout(() => {
-          console.log(this.$refs.civilizationList.scrollTop)
           this.$refs.civilizationList.scrollTop = 0
           this.canScrollHeight = (this.$refs.civilizationList.scrollHeight - this.$refs.civilizationList.clientHeight)
         }, 100)
@@ -852,6 +859,9 @@ export default {
              text-align: left;
              color:rgba(255,255,255,1);
              font-size:0.348rem;
+             .org_features_content{
+               text-indent: 2em;
+             }
              .org_features_name{
                color:rgba(0,192,255,1);
                font-size: 0.38rem;
