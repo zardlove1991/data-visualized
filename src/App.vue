@@ -18,7 +18,7 @@ export default {
           document.title = val.title
           var link = document.head.querySelector("link[rel*='icon']")
           link.href = `/static/${val.favicon}.png`
-          document.getElementsByTagName('head')[0].appendChild(link)
+          // document.getElementsByTagName('head')[0].appendChild(link)
         }
       })
     }
