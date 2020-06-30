@@ -11,7 +11,7 @@
         <div
           :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'"
           @click="showOrg=!showOrg"
-        >先进典型</div>
+        >成员名单</div>
       </div>
       <div class="org-div"  v-if="showOrg">
         <div class="total">
@@ -66,30 +66,8 @@
         >{{orgIndexData.rightBottomInfo.number}}</div>
       </div>
       <!-- 成员名单 -->
-      <div class="org-div" :class="{org_div_add: !showOrg}" v-if="!showOrg && advanceList.length">
-        <div class="total advance_total">
-          <p>先进典型</p>
-          <span>{{advanceTotal}}</span>
-        </div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position1" @click="getDataList(0)">{{advanceList[0].name}}</div>
-        <div v-if="advanceList.length" class="name1 common01-ft36 animated flipInX advance_position2" @click="getDataList(1)">{{advanceList[1].name}}</div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position3" @click="getDataList(2)">{{advanceList[2].name}}</div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position4" @click="getDataList(3)">{{advanceList[3].name}}</div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position5" @click="getDataList(4)">{{advanceList[4].name}}</div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position6" @click="getDataList(5)">{{advanceList[5].name}}</div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position7" @click="getDataList(6)">{{advanceList[6].name}}</div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position8" @click="getDataList(7)">{{advanceList[7].name}}</div>
-        <div v-if="advanceList.length" class="name common01-ft36 animated flipInX advance_position9" @click="getDataList(8)">{{advanceList[8].name}}</div>
-        <div class="number advance_position1" @click="getDataList(0)">{{advanceList[0].publish_number}}</div>
-        <div class="number advance_position2" @click="getDataList(1)">{{advanceList[1].publish_number}}</div>
-        <div class="number advance_position3" @click="getDataList(2)">{{advanceList[2].publish_number}}</div>
-        <div class="number advance_position4" @click="getDataList(3)">{{advanceList[3].publish_number}}</div>
-        <div class="number advance_position5" @click="getDataList(4)">{{advanceList[4].publish_number}}</div>
-        <div class="number advance_position6" @click="getDataList(5)">{{advanceList[5].publish_number}}</div>
-        <div class="number advance_position7" @click="getDataList(6)">{{advanceList[6].publish_number}}</div>
-        <div class="number advance_position8" @click="getDataList(7)">{{advanceList[7].publish_number}}</div>
-        <div class="number advance_position9" @click="getDataList(8)">{{advanceList[8].publish_number}}</div>
-        <!-- <div class="left-part sys-flex-one">
+      <div class="member-div sys-flex" v-if="!showOrg">
+        <div class="left-part sys-flex-one">
           <div class="title">
             <div class="img-div">
               <img src="./assets/arrow_list.png" alt />
@@ -144,11 +122,11 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
     <!-- 组织二级页面 -->
-    <div class="orgStructure-detail-page common01-border" v-if="showDetailPage && !showAdvancePage && !showAdvanceDeatil"">
+    <div class="orgStructure-detail-page common01-border" v-if="showDetailPage">
       <div class="back-btn common01-ft36" @click="childDetailPageBack">返回</div>
       <div class="box">
         <div class="top-part">
@@ -196,103 +174,17 @@
         </div>
       </div>
     </div>
-    <!-- 先进典型列表页 -->
-    <div class="activityInfo-page common01-border" v-if="showDetailPage && showAdvancePage">
-        <div class="back-btn common01-ft36" @click="advanceListBack">返回</div>
-        <div class="common01-title page-title">{{ viewAttr.header || '先进典型' }}</div>
-        <div class="list-title">
-          <div
-            class="list-item flex sys-flex-center animated"
-            :class="{ flipInX: v.title }"
-            :style="{ 'animation-delay': k / 2 + 's' }"
-            v-for="(v, k) in dataList"
-            @click="getDetail(v)"
-            :key="k"
-          >
-            <p>{{ v.title }}</p>
-            <div>{{ v.brief }}</div>
-            <!--  -->
-          </div>
-        </div>
-        <div class="scroll_icon"> 
-          <img class="icon_up" :class="{icon_opcity: page === 1}" src="./assets/arrow_up.png" @click="lastPage"/>
-          <img class="icon_up" src="./assets/arrow_down.png" :class="{icon_opcity: page === PageTotal}" @click="nextPage"/>
-        </div>
-    </div>
-    <!-- 人物详情页 -->
-    <div class="activityInfo-detail common01-border" v-if="showDetailPage && showAdvanceDeatil">
-      <!-- <div class="back-line">
-        <div @click="backList()" class="back">
-          <div class="back-img">
-            <img src="./assets/icon_back.png" />
-          </div>
-          <span class="back-text">返回</span>
-        </div>
-      </div> -->
-      <div class="back-btn common01-ft36" @click="backList()">返回</div>
-      <swiper
-        :options="swiperOption"
-        ref="mySwiper"
-      >
-        <swiper-slide v-for="(v, k) in swiperDataList" :key="k" class="content-swiper">
-          <div class="detail-title">{{ v.title }}</div>
-          <div class="detail-list">
-            <div class="source">来源：{{ v.source }}</div>
-            <div class="author">发布时间：{{ v.showTime }}</div>
-            <div class="bg-line">
-              <p class="line"></p>
-            </div>
-          </div>
-          <div  class="detail-content common01-ft36" :style="setFontSize(40)" v-if="v.contentDetail">
-            <div class="contnet-detail-img" v-html="handelHtml(v.imgContent)"></div>
-            <div class="contnet-detail-div" v-html="handelHtml(v.contentDetail)"></div>
-          </div>
-        </swiper-slide>
-      </swiper>
-      <div class="swiper-button-prev swiper-button-white"></div>
-      <div class="swiper-button-next swiper-button-white"></div>
-    </div>
   </div>
 </template>
 
 <script>
-import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getAdvancedList, getJSActivityInfo, getActivityInfoDetail } from '@/servers/interface'
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
     return {
       orgImg: require('./assets/icon_group.png'),
-      showOrg: false,
-      showAdvancePage: false,
-      showAdvanceDeatil: false,
-      advanceList: [],
-      showIndex: 0,
-      swiperDataList: [], // 轮播图列表
-      currentIndex: 0,
-      advanceTotal: 0,
-      dataList: [],
-      PageTotal: 1,
-      swiperOption: {
-        notNextTick: true,
-        initialSlide: 0,
-        speed: 1000,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
-        pagination: {
-          el: '.swiper-pagination'
-        },
-        direction: 'horizontal',
-        loop: false,
-        observer: true,
-        observeParents: true,
-        paginationClickable: true
-      },
-      page: 1,
-      count: 5,
+      showOrg: true,
       orgIndexData: {
         total: 0,
         topInfo: {
@@ -340,21 +232,11 @@ export default {
   },
   created () {
     this.getVolunteerOrganizeList()
-    this.getAdvancedList()
-    // this.getVolunteerMemberList()
+    this.getVolunteerMemberList()
   },
   watch: {
   },
-  components: {
-    swiper,
-    swiperSlide
-  },
   methods: {
-    // 返回先进典型列表页
-    backList () {
-      this.showAdvanceDeatil = false
-      this.showAdvancePage = true
-    },
     handelHtml (html) {
       let rel = /style\s*?=\s*?([‘"])[\s\S]*?\1/gi
       return html.replace(rel, '')
@@ -364,134 +246,12 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    // 获取详情的content
-    getContent (k) {
-      getActivityInfoDetail(this.swiperDataList[k].id).then(res => {
-        if (!res.data.error_code) {
-          if (res.data.result.content) {
-            let imgContent = ''
-            let textContent = ''
-            let content = res.data.result.content
-            if (content.indexOf('<img') > -1) {
-              textContent = content.substring(0, content.indexOf('<img')) + content.substring(content.indexOf('"/>') + 3, content.length)
-              imgContent = content.substring(content.indexOf('<img'), content.indexOf('"/>') + 3)
-            } else {
-              textContent = content
-            }
-            this.$set(this.swiperDataList[k], 'contentDetail', textContent)
-            this.$set(this.swiperDataList[k], 'imgContent', imgContent)
-          }
-        }
-      })
-    },
-    getListcontent () {
-      this.swiperDataList.forEach((val, index) => {
-        if (val.contentDetail) {
-          return false
-        }
-        this.getContent(index)
-      })
-    },
-    // 获取先进典型轮播图数据
-    getDetail (item) {
-      // 保存swiper所需数据
-      this.showIndex = 0
-      this.dataList.forEach((v, index) => {
-        if (v.id === item.id) {
-          this.showIndex = index
-        }
-      })
-      this.swiperDataList = [...this.dataList]
-      this.getListcontent()
-      this.swiperOption.initialSlide = this.showIndex
-      setTimeout(() => {
-        this.showAdvancePage = false
-        this.showAdvanceDeatil = true
-      }, 0)
-    },
-    advanceListBack () {
-      this.showAdvancePage = false
-      this.showDetailPage = false
-      this.dataList = []
-    },
-    // 下一页
-    nextPage () {
-      if (this.page === this.PageTotal) return false
-      this.page += 1
-      this.getDataList(this.currentIndex, 'sign')
-    },
-    // 上一页
-    lastPage () {
-      if (this.page === 1) return false
-      this.page -= 1
-      this.getDataList(this.currentIndex, 'sign')
-    },
-    getDataList (i, sign) {
-      if (!sign) {
-        this.page = 1
-      }
-      this.showAdvancePage = true
-      this.showDetailPage = true
-      this.currentIndex = i
-      let config = {
-        site_id: 143,
-        page: this.page,
-        count: this.count,
-        status: 1,
-        column_id: this.advanceList[i].id
-      }
-      getJSActivityInfo({ params: config }).then(res => {
-        this.currentPage = this.page
-        if (!res.data.error_code) {
-          if (res.data.result.data && res.data.result.data.length) {
-            this.dataList = []
-            this.PageTotal = Math.ceil(res.data.result.total / 5)
-            setTimeout(() => {
-              this.dataList = res.data.result.data.map(v => {
-                let newDate = v.create_time.split('-').join('/')
-                let _date = new Date(newDate)
-                let month = (_date.getMonth() + 1).toString().padStart(2, '0')
-                let day = _date
-                  .getDate()
-                  .toString()
-                  .padStart(2, '0')
-                let hour = _date
-                  .getHours()
-                  .toString()
-                  .padStart(2, '0')
-                let min = _date
-                  .getMinutes()
-                  .toString()
-                  .padStart(2, '0')
-                v.showTime = month + '-' + day + '  ' + hour + ':' + min
-                v.contentDetail = ''
-                v.imgContent = ''
-                return {
-                  ...v
-                }
-              })
-            }, 100)
-          }
-        }
-      })
-    },
     checkCanShow (num) {
       if (this.detailInfo && this.detailInfo.length > num) {
         return true
       } else {
         return false
       }
-    },
-    // 获取先进典型列表
-    getAdvancedList () {
-      getAdvancedList().then(res => {
-        if (!res.data.error_code) {
-          this.advanceList = res.data.result
-          this.advanceList.forEach(val => {
-            this.advanceTotal += Number(val.publish_number)
-          })
-        }
-      })
     },
     // 获取组织架构
     getVolunteerOrganizeList () {
@@ -540,21 +300,21 @@ export default {
         this.dimensionalArr = []
         this.detailTitle = ''
       }
-    }
+    },
     // 成员名单
-    // getVolunteerMemberList () {
-    //   getVolunteerMemberList().then(res => {
-    //     if (!res.data.error_code) {
-    //       let _result = res.data.result
-    //       if (_result) {
-    //         this.memberIndexData.leftMember.title = _result[0].title
-    //         this.memberIndexData.leftMember.data = _result[0].relation
-    //         this.memberIndexData.rightMember.title = _result[1].title
-    //         this.memberIndexData.rightMember.data = _result[1].relation
-    //       }
-    //     }
-    //   })
-    // }
+    getVolunteerMemberList () {
+      getVolunteerMemberList().then(res => {
+        if (!res.data.error_code) {
+          let _result = res.data.result
+          if (_result) {
+            this.memberIndexData.leftMember.title = _result[0].title
+            this.memberIndexData.leftMember.data = _result[0].relation
+            this.memberIndexData.rightMember.title = _result[1].title
+            this.memberIndexData.rightMember.data = _result[1].relation
+          }
+        }
+      })
+    }
   }
 }
 </script>
@@ -570,280 +330,6 @@ export default {
   * {
     outline: 0;
     font-family: "SourceHanSansSC-Medium";
-  }
-  .activityInfo-detail {
-    padding: 0.7rem pxrem(72px) pxrem(10px);
-    .back-btn{
-      position: absolute;
-      z-index: 1;
-      right: 0.8rem;
-      bottom: 0.5rem;
-      padding-left: 0.55rem;
-      color: #00ffea;
-      font-weight: bold;
-      background: url("./assets/icon_back.png") no-repeat;
-      background-size: 0.36rem 0.28rem;
-      background-position: 0 0.11rem;
-    }
-    .content-swiper {
-      height: pxrem(820px);
-      overflow-y: scroll;
-    }
-    .back-line {
-      position: absolute;
-      z-index: 10;
-      right: pxrem(80px);
-      bottom: pxrem(50px);
-    }
-    .back {
-      display: inline-block;
-      font-weight: bold;
-    }
-    .back-text {
-      font-size: 0.34rem;
-      color: #00ffea;
-    }
-    .back-img {
-      display: inline-block;
-      width: 0.36rem;
-      height: 0.28rem;
-      margin-right: 0.2rem;
-    }
-    // img {
-    //   width: 100%;
-    //   height: 100%;
-    //   object-fit: cover;
-    //   display: block;
-    // }
-    .detail-title {
-      display: inline-block;
-      width: pxrem(1250px);
-      font-weight: bold;
-      font-size: 0.52rem;
-      // line-height:0.52rem;
-      color: #fff;
-      margin-bottom: 0.3rem;
-      text-align: center;
-    }
-    .detail-list {
-      color: #fff;
-      margin: 0 auto;
-      text-align: center;
-      .source {
-        margin-right: 0.34rem;
-        display: inline-block;
-        font-size: 0.28rem;
-      }
-      .author {
-        display: inline-block;
-        font-size: 0.28rem;
-      }
-      .bg-line {
-        margin-top: pxrem(12px);
-        .line {
-          width: pxrem(1017px);
-          height: pxrem(2px);
-          margin: 0 auto;
-          background: linear-gradient(
-            90deg,
-            rgba(64, 107, 173, 0) 0%,
-            rgba(64, 107, 173, 0.99) 48%,
-            rgba(64, 107, 173, 0) 100%
-          );
-        }
-      }
-    }
-    .detail-content {
-      width: 100%;
-      // height: 6.2rem;
-      overflow-y: scroll;
-      margin-top: pxrem(40px);
-      padding: 0 pxrem(30px);
-      display: flex;
-      .video{
-        margin: 0 auto;
-        width: 12rem;
-        height: 6rem;
-        .vjs-custom-skin {
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          .vjs-big-play-button{
-            left: calc(50% - 1.5em);
-            top: calc(50% - 0.8em);
-          }
-        }
-      }
-      // & > div {
-      //   width: 100%;
-      // }
-      .pic {
-        img {
-          margin-bottom: pxrem(20px);
-        }
-      }
-      .contnet-detail-div {
-        flex: 1;
-        line-height: 0.6rem;
-        font-size: pxrem(35px);
-        text-indent: 2em;
-        text-align: left;
-        color: #eeeeee;
-        p{
-          br{
-            display: none;
-          }
-        }
-      }
-      .contnet-detail-img{
-        max-width: 31%;
-        margin-right: 0.3rem;
-        display: flex;
-        img {
-          object-fit: contain;
-          max-width: 100%;
-          max-height: 6.4rem;
-        }
-      }
-    }
-    .swiper-slide {
-      width: 100% !important;
-    }
-    .swiper-button-prev {
-      background-image: url(./assets/icon_left.png) !important;
-      width: 0.4rem;
-      height: 0.78rem;
-      background-size: 100%;
-    }
-    .swiper-button-next {
-      background-image: url(./assets/icon_right.png) !important;
-      width: 0.4rem;
-      height: 0.78rem;
-      background-size: 100%;
-    }
-    .swiper-button-prev:focus,
-    .swiper-button-next:focus {
-      outline: none;
-    }
-  }
-  .activityInfo-page {
-    position: relative;
-    padding: pxrem(200px) pxrem(120px) pxrem(95px) pxrem(78px);
-    .back-btn {
-      position: absolute;
-      z-index: 1;
-      right: 0.8rem;
-      bottom: 0.5rem;
-      padding-left: pxrem(55px);
-      color: #00ffea;
-      font-weight: bold;
-      background: url("./assets/icon_back.png") no-repeat;
-      background-size: pxrem(36px) pxrem(28px);
-      background-position: 0 pxrem(11px);
-    }
-    .scroll_icon{
-      position: absolute;
-      right: 0.4rem;
-      top: 5.1rem;
-      display: flex;
-      flex-direction: column;
-      img{
-        margin-top: 0.2rem;
-        width: 0.585rem;
-        height: 0.664rem;;
-      }
-      .icon_opcity{
-        opacity: 0.4;
-      }
-    }
-    .tab-btn {
-      position: absolute;
-      outline: none;
-      z-index: 2;
-      top: pxrem(90px);
-      right: pxrem(77px);
-      .btn {
-        width: pxrem(253px);
-        height: pxrem(94px);
-        line-height: pxrem(98px);
-        text-align: center;
-        font-weight: bold;
-        color: #fff;
-        background: url("./assets/rectangle.png") no-repeat center;
-        background-size: 100%;
-      }
-      .btn.act {
-        background: url("./assets/rectangle_pre.png") no-repeat center;
-        background-size: 100%;
-      }
-    }
-    .page-title {
-      font-weight: 600;
-    }
-    .list-item {
-      background: url('./assets/box@2x.png');
-      background-size: 100% 100%;
-      margin-bottom: 0.5rem;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.2rem 0.2rem 0.2rem 0 ;
-    }
-    .type-area {
-      color: #0afbf2;
-      span {
-        color: #0afbf2;
-      }
-      img {
-        width: 1.07rem;
-        height: 0.48rem;
-        margin: 0 0.225rem;
-      }
-    }
-    .list-title {
-      color: #fff;
-      font-size: 0.38rem;
-      text-align: left;
-    }
-    .list-text {
-      width: 40%;
-      text-align: left;
-    }
-    .list-time {
-      .img-icon {
-        width: 0.3rem;
-        height: 0.3rem;
-        margin-right: 0.2rem;
-      }
-    }
-    .title-div {
-      width: 100%;
-      &.haveico {
-        width: calc(100% - 1.06rem);
-      }
-      > p {
-        display: block;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        word-break: break-all;
-      }
-    }
-    .right-part {
-      width: 5.4rem;
-    }
-    .list-read {
-      margin: 0 0.3rem 0 0.45rem;
-      font-size: 0.32rem;
-      .click-span {
-        display: inline-block;
-        width: 1.1rem;
-      }
-      .img-icon {
-        width: 0.42rem;
-        height: 0.3rem;
-        margin-right: 0.2rem;
-      }
-    }
   }
   .orgStructure-page {
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
@@ -1007,42 +493,6 @@ export default {
         bottom: pxrem(54px);
         left: pxrem(1270px);
       }
-      .name.advance_position1 {
-        top: -0.1rem;
-        left: 3rem;
-      }
-      .name.advance_position3{
-        left: 13.2rem;
-        top: 4rem;
-      }
-      .name.advance_position4{
-        left: 13rem;
-        top: 5.5rem;
-      }
-      .name.advance_position5{
-        left: 11.4rem;
-        top: 7.45rem;
-      }
-      .name.advance_position6{
-        left: 0.75rem;
-        top: 7.45rem;
-      }
-      .name.advance_position7{
-        left: -0.8rem;
-        top: 5.5rem;
-      }
-      .name.advance_position8{
-        left: -0.8rem;
-        top: 4.05rem;
-      }
-      .name.advance_position9{
-        left: 1.45rem;
-        top: 1.7rem;
-      }
-      .name1.advance_position2{
-        left: 12.3rem;
-        top: 1.5rem;
-      }
       .number {
         width: pxrem(138px);
         height: pxrem(138px);
@@ -1074,46 +524,6 @@ export default {
       .number.right-bottom-info {
         bottom: pxrem(96px);
         right: pxrem(514px);
-      }
-      .number.advance_position1{
-        top: 0.83rem;
-        left: 7.52rem;
-      }
-      .number.advance_position2{
-        top: 1.57rem;
-        left: 9.64rem;
-        color: #0ce7e6;
-      }
-      .number.advance_position3{
-        top: 3.28rem;
-        left: 10.6rem;
-      }
-      .number.advance_position4{
-        top: 5.26rem;
-        left: 10.32rem;
-        color: #0ce7e6;
-      }
-      .number.advance_position5{
-        top: 6.6rem;
-        left: 8.9rem;
-      }
-      .number.advance_position6{
-        top: 6.58rem;
-        left: 6.16rem;
-      }
-      .number.advance_position7{
-        top: 5.28rem;
-        left: 4.8rem;
-        color: #0ce7e6;
-      }
-      .number.advance_position8{
-        top: 3.28rem;
-        left: 4.6rem;
-      }
-      .number.advance_position9{
-        top: 1.57rem;
-        left: 5.58rem;
-        color: #0ce7e6;
       }
     }
     .org_div_add{
