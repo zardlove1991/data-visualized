@@ -68,7 +68,7 @@
     </div>
     <!-- 二级页面 -->
     <div class="common01-border civilizationmap_twopage" v-if="depath === 2">
-      <div class="common01-title">{{viewAttr.header || '站点列表'}}</div>
+      <!-- <div class="common01-title">{{viewAttr.header || '站点列表'}}</div> -->
       <div class="civilization_list">
         <div class="civilization_list_top flex flex-center">
           <div class="list_top_info flex-one flex flex-center">
@@ -95,7 +95,7 @@
     </div>
     <!-- 三级页面 -->
     <div class="common01-border civilizationmap_twopage" v-if="depath === 3">
-       <div class="common01-title">{{viewAttr.header || '站点详情'}}</div>
+       <!-- <div class="common01-title">{{viewAttr.header || '站点详情'}}</div> -->
        <div class="civilization_list">
          <div class="civilization_list_top flex flex-center">
             <div class="list_top_info  flex flex-center">
