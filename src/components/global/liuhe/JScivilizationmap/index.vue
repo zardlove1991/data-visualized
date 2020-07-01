@@ -706,7 +706,7 @@ export default {
   }
   .civilizationmap_twopage{
     position: relative;
-    padding: 1.61rem 0.743rem 1.223rem 0.743rem;
+    padding: 1.1rem 0.743rem 1.223rem 0.743rem;
     .scroll_icon{
       position: absolute;
       right: 0.4rem;
