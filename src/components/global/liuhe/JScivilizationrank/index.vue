@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-civilizationrank-js">
+  <div class="common01-civilizationrank-js" id="civilizationrank">
     <div class="dispatchrank-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '数据统计'}}</div>
       <div class="title-tab sys-flex">
@@ -124,7 +124,7 @@ export default {
       }
     },
     echartRemSize (res) {
-      let clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      let clientWidth = document.getElementById('civilizationrank').clientWidth
       if (!clientWidth) return
       let fontSize = 100 * (clientWidth / 1920)
       return res * fontSize
