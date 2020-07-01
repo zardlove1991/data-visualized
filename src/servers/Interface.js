@@ -170,6 +170,8 @@ export const getOrgList = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/m
 export const getOrganizeDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/mapOrganizeDetail?id=${id}`)
 // 金山先进典型列表接口
 export const getAdvancedList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/columnList`)
+// 金山数据统计图接口
+export const getJSstaticList = (config) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/marketData`, 'get', config)
 // 活动咨询详情
 export const getActivityInfoDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublishDetail?id=${id}`)
 export const getSixPlatformInfo = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerSixPlatForms?id=${id}`)

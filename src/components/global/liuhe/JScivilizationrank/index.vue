@@ -1,7 +1,7 @@
 <template>
   <div class="common01-civilizationrank-js">
     <div class="dispatchrank-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '文明排行'}}</div>
+      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '数据统计'}}</div>
       <div class="title-tab sys-flex">
           <div class="item">
             <div>
@@ -22,7 +22,16 @@
               </div>
           </div>
       </div>
-      <div class="wrap-content sys-flex flex-justify-between">
+      <div class="civilizationrank_content">
+        <chart class="civilizationrank_static" :options="pieOpt" :autoResize="true"></chart>
+        <div class="static_tab">
+          <div class="btn" :class="{act: type === 'area'}" @click="type = 'area'">服务区域</div>
+          <div class="btn" :class="{act: type === 'age'}" @click="type = 'age'">年龄</div>
+          <div class="btn" :class="{act: type === 'political'}" @click="type = 'political'">政治面貌</div>
+          <div class="btn" :class="{act: type === 'service_type'}" @click="type = 'service_type'">服务领域</div>
+        </div>
+      </div>
+      <!-- <div class="wrap-content sys-flex flex-justify-between">
         <div class="content-left sys-flex-one">
           <div class="title">志愿组织排行<span class="unit">(时长/h)</span></div>
           <div class="item-list sys-flex sys-flex-center animated flipInX" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
@@ -49,13 +58,17 @@
             <div class="num common01-ft36" :style="setFontSize(40)"><span class="common01-ft60" :style="setFontSize(65)">{{v.duration}}</span>h</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
-import { getVolunteerRank } from '@/servers/interface'
+import { getJSstaticList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
+import echarts from 'vue-echarts/components/ECharts'
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/legend'
+import 'echarts/lib/component/grid'
 export default {
   name: 'civilizationRank',
   data () {
@@ -66,13 +79,19 @@ export default {
       memberTotalNum: 0,
       // leftCount: 0,
       // rightCount: 0,
+      pieOpt: {},
+      type: 'area',
       pageNum: 1,
       count: 3,
       frequency: 10000,
       leftList: [],
       rightList: [],
-      customSize: false
+      customSize: false,
+      staticData: []
     }
+  },
+  components: {
+    chart: echarts
   },
   created () {
     getDataConfig().then(res => {
@@ -80,17 +99,23 @@ export default {
         this.customSize = true
       }
     })
-    this.getVolunteerRank()
-    setInterval(() => {
-      if (this.pageNum >= 3) {
-        this.pageNum = 1
-      } else {
-        this.pageNum += 1
-      }
-      this.leftList = []
-      this.rightList = []
-      this.getVolunteerRank()
-    }, this.frequency)
+    // this.getVolunteerRank()
+    this.getStaticList()
+    // setInterval(() => {
+    //   if (this.pageNum >= 3) {
+    //     this.pageNum = 1
+    //   } else {
+    //     this.pageNum += 1
+    //   }
+    //   this.leftList = []
+    //   this.rightList = []
+    //   this.getVolunteerRank()
+    // }, this.frequency)
+  },
+  watch: {
+    type () {
+      this.getStaticList()
+    }
   },
   methods: {
     setFontSize (size) {
@@ -98,22 +123,90 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getVolunteerRank (type) {
-      getVolunteerRank(this.pageNum, this.count).then(res => {
-        if (!res.data.error_code) {
-          let _result = res.data.result
-          if (_result.volunteerRank.data) {
-            this.rightList = _result.volunteerRank.data
-          }
-          if (_result.organizeRank.data) {
-            this.leftList = _result.organizeRank.data
-          }
-          this.timeTotalNum = _result.duration
-          this.teamTotalNum = _result.organize_number
-          this.memberTotalNum = _result.volunteer_number
+    echartRemSize (res) {
+      let clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      if (!clientWidth) return
+      let fontSize = 100 * (clientWidth / 1920)
+      return res * fontSize
+    },
+    getStaticList () {
+      getJSstaticList({ params: { mark: this.type } }).then(res => {
+        let _result = res.data.result
+        this.timeTotalNum = _result.statistics.service_time
+        this.teamTotalNum = _result.statistics.organize_num
+        this.memberTotalNum = _result.statistics.volunteer_num
+        this.staticData = []
+        _result.market_data.forEach(val => {
+          this.staticData.push({
+            name: val.title,
+            value: val.volunteer_num
+          })
+        })
+        // this.staticData = _result.market_data
+        this.pieOpt = {
+          // color: ['#ce4272', '#0554f5', '#f3972e', '#008aed', '#14da7d'],
+          textStyle: {
+            color: '#fff'
+          },
+          series: [
+            {
+              name: '任务统计',
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: '75%',
+              avoidLabelOverlap: true,
+              label: {
+                normal: {
+                  show: true,
+                  formatter: '{b}:{d}%  {c}人',
+                  textStyle: {
+                    color: 'rgba(214, 230, 255)',
+                    fontSize: this.echartRemSize(0.25),
+                    fontWeight: 'bold'
+                  }
+                },
+                emphasis: {
+                  show: true,
+                  textStyle: {
+                    fontSize: this.echartRemSize(0.28),
+                    fontWeight: 'bold',
+                    color: 'rgba(255, 255, 255)'
+                  }
+                }
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: this.echartRemSize(0.2), // 指示线宽度
+                  length2: this.echartRemSize(0.7),
+                  lineStyle: {
+                    width: 2,
+                    color: '#03F6FF' // 指示线颜色
+                  }
+                }
+              },
+              data: this.staticData
+            }
+          ]
         }
       })
     }
+    // getVolunteerRank (type) {
+    //   getVolunteerRank(this.pageNum, this.count).then(res => {
+    //     if (!res.data.error_code) {
+    //       let _result = res.data.result
+    //       if (_result.volunteerRank.data) {
+    //         this.rightList = _result.volunteerRank.data
+    //       }
+    //       if (_result.organizeRank.data) {
+    //         this.leftList = _result.organizeRank.data
+    //       }
+    //       this.timeTotalNum = _result.duration
+    //       this.teamTotalNum = _result.organize_number
+    //       this.memberTotalNum = _result.volunteer_number
+    //     }
+    //   })
+    // }
   }
 }
 </script>
@@ -131,6 +224,34 @@ export default {
   .dispatchrank-wrap {
     padding: pxrem(154px) pxrem(70px) pxrem(61px) pxrem(70px);
     color: #fff;
+    .civilizationrank_content{
+      height: calc(100% - 1.1rem);
+      padding: 0.474rem 0;
+      display: flex;
+      .civilizationrank_static{
+        flex: 1
+      }
+      .static_tab{
+        display: flex;
+        flex-direction: column;
+        .btn {
+          font-size: 0.285rem;
+          margin-bottom: 0.395rem;
+          width: 2.21rem;
+          height: 0.743rem;
+          line-height: 0.743rem;
+          text-align: center;
+          font-weight: bold;
+          color: #fff;
+          background: url("./assets/rectangle.png") no-repeat center;
+          background-size: 100%;
+        }
+        .btn.act {
+          background: url("./assets/rectangle_pre.png") no-repeat center;
+          background-size: 100%;
+        }
+      }
+    }
     .common01-title {
         font-family: 'SourceHanSansSC-Medium';
         top: pxrem(53px);

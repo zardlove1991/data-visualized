@@ -43,7 +43,11 @@
           class="name common01-ft36 animated flipInX right-bottom-info"
           @click="showChildDetail(orgIndexData.rightBottomInfo.id, orgIndexData.rightBottomInfo.name)"
         >{{orgIndexData.rightBottomInfo.name}}</div>
-
+        <div
+          v-if="orgIndexData.bottomInfo.name"
+          class="name common01-ft36 animated flipInX bottom-info"
+          @click="showChildDetail(orgIndexData.bottomInfo.id, orgIndexData.bottomInfo.name)"
+        >{{orgIndexData.bottomInfo.name}}</div>
         <div
           class="number left-bottom-info"
           @click="showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)"
@@ -64,6 +68,10 @@
           class="number right-bottom-info"
           @click="showChildDetail(orgIndexData.rightBottomInfo.id, orgIndexData.rightBottomInfo.name)"
         >{{orgIndexData.rightBottomInfo.number}}</div>
+        <div
+          class="number bottom-info"
+          @click="showChildDetail(orgIndexData.bottomInfo.id, orgIndexData.bottomInfo.name)"
+        >{{orgIndexData.bottomInfo.number}}</div>
       </div>
       <!-- 成员名单 -->
       <div class="member-div sys-flex" v-if="!showOrg">
@@ -211,6 +219,11 @@ export default {
           title: '',
           score: 0,
           id: ''
+        },
+        bottomInfo: {
+          title: '',
+          score: 0,
+          id: ''
         }
       },
       dimensionalArr: [],
@@ -260,11 +273,12 @@ export default {
           let _result = res.data.result.organize_cate
           if (_result && _result.length > 0) {
             this.orgIndexData.total = res.data.result.total
-            this.orgIndexData.topInfo = _result[3]
-            this.orgIndexData.leftTopInfo = _result[2]
-            this.orgIndexData.leftBottomInfo = _result[1]
-            this.orgIndexData.rightTopInfo = _result[0]
+            this.orgIndexData.topInfo = _result[0]
+            this.orgIndexData.leftTopInfo = _result[1]
+            this.orgIndexData.leftBottomInfo = _result[2]
+            this.orgIndexData.rightTopInfo = _result[3]
             this.orgIndexData.rightBottomInfo = _result[4]
+            this.orgIndexData.bottomInfo = _result[5]
             _result.forEach(e => {
             })
           }
@@ -362,17 +376,16 @@ export default {
     .org-div {
       position: absolute;
       width: pxrem(1678px);
-      height: pxrem(810px);
+      height: pxrem(710px);
       bottom: pxrem(35px);
-      // background: url("./assets/bg_group_new2.png") no-repeat center;
-      background: url("./assets/bg_group_new3.png") no-repeat center;
-      background-size: 100%;
-      left: 52%;
-      -webkit-transform: translateX(-50%);
-      -moz-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-      -o-transform: translateX(-50%);
-      transform: translateX(-50%);
+      background: url("./assets/bg_group_new4.png") no-repeat center;
+      background-size: auto 100%;
+      // left: 52%;
+      // -webkit-transform: translateX(-50%);
+      // -moz-transform: translateX(-50%);
+      // -ms-transform: translateX(-50%);
+      // -o-transform: translateX(-50%);
+      // transform: translateX(-50%);
       .total,
       .name,
       .number {
@@ -382,8 +395,8 @@ export default {
         width: pxrem(314px);
         height: pxrem(189px);
         text-align: center;
-        top: pxrem(338px);
-        left: pxrem(667px);
+        top: pxrem(238px);
+        left: pxrem(705px);
         p {
           font-size: pxrem(52px);
           height: pxrem(50px);
@@ -468,30 +481,34 @@ export default {
       }
       .name.top-info {
         // width: pxrem(294px);
-        top: 0;
+        top: pxrem(15px);
         // left: pxrem(354px);
-        right: pxrem(1029px);
+        right: pxrem(1215px);
       }
       .name.left-top-info {
         // width: pxrem(294px);
-        top: pxrem(230px);
-        right: pxrem(1300px);
+        top: pxrem(285px);
+        right: pxrem(1360px);
       }
       .name.left-bottom-info {
         // width: pxrem(374px);
-        bottom: pxrem(38px);
+        bottom: pxrem(50px);
         // right: pxrem(1306px);
-        right: pxrem(1260px);
+        right: pxrem(1240px);
       }
       .name.right-top-info {
         // width: pxrem(294px);
-        top: pxrem(180px);
-        left: pxrem(1270px);
+        top: pxrem(295px);
+        left: pxrem(1358px);
       }
       .name.right-bottom-info {
         // width: pxrem(408px);
         bottom: pxrem(54px);
-        left: pxrem(1270px);
+        left: pxrem(1285px);
+      }
+      .name.bottom-info {
+        top: pxrem(15px);
+        right: pxrem(152px);
       }
       .number {
         width: pxrem(138px);
@@ -504,26 +521,30 @@ export default {
         color: #becfff;
       }
       .number.top-info {
-        top: pxrem(20px);
-        left: pxrem(750px);
+        top: pxrem(0px);
+        left: pxrem(610px);
       }
       .number.left-top-info {
-        top: pxrem(248px);
-        left: pxrem(428px);
+        top: pxrem(262px);
+        left: pxrem(468px);
         color: #0ce7e6;
       }
       .number.left-bottom-info {
-        bottom: pxrem(96px);
-        left: pxrem(482px);
+        bottom: pxrem(92px);
+        left: pxrem(556px);
       }
       .number.right-top-info {
-        top: pxrem(250px);
-        right: pxrem(462px);
+        top: pxrem(265px);
+        right: pxrem(423px);
         color: #0ce7e6;
       }
       .number.right-bottom-info {
-        bottom: pxrem(96px);
-        right: pxrem(514px);
+        bottom: pxrem(86px);
+        right: pxrem(524px);
+      }
+      .number.bottom-info {
+        top: pxrem(0px);
+        right: pxrem(556px);
       }
     }
     .org_div_add{
