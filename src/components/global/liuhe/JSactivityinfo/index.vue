@@ -1,7 +1,7 @@
 <template>
   <div class="common-activityInfo-js">
     <div class="activityInfo-page common01-border" v-if="!showDetail">
-      <div class="common01-title page-title">{{ viewAttr.header || '资讯信息' }}</div>
+      <div class="common01-title page-title">{{ viewAttr.header || '文明播报' }}</div>
       <div class="tab-btn sys-flex">
         <div
           :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"

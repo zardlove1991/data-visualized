@@ -192,7 +192,7 @@ export default {
   data () {
     return {
       orgImg: require('./assets/icon_group.png'),
-      showOrg: true,
+      showOrg: false,
       orgIndexData: {
         total: 0,
         topInfo: {
