@@ -339,11 +339,12 @@ export default {
     .title-logo{
       width: 1.2rem;
       height: 1.2rem;
-      margin-right: 0.2rem;
+      margin-right: 0.35rem;
+      margin-left: 0.3rem;
     }
     .inner-title {
       color: #00fffa;
-      font-size: 1.2rem;
+      font-size: 1.17rem;
       text-align: center;
       font-weight: bold;
       letter-spacing: 0.1rem;
