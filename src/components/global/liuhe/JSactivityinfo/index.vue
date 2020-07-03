@@ -220,6 +220,7 @@ export default {
       swiperLeftPage: 1, // 定位swiper滑动边界页码
       swiperRightPage: 1, // 定位swiper滑动边界页码
       showIndex: 0,
+      column_id: '1046,1047,1048,1052,1265',
       isPaging: true,
       typeList: {
         article: '文稿',
@@ -402,7 +403,8 @@ export default {
         site_id: 143,
         page: this.page,
         count: this.count,
-        status: 1
+        status: 1,
+        column_id: this.column_id
       }
       if (i || i === 0) {
         config.column_id = this.advanceList[i].id
@@ -846,6 +848,7 @@ export default {
     }
     .title-div {
       width: 100%;
+      padding-left: 0.225rem;
       &.haveico {
         width: calc(100% - 1.06rem);
       }
