@@ -84,6 +84,7 @@
           </div>
           <div class="member-list">
             <div
+            class="item_add"
               :class="item.title === '成员'?'item type-member':'item type-leader'"
               v-for="(item, index) in memberIndexData.leftMember.data"
               :key="index"
@@ -639,6 +640,9 @@ export default {
               font-size: pxrem(30px);
             }
           }
+        }
+        .item_add{
+          line-height: 0.3rem;
         }
         > .item:last-child {
           padding-bottom: pxrem(43px);

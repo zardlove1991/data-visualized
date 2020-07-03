@@ -328,6 +328,7 @@ export default {
     //   }
     // },
     getDetail (item, adv) {
+      if (item.title.indexOf('金山好人') > -1) return false // 金山好人暂时没详情，不进入详情
       // 保存swiper所需数据
       this.showIndex = 0
       this.dataList.forEach((v, index) => {
@@ -403,7 +404,7 @@ export default {
         count: this.count,
         status: 1
       }
-      if (i) {
+      if (i || i === 0) {
         config.column_id = this.advanceList[i].id
         this.showAdvancePage = true
         this.showDetail = true
@@ -888,7 +889,7 @@ export default {
       background-position: 0 0.11rem;
     }
     .content-swiper {
-      height: pxrem(800px);
+      height: pxrem(820px);
       overflow-y: scroll;
     }
     .back-line {
@@ -976,7 +977,7 @@ export default {
         }
       }
       & > div {
-        width: 100%;
+        // width: 100%;
       }
       .pic {
         img {
@@ -1006,13 +1007,13 @@ export default {
         }
       }
       .contnet-detail-img{
-        max-width: 31%;
+        max-width: 35%;
         margin-right: 0.3rem;
         display: flex;
         img {
           object-fit: contain;
           max-width: 100%;
-          max-height: 6.4rem;
+          max-height: 6.8rem;
         }
       }
     }
