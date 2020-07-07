@@ -150,7 +150,7 @@
                   <span
                     class="num"
                     v-if="detailInfo && detailInfo.length > 0"
-                  >({{detailInfo.length}})</span>
+                  >({{detailInTotal}})</span>
                 </div>
                 <div class="title-right">
                   <img src="./assets/namebox_right.png" alt />
@@ -194,6 +194,7 @@ export default {
     return {
       orgImg: require('./assets/icon_group.png'),
       showOrg: false,
+      detailInTotal: 0,
       orgIndexData: {
         total: 0,
         topInfo: {
@@ -294,6 +295,7 @@ export default {
           if (_result) {
             this.detailTitle = name
             this.detailInfo = _result.data
+            this.detailInTotal = _result.to
             this.dimensionalArr.push({
               name: name,
               data: _result.data
