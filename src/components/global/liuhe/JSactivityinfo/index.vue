@@ -329,7 +329,7 @@ export default {
     //   }
     // },
     getDetail (item, adv) {
-      if (item.title.indexOf('金山好人') > -1) return false // 金山好人暂时没详情，不进入详情
+      // if (item.title.indexOf('金山好人') > -1) return false // 金山好人暂时没详情，不进入详情
       // 保存swiper所需数据
       this.showIndex = 0
       this.dataList.forEach((v, index) => {
@@ -749,7 +749,7 @@ export default {
       }
       .number.advance_position5{
         top: 6.6rem;
-        left: 8.9rem;
+        left: 8.86rem;
       }
       .number.advance_position6{
         top: 6.58rem;
