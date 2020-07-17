@@ -135,7 +135,7 @@ export default {
                   {
                     withCredentials: false,
                     type: 'application/x-mpegURL',
-                    src: 'http://36772.live-vod.cdn.aodianyun.com/clip/0x0/ec797e2c2cd612a4ee7654cbbdf9d811/ec797e2c2cd612a4ee7654cbbdf9d811.m3u8'
+                    src: 'https://36772.live-vod.cdn.aodianyun.com/clip/0x0/004d1d03d523c495a6b8f611a426f110/004d1d03d523c495a6b8f611a426f110.m3u8'
                   }
                 ],
                 // poster:
