@@ -146,6 +146,8 @@ export const getWorkCallSubjectSortList = (id) => createAPI(`${httpsbaseUrl}/Api
 // 盐湖大屏
 // 文明排行
 export const getVolunteerRank = (page = 1, count = 3) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerRank?page=${page}&count=${count}`)
+// 排行榜详情
+export const getActivity = (id, module = 'organize', page = 1, count = 5) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getActivity?id=${id}&module=${module}&page=${page}&count=${count}`)
 // 点单列表
 export const getVolunteerHelpList = (count = 4, page = 1, status = '') => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerHelpList?count=${count}&page=${page}&status=${status}`)
 // 点单详情
