@@ -4,9 +4,9 @@
       <div class="common01-title">{{viewAttr.header || '运营数据'}}</div>
       <div class="operate-list sys-flex sys-vertical">
         <div class="sys-flex">
-          <!-- <div class="one-img img-box">
+          <div class="one-img img-box">
             <img src="./assets/app.png" />
-          </div> -->
+          </div>
           <div class="custom-wrap flex flex-justify-between flex-one" v-if="customConfig.app && customConfig.app.length">
             <div v-for="(item, index) in customConfig.app" :key="index">
               <div class="mbt12 common01-ft40">{{item.name}}</div>
@@ -31,9 +31,9 @@
         </div>
         <div class="operate-line mtt22"></div>
         <div class="sys-flex">
-          <!-- <div class="two-img img-box">
+          <div class="two-img img-box">
             <img src="./assets/web.png" />
-          </div> -->
+          </div>
           <div class="custom-wrap flex flex-justify-between flex-one" v-if="customConfig.website && customConfig.website.length">
             <div v-for="(item, index) in customConfig.website" :key="index">
               <div class="mbt12 common01-ft40">{{item.name}}</div>
@@ -57,9 +57,9 @@
         </div>
         <div class="operate-line mtt22"></div>
         <div class="sys-flex">
-          <!-- <div class="three-img img-box">
+          <div class="three-img img-box">
             <img src="./assets/wechat.png" />
-          </div> -->
+          </div>
           <div class="custom-wrap flex flex-justify-between flex-one" v-if="customConfig.weChat && customConfig.weChat.length">
             <div v-for="(item, index) in customConfig.weChat" :key="index">
               <div class="mbt12 common01-ft40">{{item.name}}</div>
@@ -171,7 +171,7 @@ export default {
   padding: pxrem(40px);
   text-align: left;
   .operate-wrap {
-    padding: pxrem(207px) pxrem(0px) pxrem(95px) pxrem(30px);
+    padding: pxrem(207px) pxrem(96px) pxrem(95px) pxrem(78px);
     width: 100%;
     height: 100%;
     background-size: 100% 100%;
@@ -206,7 +206,7 @@ export default {
     color: #ffffff;
   }
   .mr100 {
-    margin-right: .5em;
+    margin-right: 2em;
   }
   .custom-wrap{
     padding: 0 pxrem(120px) 0 0;

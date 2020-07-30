@@ -137,13 +137,15 @@ export const common01componentLiveCamera = getComponent('common01/liveCamera') /
 export const common01componentYanchengGather = getComponent('common01/yanchengGather') // 盐城聚合信息
 export const common01componentYanchengScreen = getComponent('common01/yanchengScreen') // 盐城聚合信息
 export const common01componentTitle02 = getComponent('common01/title02') // 标题2
+
+export const common01componentIframe = getComponent('common01/iframe') // 芜湖 外链展示
+export const common01componentWuhuTitle = getComponent('common01/wuhuTitle') // 芜湖 标题
+export const common01componentOperateData03 = getComponent('common01/operateData03') //  运营数据03
+export const common01componentTaskShow03 = getComponent('common01/taskShow03') //  运营数据03
+
 export const common01componentYuqing = getComponent('common01/yuqing') // 雨花台区 舆情分析
 export const common01componentClueGather2 = getComponent('common01/clueGather2') // 雨花台区 线索汇聚
 export const common01componentBusinessDate = getComponent('common01/businessDate') // 雨花台区 运营数据
 export const common01componentTaskShow02 = getComponent('common01/taskShow02') // 雨花台区 任务展示
 export const common01componentVideoList = getComponent('common01/videoList') // 雨花台区 视频列表
 export const common01componentYuhuaTitle = getComponent('common01/yuhuaTitle') // 雨花台区 标题
-export const common01componentIframe = getComponent('common01/iframe') // 外链展示
-export const common01componentWuhuTitle = getComponent('common01/wuhuTitle') // 雨花台区 标题
-export const common01componentOperateData03 = getComponent('common01/operateData03') //  运营数据03
-export const common01componentTaskShow03 = getComponent('common01/taskShow03') //  运营数据03

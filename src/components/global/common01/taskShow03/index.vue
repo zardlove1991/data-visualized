@@ -52,7 +52,7 @@ export default {
       }
     },
     getWorkCallTaskList () {
-      getWorkCallTaskList(9, this.page, this.currentViewId).then(res => {
+      getWorkCallTaskList(8, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
