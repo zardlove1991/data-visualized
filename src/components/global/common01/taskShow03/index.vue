@@ -3,10 +3,22 @@
     <div class="taskshow-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '任务展示'}}</div>
       <div class="wrap-content">
-        <div class="item-list animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title, 'marginBottom50': customSize}" :style="{'animation-delay' : k/2+'s'}">
+        <div
+          class="item-list animated"
+          v-for="(v, k) in dataList"
+          :key="k"
+          :class="{'flipInX' : v.title, 'marginBottom50': customSize}"
+          :style="{'animation-delay' : k/2+'s'}"
+        >
           <div class="status-title sys-flex sys-flex-center common01-ft40" :style="setFontSize(50)">
-            <div class="status" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3' || v.priority === '4'}">【{{v.priority === '1' ? '一级' : v.priority === '2' ? '二级' : v.priority === '3' ? '三级' : '四级'}}】</div>
-            <div class="status-show" :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3'}">【{{v.status_show}}】</div>
+            <div
+              class="status"
+              :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3' || v.priority === '4'}"
+            >【{{v.priority === '1' ? '一级' : v.priority === '2' ? '二级' : v.priority === '3' ? '三级' : '四级'}}】</div>
+            <div
+              class="status-show"
+              :class="{'one': v.priority === '1', 'two': v.priority === '2', 'three': v.priority === '3'}"
+            >【{{v.status_show}}】</div>
             <div class="title overhidden">{{v.title}}</div>
           </div>
           <div class="project-name sys-flex sys-flex-center common01-ft32" :style="setFontSize(45)">
@@ -52,7 +64,7 @@ export default {
       }
     },
     getWorkCallTaskList () {
-      getWorkCallTaskList(8, this.page, this.currentViewId).then(res => {
+      getWorkCallTaskList(9, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -78,7 +90,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "~@/styles/index.scss";
+@import '~@/styles/index.scss';
 @import '../style/index.scss';
 .common01-taskshow {
   width: 100%;
@@ -89,7 +101,7 @@ export default {
     color: #fff;
     .wrap-content {
       .marginBottom50 {
-        margin-bottom: pxrem(50px)!important;
+        margin-bottom: pxrem(50px) !important;
       }
       .item-list {
         margin-bottom: pxrem(70px);
@@ -98,10 +110,10 @@ export default {
         }
         .status-title {
           .one {
-            color: #05D9FF;
+            color: #05d9ff;
           }
           .two {
-            color: #FEA32C;
+            color: #fea32c;
           }
           .three {
             color: RGBA(217, 67, 110, 1);
@@ -112,7 +124,7 @@ export default {
           }
         }
         .project-name {
-          color: #05D9FF;
+          color: #05d9ff;
           padding: pxrem(10px) 0 0 pxrem(130px);
           .project {
             width: 50%;
