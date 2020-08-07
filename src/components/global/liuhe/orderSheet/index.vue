@@ -10,6 +10,8 @@
             <img :src="icon" />
           </div>
         </div>
+        <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery()">
+        <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
         <!-- <div class="title">盐湖区新时代文明实践中心</div> -->
         <div class="title-box" v-if="title === '盐湖区新时代文明实践中心'"><img class="title-logo" src="./assets/logo_bar.png"/><span class="inner-title">{{title}}</span></div>
         <div class="title" v-if="title !== '盐湖区新时代文明实践中心'">{{title}}</div>
@@ -175,11 +177,13 @@
 </template>
 
 <script>
+import {GUID} from '@/servers/api'
 import { getJiangningWeather, getVolunteerHelpList, getVolunteerHelpDetail } from '@/servers/interface'
 export default {
   name: 'manuscript',
   data () {
     return {
+      showUnit: true,
       dataList: [],
       type: 'latest',
       temp: '',
@@ -194,13 +198,19 @@ export default {
       detail: {},
       showDetail: false,
       frequency: 10000,
-      firstLoad: true
+      firstLoad: true,
+      guid: GUID
     }
   },
   created () {
     this.getWeather()
     this.getList()
     this.getToday('')
+    if (window.location.href.indexOf('All') >= 0) {
+      this.showUnit = true
+    } else {
+      this.showUnit = false
+    }
   },
   mounted () {
     setInterval(() => {
@@ -210,6 +220,14 @@ export default {
     }, this.frequency)
   },
   methods: {
+    showAll () {
+      var url = window.location.origin + '/' + this.guid + '/All'
+      window.location.href = url
+    },
+    showEvery () {
+      var url = window.location.origin + '/' + this.guid + '/orderSheet'
+      window.location.href = url
+    },
     backList () {
       this.showDetail = false
       this.getList('')
@@ -369,6 +387,13 @@ export default {
         margin-left: 0.15rem;
         margin-right: 0.2rem;
       }
+    }
+    .unit_icon {
+      width: pxrem(58px);
+      height: pxrem(58px);
+      position: absolute;
+      top: pxrem(70px);
+      right: pxrem(70px);
     }
     .type-list {
       margin-right: 0.35rem;

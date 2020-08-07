@@ -2,6 +2,8 @@
   <div class="common-activityInfo">
     <div class="activityInfo-page common01-border" v-if="!showDetail">
       <div class="common01-title page-title">{{ viewAttr.header || '活动资讯' }}</div>
+        <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery()">
+        <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
       <div class="list-title">
         <div
           class="list-item flex sys-flex-center animated"
@@ -79,6 +81,7 @@
 </template>
 
 <script>
+import {GUID} from '@/servers/api'
 import { getActivityInfo, getActivityInfoDetail } from '@/servers/interface'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -86,6 +89,7 @@ export default {
   name: 'manuscript',
   data () {
     return {
+      showUnit: true,
       dataList: [],
       swiperDataList: [],
       count: 5,
@@ -121,11 +125,17 @@ export default {
         observer: true,
         observeParents: true,
         paginationClickable: true
-      }
+      },
+      guid: GUID
     }
   },
   created () {
     this.getDataList()
+    if (window.location.href.indexOf('All') >= 0) {
+      this.showUnit = true
+    } else {
+      this.showUnit = false
+    }
   },
   mounted () {
     this.setFontsize('lishui-manuscriptoutput')
@@ -136,6 +146,14 @@ export default {
     }, this.frequency)
   },
   methods: {
+    showAll () {
+      var url = window.location.origin + '/' + this.guid + '/All'
+      window.location.href = url
+    },
+    showEvery () {
+      var url = window.location.origin + '/' + this.guid + '/activityInfo'
+      window.location.href = url
+    },
     goBefore () {
       if (this.swiperLeftPage > 1 && this.$refs.mySwiper.swiper.realIndex < 2) {
         this.getMoreList(this.swiperLeftPage--, 'left')
@@ -287,6 +305,13 @@ export default {
     padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
     .page-title {
       font-weight: 600;
+    }
+    .unit_icon {
+      width: pxrem(58px);
+      height: pxrem(58px);
+      position: absolute;
+      top: pxrem(70px);
+      right: pxrem(70px);
     }
     .list-item {
       margin-bottom: pxrem(110px);

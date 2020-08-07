@@ -3,6 +3,8 @@
     <!-- 一级页面 -->
     <div class="orgStructure-page common01-border" v-if="!showDetailPage">
       <div class="common01-title">{{viewAttr.header || '组织架构'}}</div>
+        <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery()">
+        <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
       <div class="tab-btn sys-flex">
         <div
           :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"
@@ -178,11 +180,13 @@
 </template>
 
 <script>
+import {GUID} from '@/servers/api'
 import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
     return {
+      showUnit: true,
       orgImg: require('./assets/icon_group.png'),
       showOrg: true,
       orgIndexData: {
@@ -227,16 +231,30 @@ export default {
       // 二级页面
       showDetailPage: false,
       detailTitle: '',
-      detailInfo: []
+      detailInfo: [],
+      guid: GUID
     }
   },
   created () {
     this.getVolunteerOrganizeList()
     this.getVolunteerMemberList()
+    if (window.location.href.indexOf('All') >= 0) {
+      this.showUnit = true
+    } else {
+      this.showUnit = false
+    }
   },
   computed: {
   },
   methods: {
+    showAll () {
+      var url = window.location.origin + '/' + this.guid + '/All'
+      window.location.href = url
+    },
+    showEvery () {
+      var url = window.location.origin + '/' + this.guid + '/orgStructure'
+      window.location.href = url
+    },
     getSixPlatformInfo (item) {
       if (this.detailTitle !== '六大平台') {
         return false
@@ -368,11 +386,18 @@ export default {
       line-height: 1;
       text-shadow: 0px 16px 16px rgba(7, 222, 255, 0.2);
     }
+    .unit_icon {
+      width: pxrem(58px);
+      height: pxrem(58px);
+      position: absolute;
+      top: pxrem(70px);
+      right: pxrem(70px);
+    }
     .tab-btn {
       position: absolute;
       z-index: 2;
       top: pxrem(90px);
-      right: pxrem(77px);
+      right: pxrem(150px);
       .btn {
         width: pxrem(253px);
         height: pxrem(94px);
