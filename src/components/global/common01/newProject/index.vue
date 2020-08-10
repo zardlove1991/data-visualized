@@ -102,7 +102,7 @@ export default {
     }
     .wrap-content {
       overflow: scroll;
-      height: pxrem(900px);
+      height: pxrem(740px);
       
       .item-list {
         margin-bottom: pxrem(60px);
