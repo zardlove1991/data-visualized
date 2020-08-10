@@ -223,17 +223,20 @@
             </div>
           </div>
           <div class="actbox">
-            <div class="item-list" v-for="(v, k) in leftOrderList" :key="k">
-              <div class="act_title">
-                <span>{{k+1}}、</span>
-                {{v.title}}
-              </div>
-              <div class="act_desc">{{v.brief}}</div>
-              <div class="act_duration">
-                <span class="color_white">服务</span>
-                <span class="colour_hours">{{v.duration}}</span>
-                <span class="color_white">小时</span>
-              </div>
+            <div class="item-list-null" v-if="!leftOrderList.length"><span class="null-text">暂未接单</span></div>
+            <div v-if="leftOrderList.length">
+              <div class="item-list" v-for="(v, k) in leftOrderList" :key="k">
+                <div class="act_title">
+                  <span>{{k+1}}、</span>
+                  {{v.title}}
+                </div>
+                <div class="act_desc">{{v.brief}}</div>
+                <div class="act_duration">
+                  <span class="color_white">服务</span>
+                  <span class="colour_hours">{{v.duration}}</span>
+                  <span class="color_white">小时</span>
+                </div>
+               </div>
             </div>
           </div>
         </div>
@@ -247,16 +250,19 @@
             </div>
           </div>
           <div class="actbox">
-            <div class="item-list" v-for="(v, k) in rightActList" :key="k">
-              <div class="act_title">
-                <span>{{k+1}}、</span>
-                {{v.title}}
-              </div>
-              <div class="act_desc">{{v.desc}}</div>
-              <div class="act_duration">
-                <span class="color_white">服务</span>
-                <span class="colour_hours">{{v.duration}}</span>
-                <span class="color_white">小时</span>
+            <div class="item-list-null" v-if="!rightActList.length"><span class="null-text">暂无活动</span></div>
+            <div v-if="rightActList.length">
+              <div class="item-list" v-for="(v, k) in rightActList" :key="k">
+                <div class="act_title">
+                  <span>{{k+1}}、</span>
+                  {{v.title}}
+                </div>
+                <div class="act_desc">{{v.desc}}</div>
+                <div class="act_duration">
+                  <span class="color_white">服务</span>
+                  <span class="colour_hours">{{v.duration}}</span>
+                  <span class="color_white">小时</span>
+                </div>
               </div>
             </div>
           </div>
@@ -580,8 +586,8 @@ export default {
       width: pxrem(58px);
       height: pxrem(58px);
       position: absolute;
-      top: pxrem(70px);
-      right: pxrem(70px);
+      top: pxrem(90px);
+      right: pxrem(40px);
     }
     .title-tab {
       width: 100%;
@@ -662,6 +668,19 @@ export default {
         .actbox {
           overflow-y: scroll;
           height: pxrem(526px);
+          .item-list-null{
+            height: pxrem(321px);
+            background: url("./assets/back.png") no-repeat center;
+            background-size: 100% 100%;
+            padding: pxrem(26px) pxrem(40px) pxrem(26px) pxrem(40px);
+            margin-bottom: pxrem(24px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .null-text{
+              font-size: pxrem(36px);
+            }
+          }
           .item-list {
             background: url("./assets/back.png") no-repeat center;
             background-size: 100% 100%;

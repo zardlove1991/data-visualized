@@ -336,8 +336,8 @@ export default {
       width: pxrem(58px);
       height: pxrem(58px);
       position: absolute;
-      top: pxrem(70px);
-      right: pxrem(70px);
+      top: pxrem(90px);
+      right: pxrem(40px);
     }
     .list-item {
       margin-bottom: pxrem(110px);
@@ -422,8 +422,8 @@ export default {
       width: pxrem(58px);
       height: pxrem(58px);
       position: absolute;
-      top: pxrem(70px);
-      right: pxrem(70px);
+      top: pxrem(90px);
+      right: pxrem(40px);
     }
     .back-text {
       font-size: 0.34rem;
