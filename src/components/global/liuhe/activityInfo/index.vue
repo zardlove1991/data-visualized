@@ -10,7 +10,7 @@
           :class="{ flipInX: v.title }"
           :style="{ 'animation-delay': k / 2 + 's' }"
           v-for="(v, k) in dataList"
-          @click="getDetail(v)"
+          @click="getDetail(v.id)"
           :key="k"
         >
           <!--  -->
@@ -50,6 +50,8 @@
           <span class="back-text">返回</span>
         </div>
       </div>
+      <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery1()">
+      <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
       <swiper
         :options="swiperOption"
         ref="mySwiper"
@@ -95,7 +97,7 @@ export default {
       count: 5,
       detailData: {},
       showDetail: false,
-      page: 1,
+      page: this.$route.query.page || 1,
       maxPage: 3,
       swiperLeftPage: 1, // 定位swiper滑动边界页码
       swiperRightPage: 1, // 定位swiper滑动边界页码
@@ -111,7 +113,7 @@ export default {
       frequency: 10000,
       swiperOption: {
         notNextTick: true,
-        initialSlide: 0,
+        initialSlide: this.$route.query.key || 0,
         speed: 1000,
         navigation: {
           nextEl: '.swiper-button-next',
@@ -126,16 +128,19 @@ export default {
         observeParents: true,
         paginationClickable: true
       },
-      guid: GUID
+      guid: GUID,
+      detailId: '',
+      key: '',
+      isCheckPage: false
     }
   },
-  created () {
-    this.getDataList()
+  async created () {
     if (window.location.href.indexOf('All') >= 0) {
       this.showUnit = true
     } else {
       this.showUnit = false
     }
+    this.getDataList()
   },
   mounted () {
     this.setFontsize('lishui-manuscriptoutput')
@@ -154,6 +159,10 @@ export default {
       var url = window.location.origin + '/' + this.guid + '/activityInfo'
       window.location.href = url
     },
+    showEvery1 () {
+      var url = window.location.origin + '/' + this.guid + '/activityInfo' + '?detailId=' + this.detailId + '&key=' + this.showIndex + '&showDetail=' + this.showDetail + '&page=' + (this.page - 1)
+      window.location.href = url
+    },
     goBefore () {
       if (this.swiperLeftPage > 1 && this.$refs.mySwiper.swiper.realIndex < 2) {
         this.getMoreList(this.swiperLeftPage--, 'left')
@@ -164,14 +173,16 @@ export default {
         this.getMoreList(this.swiperRightPage++, 'right')
       }
     },
-    getDetail (item) {
+    getDetail (id) {
+      this.detailId = id
       // 保存swiper所需数据
       this.swiperLeftPage = this.page
       this.swiperRightPage = this.page
-
       this.showIndex = 0
+      console.log(this.dataList)
       this.dataList.forEach((v, index) => {
-        if (v.id === item.id) {
+        if (v.id === parseInt(this.detailId)) {
+          // console.log('当前展示id：', this.detailId, v.id)
           this.showIndex = index
         }
       })
@@ -220,6 +231,17 @@ export default {
         }
       })
     },
+    checkPageType () {
+      if (this.$route.query.detailId) {
+        this.detailId = this.$route.query.detailId
+        this.swiperOption.initialSlide = this.$route.query.key
+        // this.showDetail = this.$route.query.showDetail
+        // this.getDetail(this.detailId)
+        this.showDetail = true
+        this.getDetail(this.detailId)
+      }
+      this.isCheckPage = true
+    },
     getDataList () {
       getActivityInfo(this.page, this.count).then(res => {
         if (!res.data.error_code) {
@@ -248,6 +270,10 @@ export default {
                   ...v
                 }
               })
+              if (!this.isCheckPage) {
+                // 校验页面是否全屏
+                this.checkPageType()
+              }
             }, 100)
             if (this.isPaging) {
               this.page += 1
@@ -390,6 +416,14 @@ export default {
     .back {
       display: inline-block;
       font-weight: bold;
+    }
+    .unit_icon {
+      z-index: 1;
+      width: pxrem(58px);
+      height: pxrem(58px);
+      position: absolute;
+      top: pxrem(70px);
+      right: pxrem(70px);
     }
     .back-text {
       font-size: 0.34rem;

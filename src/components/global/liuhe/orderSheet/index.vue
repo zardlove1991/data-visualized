@@ -54,7 +54,7 @@
           <div class="list-content sys-flex-one">
             <div
               class="list-item sys-flex animated"
-              @click="changeDetail(v)"
+              @click="changeDetail(v.id)"
               :class="{'flipInX' : v.title}"
               :style="{'animation-delay' : k/2 + 's'}"
               v-for="(v, k) in dataList"
@@ -75,6 +75,8 @@
             </div>
             <span class="back-text">返回</span>
           </div>
+          <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery1()">
+          <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
         </div>
         <div class="detail-info">
           <div class="title-line sys-flex">
@@ -199,10 +201,15 @@ export default {
       showDetail: false,
       frequency: 10000,
       firstLoad: true,
-      guid: GUID
+      guid: GUID,
+      detailId: ''
     }
   },
   created () {
+    if (this.$route.query.detailId) {
+      this.detailId = this.$route.query.detailId
+      this.changeDetail(this.detailId)
+    }
     this.getWeather()
     this.getList()
     this.getToday('')
@@ -228,15 +235,20 @@ export default {
       var url = window.location.origin + '/' + this.guid + '/orderSheet'
       window.location.href = url
     },
+    showEvery1 () {
+      var url = window.location.origin + '/' + this.guid + '/orderSheet' + '?detailId=' + this.detailId
+      window.location.href = url
+    },
     backList () {
       this.showDetail = false
       this.getList('')
       this.type = 'latest'
     },
-    changeDetail (item) {
+    changeDetail (id) {
       this.showDetail = true
       this.detail = []
-      getVolunteerHelpDetail(item.id).then(res => {
+      this.detailId = id
+      getVolunteerHelpDetail(this.detailId).then(res => {
         if (!res.error_code) {
           this.detail = res.data.result
         }

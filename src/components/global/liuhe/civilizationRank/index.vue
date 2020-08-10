@@ -43,7 +43,7 @@
             <span class="unit">(时长/h)</span>
           </div>
           <div
-            @click="getActivitys(v,k,1)"
+            @click="getActivitys(v.id,'organize')"
             class="item-list rank-height sys-flex sys-flex-center animated flipInX"
             v-for="(v, k) in leftList"
             :key="k"
@@ -73,7 +73,7 @@
             <span class="unit">(时长/h)</span>
           </div>
           <div
-            @click="getActivitys(v,k,0)"
+            @click="getActivitys(v.id,'volunteer')"
             class="item-list rank-height sys-flex sys-flex-center animated"
             v-for="(v, k) in rightList"
             :key="k"
@@ -106,6 +106,20 @@
           <img class="back-img" src="../orderSheet/assets/icon_back.png" />
           <div class="back_text">返回</div>
         </div>
+      <img
+        v-if="showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/allunit.png"
+        alt
+        @click="showEvery1()"
+      />
+      <img
+        v-if="!showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/unit.png"
+        alt
+        @click="showAll()"
+      />
         <div class="org-title sys-flex sys-flex-center">
           <div>总排名 {{orgRank}}：</div>
           <img class="header-img" :src="orgHeadPic" />
@@ -158,6 +172,20 @@
           <img class="back-img" src="../orderSheet/assets/icon_back.png" />
           <div class="back_text">返回</div>
         </div>
+      <img
+        v-if="showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/allunit.png"
+        alt
+        @click="showEvery1()"
+      />
+      <img
+        v-if="!showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/unit.png"
+        alt
+        @click="showAll()"
+      />
         <div class="org-title sys-flex sys-flex-center">
           <div>总排名 {{volRank}}：</div>
           <img class="header-img" :src="volHeadPic" />
@@ -259,16 +287,13 @@ export default {
       rightList: [],
       customSize: false,
       page: 1, // 详情页
-      organize: 'organize',
-      volunteer: 'volunteer',
       orgActList: [],
       orgService: '', // 组织时长
       activity_count: '', // 组织活动
-      orgId: '',
+      detailId: '',
       orgName: '',
       orgHeadPic: '',
       orgRank: '',
-      volId: '',
       volAct: '', // 志愿者详情
       help_count: '',
       volService: '',
@@ -291,6 +316,11 @@ export default {
         this.customSize = true
       }
     })
+    if (this.$route.query.detailId) {
+      this.detailId = this.$route.query.detailId
+      this.flag = this.$route.query.flag
+      this.getActivitys(this.detailId, this.flag)
+    }
     this.getVolunteerRank()
     setInterval(() => {
       if (this.pageNum >= 3) {
@@ -312,6 +342,10 @@ export default {
       var url = window.location.origin + '/' + this.guid + '/civilizationRank'
       window.location.href = url
     },
+    showEvery1 () {
+      var url = window.location.origin + '/' + this.guid + '/civilizationRank' + '?detailId=' + this.detailId + '&flag=' + this.flag
+      window.location.href = url
+    },
     backList () {
       this.showOrgDetails = false
       this.showVolDetails = false
@@ -324,14 +358,12 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getActivitys (v, k, flag) {
-      if (flag) {
-        this.orgId = v.id
-        this.orgRank = k + (this.pageNum - 1) * this.count + 1
-        this.orgHeadPic = v.head_pic ? v.head_pic : this.defaultImg
-        this.orgName = v.name
+    getActivitys (id, flag) {
+      this.detailId = id
+      this.flag = flag
+      if (this.flag === 'organize') {
         this.showOrgDetails = true
-        getActivity(this.orgId, 'organize').then(res => {
+        getActivity(this.detailId, 'organize').then(res => {
           console.log(res.data.result)
           if (!res.data.error_code) {
             let _result = res.data.result
@@ -340,15 +372,15 @@ export default {
             }
             this.activity_count = _result.activity_count
             this.orgService = _result.service
+            this.orgRank = _result.rank
+            this.orgHeadPic = _result.data.head_pic ? _result.data.head_pic : this.defaultImg
+            this.orgName = _result.data.name
           }
         })
-      } else {
-        this.volId = v.id
-        this.volRank = k + (this.pageNum - 1) * this.count + 1
-        this.volHeadPic = v.head_pic ? v.head_pic : this.defaultImg
-        this.volName = v.real_name
+      }
+      if (this.flag === 'volunteer') {
         this.showVolDetails = true
-        getActivity(this.volId, 'volunteer').then(res => {
+        getActivity(this.detailId, 'volunteer').then(res => {
           if (!res.data.error_code) {
             let _result = res.data.result
             if (_result.activity) {
@@ -360,6 +392,9 @@ export default {
             this.volAct = _result.activity_count
             this.help_count = _result.help_count
             this.volService = _result.service
+            this.volRank = _result.rank
+            this.volHeadPic = _result.data.head_pic ? _result.data.head_pic : this.defaultImg
+            this.volName = _result.data.real_name
           }
         })
       }
@@ -432,7 +467,7 @@ export default {
           width: pxrem(100px);
           height: pxrem(100px);
           border-radius: 50%;
-          background-color: red;
+          // background-color: red;
           margin-right: pxrem(40px);
         }
         .title {

@@ -6,16 +6,16 @@
         <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery()">
         <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
       <div class="tab-btn sys-flex">
-        <div
-          :class="showOrg?'btn common01-ft38 act':'btn common01-ft38'"
-          @click="showOrg=!showOrg"
-        >组织机构</div>
-        <div
+        <div v-for="(item,index) in orgNav" :key='index'
+          :class="currentIndex === index?'btn common01-ft38 act':'btn common01-ft38'"
+          @click="changeIndex(index)"
+        >{{item}}</div>
+        <!-- <div
           :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'"
           @click="showOrg=!showOrg"
-        >成员名单</div>
+        >成员名单</div> -->
       </div>
-      <div class="org-div" v-if="showOrg">
+      <div class="org-div" v-if="currentIndex === 0">
         <div class="total">
           <p>文明总队</p>
           <span>{{orgIndexData.total}}</span>
@@ -68,7 +68,7 @@
         >{{orgIndexData.rightBottomInfo.number}}</div>
       </div>
       <!-- 成员名单 -->
-      <div class="member-div sys-flex" v-if="!showOrg">
+      <div class="member-div sys-flex" v-if="currentIndex === 1">
         <div class="left-part sys-flex-one">
           <div class="title">
             <div class="img-div">
@@ -130,6 +130,8 @@
     <!-- 二级页面 -->
     <div class="orgStructure-detail-page common01-border" v-if="showDetailPage">
       <div class="back-btn common01-ft36" @click="childDetailPageBack">返回</div>
+      <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery1()">
+      <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
       <div class="box">
         <div class="top-part">
           <div class="page-title">
@@ -186,9 +188,10 @@ export default {
   name: 'orgStructure',
   data () {
     return {
+      orgNav: ['组织结构', '成员名单'],
       showUnit: true,
       orgImg: require('./assets/icon_group.png'),
-      showOrg: true,
+      currentIndex: 0,
       orgIndexData: {
         total: 0,
         topInfo: {
@@ -232,10 +235,21 @@ export default {
       showDetailPage: false,
       detailTitle: '',
       detailInfo: [],
-      guid: GUID
+      guid: GUID,
+      detailId: '',
+      detailName: ''
     }
   },
   created () {
+    if (this.$route.query.currentIndex) {
+      this.currentIndex = +this.$route.query.currentIndex
+      console.log(this.$route.query.currentIndex)
+    }
+    if (this.$route.query.detailId) {
+      this.detailId = this.$route.query.detailId
+      this.detailName = this.$route.query.detailName
+      this.showChildDetail(this.detailId, this.detailName)
+    }
     this.getVolunteerOrganizeList()
     this.getVolunteerMemberList()
     if (window.location.href.indexOf('All') >= 0) {
@@ -247,12 +261,19 @@ export default {
   computed: {
   },
   methods: {
+    changeIndex (index) {
+      this.currentIndex = index
+    },
     showAll () {
       var url = window.location.origin + '/' + this.guid + '/All'
       window.location.href = url
     },
     showEvery () {
-      var url = window.location.origin + '/' + this.guid + '/orgStructure'
+      var url = window.location.origin + '/' + this.guid + '/orgStructure' + '?currentIndex=' + this.currentIndex
+      window.location.href = url
+    },
+    showEvery1 () {
+      var url = window.location.origin + '/' + this.guid + '/orgStructure' + '?detailId=' + this.detailId + '&detailName=' + this.detailName
       window.location.href = url
     },
     getSixPlatformInfo (item) {
@@ -263,6 +284,7 @@ export default {
         if (!res.data.error_code) {
           let _result = res.data.result
           if (_result) {
+            console.log(item.name)
             this.detailTitle = item.name
             this.dimensionalArr.push({
               name: item.name,
@@ -273,7 +295,6 @@ export default {
         }
       })
     },
-    //
     checkCanShow (num) {
       if (this.detailInfo && this.detailInfo.length > num) {
         return true
@@ -316,6 +337,8 @@ export default {
     },
     // 获取组织架构（子组织）
     showChildDetail (id, name) {
+      this.detailId = id
+      this.detailName = name
       getVolunteerOrganizeDetail(id).then(res => {
         if (!res.data.error_code) {
           let _result = res.data.result
@@ -387,6 +410,7 @@ export default {
       text-shadow: 0px 16px 16px rgba(7, 222, 255, 0.2);
     }
     .unit_icon {
+      z-index: 1;
       width: pxrem(58px);
       height: pxrem(58px);
       position: absolute;
@@ -638,6 +662,14 @@ export default {
   }
   // 二级页面
   .orgStructure-detail-page {
+    .unit_icon {
+      z-index: 1;
+      width: pxrem(58px);
+      height: pxrem(58px);
+      position: absolute;
+      top: pxrem(70px);
+      right: pxrem(70px);
+    }
     .box {
       height: 100%;
       position: relative;
