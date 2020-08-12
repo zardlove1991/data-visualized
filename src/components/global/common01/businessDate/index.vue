@@ -5,7 +5,7 @@
       <div class="wrap-content">
         <div class="list-sort sys-flex sys-flex-center flex-justify-around">
             <div class="common01-ft32 weixin sys-flex sys-flex-center flex-justify-center" :class="active ? 'active' : 'normal' ">
-                <img src="./assets/weixin.png" alt="">
+                <img src="./assets/weixin.png" alt="" style="width: 20%">
                 微信：{{wechatNum}}
                 </div>
             <!-- <div class="common01-ft32 weibo sys-flex sys-flex-center flex-justify-center" :class="!active ? 'active' : 'normal' ">
@@ -120,6 +120,7 @@ export default {
             line-height: pxrem(100px);
             background-image: url("./assets/active-bg.png");
             color:#ffffff;
+            background-size: contain;
         }
         .normal{
             width: pxrem(600px);

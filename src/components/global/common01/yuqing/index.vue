@@ -575,6 +575,7 @@ export default {
 .yuqing {
   padding: pxrem(27px) pxrem(20px) pxrem(49px) pxrem(37px);
   margin-top: pxrem(79px);
+  height: 100%;
   .left{
     margin-top: pxrem(50px);
     background: url(./asset/yuqing.png) center center no-repeat;
