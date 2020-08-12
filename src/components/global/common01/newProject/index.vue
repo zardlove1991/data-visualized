@@ -13,8 +13,9 @@
         </el-select>
       </div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}" @mouseenter="enter(k)" @mouseleave="leave(k)">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
+          <div class="hoverTitle" v-show="isShow == k">{{v.title}}</div>
           <div class="name overhidden common01-ft32">{{v.sort_name}}</div>
           <div class="sort-name common01-ft32">{{v.channel_name}}</div>
         </div>
@@ -33,7 +34,9 @@ export default {
       maxPage: 3,
       projectList: [],
       sortList: [],
-      value: ''
+      value: '',
+      list: [],
+      isShow: -1
     }
   },
   created () {
@@ -74,6 +77,12 @@ export default {
       }
       var currentdate = year + ' 年 ' + month + ' 月 ' + strDate + ' 日 '
       return currentdate
+    },
+    enter (index) {
+      this.isShow = index
+    },
+    leave (index) {
+      this.isShow = -1
     }
   }
 }
@@ -106,12 +115,26 @@ export default {
       
       .item-list {
         margin-bottom: pxrem(60px);
+        position: relative;
         &:last-of-type {
           margin-bottom: 0;
         }
         .title {
           text-align: left;
           width: 55%;
+        }
+        .hoverTitle{
+          position: absolute;
+          left:pxrem(90px);
+          top:pxrem(55px);
+          color:#333;
+          background: #fff;
+          border-radius: pxrem(10px);
+          padding: 0 pxrem(20px);
+          font-size:pxrem(40px);
+          text-align: left;
+          z-index: 999;
+          // display:none;
         }
         .name {
           width: 25%;
@@ -125,4 +148,8 @@ export default {
     }
   }
 }
+.el-select-dropdown__wrap {
+    max-height: unset;
+}
+
 </style>

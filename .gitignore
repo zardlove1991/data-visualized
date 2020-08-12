@@ -11,3 +11,4 @@ dist.zip
 *.ntvs*
 *.njsproj
 *.sln
+*.history
