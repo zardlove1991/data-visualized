@@ -147,7 +147,7 @@ export default {
         },
         legend: {
           orient: 'horizontal',
-          bottom: 20,
+          bottom: 30,
           itemGap: 25,
           data: legendData,
           formatter: function (name) {
@@ -161,7 +161,7 @@ export default {
             }
             return name + '    ' + ((target / total) * 100).toFixed(0) + '%'
           },
-          textStyle: { color: '#fff', fontSize: '18', padding: [ 0, 0, 0, 10 ] }
+          textStyle: { color: '#fff', fontSize: '16', padding: [ 0, 0, 0, 10 ] }
         },
         series: [
           {
@@ -177,7 +177,7 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: '30',
+                fontSize: '16',
                 color: '#fff',
                 fontWeight: 'bold'
               }
@@ -213,7 +213,7 @@ export default {
         series: [
           {
             type: 'wordCloud',
-            sizeRange: [18, 48],
+            sizeRange: [14, 28],
             rotationRange: [0, 90],
             rotationStep: 90,
             shape: 'square',
@@ -274,7 +274,7 @@ export default {
         legend: {
           left: 'center',
           textStyle: { // 图例的公用文本样式。
-            fontSize: 18,
+            fontSize: 16,
             color: '#fff'
           }
         },
@@ -284,7 +284,7 @@ export default {
             center: ['50%', '40%'],
             name: {
               textStyle: {
-                fontSize: 18,
+                fontSize: 16,
                 color: '#fff'
               }
             },
@@ -374,7 +374,7 @@ export default {
         },
         legend: {
           orient: 'horizontal',
-          bottom: 40,
+          bottom: 80,
           itemGap: 30,
           data: legendData,
           formatter: function (name) {
@@ -388,7 +388,7 @@ export default {
             }
             return name + '    ' + ((target / total) * 100).toFixed(0) + '%'
           },
-          textStyle: { color: '#fff', fontSize: '18', padding: [ 0, 0, 0, 10 ] }
+          textStyle: { color: '#fff', fontSize: '16', padding: [ 0, 0, 0, 10 ] }
         },
         series: [
           {
@@ -404,7 +404,7 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: '30',
+                fontSize: '16',
                 color: '#fff',
                 fontWeight: 'bold'
               }
@@ -488,7 +488,7 @@ export default {
         legend: {
           data: legendData,
           textStyle: {
-            fontSize: '18',
+            fontSize: '16',
             color: '#fff'
           },
           icon: 'circle'
@@ -509,7 +509,7 @@ export default {
               textStyle: {
                 color: '#FFFFFF'
               },
-              fontSize: 18// 字体大小
+              fontSize: 16// 字体大小
             },
             axisLine: {
               lineStyle: {
@@ -531,14 +531,14 @@ export default {
           {
             type: 'value',
             nameTextStyle: {
-              fontSize: '18'
+              fontSize: '16'
             },
             axisLabel: {
               show: true,
               textStyle: {
                 color: '#FFFFFF'
               },
-              fontSize: 18
+              fontSize: 16
             },
             axisLine: {
               lineStyle: {
@@ -574,36 +574,38 @@ export default {
 }
 .yuqing {
   padding: pxrem(27px) pxrem(20px) pxrem(49px) pxrem(37px);
-  margin-top: pxrem(79px);
+  margin-top: pxrem(140px);
   height: 100%;
   .left{
-    margin-top: pxrem(50px);
+    margin-top: pxrem(80px);
     background: url(./asset/yuqing.png) center center no-repeat;
     background-size: contain;
-    width:pxrem(400px);
-    height:pxrem(870px);
+    width:pxrem(800px);
+    // width: 20%;
+    height:pxrem(1740px);
     // padding: 0 pxrem(98px);
     .title{
       background: url(./asset/title.png) center center no-repeat;
       background-size: contain;
-      width: pxrem(203px);
-      height: pxrem(40px);
+      width: pxrem(406px);
+      height: pxrem(80px);
       color:rgba(0,255,228,1);
-      font-size:pxrem(32px);
+      font-size:pxrem(64px);
       font-family:Source Han Sans CN;
       font-weight:500;
+      line-height: pxrem(80px);
       margin: pxrem(47px) auto;
     }
     .leftList{
       color: #fff;
-      font-size: pxrem(19px);
+      font-size: pxrem(38px);
       li{
         margin-left: pxrem(28px);
         margin-right: pxrem(27px);
         margin-bottom: pxrem(45px);
         display: flex;
         p{
-          width: pxrem(333px);
+          // width: pxrem(333px);
           text-overflow: -o-ellipsis-lastline;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -627,12 +629,12 @@ export default {
   }
   .right{
     margin-left: pxrem(48px);
-    width: 100%;
-    margin-top: pxrem(50px);
+    width: 80%;
+    margin-top: pxrem(80px);
     // height: 100%;
     .titleIcon{
-      width: pxrem(175px);
-      height: pxrem(44px);
+      width: pxrem(350px);
+      height: pxrem(88px);
       img{
         width: 100%;
         height: 100%;
@@ -641,8 +643,8 @@ export default {
     .rightTop{
       height: 50%;
       .line{
-        width: pxrem(1px);
-        height: pxrem(260px);
+        width: pxrem(2px);
+        height: pxrem(520px);
         background: url(./asset/line1.png) center center no-repeat;
         background-size: contain;
         margin-top: pxrem(64px);
