@@ -104,6 +104,7 @@ export default {
           margin-right: pxrem(80px);
         }
         .project-status {
+          width: pxrem(170px);
           &.on-progress {
             color: #0272ff;
           }
