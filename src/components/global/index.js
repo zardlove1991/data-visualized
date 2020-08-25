@@ -149,3 +149,5 @@ export const common01componentBusinessDate = getComponent('common01/businessDate
 export const common01componentTaskShow02 = getComponent('common01/taskShow02') // 雨花台区 任务展示
 export const common01componentVideoList = getComponent('common01/videoList') // 雨花台区 视频列表
 export const common01componentYuhuaTitle = getComponent('common01/yuhuaTitle') // 雨花台区 标题
+export const common01componentReport2 = getComponent('common01/report2') // 雨花台区 报题
+export const common01componentTaskShow04 = getComponent('common01/taskShow04') // 雨花台区 任务
