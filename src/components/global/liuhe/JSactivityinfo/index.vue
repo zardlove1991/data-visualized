@@ -404,6 +404,7 @@ export default {
         page: this.page,
         count: this.count,
         status: 1,
+        date_search: 5,
         column_id: this.column_id
       }
       if (i || i === 0) {
