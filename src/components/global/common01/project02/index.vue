@@ -51,7 +51,7 @@ export default {
       }
     },
     getWorkCallSubjectList () {
-      getWorkCallSubjectList(5, this.page, this.currentViewId).then(res => {
+      getWorkCallSubjectList(8, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.projectList = []
@@ -104,7 +104,6 @@ export default {
           margin-right: pxrem(80px);
         }
         .project-status {
-          width: pxrem(170px);
           &.on-progress {
             color: #0272ff;
           }

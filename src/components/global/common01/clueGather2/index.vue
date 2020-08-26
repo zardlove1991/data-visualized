@@ -117,6 +117,11 @@ export default {
       .marginBottom75 {
         margin-bottom: pxrem(75px)!important;
       }
+      .list-sort{
+        img{
+          width: 25%;
+        }
+      }
       .item-list {
         overflow: hidden;
         margin: pxrem(90px) 0;

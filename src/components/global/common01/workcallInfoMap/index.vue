@@ -62,6 +62,7 @@ export default {
   },
   created () {
     getDataConfig().then(res => {
+      console.log(res)
       this.center = { lng: +res.lng, lat: +res.lat }
       if (Number(res.customSize)) {
         this.customSize = true

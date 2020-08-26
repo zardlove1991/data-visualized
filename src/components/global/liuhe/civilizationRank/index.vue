@@ -2,6 +2,20 @@
   <div class="common01-civilizationrank">
     <div class="dispatchrank-wrap org-top common01-border" v-if="!showOrgDetails&&!showVolDetails">
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '文明排行'}}</div>
+      <img
+        v-if="showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/allunit.png"
+        alt
+        @click="showEvery()"
+      />
+      <img
+        v-if="!showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/unit.png"
+        alt
+        @click="showAll()"
+      />
       <div class="title-tab sys-flex">
         <div class="item">
           <div>
@@ -29,7 +43,7 @@
             <span class="unit">(时长/h)</span>
           </div>
           <div
-            @click="getActivitys(v,k,1)"
+            @click="getActivitys(v.id,'organize')"
             class="item-list rank-height sys-flex sys-flex-center animated flipInX"
             v-for="(v, k) in leftList"
             :key="k"
@@ -59,7 +73,7 @@
             <span class="unit">(时长/h)</span>
           </div>
           <div
-            @click="getActivitys(v,k,0)"
+            @click="getActivitys(v.id,'volunteer')"
             class="item-list rank-height sys-flex sys-flex-center animated"
             v-for="(v, k) in rightList"
             :key="k"
@@ -92,6 +106,20 @@
           <img class="back-img" src="../orderSheet/assets/icon_back.png" />
           <div class="back_text">返回</div>
         </div>
+      <img
+        v-if="showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/allunit.png"
+        alt
+        @click="showEvery1()"
+      />
+      <img
+        v-if="!showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/unit.png"
+        alt
+        @click="showAll()"
+      />
         <div class="org-title sys-flex sys-flex-center">
           <div>总排名 {{orgRank}}：</div>
           <img class="header-img" :src="orgHeadPic" />
@@ -122,17 +150,17 @@
           </div>
         </div>
         <div class="activity_content">
-          <div
-            class="item-list sys-flex sys-flex-center animated flipInX"
-            v-for="(v, k) in orgActList"
-            :key="k"
-            :class="{'flipInX' : v.title}"
-            :style="{'animation-delay' : k/2+'s'}"
-          >
-            <div class="index common01-ft40">
-              <div>{{k + (page - 1) * pageSize + 1}}、</div>
+          <div class="item-list" v-for="(v, k) in orgActList" :key="k">
+            <div class="act_title">
+              <span>{{k+1}}、</span>
+              {{v.title}}
             </div>
-            <div class="title common01-ft38 overhidden" :style="setFontSize(50)">{{v.title}}</div>
+            <div class="act_desc">{{v.desc}}</div>
+            <div class="act_duration">
+              <span class="color_white">服务</span>
+              <span class="colour_hours">{{v.duration}}</span>
+              <span class="color_white">小时</span>
+            </div>
           </div>
         </div>
       </div>
@@ -144,6 +172,20 @@
           <img class="back-img" src="../orderSheet/assets/icon_back.png" />
           <div class="back_text">返回</div>
         </div>
+      <img
+        v-if="showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/allunit.png"
+        alt
+        @click="showEvery1()"
+      />
+      <img
+        v-if="!showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/unit.png"
+        alt
+        @click="showAll()"
+      />
         <div class="org-title sys-flex sys-flex-center">
           <div>总排名 {{volRank}}：</div>
           <img class="header-img" :src="volHeadPic" />
@@ -170,49 +212,59 @@
           </div>
         </div>
       </div>
-      <div class="wrap-content sys-flex flex-justify-between">
-        <div class="content-left sys-flex-one">
+      <div class="vol_rank sys-flex">
+        <div class="content">
           <div class="help-info">
             <div class="help-title sys-flex">
               <div class="help-img">
                 <img src="../orderSheet/assets/arrow_list.png" />
               </div>
-              <div class="help-text">求助点单</div>
+              <span class="help-text">求助点单</span>
             </div>
           </div>
-          <div
-            class="item-list detail-height sys-flex sys-flex-center animated flipInX"
-            v-for="(v, k) in leftOrderList"
-            :key="k"
-            :class="{'flipInX' : v.title}"
-            :style="{'animation-delay' : k/2+'s'}"
-          >
-            <div class="index common01-ft40">
-              <div>{{k + (pageVol - 1) * pageSize + 1}}、</div>
+          <div class="actbox">
+            <div class="item-list-null" v-if="!leftOrderList.length"><span class="null-text">暂未接单</span></div>
+            <div v-if="leftOrderList.length">
+              <div class="item-list" v-for="(v, k) in leftOrderList" :key="k">
+                <div class="act_title">
+                  <span>{{k+1}}、</span>
+                  {{v.title}}
+                </div>
+                <div class="act_desc">{{v.brief}}</div>
+                <div class="act_duration">
+                  <span class="color_white">服务</span>
+                  <span class="colour_hours">{{v.duration}}</span>
+                  <span class="color_white">小时</span>
+                </div>
+               </div>
             </div>
-            <div class="title_content common01-ft38 overhidden" :style="setFontSize(50)">{{v.title}}</div>
           </div>
         </div>
-        <div class="content-right sys-flex-one">
+        <div class="content margin40">
           <div class="help-info">
             <div class="help-title sys-flex">
               <div class="help-img">
                 <img src="../orderSheet/assets/arrow_list.png" />
               </div>
-              <div class="help-text">志愿活动</div>
+              <span class="help-text">志愿活动</span>
             </div>
           </div>
-          <div
-            class="item-list detail-height sys-flex sys-flex-center animated"
-            v-for="(v, k) in rightActList"
-            :key="k"
-            :class="{'flipInX' : v.title}"
-            :style="{'animation-delay' : k/2+'s'}"
-          >
-            <div class="index common01-ft40">
-              <div>{{k + (pageVol - 1) * pageSize + 1}}、</div>
+          <div class="actbox">
+            <div class="item-list-null" v-if="!rightActList.length"><span class="null-text">暂无活动</span></div>
+            <div v-if="rightActList.length">
+              <div class="item-list" v-for="(v, k) in rightActList" :key="k">
+                <div class="act_title">
+                  <span>{{k+1}}、</span>
+                  {{v.title}}
+                </div>
+                <div class="act_desc">{{v.desc}}</div>
+                <div class="act_duration">
+                  <span class="color_white">服务</span>
+                  <span class="colour_hours">{{v.duration}}</span>
+                  <span class="color_white">小时</span>
+                </div>
+              </div>
             </div>
-            <div class="title_content common01-ft38 overhidden" :style="setFontSize(50)">{{v.title}}</div>
           </div>
         </div>
       </div>
@@ -220,20 +272,20 @@
   </div>
 </template>
 <script>
+import { GUID } from '@/servers/api'
 import { getActivity, getVolunteerRank } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'civilizationRank',
   data () {
     return {
+      showUnit: false,
       showVolDetails: false,
       showOrgDetails: false,
       defaultImg: require('../../../../assets/avatar/touxiang.png'),
       timeTotalNum: 0,
       teamTotalNum: 0,
       memberTotalNum: 0,
-      // leftCount: 0,
-      // rightCount: 0,
       pageNum: 1,
       count: 3,
       frequency: 10000,
@@ -241,18 +293,13 @@ export default {
       rightList: [],
       customSize: false,
       page: 1, // 详情页
-      pageVol: 1,
-      pageSize: 5,
-      organize: 'organize',
-      volunteer: 'volunteer',
       orgActList: [],
       orgService: '', // 组织时长
       activity_count: '', // 组织活动
-      orgId: '',
+      detailId: '',
       orgName: '',
       orgHeadPic: '',
       orgRank: '',
-      volId: '',
       volAct: '', // 志愿者详情
       help_count: '',
       volService: '',
@@ -260,15 +307,26 @@ export default {
       leftOrderList: [],
       volRank: '',
       volHeadPic: '',
-      volName: ''
+      volName: '',
+      guid: GUID
     }
   },
   created () {
+    if (window.location.href.indexOf('All') >= 0) {
+      this.showUnit = true
+    } else {
+      this.showUnit = false
+    }
     getDataConfig().then(res => {
       if (Number(res.customSize)) {
         this.customSize = true
       }
     })
+    if (this.$route.query.detailId) {
+      this.detailId = this.$route.query.detailId
+      this.flag = this.$route.query.flag
+      this.getActivitys(this.detailId, this.flag)
+    }
     this.getVolunteerRank()
     setInterval(() => {
       if (this.pageNum >= 3) {
@@ -282,12 +340,18 @@ export default {
     }, this.frequency)
   },
   methods: {
-    // getVolDetails () {
-    //   this.showVolDetails = true
-    // },
-    // getOrgDetails () {
-    //   this.showOrgDetails = true
-    // },
+    showAll () {
+      var url = window.location.origin + '/' + this.guid + '/All'
+      window.location.href = url
+    },
+    showEvery () {
+      var url = window.location.origin + '/' + this.guid + '/civilizationRank'
+      window.location.href = url
+    },
+    showEvery1 () {
+      var url = window.location.origin + '/' + this.guid + '/civilizationRank' + '?detailId=' + this.detailId + '&flag=' + this.flag
+      window.location.href = url
+    },
     backList () {
       this.showOrgDetails = false
       this.showVolDetails = false
@@ -300,98 +364,45 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getActivitys (v, k, flag) {
-      console.log(flag)
-      if (flag) {
-        this.orgId = v.id
-        this.orgRank = k + (this.pageNum - 1) * this.count + 1
-        this.orgHeadPic = v.head_pic ? v.head_pic : this.defaultImg
-        this.orgName = v.name
+    getActivitys (id, flag) {
+      this.detailId = id
+      this.flag = flag
+      if (this.flag === 'organize') {
         this.showOrgDetails = true
-        getActivity(this.orgId, 'organize', this.page, this.pageSize).then(
-          res => {
-            if (!res.data.error_code) {
-              let _result = res.data.result
-              if (_result.activity.data) {
-                this.orgActList = _result.activity.data
-              }
-              this.activity_count = _result.activity_count
-              this.orgService = _result.service
+        getActivity(this.detailId, 'organize').then(res => {
+          console.log(res.data.result)
+          if (!res.data.error_code) {
+            let _result = res.data.result
+            if (_result.activity) {
+              this.orgActList = _result.activity
             }
+            this.activity_count = _result.activity_count
+            this.orgService = _result.service
+            this.orgRank = _result.rank
+            this.orgHeadPic = _result.data.head_pic ? _result.data.head_pic : this.defaultImg
+            this.orgName = _result.data.name
           }
-        )
-        this.orgClear = setInterval(() => {
-          if (this.page >= 2) {
-            this.page = 1
-          } else {
-            this.page += 1
-          }
-          this.orgActList = []
-          getActivity(this.orgId, 'organize', this.page, this.pageSize).then(
-            res => {
-              if (!res.data.error_code) {
-                let _result = res.data.result
-                if (_result.activity.data) {
-                  this.orgActList = _result.activity.data
-                }
-                this.activity_count = _result.activity_count
-                this.orgService = _result.service
-              }
-            }
-          )
-        }, this.frequency)
-      } else {
-        this.volId = v.id
-        this.volRank = k + (this.pageNum - 1) * this.count + 1
-        this.volHeadPic = v.head_pic ? v.head_pic : this.defaultImg
-        this.volName = v.real_name
+        })
+      }
+      if (this.flag === 'volunteer') {
         this.showVolDetails = true
-        getActivity(this.volId, 'volunteer', this.pageVol, this.pageSize).then(
-          res => {
-            if (!res.data.error_code) {
-              let _result = res.data.result
-              if (_result.activity.data) {
-                this.rightActList = _result.activity.data
-              }
-              if (_result.help.data) {
-                this.leftOrderList = _result.help.data
-              }
-              this.volAct = _result.activity_count
-              this.help_count = _result.help_count
-              this.volService = _result.service
+        getActivity(this.detailId, 'volunteer').then(res => {
+          if (!res.data.error_code) {
+            let _result = res.data.result
+            if (_result.activity) {
+              this.rightActList = _result.activity
             }
+            if (_result.help) {
+              this.leftOrderList = _result.help
+            }
+            this.volAct = _result.activity_count
+            this.help_count = _result.help_count
+            this.volService = _result.service
+            this.volRank = _result.rank
+            this.volHeadPic = _result.data.head_pic ? _result.data.head_pic : this.defaultImg
+            this.volName = _result.data.real_name
           }
-        )
-        if (this.rightActList.length >= 5 || this.leftOrderList.length >= 5) {
-          this.volClear = setInterval(() => {
-            if (this.pageVol >= 2) {
-              this.pageVol = 1
-            } else {
-              this.pageVol += 1
-            }
-            this.rightActList = []
-            this.leftOrderList = []
-            getActivity(
-              this.volId,
-              'volunteer',
-              this.pageVol,
-              this.pageSize
-            ).then(res => {
-              if (!res.data.error_code) {
-                let _result = res.data.result
-                if (_result.activity.data) {
-                  this.rightActList = _result.activity.data
-                }
-                if (_result.help.data) {
-                  this.leftOrderList = _result.help.data
-                }
-                this.volAct = _result.activity_count
-                this.help_count = _result.help_count
-                this.volService = _result.service
-              }
-            })
-          }, this.frequency)
-        }
+        })
       }
     },
     getVolunteerRank (type) {
@@ -422,7 +433,7 @@ export default {
   padding: pxrem(40px);
   background: #0a1742;
   * {
-    font-family: 'SourceHanSansSC-Medium';
+    font-family: SourceHanSansSC-Medium;
   }
   .org-top {
     padding-top: pxrem(154px);
@@ -451,7 +462,7 @@ export default {
         }
       }
       .org-title {
-        font-family: 'SourceHanSansSC-Medium';
+        font-family: SourceHanSansSC-Medium;
         top: pxrem(53px);
         height: pxrem(56px);
         font-size: pxrem(58px);
@@ -462,7 +473,7 @@ export default {
           width: pxrem(100px);
           height: pxrem(100px);
           border-radius: 50%;
-          background-color: red;
+          // background-color: red;
           margin-right: pxrem(40px);
         }
         .title {
@@ -494,14 +505,72 @@ export default {
           color: #fff;
         }
       }
-      .item-list {
-        height: pxrem(84px);
-        background: url("./assets/back.png") no-repeat center;
-        background-size: 100% 100%;
-        padding: 0 pxrem(60px) 0 pxrem(50px);
-        margin-bottom: pxrem(24px);
-        &:last-of-type {
-          margin-bottom: 0;
+      .activity_content {
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        height: pxrem(526px);
+        .item-list {
+          margin-left: pxrem(40px);
+          width: 48.8%;
+          height: pxrem(310px);
+          background: url('./assets/back.png') no-repeat center;
+          background-size: 100% 100%;
+          padding: pxrem(26px) pxrem(40px) pxrem(26px) pxrem(40px);
+          margin-bottom: pxrem(24px);
+          text-align: left;
+          .act_title {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            height: pxrem(50px);
+            font-size: pxrem(36px);
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+            line-height: pxrem(60px);
+          }
+          .act_desc {
+            width: 100%;
+            height: pxrem(107px);
+            font-size: pxrem(26px);
+            display: -moz-box;
+            display: -webkit-box;
+            -moz-box-orient: vertical;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(221, 221, 221, 1);
+            margin: pxrem(26px) 0;
+          }
+          .act_duration {
+            text-align: right;
+            .colour_hours {
+              height: pxrem(34px);
+              font-size: pxrem(36px);
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(0, 192, 255, 1);
+            }
+            .color_white {
+              height: pxrem(34px);
+              font-size: pxrem(36px);
+              font-family: PingFang SC;
+              font-weight: 500;
+              color: rgba(255, 255, 255, 1);
+              line-height: pxrem(60px);
+            }
+          }
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+          &:nth-child(2n + 1) {
+            margin-left: 0;
+          }
         }
       }
     }
@@ -512,6 +581,13 @@ export default {
       font-weight: 600;
       line-height: 1;
       text-shadow: 0px 16px 16px rgba(7, 222, 255, 0.2);
+    }
+    .unit_icon {
+      width: pxrem(58px);
+      height: pxrem(58px);
+      position: absolute;
+      top: pxrem(90px);
+      right: pxrem(40px);
     }
     .title-tab {
       width: 100%;
@@ -562,6 +638,108 @@ export default {
         transform: translateY(-50%);
       }
     }
+    // 志愿者点单活动详情
+    .vol_rank{
+      .margin40{
+        margin-left: 0.4rem;
+      }
+      .content {
+        width: 48.8%;
+        .help-info {
+          .help-title {
+            align-items: center;
+            margin-bottom: 0.2rem;
+            margin-top: 0.2rem;
+          }
+          .help-img {
+            display: inline-block;
+            margin-right: 0.23rem;
+            img {
+              width: 0.8rem;
+              height: 0.28rem;
+              // vertical-align: top;
+            }
+          }
+          .help-text {
+            font-size: 0.42rem;
+            color: #fff;
+          }
+        }
+        .actbox {
+          overflow-y: scroll;
+          height: pxrem(526px);
+          .item-list-null{
+            height: pxrem(321px);
+            background: url("./assets/back.png") no-repeat center;
+            background-size: 100% 100%;
+            padding: pxrem(26px) pxrem(40px) pxrem(26px) pxrem(40px);
+            margin-bottom: pxrem(24px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .null-text{
+              font-size: pxrem(36px);
+            }
+          }
+          .item-list {
+            background: url("./assets/back.png") no-repeat center;
+            background-size: 100% 100%;
+            padding: pxrem(26px) pxrem(40px) pxrem(26px) pxrem(40px);
+            margin-bottom: pxrem(24px);
+            text-align: left;
+            .act_title {
+              width: 100%;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              word-break: break-all;
+              height: pxrem(50px);
+              font-size: pxrem(36px);
+              font-family: PingFang SC;
+              font-weight: 500;
+              color: rgba(255, 255, 255, 1);
+              line-height: pxrem(60px);
+            }
+            .act_desc {
+              width: 100%;
+              height: pxrem(107px);
+              font-size: pxrem(26px);
+              display: -moz-box;
+              display: -webkit-box;
+              -moz-box-orient: vertical;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+              overflow: hidden;
+              font-family: PingFang SC;
+              font-weight: 500;
+              color: rgba(221, 221, 221, 1);
+              margin: pxrem(26px) 0;
+            }
+            .act_duration {
+              text-align: right;
+              .colour_hours {
+                height: pxrem(34px);
+                font-size: pxrem(36px);
+                font-family: PingFang SC;
+                font-weight: bold;
+                color: rgba(0, 192, 255, 1);
+              }
+              .color_white {
+                height: pxrem(34px);
+                font-size: pxrem(36px);
+                font-family: PingFang SC;
+                font-weight: 500;
+                color: rgba(255, 255, 255, 1);
+                line-height: pxrem(60px);
+              }
+            }
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
     .wrap-content {
       .content-left {
         .item-list {
@@ -574,7 +752,8 @@ export default {
       }
       .content-right {
         .item-list {
-          width: pxrem(760px);
+          margin-right: pxrem(40px);
+          // width: pxrem(900px);
           &:last-of-type {
             margin-bottom: 0;
           }
@@ -676,10 +855,6 @@ export default {
       .rank-height {
         height: pxrem(140px);
         margin-bottom: pxrem(50px);
-      }
-      .detail-height {
-        height: pxrem(84px);
-        margin-bottom: 0.24rem;
       }
     }
   }
