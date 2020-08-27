@@ -7,12 +7,14 @@
           <div class="task-list" v-for="(list,key) in item" :key="key">
             <div class="task-nav sys-flex sys-flex-center">
               <div class="project-title sys-flex-one overhidden">所属选题：{{list.project_title}}</div>
-              <div class="task-status normal" v-if="list.priority == 1">普通</div>
-              <div class="task-status emergency" v-if="list.priority == 2">紧急</div>
-              <div class="task-status urgent" v-if="list.priority == 3">加急</div>
             </div>
             <div class="task-content sys-flex sys-vertical  flex-justify-between">
-              <div class="brief">{{list.title}}</div>
+              <div class="brief">
+                <span class="task-status normal" v-if="list.priority == 1">普通</span>
+                <span class="task-status emergency" v-if="list.priority == 2">紧急</span>
+                <span class="task-status urgent" v-if="list.priority == 3">加急</span>
+                {{list.title}}
+              </div>
               <div class="task-info sys-flex sys-flex-center overhidden flex-justify-between">
                 <div class="task-create-user">{{list.task_user_name}}</div>
                 <div class="task-create-time">{{list.update_time | dateFormat(0, 16)}}</div>
@@ -159,24 +161,6 @@ export default {
           text-align: left;
           color:#00A8FE;
         }
-        .task-status{
-          width: pxrem(100px);
-          height: pxrem(46px);
-          line-height: pxrem(46px);
-          border-radius: 0.025rem;
-          text-align: center;
-          font-size: pxrem(30px);
-          color: #fff;
-          &.normal{
-            background: RGBA(34, 115, 238, 1);
-          }
-          &.emergency{
-            background: RGBA(226, 118, 46, 1);
-          }
-          &.urgent{
-            background: RGBA(217, 67, 110, 1);
-          }
-        }
       }
       .task-content{
         height: 75%;
@@ -190,6 +174,25 @@ export default {
           color: #fff;
           text-align: left;
           overflow: hidden;
+          .task-status{
+            display: inline-block;
+            width: pxrem(100px);
+            height: pxrem(46px);
+            line-height: pxrem(46px);
+            border-radius: 0.025rem;
+            text-align: center;
+            font-size: pxrem(30px);
+            color: #fff;
+            &.normal{
+              background: RGBA(34, 115, 238, 1);
+            }
+            &.emergency{
+              background: RGBA(226, 118, 46, 1);
+            }
+            &.urgent{
+              background: RGBA(217, 67, 110, 1);
+            }
+          }
         }
         .task-info{
           width: 100%;
@@ -199,16 +202,16 @@ export default {
             color: #fff;
             background: url('./assets/user.png') no-repeat center left;
             background-size: pxrem(25px) pxrem(28px);
-            margin-right: pxrem(30px); 
+            margin-right: pxrem(10px); 
           }
           .task-create-time{
             font-size: pxrem(20px);
-            padding-left: pxrem(30px);  
+            padding-left: pxrem(34px);  
             color:#fff;
             background: url('./assets/time.png') no-repeat center left;
             background-size: pxrem(29px) pxrem(29px);
-            width: pxrem(400px);
-            overflow: hidden;
+            width: pxrem(200px);
+            white-space: normal;
           }
           .task-type{
             font-size: pxrem(20px);
