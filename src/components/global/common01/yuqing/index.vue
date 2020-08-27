@@ -4,7 +4,7 @@
     <div class="left">
       <div class="title">{{title}}</div>
       <ul class="leftList">
-        <li v-for="(item, index) in leftList.slice(0,7)" :key="index">
+        <li v-for="(item, index) in leftList.slice(0,12)" :key="index">
           <span class="dian"></span>
           <p>{{item.news_title}}</p>  
         </li>
@@ -146,9 +146,11 @@ export default {
           formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
         legend: {
-          orient: 'horizontal',
-          bottom: 30,
-          itemGap: 25,
+          orient: 'vertical',
+          top: '60%',
+          itemGap: 10,
+          itemWidth: 10,
+          itemHeight: 10,
           data: legendData,
           formatter: function (name) {
             let total = 0
@@ -159,9 +161,9 @@ export default {
                 target = seriesData[i].value
               }
             }
-            return name + '    ' + ((target / total) * 100).toFixed(0) + '%'
+            return name + ' ' + ((target / total) * 100).toFixed(0) + '%'
           },
-          textStyle: { color: '#fff', fontSize: '16', padding: [ 0, 0, 0, 10 ] }
+          textStyle: { color: '#fff', fontSize: '14', padding: [ 0, 0, 0, 5 ] }
         },
         series: [
           {
@@ -177,7 +179,7 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: '16',
+                fontSize: '14',
                 color: '#fff',
                 fontWeight: 'bold'
               }
@@ -213,7 +215,7 @@ export default {
         series: [
           {
             type: 'wordCloud',
-            sizeRange: [14, 28],
+            sizeRange: [14, 24],
             rotationRange: [0, 90],
             rotationStep: 90,
             shape: 'square',
@@ -274,21 +276,21 @@ export default {
         legend: {
           left: 'center',
           textStyle: { // 图例的公用文本样式。
-            fontSize: 16,
+            fontSize: 14,
             color: '#fff'
           }
         },
         radar: [
           {
             indicator: indicator,
-            center: ['50%', '40%'],
+            center: ['50%', '50%'],
             name: {
               textStyle: {
-                fontSize: 16,
+                fontSize: 14,
                 color: '#fff'
               }
             },
-            radius: 80,
+            radius: 52,
             axisLine: { // (圆内的几条直线)坐标轴轴线相关设置
               lineStyle: {
                 color: '#00E4FF',
@@ -373,9 +375,11 @@ export default {
           formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
         legend: {
-          orient: 'horizontal',
-          bottom: 80,
-          itemGap: 30,
+          orient: 'vertical',
+          top: '50%',
+          itemGap: 10,
+          itemWidth: 10,
+          itemHeight: 10,
           data: legendData,
           formatter: function (name) {
             let total = 0
@@ -386,15 +390,15 @@ export default {
                 target = seriesData[i].value
               }
             }
-            return name + '    ' + ((target / total) * 100).toFixed(0) + '%'
+            return name + ' ' + ((target / total) * 100).toFixed(0) + '%'
           },
-          textStyle: { color: '#fff', fontSize: '16', padding: [ 0, 0, 0, 10 ] }
+          textStyle: { color: '#fff', fontSize: '14', padding: [ 0, 0, 0, 2 ] }
         },
         series: [
           {
             name: '',
             type: 'pie',
-            radius: ['30%', '40%'],
+            radius: ['40%', '55%'],
             center: ['50%', '25%'],
             avoidLabelOverlap: false,
             label: {
@@ -404,7 +408,7 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: '16',
+                fontSize: '14',
                 color: '#fff',
                 fontWeight: 'bold'
               }
@@ -487,15 +491,18 @@ export default {
         },
         legend: {
           data: legendData,
+          top: 10,
           textStyle: {
-            fontSize: '16',
+            fontSize: '14',
             color: '#fff'
           },
-          icon: 'circle'
+          icon: 'circle',
+          itemWidth: 10,
+          itemHeight: 10
         },
         grid: {
           left: '3%',
-          right: '4%',
+          right: '7%',
           bottom: '10%',
           containLabel: true
         },
@@ -509,7 +516,7 @@ export default {
               textStyle: {
                 color: '#FFFFFF'
               },
-              fontSize: 16// 字体大小
+              fontSize: 14// 字体大小
             },
             axisLine: {
               lineStyle: {
@@ -531,14 +538,14 @@ export default {
           {
             type: 'value',
             nameTextStyle: {
-              fontSize: '16'
+              fontSize: '14'
             },
             axisLabel: {
               show: true,
               textStyle: {
                 color: '#FFFFFF'
               },
-              fontSize: 16
+              fontSize: 14
             },
             axisLine: {
               lineStyle: {
@@ -568,7 +575,7 @@ export default {
 @import '../style/index.scss';
 .yuhuatai{
   background: url(./asset/kuang.png) center center no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   width: 100%;
   height: 100%;
 }
@@ -579,26 +586,26 @@ export default {
   .left{
     margin-top: pxrem(80px);
     background: url(./asset/yuqing.png) center center no-repeat;
-    background-size: contain;
+    background-size: pxrem(800px) 100%;
     width:pxrem(800px);
     // width: 20%;
-    height:pxrem(1740px);
+    height:90%;
     // padding: 0 pxrem(98px);
     .title{
       background: url(./asset/title.png) center center no-repeat;
-      background-size: contain;
-      width: pxrem(406px);
-      height: pxrem(80px);
+      background-size: 100% 100%;
+      width: 80%;
+      height: pxrem(90px);
       color:rgba(0,255,228,1);
       font-size:pxrem(64px);
       font-family:Source Han Sans CN;
       font-weight:500;
-      line-height: pxrem(80px);
+      line-height: pxrem(90px);
       margin: pxrem(47px) auto;
     }
     .leftList{
       color: #fff;
-      font-size: pxrem(38px);
+      font-size: pxrem(56px);
       li{
         margin-left: pxrem(28px);
         margin-right: pxrem(27px);
@@ -621,8 +628,8 @@ export default {
           background: url(./asset/newsIcon.png) center center no-repeat;
           background-size: contain;
           display: block;
-          margin-right: pxrem(10px);
-          margin-top: pxrem(10px);
+          margin-right: pxrem(40px);
+          margin-top: pxrem(40px);
         }
       }
     }
@@ -643,15 +650,15 @@ export default {
     .rightTop{
       height: 50%;
       .line{
-        width: pxrem(2px);
-        height: pxrem(520px);
+        width: pxrem(5px);
+        height: pxrem(1320px);
         background: url(./asset/line1.png) center center no-repeat;
         background-size: contain;
         margin-top: pxrem(64px);
         margin-right: pxrem(15px);
       }
       .emotional{
-        width: 33%;
+        width: 32%;
         flex: 1;
         .emotional-wrap{
           height: 90%;
@@ -660,7 +667,7 @@ export default {
       }
       .keywords{
         flex: 1;
-        width: 33%;
+        width: 32%;
         .hot-wrap{
           width: 100%;
           height: 100%;
@@ -668,9 +675,10 @@ export default {
           position: relative;
           .hotword-wrap {
             width: 100%;
-            height: 100%;
+            height: 50%;
             background-size: 100% 100%;
             position: relative;
+            margin-top: 30%;
             padding: pxrem(50px);
             .word-cloud {
               height: 100%;
@@ -681,7 +689,7 @@ export default {
       }
       .content{
         flex: 1;
-        width: 33%;
+        width: 32%;
         .content-analysis{
           height: 90%;
           width: 100%;
@@ -691,8 +699,8 @@ export default {
     .rightBottom{
       height: 50%;
       .line{
-        width: pxrem(1px);
-        height: pxrem(358px);
+        width: pxrem(5px);
+        height: pxrem(1358px);
         background: url(./asset/line2.png) center center no-repeat;
         background-size: contain;
         margin-top: pxrem(64px);
