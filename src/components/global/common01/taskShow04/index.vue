@@ -17,9 +17,9 @@
               </div>
               <div class="task-info sys-flex sys-flex-center overhidden flex-justify-between">
                 <div class="task-create-user">{{list.task_user_name}}</div>
-                <div class="task-create-time">{{list.update_time | dateFormat(0, 16)}}</div>
                 <div class="task-type sys-flex-one" :class="{'on-start': list.status == 1,'on-progress' :  list.status == 2 , 'on-stop' : list.status == 3 , 'on-done' : list.status == 4}">{{list.status_show}}</div>
               </div>
+              <div class="task-create-time">{{list.update_time | dateFormat(0, 16)}}</div>
             </div>
           </div>
         </swiper-slide>
@@ -178,7 +178,7 @@ export default {
             display: inline-block;
             width: pxrem(100px);
             height: pxrem(46px);
-            line-height: pxrem(46px);
+            line-height: pxrem(50px);
             border-radius: 0.025rem;
             text-align: center;
             font-size: pxrem(30px);
@@ -204,15 +204,6 @@ export default {
             background-size: pxrem(25px) pxrem(28px);
             margin-right: pxrem(10px); 
           }
-          .task-create-time{
-            font-size: pxrem(20px);
-            padding-left: pxrem(34px);  
-            color:#fff;
-            background: url('./assets/time.png') no-repeat center left;
-            background-size: pxrem(29px) pxrem(29px);
-            width: pxrem(200px);
-            white-space: normal;
-          }
           .task-type{
             font-size: pxrem(20px);
             text-align: right;
@@ -229,6 +220,15 @@ export default {
               color: #25B17C;
             }
           }
+        }
+        .task-create-time{
+          font-size: pxrem(20px);
+          padding-left: pxrem(34px);  
+          color:#fff;
+          background: url('./assets/time.png') no-repeat center left;
+          background-size: pxrem(29px) pxrem(29px);
+          width: pxrem(200px);
+          white-space: normal;
         }
       }
     }
