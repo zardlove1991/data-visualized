@@ -227,8 +227,6 @@ export default {
           color:#fff;
           background: url('./assets/time.png') no-repeat center left;
           background-size: pxrem(29px) pxrem(29px);
-          width: pxrem(200px);
-          white-space: normal;
         }
       }
     }
