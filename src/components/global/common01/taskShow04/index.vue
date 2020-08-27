@@ -198,7 +198,7 @@ export default {
           width: 100%;
           .task-create-user{
             font-size: pxrem(30px);
-            padding-left: pxrem(30px); 
+            padding-left: pxrem(40px); 
             color: #fff;
             background: url('./assets/user.png') no-repeat center left;
             background-size: pxrem(25px) pxrem(28px);
@@ -223,10 +223,11 @@ export default {
         }
         .task-create-time{
           font-size: pxrem(20px);
-          padding-left: pxrem(34px);  
+          padding-left: pxrem(40px);  
           color:#fff;
           background: url('./assets/time.png') no-repeat center left;
           background-size: pxrem(29px) pxrem(29px);
+          text-align: left;
         }
       }
     }
