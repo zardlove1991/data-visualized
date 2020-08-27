@@ -85,6 +85,8 @@ export default {
   padding: pxrem(40px);
   .project-wrap {
     padding: pxrem(220px) pxrem(80px) pxrem(95px) pxrem(78px);
+    padding-top: pxrem(220px)!important;
+    padding-right: pxrem(80px)!important;
     color: #fff;
     .wrap-content {
       .marginBottom75 {
@@ -101,8 +103,8 @@ export default {
           margin-right: pxrem(20px);
         }
         .name {
-          width: 24%;
-          margin-right: pxrem(10px);
+          width: 24%!important;
+          margin-right: pxrem(10px)!important;
         }
         .project-status {
           width: pxrem(170px);
@@ -119,7 +121,7 @@ export default {
         .project-progress {
           margin-left: auto;
           .progress-total {
-            width: pxrem(200px);
+            width: pxrem(200px)!important;
             height: pxrem(16px);
             background: #2B3A58;
             border-radius: pxrem(8px);
