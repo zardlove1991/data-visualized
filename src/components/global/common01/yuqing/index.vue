@@ -1,10 +1,11 @@
 <template>
  <div class="yuhuatai">
+   <div class="yuqing-title" :style="setFontSize(63)">舆情分析</div>
    <div class="yuqing flex">
     <div class="left">
       <div class="title">{{title}}</div>
       <ul class="leftList">
-        <li v-for="(item, index) in leftList.slice(0,12)" :key="index">
+        <li v-for="(item, index) in leftList.slice(0,7)" :key="index">
           <span class="dian"></span>
           <p>{{item.news_title}}</p>  
         </li>
@@ -93,6 +94,11 @@ export default {
     }, 10000)
   },
   methods: {
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
+    },
     getYuqingData () {
       getYuqingList().then(res => {
         if (res.data.error_code === 0) {
@@ -290,7 +296,7 @@ export default {
                 color: '#fff'
               }
             },
-            radius: 52,
+            radius: 48,
             axisLine: { // (圆内的几条直线)坐标轴轴线相关设置
               lineStyle: {
                 color: '#00E4FF',
@@ -376,7 +382,7 @@ export default {
         },
         legend: {
           orient: 'vertical',
-          top: '50%',
+          top: '49%',
           itemGap: 10,
           itemWidth: 10,
           itemHeight: 10,
@@ -579,9 +585,18 @@ export default {
   width: 100%;
   height: 100%;
 }
+.yuqing-title{
+  text-align: left;
+  color: #ffffff;
+  position: unset;
+  font-size: pxrem(58px);
+  margin-bottom: pxrem(80px);
+  margin-top: pxrem(140px);
+  margin-left: pxrem(80px); 
+}
 .yuqing {
   padding: pxrem(27px) pxrem(20px) pxrem(49px) pxrem(37px);
-  margin-top: pxrem(140px);
+  // margin-top: pxrem(140px);
   height: 100%;
   .left{
     margin-top: pxrem(80px);
@@ -605,7 +620,7 @@ export default {
     }
     .leftList{
       color: #fff;
-      font-size: pxrem(56px);
+      font-size: pxrem(38px);
       li{
         margin-left: pxrem(28px);
         margin-right: pxrem(27px);
@@ -650,15 +665,15 @@ export default {
     .rightTop{
       height: 50%;
       .line{
-        width: pxrem(5px);
-        height: pxrem(1320px);
+        width: pxrem(2px);
+        height: 80%;
         background: url(./asset/line1.png) center center no-repeat;
-        background-size: contain;
+        background-size: cover;
         margin-top: pxrem(64px);
         margin-right: pxrem(15px);
       }
       .emotional{
-        width: 32%;
+        width: 33%;
         flex: 1;
         .emotional-wrap{
           height: 90%;
@@ -667,7 +682,7 @@ export default {
       }
       .keywords{
         flex: 1;
-        width: 32%;
+        width: 33%;
         .hot-wrap{
           width: 100%;
           height: 100%;
@@ -689,7 +704,7 @@ export default {
       }
       .content{
         flex: 1;
-        width: 32%;
+        width: 33%;
         .content-analysis{
           height: 90%;
           width: 100%;
@@ -699,10 +714,10 @@ export default {
     .rightBottom{
       height: 50%;
       .line{
-        width: pxrem(5px);
-        height: pxrem(1358px);
+        width: pxrem(2px);
+        height: 80%;
         background: url(./asset/line2.png) center center no-repeat;
-        background-size: contain;
+        background-size: cover;
         margin-top: pxrem(64px);
         margin-right: pxrem(15px);
       }
