@@ -5,7 +5,7 @@
     <div class="left">
       <div class="title">{{title}}</div>
       <ul class="leftList">
-        <li v-for="(item, index) in leftList.slice(0,7)" :key="index">
+        <li v-for="(item, index) in leftList.slice(0,10)" :key="index">
           <span class="dian"></span>
           <p>{{item.news_title}}</p>  
         </li>
@@ -590,8 +590,7 @@ export default {
   color: #ffffff;
   position: unset;
   font-size: pxrem(58px);
-  margin-bottom: pxrem(80px);
-  margin-top: pxrem(140px);
+  margin-top: pxrem(40px);
   margin-left: pxrem(80px); 
 }
 .yuqing {
@@ -644,7 +643,7 @@ export default {
           background-size: contain;
           display: block;
           margin-right: pxrem(40px);
-          margin-top: pxrem(40px);
+          margin-top: pxrem(25px);
         }
       }
     }
@@ -673,16 +672,16 @@ export default {
         margin-right: pxrem(15px);
       }
       .emotional{
-        width: 33%;
-        flex: 1;
+        width: 30%;
+        flex: 3;
         .emotional-wrap{
           height: 90%;
           width: 100%;
         }
       }
       .keywords{
-        flex: 1;
-        width: 33%;
+        flex: 3;
+        width: 30%;
         .hot-wrap{
           width: 100%;
           height: 100%;
@@ -703,8 +702,8 @@ export default {
         }
       }
       .content{
-        flex: 1;
-        width: 33%;
+        flex: 4;
+        width: 40%;
         .content-analysis{
           height: 90%;
           width: 100%;
@@ -722,14 +721,14 @@ export default {
         margin-right: pxrem(15px);
       }
       .media{
-        flex: 1;
+        flex: 3;
         .media-chart{
           height: 90%;
           width: 100%;
         }
       }
       .hot{
-        flex: 2;
+        flex: 7;
         .hot-chart{
           height: 90%;
           width: 100%;
