@@ -121,7 +121,7 @@ export default {
         let data = res.data.result
         setTimeout(() => {
           // 稿件总数
-          this.today_publish_num = this.preFixInterge(1277253, 8)
+          this.today_publish_num = this.preFixInterge(1282642, 8)
           this.new_user = this.preFixInterge(1650081, 8)
           this.web_au_total = this.preFixInterge(865387, 8)
           // 微信总数
