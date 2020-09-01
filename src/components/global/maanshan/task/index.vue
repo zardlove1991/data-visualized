@@ -14,7 +14,7 @@
             <div class="task-content sys-flex sys-vertical  flex-justify-between">
               <div class="brief">{{list.title}}</div>
               <div class="task-info sys-flex sys-flex-center overhidden flex-justify-between">
-                <div class="task-create-user">{{list.task_user_name}}</div>
+                <div class="task-create-user">{{list.create_user_name}}</div>
                 <div class="task-create-time">{{list.update_time | dateFormat(0, 16)}}</div>
                 <div class="task-type sys-flex-one" :class="{'on-start': list.status == 1,'on-progress' :  list.status == 2 , 'on-stop' : list.status == 3 , 'on-done' : list.status == 4}">{{list.status_show}}</div>
               </div>
@@ -29,7 +29,7 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import { getWorkCallTaskList } from '@/servers/interface'
+import { getWorkCallSubjectList } from '@/servers/interface'
 export default {
   name: 'task',
   components: {
@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     getDataList () {
-      getWorkCallTaskList(this.count, this.page, this.currentViewId).then((res) => {
+      getWorkCallSubjectList(this.count, this.page, this.currentViewId).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
