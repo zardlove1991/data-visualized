@@ -23,7 +23,7 @@
                 <img src="./assets/new_pre.png" v-if="type === 'latest'" />
                 <img src="./assets/new.png" v-else />
               </div>
-              <div class="type-name">最新点单</div>
+              <div class="type-name">最新鑫愿</div>
             </div>
             <div
               class="type-item"
@@ -34,7 +34,7 @@
                 <img src="./assets/process_pre.png" v-if="type === 'ongoing'" />
                 <img src="./assets/process.png" v-else />
               </div>
-              <div class="type-name">点单进程</div>
+              <div class="type-name">鑫愿进程</div>
             </div>
             <div
               class="type-item"
@@ -45,7 +45,7 @@
                 <img src="./assets/complete_pre.png" v-if="type === 'complete'" />
                 <img src="./assets/complete.png" v-else />
               </div>
-              <div class="type-name">完成点单</div>
+              <div class="type-name">完成鑫愿</div>
             </div>
           </div>
           <div class="list-content sys-flex-one">
