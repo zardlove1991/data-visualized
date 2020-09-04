@@ -179,6 +179,8 @@ export default {
             flex: 1;
             margin-bottom: pxrem(12px);
             overflow: hidden;
+            display: flex;
+            align-items: center;
             &.active{
               border: 3px solid rgb(0, 228, 255);
             }

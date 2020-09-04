@@ -229,7 +229,7 @@ export default {
           background: url('./assets/time.png') no-repeat center left;
           background-size: pxrem(29px) pxrem(29px);
           text-align: left;
-          margin-bottom: pxrem(140px);
+          margin-bottom: pxrem(14px);
         }
       }
     }
