@@ -46,7 +46,7 @@ export default {
       }
     },
     getWorkCallReportList () {
-      getWorkCallReportList(5, this.page, this.currentViewId).then((res) => {
+      getWorkCallReportList(6, this.page, this.currentViewId).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -83,7 +83,7 @@ export default {
     color: #fff;
     .wrap-content {
       .item-list {
-        margin-bottom: pxrem(80px);
+        margin-bottom: pxrem(60px);
         &:last-of-type {
           margin-bottom: 0;
         }

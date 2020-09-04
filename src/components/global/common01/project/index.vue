@@ -51,7 +51,7 @@ export default {
       }
     },
     getWorkCallSubjectList () {
-      getWorkCallSubjectList(5, this.page, this.currentViewId).then(res => {
+      getWorkCallSubjectList(6, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.projectList = []
@@ -93,7 +93,7 @@ export default {
         margin-bottom: pxrem(75px)!important;
       }
       .item-list {
-        margin-bottom: pxrem(90px);
+        margin-bottom: pxrem(60px);
         &:last-of-type {
           margin-bottom: 0;
         }

@@ -130,11 +130,11 @@ export default {
     background-size: 100% 100%;
     // background-color: #0F1C46;
     .common01-title{
-        text-align: left;
-        color: #ffffff;
-        position: unset;
-        font-size: pxrem(58px);
-        margin-bottom: pxrem(80px);
+      text-align: left;
+      color: #ffffff;
+      position: unset;
+      font-size: pxrem(58px);
+      margin-bottom: pxrem(40px);
     }
     .swiper-container{
       width: 100%;
@@ -145,7 +145,7 @@ export default {
     }
     .task-list{
       width: 49.5%;
-      height: 48%;
+      height: 54%;
       background: rgba(2,122,186,0.2);
       border: 0.01rem solid rgba(2, 122, 186, 0.5);
       margin-right: 0.5%;
@@ -210,6 +210,7 @@ export default {
             color: #fff;
             font-family: Adobe Heiti Std R;
             font-weight: normal;
+            margin-right: pxrem(20px);
             &.on-progress {
               color: #01DF76;
             }
