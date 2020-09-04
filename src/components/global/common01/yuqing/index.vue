@@ -5,9 +5,9 @@
     <div class="left">
       <div class="title">{{title}}</div>
       <ul class="leftList">
-        <li v-for="(item, index) in leftList.slice(0,10)" :key="index">
+        <li v-for="(item, index) in leftList.slice(0,8)" :key="index">
           <span class="dian"></span>
-          <p>{{item.news_title}}</p>  
+          <p class="lineHeight">{{item.news_title}}</p>  
         </li>
       </ul>
     </div>
@@ -619,7 +619,7 @@ export default {
     }
     .leftList{
       color: #fff;
-      font-size: pxrem(38px);
+      font-size: pxrem(50px);
       li{
         margin-left: pxrem(28px);
         margin-right: pxrem(27px);
@@ -627,6 +627,7 @@ export default {
         display: flex;
         p{
           // width: pxrem(333px);
+          line-height: pxrem(80px);
           text-overflow: -o-ellipsis-lastline;
           overflow: hidden;
           text-overflow: ellipsis;

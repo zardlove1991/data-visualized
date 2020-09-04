@@ -1,6 +1,7 @@
 <template>
   <div class="xy-tv" id="xy-tv" v-cloak>
-    <div class="tv-wrap sys-flex sys-vertical" style="height: 100%;">
+    <div class="videoTitle" :style="setFontSize(63)">视频监看</div>
+    <div class="tv-wrap sys-flex sys-vertical" style="height: 90%;">
       <div class="tv-main">
         <div  class="tv-list list-box">
           <div class="sys-flex tv-detail">
@@ -14,8 +15,8 @@
               ></video-player>
             </div>
             <div class="tv-right">
-              <div class="right-item" v-for="(v,k) in rightVideo" :key="k">
-               <img :src="v.index_pic" alt="" class="sys-flex sys-vertical">
+              <div :class="['right-item', {'active': k == curIndex}]" v-for="(v,k) in tvList" :key="k">
+               <img :src="v.index_pic" alt="" class="sys-flex,sys-vertical">
               </div>
             </div>
           </div>
@@ -34,7 +35,7 @@ export default {
   data () {
     return {
       tvList: [],
-      index: 0,
+      curIndex: 0,
       leftVideo: {},
       rightVideo: []
     }
@@ -45,19 +46,24 @@ export default {
   created () {
     this.getTvList()
     setInterval(() => {
-      this.index += 1
-      if (this.index === 4) {
-        this.index = 0
+      this.curIndex += 1
+      if (this.curIndex === 3) {
+        this.curIndex = 0
       }
-      this.leftVideo = this.tvList[this.index]
+      this.leftVideo = this.tvList[this.curIndex]
       this.rightVideo = this.tvList.filter((item, index) => {
-        if (parseInt(index) !== parseInt(this.index)) {
+        if (parseInt(index) !== parseInt(this.curIndex)) {
           return item
         }
       })
     }, 15000)
   },
   methods: {
+    setFontSize (size) {
+      if (this.customSize && size && size > 0) {
+        return `font-size: ${size / 100}rem!important`
+      }
+    },
     getTvList () {
       getM2OPlusPublishVideo().then(res => {
         if (!res.data.error_code) {
@@ -94,10 +100,10 @@ export default {
               }
             }
           })
-          this.tvList = data.slice(0, 4)
-          this.leftVideo = this.tvList[this.index]
+          this.tvList = data.slice(0, 3)
+          this.leftVideo = this.tvList[this.curIndex]
           this.rightVideo = this.tvList.filter((item, index) => {
-            if (parseInt(index) !== parseInt(this.index)) {
+            if (parseInt(index) !== parseInt(this.curIndex)) {
               return item
             }
           })
@@ -116,6 +122,14 @@ export default {
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
+  .videoTitle{
+    font-size: pxrem(58px);
+    font-weight: 500;
+    text-shadow: 0 pxrem(16px) pxrem(16px) rgba(0, 222, 255, 0.2);
+    color: #fff;
+    text-align: left;
+    margin-bottom: pxrem(20px);
+  }
   .tv-main {
     position: relative;
     width: 100%;
@@ -150,6 +164,9 @@ export default {
           flex: 2;
           width:100%;
           height:100%;
+          background: url(./assets/back.png) center center no-repeat;
+          background-size: 100% 100%;
+          margin-right: pxrem(10px);
         }
         .tv-right{
           flex: 1;
@@ -158,9 +175,13 @@ export default {
           flex-direction: column;
           .right-item{
             width: 100%;
-            height: 33.3%;
+            height: 33%;
             flex: 1;
+            margin-bottom: pxrem(12px);
             overflow: hidden;
+            &.active{
+              border: 3px solid rgb(0, 228, 255);
+            }
             img{
               width: 100%;
               // max-height: 100%;
@@ -172,6 +193,7 @@ export default {
         width: 100%;
         height: 100%;
         overflow: hidden;
+        padding: 10px;
       }
       .tv-name {
         color: #fff;

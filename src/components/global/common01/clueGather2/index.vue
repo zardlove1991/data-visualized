@@ -4,10 +4,10 @@
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '线索汇聚'}}</div>
       <div class="wrap-content">
         <div class="list-sort sys-flex sys-flex-center flex-justify-between">
-            <img :src=' activeIdx == 0 ? require("./assets/zixun-active.png") : require("./assets/zixun.png")'  alt="">
-            <img :src=' activeIdx == 1 ? require("./assets/weixin-active.png") : require("./assets/weixin.png")'  alt="">
-            <img :src=' activeIdx == 2 ? require("./assets/weibo-active.png") : require("./assets/weibo.png")' alt="">
-            <img :src=' activeIdx == 3 ? require("./assets/qiangguo-active.png") : require("./assets/qiangguo.png")'  alt="">
+            <img class="imgHeight" :src=' activeIdx == 0 ? require("./assets/zixun-active.png") : require("./assets/zixun.png")'  alt="">
+            <img class="imgHeight" :src=' activeIdx == 1 ? require("./assets/weixin-active.png") : require("./assets/weixin.png")'  alt="">
+            <img class="imgHeight" :src=' activeIdx == 2 ? require("./assets/weibo-active.png") : require("./assets/weibo.png")' alt="">
+            <img class="imgHeight" :src=' activeIdx == 3 ? require("./assets/qiangguo-active.png") : require("./assets/qiangguo.png")'  alt="">
         </div>
         <div class="item-list sys-flex sys-flex-center flex-justify-between animated" v-for="(v, k) in dataList" :key="k" :class="{'flipInX' : v.title, 'marginBottom75': customSize}" :style="{'animation-delay' : k/2+'s'}">
           <div v-if="k == 0" class="common01-ft32 idx1">{{k+1}}</div>
@@ -120,6 +120,9 @@ export default {
       .list-sort{
         img{
           width: 25%;
+        }
+        .imgHeight{
+          height: pxrem(80px);
         }
       }
       .item-list {
