@@ -46,7 +46,7 @@ export default {
       }
     },
     getWorkCallReportList () {
-      getWorkCallReportList(6, this.page, this.currentViewId).then((res) => {
+      getWorkCallReportList(7, this.page, this.currentViewId).then((res) => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -80,6 +80,7 @@ export default {
   padding: pxrem(40px);
   .report-wrap {
     padding: pxrem(230px) pxrem(80px) pxrem(95px) pxrem(78px);
+    padding-top: pxrem(200px)!important;
     color: #fff;
     .wrap-content {
       .item-list {
