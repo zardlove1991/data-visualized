@@ -38,7 +38,7 @@ export const getM2OPlusRankList = (desc = 'website', count = 6, page = 1) => cre
 export const getMicroOperationArticleList = (id = '748', count = 6, page = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationArticleList?bind_id=${id}&count=${count}&page=${page}`)
 
 /* 在线记者 */
-export const getWorkCallConnectList = (currentViewId) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallConnectList&view_id=${currentViewId}`)
+export const getWorkCallConnectList = (currentViewId, orgid) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallConnectList&view_id=${currentViewId}&orgid=${orgid}`)
 
 /* 记者详情 */
 export const getIndexMemberDetail = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getIndexMemberDetail?user_id=${id}`)

@@ -189,7 +189,8 @@ export default {
       }
     },
     getReporter () {
-      getWorkCallConnectList(this.currentViewId).then(res => {
+      // 盐城城南取部门下的人
+      getWorkCallConnectList(this.currentViewId, 4609).then(res => {
         if (!res.data.error_code && res.data.result.length) {
           this.reporterList = res.data.result
         }
