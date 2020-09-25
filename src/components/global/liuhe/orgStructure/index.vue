@@ -17,7 +17,7 @@
       </div>
       <div class="org-div" v-if="currentIndex === 0">
         <div class="total">
-          <p>文明总队</p>
+          <p>志愿服务总队</p>
           <span>{{orgIndexData.total}}</span>
         </div>
         <div
@@ -463,7 +463,7 @@ export default {
         top: pxrem(338px);
         left: pxrem(662px);
         p {
-          font-size: pxrem(52px);
+          font-size: pxrem(42px);
           height: pxrem(50px);
           line-height: 1;
           letter-spacing: pxrem(3px);
