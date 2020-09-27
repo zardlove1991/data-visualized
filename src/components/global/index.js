@@ -25,14 +25,15 @@ export const xinyicomponentNewspaper = getComponent('xinyi/newspaper')
 export const xinyicomponentTv = getComponent('xinyi/tv')
 
 /* 马鞍山套系 */
-export const maanshancomponentReport = getComponent('maanshan/report')
-export const maanshancomponentProject = getComponent('maanshan/project')
-export const maanshancomponentClueGather = getComponent('maanshan/clueGather')
-export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAnalysis')
+export const maanshancomponentReport = getComponent('maanshan/report') // 报题展示
+export const maanshancomponentProject = getComponent('maanshan/project') // 选题展示
+export const maanshancomponentClueGather = getComponent('maanshan/clueGather') // 线索汇聚
+export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAnalysis') // 舆情分析
 export const maanshancomponentCommunicationEffect = getComponent('maanshan/communicationEffect')
-export const maanshancomponentWorkcallInfoMap = getComponent('maanshan/workcallInfoMap')
-export const maanshancomponentNews = getComponent('maanshan/news')
-export const maanshancomponentTask = getComponent('maanshan/task')
+export const maanshancomponentWorkcallInfoMap = getComponent('maanshan/workcallInfoMap') // 记者联线
+export const maanshancomponentNews = getComponent('maanshan/news') // 稿件排行
+export const maanshancomponentTask = getComponent('maanshan/task') // 选题
+export const maanshancomponentOperateData = getComponent('maanshan/operateData') // 运营数据
 
 /* 溧水套系 */
 // 主屏部分
