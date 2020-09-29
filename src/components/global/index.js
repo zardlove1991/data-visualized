@@ -32,8 +32,12 @@ export const maanshancomponentOpinionAnalysis = getComponent('maanshan/opinionAn
 export const maanshancomponentCommunicationEffect = getComponent('maanshan/communicationEffect')
 export const maanshancomponentWorkcallInfoMap = getComponent('maanshan/workcallInfoMap') // 记者联线
 export const maanshancomponentNews = getComponent('maanshan/news') // 稿件排行
-export const maanshancomponentTask = getComponent('maanshan/task') // 选题
+export const maanshancomponentTask = getComponent('maanshan/task') // 选题展示
 export const maanshancomponentOperateData = getComponent('maanshan/operateData') // 运营数据
+export const maanshancomponentContentProduction = getComponent('maanshan/contentProduction') // 内容生产
+export const maanshancomponentHotTopic = getComponent('maanshan/hotTopic') // 全网热点
+export const maanshancomponentDataAnalysis = getComponent('maanshan/dataAnalysis') // 数据分析
+export const maanshancomponentNewsProduction = getComponent('maanshan/newsProduction') // 稿件生产
 
 /* 溧水套系 */
 // 主屏部分
