@@ -11,7 +11,7 @@
       >
         <div 
           class="list-icon"
-          :class="{'bgback': v.audit_status !== '1', 'bgpass': v.audit_status === '1'}"
+          :class="{'bgback': v.audit_status == '2', 'bgpass': v.audit_status === '1', 'pending': v.audit_status == '0'}"
         ></div>
         <div class="list-title overhidden">{{v.title}}</div>
         <div class="list-user overhidden">{{v.project_user_name}}</div>
@@ -103,8 +103,8 @@ export default {
     margin-bottom: 0.97em;
     color: #ffffff;
     .list-icon {
-      width: 0.9em;
-      height: 0.74em;
+      width: 1.5em;
+      height: 0.625em;
       margin-right: 0.25em;
     }
     .bgpass {
@@ -113,6 +113,10 @@ export default {
     }
     .bgback {
       background: url('./assets/back.png') no-repeat center;
+      background-size: 100% 100%;
+    }
+    .pending {
+      background: url('./assets/pending.png') no-repeat center;
       background-size: 100% 100%;
     }
     .list-title {

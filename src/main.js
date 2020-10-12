@@ -14,6 +14,8 @@ import * as api from './servers/api' // 接口
 import mixins from '@/mixins'
 import './styles/index.scss'
 import filters from '@/utils/filter'
+import moment from 'moment'
+import 'moment/locale/zh-cn'
 
 // vue全局过滤器
 Object.keys(filters).forEach(key => {
@@ -21,6 +23,7 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.use(ElementUI)
+Vue.prototype.$moment = moment
 Vue.use(BaiduMap, {
   ak: 'MdXesfCPYcPLZ5FnH5k1RhdQ'
 })
