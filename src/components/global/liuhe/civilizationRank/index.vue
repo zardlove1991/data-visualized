@@ -19,7 +19,7 @@
       <div class="title-tab sys-flex">
         <div class="item">
           <div>
-            <h4>志愿服务总时长(时)</h4>
+            <h4>志愿者服务总时长(时)</h4>
             <p>{{timeTotalNum}}</p>
           </div>
         </div>
