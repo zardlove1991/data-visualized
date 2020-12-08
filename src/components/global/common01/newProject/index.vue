@@ -13,7 +13,7 @@
         </el-select>
       </div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title}" :style="{'animation-delay' : k/2+'s'}" @mouseenter="enter(k)" @mouseleave="leave(k)">
+        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :style="{'animation-delay' : k/2+'s'}" @mouseenter="enter(k)" @mouseleave="leave(k)">
           <div class="title common01-ft40 overhidden">{{v.title}}</div>
           <div class="hoverTitle" v-show="isShow == k">{{v.title}}</div>
           <div class="name overhidden common01-ft32">{{v.sort_name}}</div>
