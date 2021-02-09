@@ -39,7 +39,8 @@ export default {
       commentNum: 0,
       frequency: 60000,
       xAxisData: [],
-      seriesData: []
+      seriesData: [],
+      proportion: ''
     }
   },
   computed: {

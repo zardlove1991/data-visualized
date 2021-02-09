@@ -1,5 +1,5 @@
 <template>
-  <div class="lishui-contentproduction" id="lishui-contentproduction">
+  <div class="maanshan-contentproduction" id="maanshan-contentproduction">
     <div class="contentproduction-wrap">
       <div class="wrap-top sys-flex sys-flex-center">
         <div class="top-total sys-flex sys-flex-center">
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="bottom-right">
-          <chart :options="barOptions" :autoResize="true"></chart>
+          <chart :options="barOptions.data" :autoResize="true"></chart>
         </div>
       </div>
     </div>
@@ -46,93 +46,6 @@ export default {
   name: 'contentProduction',
   data () {
     return {
-      barOptions: {
-        legend: {
-          itemWidth: 60,
-          itemHeight: 30,
-          itemGap: 50,
-          data: [{
-            name: '已通过',
-            textStyle: {
-              color: '#fff',
-              fontSize: 30
-            }
-          }, {
-            name: '已过审',
-            textStyle: {
-              color: '#fff',
-              fontSize: 30
-            }
-          }]
-        },
-        xAxis: {
-          type: 'category',
-          data: ['文稿', '图集', '视频', '外链'],
-          axisLabel: {
-            interval: 0,
-            color: '#fff',
-            fontSize: 30,
-            fontWeight: 'bold',
-            margin: 15
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#4A6AA8'
-            }
-          }
-        },
-        yAxis: {
-          type: 'value',
-          axisLine: {
-            lineStyle: {
-              color: '#4A6AA8'
-            }
-          },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              width: 0.5,
-              opacity: 0.5,
-              type: 'dashed',
-              color: '#4A6AA8'
-            }
-          },
-          axisLabel: {
-            formatter: function () {
-              return ''
-            }
-          }
-        },
-        series: [{
-          type: 'bar',
-          name: '已通过',
-          stack: 'sum',
-          barWidth: 60,
-          itemStyle: {
-            normal: {
-              color: function (params) {
-                var colorList = ['#064DFF']
-                return colorList[params.dataIndex]
-              }
-            }
-          },
-          data: [70, 30, 50, 15]
-        }, {
-          type: 'bar',
-          name: '已过审',
-          stack: 'sum',
-          barWidth: 60,
-          itemStyle: {
-            normal: {
-              color: function (params) {
-                var colorList = ['#DC355C']
-                return colorList[params.dataIndex]
-              }
-            }
-          },
-          data: [25, 10, 20, 5]
-        }]
-      },
       testList: [0, 0, 0, 1, 5, 6, 8, 4],
       dateList: [{
         text: '日',
@@ -152,7 +65,108 @@ export default {
         num: '3'
       }],
       currentIndex: 0,
-      frequency: 25000
+      frequency: 25000,
+      proportion: ''
+    }
+  },
+  computed: {
+    barOptions () {
+      return {
+        data: {
+          legend: {
+            itemWidth: 60 * this.proportion,
+            itemHeight: 30 * this.proportion,
+            itemGap: 50 * this.proportion,
+            data: [{
+              name: '已通过',
+              textStyle: {
+                color: '#fff',
+                fontSize: 30 * this.proportion
+              }
+            }, {
+              name: '已过审',
+              textStyle: {
+                color: '#fff',
+                fontSize: 30 * this.proportion
+              }
+            }]
+          },
+          grid: {
+            left: this.proportion * 30,
+            right: this.proportion * 60,
+            top: this.proportion * 105,
+            bottom: this.proportion * 15,
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            data: ['文稿', '图集', '视频', '外链'],
+            axisLabel: {
+              interval: 0,
+              color: '#fff',
+              fontSize: 30 * this.proportion,
+              fontWeight: 'bold',
+              margin: 15
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#4A6AA8'
+              }
+            }
+          },
+          yAxis: {
+            type: 'value',
+            axisLine: {
+              lineStyle: {
+                color: '#4A6AA8'
+              }
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                width: 0.5,
+                opacity: 0.5,
+                type: 'dashed',
+                color: '#4A6AA8'
+              }
+            },
+            axisLabel: {
+              formatter: function () {
+                return ''
+              }
+            }
+          },
+          series: [{
+            type: 'bar',
+            name: '已通过',
+            stack: 'sum',
+            barWidth: 60 * this.proportion,
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  var colorList = ['#064DFF']
+                  return colorList[params.dataIndex]
+                }
+              }
+            },
+            data: [70, 30, 50, 15]
+          }, {
+            type: 'bar',
+            name: '已过审',
+            stack: 'sum',
+            barWidth: 60 * this.proportion,
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  var colorList = ['#DC355C']
+                  return colorList[params.dataIndex]
+                }
+              }
+            },
+            data: [25, 10, 20, 5]
+          }]
+        }
+      }
     }
   },
   components: {
@@ -161,7 +175,8 @@ export default {
   created () {
   },
   mounted () {
-    this.setFontsize('lishui-contentproduction')
+    this.proportion = this.getProportion('maanshan-contentproduction')
+    this.setFontsize('maanshan-contentproduction')
     setInterval(() => {
       this.currentIndex++
       if (this.currentIndex >= this.dateList.length) {
@@ -173,7 +188,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
-.lishui-contentproduction {
+.maanshan-contentproduction {
   width: 100%;
   height: 100%;
   padding: px2em(33px) px2em(26px) px2em(53px) px2em(50px);
