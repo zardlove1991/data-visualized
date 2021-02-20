@@ -140,7 +140,7 @@ export default {
             type: 'bar',
             name: '已通过',
             stack: 'sum',
-            barWidth: 60 * this.proportion,
+            barWidth: 120 * this.proportion,
             itemStyle: {
               normal: {
                 color: function (params) {
