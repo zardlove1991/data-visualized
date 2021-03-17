@@ -156,3 +156,12 @@ export const common01componentVideoList = getComponent('common01/videoList') // 
 export const common01componentYuhuaTitle = getComponent('common01/yuhuaTitle') // 雨花台区 标题
 export const common01componentReport2 = getComponent('common01/report2') // 雨花台区 报题
 export const common01componentTaskShow04 = getComponent('common01/taskShow04') // 雨花台区 任务
+
+export const common01componentContentPlan = getComponent('common01/contentPlan') // 山西 内容策划
+export const common01componentNewsGatherEdit = getComponent('common01/newsGatherEdit') // 山西 新闻采编
+export const common01componentPerformanceAppraisal = getComponent('common01/performanceAppraisal') // 山西 绩效考核
+export const common01componentSxTitle = getComponent('common01/sxTitle') // 山西 标题
+export const common01componentReporterConnection = getComponent('common01/reporterConnection') // 山西 记者连线
+export const common01componentReviewRelease = getComponent('common01/reviewRelease') // 山西 审核发布
+export const common01componentContentSpread = getComponent('common01/contentSpread') // 山西 内容传播
+export const common01componentOperationData = getComponent('common01/operationData') // 山西 运营数据
