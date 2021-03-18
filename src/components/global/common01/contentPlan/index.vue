@@ -68,7 +68,7 @@ export default {
             textStyle: {
               color: '#fff'
             },
-            fontSize: '26'
+            fontSize: 26
           }
         },
         yAxis: {
@@ -79,9 +79,9 @@ export default {
           }
         },
         grid: {
-          left: '4%',
-          right: '4%',
-          top: '0%'
+          left: 20,
+          right: 20,
+          top: 0
         },
         splitLine: {
           show: true
@@ -101,7 +101,6 @@ export default {
               color: '#2041ad',
               width: 5
             },
-            // color: '#133085',
             areaStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -143,9 +142,9 @@ export default {
           }
         },
         grid: {
-          left: '4%',
-          right: '4%',
-          top: '0%'
+          left: 20,
+          right: 20,
+          top: 0
         },
         splitLine: {
           show: true
@@ -188,15 +187,6 @@ export default {
         ]
       },
       barOptions2: {
-        // tooltip: {
-        //   trigger: 'axis',
-        //   axisPointer: {
-        //     type: 'cross',
-        //     label: {
-        //       backgroundColor: '#6a7985'
-        //     }
-        //   }
-        // },
         splitLine: {
           show: false
         },
@@ -218,10 +208,10 @@ export default {
           }
         },
         grid: {
-          left: '0%',
-          right: '4%',
-          bottom: '0%',
-          top: '20%',
+          left: 0,
+          right: 20,
+          bottom: 0,
+          top: 140,
           containLabel: true
         },
         xAxis: {
@@ -233,7 +223,7 @@ export default {
             textStyle: {
               color: '#fff'
             },
-            fontSize: '30'
+            fontSize: 30
           }
         },
         yAxis: {
@@ -242,7 +232,7 @@ export default {
             textStyle: {
               color: '#fff'
             },
-            fontSize: '30'
+            fontSize: 30
           },
           splitLine: {
             show: true,
@@ -256,13 +246,7 @@ export default {
           {
             name: '累计选题',
             type: 'line',
-            // stack: '总量',
-            // emphasis: {
-            //   focus: 'series'
-            // },
             data: [600, 850, 1000, 600, 550, 450, 310],
-            // color: '#827705',
-            // symbol: 'true',
             lineStyle: {
               color: '#ffe50c',
               width: 5
@@ -288,13 +272,7 @@ export default {
           {
             name: '累计完成',
             type: 'line',
-            // stack: '总量',
-            // areaStyle: {},
-            // emphasis: {
-            //   focus: 'series'
-            // },
             data: [279, 300, 201, 334, 290, 300, 210],
-            // color: '#01616f',
             lineStyle: {
               color: '#00f8e4',
               width: 5
@@ -323,6 +301,7 @@ export default {
   },
   mounted () {
     this.setFontsize('contentplan')
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
   },
   components: {
     chart: echarts
@@ -332,18 +311,20 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .contentplan {
-  width: 100%;
-  height: 100%;
-  padding: pxrem(58px) pxrem(50px) pxrem(53px) pxrem(50px);
+  width: pxrem(1920px);
+  height: pxrem(2160px);
+  padding: pxrem(55px) pxrem(50px);
   position: relative;
   background: #0b072d;
+  box-sizing: border-box;
   .contentplan-wrap {
     width: 100%;
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(220px) pxrem(126px) pxrem(0px);
+    padding: pxrem(198px) pxrem(115px) pxrem(0px);
     color: #fff;
+    box-sizing: border-box;
     .wrap-top {
       width: 100%;
       height: pxrem(750px);
@@ -351,10 +332,10 @@ export default {
       margin-bottom: pxrem(102px);
       .top_left{
         width: pxrem(750px);
-        height: 100%;
+        height: pxrem(750px);
         background: url("./assets/topBack.png") no-repeat center;
         background-size: 100% 100%;
-        padding: pxrem(50px);
+        padding: pxrem(50px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
           font-size: pxrem(44px);
@@ -364,7 +345,7 @@ export default {
           margin-bottom: pxrem(55px);
         }
         .total-num {
-          margin-bottom: pxrem(80px);
+          margin-bottom: pxrem(90px);
           .num-list {
             width: pxrem(80px);
             height: pxrem(75px);
@@ -391,15 +372,15 @@ export default {
           margin-bottom: pxrem(42px);
         }
         .jinri_echart{
-          height: pxrem(330px);
+          height: pxrem(300px);
         }
       }
       .top_right{
         width: pxrem(750px);
-        height: 100%;
+        height: pxrem(750px);
         background: url("./assets/topBack.png") no-repeat center;
         background-size: 100% 100%;
-        padding: pxrem(50px);
+        padding: pxrem(50px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
           font-size: pxrem(44px);
@@ -409,7 +390,7 @@ export default {
           margin-bottom: pxrem(55px);
         }
         .total-num {
-          margin-bottom: pxrem(80px);
+          margin-bottom: pxrem(90px);
           .num-list {
             width: pxrem(80px);
             height: pxrem(75px);
@@ -436,7 +417,7 @@ export default {
           margin-bottom: pxrem(42px);
         }
         .jinri_echart{
-          height: pxrem(330px);
+          height: pxrem(300px);
         }
       }
     }
