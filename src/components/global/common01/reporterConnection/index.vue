@@ -223,7 +223,7 @@ export default {
   height: 100%;
   // padding: pxrem(20px);
   padding-bottom: pxrem(53px);
-  background: #030520;
+  background: #0b072d;
   .reporter-map-wrap {
     width: 100%;
     height: 100%;

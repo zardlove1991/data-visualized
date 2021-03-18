@@ -22,7 +22,7 @@ export default {
 .common01-sxtitle {
   width: 100%;
   height: 100%;
-  background: #0b1263 url('./assets/titlebg.png');
+  background: #0b072d url('./assets/titlebg.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   position: absolute;

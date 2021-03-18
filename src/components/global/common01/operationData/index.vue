@@ -55,7 +55,7 @@ export default {
   height: 100%;
   padding: pxrem(58px) pxrem(50px) pxrem(53px) pxrem(50px);
   position: relative;
-  background: #030520;
+  background: #0b072d;
   .operationData-wrap {
     width: 100%;
     height: 100%;
