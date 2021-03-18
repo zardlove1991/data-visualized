@@ -58,9 +58,6 @@ export default {
   data () {
     return {
       barOptions1: {
-        // tooltip: {
-        //   trigger: 'item'
-        // },
         legend: {
           icon: 'rect',
           data: ['文稿', '图集', '视频', '专题'],
@@ -94,7 +91,6 @@ export default {
           }
         },
         grid: {
-          // bottom: '60%',
           containLabel: true
         },
         color: ['#0d5ee4', '#01c0ff', '#e8854a', '#791fe2'],
@@ -122,7 +118,7 @@ export default {
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: '46',
+                  fontSize: 46,
                   color: '#fff',
                   borderWidth: 5,
                   fontWeight: 'bold'
@@ -152,7 +148,7 @@ export default {
             textStyle: {
               color: '#ccc'
             },
-            fontSize: '40'
+            fontSize: 40
           }
         },
         barWidth: 90,
@@ -173,10 +169,6 @@ export default {
         series: [{
           data: [12, 20, 16, 52],
           type: 'bar',
-          // showBackground: true,
-          // backgroundStyle: {
-          //   color: 'rgba(180, 180, 180, 0.2)'
-          // },
           itemStyle: {
             normal: {
               label: {
@@ -199,6 +191,7 @@ export default {
   },
   mounted () {
     this.setFontsize('newsgatheredit')
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
   },
   components: {
     chart: echarts
@@ -208,18 +201,20 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .newsgatheredit {
-  width: 100%;
-  height: 100%;
-  padding: pxrem(58px) pxrem(50px) pxrem(53px) pxrem(50px);
+  width: pxrem(1920px);
+  height: pxrem(2160px);
+  padding: pxrem(55px) pxrem(50px);
   position: relative;
   background: #0b072d;
+  box-sizing: border-box;
   .newsgatheredit-wrap {
     width: 100%;
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(198px) pxrem(126px) pxrem(0px);
+    padding: pxrem(198px) pxrem(115px) pxrem(0px);
     color: #fff;
+    box-sizing: border-box;
     .top-total{
       width: 100%;
       height: pxrem(180px);
@@ -252,7 +247,7 @@ export default {
       }
     }
     .new_add{
-      margin-top: 0.97rem;
+      margin-top: pxrem(97px);
       .new_div{
         width: pxrem(500px);
         height: pxrem(500px);
