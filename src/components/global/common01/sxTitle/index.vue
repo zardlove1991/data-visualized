@@ -23,7 +23,7 @@ export default {
   width: 100%;
   height: 100%;
   background: #0b1263 url('./assets/titlebg.png');
-  background-size: 100%;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   position: absolute;
   top: 0rem;
