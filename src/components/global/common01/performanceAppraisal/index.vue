@@ -191,6 +191,7 @@ export default {
   name: 'performanceAppraisal',
   mounted () {
     this.setFontsize('performanceAppraisal')
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
     this.scrollImgLeft()
   },
   methods: {
@@ -221,18 +222,20 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .performanceAppraisal {
-  width: 100%;
-  height: 100%;
-  padding: pxrem(58px) pxrem(50px) pxrem(53px) pxrem(50px);
+  width: pxrem(1920px);
+  height: pxrem(1080px);
+  padding: pxrem(55px) pxrem(25px);
   position: relative;
   background: #0b072d;
+  box-sizing: border-box;
   .performanceAppraisal-wrap {
     width: 100%;
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(185px) pxrem(126px) pxrem(0px);
+    padding: pxrem(198px) pxrem(57px) pxrem(0px);
     color: #fff;
+    box-sizing: border-box;
     .scroll_div{
       height: pxrem(690px);
       overflow: hidden;
@@ -244,23 +247,23 @@ export default {
           height: pxrem(690px);
           display: inline-block;
           .item{
-            width: pxrem(750px);
+            width: pxrem(375px);
             height: 100%;
             background: url("./assets/topBack.png") no-repeat center;
             background-size: 100% 100%;
             box-sizing: border-box;
-            margin-right: pxrem(100px);
+            margin-right: pxrem(50px);
             display: inline-block;
-            padding: pxrem(50px) pxrem(75px) pxrem(0px);
+            padding: pxrem(50px) pxrem(37px) pxrem(0px);
             .item_top{
               height: pxrem(190px);
-              padding-left: pxrem(50px);
+              padding-left: pxrem(25px);
               .touxiang{
-                width: pxrem(110px);
+                width: pxrem(55px);
                 height: pxrem(190px);
                 float: left;
                 img{
-                  width: pxrem(110px);
+                  width: pxrem(55px);
                   height: pxrem(110px);
                   vertical-align: middle;
                 }
@@ -271,7 +274,7 @@ export default {
                 }
               }
               .top_right{
-                width: pxrem(320px);
+                // width: pxrem(160px);
                 height: pxrem(190px);
                 float: right;
                 padding-top: pxrem(20px);
@@ -286,7 +289,7 @@ export default {
                     font-style: normal;
                     font-size: pxrem(48px);
                     color: #13fee3;
-                    margin-left: pxrem(100px);
+                    margin-left: pxrem(25px);
                   }
                 }
                 .dev{
@@ -334,23 +337,23 @@ export default {
           height: pxrem(690px);
           display: inline-block;
           .item{
-            width: pxrem(750px);
+            width: pxrem(375px);
             height: 100%;
             background: url("./assets/topBack.png") no-repeat center;
             background-size: 100% 100%;
             box-sizing: border-box;
-            margin-right: pxrem(100px);
+            margin-right: pxrem(50px);
             display: inline-block;
-            padding: pxrem(50px) pxrem(75px) pxrem(0px);
+            padding: pxrem(50px) pxrem(37px) pxrem(0px);
             .item_top{
               height: pxrem(190px);
-              padding-left: pxrem(50px);
+              padding-left: pxrem(25px);
               .touxiang{
-                width: pxrem(110px);
+                width: pxrem(55px);
                 height: pxrem(190px);
                 float: left;
                 img{
-                  width: pxrem(110px);
+                  width: pxrem(55px);
                   height: pxrem(110px);
                   vertical-align: middle;
                 }
@@ -361,7 +364,7 @@ export default {
                 }
               }
               .top_right{
-                width: pxrem(320px);
+                // width: pxrem(160px);
                 height: pxrem(190px);
                 float: right;
                 padding-top: pxrem(20px);
@@ -376,7 +379,7 @@ export default {
                     font-style: normal;
                     font-size: pxrem(48px);
                     color: #13fee3;
-                    margin-left: pxrem(100px);
+                    margin-left: pxrem(25px);
                   }
                 }
                 .dev{

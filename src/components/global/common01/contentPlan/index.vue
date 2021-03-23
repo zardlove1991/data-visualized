@@ -46,10 +46,13 @@ export default {
   name: 'contentPlan',
   data () {
     return {
+      topic_today_amount: [],
+      topic_today_finish_amount: [],
       barOptions: {
         xAxis: {
           type: 'category',
           boundaryGap: false,
+          data: [],
           axisLabel: {
             show: true,
             textStyle: {
@@ -96,16 +99,7 @@ export default {
                 ])
               }
             },
-            data: [
-              ['02', 150],
-              ['03', 120],
-              ['04', 230],
-              ['05', 180],
-              ['06', 100],
-              ['07', 130],
-              ['08', 160],
-              ['09', 150]
-            ]
+            data: [150, 120, 230, 180, 100, 130, 160, 150]
           }
         ]
       },
@@ -113,6 +107,7 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
+          data: ['02', '03', '04', '05', '06', '07', '08', '09'],
           axisLabel: {
             show: true,
             textStyle: {
@@ -160,16 +155,7 @@ export default {
                 ])
               }
             },
-            data: [
-              ['02', 150],
-              ['03', 120],
-              ['04', 230],
-              ['05', 180],
-              ['06', 100],
-              ['07', 130],
-              ['08', 160],
-              ['09', 150]
-            ]
+            data: [150, 120, 230, 180, 100, 130, 160, 150]
           }
         ]
       },
@@ -196,7 +182,7 @@ export default {
         },
         grid: {
           left: 0,
-          right: 20,
+          right: 40,
           bottom: 0,
           top: 140,
           containLabel: true
@@ -204,7 +190,7 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['10.12', '10.13', '10.14', '10.15', '10.16', '10.16', '10.16'],
+          data: [],
           axisLabel: {
             show: true,
             textStyle: {
@@ -283,13 +269,12 @@ export default {
             }
           }
         ]
-      },
-      topic_today_amount: [],
-      topic_today_finish_amount: []
+      }
     }
   },
   created () {
     this.contentPlanning()
+    this.initData()
   },
   methods: {
     contentPlanning () {
@@ -317,6 +302,34 @@ export default {
           }
         }
       })
+    },
+    funGetDateStr (pCount) {
+      var dd = new Date()
+      dd.setDate(dd.getDate() + pCount)
+      var d = dd.getDate()
+      return d < 10 ? '0' + d : d
+    },
+    funGetDateStr1 (pCount) {
+      var dd = new Date()
+      dd.setDate(dd.getDate() + pCount)
+      var m = dd.getMonth() + 1
+      var d = dd.getDate()
+      return (m < 10 ? '0' + m : m) + '.' + (d < 10 ? '0' + d : d)
+    },
+    initData () {
+      var dateList = []
+      for (var i = -7; i < 1; i++) {
+        let tempData = this.funGetDateStr(i).toString()
+        dateList.push(tempData)
+      }
+      var dateList1 = []
+      for (var j = -6; j < 1; j++) {
+        let tempData1 = this.funGetDateStr1(j).toString()
+        dateList1.push(tempData1)
+      }
+      this.barOptions.xAxis.data = dateList
+      this.barOptions1.xAxis.data = dateList
+      this.barOptions2.xAxis.data = dateList1
     }
   },
   mounted () {
@@ -333,8 +346,8 @@ export default {
 @import "~@/styles/index.scss";
 .contentplan {
   width: pxrem(1920px);
-  height: pxrem(2160px);
-  padding: pxrem(55px) pxrem(50px);
+  height: pxrem(1080px);
+  padding: pxrem(27px) pxrem(50px);
   position: relative;
   background: #0b072d;
   box-sizing: border-box;
@@ -343,33 +356,33 @@ export default {
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(198px) pxrem(115px) pxrem(0px);
+    padding: pxrem(99px) pxrem(115px) pxrem(0px);
     color: #fff;
     box-sizing: border-box;
     .wrap-top {
       width: 100%;
-      height: pxrem(750px);
+      height: pxrem(375px);
       background-size: 100% 100%;
-      margin-bottom: pxrem(102px);
+      margin-bottom: pxrem(51px);
       .top_left{
         width: pxrem(750px);
-        height: pxrem(750px);
+        height: pxrem(375px);
         background: url("./assets/topBack.png") no-repeat center;
         background-size: 100% 100%;
-        padding: pxrem(50px) pxrem(50px) pxrem(0px) pxrem(50px);
+        padding: pxrem(25px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
           font-size: pxrem(44px);
           font-weight: bold;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(55px);
+          margin-bottom: pxrem(24px);
         }
         .total-num {
-          margin-bottom: pxrem(90px);
+          margin-bottom: pxrem(45px);
           .num-list {
             width: pxrem(80px);
-            height: pxrem(75px);
+            height: pxrem(37px);
             background: url('./assets/numBack.png') no-repeat center;
             margin-right: pxrem(8px);
             &:last-of-type {
@@ -390,31 +403,31 @@ export default {
           font-weight: 500;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(42px);
+          margin-bottom: pxrem(16px);
         }
         .jinri_echart{
-          height: pxrem(300px);
+          height: pxrem(150px);
         }
       }
       .top_right{
         width: pxrem(750px);
-        height: pxrem(750px);
+        height: pxrem(375px);
         background: url("./assets/topBack.png") no-repeat center;
         background-size: 100% 100%;
-        padding: pxrem(50px) pxrem(50px) pxrem(0px) pxrem(50px);
+        padding: pxrem(25px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
           font-size: pxrem(44px);
           font-weight: bold;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(55px);
+          margin-bottom: pxrem(24px);
         }
         .total-num {
-          margin-bottom: pxrem(90px);
+          margin-bottom: pxrem(45px);
           .num-list {
             width: pxrem(80px);
-            height: pxrem(75px);
+            height: pxrem(37px);
             background: url('./assets/numBack.png') no-repeat center;
             margin-right: pxrem(8px);
             &:last-of-type {
@@ -435,24 +448,24 @@ export default {
           font-weight: 500;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(42px);
+          margin-bottom: pxrem(16px);
         }
         .jinri_echart{
-          height: pxrem(300px);
+          height: pxrem(150px);
         }
       }
     }
     .wrap-bottom{
-      margin-top: pxrem(125px);
+      margin-top: pxrem(62px);
       .leiji{
         width: pxrem(350px);
-        height: pxrem(88px);
+        height: pxrem(44px);
         background: url("./assets/leijiBg.png") no-repeat;
         background-size: 100% 100%;
-        margin-bottom: pxrem(38px);
+        margin-bottom: pxrem(19px);
       }
       .leiji_echart{
-        height: pxrem(700px);
+        height: pxrem(350px);
       }
     }
   }
