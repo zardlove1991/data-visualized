@@ -5,14 +5,7 @@
         <div class="top_left">
           <div class="top_title">今日选题</div>
           <div class="total-num sys-flex sys-flex-center">
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>0</span></div>
-            <div class="num-list hg-flex"><span>2</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>9</span></div>
+            <div class="num-list hg-flex"  v-for="(v, k) in topic_today_amount" :key="k"><span>{{v}}</span></div>
           </div>
           <div class="pic_title">近7日走势</div>
           <div class="jinri_echart">
@@ -22,14 +15,7 @@
         <div class="top_right">
           <div class="top_title">今日完成</div>
           <div class="total-num sys-flex sys-flex-center">
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>0</span></div>
-            <div class="num-list hg-flex"><span>2</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>9</span></div>
+            <div class="num-list hg-flex"  v-for="(v, k) in topic_today_finish_amount" :key="k"><span>{{v}}</span></div>
           </div>
           <div class="pic_title">近7日走势</div>
           <div class="jinri_echart">
@@ -47,6 +33,7 @@
   </div>
 </template>
 <script>
+import { contentPlanning } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
@@ -296,12 +283,46 @@ export default {
             }
           }
         ]
-      }
+      },
+      topic_today_amount: [],
+      topic_today_finish_amount: []
+    }
+  },
+  created () {
+    this.contentPlanning()
+  },
+  methods: {
+    contentPlanning () {
+      contentPlanning().then(res => {
+        if (!res.data.error_code) {
+          // 今日选题
+          let topicVal = res.data.result.topic_today_amount.toString()
+          let topicValLength = topicVal.length
+          let chaTopicValLength = 8 - topicValLength
+          for (let i = 0; i < chaTopicValLength; i++) {
+            this.topic_today_amount.push(0)
+          }
+          for (let j = 0; j < topicValLength; j++) {
+            this.topic_today_amount.push(topicVal[j])
+          }
+          // 今日完成
+          let finishVal = res.data.result.topic_today_finish_amount.toString()
+          let finishValLength = finishVal.length
+          let chaFinishValLength = 8 - finishValLength
+          for (let i = 0; i < chaFinishValLength; i++) {
+            this.topic_today_finish_amount.push(0)
+          }
+          for (let j = 0; j < finishValLength; j++) {
+            this.topic_today_finish_amount.push(finishVal[j])
+          }
+        }
+      })
     }
   },
   mounted () {
     this.setFontsize('contentplan')
     document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
+    console.log(document.documentElement.getBoundingClientRect().width)
   },
   components: {
     chart: echarts

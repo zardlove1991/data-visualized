@@ -214,3 +214,15 @@ export const getMicroOperationYesterday = () => createAPI(`${httpsbaseUrl}/Apida
 // 视频列表
 export const getM2OPlusPublishVideo = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?
 column_id=16&orders=order_id,DESC`)
+// 山西内容策划
+export const contentPlanning = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/contentPlanning`)
+// 山西运营数据
+export const operationalData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/operationalData`)
+// 山西新闻采编
+export const newsPro = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/newsPro`)
+// 山西审核发布
+export const waiting = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/waiting`)
+// 山西内容传播
+export const contentDistribution = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/contentDistribution`)
+// 山西绩效考核
+export const performanceAppraisal = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/performanceAppraisal`)
