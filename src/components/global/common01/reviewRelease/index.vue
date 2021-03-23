@@ -5,12 +5,12 @@
         <div class="num_div sys-flex sys-flex-center flex-justify-between">
           <div class="y_sh sys-flex sys-flex-center">
             <div class="top_title">已审核:</div>
-            <div class="number">165,305</div>
+            <div class="number">{{audited_publish_amount}}</div>
           </div>
           <div class="connect_div"></div>
           <div class="n_sh sys-flex sys-flex-center">
             <div class="top_title">待审核:</div>
-            <div class="number">165,305</div>
+            <div class="number">{{waiting_publish_amount}}</div>
           </div>
         </div>
         <div class="shenhe_echart">
@@ -21,12 +21,12 @@
         <div class="num_div sys-flex sys-flex-center flex-justify-between">
           <div class="y_sh sys-flex sys-flex-center">
             <div class="top_title">已发布:</div>
-            <div class="number">32,305</div>
+            <div class="number">{{already_publish_amount}}</div>
           </div>
           <div class="connect_div"></div>
           <div class="n_sh sys-flex sys-flex-center">
             <div class="top_title">待发布:</div>
-            <div class="number">66,305</div>
+            <div class="number">{{announced_publish_amount}}</div>
           </div>
         </div>
         <div class="fabu_echart">
@@ -37,6 +37,7 @@
   </div>
 </template>
 <script>
+import { waiting } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
@@ -49,6 +50,10 @@ export default {
   name: 'reviewRelease',
   data () {
     return {
+      audited_publish_amount: '',
+      waiting_publish_amount: '',
+      already_publish_amount: '',
+      announced_publish_amount: '',
       barOptions1: {
         legend: {
           data: ['已审核', '待审核'],
@@ -59,7 +64,7 @@ export default {
           itemWidth: 40,
           itemHeight: 26,
           itemGap: 100,
-          padding: [0, 15, 0, 0],
+          padding: [5, 15, 0, 0],
           x: 'center',
           y: 'top',
           formatter: function (name) {
@@ -71,7 +76,7 @@ export default {
           left: '0%',
           right: '0%',
           bottom: '0%',
-          top: '20%',
+          top: '25%',
           containLabel: true
         },
         toolbox: {
@@ -161,7 +166,7 @@ export default {
           itemWidth: 40,
           itemHeight: 26,
           itemGap: 100,
-          padding: [0, 15, 0, 0],
+          padding: [5, 15, 0, 0],
           x: 'center',
           y: 'top',
           formatter: function (name) {
@@ -173,7 +178,7 @@ export default {
           left: '0%',
           right: '0%',
           bottom: '0%',
-          top: '20%',
+          top: '25%',
           containLabel: true
         },
         toolbox: {
@@ -255,8 +260,25 @@ export default {
       }
     }
   },
+  created () {
+    this.waiting()
+  },
   mounted () {
     this.setFontsize('reviewRelease')
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
+    console.log(document.documentElement.getBoundingClientRect().width)
+  },
+  methods: {
+    waiting () {
+      waiting().then(res => {
+        if (!res.data.error_code) {
+          this.audited_publish_amount = res.data.result.audited_publish_amount
+          this.waiting_publish_amount = res.data.result.waiting_publish_amount
+          this.already_publish_amount = res.data.result.already_publish_amount
+          this.announced_publish_amount = res.data.result.announced_publish_amount
+        }
+      })
+    }
   },
   components: {
     chart: echarts
@@ -266,9 +288,9 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .reviewRelease {
-  width: 100%;
-  height: 100%;
-  padding: pxrem(58px) pxrem(50px) pxrem(53px) pxrem(50px);
+  width: pxrem(1920px);
+  height: pxrem(1080px);
+  padding: pxrem(27px) pxrem(50px);
   position: relative;
   background: #0b072d;
   .reviewRelease-wrap {
@@ -276,15 +298,15 @@ export default {
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(220px) pxrem(126px) pxrem(0px);
+    padding: pxrem(99px) pxrem(115px) pxrem(0px);
     color: #fff;
     .wrap-top {
       width: 100%;
-      margin-bottom: pxrem(102px);
+      margin-bottom: pxrem(51px);
       .num_div{
         .y_sh{
           width: pxrem(740px);
-          height: pxrem(180px);
+          height: pxrem(90px);
           background: url('./assets/num_bg.png') no-repeat;
           background-size: 100% 100%;
           box-sizing: border-box;
@@ -302,13 +324,13 @@ export default {
         }
         .connect_div{
           width: pxrem(89px);
-          height: pxrem(102px);
+          height: pxrem(51px);
           background: url('./assets/connect_bg.png') no-repeat;
           background-size: 100% 100%;
         }
         .n_sh{
           width: pxrem(740px);
-          height: pxrem(180px);
+          height: pxrem(90px);
           background: url('./assets/num_bg.png') no-repeat;
           background-size: 100% 100%;
           box-sizing: border-box;
@@ -326,8 +348,8 @@ export default {
         }
       }
       .shenhe_echart{
-        height: pxrem(580px);
-        margin-top: pxrem(60px);
+        height: pxrem(290px);
+        margin-top: pxrem(55px);
       }
     }
     .wrap-bottom{
@@ -335,7 +357,7 @@ export default {
       .num_div{
         .y_sh{
           width: pxrem(740px);
-          height: pxrem(180px);
+          height: pxrem(90px);
           background: url('./assets/num_bg.png') no-repeat;
           background-size: 100% 100%;
           box-sizing: border-box;
@@ -353,13 +375,13 @@ export default {
         }
         .connect_div{
           width: pxrem(89px);
-          height: pxrem(102px);
+          height: pxrem(51px);
           background: url('./assets/connect_bg.png') no-repeat;
           background-size: 100% 100%;
         }
         .n_sh{
           width: pxrem(740px);
-          height: pxrem(180px);
+          height: pxrem(90px);
           background: url('./assets/num_bg.png') no-repeat;
           background-size: 100% 100%;
           box-sizing: border-box;
@@ -377,8 +399,8 @@ export default {
         }
       }
       .fabu_echart{
-        height: pxrem(580px);
-        margin-top: pxrem(60px);
+        height: pxrem(290px);
+        margin-top: pxrem(55px);
       }
     }
   }

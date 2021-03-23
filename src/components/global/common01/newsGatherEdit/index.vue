@@ -4,30 +4,21 @@
       <div class="top-total sys-flex sys-flex-center">
         <div class="total-text">内容总数：</div>
         <div class="total-num sys-flex sys-flex-center">
-          <div class="num-list hg-flex"><span class="zero">0</span></div>
-          <div class="num-list hg-flex"><span class="zero">0</span></div>
-          <div class="num-list hg-flex"><span class="zero">0</span></div>
-          <div class="num-list hg-flex"><span>1</span></div>
-          <div class="num-list hg-flex"><span>0</span></div>
-          <div class="num-list hg-flex"><span>2</span></div>
-          <div class="num-list hg-flex"><span>1</span></div>
-          <div class="num-list hg-flex"><span>9</span></div>
-          <div class="num-list hg-flex"><span>1</span></div>
-          <div class="num-list hg-flex"><span>9</span></div>
+          <div class="num-list hg-flex"  v-for="(v, k) in content_amount" :key="k"><span>{{v}}</span></div>
         </div>
       </div>
       <div class="new_add sys-flex sys-flex-center flex-justify-between">
         <div class="new_left new_div">
           <div class="title">今日新增</div>
-          <div class="num">625</div>
+          <div class="num">{{today_create_amount}}</div>
         </div>
         <div class="new_middle new_div">
           <div class="title">本周新增</div>
-          <div class="num">1,589</div>
+          <div class="num">{{week_create_amount}}</div>
         </div>
         <div class="new_right new_div">
           <div class="title">本月新增</div>
-          <div class="num">48,917</div>
+          <div class="num">{{month_create_amount}}</div>
         </div>
       </div>
       <div class="wrap-bottom">
@@ -45,6 +36,7 @@
   </div>
 </template>
 <script>
+import { newsPro } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
@@ -57,6 +49,10 @@ export default {
   name: 'newsGatherEdit',
   data () {
     return {
+      content_amount: [],
+      today_create_amount: '',
+      week_create_amount: '',
+      month_create_amount: '',
       barOptions1: {
         legend: {
           icon: 'rect',
@@ -70,25 +66,7 @@ export default {
           itemGap: 60,
           padding: [0, 15, 0, 0],
           x: 'center',
-          y: 'bottom',
-          formatter: function (name) {
-            var data = [
-              {value: 12, name: '文稿'},
-              {value: 20, name: '图集'},
-              {value: 16, name: '视频'},
-              {value: 52, name: '专题'}
-            ]
-            var total = 0
-            var tarValue
-            for (var i = 0, l = data.length; i < l; i++) {
-              total += data[i].value
-              if (data[i].name === name) {
-                tarValue = data[i].value
-              }
-            }
-            var p = (tarValue / total * 100).toFixed(0)
-            return ' ' + ' ' + name + ' ' + ' ' + p + '%'
-          }
+          y: 'bottom'
         },
         grid: {
           containLabel: true
@@ -112,7 +90,7 @@ export default {
                 show: false,
                 position: 'center',
                 formatter: function (data) { // 设置圆饼图中间文字排版
-                  return data.percent + '%\n\n' + data.name
+                  return data.percent.toFixed(0) + '%\n' + data.name
                 }
               },
               emphasis: {
@@ -128,12 +106,7 @@ export default {
             labelLine: {
               show: false
             },
-            data: [
-              {value: 12, name: '文稿'},
-              {value: 20, name: '图集'},
-              {value: 16, name: '视频'},
-              {value: 52, name: '专题'}
-            ]
+            data: []
           }
         ]
       },
@@ -163,11 +136,11 @@ export default {
           left: '0%',
           right: '0%',
           bottom: '0%',
-          top: '0%',
+          top: 30,
           containLabel: true
         },
         series: [{
-          data: [12, 20, 16, 52],
+          data: [],
           type: 'bar',
           itemStyle: {
             normal: {
@@ -193,6 +166,51 @@ export default {
     this.setFontsize('newsgatheredit')
     document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
   },
+  created () {
+    this.newsPro()
+  },
+  methods: {
+    newsPro () {
+      newsPro().then(res => {
+        if (!res.data.error_code) {
+          // 总内容
+          // console.log(res.data);
+          let allVal = res.data.result.content_amount.toString()
+          let allValLength = allVal.length
+          let chaAllValLength = 10 - allValLength
+          for (let i = 0; i < chaAllValLength; i++) {
+            this.content_amount.push(0)
+          }
+          for (let j = 0; j < allValLength; j++) {
+            this.content_amount.push(allVal[j])
+          }
+          this.today_create_amount = res.data.result.today_create_amount
+          this.week_create_amount = res.data.result.week_create_amount
+          this.month_create_amount = res.data.result.month_create_amount
+          let articleSum = res.data.result.publish_num.article
+          let gallerySum = res.data.result.publish_num.gallery
+          let videoSum = res.data.result.publish_num.video
+          let topicSum = res.data.result.publish_num.topic
+          this.barOptions1.series[0].data.push({value: articleSum, name: '文稿'}, {value: gallerySum, name: '图集'}, {value: videoSum, name: '视频'}, {value: topicSum, name: '专题'})
+          this.barOptions2.series[0].data.push(articleSum, gallerySum, videoSum, topicSum)
+          this.barOptions1.legend.formatter = function (name) {
+            var data = []
+            data.push({value: articleSum, name: '文稿'}, {value: gallerySum, name: '图集'}, {value: videoSum, name: '视频'}, {value: topicSum, name: '专题'})
+            var total = 0
+            var tarValue
+            for (var i = 0, l = data.length; i < l; i++) {
+              total += data[i].value
+              if (data[i].name === name) {
+                tarValue = data[i].value
+              }
+            }
+            var p = (tarValue / total * 100).toFixed(0)
+            return ' ' + ' ' + name + ' ' + ' ' + p + '%'
+          }
+        }
+      })
+    }
+  },
   components: {
     chart: echarts
   }
@@ -202,8 +220,8 @@ export default {
 @import "~@/styles/index.scss";
 .newsgatheredit {
   width: pxrem(1920px);
-  height: pxrem(2160px);
-  padding: pxrem(55px) pxrem(50px);
+  height: pxrem(1080px);
+  padding: pxrem(27px) pxrem(50px);
   position: relative;
   background: #0b072d;
   box-sizing: border-box;
@@ -212,12 +230,12 @@ export default {
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(198px) pxrem(115px) pxrem(0px);
+    padding: pxrem(99px) pxrem(115px) pxrem(0px);
     color: #fff;
     box-sizing: border-box;
     .top-total{
       width: 100%;
-      height: pxrem(180px);
+      height: pxrem(90px);
       border: pxrem(1px) solid #0896fa;
       box-sizing: border-box;
       padding-left: pxrem(120px);
@@ -230,7 +248,7 @@ export default {
       .total-num {
         .num-list {
           width: pxrem(95px);
-          height: pxrem(110px);
+          height: pxrem(55px);
           background: url('./assets/numBack.png') no-repeat center;
           margin-right: pxrem(8px);
           &:last-of-type {
@@ -247,10 +265,10 @@ export default {
       }
     }
     .new_add{
-      margin-top: pxrem(97px);
+      margin-top: pxrem(48px);
       .new_div{
         width: pxrem(500px);
-        height: pxrem(500px);
+        height: pxrem(250px);
         background: rgba(0,152,248,0.08);
         box-sizing: border-box;
         padding-top: pxrem(50px);
@@ -263,7 +281,7 @@ export default {
         }
         .num{
           width: pxrem(374px);
-          height: pxrem(350px);
+          height: pxrem(175px);
           font-size: pxrem(64px);
           font-weight: bold;
           color: #00ffe2;
@@ -276,22 +294,22 @@ export default {
       }
     }
     .wrap-bottom{
-      margin-top: pxrem(125px);
+      margin-top: pxrem(62px);
       .type{
         width: pxrem(350px);
-        height: pxrem(88px);
+        height: pxrem(44px);
         background: url("./assets/typeBg.png") no-repeat;
         background-size: 100% 100%;
-        margin-bottom: pxrem(38px);
+        margin-bottom: pxrem(19px);
       }
       .echart_div{
         .echart_left{
           width: pxrem(700px);
-          height: pxrem(700px);
+          height: pxrem(350px);
         }
         .echart_right{
           width: pxrem(794px);
-          height: pxrem(700px);
+          height: pxrem(350px);
         }
       }
     }

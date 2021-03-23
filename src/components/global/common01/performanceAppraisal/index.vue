@@ -4,177 +4,37 @@
       <div id="scroll_div" class="scroll_div">
         <div id="scroll_begin" class="scroll_begin">
             <ul>
-              <li class="item">
+              <li class="item" v-for="(v, k) in dataList" :key="k">
                 <div class="item_top">
                   <div class="touxiang">
                     <img src="./assets/head.png"/>
-                    <p class="user_name">陈小1</p>
+                    <p class="user_name">{{v.userName}}</p>
                   </div>
                   <div class="top_right">
                     <div class="pro right_div">
-                      生产量<i>52</i>
+                      生产量<i>{{v.total_amount}}</i>
                     </div>
                     <div class="dev right_div">
-                      发布量<i>37</i>
+                      发布量<i>{{v.total_publish_amount}}</i>
                     </div>
                   </div>
                 </div>
                 <div class="split_line"></div>
                 <div class="item_bottom">
                   <div class="click bottom_div">
-                    <p class="num">10,230</p>
+                    <p class="num">{{v.total_click_amount}}</p>
                     <p class="tit">总点击量</p>
                   </div>
                   <div class="comment bottom_div">
-                    <p class="num">3,125</p>
+                    <p class="num">{{v.total_forward_amount}}</p>
                     <p class="tit">总评论量</p>
                   </div>
                   <div class="zan bottom_div">
-                    <p class="num">7,265</p>
+                    <p class="num">{{v.total_like_amount}}</p>
                     <p class="tit">总点赞量</p>
                   </div>
                   <div class="share bottom_div">
-                    <p class="num">1,102</p>
-                    <p class="tit">总分享量</p>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="item_top">
-                  <div class="touxiang">
-                    <img src="./assets/head.png"/>
-                    <p class="user_name">陈小2</p>
-                  </div>
-                  <div class="top_right">
-                    <div class="pro right_div">
-                      生产量<i>52</i>
-                    </div>
-                    <div class="dev right_div">
-                      发布量<i>37</i>
-                    </div>
-                  </div>
-                </div>
-                <div class="split_line"></div>
-                <div class="item_bottom">
-                  <div class="click bottom_div">
-                    <p class="num">10,230</p>
-                    <p class="tit">总点击量</p>
-                  </div>
-                  <div class="comment bottom_div">
-                    <p class="num">3,125</p>
-                    <p class="tit">总评论量</p>
-                  </div>
-                  <div class="zan bottom_div">
-                    <p class="num">7,265</p>
-                    <p class="tit">总点赞量</p>
-                  </div>
-                  <div class="share bottom_div">
-                    <p class="num">1,102</p>
-                    <p class="tit">总分享量</p>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="item_top">
-                  <div class="touxiang">
-                    <img src="./assets/head.png"/>
-                    <p class="user_name">陈小3</p>
-                  </div>
-                  <div class="top_right">
-                    <div class="pro right_div">
-                      生产量<i>52</i>
-                    </div>
-                    <div class="dev right_div">
-                      发布量<i>37</i>
-                    </div>
-                  </div>
-                </div>
-                <div class="split_line"></div>
-                <div class="item_bottom">
-                  <div class="click bottom_div">
-                    <p class="num">10,230</p>
-                    <p class="tit">总点击量</p>
-                  </div>
-                  <div class="comment bottom_div">
-                    <p class="num">3,125</p>
-                    <p class="tit">总评论量</p>
-                  </div>
-                  <div class="zan bottom_div">
-                    <p class="num">7,265</p>
-                    <p class="tit">总点赞量</p>
-                  </div>
-                  <div class="share bottom_div">
-                    <p class="num">1,102</p>
-                    <p class="tit">总分享量</p>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="item_top">
-                  <div class="touxiang">
-                    <img src="./assets/head.png"/>
-                    <p class="user_name">陈小4</p>
-                  </div>
-                  <div class="top_right">
-                    <div class="pro right_div">
-                      生产量<i>52</i>
-                    </div>
-                    <div class="dev right_div">
-                      发布量<i>37</i>
-                    </div>
-                  </div>
-                </div>
-                <div class="split_line"></div>
-                <div class="item_bottom">
-                  <div class="click bottom_div">
-                    <p class="num">10,230</p>
-                    <p class="tit">总点击量</p>
-                  </div>
-                  <div class="comment bottom_div">
-                    <p class="num">3,125</p>
-                    <p class="tit">总评论量</p>
-                  </div>
-                  <div class="zan bottom_div">
-                    <p class="num">7,265</p>
-                    <p class="tit">总点赞量</p>
-                  </div>
-                  <div class="share bottom_div">
-                    <p class="num">1,102</p>
-                    <p class="tit">总分享量</p>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="item_top">
-                  <div class="touxiang">
-                    <img src="./assets/head.png"/>
-                    <p class="user_name">陈小5</p>
-                  </div>
-                  <div class="top_right">
-                    <div class="pro right_div">
-                      生产量<i>52</i>
-                    </div>
-                    <div class="dev right_div">
-                      发布量<i>37</i>
-                    </div>
-                  </div>
-                </div>
-                <div class="split_line"></div>
-                <div class="item_bottom">
-                  <div class="click bottom_div">
-                    <p class="num">10,230</p>
-                    <p class="tit">总点击量</p>
-                  </div>
-                  <div class="comment bottom_div">
-                    <p class="num">3,125</p>
-                    <p class="tit">总评论量</p>
-                  </div>
-                  <div class="zan bottom_div">
-                    <p class="num">7,265</p>
-                    <p class="tit">总点赞量</p>
-                  </div>
-                  <div class="share bottom_div">
-                    <p class="num">1,102</p>
+                    <p class="num">{{v.total_share_amount}}</p>
                     <p class="tit">总分享量</p>
                   </div>
                 </div>
@@ -187,14 +47,66 @@
   </div>
 </template>
 <script>
+import { performanceAppraisal } from '@/servers/interface'
 export default {
   name: 'performanceAppraisal',
+  data () {
+    return {
+      dataList: []
+    }
+  },
+  created () {
+    this.performanceAppraisal()
+  },
   mounted () {
     this.setFontsize('performanceAppraisal')
     document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
-    this.scrollImgLeft()
   },
   methods: {
+    performanceAppraisal () {
+      performanceAppraisal().then(res => {
+        if (!res.data.error_code) {
+          // let topicVal = res.data.result.topic_today_amount.toString()
+          this.dataList.push({
+            userImg: './assets/head.png',
+            userName: '陈小依',
+            total_amount: res.data.result.total_amount,
+            total_publish_amount: res.data.result.total_publish_amount,
+            total_click_amount: res.data.result.total_click_amount,
+            total_forward_amount: res.data.result.total_forward_amount,
+            total_like_amount: res.data.result.total_like_amount,
+            total_share_amount: res.data.result.total_share_amount
+          }, {
+            userImg: './assets/head.png',
+            userName: '梁苗苗',
+            total_amount: res.data.result.total_amount,
+            total_publish_amount: res.data.result.total_publish_amount,
+            total_click_amount: res.data.result.total_click_amount,
+            total_forward_amount: res.data.result.total_forward_amount,
+            total_like_amount: res.data.result.total_like_amount,
+            total_share_amount: res.data.result.total_share_amount
+          }, {
+            userImg: './assets/head.png',
+            userName: '葛中流',
+            total_amount: res.data.result.total_amount,
+            total_publish_amount: res.data.result.total_publish_amount,
+            total_click_amount: res.data.result.total_click_amount,
+            total_forward_amount: res.data.result.total_forward_amount,
+            total_like_amount: res.data.result.total_like_amount,
+            total_share_amount: res.data.result.total_share_amount
+          }, {
+            userImg: './assets/head.png',
+            userName: '洛小天',
+            total_amount: res.data.result.total_amount,
+            total_publish_amount: res.data.result.total_publish_amount,
+            total_click_amount: res.data.result.total_click_amount,
+            total_forward_amount: res.data.result.total_forward_amount,
+            total_like_amount: res.data.result.total_like_amount,
+            total_share_amount: res.data.result.total_share_amount
+          })
+        }
+      })
+    },
     scrollImgLeft () {
       var speed = 30
       var scrollBegin = document.getElementById('scroll_begin')
@@ -215,6 +127,14 @@ export default {
       scrollDiv.οnmοuseοut = function () {
         MyMar = setInterval(Marquee, speed)
       }
+    }
+  },
+  watch: {
+    dataList: function () {
+      var _this = this
+      _this.$nextTick(function () {
+        this.scrollImgLeft()
+      })
     }
   }
 }
@@ -257,7 +177,7 @@ export default {
             padding: pxrem(50px) pxrem(37px) pxrem(0px);
             .item_top{
               height: pxrem(190px);
-              padding-left: pxrem(25px);
+              // padding-left: pxrem(25px);
               .touxiang{
                 width: pxrem(55px);
                 height: pxrem(190px);
@@ -271,10 +191,11 @@ export default {
                   font-size: pxrem(32px);
                   color: #fff;
                   margin-top: pxrem(28px);
+                  text-align: center;
                 }
               }
               .top_right{
-                // width: pxrem(160px);
+                width: pxrem(160px);
                 height: pxrem(190px);
                 float: right;
                 padding-top: pxrem(20px);
@@ -347,7 +268,7 @@ export default {
             padding: pxrem(50px) pxrem(37px) pxrem(0px);
             .item_top{
               height: pxrem(190px);
-              padding-left: pxrem(25px);
+              // padding-left: pxrem(25px);
               .touxiang{
                 width: pxrem(55px);
                 height: pxrem(190px);
@@ -361,10 +282,11 @@ export default {
                   font-size: pxrem(32px);
                   color: #fff;
                   margin-top: pxrem(28px);
+                  text-align: center;
                 }
               }
               .top_right{
-                // width: pxrem(160px);
+                width: pxrem(160px);
                 height: pxrem(190px);
                 float: right;
                 padding-top: pxrem(20px);

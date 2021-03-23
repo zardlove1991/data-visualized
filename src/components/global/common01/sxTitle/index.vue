@@ -13,6 +13,7 @@ export default {
   },
   mounted () {
     this.setFontsize('common01-sxtitle')
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
   }
 }
 </script>
@@ -20,8 +21,8 @@ export default {
 <style lang="scss" scoped>
 @import "src/styles/index.scss";
 .common01-sxtitle {
-  width: 100%;
-  height: 100%;
+  width: 19.2rem;
+  height: 10.8rem;
   background: #0b072d url('./assets/titlebg.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
