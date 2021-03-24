@@ -247,7 +247,6 @@ export default {
       var _this = this
       _this.$nextTick(function () {
         // this.scrollImgLeft()
-        debugger
         let swiper = this.$refs.mySwiper.swiper
         // swiper.autoplay.start()
         swiper.init()
