@@ -59,11 +59,11 @@ export default {
           data: ['文稿', '图集', '视频', '专题'],
           textStyle: {
             color: '#fff',
-            fontSize: 40
+            fontSize: 34
           },
-          itemWidth: 34,
-          itemHeight: 26,
-          itemGap: 60,
+          itemWidth: 40,
+          itemHeight: 14,
+          itemGap: 20,
           padding: [0, 15, 0, 0],
           x: 'center',
           y: 'bottom'
@@ -96,7 +96,7 @@ export default {
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: 46,
+                  fontSize: 40,
                   color: '#fff',
                   borderWidth: 5,
                   fontWeight: 'bold'
@@ -113,7 +113,7 @@ export default {
       barOptions2: {
         xAxis: {
           type: 'category',
-          data: ['文稿', '图集', '视频', '外链'],
+          data: ['文稿', '图集', '视频', '专题'],
           axisLabel: {
             fontWeight: 'bold',
             show: true,
@@ -121,7 +121,7 @@ export default {
             textStyle: {
               color: '#ccc'
             },
-            fontSize: 40
+            fontSize: 34
           }
         },
         barWidth: 90,
@@ -240,10 +240,11 @@ export default {
       box-sizing: border-box;
       padding-left: pxrem(120px);
       .total-text {
-        font-size: pxrem(52px);
+        font-size: pxrem(50px);
         font-weight: 600;
         width: pxrem(280px);
         margin-right: pxrem(50px);
+        font-stretch: ultra-expanded;
       }
       .total-num {
         .num-list {
@@ -255,8 +256,9 @@ export default {
             margin-right: 0;
           }
           span {
-            font-size: pxrem(72px);
+            font-size: pxrem(50px);
             color: #00FFF6;
+            font-stretch: ultra-expanded;
           }
           span.zero{
             color: #719be2;
@@ -286,6 +288,7 @@ export default {
           font-weight: bold;
           color: #00ffe2;
           background: url("./assets/new_bg.png") no-repeat center bottom;
+          background-size: 100% 100%;
           position: absolute;
           bottom: pxrem(0px);
           left: 50%;

@@ -112,7 +112,7 @@ export default {
     color: #fff;
     .wrap-top {
       width: 100%;
-      margin-bottom: pxrem(60px);
+      margin-bottom: pxrem(70px);
       .top_left{
         width: pxrem(830px);
         height: pxrem(415px);
@@ -122,18 +122,19 @@ export default {
       .top_right{
         width: pxrem(730px);
         height: pxrem(415px);
-        padding-top: pxrem(90px);
+        padding-top: pxrem(65px);
         box-sizing: border-box;
         .content_div{
           background: url('./assets/split.png') no-repeat left center;
           padding-left: pxrem(67px);
           margin-bottom: pxrem(80px);
           .top_title{
-            font-size: pxrem(44px);
+            font-size: pxrem(40px);
             font-weight: bold;
             color: #fff;
             text-align: left;
             margin-bottom: pxrem(22px);
+            font-stretch: ultra-expanded;
           }
           .total-num {
             .num-list {
@@ -145,9 +146,10 @@ export default {
                 margin-right: 0;
               }
               span {
-                font-size: pxrem(44px);
+                font-size: pxrem(30px);
                 color: #13fee3;
                 font-weight: 600;
+                font-stretch: ultra-expanded;
               }
               span.zero{
                 color: #719be2;
@@ -174,12 +176,13 @@ export default {
         background-size: 100% 100%;
         position: relative;
         .title{
-          font-size: pxrem(44px);
+          font-size: pxrem(42px);
           color: #fff;
           font-weight: 600;
           position: absolute;
           left: pxrem(56px);
           top: pxrem(15px);
+          font-stretch: ultra-expanded;
         }
         .num{
           font-size: pxrem(84px);
@@ -187,6 +190,7 @@ export default {
           font-weight: 600;
           height: pxrem(185px);
           line-height: pxrem(185px);
+          font-stretch: ultra-expanded;
         }
       }
       .click{

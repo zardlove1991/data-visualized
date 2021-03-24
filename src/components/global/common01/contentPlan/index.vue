@@ -58,7 +58,7 @@ export default {
             textStyle: {
               color: '#fff'
             },
-            fontSize: 26
+            fontSize: 24
           }
         },
         yAxis: {
@@ -113,7 +113,7 @@ export default {
             textStyle: {
               color: '#fff'
             },
-            fontSize: '26'
+            fontSize: 24
           }
         },
         yAxis: {
@@ -169,7 +169,7 @@ export default {
           data: ['累计选题', '累计完成'],
           textStyle: {
             color: '#fff',
-            fontSize: 40
+            fontSize: 34
           },
           itemWidth: 80,
           itemHeight: 30,
@@ -184,7 +184,7 @@ export default {
           left: 0,
           right: 40,
           bottom: 0,
-          top: 140,
+          top: 70,
           containLabel: true
         },
         xAxis: {
@@ -372,11 +372,12 @@ export default {
         padding: pxrem(25px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
-          font-size: pxrem(44px);
+          font-size: pxrem(34px);
           font-weight: bold;
           color: #fff;
           text-align: left;
           margin-bottom: pxrem(24px);
+          font-stretch: ultra-expanded;
         }
         .total-num {
           margin-bottom: pxrem(45px);
@@ -389,9 +390,10 @@ export default {
               margin-right: 0;
             }
             span {
-              font-size: pxrem(44px);
+              font-size: pxrem(34px);
               color: #13fee3;
               font-weight: 600;
+              font-stretch: ultra-expanded;
             }
             span.zero{
               color: #719be2;
@@ -399,11 +401,12 @@ export default {
           }
         }
         .pic_title{
-          font-size: pxrem(36px);
+          font-size: pxrem(30px);
           font-weight: 500;
           color: #fff;
           text-align: left;
           margin-bottom: pxrem(16px);
+          font-stretch: ultra-expanded;
         }
         .jinri_echart{
           height: pxrem(150px);
@@ -417,11 +420,12 @@ export default {
         padding: pxrem(25px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
-          font-size: pxrem(44px);
+          font-size: pxrem(34px);
           font-weight: bold;
           color: #fff;
           text-align: left;
           margin-bottom: pxrem(24px);
+          font-stretch: ultra-expanded;
         }
         .total-num {
           margin-bottom: pxrem(45px);
@@ -434,9 +438,10 @@ export default {
               margin-right: 0;
             }
             span {
-              font-size: pxrem(44px);
+              font-size: pxrem(34px);
               color: #13fee3;
               font-weight: 600;
+              font-stretch: ultra-expanded;
             }
             span.zero{
               color: #719be2;
@@ -444,7 +449,7 @@ export default {
           }
         }
         .pic_title{
-          font-size: pxrem(36px);
+          font-size: pxrem(30px);
           font-weight: 500;
           color: #fff;
           text-align: left;
@@ -465,7 +470,7 @@ export default {
         margin-bottom: pxrem(19px);
       }
       .leiji_echart{
-        height: pxrem(350px);
+        height: pxrem(380px);
       }
     }
   }

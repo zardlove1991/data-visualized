@@ -312,14 +312,16 @@ export default {
           box-sizing: border-box;
           padding-left: pxrem(100px);
           .top_title{
-            font-size: pxrem(40px);
+            font-size: pxrem(38px);
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
+            font-stretch: ultra-expanded;
           }
           .number{
-            font-size: pxrem(64px);
+            font-size: pxrem(54px);
             color: #15fef5;
+            font-stretch: ultra-expanded;
           }
         }
         .connect_div{
@@ -336,20 +338,22 @@ export default {
           box-sizing: border-box;
           padding-left: pxrem(100px);
           .top_title{
-            font-size: pxrem(40px);
+            font-size: pxrem(38px);
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
+            font-stretch: ultra-expanded;
           }
           .number{
-            font-size: pxrem(64px);
+            font-size: pxrem(54px);
             color: #15fef5;
+            font-stretch: ultra-expanded;
           }
         }
       }
       .shenhe_echart{
         height: pxrem(290px);
-        margin-top: pxrem(55px);
+        margin-top: pxrem(35px);
       }
     }
     .wrap-bottom{
@@ -363,14 +367,16 @@ export default {
           box-sizing: border-box;
           padding-left: pxrem(100px);
           .top_title{
-            font-size: pxrem(40px);
+            font-size: pxrem(38px);
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
+            font-stretch: ultra-expanded;
           }
           .number{
-            font-size: pxrem(64px);
+            font-size: pxrem(54px);
             color: #15fef5;
+            font-stretch: ultra-expanded;
           }
         }
         .connect_div{
@@ -387,20 +393,22 @@ export default {
           box-sizing: border-box;
           padding-left: pxrem(100px);
           .top_title{
-            font-size: pxrem(40px);
+            font-size: pxrem(38px);
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
+            font-stretch: ultra-expanded;
           }
           .number{
-            font-size: pxrem(64px);
+            font-size: pxrem(54px);
             color: #15fef5;
+            font-stretch: ultra-expanded;
           }
         }
       }
       .fabu_echart{
         height: pxrem(290px);
-        margin-top: pxrem(55px);
+        margin-top: pxrem(35px);
       }
     }
   }

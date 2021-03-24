@@ -101,6 +101,7 @@ export default {
       p{
         font-size: pxrem(40px);
         text-align: center;
+        font-stretch: ultra-condensed;
         i{
           font-style: normal;
           font-size: pxrem(40px);
@@ -110,12 +111,14 @@ export default {
         }
       }
       .anzhuang{
+        width: 100%;
         position: absolute;
         bottom: pxrem(224px);
         left: 50%;
         transform: translateX(-50%);
       }
       .yonghu{
+        width: 100%;
         position: absolute;
         bottom: pxrem(79px);
         left: 50%;
@@ -125,13 +128,14 @@ export default {
     .web_div{
       width: pxrem(422px);
       height: pxrem(656px);
-      background: url('./assets/web.png') no-repeat left bottom;
+      background: url('./assets/web_xin.png') no-repeat left bottom;
       background-size: 100% 100%;
       position: relative;
       box-sizing: border-box;
       p{
         font-size: pxrem(40px);
         text-align: center;
+        font-stretch: ultra-condensed;
         i{
           font-style: normal;
           font-size: pxrem(40px);
@@ -141,12 +145,14 @@ export default {
         }
       }
       .fangwen{
+        width: 100%;
         position: absolute;
         bottom: pxrem(224px);
         left: 50%;
         transform: translateX(-50%);
       }
       .yonghu{
+        width: 100%;
         position: absolute;
         bottom: pxrem(79px);
         left: 50%;
@@ -156,7 +162,7 @@ export default {
     .wechat_div{
       width: pxrem(822px);
       height: pxrem(656px);
-      background: url('./assets/wechat.png') no-repeat left bottom;
+      background: url('./assets/wechat_xin.png') no-repeat left bottom;
       background-size: 100% 100%;
       position: relative;
       .wechat_child{
@@ -168,7 +174,7 @@ export default {
           position: absolute;
           left: 50%;
           transform: translateX(-50%);
-          top: pxrem(40px);
+          top: pxrem(50px);
           img{
             width: pxrem(57px);
             height: pxrem(114px);
@@ -181,6 +187,7 @@ export default {
             font-size: pxrem(24px);
             font-weight: 600;
             color: #fff;
+            font-stretch: ultra-condensed;
           }
           .num{
             background: url('./assets/article.png') no-repeat left center;
@@ -188,13 +195,16 @@ export default {
             color: #00a2ff;
             margin-top: pxrem(20px);
             text-align: left;
-            padding-left: pxrem(24px);
+            padding-left: pxrem(34px);
+            font-stretch: ultra-condensed;
+            background-size: auto 100%;
           }
         }
         .wechat_bottom{
           p{
             font-size: pxrem(40px);
             text-align: center;
+            font-stretch: ultra-condensed;
             i{
               font-style: normal;
               font-size: pxrem(40px);
@@ -207,13 +217,13 @@ export default {
             position: absolute;
             left: pxrem(0px);
             bottom: pxrem(224px);
-            padding-left: pxrem(70px);
+            padding-left: pxrem(60px);
           }
           .weibo{
             position: absolute;
             left: pxrem(0px);
             bottom: pxrem(79px);
-            padding-left: pxrem(70px);
+            padding-left: pxrem(60px);
           }
         }
       }
@@ -228,10 +238,10 @@ export default {
         top: pxrem(0px);
         .wechat_bottom{
           .weixin{
-            padding-left: pxrem(77px);
+            padding-left: pxrem(50px);
           }
           .weibo{
-            padding-left: pxrem(77px);
+            padding-left: pxrem(50px);
           }
         }
       }
