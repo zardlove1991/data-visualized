@@ -183,8 +183,7 @@ export default {
             font-size: pxrem(34px);
             font-weight: 600;
             color: #fff;
-            position: relative;
-            left: -25%;
+            transform-origin: 0 0;
             transform: scale(0.5,1);
           }
           .num{

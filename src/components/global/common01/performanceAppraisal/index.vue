@@ -183,7 +183,7 @@ export default {
                 vertical-align: middle;
               }
               .user_name{
-                font-size: pxrem(32px);
+                font-size: pxrem(34px);
                 color: #fff;
                 margin-top: pxrem(28px);
                 text-align: center;
@@ -210,7 +210,7 @@ export default {
                 // margin-right: pxrem(100px);
                 i{
                   font-style: normal;
-                  font-size: pxrem(34px);
+                  font-size: pxrem(40px);
                   color: #13fee3;
                   margin-left: pxrem(40px);
                 }
