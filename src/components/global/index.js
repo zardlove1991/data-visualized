@@ -165,3 +165,4 @@ export const common01componentReporterConnection = getComponent('common01/report
 export const common01componentReviewRelease = getComponent('common01/reviewRelease') // 山西 审核发布
 export const common01componentContentSpread = getComponent('common01/contentSpread') // 山西 内容传播
 export const common01componentOperationData = getComponent('common01/operationData') // 山西 运营数据
+export const common01componentSxMiddle = getComponent('common01/sxMiddle') // 山西 中间

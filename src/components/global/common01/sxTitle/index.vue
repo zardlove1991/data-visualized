@@ -21,8 +21,8 @@ export default {
 <style lang="scss" scoped>
 @import "src/styles/index.scss";
 .common01-sxtitle {
-  width: 19.2rem;
-  height: 10.8rem;
+  width: pxrem(1920px);
+  height: pxrem(1080px);
   background: #0b072d url('./assets/titlebg.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
