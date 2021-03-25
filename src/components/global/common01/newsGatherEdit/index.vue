@@ -273,7 +273,7 @@ export default {
         height: pxrem(250px);
         background: rgba(0,152,248,0.08);
         box-sizing: border-box;
-        padding-top: pxrem(50px);
+        padding-top: pxrem(15px);
         position: relative;
         .title{
           font-size: pxrem(44px);
@@ -287,7 +287,7 @@ export default {
           font-size: pxrem(64px);
           font-weight: bold;
           color: #00ffe2;
-          background: url("./assets/new_bg.png") no-repeat center bottom;
+          background: url("./assets/new_bg.png") no-repeat center pxrem(25px);
           background-size: 100% 100%;
           position: absolute;
           bottom: pxrem(0px);
