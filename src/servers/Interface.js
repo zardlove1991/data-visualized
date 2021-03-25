@@ -214,3 +214,5 @@ export const getMicroOperationYesterday = () => createAPI(`${httpsbaseUrl}/Apida
 // 视频列表
 export const getM2OPlusPublishVideo = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?
 column_id=16&orders=order_id,DESC`)
+// 组织下志愿者列表
+export const getVolunteersInfo = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteer?id=${id}`)

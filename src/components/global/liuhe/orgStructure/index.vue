@@ -166,7 +166,7 @@
           <div class="line" v-if="checkCanShow(4)"></div>
           <div class="line" v-if="checkCanShow(5)"></div>
         </div>
-        <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
+        <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0 && !showList">
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
             <div class="img-box" @click="getSixPlatformInfo(item)">
               <img v-if="item.head_pic" :src="item.head_pic" alt />
@@ -178,18 +178,18 @@
           </div>
         </div>
         <!-- 三级页面 -->
-        <div class="list-box sys-flex" v-if="depath">
-          <div class="item">
+        <div class="list-box sys-flex" v-else>
+          <div class="item" v-for="(item, index) in detailInfo" :key="index">
             <div class="img-box-volunteer">
-              <!-- <img v-if="item.head_pic" :src="item.head_pic" alt /> -->
-              <img src="./assets/icon_volunteer.png" alt />
+              <img v-if="item.head_pic" :src="item.head_pic" alt />
+              <img v-else src="./assets/icon_volunteer.png" alt />
             </div>
             <div class="volunteer-name">
-              <span class="volunteer-name__span">是是是</span>
+              <span class="volunteer-name__span">{{item.real_name}}</span>
             </div>
             <div class="volunteer-name">
               <span class="volunteer-time">服务时长:</span>
-              <span class="volunteer-hours">19h</span>
+              <span class="volunteer-hours">{{item.total}}</span>
             </div>
           </div>
         </div>
@@ -200,7 +200,7 @@
 
 <script>
 import {GUID} from '@/servers/api'
-import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo } from '@/servers/interface'
+import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo, getVolunteersInfo } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
@@ -257,7 +257,9 @@ export default {
       detailName: '',
       // 三级页面
       depath: false,
-      list: []
+      showList: false,
+      list: [],
+      count: 0
     }
   },
   created () {
@@ -297,28 +299,43 @@ export default {
       window.location.href = url
     },
     getSixPlatformInfo (item) {
-      if (this.detailTitle !== '六大平台' && item.a !== true) {
+      if (this.detailTitle !== '六大平台' && item.isShow !== true) {
         return false
       }
-      if (item.a === true) {
+      if (item.isShow === true) {
         this.depath = true
-      }
-      getSixPlatformInfo(item.id).then(res => {
-        if (!res.data.error_code) {
-          let _result = res.data.result
-          _result.forEach(val => {
-            val['a'] = true
-          })
-          if (_result) {
-            this.detailTitle = item.name
-            this.dimensionalArr.push({
-              name: item.name,
-              data: _result
-            })
-            this.detailInfo = _result
+        this.showList = true
+        getVolunteersInfo(item.id).then(res => {
+          if (!res.data.error_code) {
+            let _result = res.data.result
+            if (_result) {
+              this.detailTitle = item.name
+              this.dimensionalArr.push({
+                name: item.name,
+                data: _result
+              })
+              this.detailInfo = _result
+            }
           }
-        }
-      })
+        })
+      } else {
+        getSixPlatformInfo(item.id).then(res => {
+          if (!res.data.error_code) {
+            let _result = res.data.result
+            _result.forEach(val => {
+              val['isShow'] = true
+            })
+            if (_result) {
+              this.detailTitle = item.name
+              this.dimensionalArr.push({
+                name: item.name,
+                data: _result
+              })
+              this.detailInfo = _result
+            }
+          }
+        })
+      }
     },
     checkCanShow (num) {
       if (this.detailInfo && this.detailInfo.length > num) {
@@ -362,6 +379,7 @@ export default {
     },
     // 获取组织架构（子组织）
     showChildDetail (id, name) {
+      this.count = 0
       this.detailId = id
       this.detailName = name
       if (name !== '六大平台') {
@@ -386,16 +404,32 @@ export default {
     },
     // 二级页面返回
     childDetailPageBack () {
+      this.count += 1
       if (this.dimensionalArr.length > 1) {
-        this.dimensionalArr = this.dimensionalArr.splice(0, 1)
-        this.detailInfo = this.dimensionalArr[0].data
-        this.detailTitle = this.dimensionalArr[0].name
+        if (this.dimensionalArr.length === 2) {
+          this.showList = false
+          this.dimensionalArr = this.dimensionalArr.splice(0, 1)
+          this.detailInfo = this.dimensionalArr[0].data
+          this.detailTitle = this.dimensionalArr[0].name
+          this.count = 0
+        } else {
+          this.showList = false
+          this.dimensionalArr = this.dimensionalArr.splice(0, 2)
+          this.detailInfo = this.dimensionalArr[1].data
+          this.detailTitle = this.dimensionalArr[1].name
+        }
+        if (this.count === 2) {
+          this.dimensionalArr = this.dimensionalArr.splice(0, 1)
+          this.detailInfo = this.dimensionalArr[0].data
+          this.detailTitle = this.dimensionalArr[0].name
+        }
       } else {
         this.showDetailPage = false
         this.detailInfo = []
         this.dimensionalArr = []
         this.detailTitle = ''
         this.depath = false
+        this.showList = false
       }
     },
     pageBack () {
@@ -404,6 +438,7 @@ export default {
       this.dimensionalArr = []
       this.detailTitle = ''
       this.depath = false
+      this.showList = false
     },
     // 成员名单
     getVolunteerMemberList () {
@@ -848,6 +883,7 @@ export default {
         width: pxrem(293px);
         height: pxrem(283px);
         padding-bottom: pxrem(16px);
+        margin-bottom: pxrem(60px);
         .img-box {
           margin-bottom: pxrem(16px);
           img {

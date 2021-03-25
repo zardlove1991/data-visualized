@@ -613,7 +613,7 @@ export default {
         position: relative;
         color: #fff;
         max-width: 4.3rem;
-        height: 1.32rem;
+        // height: 1.32rem;
         letter-spacing: pxrem(2px);
         font-weight: bold;
         background: url("./assets/3@2x.png") no-repeat center;
