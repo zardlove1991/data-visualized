@@ -134,7 +134,7 @@ export default {
             color: #fff;
             text-align: left;
             margin-bottom: pxrem(22px);
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
           .total-num {
             .num-list {
@@ -146,10 +146,10 @@ export default {
                 margin-right: 0;
               }
               span {
-                font-size: pxrem(30px);
+                font-size: pxrem(50px);
                 color: #13fee3;
                 font-weight: 600;
-                font-stretch: ultra-expanded;
+                transform: scale(1,0.5);
               }
               span.zero{
                 color: #719be2;
@@ -182,7 +182,7 @@ export default {
           position: absolute;
           left: pxrem(56px);
           top: pxrem(15px);
-          font-stretch: ultra-expanded;
+          transform: scale(1,0.5);
         }
         .num{
           font-size: pxrem(84px);
@@ -190,7 +190,7 @@ export default {
           font-weight: 600;
           height: pxrem(185px);
           line-height: pxrem(185px);
-          font-stretch: ultra-expanded;
+          transform: scale(1,0.5);
         }
       }
       .click{

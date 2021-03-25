@@ -316,12 +316,12 @@ export default {
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
           .number{
             font-size: pxrem(54px);
             color: #15fef5;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
         }
         .connect_div{
@@ -342,12 +342,12 @@ export default {
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
           .number{
             font-size: pxrem(54px);
             color: #15fef5;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
         }
       }
@@ -371,12 +371,12 @@ export default {
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
           .number{
             font-size: pxrem(54px);
             color: #15fef5;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
         }
         .connect_div{
@@ -397,12 +397,12 @@ export default {
             color: #fff;
             margin-right: pxrem(95px);
             letter-spacing: 3px;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
           .number{
             font-size: pxrem(54px);
             color: #15fef5;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
         }
       }

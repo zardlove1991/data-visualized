@@ -225,7 +225,7 @@ export default {
   width: pxrem(1920px);
   height: pxrem(1080px);
   // padding: pxrem(20px);
-  padding-bottom: pxrem(26px);
+  padding-bottom: pxrem(25px);
   background: #0b072d;
   .common01-sxtitle {
     width: pxrem(1920px);
@@ -239,7 +239,7 @@ export default {
   }
   .reporter-map-wrap {
     width: pxrem(1920px);
-    height: pxrem(694px);
+    height: pxrem(695px);
     position: relative;
     background: url("./assets/mapBorder.png") no-repeat center;
     background-size: 100% 100%;

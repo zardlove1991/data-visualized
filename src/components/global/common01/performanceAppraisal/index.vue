@@ -183,32 +183,36 @@ export default {
                 vertical-align: middle;
               }
               .user_name{
-                font-size: pxrem(28px);
+                font-size: pxrem(32px);
                 color: #fff;
                 margin-top: pxrem(28px);
                 text-align: center;
-                font-stretch: ultra-condensed;
+                transform: scale(0.5,1);
+                transform-origin: 50% 0;
               }
             }
             .top_right{
               // width: pxrem(160px);
+              width: 100%;
+              position: absolute;
               height: pxrem(190px);
-              float: right;
+              padding-right: pxrem(37px);
+              // float: right;
               padding-top: pxrem(20px);
               box-sizing: border-box;
               .right_div{
                 height: pxrem(50px);
-                font-size: pxrem(28px);
+                font-size: pxrem(40px);
                 color: #fff;
                 letter-spacing: pxrem(3px);
-                font-stretch: ultra-condensed;
+                transform: scale(0.5,1);
+                transform-origin: 100% 0;
                 // margin-right: pxrem(100px);
                 i{
                   font-style: normal;
-                  font-size: pxrem(28px);
+                  font-size: pxrem(34px);
                   color: #13fee3;
-                  margin-left: pxrem(25px);
-                  font-stretch: ultra-condensed;
+                  margin-left: pxrem(40px);
                 }
               }
               .dev{
@@ -229,16 +233,16 @@ export default {
               width: 50%;
               float: left;
               .num{
-                font-size: pxrem(36px);
+                font-size: pxrem(46px);
                 font-weight: 600;
                 color: #00d8ff;
-                font-stretch: ultra-condensed;
+                transform: scale(0.5,1);
               }
               .tit{
                 font-size: pxrem(30px);
                 color: #fff;
                 margin-top: pxrem(18px);
-                font-stretch: ultra-condensed;
+                transform: scale(0.5,1);
               }
             }
             .zan{

@@ -377,7 +377,7 @@ export default {
           color: #fff;
           text-align: left;
           margin-bottom: pxrem(24px);
-          font-stretch: ultra-expanded;
+          transform: scale(1,0.5);
         }
         .total-num {
           margin-bottom: pxrem(45px);
@@ -393,7 +393,7 @@ export default {
               font-size: pxrem(34px);
               color: #13fee3;
               font-weight: 600;
-              font-stretch: ultra-expanded;
+              transform: scale(1,0.5);
             }
             span.zero{
               color: #719be2;
@@ -406,7 +406,7 @@ export default {
           color: #fff;
           text-align: left;
           margin-bottom: pxrem(16px);
-          font-stretch: ultra-expanded;
+          transform: scale(1,0.5);
         }
         .jinri_echart{
           height: pxrem(150px);
@@ -425,7 +425,7 @@ export default {
           color: #fff;
           text-align: left;
           margin-bottom: pxrem(24px);
-          font-stretch: ultra-expanded;
+          transform: scale(1,0.5);
         }
         .total-num {
           margin-bottom: pxrem(45px);
@@ -441,7 +441,7 @@ export default {
               font-size: pxrem(34px);
               color: #13fee3;
               font-weight: 600;
-              font-stretch: ultra-expanded;
+              transform: scale(1,0.5);
             }
             span.zero{
               color: #719be2;
@@ -454,6 +454,7 @@ export default {
           color: #fff;
           text-align: left;
           margin-bottom: pxrem(16px);
+          transform: scale(1,0.5);
         }
         .jinri_echart{
           height: pxrem(150px);

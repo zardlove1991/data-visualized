@@ -10,15 +10,15 @@
       <div class="new_add sys-flex sys-flex-center flex-justify-between">
         <div class="new_left new_div">
           <div class="title">今日新增</div>
-          <div class="num">{{today_create_amount}}</div>
+          <div class="num"><p>{{today_create_amount}}</p></div>
         </div>
         <div class="new_middle new_div">
           <div class="title">本周新增</div>
-          <div class="num">{{week_create_amount}}</div>
+          <div class="num"><p>{{week_create_amount}}</p></div>
         </div>
         <div class="new_right new_div">
           <div class="title">本月新增</div>
-          <div class="num">{{month_create_amount}}</div>
+          <div class="num"><p>{{month_create_amount}}</p></div>
         </div>
       </div>
       <div class="wrap-bottom">
@@ -63,7 +63,7 @@ export default {
           },
           itemWidth: 40,
           itemHeight: 14,
-          itemGap: 20,
+          itemGap: 35,
           padding: [0, 15, 0, 0],
           x: 'center',
           y: 'bottom'
@@ -244,7 +244,7 @@ export default {
         font-weight: 600;
         width: pxrem(280px);
         margin-right: pxrem(50px);
-        font-stretch: ultra-expanded;
+        transform: scale(1,0.5);
       }
       .total-num {
         .num-list {
@@ -258,7 +258,7 @@ export default {
           span {
             font-size: pxrem(50px);
             color: #00FFF6;
-            font-stretch: ultra-expanded;
+            transform: scale(1,0.5);
           }
           span.zero{
             color: #719be2;
@@ -280,6 +280,7 @@ export default {
           color: #fff;
           font-weight: 500;
           text-align: center;
+          transform: scale(1,0.5);
         }
         .num{
           width: pxrem(374px);
@@ -293,6 +294,10 @@ export default {
           bottom: pxrem(0px);
           left: 50%;
           transform: translateX(-50%);
+          p{
+            text-align: center;
+            transform: scale(1,0.5);
+          }
         }
       }
     }

@@ -99,30 +99,28 @@ export default {
       position: relative;
       box-sizing: border-box;
       p{
-        font-size: pxrem(40px);
-        text-align: center;
-        font-stretch: ultra-condensed;
+        font-size: pxrem(45px);
+        // text-align: center;
         i{
           font-style: normal;
-          font-size: pxrem(40px);
+          font-size: pxrem(45px);
           font-weight: 600;
-          // padding-left: pxrem(43px);
           color: #fe7e16;
         }
       }
       .anzhuang{
-        width: 100%;
+        width: 200%;
         position: absolute;
         bottom: pxrem(224px);
-        left: 50%;
-        transform: translateX(-50%);
+        left: -50%;
+        transform: scale(0.5,1);
       }
       .yonghu{
-        width: 100%;
+        width: 200%;
         position: absolute;
         bottom: pxrem(79px);
-        left: 50%;
-        transform: translateX(-50%);
+        left: -50%;
+        transform: scale(0.5,1);
       }
     }
     .web_div{
@@ -133,30 +131,28 @@ export default {
       position: relative;
       box-sizing: border-box;
       p{
-        font-size: pxrem(40px);
-        text-align: center;
-        font-stretch: ultra-condensed;
+        font-size: pxrem(45px);
+        // text-align: center;
         i{
           font-style: normal;
-          font-size: pxrem(40px);
+          font-size: pxrem(45px);
           font-weight: 600;
-          // padding-left: pxrem(43px);
           color: #dac300;
         }
       }
       .fangwen{
-        width: 100%;
+        width: 200%;
         position: absolute;
         bottom: pxrem(224px);
-        left: 50%;
-        transform: translateX(-50%);
+        left: -50%;
+        transform: scale(0.5,1);
       }
       .yonghu{
-        width: 100%;
+        width: 200%;
         position: absolute;
         bottom: pxrem(79px);
-        left: 50%;
-        transform: translateX(-50%);
+        left: -50%;
+        transform: scale(0.5,1);
       }
     }
     .wechat_div{
@@ -184,10 +180,12 @@ export default {
             top: pxrem(0px);
           }
           .title{
-            font-size: pxrem(24px);
+            font-size: pxrem(34px);
             font-weight: 600;
             color: #fff;
-            font-stretch: ultra-condensed;
+            position: relative;
+            left: -25%;
+            transform: scale(0.5,1);
           }
           .num{
             background: url('./assets/article.png') no-repeat left center;
@@ -196,34 +194,37 @@ export default {
             margin-top: pxrem(20px);
             text-align: left;
             padding-left: pxrem(34px);
-            font-stretch: ultra-condensed;
             background-size: auto 100%;
           }
         }
         .wechat_bottom{
           p{
-            font-size: pxrem(40px);
+            font-size: pxrem(45px);
             text-align: center;
             font-stretch: ultra-condensed;
             i{
               font-style: normal;
-              font-size: pxrem(40px);
+              font-size: pxrem(45px);
               font-weight: 600;
               // padding-left: pxrem(43px);
               color: #01feb6;
             }
           }
           .weixin{
+            width: pxrem(840px);
             position: absolute;
-            left: pxrem(0px);
+            left: -50%;
             bottom: pxrem(224px);
-            padding-left: pxrem(60px);
+            // padding-left: pxrem(60px);
+            transform: scale(0.5,1);
           }
           .weibo{
+            width: pxrem(840px);
             position: absolute;
-            left: pxrem(0px);
+            left: -50%;
             bottom: pxrem(79px);
-            padding-left: pxrem(60px);
+            // padding-left: pxrem(60px);
+            transform: scale(0.5,1);
           }
         }
       }
