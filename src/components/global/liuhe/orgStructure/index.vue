@@ -128,7 +128,9 @@
       </div>
     </div>
     <!-- 二级页面 -->
-    <div class="orgStructure-detail-page common01-border" v-if="showDetailPage">
+    <div class="orgStructure-detail-page common01-border" v-if="showDetailPage" v-loading="loading"  element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(9, 40, 94, 0.9)">
       <div class="back-btn back-btn-last common01-ft36" v-if="depath" @click="childDetailPageBack">上一级</div>
       <div class="common01-ft36" :class="depath? ' back-btn-first':'back-btn'"  @click="pageBack">返回</div>
       <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery1()">
@@ -195,7 +197,7 @@
         </div>
         <!-- 暂无数据 -->
         <div class="list-box sys-flex" v-if="!detailInfo.length">
-         <p class="no-more">暂无更多数据</p>
+         <p class="no-more">暂无数据</p>
         </div>
       </div>
     </div>
@@ -263,7 +265,9 @@ export default {
       depath: false,
       showList: false,
       list: [],
-      count: 0
+      count: 0,
+      loading: true,
+      timer: null
     }
   },
   created () {
@@ -303,6 +307,7 @@ export default {
       window.location.href = url
     },
     getSixPlatformInfo (item) {
+      this.loading = true
       // console.log(this.detailInfo)
       // if (this.detailTitle !== '六大平台' && item.isShow !== true) {
       //   return false
@@ -319,7 +324,10 @@ export default {
                 name: item.name,
                 data: _result
               })
-              this.detailInfo = _result
+              this.timer = setTimeout(() => {
+                this.detailInfo = _result
+                this.loading = false
+              }, 2000)
             }
           }
         })
@@ -336,8 +344,14 @@ export default {
                 name: item.name,
                 data: _result
               })
-              this.detailInfo = _result
+              this.timer = setTimeout(() => {
+                this.detailInfo = _result
+                this.loading = false
+              }, 2000)
             }
+            // this.timer = setTimeout(() => {
+            //   this.loading = false
+            // }, 2000)
           }
         })
       }
@@ -404,6 +418,7 @@ export default {
             })
             this.showDetailPage = true
           }
+          this.loading = false
         }
       })
     },
@@ -464,6 +479,10 @@ export default {
         }
       })
     }
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+    this.timer = null
   }
 }
 </script>
