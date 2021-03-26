@@ -226,3 +226,6 @@ export const waiting = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/waitin
 export const contentDistribution = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/contentDistribution`)
 // 山西绩效考核
 export const performanceAppraisal = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/performanceAppraisal`)
+
+// 组织下志愿者列表
+export const getVolunteersInfo = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteer?id=${id}`)

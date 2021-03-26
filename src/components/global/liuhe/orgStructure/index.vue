@@ -129,7 +129,8 @@
     </div>
     <!-- 二级页面 -->
     <div class="orgStructure-detail-page common01-border" v-if="showDetailPage">
-      <div class="back-btn common01-ft36" @click="childDetailPageBack">返回</div>
+      <div class="back-btn back-btn-last common01-ft36" v-if="depath" @click="childDetailPageBack">上一级</div>
+      <div class="common01-ft36" :class="depath? ' back-btn-first':'back-btn'"  @click="pageBack">返回</div>
       <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery1()">
       <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
       <div class="box">
@@ -165,7 +166,7 @@
           <div class="line" v-if="checkCanShow(4)"></div>
           <div class="line" v-if="checkCanShow(5)"></div>
         </div>
-        <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0">
+        <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0 && !showList">
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
             <div class="img-box" @click="getSixPlatformInfo(item)">
               <img v-if="item.head_pic" :src="item.head_pic" alt />
@@ -176,6 +177,22 @@
             </div>
           </div>
         </div>
+        <!-- 三级页面 -->
+        <div class="list-box sys-flex" v-else>
+          <div class="item" v-for="(item, index) in detailInfo" :key="index">
+            <div class="img-box-volunteer">
+              <img v-if="item.head_pic" :src="item.head_pic" alt />
+              <img v-else src="./assets/icon_volunteer.png" alt />
+            </div>
+            <div class="volunteer-name">
+              <span class="volunteer-name__span">{{item.real_name}}</span>
+            </div>
+            <div class="volunteer-name">
+              <span class="volunteer-time">服务时长:</span>
+              <span class="volunteer-hours">{{item.total}}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -183,7 +200,7 @@
 
 <script>
 import {GUID} from '@/servers/api'
-import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo } from '@/servers/interface'
+import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo, getVolunteersInfo } from '@/servers/interface'
 export default {
   name: 'orgStructure',
   data () {
@@ -237,7 +254,12 @@ export default {
       detailInfo: [],
       guid: GUID,
       detailId: '',
-      detailName: ''
+      detailName: '',
+      // 三级页面
+      depath: false,
+      showList: false,
+      list: [],
+      count: 0
     }
   },
   created () {
@@ -277,23 +299,43 @@ export default {
       window.location.href = url
     },
     getSixPlatformInfo (item) {
-      if (this.detailTitle !== '六大平台') {
+      if (this.detailTitle !== '六大平台' && item.isShow !== true) {
         return false
       }
-      getSixPlatformInfo(item.id).then(res => {
-        if (!res.data.error_code) {
-          let _result = res.data.result
-          if (_result) {
-            console.log(item.name)
-            this.detailTitle = item.name
-            this.dimensionalArr.push({
-              name: item.name,
-              data: _result
-            })
-            this.detailInfo = _result
+      if (item.isShow === true) {
+        this.depath = true
+        this.showList = true
+        getVolunteersInfo(item.id).then(res => {
+          if (!res.data.error_code) {
+            let _result = res.data.result
+            if (_result) {
+              this.detailTitle = item.name
+              this.dimensionalArr.push({
+                name: item.name,
+                data: _result
+              })
+              this.detailInfo = _result
+            }
           }
-        }
-      })
+        })
+      } else {
+        getSixPlatformInfo(item.id).then(res => {
+          if (!res.data.error_code) {
+            let _result = res.data.result
+            _result.forEach(val => {
+              val['isShow'] = true
+            })
+            if (_result) {
+              this.detailTitle = item.name
+              this.dimensionalArr.push({
+                name: item.name,
+                data: _result
+              })
+              this.detailInfo = _result
+            }
+          }
+        })
+      }
     },
     checkCanShow (num) {
       if (this.detailInfo && this.detailInfo.length > num) {
@@ -337,8 +379,14 @@ export default {
     },
     // 获取组织架构（子组织）
     showChildDetail (id, name) {
+      this.count = 0
       this.detailId = id
       this.detailName = name
+      if (name !== '六大平台') {
+        this.depath = false
+      } else {
+        this.depath = true
+      }
       getVolunteerOrganizeDetail(id).then(res => {
         if (!res.data.error_code) {
           let _result = res.data.result
@@ -356,16 +404,41 @@ export default {
     },
     // 二级页面返回
     childDetailPageBack () {
+      this.count += 1
       if (this.dimensionalArr.length > 1) {
-        this.dimensionalArr = this.dimensionalArr.splice(0, 1)
-        this.detailInfo = this.dimensionalArr[0].data
-        this.detailTitle = this.dimensionalArr[0].name
+        if (this.dimensionalArr.length === 2) {
+          this.showList = false
+          this.dimensionalArr = this.dimensionalArr.splice(0, 1)
+          this.detailInfo = this.dimensionalArr[0].data
+          this.detailTitle = this.dimensionalArr[0].name
+          this.count = 0
+        } else {
+          this.showList = false
+          this.dimensionalArr = this.dimensionalArr.splice(0, 2)
+          this.detailInfo = this.dimensionalArr[1].data
+          this.detailTitle = this.dimensionalArr[1].name
+        }
+        if (this.count === 2) {
+          this.dimensionalArr = this.dimensionalArr.splice(0, 1)
+          this.detailInfo = this.dimensionalArr[0].data
+          this.detailTitle = this.dimensionalArr[0].name
+        }
       } else {
         this.showDetailPage = false
         this.detailInfo = []
         this.dimensionalArr = []
         this.detailTitle = ''
+        this.depath = false
+        this.showList = false
       }
+    },
+    pageBack () {
+      this.showDetailPage = false
+      this.detailInfo = []
+      this.dimensionalArr = []
+      this.detailTitle = ''
+      this.depath = false
+      this.showList = false
     },
     // 成员名单
     getVolunteerMemberList () {
@@ -682,6 +755,18 @@ export default {
       width: 100%;
       box-shadow: 0px 8px 22px 12px rgba(14, 34, 84, 0.7);
     }
+    .back-btn-first {
+      position: absolute;
+      z-index: 1;
+      left: pxrem(350px);
+      top: pxrem(80px);
+      padding-left: pxrem(55px);
+      color: #00ffea;
+      font-weight: bold;
+      background: url("./assets/icon_back.png") no-repeat;
+      background-size: pxrem(36px) pxrem(28px);
+      background-position: 0 pxrem(8px);
+    }
     .back-btn {
       position: absolute;
       z-index: 1;
@@ -693,6 +778,12 @@ export default {
       background: url("./assets/icon_back.png") no-repeat;
       background-size: pxrem(36px) pxrem(28px);
       background-position: 0 pxrem(8px);
+    }
+    .back-btn-last{
+      background: url("./assets/icon_parent@2x.png") no-repeat;
+      background-size: 0.36rem 0.36rem;
+      background-position: 0 0.075rem;
+      left: pxrem(80px);
     }
     .top-part {
       padding-top: pxrem(150px);
@@ -792,12 +883,21 @@ export default {
         width: pxrem(293px);
         height: pxrem(283px);
         padding-bottom: pxrem(16px);
+        margin-bottom: pxrem(60px);
         .img-box {
           margin-bottom: pxrem(16px);
           img {
             width: pxrem(150px);
             height: pxrem(150px);
             border-radius: pxrem(20px);
+          }
+        }
+        .img-box-volunteer {
+          margin-bottom: pxrem(16px);
+          img {
+            width: pxrem(150px);
+            height: pxrem(150px);
+            border-radius: 50%;
           }
         }
         .name {
@@ -817,6 +917,33 @@ export default {
           > span {
             display: inline-block;
             text-align: left;
+          }
+        }
+        .volunteer-name {
+          display: -webkit-box;
+          font-size: pxrem(32px);
+          color: #fff;
+          width: pxrem(277px);
+          height: pxrem(66px);
+          margin: 0 auto;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-wrap: normal;
+          word-break: break-all;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-align: center;
+          .volunteer-name__span {
+            display: inline-block;
+            text-align: left;
+          }
+          .volunteer-time {
+            font-size: pxrem(28px);
+            color: #cccccc;
+          }
+          .volunteer-hours {
+            font-size: pxrem(28px);
+            color:#00fffa;
           }
         }
       }
