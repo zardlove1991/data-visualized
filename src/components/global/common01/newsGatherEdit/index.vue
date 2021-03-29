@@ -63,7 +63,7 @@ export default {
           },
           itemWidth: 40,
           itemHeight: 14,
-          itemGap: 35,
+          itemGap: 50,
           padding: [0, 15, 0, 0],
           x: 'center',
           y: 'bottom'
@@ -75,13 +75,13 @@ export default {
         series: [
           {
             type: 'pie',
-            radius: ['40%', '70%'],
-            center: ['50%', '35%'], // 图的位置，距离左跟上的位置
+            radius: ['35%', '65%'],
+            center: ['50%', '38%'], // 图的位置，距离左跟上的位置
             avoidLabelOverlap: false,
             itemStyle: {
               // borderRadius: 20,
               borderColor: '#07093A',
-              borderWidth: 20
+              borderWidth: 10
             },
             label: {
               // show: false,
@@ -98,8 +98,8 @@ export default {
                 textStyle: {
                   fontSize: 40,
                   color: '#fff',
-                  borderWidth: 5,
-                  fontWeight: 'bold'
+                  borderWidth: 5
+                  // fontWeight: 'bold'
                 }
               }
             },
@@ -115,7 +115,8 @@ export default {
           type: 'category',
           data: ['文稿', '图集', '视频', '专题'],
           axisLabel: {
-            fontWeight: 'bold',
+            // rotate: 20,
+            // fontWeight: 'bold',
             show: true,
             interval: 0,
             textStyle: {
@@ -313,11 +314,17 @@ export default {
       .echart_div{
         .echart_left{
           width: pxrem(700px);
-          height: pxrem(350px);
+          // height: pxrem(350px);
+          height: pxrem(700px);
+          transform: scale(1,0.5);
+          transform-origin: 0 0;
         }
         .echart_right{
           width: pxrem(794px);
-          height: pxrem(350px);
+          // height: pxrem(350px);
+          height: pxrem(700px);
+          transform: scale(1,0.5);
+          transform-origin: 0 0;
         }
       }
     }

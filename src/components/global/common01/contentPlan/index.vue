@@ -409,7 +409,10 @@ export default {
           transform: scale(1,0.5);
         }
         .jinri_echart{
-          height: pxrem(150px);
+          // height: pxrem(150px);
+          height: pxrem(300px);
+          transform: scale(1,0.5);
+          transform-origin: 0 0;
         }
       }
       .top_right{
@@ -457,12 +460,16 @@ export default {
           transform: scale(1,0.5);
         }
         .jinri_echart{
-          height: pxrem(150px);
+          // height: pxrem(150px);
+          height: pxrem(300px);
+          transform: scale(1,0.5);
+          transform-origin: 0 0;
         }
       }
     }
     .wrap-bottom{
       margin-top: pxrem(62px);
+      height: pxrem(443px);
       .leiji{
         width: pxrem(350px);
         height: pxrem(44px);
@@ -471,7 +478,10 @@ export default {
         margin-bottom: pxrem(19px);
       }
       .leiji_echart{
-        height: pxrem(380px);
+        // height: pxrem(380px);
+        height: pxrem(760px);
+        transform: scale(1,0.5);
+        transform-origin: 0 0;
       }
     }
   }

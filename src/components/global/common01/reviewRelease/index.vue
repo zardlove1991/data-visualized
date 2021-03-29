@@ -302,6 +302,7 @@ export default {
     color: #fff;
     .wrap-top {
       width: 100%;
+      height: pxrem(420px);
       margin-bottom: pxrem(51px);
       .num_div{
         .y_sh{
@@ -352,12 +353,16 @@ export default {
         }
       }
       .shenhe_echart{
-        height: pxrem(290px);
+        // height: pxrem(290px);
         margin-top: pxrem(35px);
+        height: pxrem(580px);
+        transform: scale(1,0.5);
+        transform-origin: 0 0;
       }
     }
     .wrap-bottom{
       width: 100%;
+      height: pxrem(420px);
       .num_div{
         .y_sh{
           width: pxrem(740px);
@@ -407,8 +412,11 @@ export default {
         }
       }
       .fabu_echart{
-        height: pxrem(290px);
+        // height: pxrem(290px);
         margin-top: pxrem(35px);
+        height: pxrem(580px);
+        transform: scale(1,0.5);
+        transform-origin: 0 0;
       }
     }
   }
