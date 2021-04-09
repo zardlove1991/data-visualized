@@ -10,6 +10,8 @@
         <p class="yonghu">网站用户量：<i>{{web_user_amount}}</i></p>
       </div>
       <div class="wechat_div">
+
+
         <div class="wechat_child wechat1">
           <div class="wechat_top">
             <img src="./assets/numBack.png"/>
@@ -32,6 +34,13 @@
             <p class="weibo">微博阅读量：<i>{{weChat_user_amount}}</i></p>
           </div>
         </div>
+        
+        <!-- <swiper :options="swiperOption" ref="mySwiper">
+          <swiper-slide v-for="(v, k) in dataList" :key="k">
+            
+          </swiper-slide>
+        </swiper> -->
+
       </div>
     </div>
   </div>
@@ -99,11 +108,11 @@ export default {
       position: relative;
       box-sizing: border-box;
       p{
-        font-size: pxrem(45px);
+        font-size: pxrem(48px);
         // text-align: center;
         i{
           font-style: normal;
-          font-size: pxrem(45px);
+          font-size: pxrem(48px);
           font-weight: 600;
           color: #fe7e16;
         }
@@ -131,11 +140,11 @@ export default {
       position: relative;
       box-sizing: border-box;
       p{
-        font-size: pxrem(45px);
+        font-size: pxrem(48px);
         // text-align: center;
         i{
           font-style: normal;
-          font-size: pxrem(45px);
+          font-size: pxrem(48px);
           font-weight: 600;
           color: #dac300;
         }
@@ -188,7 +197,7 @@ export default {
           }
           .num{
             background: url('./assets/article.png') no-repeat left center;
-            font-size: pxrem(24px);
+            font-size: pxrem(28px);
             color: #00a2ff;
             margin-top: pxrem(20px);
             text-align: left;
@@ -198,12 +207,12 @@ export default {
         }
         .wechat_bottom{
           p{
-            font-size: pxrem(45px);
+            font-size: pxrem(48px);
             text-align: center;
             font-stretch: ultra-condensed;
             i{
               font-style: normal;
-              font-size: pxrem(45px);
+              font-size: pxrem(48px);
               font-weight: 600;
               // padding-left: pxrem(43px);
               color: #01feb6;

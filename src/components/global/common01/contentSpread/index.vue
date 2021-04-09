@@ -118,6 +118,7 @@ export default {
         height: pxrem(415px);
         background: url('./assets/topleft_bg.png') no-repeat;
         background-size: 100% 100%;
+        animation: rotate 60s linear infinite;
       }
       .top_right{
         width: pxrem(730px);
@@ -129,7 +130,7 @@ export default {
           padding-left: pxrem(67px);
           margin-bottom: pxrem(80px);
           .top_title{
-            font-size: pxrem(40px);
+            font-size: pxrem(48px);
             font-weight: bold;
             color: #fff;
             text-align: left;
@@ -176,7 +177,7 @@ export default {
         background-size: 100% 100%;
         position: relative;
         .title{
-          font-size: pxrem(42px);
+          font-size: pxrem(48px);
           color: #fff;
           font-weight: 600;
           position: absolute;
