@@ -27,7 +27,30 @@ export const getOtherUserDetail = (userId) => createXietongAPI(`${workcallUrl}/A
 // 指挥连线用户详情
 export const getUserInfo = (memberId) => createXietongAPI(`${workcallUrl}/Apisys/organization/memberDetail?member_id=${memberId}`)
 /* 通用 end */
+// ------------- 新沂大屏 -------------
 
+export const customAppId = '330'
+export const customAppKey = 'SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d'
+
+export const getVideo = () => axios.get(`${httpsbaseUrl}/Apidaping/NTk0YjQ2NW/getVideoList`)
+export const getUserId = () => axios.get(`${httpsbaseUrl}/index.php?m=Apidaping&c=user&a=login&user_name=17610861680&password=61680Abc&custom_appid=${customAppId}&custom_appkey=${customAppKey}`)
+/* 稿件排行 点击数 */
+// export const getRankList = () => createAPI(`${httpsbaseUrl}/Apidaping/NTk0YjQ2NW/getM2OPlusRankList?jnType=click`)
+export const getRankList = () => createAPI(`http://mapi.xysrmt.cn/api/open/xyrm/get_wmxy?appid=m2oxufj7e8hv0kzvjk&appkey=ace3d0b5f325a6daab9aa141d470d968`)
+export const getUserInformation = (token, id) => createAPI(`${workcallUrl}/Apisys/members/detail?access_token=${token}&other_user_id=${id}`)
+
+// 相关报道数据
+export const getContentDetail = (figureId) => createAPI(`${httpsbaseUrl}/?m=Apidaping&c=M2OPLUS_topic&a=columnContent&figure_id=${figureId}&custom_appid=${customAppId}`)
+export const getCharacterDetail = (figureId) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=M2OPLUS_topic&a=detail&figure_id=${figureId}&custom_appid=${customAppId}`)
+
+/* 发送websocket断连通知 */
+export const isWebsocket = (link, name) => axios.get(`${httpsbaseUrl}/index.php?m=Apidaping&c=CLOUD_websocket&a=long_links_send&type=2&link=${link}&name=${name}`)
+// 开启ai检测的数据接口
+// export const startScan = (callback_url) => axios.post(`http://10.0.1.111:8011/face/recognize/live/start`, {url : `rtmp://10.0.1.111:1935/live/aitest`, callback_url: `http://10.0.1.111:8011/websocket/callback/${callback_url}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, timeout: 10, create_thumbnail : true, timeout: 50});
+export const startScan = (callbackUrl) => axios.post(`http://10.0.1.111:8011/face/recognize/live/start`, {url: `rtmp://10.0.1.111/live/test_sd`, callbackUrl: `http://10.0.1.111:8011/websocket/callback/${callbackUrl}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, create_thumbnail: true, timeout: 50})
+// export const startScan = (callback_url) => axios.post(`http://172.31.2.4:8011/face/recognize/live/start`, {url : `rtmp://livefb.sczytv.com:9935/live/sxt_sxt`, callback_url: `http://172.31.2.4:8011/websocket/callback/${callback_url}`, quality_threshold: 0.01, min_face_size: 60, buffer_ms: 60000, timeout: 10, create_thumbnail : true, timeout: 50});
+
+// -------------- end 新沂大屏 --------------
 // 获取配置数据
 export const getConfigData = () => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=CP_project&a=new_detail&guid=${GUID}`)
 

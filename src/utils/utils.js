@@ -148,7 +148,12 @@ const formatDate = (utcstr, format = 'YYYY-MM-DD hh:mm:ss') => {
 const preFixInterge = (num, n) => {
   return (Array(n).join(0) + num).slice(-n).split('')
 }
-
+// 得到当前时分
+const getNowTime = () => {
+  let date = new Date()
+  let time = `${date.getHours()}:${date.getMinutes()}`
+  return time
+}
 export {
-  gaodeTobaidu, getImageUrl, getcurrentDateTime, preFixInterge, timeFormat, formatDate
+  gaodeTobaidu, getImageUrl, getcurrentDateTime, preFixInterge, timeFormat, formatDate, getNowTime
 }
