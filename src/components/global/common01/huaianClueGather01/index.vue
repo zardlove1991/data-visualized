@@ -58,7 +58,7 @@ export default {
           if (res.data.result.data.length) {
             this.dataList = []
             setTimeout(() => {
-                this.dataList = res.data.result.data
+              this.dataList = res.data.result.data
             }, 100)
             if (this.isPaging) {
               this.page += 1
