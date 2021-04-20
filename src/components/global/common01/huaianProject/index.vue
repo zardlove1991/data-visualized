@@ -3,7 +3,7 @@
     <div class="project-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '选题展示'}}</div>
       <div class="wrap-content">
-        <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title, 'marginBottom75': customSize}" :style="{'animation-delay' : k/2+'s'}">
+        <div class="item-list sys-flex sys-flex-center animated mb90" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title, 'marginBottom75': customSize}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.title}}</div>
           <div class="name overhidden common01-ft32" :style="setFontSize(45)">{{v.project_user_name}}</div>
           <div class="project-status common01-ft32" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{v.status_show}}</div>
@@ -102,6 +102,9 @@ export default {
         margin-right: pxrem(80px);
         &:last-of-type {
           margin-bottom: 0;
+        }
+        &.mb90{
+          margin-bottom: pxrem(90px)!important;
         }
         .title {
           text-align: left;

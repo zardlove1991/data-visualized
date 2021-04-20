@@ -84,8 +84,9 @@ export default {
     color: #fff;
     .wrap-content {
       width: 107%;
+      padding-top: pxrem(30px)!important;
       .item-list {
-        margin-bottom: pxrem(90px);
+        margin-bottom: pxrem(90px)!important;
         float: left;
         width: 46%;
         margin-right: pxrem(80px);
