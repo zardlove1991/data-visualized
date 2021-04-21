@@ -99,7 +99,7 @@ export default {
                 ])
               }
             },
-            data: [150, 120, 230, 180, 100, 130, 160, 150]
+            data: []
           }
         ]
       },
@@ -107,7 +107,7 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['02', '03', '04', '05', '06', '07', '08', '09'],
+          data: [],
           axisLabel: {
             show: true,
             textStyle: {
@@ -155,7 +155,7 @@ export default {
                 ])
               }
             },
-            data: [150, 120, 230, 180, 100, 130, 160, 150]
+            data: []
           }
         ]
       },
@@ -219,7 +219,7 @@ export default {
           {
             name: '累计选题',
             type: 'line',
-            data: [600, 850, 1000, 600, 550, 450, 310],
+            data: [],
             lineStyle: {
               color: '#ffe50c',
               width: 5
@@ -245,7 +245,7 @@ export default {
           {
             name: '累计完成',
             type: 'line',
-            data: [279, 300, 201, 334, 290, 300, 210],
+            data: [],
             lineStyle: {
               color: '#00f8e4',
               width: 5
@@ -281,7 +281,7 @@ export default {
       contentPlanning().then(res => {
         if (!res.data.error_code) {
           // 今日选题
-          let topicVal = res.data.result.topic_today_amount.toString()
+          let topicVal = res.data.result.topic_today_amount.amount.toString()
           let topicValLength = topicVal.length
           let chaTopicValLength = 8 - topicValLength
           for (let i = 0; i < chaTopicValLength; i++) {
@@ -291,7 +291,7 @@ export default {
             this.topic_today_amount.push(topicVal[j])
           }
           // 今日完成
-          let finishVal = res.data.result.topic_today_finish_amount.toString()
+          let finishVal = res.data.result.topic_today_finish_amount.amount.toString()
           let finishValLength = finishVal.length
           let chaFinishValLength = 8 - finishValLength
           for (let i = 0; i < chaFinishValLength; i++) {
@@ -300,6 +300,30 @@ export default {
           for (let j = 0; j < finishValLength; j++) {
             this.topic_today_finish_amount.push(finishVal[j])
           }
+          const todayArr = res.data.result.topic_today_amount.seven_amount
+          const todayFinishArr = res.data.result.topic_today_finish_amount.seven_amount
+          const amountArr = res.data.result.amount
+          const finishAmountArr = res.data.result.finish_amount
+          const today = []
+          const todayFinish = []
+          const amount = []
+          const finishAmount = []
+          for (let m = 0; m < todayArr.length; m++) {
+            today.push(todayArr[m].amount)
+          }
+          for (let m = 0; m < todayFinishArr.length; m++) {
+            todayFinish.push(todayFinishArr[m].amount)
+          }
+          for (let m = 0; m < amountArr.length; m++) {
+            amount.push(amountArr[m].amount)
+          }
+          for (let m = 0; m < finishAmountArr.length; m++) {
+            finishAmount.push(finishAmountArr[m].amount)
+          }
+          this.barOptions.series[0].data = today
+          this.barOptions1.series[0].data = todayFinish
+          this.barOptions2.series[0].data = amount
+          this.barOptions2.series[1].data = finishAmount
         }
       })
     },
@@ -318,7 +342,7 @@ export default {
     },
     initData () {
       var dateList = []
-      for (var i = -7; i < 1; i++) {
+      for (var i = -6; i < 1; i++) {
         let tempData = this.funGetDateStr(i).toString()
         dateList.push(tempData)
       }

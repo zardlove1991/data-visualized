@@ -128,7 +128,7 @@ export default {
           {
             name: '已审核',
             type: 'bar',
-            data: [600, 250, 700, 420],
+            data: [],
             itemStyle: {
               normal: {
                 color: '#d15900'
@@ -143,7 +143,7 @@ export default {
           {
             name: '待审核',
             type: 'bar',
-            data: [180, 420, 380, 50],
+            data: [],
             itemStyle: {
               normal: {
                 color: '#e7b448'
@@ -230,7 +230,7 @@ export default {
           {
             name: '已发布',
             type: 'bar',
-            data: [600, 250, 700, 420],
+            data: [],
             itemStyle: {
               normal: {
                 color: '#136eff'
@@ -245,7 +245,7 @@ export default {
           {
             name: '待发布',
             type: 'bar',
-            data: [180, 420, 380, 50],
+            data: [],
             itemStyle: {
               normal: {
                 color: '#17ffe6'
@@ -272,10 +272,32 @@ export default {
     waiting () {
       waiting().then(res => {
         if (!res.data.error_code) {
-          this.audited_publish_amount = res.data.result.audited_publish_amount
-          this.waiting_publish_amount = res.data.result.waiting_publish_amount
-          this.already_publish_amount = res.data.result.already_publish_amount
-          this.announced_publish_amount = res.data.result.announced_publish_amount
+          const resultData = res.data.result
+          this.audited_publish_amount = resultData.audited_publish.total ? parseInt(resultData.audited_publish.total) : 0
+          this.waiting_publish_amount = resultData.waiting_publish.total ? parseInt(resultData.waiting_publish.total) : 0
+          this.already_publish_amount = resultData.already_publish.total ? parseInt(resultData.already_publish.total) : 0
+          this.announced_publish_amount = resultData.announced_publish.total ? parseInt(resultData.announced_publish.total) : 0
+          // 图表
+          let auditedArticle = resultData.audited_publish.article ? parseInt(resultData.audited_publish.article) : 0
+          let auditedGallery = resultData.audited_publish.gallery ? parseInt(resultData.audited_publish.gallery) : 0
+          let auditedVideo = resultData.audited_publish.video ? parseInt(resultData.audited_publish.video) : 0
+          let auditedTopic = resultData.audited_publish.topic ? parseInt(resultData.audited_publish.topic) : 0
+          this.barOptions1.series[0].data.push(auditedArticle, auditedGallery, auditedVideo, auditedTopic)
+          let waitingArticle = resultData.waiting_publish.article ? parseInt(resultData.waiting_publish.article) : 0
+          let waitingGallery = resultData.waiting_publish.gallery ? parseInt(resultData.waiting_publish.gallery) : 0
+          let waitingVideo = resultData.waiting_publish.video ? parseInt(resultData.waiting_publish.video) : 0
+          let waitingTopic = resultData.waiting_publish.topic ? parseInt(resultData.waiting_publish.topic) : 0
+          this.barOptions1.series[1].data.push(waitingArticle, waitingGallery, waitingVideo, waitingTopic)
+          let alreadyArticle = resultData.already_publish.article ? parseInt(resultData.already_publish.article) : 0
+          let alreadyGallery = resultData.already_publish.gallery ? parseInt(resultData.already_publish.gallery) : 0
+          let alreadyVideo = resultData.already_publish.video ? parseInt(resultData.already_publish.video) : 0
+          let alreadyTopic = resultData.already_publish.topic ? parseInt(resultData.already_publish.topic) : 0
+          this.barOptions2.series[0].data.push(alreadyArticle, alreadyGallery, alreadyVideo, alreadyTopic)
+          let announcedArticle = resultData.announced_publish.article ? parseInt(resultData.announced_publish.article) : 0
+          let announcedGallery = resultData.announced_publish.gallery ? parseInt(resultData.announced_publish.gallery) : 0
+          let announcedVideo = resultData.announced_publish.video ? parseInt(resultData.announced_publish.video) : 0
+          let announcedTopic = resultData.announced_publish.topic ? parseInt(resultData.announced_publish.topic) : 0
+          this.barOptions2.series[1].data.push(announcedArticle, announcedGallery, announcedVideo, announcedTopic)
         }
       })
     }

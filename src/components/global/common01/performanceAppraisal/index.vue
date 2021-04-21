@@ -2,11 +2,12 @@
   <div class="performanceAppraisal" id="performanceAppraisal">
     <div class="performanceAppraisal-wrap">
       <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(v, k) in dataList" :key="k">
+        <swiper-slide v-for="v in dataList" :key="v.user_id">
           <div class="item_top">
             <div class="touxiang">
-              <img src="./assets/head.png"/>
-              <p class="user_name">{{v.userName}}</p>
+              <img v-if="v.avatar" :src="v.avatar && v.avatar.uri" />
+              <img v-if="!v.avatar" src="./assets/head.png" />
+              <p class="user_name">{{v.username}}</p>
             </div>
             <div class="top_right">
               <div class="pro right_div">
@@ -78,43 +79,7 @@ export default {
       performanceAppraisal().then(res => {
         if (!res.data.error_code) {
           // let topicVal = res.data.result.topic_today_amount.toString()
-          this.dataList.push({
-            userImg: './assets/head.png',
-            userName: '陈小依',
-            total_amount: res.data.result.total_amount,
-            total_publish_amount: res.data.result.total_publish_amount,
-            total_click_amount: res.data.result.total_click_amount,
-            total_forward_amount: res.data.result.total_forward_amount,
-            total_like_amount: res.data.result.total_like_amount,
-            total_share_amount: res.data.result.total_share_amount
-          }, {
-            userImg: './assets/head.png',
-            userName: '梁苗苗',
-            total_amount: res.data.result.total_amount,
-            total_publish_amount: res.data.result.total_publish_amount,
-            total_click_amount: res.data.result.total_click_amount,
-            total_forward_amount: res.data.result.total_forward_amount,
-            total_like_amount: res.data.result.total_like_amount,
-            total_share_amount: res.data.result.total_share_amount
-          }, {
-            userImg: './assets/head.png',
-            userName: '葛中流',
-            total_amount: res.data.result.total_amount,
-            total_publish_amount: res.data.result.total_publish_amount,
-            total_click_amount: res.data.result.total_click_amount,
-            total_forward_amount: res.data.result.total_forward_amount,
-            total_like_amount: res.data.result.total_like_amount,
-            total_share_amount: res.data.result.total_share_amount
-          }, {
-            userImg: './assets/head.png',
-            userName: '洛小天',
-            total_amount: res.data.result.total_amount,
-            total_publish_amount: res.data.result.total_publish_amount,
-            total_click_amount: res.data.result.total_click_amount,
-            total_forward_amount: res.data.result.total_forward_amount,
-            total_like_amount: res.data.result.total_like_amount,
-            total_share_amount: res.data.result.total_share_amount
-          })
+          this.dataList = res.data.result
         }
       })
     }
