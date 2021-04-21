@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrap">
+  <div class="main-wrap" id="character-information">
     <div class="character-information">
       <div class="character-title">人物介绍</div>
       <div class="character-body sys-flex flex-justify-between" v-if="detail&&detail.name">
@@ -33,7 +33,8 @@ export default {
     return {
       detail: {},
       faceImg: '',
-      indexpic: ''
+      indexpic: '',
+      id: 313
     }
   },
   props: {
@@ -60,6 +61,9 @@ export default {
       this.getDetail()
     }
   },
+  mounted () {
+    this.setFontsize('character-information')
+  },
   methods: {
     getDetail () {
       if (this.id) {
@@ -76,13 +80,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import 'src/styles/index.scss';
 .main-wrap {
   .character-information {
     width: 100%;
     height: 100%;
-    padding: 0.5rem 0.3rem 0.35rem;
+    padding: px1em(5px) px1em(15px);
     color: #fff;
-    font-size: 0.48rem;
     img {
       width: 100%;
       height: 100%;
@@ -90,80 +94,74 @@ export default {
     }
     .character-title {
       width: 100%;
-      height: 1.13rem;
-      background: linear-gradient(
-        0deg,
-        rgba(38, 182, 241, 0.46) 0%,
-        rgba(38, 182, 241, 0.01) 99%
-      );
-      background-size: 100%;
-      background-image: url("./assets/title_bg2.png");
-      background-repeat: no-repeat;
-      background-position: center 30%;
+      height: 15%;
+      background: url("./assets/title_bg2.png") no-repeat center top;
+      background-size: 100% 100%;
       text-align: center;
       font-weight: 600;
-      margin-bottom: 0.25rem;
+      padding-top:px1em(7px);
+      margin-bottom: px1em(10px);
+      font-size: px1em(14px);
     }
     .character-body {
       .no_data {
         width: 100%;
-        height: 8.62rem;
+        height: px1em(862px);
         div {
-          width: 7.58rem;
-          height: 5.76rem;
-          background: url("./assets/no_data.png") no-repeat;
+          width: px1em(758px);
+          height: px1em(592px);
+          background: url("./assets/no_data.png") no-repeat center top;
           background-size: 100% 100%;
+          margin-bottom: px1em(300px);
         }
       }
       .head-photo {
-        width: 6.35rem;
-        height: 8.62rem;
+        width: 33%;
+        height: 70%;
         img{
           width: 100%;
           height: 100%;
-          border-radius: 0.1rem;
+          border-radius: px1em(5px);
+          border:1px solid red;
         }
       }
       .name-position {
-        span {
-          font-size: 0.3rem;
-          margin-left: 0.08rem;
-        }
+        flex-basis: 60%;
         .name {
-          width: 11.36rem;
-          height: 1.83rem;
+          width: 100%;
+          height: px1em(45px);
+          line-height: px1em(45px);
           background: url("./assets/name02_bg.png") no-repeat center;
-          background-size: 100%;
-          margin-bottom: 0.42rem;
-          padding: 0 0.72rem;
+          background-size: 100% 100%;
+          margin-bottom: px1em(11px);
+          padding: 0 px1em(14px);
           div:first-of-type {
-            font-size: 0.48rem;
+            font-size: px1em(18px);
             font-weight: 500;
             color: rgba(0, 255, 246, 1);
-            line-height: 0.46rem;
           }
           div:last-of-type {
-            font-size: 0.32rem;
+            font-size: px1em(14px);
             font-weight: 400;
             color: rgba(255, 255, 255, 1);
-            line-height: 0.46rem;
-            margin-left: 0.6rem;
+            margin-left: px1em(30px);
           }
         }
         .position {
-          width: 11.36rem;
-          height: 6.34rem;
+          width: 100%;
+          height: px1em(170px);
           background: url("./assets/renwu_zhiwu_bg.png") no-repeat center;
-          background-size: 100%;
-          padding: 0.47rem 0.72rem;
+          background-size: 100% 100%;
+          padding: px1em(15px) px1em(12.5px);
           div:first-of-type {
             width: 100%;
             height: 100%;
-            font-size: 0.34rem;
+            font-size: px1em(14px);
             font-weight: 400;
-            line-height: 0.6rem;
+            line-height: 1.5em;
             color: rgba(255, 255, 255, 1);
             overflow: hidden;
+            text-align: center;
           }
         }
       }

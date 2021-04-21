@@ -1,7 +1,8 @@
 <template>
-  <div class="main-wrap">
+  <div class="main-wrap" id="click-list-box">
     <div class="click-wrap">
-      <div class="click-title overhidden">
+      <!-- <div class="click-title overhidden"> -->
+        <div class="click-title-2">文明新沂</div>
         <div class="click-list-wrap">
           <div
             class="click-list sys-flex sys-flex-center animated"
@@ -19,7 +20,7 @@
             <div class="click-count">{{v.click_num}}</div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -38,7 +39,9 @@ export default {
   created () {
     this.getReportList()
   },
-
+  mounted () {
+    this.setFontsize('click-list-box')
+  },
   methods: {
     getReportList () {
       if (this.countNum) {
@@ -47,6 +50,7 @@ export default {
         this.count = 0
       }
       getRankList().then(response => {
+        console.log(response, 'ree')
         if (response.data[0].data.length) {
           this.list = response.data[0].data
           this.initList()
@@ -57,7 +61,7 @@ export default {
     getList () {
       setTimeout(() => {
         this.initList()
-      }, 1000)
+      }, 1000000)
     },
 
     initList () {
@@ -87,86 +91,81 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-html, body, #app{
-  font-size: 20px;
-}
+@import 'src/styles/index.scss';
 .main-wrap {
   width: 100%;
-  height: 10.8rem;
-  padding: 0rem 0.3rem 0.15rem;
+  height: 100%;
+  // padding: 0 px1em(30px) px1em(15px);
+  padding: 0.3% 0.5%;
   position: relative;
   background: url("./assets/bg.png") no-repeat center center;
   background-size: 100% 100%;
   .click-wrap {
     width: 100%;
     height: 100%;
-    .click-title {
-      width: 100%;
-      height: 100%;
-      background: url("./assets/title.png") no-repeat top center;
-      background-size: 100%;
-    }
-    .click-list-wrap {
-      margin-top: 2rem;
-    }
+  }
+  .click-title-2{
+    width: 100%;
+    height: 15%;
+    background: url("./assets/title_bg2.png") no-repeat center top;
     background-size: 100% 100%;
-    .click-list {
-      background: url("./assets/border.png") no-repeat center center;
-      background-size: 100% 100%;
-      color: #fff;
-      width: 100%;
-      height: 1.2rem;
-      font-size: 0.32rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: px1em(22px);
+    color:#fff;
+  }
+  .click-list {
+    background: url("./assets/border.png") no-repeat center center;
+    background-size: 100% 100%;
+    color: #fff;
+    width: 100%;
+    height: 15%;
+    font-family: PingFangSC-Regular;
+    margin-bottom: 1%;
+    padding: 1% 2%;
+    .click-rank {
+      font-size: px1em(14px);
+      padding:px1em(5px) px1em(10px);
+      border-radius: px1em(6px);
+      &.first {
+        background: rgba(240, 65, 65, 1);
+      }
+      &.second {
+        background: rgba(240, 168, 65, 1);
+      }
+      &.third {
+        background: rgba(193, 65, 240, 1);
+      }
+      &.others {
+        background: rgba(50, 205, 228, 1);
+      }
+    }
+    .click-list-title {
+      font-size: px1em(18px);
+      font-weight: 400;
+      padding-left: px1em(30px);
+      flex:1;
+      text-align: left;
+    }
+    .click-user {
+      background: url("./assets/name.png") no-repeat center left;
+      background-size: px1em(25px) px1em(28px);
+      padding-left: px1em(40px);
+      font-size: px1em(14.5px);
       font-family: PingFangSC-Regular;
-      margin-bottom: 0.26rem;
-      padding: 0 0.3rem;
-      .click-rank {
-        width: 0.44rem;
-        height: 0.44rem;
-        line-height: 0.44rem;
-        font-size: 0.28rem;
-        text-align: center;
-        border-radius: 0.06rem;
-        &.first {
-          background: rgba(240, 65, 65, 1);
-        }
-        &.second {
-          background: rgba(240, 168, 65, 1);
-        }
-        &.third {
-          background: rgba(193, 65, 240, 1);
-        }
-        &.others {
-          background: rgba(50, 205, 228, 1);
-        }
-      }
-      .click-list-title {
-        font-size: 0.42rem;
-        font-weight: 400;
-        padding-left: 0.4rem;
-        width: 75%;
-        text-align: left;
-      }
-      .click-user {
-        background: url("./assets/name.png") no-repeat center left;
-        background-size: 0.25rem 0.28rem;
-        padding-left: 0.4rem;
-        font-size: 0.32rem;
-        font-family: PingFangSC-Regular;
-        font-weight: 400;
-        color: #fff;
-        width: 12%;
-        text-align: left;
-      }
-      .click-count {
-        background: url("./assets/click.png") no-repeat center left;
-        background-size: 0.3rem 0.28rem;
-        padding-left: 0.5rem;
-        font-size: 0.34rem;
-        font-family: PingFangSC-Regular;
-        font-weight: 400;
-        color: #fff;
-      }
+      font-weight: 400;
+      color: #fff;
+      width: 12%;
+      text-align: left;
+    }
+    .click-count {
+      background: url("./assets/click.png") no-repeat center left;
+      background-size: px1em(30px) px1em(28px);
+      padding-left: px1em(50px);
+      font-size: px1em(14.5px);
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: #fff;
     }
   }
 }

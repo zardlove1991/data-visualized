@@ -12,7 +12,7 @@ export default {
   name: 'characterSeven',
   data () {
     return {
-      id: 0,
+      id: 313,
       token: '',
       type: 'old',
       startTime: '',
@@ -57,7 +57,7 @@ export default {
           })
           // 长链接断开时间大于一分钟 刷新页面
           console.log('页面刷新')
-          window.location.reload()
+          // window.location.reload()
         } else {
           this.isConnection = false
         }

@@ -180,13 +180,13 @@ export default {
 }
 </script>
 <style lang="scss">
+@import 'src/styles/index.scss';
 .main-wrap {
   .related-reports {
     width: 100%;
     height: 100%;
-    padding: 0.5rem 0.1rem 0.35rem 0.1rem;
+    padding: px1em(10px) px1em(30px);
     color: #fff;
-    font-size: 0.48rem;
     img {
       width: 100%;
       height: 100%;
@@ -194,61 +194,57 @@ export default {
     }
     .reports-title {
       width: 100%;
-      height: 1.13rem;
-      background: linear-gradient(
-        0deg,
-        rgba(38, 182, 241, 0.46) 0%,
-        rgba(38, 182, 241, 0.01) 99%
-      );
-      background-size: 100%;
-      background-image: url("./assets/title_bg2.png");
-      background-repeat: no-repeat;
-      background-position: center 30%;
+      height: px1em(80px);
+      background: url("./assets/title_bg2.png") no-repeat center top;
+      background-size: 100% 100%;
       text-align: center;
       font-weight: 600;
-      // line-height: 1.13rem;
-      margin-bottom: 0.25rem;
+      padding-top:px1em(10px);
+      // margin-bottom: px1em(10px);
+      font-size: px1em(40px);
     }
     .reports-body {
       display: flex;
       justify-content: space-between;
       .no_data {
         width: 100%;
-        height: 8.62rem;
+        height: px1em(862px);
         div {
-          width: 7.58rem;
-          height: 5.76rem;
-          background: url("./assets/no_data.png") no-repeat;
+          width: px1em(758px);
+          height: px1em(592px);
+          background: url("./assets/no_data.png") no-repeat center top;
           background-size: 100% 100%;
+          margin-bottom: px1em(300px);
         }
       }
       .reports_left {
-        margin-right: 0.64rem;
+        // flex-basis: 51%;
+        width:px1em(700px);
+       
         .reports_m_title {
-          height: 0.5rem;
-          line-height: 0.5rem;
-          margin-bottom: 0.39rem;
-          font-size: 0.4rem;
+          margin-bottom: px1em(20px);
+          font-size: px1em(30px);
           font-weight: 500;
-          color: rgba(255, 255, 255, 1);
+          text-align:left;
+          color: #fff;
         }
         .news {
-          height: 7.53rem;
+          // height: 7.53rem;
           overflow: hidden;
           li {
-            width: 9.87rem;
-            height: 2.23rem;
-            border: 0.01px solid rgba(63, 230, 255, 1);
+            // width: px1em(987px);
+            height: px1em(140px);
             background: url("./assets/baodao_list_bg.png") no-repeat;
-            background-size: 100%;
-            padding: 0.26rem 0.33rem;
+            background-size: 100% 100%;
+            padding: px1em(13px) px1em(16px);
             display: flex;
-            margin-bottom: 0.28rem;
+            margin-bottom: px1em(28px);
             .news_img {
-              width: 2.7rem;
-              height: 1.7rem;
-              border-radius: 1rem;
-              margin-right: 0.3rem;
+              width: px1em(135px);
+              height: px1em(85px);
+              display: block;
+              border-radius: px1em(1px);
+              margin-right: px1em(30px);
               img {
                 width: 100%;
                 height: 100%;
@@ -256,55 +252,60 @@ export default {
             }
             .news_text {
               .no_pic {
-                width: 9rem !important;
+                width: px1em(900px) !important;
               }
               div:first-of-type {
-                width: 6.15rem;
-                height: 1.08rem;
-                font-size: 0.36rem;
+                width: px1em(500px);
+                // height: px1em(108px);
+                font-size: px1em(18px);
                 font-weight: 400;
-                color: rgba(255, 255, 255, 1);
-                line-height: 0.54rem;
-                margin-bottom: 0.26rem;
+                color: #fff;
+                // line-height: 0.54rem;
+                margin-bottom: px1em(13px);
                 overflow: hidden;
                 // white-space: nowrap;
                 text-overflow: ellipsis;
+                text-align: left;
               }
               div:last-of-type {
-                height: 0.3rem;
-                font-size: 0.24rem;
+                // height: px1em(30px);
+                font-size: px1em(12px);
                 font-weight: 400;
-                color: rgba(255, 255, 255, 1);
+                color: #fff;
+                text-align: left;
               }
             }
           }
         }
       }
       .reports_right {
+        // flex-basis: 41%;
+        width:px1em(520px);
         .right_bottom {
-          margin-top: 0.63rem;
+          margin-top: px1em(63px);
         }
         div {
           .img_mb {
-            margin-bottom: 0.39rem;
+            margin-bottom: px1em(20px);
           }
           .aff_mb {
-            margin-bottom: 0.33rem !important;
+            margin-bottom: px1em(10px) !important;
           }
           .reports_m_title {
-            height: 0.5rem;
-            line-height: 0.5rem;
-            margin-bottom: 0.39rem;
-            font-size: 0.4rem;
+            // height: 0.5rem;
+            // line-height: 0.5rem;
+            margin-bottom: px1em(20px);
+            font-size: px1em(30px);
             font-weight: 500;
+            text-align: left;
             color: rgba(255, 255, 255, 1);
           }
           .click-title {
-            width: 7.88rem;
-            height: 3rem;
+            width: px1em(520px);
+            height: px1em(200px);
             .swiper2 {
-              height: 2.6rem !important;
-              border-radius: 0.1rem;
+              height: px1em(200px) !important;
+              border-radius: px1em(10px);
               img {
                 width: 100%;
                 height: 100%;
@@ -313,7 +314,7 @@ export default {
             }
             .swiper {
               color: #fff;
-              height: 3rem;
+              height: px1em(200px);
               .swiper-slide-active {
                 opacity: 1 !important;
               }
@@ -326,26 +327,26 @@ export default {
                 .no_pic_box {
                   width: 100%;
                   height: 100%;
-                  border-radius: 0.1rem;
+                  border-radius: px1em(10px);
                   display: flex;
                   justify-content: center;
                   align-items: center;
                   background-color: #fff;
                   img {
-                    width: 1.14rem;
-                    height: 1.14rem;
+                    width: px1em(114px);
+                    height: px1em(114px);
                   }
                 }
                 img {
                   width: 100%;
                   height: 100%;
-                  border-radius: 0.1rem;
+                  border-radius: px1em(10px);
                 }
                 .title_bg {
                   position: absolute;
                   bottom: 0;
                   width: 100%;
-                  height: 0.95rem;
+                  height: px1em(95px);
                   background: linear-gradient(
                     0deg,
                     rgba(0, 0, 0, 0.8),
@@ -355,9 +356,9 @@ export default {
                     // width: 100%;
                     text-align: center;
                     z-index: 99999;
-                    margin: 0 0.3rem;
-                    margin-top: 0.3rem;
-                    font-size: 0.3rem;
+                    margin: 0 px1em(30px);
+                    margin-top: px1em(30px);
+                    font-size: px1em(30px);
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                   }
@@ -366,24 +367,24 @@ export default {
             }
             .swiper-pagination,
             .swiper-pagination2 {
-              width: 7.88rem;
-              margin-top: -0.15rem;
+              width: px1em(520px);
+              margin-top: -px1em(15px);
               // height: 0.12rem;
               // margin-top: 0.22rem;
             }
             .swiper-pagination-bullet {
-              width: 0.12rem;
-              height: 0.12rem;
+              width: px1em(12px);
+              height: px1em(12px);
               background: #00edff;
               opacity: 0.4;
-              margin-right: 0.12rem;
+              margin-right: px1em(12px);
             }
             .swiper-pagination-bullet-active {
               background: #00edff;
               opacity: 1 !important;
-              width: 0.4rem;
-              height: 0.12rem;
-              border-radius: 0.1rem;
+              width: px1em(40px);
+              height: px1em(12px);
+              border-radius: px1em(10px);
             }
           }
         }

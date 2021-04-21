@@ -6,7 +6,7 @@
       <div class="briefing-body sys-flex sys-flex-center flex-justify-between">
         <div class="ai-left" :class="list && list[0] ? 'width1' : 'width2'">
           <!-- <video :src="videoUrl" autoplay loop controls muted></video> -->
-          <video src="http://vod.plus.yongzhou.gov.cn/video/2021/04/13/83b761ca171eaca13afb6cc944c1ad5c.mp4" style="width:100%;height:100%;object-fit:fill;" autoplay loop controls muted></video>
+          <!-- <video src="http://vod.plus.yongzhou.gov.cn/video/2021/04/13/83b761ca171eaca13afb6cc944c1ad5c.mp4" style="width:100%;height:100%;object-fit:fill;" autoplay loop controls muted></video> -->
           <!-- <video id="monitor-video" style="width:100%;height:100%;object-fit:fill;" class="video-js vjs-default-skin vjs-big-play-centered"></video> -->
         </div>
         <div class="ai-right" v-if="list && list[0]">
@@ -84,13 +84,13 @@ export default {
           this.times--
           storage.set('intelligenceBriefing', this.times)
           // 发送websocket断连通知
-          let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=316&custom_appkey=hCSxFPczZxine4Uu9ZQRQVqfeB5vfiNm&device_token=32432weqdwaqdqw'
+          let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw'
           let name = '智能人物'
           this.$api.isWebsocket(link, name).then(res => {
             console.log(res)
           })
           // 长链接断开时间大于一分钟 刷新页面
-          window.location.reload()
+          // window.location.reload()
         } else {
           this.isConnection = false
         }
@@ -128,7 +128,7 @@ export default {
           this.$api.isWebsocket(link, name).then(res => {
             console.log(res, '123')
           })
-          window.location.reload()
+          // window.location.reload()
         } else {
           this.isConnection = false
         }
@@ -332,9 +332,9 @@ export default {
     .briefing-title {
       width: 100%;
       height: 1.13rem;
-      background:linear-gradient(0deg,rgba(38,182,241,0.46) 0%,rgba(38,182,241,0.01) 99%);
-      background-size: 100%;
-      // background-image: url('../../assets/img/title_bg2.png');
+      // background:linear-gradient(0deg,rgba(38,182,241,0.46) 0%,rgba(38,182,241,0.01) 99%);
+      background-size: 100% 100%;
+      background-image: url('./assets/title_bg2.png');
       background-repeat: no-repeat;
       background-position: center 30%;
       text-align: center;
@@ -345,7 +345,7 @@ export default {
     .briefing-body {
       width: 100%;
       height: 8.61rem;
-      // background: url('../../assets/img/briefing/tongyong_bg01.png') no-repeat center;
+      background: url('./assets/tongyong_bg01.png') no-repeat center;
       background-size: 100%;
       padding: 0.3rem 0.34rem 0.3rem 0.3rem;
       .width1 {
@@ -371,7 +371,7 @@ export default {
           opacity: 0.6;
           width: 1.92rem;
           height: 1.9rem;
-          // background: url('../../assets/img/briefing/touxiang_bg.png') no-repeat center;
+          background: url('./assets/touxiang_bg.png') no-repeat center;
           background-size: 100%;
           margin-bottom: 0.12rem;
           img {

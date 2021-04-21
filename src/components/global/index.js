@@ -29,6 +29,7 @@ export const xinyicomponentRelatedReports = getComponent('xinyi/relatedReports')
 export const xinyicomponentCharacterOne = getComponent('xinyi/characterOne')
 export const xinyicomponentClickList = getComponent('xinyi/clickList')
 export const xinyicomponentCharacterSeven = getComponent('xinyi/characterSeven')
+export const xinyicomponentCharacterAll = getComponent('xinyi/characterAll')
 /* 马鞍山套系 */
 export const maanshancomponentReport = getComponent('maanshan/report') // 报题展示
 export const maanshancomponentProject = getComponent('maanshan/project') // 选题展示
