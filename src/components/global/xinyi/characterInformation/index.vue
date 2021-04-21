@@ -80,13 +80,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import 'src/styles/index.scss';
+@import "~@/styles/index.scss";
 .main-wrap {
   .character-information {
     width: 100%;
     height: 100%;
-    padding: px1em(5px) px1em(15px);
+    padding: px1em(50px) px1em(35px) px1em(30px);
     color: #fff;
+    font-size:  px1em(48px);
     img {
       width: 100%;
       height: 100%;
@@ -94,30 +95,35 @@ export default {
     }
     .character-title {
       width: 100%;
-      height: 15%;
-      background: url("./assets/title_bg2.png") no-repeat center top;
-      background-size: 100% 100%;
+      height:  px1em(113px);
+      background: linear-gradient(
+        0deg,
+        rgba(38, 182, 241, 0.46) 0%,
+        rgba(38, 182, 241, 0.01) 99%
+      );
+      background-size: 100%;
+      background-image: url("./assets/title_bg2.png");
+      background-repeat: no-repeat;
+      background-position: center 30%;
       text-align: center;
       font-weight: 600;
-      padding-top:px1em(7px);
-      margin-bottom: px1em(10px);
-      font-size: px1em(14px);
+      margin-bottom:  px1em(25px);
     }
     .character-body {
       .no_data {
         width: 100%;
-        height: px1em(862px);
+        height:  px1em(862px);
         div {
-          width: px1em(758px);
-          height: px1em(592px);
-          background: url("./assets/no_data.png") no-repeat center top;
+          width:  px1em(758px);
+          height: px1em(576px);
+          background: url("./assets/no_data.png") no-repeat;
           background-size: 100% 100%;
           margin-bottom: px1em(300px);
         }
       }
       .head-photo {
-        width: 33%;
-        height: 70%;
+        width:  px1em(635px);
+        height:  px1em(862px)
         img{
           width: 100%;
           height: 100%;
@@ -126,39 +132,43 @@ export default {
         }
       }
       .name-position {
-        flex-basis: 60%;
+        span {
+          font-size:  px1em(30px);
+          margin-left:  px1em(8px);
+        }
         .name {
-          width: 100%;
-          height: px1em(45px);
-          line-height: px1em(45px);
+          width:  px1em(1136px);
+          height:  px1em(183px);
           background: url("./assets/name02_bg.png") no-repeat center;
-          background-size: 100% 100%;
-          margin-bottom: px1em(11px);
-          padding: 0 px1em(14px);
+          background-size: 100%;
+          margin-bottom:  px1em(42px);
+          padding: 0  px1em(72px);
           div:first-of-type {
-            font-size: px1em(18px);
+            font-size:  px1em(48px);
             font-weight: 500;
             color: rgba(0, 255, 246, 1);
+            line-height:  px1em(46px);
           }
           div:last-of-type {
-            font-size: px1em(14px);
+            font-size:  px1em(32px);
             font-weight: 400;
             color: rgba(255, 255, 255, 1);
-            margin-left: px1em(30px);
+            line-height:  px1em(46px);
+            margin-left: 0.6rem;
           }
         }
         .position {
-          width: 100%;
-          height: px1em(170px);
+          width:  px1em(1136px);
+          height:  px1em(634px);
           background: url("./assets/renwu_zhiwu_bg.png") no-repeat center;
-          background-size: 100% 100%;
-          padding: px1em(15px) px1em(12.5px);
+          background-size: 100%;
+          padding:  px1em(47px)  px1em(72px);
           div:first-of-type {
             width: 100%;
             height: 100%;
-            font-size: px1em(14px);
+            font-size:  px1em(34px);
             font-weight: 400;
-            line-height: 1.5em;
+            line-height:  px1em(60px);
             color: rgba(255, 255, 255, 1);
             overflow: hidden;
             text-align: center;

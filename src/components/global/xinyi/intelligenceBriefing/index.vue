@@ -49,6 +49,7 @@ export default {
     }
   },
   created () {
+    this.setFontsize('main-wrap')
     // 初始化数据
     storage.set('intelligenceBriefing', 6)
     this.startTime2 = (new Date()).getTime()
@@ -161,6 +162,7 @@ export default {
       }
       this.socketClient.onmessage = (evt) => {
         storage.set('aiWebsocket', 6)
+        console.log('111111')
         this.startTime3 = (new Date()).getTime()
         let data = evt.data
         // let data = ''
@@ -222,7 +224,7 @@ export default {
     },
     start () {
       this.$api.startScan(this.callback_url).then((res) => {
-        // console.log(res,'res')
+        console.log(res)
         // let url = 'rtmp://10.0.1.111/live/test_sd'
         // this.player = new Videojs('monitor-video', {
         //   sources: [{
@@ -316,46 +318,47 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "~@/styles/index.scss";
 .main-wrap {
   .intelligence-briefing {
     width: 100%;
     height: 100%;
-    padding: 0.5rem 0.3rem 0.35rem;
+    padding: pxrem(50px)  pxrem(30px)  pxrem(35px);
     // padding-top: 0;
     color: #fff;
-    font-size: 0.48rem;
+    font-size:  pxrem(24px);
     button {
-      width: 1rem;
-      height: 0.5rem;
-      font-size: 0.4rem;
+      width:  pxrem(100px);
+      height:  pxrem(50px);
+      font-size:  pxrem(40px)
     }
     .briefing-title {
       width: 100%;
-      height: 1.13rem;
-      // background:linear-gradient(0deg,rgba(38,182,241,0.46) 0%,rgba(38,182,241,0.01) 99%);
-      background-size: 100% 100%;
-      background-image: url('./assets/title_bg2.png');
+      height:  pxrem(113px);
+      background:linear-gradient(0deg,rgba(38,182,241,0.46) 0%,rgba(38,182,241,0.01) 99%);
+      background-size: 100%;
+      // background-image: url('../../assets/img/title_bg2.png');
       background-repeat: no-repeat;
       background-position: center 30%;
       text-align: center;
       font-weight: 600;
       // line-height: 1.13rem;
-      margin-bottom: 0.25rem;
+      margin-bottom: pxrem(25px)
     }
     .briefing-body {
       width: 100%;
-      height: 8.61rem;
-      background: url('./assets/tongyong_bg01.png') no-repeat center;
+      height:  pxrem(461px);
+      // background: url('../../assets/img/briefing/tongyong_bg01.png') no-repeat center;
       background-size: 100%;
-      padding: 0.3rem 0.34rem 0.3rem 0.3rem;
+      padding:  pxrem(30px) pxrem(34px) pxrem(30px) pxrem(30px);
       .width1 {
-        width: 15.5rem;
+        width: pxrem(1550px);
       }
       .width2 {
         width: 100%;
       }
       .ai-left {
-        height: 8rem;
+        height: pxrem(400px);
         video {
           width: 100%;
           height: 100%;
@@ -369,14 +372,14 @@ export default {
         }
         .img-box {
           opacity: 0.6;
-          width: 1.92rem;
+          width: pxrem(192px);
           height: 1.9rem;
           background: url('./assets/touxiang_bg.png') no-repeat center;
           background-size: 100%;
-          margin-bottom: 0.12rem;
+          margin-bottom: pxrem(12px);
           img {
-            width: 1.8rem;
-            height: 1.78rem;
+            width: pxrem(180px);
+            height: pxrem(178px);
             object-fit: cover;
           }
         }

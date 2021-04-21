@@ -180,13 +180,14 @@ export default {
 }
 </script>
 <style lang="scss">
-@import 'src/styles/index.scss';
+@import "~@/styles/index.scss";
 .main-wrap {
   .related-reports {
     width: 100%;
     height: 100%;
-    padding: px1em(10px) px1em(30px);
+    padding: px1em(50px)  px1em(10px) px1em(35px)  px1em(10px);
     color: #fff;
+    font-size: px1em(48px);
     img {
       width: 100%;
       height: 100%;
@@ -194,46 +195,53 @@ export default {
     }
     .reports-title {
       width: 100%;
-      height: px1em(80px);
-      background: url("./assets/title_bg2.png") no-repeat center top;
-      background-size: 100% 100%;
+      height:  px1em(113px);
+      background: linear-gradient(
+        0deg,
+        rgba(38, 182, 241, 0.46) 0%,
+        rgba(38, 182, 241, 0.01) 99%
+      );
+      background-size: 100%;
+      background-image: url("./assets/title_bg2.png");
+      background-repeat: no-repeat;
+      background-position: center 30%;
       text-align: center;
       font-weight: 600;
-      padding-top:px1em(10px);
-      // margin-bottom: px1em(10px);
-      font-size: px1em(40px);
+      // line-height: 1.13rem;
+      margin-bottom:  px1em(25px);
     }
     .reports-body {
       display: flex;
       justify-content: space-between;
       .no_data {
         width: 100%;
-        height: px1em(862px);
+        height:  px1em(862px);
         div {
           width: px1em(758px);
-          height: px1em(592px);
-          background: url("./assets/no_data.png") no-repeat center top;
+          height: px1em(576px);
+          background: url("./assets/no_data.png") no-repeat;
           background-size: 100% 100%;
           margin-bottom: px1em(300px);
         }
       }
       .reports_left {
-        // flex-basis: 51%;
-        width:px1em(700px);
-       
+        margin-right: px1em(64px);
         .reports_m_title {
-          margin-bottom: px1em(20px);
-          font-size: px1em(30px);
+          height:  px1em(50px);
+          line-height: px1em(50px);
+          margin-bottom: px1em(39px);
+          font-size:  px1em(40px);
           font-weight: 500;
           text-align:left;
           color: #fff;
         }
         .news {
-          // height: 7.53rem;
+          height:  px1em(753px);
           overflow: hidden;
           li {
-            // width: px1em(987px);
-            height: px1em(140px);
+            width: px1em(987px);
+            height:  px1em(223px);
+            border: 0.01px solid rgba(63, 230, 255, 1);
             background: url("./assets/baodao_list_bg.png") no-repeat;
             background-size: 100% 100%;
             padding: px1em(13px) px1em(16px);

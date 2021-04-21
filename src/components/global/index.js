@@ -172,3 +172,13 @@ export const common01componentReviewRelease = getComponent('common01/reviewRelea
 export const common01componentContentSpread = getComponent('common01/contentSpread') // 山西 内容传播
 export const common01componentOperationData = getComponent('common01/operationData') // 山西 运营数据
 export const common01componentSxMiddle = getComponent('common01/sxMiddle') // 山西 中间
+
+export const common01componentHuaianReport = getComponent('common01/huaianReport') // 淮安清江浦 报题展示
+export const common01componentHuaianProject = getComponent('common01/huaianProject') // 淮安清江浦 选题展示
+export const common01componentHuaianTaskShow = getComponent('common01/huaianTaskShow') // 淮安清江浦 任务展示
+export const common01componentHuaianClueGather = getComponent('common01/huaianClueGather') // 淮安清江浦 线索汇聚
+export const common01componentHuaianClueGather01 = getComponent('common01/huaianClueGather01') // 淮安清江浦 线索汇聚
+export const common01componentHuaianClueGather02 = getComponent('common01/huaianClueGather02') // 淮安清江浦 线索汇聚
+export const common01componentHuaianClueGather03 = getComponent('common01/huaianClueGather03') // 淮安清江浦 线索汇聚
+export const common01componentHuaianTitle = getComponent('common01/huaianTitle') // 淮安清江浦 标题
+export const common01componentHuaianReporterConnection = getComponent('common01/huaianReporterConnection') // 淮安清江浦 记者连线
