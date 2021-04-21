@@ -180,13 +180,14 @@ export default {
 }
 </script>
 <style lang="scss">
+@import "~@/styles/index.scss";
 .main-wrap {
   .related-reports {
     width: 100%;
     height: 100%;
-    padding: 0.5rem 0.1rem 0.35rem 0.1rem;
+    padding: px1em(50px)  px1em(10px) px1em(35px)  px1em(10px);
     color: #fff;
-    font-size: 0.48rem;
+    font-size: px1em(48px);
     img {
       width: 100%;
       height: 100%;
@@ -194,7 +195,7 @@ export default {
     }
     .reports-title {
       width: 100%;
-      height: 1.13rem;
+      height:  px1em(113px);
       background: linear-gradient(
         0deg,
         rgba(38, 182, 241, 0.46) 0%,
@@ -207,37 +208,37 @@ export default {
       text-align: center;
       font-weight: 600;
       // line-height: 1.13rem;
-      margin-bottom: 0.25rem;
+      margin-bottom:  px1em(25px);
     }
     .reports-body {
       display: flex;
       justify-content: space-between;
       .no_data {
         width: 100%;
-        height: 8.62rem;
+        height:  px1em(862px);
         div {
-          width: 7.58rem;
-          height: 5.76rem;
+          width: px1em(758px);
+          height: px1em(576px);
           background: url("./assets/no_data.png") no-repeat;
           background-size: 100% 100%;
         }
       }
       .reports_left {
-        margin-right: 0.64rem;
+        margin-right: px1em(64px);
         .reports_m_title {
-          height: 0.5rem;
-          line-height: 0.5rem;
-          margin-bottom: 0.39rem;
-          font-size: 0.4rem;
+          height:  px1em(50px);
+          line-height: px1em(50px);
+          margin-bottom: px1em(39px);
+          font-size:  px1em(40px);
           font-weight: 500;
           color: rgba(255, 255, 255, 1);
         }
         .news {
-          height: 7.53rem;
+          height:  px1em(753px);
           overflow: hidden;
           li {
-            width: 9.87rem;
-            height: 2.23rem;
+            width: px1em(987px);
+            height:  px1em(223px);
             border: 0.01px solid rgba(63, 230, 255, 1);
             background: url("./assets/baodao_list_bg.png") no-repeat;
             background-size: 100%;

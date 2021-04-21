@@ -76,13 +76,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "~@/styles/index.scss";
 .main-wrap {
   .character-information {
     width: 100%;
     height: 100%;
-    padding: 0.5rem 0.3rem 0.35rem;
+    padding: px1em(50px) px1em(35px) px1em(30px);
     color: #fff;
-    font-size: 0.48rem;
+    font-size:  px1em(48px);
     img {
       width: 100%;
       height: 100%;
@@ -90,7 +91,7 @@ export default {
     }
     .character-title {
       width: 100%;
-      height: 1.13rem;
+      height:  px1em(113px);
       background: linear-gradient(
         0deg,
         rgba(38, 182, 241, 0.46) 0%,
@@ -102,22 +103,22 @@ export default {
       background-position: center 30%;
       text-align: center;
       font-weight: 600;
-      margin-bottom: 0.25rem;
+      margin-bottom:  px1em(25px);
     }
     .character-body {
       .no_data {
         width: 100%;
-        height: 8.62rem;
+        height:  px1em(862px);
         div {
-          width: 7.58rem;
-          height: 5.76rem;
+          width:  px1em(758px);
+          height: px1em(576px);
           background: url("./assets/no_data.png") no-repeat;
           background-size: 100% 100%;
         }
       }
       .head-photo {
-        width: 6.35rem;
-        height: 8.62rem;
+        width:  px1em(635px);
+        height:  px1em(862px)
         img{
           width: 100%;
           height: 100%;
@@ -126,42 +127,42 @@ export default {
       }
       .name-position {
         span {
-          font-size: 0.3rem;
-          margin-left: 0.08rem;
+          font-size:  px1em(30px);
+          margin-left:  px1em(8px);
         }
         .name {
-          width: 11.36rem;
-          height: 1.83rem;
+          width:  px1em(1136px);
+          height:  px1em(183px);
           background: url("./assets/name02_bg.png") no-repeat center;
           background-size: 100%;
-          margin-bottom: 0.42rem;
-          padding: 0 0.72rem;
+          margin-bottom:  px1em(42px);
+          padding: 0  px1em(72px);
           div:first-of-type {
-            font-size: 0.48rem;
+            font-size:  px1em(48px);
             font-weight: 500;
             color: rgba(0, 255, 246, 1);
-            line-height: 0.46rem;
+            line-height:  px1em(46px);
           }
           div:last-of-type {
-            font-size: 0.32rem;
+            font-size:  px1em(32px);
             font-weight: 400;
             color: rgba(255, 255, 255, 1);
-            line-height: 0.46rem;
+            line-height:  px1em(46px);
             margin-left: 0.6rem;
           }
         }
         .position {
-          width: 11.36rem;
-          height: 6.34rem;
+          width:  px1em(1136px);
+          height:  px1em(634px);
           background: url("./assets/renwu_zhiwu_bg.png") no-repeat center;
           background-size: 100%;
-          padding: 0.47rem 0.72rem;
+          padding:  px1em(47px)  px1em(72px);
           div:first-of-type {
             width: 100%;
             height: 100%;
-            font-size: 0.34rem;
+            font-size:  px1em(34px);
             font-weight: 400;
-            line-height: 0.6rem;
+            line-height:  px1em(60px);
             color: rgba(255, 255, 255, 1);
             overflow: hidden;
           }
