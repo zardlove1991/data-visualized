@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrap position-relative">
+  <div class="xy-intelligenceBriefing" id="xy-intelligenceBriefing">
     <span class="off" v-if="!isConnection">websocket断连，页面已刷新5次</span>
     <div class="intelligence-briefing">
       <div class="briefing-title">智能前台</div>
@@ -49,7 +49,6 @@ export default {
     }
   },
   created () {
-    this.setFontsize('main-wrap')
     // 初始化数据
     storage.set('intelligenceBriefing', 6)
     this.startTime2 = (new Date()).getTime()
@@ -136,6 +135,9 @@ export default {
       }
     }, 60000)
     this.initData()
+  },
+  mounted () {
+    this.setFontsize('xy-intelligenceBriefing')
   },
   methods: {
     initData () {
@@ -319,13 +321,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
-.main-wrap {
+.xy-intelligenceBriefing {
+    height: 100%;
+    padding: 0.25vh 0.1vw;
   .intelligence-briefing {
     width: 100%;
     height: 100%;
     padding: 0  pxrem(30px)  pxrem(35px);
     color: #fff;
-    font-size: pxrem(24px);
+    font-size: pxrem(48px);
     button {
       width:  pxrem(100px);
       height:  pxrem(50px);
@@ -333,7 +337,7 @@ export default {
     }
     .briefing-title {
       width: 100%;
-      height:  pxrem(113px);
+      height: pxrem(183px);
       // background:linear-gradient(0deg,rgba(38,182,241,0.46) 0%,rgba(38,182,241,0.01) 99%);
       background-image: url('./assets/title_bg2.png');
       background-size: 100% 100%;
@@ -342,11 +346,10 @@ export default {
       text-align: center;
       font-weight: 600;
       padding-top:px1em(20px);
-      // margin-bottom: pxrem(25px)
     }
     .briefing-body {
       width: 100%;
-      height:  pxrem(461px);
+      height:  pxrem(861px);
       background: url('./assets/tongyong_bg01.png') no-repeat center;
       background-size: 100% 100%;
       padding:  pxrem(30px) pxrem(34px) pxrem(30px) pxrem(30px);
@@ -357,7 +360,7 @@ export default {
         width: 100%;
       }
       .ai-left {
-        height: pxrem(400px);
+        height: 100%;
         video {
           width: 100%;
           height: 100%;

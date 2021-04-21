@@ -95,8 +95,7 @@ export default {
 .main-wrap {
   width: 100%;
   height: 100%;
-  // padding: 0 px1em(30px) px1em(15px);
-  padding: 0.3% 0.5%;
+  padding: 0 pxrem(30px) pxrem(15px);
   position: relative;
   background: url("./assets/bg.png") no-repeat center center;
   background-size: 100% 100%;
@@ -111,22 +110,23 @@ export default {
     background-size: 100% 100%;
     text-align: center;
     font-weight: 600;
-    font-size: px1em(22px);
+    font-size: pxrem(48px);
     color:#fff;
   }
+  
   .click-list {
     background: url("./assets/border.png") no-repeat center center;
     background-size: 100% 100%;
     color: #fff;
     width: 100%;
-    height: 15%;
+    height: 1.2rem;
     font-family: PingFangSC-Regular;
-    margin-bottom: 1%;
-    padding: 1% 2%;
+    margin-bottom: .26rem;
+    padding: 0 0.3rem;
     .click-rank {
-      font-size: px1em(14px);
-      padding:px1em(5px) px1em(10px);
-      border-radius: px1em(6px);
+      font-size: pxrem(14px);
+      padding:pxrem(5px) pxrem(10px);
+      border-radius: pxrem(6px);
       &.first {
         background: rgba(240, 65, 65, 1);
       }
@@ -141,17 +141,17 @@ export default {
       }
     }
     .click-list-title {
-      font-size: px1em(18px);
+      font-size: pxrem(18px);
       font-weight: 400;
-      padding-left: px1em(30px);
+      padding-left: pxrem(30px);
       flex:1;
       text-align: left;
     }
     .click-user {
       background: url("./assets/name.png") no-repeat center left;
-      background-size: px1em(25px) px1em(28px);
-      padding-left: px1em(40px);
-      font-size: px1em(14.5px);
+      background-size: pxrem(25px) pxrem(28px);
+      padding-left: pxrem(40px);
+      font-size: pxrem(14.5px);
       font-family: PingFangSC-Regular;
       font-weight: 400;
       color: #fff;
@@ -160,9 +160,9 @@ export default {
     }
     .click-count {
       background: url("./assets/click.png") no-repeat center left;
-      background-size: px1em(30px) px1em(28px);
-      padding-left: px1em(50px);
-      font-size: px1em(14.5px);
+      background-size: pxrem(30px) pxrem(28px);
+      padding-left: pxrem(50px);
+      font-size: pxrem(14.5px);
       font-family: PingFangSC-Regular;
       font-weight: 400;
       color: #fff;

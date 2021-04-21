@@ -214,6 +214,7 @@ export default {
       font-weight: 600;
       // line-height: 1.13rem;
       margin-bottom:  pxrem(25px);
+      padding-top: pxrem(20px);
     }
     .reports-body {
       display: flex;

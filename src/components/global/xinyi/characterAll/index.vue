@@ -1,5 +1,5 @@
 <template>
-  <div class="position-relative">
+  <div class="xy_characterAll" id="xy_characterAll">
     <span class="off" v-if="!isConnection">websocket断连，页面已刷新5次</span>
     <!-- <div class="wrap" v-show="type == 'm2o_plus'"> -->
     <div class="wrap">
@@ -20,7 +20,7 @@ import workcallInfoMap from '../workcallInfoMap/index'
 import { getNowTime } from '@/utils/utils'
 import { storage } from '@/utils/storage'
 export default {
-  name: 'characterOne',
+  name: 'characterAll',
   data () {
     return {
       id: 313,
@@ -94,6 +94,8 @@ export default {
     }, 60000)
   },
   mounted () {
+    this._setFontsize('xy_characterAll')
+    document.querySelector('html').style.fontSize = document.getElementById('xy-relatedReports').style.fontSize
     // 接收数据
     window.socketClient.onmessage = (evt) => {
       console.log('12312')
@@ -119,11 +121,33 @@ export default {
         }
       }
     }
+  },
+  methods: {
+    _setFontsize (id) {
+      console.log('1231')
+      let dom = document.getElementById(id)
+      if (dom) {
+        let width = dom.clientWidth / 2
+        let height = dom.clientHeight / 2
+        let multiple = 1
+        let a = width / height
+        if (a > (1920 / 1080)) {
+          multiple = (1920 / 1080) / a
+        }
+        if (a > 1.78) {
+          dom.style.fontSize = width / 1920 * 100 * multiple + 'px'
+        } else {
+          dom.style.fontSize = height / 1080 * 100 + 'px'
+        }
+      }
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
-    .wrap {
+@import 'src/styles/index.scss';
+  .xy_characterAll {
+     .wrap {
         display: flex;
         flex-wrap: wrap;
         div {
@@ -131,4 +155,5 @@ export default {
             height: 50vh;
         }
     }
+  }
 </style>
