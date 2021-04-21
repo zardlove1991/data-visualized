@@ -137,7 +137,7 @@ export default {
           left: '0%',
           right: '0%',
           bottom: '0%',
-          top: 30,
+          top: 60,
           containLabel: true
         },
         series: [{
@@ -188,10 +188,10 @@ export default {
           this.today_create_amount = res.data.result.today_create_amount
           this.week_create_amount = res.data.result.week_create_amount
           this.month_create_amount = res.data.result.month_create_amount
-          let articleSum = res.data.result.publish_num.article
-          let gallerySum = res.data.result.publish_num.gallery
-          let videoSum = res.data.result.publish_num.video
-          let topicSum = res.data.result.publish_num.topic
+          let articleSum = res.data.result.publish_num.article ? parseInt(res.data.result.publish_num.article) : 0
+          let gallerySum = res.data.result.publish_num.gallery ? parseInt(res.data.result.publish_num.gallery) : 0
+          let videoSum = res.data.result.publish_num.video ? parseInt(res.data.result.publish_num.video) : 0
+          let topicSum = res.data.result.publish_num.topic ? parseInt(res.data.result.publish_num.topic) : 0
           this.barOptions1.series[0].data.push({value: articleSum, name: '文稿'}, {value: gallerySum, name: '图集'}, {value: videoSum, name: '视频'}, {value: topicSum, name: '专题'})
           this.barOptions2.series[0].data.push(articleSum, gallerySum, videoSum, topicSum)
           this.barOptions1.legend.formatter = function (name) {

@@ -10,9 +10,7 @@
         <p class="yonghu">网站用户量：<i>{{web_user_amount}}</i></p>
       </div>
       <div class="wechat_div">
-
-
-        <div class="wechat_child wechat1">
+        <!-- <div class="wechat_child wechat1">
           <div class="wechat_top">
             <img src="./assets/numBack.png"/>
             <div class="title">黄河频道</div>
@@ -33,19 +31,30 @@
             <p class="weixin">微信粉丝数：<i>{{weChat_click_amount}}</i></p>
             <p class="weibo">微博阅读量：<i>{{weChat_user_amount}}</i></p>
           </div>
-        </div>
-        
-        <!-- <swiper :options="swiperOption" ref="mySwiper">
+        </div> -->
+        <swiper :options="swiperOption" ref="mySwiper">
           <swiper-slide v-for="(v, k) in dataList" :key="k">
-            
+            <div class="wechat_child">
+              <div class="wechat_top">
+                <img v-if="v.account_avatar" :src="v.account_avatar" />
+                <img v-if="!v.account_avatar" src="./assets/numBack.png" />
+                <div class="title">{{v.account_name}}</div>
+                <div class="num">{{v.msg_count}}</div>
+              </div>
+              <div class="wechat_bottom">
+                <p class="weixin">微信粉丝数：<i>{{v.cumulate_user}}</i></p>
+                <p class="weibo">微博阅读量：<i>{{v.int_page_read_count}}</i></p>
+              </div>
+            </div>
           </swiper-slide>
-        </swiper> -->
-
+        </swiper>
       </div>
     </div>
   </div>
 </template>
 <script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { operationalData } from '@/servers/interface'
 export default {
   name: 'operationData',
@@ -55,8 +64,15 @@ export default {
       app_user_amount: '',
       web_click_amount: '',
       web_user_amount: '',
-      weChat_click_amount: '',
-      weChat_user_amount: ''
+      dataList: [],
+      swiperOption: {
+        init: false,
+        loop: true,
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        speed: 3000,
+        autoplay: true
+      }
     }
   },
   created () {
@@ -74,11 +90,24 @@ export default {
           this.app_user_amount = res.data.result.app_user_amount
           this.web_click_amount = res.data.result.web_click_amount
           this.web_user_amount = res.data.result.web_user_amount
-          this.weChat_click_amount = res.data.result.weChat_click_amount
-          this.weChat_user_amount = res.data.result.weChat_user_amount
+          this.dataList = res.data.result.wechat
         }
       })
     }
+  },
+  watch: {
+    dataList: function () {
+      var _this = this
+      _this.$nextTick(function () {
+        let swiper = this.$refs.mySwiper.swiper
+        swiper.init()
+        swiper.effect = 'fade'
+      })
+    }
+  },
+  components: {
+    swiper,
+    swiperSlide
   }
 }
 </script>
@@ -170,87 +199,91 @@ export default {
       background: url('./assets/wechat_xin.png') no-repeat left bottom;
       background-size: 100% 100%;
       position: relative;
-      .wechat_child{
-        width: pxrem(420px);
+      .swiper-container{
+        width: 100%;
         height: pxrem(656px);
-        .wechat_top{
-          height: pxrem(115px);
-          padding-left: pxrem(72px);
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          top: pxrem(50px);
-          img{
-            width: pxrem(57px);
-            height: pxrem(114px);
-            vertical-align: middle;
-            position: absolute;
-            left: pxrem(0px);
-            top: pxrem(0px);
-          }
-          .title{
-            font-size: pxrem(34px);
-            font-weight: 600;
-            color: #fff;
-            transform-origin: 0 0;
-            transform: scale(0.5,1);
-          }
-          .num{
-            background: url('./assets/article.png') no-repeat left center;
-            font-size: pxrem(28px);
-            color: #00a2ff;
-            margin-top: pxrem(20px);
-            text-align: left;
-            padding-left: pxrem(34px);
-            background-size: auto 100%;
-          }
-        }
-        .wechat_bottom{
-          p{
-            font-size: pxrem(48px);
-            text-align: center;
-            font-stretch: ultra-condensed;
-            i{
-              font-style: normal;
-              font-size: pxrem(48px);
-              font-weight: 600;
-              // padding-left: pxrem(43px);
-              color: #01feb6;
+        .swiper-wrapper{
+          height: pxrem(656px);
+          .swiper-slide{
+            // width: pxrem(375px)!important;
+            height: 100%;
+            // margin-right: pxrem(50px);
+            display: inline-block;
+            .wechat_child{
+              position: absolute;
+              left: pxrem(0px);
+              top: pxrem(0px);
+              width: pxrem(420px);
+              height: pxrem(656px);
+              display: table-cell;
+              text-align: center;
+              .wechat_top{
+                height: pxrem(115px);
+                padding-left: pxrem(72px);
+                // position: absolute;
+                // left: 50%;
+                // transform: translateX(-50%);
+                position: relative;
+                display: inline-block;
+                top: pxrem(50px);
+                img{
+                  width: pxrem(57px);
+                  height: pxrem(114px);
+                  vertical-align: middle;
+                  position: absolute;
+                  left: pxrem(0px);
+                  top: pxrem(0px);
+                }
+                .title{
+                  font-size: pxrem(36px);
+                  font-weight: 600;
+                  color: #fff;
+                  transform-origin: 0 0;
+                  transform: scale(0.5,1);
+                }
+                .num{
+                  background: url('./assets/article.png') no-repeat left center;
+                  font-size: pxrem(30px);
+                  color: #00a2ff;
+                  margin-top: pxrem(20px);
+                  text-align: left;
+                  padding-left: pxrem(48px);
+                  background-size: auto 100%;
+                  transform-origin: 0 0;
+                  transform: scale(0.5,1);
+                }
+              }
+              .wechat_bottom{
+                p{
+                  font-size: pxrem(48px);
+                  text-align: center;
+                  font-stretch: ultra-condensed;
+                  i{
+                    font-style: normal;
+                    font-size: pxrem(48px);
+                    font-weight: 600;
+                    // padding-left: pxrem(43px);
+                    color: #01feb6;
+                  }
+                }
+                .weixin{
+                  width: pxrem(840px);
+                  position: absolute;
+                  left: -50%;
+                  bottom: pxrem(224px);
+                  // padding-left: pxrem(60px);
+                  transform: scale(0.5,1);
+                }
+                .weibo{
+                  width: pxrem(840px);
+                  position: absolute;
+                  left: -50%;
+                  bottom: pxrem(79px);
+                  // padding-left: pxrem(60px);
+                  transform: scale(0.5,1);
+                }
+              }
             }
-          }
-          .weixin{
-            width: pxrem(840px);
-            position: absolute;
-            left: -50%;
-            bottom: pxrem(224px);
-            // padding-left: pxrem(60px);
-            transform: scale(0.5,1);
-          }
-          .weibo{
-            width: pxrem(840px);
-            position: absolute;
-            left: -50%;
-            bottom: pxrem(79px);
-            // padding-left: pxrem(60px);
-            transform: scale(0.5,1);
-          }
-        }
-      }
-      .wechat1{
-        position: absolute;
-        left: pxrem(0px);
-        top: pxrem(0px);
-      }
-      .wechat2{
-        position: absolute;
-        right: pxrem(0px);
-        top: pxrem(0px);
-        .wechat_bottom{
-          .weixin{
-            padding-left: pxrem(50px);
-          }
-          .weibo{
-            padding-left: pxrem(50px);
           }
         }
       }
