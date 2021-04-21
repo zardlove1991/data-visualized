@@ -6,7 +6,7 @@
       <div class="briefing-body sys-flex sys-flex-center flex-justify-between">
         <div class="ai-left" :class="list && list[0] ? 'width1' : 'width2'">
           <!-- <video :src="videoUrl" autoplay loop controls muted></video> -->
-          <!-- <video src="http://vod.plus.yongzhou.gov.cn/video/2021/04/13/83b761ca171eaca13afb6cc944c1ad5c.mp4" style="width:100%;height:100%;object-fit:fill;" autoplay loop controls muted></video> -->
+          <video src="http://vod.plus.yongzhou.gov.cn/video/2021/04/13/83b761ca171eaca13afb6cc944c1ad5c.mp4" style="width:100%;height:100%;object-fit:fill;" autoplay loop controls muted></video>
           <!-- <video id="monitor-video" style="width:100%;height:100%;object-fit:fill;" class="video-js vjs-default-skin vjs-big-play-centered"></video> -->
         </div>
         <div class="ai-right" v-if="list && list[0]">
@@ -323,33 +323,32 @@ export default {
   .intelligence-briefing {
     width: 100%;
     height: 100%;
-    padding: pxrem(50px)  pxrem(30px)  pxrem(35px);
-    // padding-top: 0;
+    padding: 0  pxrem(30px)  pxrem(35px);
     color: #fff;
-    font-size:  pxrem(24px);
+    font-size: pxrem(24px);
     button {
       width:  pxrem(100px);
       height:  pxrem(50px);
-      font-size:  pxrem(40px)
+      font-size: pxrem(40px)
     }
     .briefing-title {
       width: 100%;
       height:  pxrem(113px);
-      background:linear-gradient(0deg,rgba(38,182,241,0.46) 0%,rgba(38,182,241,0.01) 99%);
-      background-size: 100%;
-      // background-image: url('../../assets/img/title_bg2.png');
+      // background:linear-gradient(0deg,rgba(38,182,241,0.46) 0%,rgba(38,182,241,0.01) 99%);
+      background-image: url('./assets/title_bg2.png');
+      background-size: 100% 100%;
       background-repeat: no-repeat;
       background-position: center 30%;
       text-align: center;
       font-weight: 600;
-      // line-height: 1.13rem;
-      margin-bottom: pxrem(25px)
+      padding-top:px1em(20px);
+      // margin-bottom: pxrem(25px)
     }
     .briefing-body {
       width: 100%;
       height:  pxrem(461px);
-      // background: url('../../assets/img/briefing/tongyong_bg01.png') no-repeat center;
-      background-size: 100%;
+      background: url('./assets/tongyong_bg01.png') no-repeat center;
+      background-size: 100% 100%;
       padding:  pxrem(30px) pxrem(34px) pxrem(30px) pxrem(30px);
       .width1 {
         width: pxrem(1550px);

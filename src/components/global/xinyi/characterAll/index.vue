@@ -1,58 +1,54 @@
 <template>
   <div class="position-relative">
     <span class="off" v-if="!isConnection">websocket断连，页面已刷新5次</span>
-    <div v-if="type !== 'm2o-plus'" class="box">
-        <!-- <intelligence-briefing :id="id"></intelligence-briefing> -->
-        
-        <character-seven :id="id"></character-seven>
-        <!-- <character-information :id="id"></character-information> -->
-        <character-one :id="id"></character-one>
-        <project></project>
-        <!-- <related-reports :id="id"></related-reports> -->
-        <click-list :id="id"></click-list>
+    <!-- <div class="wrap" v-show="type == 'm2o_plus'"> -->
+    <div class="wrap">
+        <intelligence-briefing></intelligence-briefing>
+        <character-information :id="id" :facePath="facePath"></character-information>
+        <related-reports :id="id"></related-reports>
+         <click-list :id="id"></click-list>
     </div>
-    
-    <workcall-infoMap v-else></workcall-infoMap>
+    <!-- <workcall-infoMap v-show="type == 'old'"></workcall-infoMap> -->
   </div>
 </template>
 <script>
-// import intelligenceBriefing from '../intelligenceBriefing/index'
-import project from '../project/index'
-// import characterInformation from '../characterInformation/index'
-import characterOne from '../characterOne/index'
-import characterSeven from '../characterSeven/index'
-import relatedReports from '../relatedReports/index'
+import characterInformation from '../characterInformation/index'
 import clickList from '../clickList/index'
+import relatedReports from '../relatedReports/index'
+import intelligenceBriefing from '../intelligenceBriefing/index'
 import workcallInfoMap from '../workcallInfoMap/index'
 import { getNowTime } from '@/utils/utils'
 import { storage } from '@/utils/storage'
 export default {
-  name: 'characterAll',
+  name: 'characterOne',
   data () {
     return {
-      id: 0,
+      id: 313,
       token: '',
-      type: 'old',
+      type: 'm2o_plus',
       startTime: '',
       endTime: '',
       times: '',
-      isConnection: true
+      isConnection: true,
+      facePath: '',
+      from: ''
     }
   },
   components: {
-    // intelligenceBriefing,
-    project,
-    // characterInformation,
-    characterOne,
-    characterSeven,
+    characterInformation,
     relatedReports,
-    clickList,
-    workcallInfoMap
+    intelligenceBriefing,
+    workcallInfoMap,
+    clickList
   },
   created () {
     // 初始化数据
     storage.set('characterAll', 6)
     this.startTime = (new Date()).getTime()
+    // 获取页面来源
+    if (window.location.href.split('?')[1]) {
+      this.from = window.location.href.split('?')[1].substring(5)
+    }
     // 发送数据建立websocket
     window.socketClient = new WebSocket('wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw')
     window.socketClient.onopen = () => {
@@ -75,9 +71,9 @@ export default {
           storage.set('characterAll', this.times)
           // 发送websocket断连通知
           let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw'
-          let name = '人物简介/我的任务/稿件排行'
+          let name = '人物信息/融媒首页/稿件排行'
           this.$api.isWebsocket(link, name).then(res => {
-            console.log(res)
+            console.log(res, '123')
           })
           // 长链接断开时间大于一分钟 刷新页面
           console.log('页面刷新')
@@ -88,6 +84,10 @@ export default {
       }
       // 发送消息
       let msg = {type: 'send_all'}
+      if (this.from) {
+        msg.from = 'hoge'
+      }
+      console.log(window.socketClient)
       if (window.socketClient.readyState === 1) {
         window.socketClient.send(JSON.stringify(msg))
       }
@@ -96,17 +96,20 @@ export default {
   mounted () {
     // 接收数据
     window.socketClient.onmessage = (evt) => {
+      console.log('12312')
       storage.set('characterAll', 6)
       // 长链接正常一直记录开始时间
       this.startTime = (new Date()).getTime()
       var res = JSON.parse(evt.data)
-      console.log(res.text)
+      console.log(res)
       if (res.text) {
         if (JSON.parse(res.text) && JSON.parse(res.text).type === 'refresh_data') {
           window.location.reload()
         } else if (JSON.parse(res.text) && JSON.parse(res.text).type === 'send_all') {
         //   return
+          console.log('1231')
         } else {
+          this.facePath = JSON.parse(res.text)['face_path']
           this.type = JSON.parse(res.text).type
           let id = JSON.parse(res.text)['figure_id']
           if (this.type === 'workcall') {
@@ -120,17 +123,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import 'src/styles/index.scss';
-.box{
-    display:flex;
-    flex-wrap: wrap;
-    div{
-        width: 50%;
-        height: 50vh;
-        border: 1px solid red;  
+    .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        div {
+            width: 50%;
+            height: 50vh;
+        }
     }
-    .click-title-2{
-      font-size: px1em(32px);
-    }
-}
 </style>

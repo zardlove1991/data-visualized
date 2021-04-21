@@ -34,7 +34,7 @@ export default {
       detail: {},
       faceImg: '',
       indexpic: '',
-      id: 313
+      id: 0
     }
   },
   props: {
@@ -85,9 +85,10 @@ export default {
   .character-information {
     width: 100%;
     height: 100%;
-    padding: px1em(50px) px1em(35px) px1em(30px);
+    // padding: px1em(50px) px1em(35px) px1em(30px);
+    padding: 0 px1em(35px) px1em(30px);
     color: #fff;
-    font-size:  px1em(48px);
+    font-size: px1em(24px);
     img {
       width: 100%;
       height: 100%;
@@ -107,14 +108,15 @@ export default {
       background-position: center 30%;
       text-align: center;
       font-weight: 600;
-      margin-bottom:  px1em(25px);
+      margin-bottom: px1em(25px);
+      padding-top: px1em(20px);
     }
     .character-body {
       .no_data {
         width: 100%;
-        height:  px1em(862px);
+        height: px1em(862px);
         div {
-          width:  px1em(758px);
+          width: px1em(758px);
           height: px1em(576px);
           background: url("./assets/no_data.png") no-repeat;
           background-size: 100% 100%;

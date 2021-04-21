@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrap">
+  <div class="xy-relatedReports" id="xy-relatedReports">
     <div class="related-reports">
       <div class="reports-title">相关报道</div>
       <div class="reports-body" v-if="articleList.length">
@@ -148,6 +148,9 @@ export default {
       this.getArticle()
     }
   },
+  mounted () {
+    this.setFontsize('xy-relatedReports')
+  },
   methods: {
     getArticle () {
       if (this.id) {
@@ -180,14 +183,16 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "~@/styles/index.scss";
-.main-wrap {
+@import 'src/styles/index.scss';
+.xy-relatedReports {
+  height: 100%;
+  padding: 0.25vh 0.1vw;
   .related-reports {
     width: 100%;
     height: 100%;
-    padding: px1em(50px)  px1em(10px) px1em(35px)  px1em(10px);
+    padding: 0.4em;
     color: #fff;
-    font-size: px1em(48px);
+    font-size: pxrem(48px);
     img {
       width: 100%;
       height: 100%;
@@ -195,7 +200,7 @@ export default {
     }
     .reports-title {
       width: 100%;
-      height:  px1em(113px);
+      height:  pxrem(113px);
       background: linear-gradient(
         0deg,
         rgba(38, 182, 241, 0.46) 0%,
@@ -208,51 +213,49 @@ export default {
       text-align: center;
       font-weight: 600;
       // line-height: 1.13rem;
-      margin-bottom:  px1em(25px);
+      margin-bottom:  pxrem(25px);
     }
     .reports-body {
       display: flex;
       justify-content: space-between;
+      height: 100%;
       .no_data {
         width: 100%;
-        height:  px1em(862px);
+        height:  pxrem(862px);
         div {
-          width: px1em(758px);
-          height: px1em(576px);
+          width: pxrem(758px);
+          height: pxrem(576px);
           background: url("./assets/no_data.png") no-repeat;
           background-size: 100% 100%;
-          margin-bottom: px1em(300px);
         }
       }
       .reports_left {
-        margin-right: px1em(64px);
+        margin-right: pxrem(64px);
         .reports_m_title {
-          height:  px1em(50px);
-          line-height: px1em(50px);
-          margin-bottom: px1em(39px);
-          font-size:  px1em(40px);
+          height:  pxrem(50px);
+          line-height: pxrem(50px);
+          margin-bottom: pxrem(39px);
+          font-size:  pxrem(40px);
           font-weight: 500;
-          text-align:left;
-          color: #fff;
+          width: 9rem;
+          color: rgba(255, 255, 255, 1);
         }
         .news {
-          height:  px1em(753px);
+          height:  pxrem(753px);
           overflow: hidden;
           li {
-            width: px1em(987px);
-            height:  px1em(223px);
-            border: 0.01px solid rgba(63, 230, 255, 1);
+            width: pxrem(987px);
+            height:  pxrem(223px);
             background: url("./assets/baodao_list_bg.png") no-repeat;
-            background-size: 100% 100%;
-            padding: px1em(13px) px1em(16px);
+            background-size: 100%;
+            padding: pxrem(26px) pxrem(33px);
             display: flex;
-            margin-bottom: px1em(28px);
+            margin-bottom: pxrem(28px);
             .news_img {
-              width: px1em(135px);
-              height: px1em(85px);
-              display: block;
-              border-radius: px1em(1px);
-              margin-right: px1em(30px);
+              width: pxrem(270px);
+              height: pxrem(170px);
+              border-radius: pxrem(100px);
+              margin-right: pxrem(30px);
               img {
                 width: 100%;
                 height: 100%;
@@ -260,60 +263,55 @@ export default {
             }
             .news_text {
               .no_pic {
-                width: px1em(900px) !important;
+                width: pxrem(900px) !important;
               }
               div:first-of-type {
-                width: px1em(500px);
-                // height: px1em(108px);
-                font-size: px1em(18px);
+                width: pxrem(615px);
+                height: pxrem(108px);
+                font-size: pxrem(36px);
                 font-weight: 400;
-                color: #fff;
-                // line-height: 0.54rem;
-                margin-bottom: px1em(13px);
+                color: rgba(255, 255, 255, 1);
+                line-height: pxrem(54px);
+                margin-bottom: pxrem(26px);
                 overflow: hidden;
                 // white-space: nowrap;
                 text-overflow: ellipsis;
-                text-align: left;
               }
               div:last-of-type {
-                // height: px1em(30px);
-                font-size: px1em(12px);
+                height: pxrem(30px);
+                font-size: pxrem(24px);
                 font-weight: 400;
-                color: #fff;
-                text-align: left;
+                color: rgba(255, 255, 255, 1);
               }
             }
           }
         }
       }
       .reports_right {
-        // flex-basis: 41%;
-        width:px1em(520px);
         .right_bottom {
-          margin-top: px1em(63px);
+          margin-top: pxrem(63px);
         }
         div {
           .img_mb {
-            margin-bottom: px1em(20px);
+            margin-bottom: pxrem(39px);
           }
           .aff_mb {
-            margin-bottom: px1em(10px) !important;
+            margin-bottom: pxrem(33px) !important;
           }
           .reports_m_title {
-            // height: 0.5rem;
-            // line-height: 0.5rem;
-            margin-bottom: px1em(20px);
-            font-size: px1em(30px);
+            height: pxrem(50px);
+            line-height: pxrem(50px);
+            margin-bottom: pxrem(39px);
+            font-size: pxrem(40px);
             font-weight: 500;
-            text-align: left;
             color: rgba(255, 255, 255, 1);
           }
           .click-title {
-            width: px1em(520px);
-            height: px1em(200px);
+            width: pxrem(788px);
+            height: pxrem(300px);
             .swiper2 {
-              height: px1em(200px) !important;
-              border-radius: px1em(10px);
+              height: pxrem(260px) !important;
+              border-radius: pxrem(10px);
               img {
                 width: 100%;
                 height: 100%;
@@ -322,7 +320,7 @@ export default {
             }
             .swiper {
               color: #fff;
-              height: px1em(200px);
+              height: pxrem(300px);
               .swiper-slide-active {
                 opacity: 1 !important;
               }
@@ -335,26 +333,26 @@ export default {
                 .no_pic_box {
                   width: 100%;
                   height: 100%;
-                  border-radius: px1em(10px);
+                  border-radius: pxrem(10px);
                   display: flex;
                   justify-content: center;
                   align-items: center;
                   background-color: #fff;
                   img {
-                    width: px1em(114px);
-                    height: px1em(114px);
+                    width: pxrem(114px);
+                    height: pxrem(114px);
                   }
                 }
                 img {
                   width: 100%;
                   height: 100%;
-                  border-radius: px1em(10px);
+                  border-radius: pxrem(10px);
                 }
                 .title_bg {
                   position: absolute;
                   bottom: 0;
                   width: 100%;
-                  height: px1em(95px);
+                  height: pxrem(95px);
                   background: linear-gradient(
                     0deg,
                     rgba(0, 0, 0, 0.8),
@@ -364,9 +362,9 @@ export default {
                     // width: 100%;
                     text-align: center;
                     z-index: 99999;
-                    margin: 0 px1em(30px);
-                    margin-top: px1em(30px);
-                    font-size: px1em(30px);
+                    margin: 0 pxrem(30px);
+                    margin-top: pxrem(30px);
+                    font-size: pxrem(30px);
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                   }
@@ -375,24 +373,24 @@ export default {
             }
             .swiper-pagination,
             .swiper-pagination2 {
-              width: px1em(520px);
-              margin-top: -px1em(15px);
+              width: pxrem(788px);
+              margin-top: -pxrem(15px);
               // height: 0.12rem;
               // margin-top: 0.22rem;
             }
             .swiper-pagination-bullet {
-              width: px1em(12px);
-              height: px1em(12px);
+              width: pxrem(12px);
+              height: pxrem(12px);
               background: #00edff;
               opacity: 0.4;
-              margin-right: px1em(12px);
+              margin-right: pxrem(12px);
             }
             .swiper-pagination-bullet-active {
               background: #00edff;
               opacity: 1 !important;
-              width: px1em(40px);
-              height: px1em(12px);
-              border-radius: px1em(10px);
+              width: pxrem(40px);
+              height: pxrem(12px);
+              border-radius: pxrem(10px);
             }
           }
         }
