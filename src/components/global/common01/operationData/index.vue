@@ -71,7 +71,7 @@ export default {
         slidesPerView: 2,
         slidesPerGroup: 2,
         speed: 3000,
-        autoplay: true
+        autoplay: false
       }
     }
   },
@@ -152,6 +152,8 @@ export default {
         bottom: pxrem(224px);
         left: -50%;
         transform: scale(0.5,1);
+        text-align: left;
+        padding-left: pxrem(220px);
       }
       .yonghu{
         width: 200%;
@@ -159,6 +161,8 @@ export default {
         bottom: pxrem(79px);
         left: -50%;
         transform: scale(0.5,1);
+        text-align: left;
+        padding-left: pxrem(220px);
       }
     }
     .web_div{
@@ -184,6 +188,8 @@ export default {
         bottom: pxrem(224px);
         left: -50%;
         transform: scale(0.5,1);
+        text-align: left;
+        padding-left: pxrem(220px);
       }
       .yonghu{
         width: 200%;
@@ -191,6 +197,8 @@ export default {
         bottom: pxrem(79px);
         left: -50%;
         transform: scale(0.5,1);
+        text-align: left;
+        padding-left: pxrem(220px);
       }
     }
     .wechat_div{
@@ -226,6 +234,7 @@ export default {
                 position: relative;
                 display: inline-block;
                 top: pxrem(50px);
+                left: pxrem(50px);
                 img{
                   width: pxrem(57px);
                   height: pxrem(114px);
@@ -273,6 +282,8 @@ export default {
                   bottom: pxrem(224px);
                   // padding-left: pxrem(60px);
                   transform: scale(0.5,1);
+                  text-align: left;
+                  padding-left: pxrem(220px);
                 }
                 .weibo{
                   width: pxrem(840px);
@@ -281,6 +292,8 @@ export default {
                   bottom: pxrem(79px);
                   // padding-left: pxrem(60px);
                   transform: scale(0.5,1);
+                  text-align: left;
+                  padding-left: pxrem(220px);
                 }
               }
             }

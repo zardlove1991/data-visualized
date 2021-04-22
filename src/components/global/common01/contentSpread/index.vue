@@ -118,7 +118,7 @@ export default {
         height: pxrem(415px);
         background: url('./assets/topleft_bg.png') no-repeat;
         background-size: 100% 100%;
-        animation: rotate 60s linear infinite;
+        // animation: rotate 60s linear infinite;
       }
       .top_right{
         width: pxrem(730px);
