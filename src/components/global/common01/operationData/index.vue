@@ -39,7 +39,7 @@
                 <img v-if="v.account_avatar" :src="v.account_avatar" />
                 <img v-if="!v.account_avatar" src="./assets/numBack.png" />
                 <div class="title">{{v.account_name}}</div>
-                <div class="num">{{v.msg_count}}</div>
+                <div class="num">{{v.article_count}}</div>
               </div>
               <div class="wechat_bottom">
                 <p class="weixin">微信粉丝数：<i>{{v.cumulate_user}}</i></p>
