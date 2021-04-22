@@ -50,7 +50,6 @@ export default {
         this.count = 0
       }
       getRankList().then(response => {
-        console.log(response, 'ree')
         if (response.data[0].data.length) {
           this.list = response.data[0].data
           this.initList()
@@ -97,21 +96,20 @@ export default {
   height: 100%;
   padding: 0 pxrem(30px) pxrem(15px);
   position: relative;
-  background: url("./assets/bg.png") no-repeat center center;
-  background-size: 100% 100%;
   .click-wrap {
     width: 100%;
     height: 100%;
   }
   .click-title-2{
     width: 100%;
-    height: 15%;
-    background: url("./assets/title_bg2.png") no-repeat center top;
+    height: pxrem(183px);
+    background: url("./assets/title_bg2.png") no-repeat center 30%;
     background-size: 100% 100%;
     text-align: center;
     font-weight: 600;
     font-size: pxrem(48px);
     color:#fff;
+    padding-top: pxrem(20px);
   }
   
   .click-list {
@@ -119,10 +117,10 @@ export default {
     background-size: 100% 100%;
     color: #fff;
     width: 100%;
-    height: 1.2rem;
+    height: pxrem(120px);
     font-family: PingFangSC-Regular;
-    margin-bottom: .26rem;
-    padding: 0 0.3rem;
+    margin-bottom: pxrem(26px);
+    padding: 0 pxrem(30px);
     .click-rank {
       font-size: pxrem(14px);
       padding:pxrem(5px) pxrem(10px);

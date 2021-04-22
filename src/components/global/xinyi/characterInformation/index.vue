@@ -33,8 +33,7 @@ export default {
     return {
       detail: {},
       faceImg: '',
-      indexpic: '',
-      id: 0
+      indexpic: ''
     }
   },
   props: {
@@ -52,6 +51,8 @@ export default {
     facePath (path) {
       if (path) {
         this.faceImg = path
+      } else {
+        this.detail = {}
       }
     }
   },
@@ -96,16 +97,9 @@ export default {
     }
     .character-title {
       width: 100%;
-      height:  pxrem(113px);
-      background: linear-gradient(
-        0deg,
-        rgba(38, 182, 241, 0.46) 0%,
-        rgba(38, 182, 241, 0.01) 99%
-      );
-      background-size: 100%;
-      background-image: url("./assets/title_bg2.png");
-      background-repeat: no-repeat;
-      background-position: center 30%;
+      height: pxrem(183px);
+      background: url("./assets/title_bg2.png") no-repeat center 30%;
+      background-size: 100% 100%;
       text-align: center;
       font-weight: 600;
       margin-bottom: pxrem(25px);
@@ -125,12 +119,11 @@ export default {
       }
       .head-photo {
         width:  pxrem(635px);
-        height:  pxrem(862px)
+        height:  pxrem(862px);
         img{
           width: 100%;
           height: 100%;
           border-radius: pxrem(5px);
-          border:1px solid red;
         }
       }
       .name-position {

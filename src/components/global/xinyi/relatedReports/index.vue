@@ -131,6 +131,8 @@ export default {
         this.id = val
         console.log('id', this.id)
         this.getArticle()
+      } else {
+        this.articleList = []
       }
     }
   },
@@ -186,11 +188,11 @@ export default {
 @import 'src/styles/index.scss';
 .xy-relatedReports {
   height: 100%;
-  padding: 0.25vh 0.1vw;
+  padding: 0 0.1vw 0.25vh;
   .related-reports {
     width: 100%;
     height: 100%;
-    padding: 0.4em;
+    padding: 0 0.4em 0.4em;
     color: #fff;
     font-size: pxrem(48px);
     img {
@@ -200,20 +202,12 @@ export default {
     }
     .reports-title {
       width: 100%;
-      height:  pxrem(113px);
-      background: linear-gradient(
-        0deg,
-        rgba(38, 182, 241, 0.46) 0%,
-        rgba(38, 182, 241, 0.01) 99%
-      );
-      background-size: 100%;
-      background-image: url("./assets/title_bg2.png");
-      background-repeat: no-repeat;
-      background-position: center 30%;
+      height: pxrem(183px);
+      background: url("./assets/title_bg2.png") no-repeat center 30%;
+      background-size: 100% 100%;
       text-align: center;
       font-weight: 600;
-      // line-height: 1.13rem;
-      margin-bottom:  pxrem(25px);
+      margin-bottom: pxrem(25px);
       padding-top: pxrem(20px);
     }
     .reports-body {
@@ -238,17 +232,19 @@ export default {
           margin-bottom: pxrem(39px);
           font-size:  pxrem(40px);
           font-weight: 500;
-          width: 9rem;
+          // width: pxrem(900px);
           color: rgba(255, 255, 255, 1);
+          text-align: left;
         }
         .news {
-          height:  pxrem(753px);
+          height: pxrem(753px);
           overflow: hidden;
           li {
-            width: pxrem(987px);
+            // width: pxrem(987px);
+            width: pxrem(1187px);
             height:  pxrem(223px);
             background: url("./assets/baodao_list_bg.png") no-repeat;
-            background-size: 100%;
+            background-size: 100% 100%;
             padding: pxrem(26px) pxrem(33px);
             display: flex;
             margin-bottom: pxrem(28px);
@@ -267,7 +263,8 @@ export default {
                 width: pxrem(900px) !important;
               }
               div:first-of-type {
-                width: pxrem(615px);
+                // width: pxrem(615px);
+                width: pxrem(815px);
                 height: pxrem(108px);
                 font-size: pxrem(36px);
                 font-weight: 400;
@@ -277,12 +274,14 @@ export default {
                 overflow: hidden;
                 // white-space: nowrap;
                 text-overflow: ellipsis;
+                text-align:left;
               }
               div:last-of-type {
                 height: pxrem(30px);
                 font-size: pxrem(24px);
                 font-weight: 400;
                 color: rgba(255, 255, 255, 1);
+                text-align:left;
               }
             }
           }
@@ -306,6 +305,7 @@ export default {
             font-size: pxrem(40px);
             font-weight: 500;
             color: rgba(255, 255, 255, 1);
+            text-align: left;
           }
           .click-title {
             width: pxrem(788px);

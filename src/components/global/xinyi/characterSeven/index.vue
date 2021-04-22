@@ -12,7 +12,7 @@ export default {
   name: 'characterSeven',
   data () {
     return {
-      id: 313,
+      id: 0,
       token: '',
       type: 'old',
       startTime: '',

@@ -5,8 +5,7 @@
       <div class="briefing-title">智能前台</div>
       <div class="briefing-body sys-flex sys-flex-center flex-justify-between">
         <div class="ai-left" :class="list && list[0] ? 'width1' : 'width2'">
-          <!-- <video :src="videoUrl" autoplay loop controls muted></video> -->
-          <video src="http://vod.plus.yongzhou.gov.cn/video/2021/04/13/83b761ca171eaca13afb6cc944c1ad5c.mp4" style="width:100%;height:100%;object-fit:fill;" autoplay loop controls muted></video>
+          <video :src="videoUrl" style="width:100%;height:100%;object-fit:fill;" autoplay loop controls muted></video>
           <!-- <video id="monitor-video" style="width:100%;height:100%;object-fit:fill;" class="video-js vjs-default-skin vjs-big-play-centered"></video> -->
         </div>
         <div class="ai-right" v-if="list && list[0]">
@@ -26,7 +25,7 @@ import 'videojs-flash'
 import { setInterval, clearInterval } from 'timers'
 import { getNowTime } from '@/utils/utils'
 import { storage } from '@/utils/storage'
-// import { startScan } from '@/servers/api'
+import { startScan, isWebsocket, getVideoUrl } from '@/servers/api'
 export default {
   name: 'intelligenceBriefing',
   data () {
@@ -62,7 +61,7 @@ export default {
     //   window.location.href = 'http://monitor.zyrb.com.cn/#/intelligenceBriefing'
     // }
     // 获取宣传视频
-    // this.getVideo()
+    this.getVideo()
     // 定时器循环
     setInterval(() => {
       this.times = storage.get('intelligenceBriefing')
@@ -71,8 +70,8 @@ export default {
       if (getNowTime() === '8:0') {
         let link = ''
         let name = '早八点定时刷新'
-        this.$api.isWebsocket(link, name).then(res => {
-          console.log(res)
+        isWebsocket(link, name).then(res => {
+          console.log(res, 'isWebsocket')
         })
         window.location.reload()
       }
@@ -86,11 +85,10 @@ export default {
           // 发送websocket断连通知
           let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw'
           let name = '智能人物'
-          this.$api.isWebsocket(link, name).then(res => {
-            console.log(res)
+          isWebsocket(link, name).then(res => {
           })
           // 长链接断开时间大于一分钟 刷新页面
-          // window.location.reload()
+          window.location.reload()
         } else {
           this.isConnection = false
         }
@@ -107,7 +105,6 @@ export default {
       // 判断ai长链接是否断掉
       console.log('11--111---111111')
       if ((this.endTime2 - this.startTime3) > 60000) {
-        console.log('2222222--111---111111')
         if (this.times2 > 0) {
           this.times2--
           storage.set('aiWebsocket', this.times2)
@@ -125,10 +122,9 @@ export default {
           }
           let name = 'ai人像识别'
 
-          this.$api.isWebsocket(link, name).then(res => {
-            console.log(res, '123')
+          isWebsocket(link, name).then(res => {
           })
-          // window.location.reload()
+          window.location.reload()
         } else {
           this.isConnection = false
         }
@@ -164,14 +160,11 @@ export default {
       }
       this.socketClient.onmessage = (evt) => {
         storage.set('aiWebsocket', 6)
-        console.log('111111')
         this.startTime3 = (new Date()).getTime()
         let data = evt.data
-        // let data = ''
         console.log('socketClientData', data)
         if (typeof data === 'string' && data.length > 0 && !this.isJsonString(data)) {
           this.callback_url = data
-          // console.log(this.callback_url)
           // 开启直播
           this.start()
           // 开启直播记录当前开始时间
@@ -180,6 +173,7 @@ export default {
           }
         } else if (typeof data === 'string' && data.length > 0 && this.isJsonString(data)) {
           // 有人进来替换开始时间
+          console.log('有人来了...')
           this.startTime = (new Date()).getTime()
           this.handleData(this.isJsonString(data))
         } else if (typeof data === 'string' && data.length === 0) {
@@ -188,6 +182,7 @@ export default {
           // 十分钟
           if ((time - this.startTime) > 60000) {
             let msg = {'type': 'old', 'figure_id': 0, 'face_path': ''}
+            this.$emit('handleData', msg)
             if (this.from) {
               msg.from = 'hoge'
             }
@@ -214,8 +209,10 @@ export default {
         // 长链接正常一直记录开始时间
         this.startTime2 = (new Date()).getTime()
         var res = JSON.parse(evt.data)
+        console.log(res, 'startTime2')
         if (res.text) {
           let type = JSON.parse(res.text).type
+          console.log(type)
           if (type === 'refresh_data') {
             window.location.reload()
           } else if (type === 'send_all') {
@@ -225,19 +222,8 @@ export default {
       }
     },
     start () {
-      this.$api.startScan(this.callback_url).then((res) => {
-        console.log(res)
-        // let url = 'rtmp://10.0.1.111/live/test_sd'
-        // this.player = new Videojs('monitor-video', {
-        //   sources: [{
-        //     type: 'rtmp/flv',
-        //     src: url
-        //   }],
-        //   preload: 'auto',
-        //   controls: true,
-        //   autoplay: true
-        // }, () => {
-        // })
+      startScan(this.callback_url).then((res) => {
+        console.log(res, 'startScan')
       })
     },
     // 判断字符串是否为json字符串
@@ -265,9 +251,12 @@ export default {
           }
         })
         this.list = this.newList.slice(-4)
+        console.log(this.list, 'this.list')
+        // this.list = [...new Set(this.list)]
         if (this.list && this.list[0]) {
           if (!this.timer) {
             let msg = {'type': this.list[this.curentIndex].extend_info.system, 'figure_id': this.list[this.curentIndex].extend_info.extend_info, 'face_path': this.list[this.curentIndex].extend_info.face_path}
+            this.$emit('handleData', msg)
             console.log('msg2', msg)
             if (this.from) {
               msg.from = 'hoge'
@@ -275,11 +264,8 @@ export default {
             // if (msg.type === 'workcall' && this.token) {
             //   msg.token = this.token
             // }
-            console.log('444')
             if (window.socketClient.readyState === 1) {
-              console.log('666', msg)
               window.socketClient.send(JSON.stringify(msg))
-              console.log('777')
             }
             this.timer = setInterval(() => {
               this.curentIndex++
@@ -287,6 +273,7 @@ export default {
                 this.curentIndex = 0
               }
               let msg = {'type': this.list[this.curentIndex].extend_info.system, 'figure_id': this.list[this.curentIndex].extend_info.extend_info, 'face_path': this.list[this.curentIndex].extend_info.face_path}
+              this.$emit('handleData', msg)
               if (this.from) {
                 msg.from = 'hoge'
               }
@@ -301,18 +288,9 @@ export default {
         }
       }
     },
-    // 对象数组去重
-    // removal (arr) {
-    //   let obj = {}
-    //   arr = arr.reduce((item, next) => {
-    //     obj[next.title] ? '' : obj[next.title] = true && item.push(next)
-    //     return item
-    //   }, [])
-    //   return arr
-    // },
     // 获取宣传视频
     getVideo () {
-      this.$api.getVideo().then(res => {
+      getVideoUrl().then(res => {
         this.videoUrl = res.data.result.url
       })
     }
@@ -323,7 +301,8 @@ export default {
 @import "~@/styles/index.scss";
 .xy-intelligenceBriefing {
     height: 100%;
-    padding: 0.25vh 0.1vw;
+    // padding: 0.25vh 0.1vw;
+    padding: 0 0.1vw 0.25vh;
   .intelligence-briefing {
     width: 100%;
     height: 100%;
@@ -345,7 +324,7 @@ export default {
       background-position: center 30%;
       text-align: center;
       font-weight: 600;
-      padding-top:px1em(20px);
+      padding-top: pxrem(20px);
     }
     .briefing-body {
       width: 100%;
@@ -354,7 +333,7 @@ export default {
       background-size: 100% 100%;
       padding:  pxrem(30px) pxrem(34px) pxrem(30px) pxrem(30px);
       .width1 {
-        width: pxrem(1550px);
+        width: pxrem(1920px);
       }
       .width2 {
         width: 100%;
