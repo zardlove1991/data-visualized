@@ -71,7 +71,7 @@ export default {
         slidesPerView: 2,
         slidesPerGroup: 2,
         speed: 3000,
-        autoplay: false
+        autoplay: true
       }
     }
   },
