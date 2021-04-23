@@ -114,7 +114,7 @@ export default {
           height: pxrem(576px);
           background: url("./assets/no_data.png") no-repeat;
           background-size: 100% 100%;
-          margin-bottom: pxrem(300px);
+          // margin-bottom: pxrem(300px);
         }
       }
       .head-photo {
@@ -166,7 +166,7 @@ export default {
             line-height:  pxrem(60px);
             color: rgba(255, 255, 255, 1);
             overflow: hidden;
-            text-align: center;
+            text-align: left;
           }
         }
       }

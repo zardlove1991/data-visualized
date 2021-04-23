@@ -122,7 +122,7 @@ export default {
     margin-bottom: pxrem(26px);
     padding: 0 pxrem(30px);
     .click-rank {
-      font-size: pxrem(14px);
+      font-size: pxrem(28px);
       padding:pxrem(5px) pxrem(10px);
       border-radius: pxrem(6px);
       &.first {
@@ -139,7 +139,7 @@ export default {
       }
     }
     .click-list-title {
-      font-size: pxrem(18px);
+      font-size: pxrem(36px);
       font-weight: 400;
       padding-left: pxrem(30px);
       flex:1;
@@ -149,7 +149,7 @@ export default {
       background: url("./assets/name.png") no-repeat center left;
       background-size: pxrem(25px) pxrem(28px);
       padding-left: pxrem(40px);
-      font-size: pxrem(14.5px);
+      font-size: pxrem(28px);
       font-family: PingFangSC-Regular;
       font-weight: 400;
       color: #fff;
@@ -160,7 +160,7 @@ export default {
       background: url("./assets/click.png") no-repeat center left;
       background-size: pxrem(30px) pxrem(28px);
       padding-left: pxrem(50px);
-      font-size: pxrem(14.5px);
+      font-size: pxrem(28px);
       font-family: PingFangSC-Regular;
       font-weight: 400;
       color: #fff;

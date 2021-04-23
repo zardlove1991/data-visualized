@@ -241,7 +241,7 @@ export default {
           overflow: hidden;
           li {
             // width: pxrem(987px);
-            width: pxrem(1187px);
+            width: pxrem(987px);
             height:  pxrem(223px);
             background: url("./assets/baodao_list_bg.png") no-repeat;
             background-size: 100% 100%;
@@ -264,7 +264,7 @@ export default {
               }
               div:first-of-type {
                 // width: pxrem(615px);
-                width: pxrem(815px);
+                width: pxrem(615px);
                 height: pxrem(108px);
                 font-size: pxrem(36px);
                 font-weight: 400;

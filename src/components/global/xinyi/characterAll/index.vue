@@ -2,7 +2,6 @@
   <div class="xy_characterAll" id="xy_characterAll">
     <span class="off" v-if="!isConnection">websocket断连，页面已刷新5次</span>
     <div class="wrap" v-show="type == 'm2o-plus'">
-    <!-- <div class="wrap"> -->
         <intelligence-briefing @handleData="handleData"></intelligence-briefing>
         <character-information :id="id" :facePath="facePath"></character-information>
         <click-list :id="id"></click-list>
