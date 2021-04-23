@@ -17,9 +17,6 @@ import clickList from '../clickList/index'
 import relatedReports from '../relatedReports/index'
 import intelligenceBriefing from '../intelligenceBriefing/index'
 import workcallInfoMap from '../workcallInfoMap/index'
-// import { getNowTime } from '@/utils/utils'
-// import { storage } from '@/utils/storage'
-// import { isWebsocket } from '@/servers/api'
 export default {
   name: 'characterAll',
   data () {
@@ -66,11 +63,9 @@ export default {
       }
     },
     handleData (event) {
-      // console.log(event)
       this.facePath = event['face_path']
       this.type = event.type
       this.id = event['figure_id']
-      console.log(this.id, 'ssssssssssssss')
     }
   }
 }
@@ -83,7 +78,7 @@ export default {
         flex-wrap: wrap;
         div {
             width: 50%;
-            height: 50vh;
+            // height: 50vh;
         }
     }
   }

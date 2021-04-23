@@ -252,7 +252,8 @@ export default {
         })
         this.list = this.newList.slice(-4)
         console.log(this.list, 'this.list')
-        // this.list = [...new Set(this.list)]
+        this.list = this.removal(this.list)
+        console.log(this.list, '去重后')
         if (this.list && this.list[0]) {
           if (!this.timer) {
             let msg = {'type': this.list[this.curentIndex].extend_info.system, 'figure_id': this.list[this.curentIndex].extend_info.extend_info, 'face_path': this.list[this.curentIndex].extend_info.face_path}
@@ -293,6 +294,15 @@ export default {
       getVideoUrl().then(res => {
         this.videoUrl = res.data.result.url
       })
+    },
+    // 对象数组去重
+    removal (arr) {
+      let obj = {}
+      arr = arr.reduce((item, next) => {
+        obj[next.title] ? '' : obj[next.title] = true && item.push(next)
+        return item
+      }, [])
+      return arr
     }
   }
 }

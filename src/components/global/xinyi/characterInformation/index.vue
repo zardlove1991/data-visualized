@@ -72,7 +72,7 @@ export default {
           console.log('人物介绍', res)
           if (res && res.data && res.data.result) {
             this.detail = res.data.result
-            this.indexpic = res.data.result.indexpic.host + res.data.result.indexpic.filename
+            // this.indexpic = res.data.result.indexpic.host + res.data.result.indexpic.filename
           }
         })
       }
