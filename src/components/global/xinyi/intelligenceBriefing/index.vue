@@ -83,7 +83,7 @@ export default {
           this.times--
           storage.set('intelligenceBriefing', this.times)
           // 发送websocket断连通知
-          let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw'
+          let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=401&custom_appkey=bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ&device_token=32432weqdwaqdqw'
           let name = '智能人物'
           isWebsocket(link, name).then(res => {
           })
@@ -200,7 +200,7 @@ export default {
         }
       }
       // 发送数据建立websocket
-      window.socketClient = new WebSocket('wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw')
+      window.socketClient = new WebSocket('wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=401&custom_appkey=bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ&device_token=32432weqdwaqdqw')
       window.socketClient.onopen = () => {
         console.log('~~~~ send connect ~~~~')
       }

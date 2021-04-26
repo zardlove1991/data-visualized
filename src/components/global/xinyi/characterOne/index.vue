@@ -35,7 +35,7 @@ export default {
       this.from = window.location.href.split('?')[1].substring(5)
     }
     // 发送数据建立websocket
-    window.socketClient = new WebSocket('wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw')
+    window.socketClient = new WebSocket('wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=401&custom_appkey=bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ&device_token=32432weqdwaqdqw')
     window.socketClient.onopen = () => {
       console.log('~~~~ send connect ~~~~')
     }
@@ -55,7 +55,7 @@ export default {
           this.times--
           storage.set('characterOne', this.times)
           // 发送websocket断连通知
-          let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=330&custom_appkey=SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d&device_token=32432weqdwaqdqw'
+          let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=401&custom_appkey=bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ&device_token=32432weqdwaqdqw'
           let name = '人物信息/融媒首页/稿件排行'
           this.$api.isWebsocket(link, name).then(res => {
             console.log(res)

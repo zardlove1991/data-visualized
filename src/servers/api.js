@@ -29,8 +29,8 @@ export const getUserInfo = (memberId) => createXietongAPI(`${workcallUrl}/Apisys
 /* 通用 end */
 // ------------- 新沂大屏 -------------
 
-export const customAppId = '330'
-export const customAppKey = 'SYBOmr9PQ18DgblypgGa6nKLfMmbvr7d'
+export const customAppId = '401'
+export const customAppKey = 'bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ'
 
 export const getVideoUrl = () => axios.get(`${httpsbaseUrl}/Apidaping/NTk0YjQ2NW/propVideoUrl`)
 export const getUserId = () => axios.get(`${httpsbaseUrl}/index.php?m=Apidaping&c=user&a=login&user_name=17610861680&password=61680Abc&custom_appid=${customAppId}&custom_appkey=${customAppKey}`)
