@@ -9,7 +9,7 @@ const instance = axios.create({
 })
 /* 接口配置 guid: 项目标识默认 */
 export const httpsbaseUrl = 'https://monitor-screen.cloud.hoge.cn'
-// const baseUrl = 'http://monitor-screen.cloud.hoge.cn'
+// export const baseUrl = 'http://monitor-screen.cloud.hoge.cn'
 export const workcallUrl = 'https://sys-team.cloud.hoge.cn'
 export const GUID = getPlatId()
 
@@ -31,7 +31,6 @@ export const getUserInfo = (memberId) => createXietongAPI(`${workcallUrl}/Apisys
 
 export const customAppId = '401'
 export const customAppKey = 'bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ'
-export const xybaseUrl = 'http://monitor-screen.cloud.hoge.cn'
 // 获取宣传片的视频地址
 export const getVideoUrl = () => axios.get(`${httpsbaseUrl}/Apidaping/NTk0YjQ2NW/propVideoUrl`)
 // export const getUserId = () => axios.get(`${httpsbaseUrl}/index.php?m=Apidaping&c=user&a=login&user_name=17610861680&password=61680Abc&custom_appid=${customAppId}&custom_appkey=${customAppKey}`)
@@ -44,11 +43,10 @@ export const getContentDetail = (figureId) => createAPI(`${httpsbaseUrl}/?m=Apid
 export const getCharacterDetail = (figureId) => createAPI(`${httpsbaseUrl}/index.php?m=Apidaping&c=M2OPLUS_topic&a=detail&figure_id=${figureId}&custom_appid=${customAppId}`)
 
 /* 发送websocket断连通知 */
-export const isWebsocket = (link, name) => axios.get(`${xybaseUrl}/index.php?m=Apidaping&c=CLOUD_websocket&a=long_links_send&type=2&link=${link}&name=${name}`)
+export const isWebsocket = (link, name) => axios.get(`${httpsbaseUrl}/index.php?m=Apidaping&c=CLOUD_websocket&a=long_links_send&type=2&link=${link}&name=${name}`)
 // 开启ai检测的数据接口
 // export const startScan = (callback_url) => axios.post(`http://10.0.1.111:8011/face/recognize/live/start`, {url : `rtmp://10.0.1.111:1935/live/aitest`, callback_url: `http://10.0.1.111:8011/websocket/callback/${callback_url}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, timeout: 10, create_thumbnail : true, timeout: 50});
-export const startScan = (callbackUrl) => axios.post(`http://aiearch.xysrmt.cn/face/recognize/live/start`, {url: `rtmp://192.168.13.200/live/av0`, callback_url: `aiearch.xysrmt.cn/websocket/callback/${callbackUrl}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, create_thumbnail: true, timeout: 50})
-// export const startScan = (callback_url) => axios.post(`http://172.31.2.4:8011/face/recognize/live/start`, {url : `rtmp://livefb.sczytv.com:9935/live/sxt_sxt`, callback_url: `http://172.31.2.4:8011/websocket/callback/${callback_url}`, quality_threshold: 0.01, min_face_size: 60, buffer_ms: 60000, timeout: 10, create_thumbnail : true, timeout: 50});
+export const startScan = (callbackUrl) => axios.post(`http://aiearch.xysrmt.cn/face/recognize/live/start`, {url: `rtmp://192.168.13.200/live/av0`, callback_url: `http://aiearch.xysrmt.cn/websocket/callback/${callbackUrl}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, create_thumbnail: true, timeout: 50})
 
 // ------------------------ end 新沂大屏 ---------------------//
 // 获取配置数据

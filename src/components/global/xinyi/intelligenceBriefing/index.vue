@@ -86,6 +86,7 @@ export default {
           let link = 'wss://pushserver-api.cloud.hoge.cn/server_all/comment/live_358888?custom_appid=401&custom_appkey=bOvXb4GgRsHhgNh4OvdFGZmlHnqOIpPJ&device_token=32432weqdwaqdqw'
           let name = '智能人物'
           isWebsocket(link, name).then(res => {
+            console.log(res, 'isWebsocket')
           })
           // 长链接断开时间大于一分钟 刷新页面
           window.location.reload()
@@ -123,6 +124,7 @@ export default {
           let name = 'ai人像识别'
 
           isWebsocket(link, name).then(res => {
+            console.log(res, 'isWebsocket')
           })
           window.location.reload()
         } else {
