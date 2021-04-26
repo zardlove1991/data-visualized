@@ -116,9 +116,9 @@ export default {
           //   link = 'ws://172.31.2.4:8011/websocket/receive'
           // }
           if (this.from) {
-            link = 'ws://10.0.1.111:8011/websocket/receive'
+            link = 'ws://aiearch.xysrmt.cn/websocket/receive'
           } else {
-            link = 'ws://10.0.1.111:8011/websocket/receive'
+            link = 'ws://aiearch.xysrmt.cn/websocket/receive'
           }
           let name = 'ai人像识别'
 
@@ -148,9 +148,9 @@ export default {
       //   this.socketClient = new WebSocket('ws://172.31.2.4:8011/websocket/receive')
       // }
       if (this.from) {
-        this.socketClient = new WebSocket('ws://10.0.1.111:8011/websocket/receive')
+        this.socketClient = new WebSocket('ws://aiearch.xysrmt.cn/websocket/receive')
       } else {
-        this.socketClient = new WebSocket('ws://10.0.1.111:8011/websocket/receive')
+        this.socketClient = new WebSocket('ws://aiearch.xysrmt.cn/websocket/receive')
       }
       this.socketClient.onopen = () => {
         console.log('~~~~ receive connect ~~~~')

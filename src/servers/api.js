@@ -47,7 +47,7 @@ export const getCharacterDetail = (figureId) => createAPI(`${httpsbaseUrl}/index
 export const isWebsocket = (link, name) => axios.get(`${httpsbaseUrl}/index.php?m=Apidaping&c=CLOUD_websocket&a=long_links_send&type=2&link=${link}&name=${name}`)
 // 开启ai检测的数据接口
 // export const startScan = (callback_url) => axios.post(`http://10.0.1.111:8011/face/recognize/live/start`, {url : `rtmp://10.0.1.111:1935/live/aitest`, callback_url: `http://10.0.1.111:8011/websocket/callback/${callback_url}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, timeout: 10, create_thumbnail : true, timeout: 50});
-export const startScan = (callbackUrl) => axios.post(`http://10.0.1.111:8011/face/recognize/live/start`, {url: `rtmp://10.0.1.111/live/test_sd`, callback_url: `http://10.0.1.111:8011/websocket/callback/${callbackUrl}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, create_thumbnail: true, timeout: 50})
+export const startScan = (callbackUrl) => axios.post(`http://aiearch.xysrmt.cn/face/recognize/live/start`, {url: `rtmp://192.168.13.200/live/av0`, callback_url: `aiearch.xysrmt.cn/websocket/callback/${callbackUrl}`, quality_threshold: 0.01, min_face_size: 100, buffer_ms: 60000, create_thumbnail: true, timeout: 50})
 // export const startScan = (callback_url) => axios.post(`http://172.31.2.4:8011/face/recognize/live/start`, {url : `rtmp://livefb.sczytv.com:9935/live/sxt_sxt`, callback_url: `http://172.31.2.4:8011/websocket/callback/${callback_url}`, quality_threshold: 0.01, min_face_size: 60, buffer_ms: 60000, timeout: 10, create_thumbnail : true, timeout: 50});
 
 // -------------- end 新沂大屏 --------------
