@@ -11,6 +11,7 @@ const instance = axios.create({
 export const httpsbaseUrl = 'https://monitor-screen.cloud.hoge.cn'
 // export const baseUrl = 'http://monitor-screen.cloud.hoge.cn'
 export const workcallUrl = 'https://sys-team.cloud.hoge.cn'
+export const huaianUrl = 'http://mapi.qpnews.com.cn/'
 export const GUID = getPlatId()
 
 // workcallInfoList 记者列表

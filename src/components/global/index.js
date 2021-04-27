@@ -182,3 +182,6 @@ export const common01componentHuaianClueGather02 = getComponent('common01/huaian
 export const common01componentHuaianClueGather03 = getComponent('common01/huaianClueGather03') // 淮安清江浦 线索汇聚
 export const common01componentHuaianTitle = getComponent('common01/huaianTitle') // 淮安清江浦 标题
 export const common01componentHuaianReporterConnection = getComponent('common01/huaianReporterConnection') // 淮安清江浦 记者连线
+export const common01componentHuaianLeaderNews = getComponent('common01/huaianLeaderNews') // 淮安清江浦 领导动态
+export const common01componentHuaianLeaderNews01 = getComponent('common01/huaianLeaderNews01') // 淮安清江浦 领导动态1
+export const common01componentHuaianDataShow = getComponent('common01/huaianDataShow') // 淮安清江浦 数据展示
