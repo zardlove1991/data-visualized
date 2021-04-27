@@ -229,8 +229,9 @@ export const performanceAppraisal = () => createAPI(`${httpsbaseUrl}/Apidaping/$
 
 // 组织下志愿者列表
 export const getVolunteersInfo = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteer?id=${id}`)
-
 // 淮安清江浦内容列表
 export const getContentList = (id) => createAPI(`${huaianUrl}/api/v1/contents.php?column_id=${id}`)
 // 淮安清江浦数据展示
 export const dataShowList = () => createAPI(`${httpsbaseUrl}/Apidaping/YjYxYTQ4OT/waiting`)
+// 淮安 外媒看德清
+export const getHuaianPlusList = (id, page, size, offset) => createAPI(`http://mapi.qpnews.com.cn/api/v1/contents.php?column_id=${id}&page=${page}&count=${size}&offset=${offset}`)
