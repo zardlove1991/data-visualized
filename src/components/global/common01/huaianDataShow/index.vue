@@ -286,7 +286,7 @@ export default {
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(45px) pxrem(71px) pxrem(0px);
+    padding: pxrem(145px) pxrem(71px) pxrem(0px);
     color: #fff;
     .common01-title {
       font-size: pxrem(60px);
@@ -331,18 +331,16 @@ export default {
     }
     .wrap-bottom{
       width: 100%;
-      height: pxrem(420px);
+      height: pxrem(520px);
       .shenhe_echart{
         width: pxrem(740px);
         // height: pxrem(290px);
-        margin-top: pxrem(35px);
-        height: pxrem(580px);
+        height: pxrem(520px);
       }
       .fabu_echart{
         width: pxrem(740px);
         // height: pxrem(290px);
-        margin-top: pxrem(35px);
-        height: pxrem(580px);
+        height: pxrem(520px);
       }
     }
   }
