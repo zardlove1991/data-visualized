@@ -119,7 +119,7 @@ export default {
           width: 65%;
           font-size: 0.4rem !important;
           padding-left:pxrem(32px);
-          font-weight: 600;
+          font-weight: 500;
         }
         .name {
           text-align: left;
