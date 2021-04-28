@@ -82,6 +82,13 @@ export default {
     background: url("./assets/huaianAreaBg.png") no-repeat center;
     background-size: 100% 100%;
     color: #fff;
+    .common01-title{
+      font-size: pxrem(30px);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-shadow: pxrem(16px) pxrem(20px) pxrem(20px) rgba(0,222,255,0.20); 
+    }
     .wrap-content {
       text-align:left;
       .item-list {
@@ -100,22 +107,22 @@ export default {
           border-radius: 3px;
           overflow: hidden;
           float: left;
-          margin-right: pxrem(30px);
+          margin-right: pxrem(15px);
           img{
-            width:100%;
+            height:100%;
           }
         }
         .item-info{
           .item-title {
             text-align: left;
-            font-size:pxrem(38px);
+            font-size:pxrem(19px);
             line-height:pxrem(50px);
             margin-bottom:pxrem(36px);
             height:pxrem(90px);
             overflow:hidden;
           }
           .item-time{
-            font-size:pxrem(32px);
+            font-size:pxrem(16px);
             color:#00f6ff;
           }
         }
