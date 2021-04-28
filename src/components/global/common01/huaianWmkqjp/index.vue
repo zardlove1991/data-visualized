@@ -94,7 +94,7 @@ export default {
         margin-right:1%;
         background-color:rgba(0,96,255,0.2);
         .item-img{
-          width: pxrem(270px);
+          width: pxrem(135px);
           height: pxrem(170px);
           background: #1181e9;
           border-radius: 3px;
