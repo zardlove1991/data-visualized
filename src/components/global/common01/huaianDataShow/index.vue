@@ -232,9 +232,9 @@ export default {
     this.dataShowList()
   },
   mounted () {
-    this.setFontsize('dataShow')
-    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
-    console.log(document.documentElement.getBoundingClientRect().width)
+    // this.setFontsize('dataShow')
+    document.querySelector('html').style.fontSize = '100px'
+    // document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
   },
   methods: {
     dataShowList () {
@@ -282,7 +282,7 @@ export default {
   background-size: 100% 100%;
   width: 100%;
   height: 100%;
-  padding: 0 pxrem(40px) pxrem(40px);
+  padding: pxrem(40px);
   .dataShow-wrap {
     width: 100%;
     height: 100%;
