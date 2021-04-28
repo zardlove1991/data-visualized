@@ -94,7 +94,7 @@ export default {
     .wrap-content {
       text-align:left;
       .item-list {
-        height: pxrem(170px);
+        height: pxrem(230px);
         margin-bottom: pxrem(20px);
         padding:pxrem(30px) pxrem(26px);
         width:24%;
@@ -104,8 +104,12 @@ export default {
         margin-right:1%;
         background-color:rgba(0,96,255,0.2);
         // display: inline-flex;
+        position: relative;
         .item-img{
-          float: left;
+          position: absolute;
+          left: pxrem(-40px);
+          top: pxrem(30px);
+          // float: left;
           // flex: 1;
           width: pxrem(270px);
           // width: 17%;
@@ -121,9 +125,12 @@ export default {
           }
         }
         .item-info{
+          position: absolute;
+          right: pxrem(-80px);
+          top: pxrem(30px);
           // float: left;
           // flex: 2;
-          width: pxrem(480px);
+          width: pxrem(410px);
           // width: 30%;
           transform: scaleX(0.5);
           .item-title {
