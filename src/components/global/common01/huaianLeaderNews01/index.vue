@@ -65,7 +65,7 @@ export default {
   },
   mounted () {
     // this.setFontSize('huaianLeaderNews01')
-    document.querySelector('html').style.fontSize = '100px'
+    document.querySelector('html').style.fontSize = '50px'
   },
   watch: {
     swiperList: function () {

@@ -64,7 +64,7 @@ export default {
     this.getContentList(277)
   },
   mounted () {
-    document.querySelector('html').style.fontSize = '100px'
+    document.querySelector('html').style.fontSize = '50px'
   },
   watch: {
     swiperList: function () {
