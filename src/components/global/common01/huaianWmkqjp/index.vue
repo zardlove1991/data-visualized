@@ -135,10 +135,10 @@ export default {
           transform: scaleX(0.5);
           .item-title {
             text-align: left;
-            font-size:pxrem(50px);
-            line-height:pxrem(60px);
+            font-size:pxrem(38px);
+            line-height:pxrem(50px);
             margin-bottom:pxrem(20px);
-            height:pxrem(110px);
+            height:pxrem(100px);
             overflow:hidden;
           }
           .item-time{
