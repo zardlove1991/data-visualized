@@ -83,15 +83,18 @@ export default {
     background-size: 100% 100%;
     color: #fff;
     .common01-title{
-      font-size: pxrem(40px);
+      font-size: pxrem(60px);
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 1px;
       text-shadow: pxrem(16px) pxrem(20px) pxrem(20px) rgba(0,222,255,0.20); 
+      transform: scaleX(0.5);
+      left:0;
     }
     .wrap-content {
       text-align:left;
       .item-list {
+        height: pxrem(170px);
         margin-bottom: pxrem(20px);
         padding:pxrem(30px) pxrem(26px);
         width:24%;
@@ -101,29 +104,35 @@ export default {
         margin-right:1%;
         background-color:rgba(0,96,255,0.2);
         .item-img{
-          width: pxrem(135px);
+          // width: pxrem(135px);
+          width: 17%;
           height: pxrem(170px);
           background: #1181e9;
           border-radius: 3px;
           overflow: hidden;
           float: left;
-          margin-right: pxrem(15px);
+          // margin-right: pxrem(15px);
+          margin-right: 1.5%;
           img{
-            height:100%;
+            width:100%;
           }
         }
         .item-info{
+          float: left;
+          width: 30%;
           .item-title {
             text-align: left;
-            font-size:pxrem(24px);
-            line-height:pxrem(31px);
-            margin-bottom:pxrem(36px);
-            height:pxrem(64px);
+            font-size:pxrem(50px);
+            line-height:pxrem(60px);
+            margin-bottom:pxrem(20px);
+            height:pxrem(110px);
             overflow:hidden;
+            transform: scaleX(0.5);
           }
           .item-time{
-            font-size:pxrem(16px);
+            font-size:pxrem(40px);
             color:#00f6ff;
+            transform: scaleX(0.5);
           }
         }
       }

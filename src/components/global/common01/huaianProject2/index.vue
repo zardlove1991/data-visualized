@@ -117,19 +117,19 @@ export default {
         .title {
           text-align: left;
           width: 65%;
-          font-size: 0.4rem !important;
+          font-size: 0.5rem !important;
           padding-left:pxrem(32px);
           font-weight: 500;
         }
         .name {
           text-align: left;
           width: 10%!important;
-          font-size: 0.32rem !important;
+          font-size: 0.4rem !important;
           color: #00f6ff;
         }
         .project-status {
           width: pxrem(170px);
-          font-size: 0.32rem !important;
+          font-size: 0.4rem !important;
           text-align: justifyLeft;
           &.on-progress {
             color: #00f6ff;
@@ -176,7 +176,7 @@ export default {
           .percent {
             margin-left: pxrem(20px);
             width: pxrem(100px);
-            font-size: 0.32rem !important;
+            font-size: 0.4rem !important;
             font-weight: 500;
             color: #ffffff;
             &.on-progress {

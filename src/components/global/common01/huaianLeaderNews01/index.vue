@@ -107,12 +107,11 @@ export default {
   background-size: 100% 100%;
   width: 100%;
   height: 100%;
-  padding: 0 pxrem(40px) pxrem(40px);
+  padding: pxrem(40px);
   .leader-news01 {
-    background: url(./assets/bg02.png) no-repeat center;
-    padding: 1.3rem 0.8rem 0.47rem 0.78rem;
-    padding-top: 1.4rem !important;
-    padding-right: 0.8rem !important;
+    background: url("./assets/huaianAreaBg.png") no-repeat center;
+    background-size: 100% 100%;
+    padding: pxrem(90px) pxrem(80px) pxrem(47px) pxrem(78px);
     color: #fff;
     .common01-title {
       transform: scaleY(0.5);
@@ -122,6 +121,7 @@ export default {
       text-align: left;
       color: #ffffff;
       text-shadow: 0px pxrem(16px) pxrem(20px) pxrem(20px) rgba(0,222,255,0.20); 
+      top: pxrem(20px);
     }
     .wrap-top {
       img {
@@ -168,12 +168,11 @@ export default {
               left: pxrem(29px);
               position: absolute;
               bottom: pxrem(14px);
-              font-size: pxrem(38px);
+              font-size: pxrem(50px);
               font-family: PingFang SC Medium, PingFang SC Medium-Medium;
               font-weight: 500;
               text-align: left;
               color: #ffffff;
-              line-height: pxrem(24px);
               transform: scaleY(0.5);
             }
           }
@@ -181,31 +180,33 @@ export default {
       }
     }
     .wrap-list{
-      margin-top: pxrem(43px);
+      margin-top: pxrem(30px);
       li {
-        padding: pxrem(10px) pxrem(50px);
+        padding: 0 pxrem(50px);
         background: url(./assets/news_bg.png) no-repeat center;
         background-size: 100% 100%;
-        height: pxrem(181px)/2;
+        height: pxrem(200px)/2;
         text-align: left;
         box-sizing: border-box;
-        margin-bottom: pxrem(49px)/2;
+        margin-bottom: pxrem(20px)/2;
         .li-title {
           width: 1452px;
-          font-size: pxrem(30px);
+          font-size: pxrem(50px);
           font-family: Source Han Sans CN Bold, Source Han Sans CN Bold-Bold;
-          font-weight: 700;
+          font-weight: 500;
           color: #ffffff;
           margin-bottom: pxrem(5px);
           transform: scaleY(0.5);
+          line-height: pxrem(50px);
         }
         .li-sub {
           width: pxrem(1452px);
-          font-size: pxrem(22px);
+          font-size: pxrem(40px);
           font-family: Source Han Sans CN Medium, Source Han Sans CN Medium-Medium;
           font-weight: 500;
           color: #00f6ff;
           transform: scaleY(0.5);
+          line-height: pxrem(40px);
           span:first-child {
             margin-right: pxrem(44px);
           }

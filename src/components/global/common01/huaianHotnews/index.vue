@@ -110,7 +110,7 @@ export default {
           height: pxrem(52px);
           line-height: pxrem(52px);
           border-radius: pxrem(2px);
-          font-size: 0.3rem !important;
+          font-size: 0.4rem !important;
           margin-left: pxrem(20px)!important;
           font-weight: 500;
           &.one {
@@ -130,18 +130,18 @@ export default {
           text-align: left;
           width: 70%;
           margin: 0 0 0 pxrem(30px);
-          font-size: 0.4rem !important;
+          font-size: 0.5rem !important;
           font-weight: 500;
         }
         .name {
           width: 9%;
           text-align: left;
-          font-size: 0.32rem !important;
+          font-size: 0.4rem !important;
           color: #00f6ff;
         }
         .time {
           margin-left: auto;
-          font-size: 0.32rem !important;
+          font-size: 0.4rem !important;
           color: #00f6ff;
         }
       }
