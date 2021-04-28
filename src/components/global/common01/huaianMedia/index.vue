@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-report">
+  <div class="huaian-common01-report3" id="huaian-common01-report3">
     <div class="report-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '媒体矩阵'}}</div>
       <div class="wrap-content">
@@ -38,6 +38,8 @@ export default {
     this.getHuaianPlusList()
   },
   mounted () {
+    this.setFontsize('huaian-common01-report3')
+    document.querySelector('html').style.fontSize = '100px'
     setInterval(() => {
       this.getHuaianPlusList()
     }, this.frequency)
@@ -77,7 +79,9 @@ export default {
 <style lang="scss" scoped>
 @import '~@/styles/index.scss';
 @import '../style/index.scss';
-.common01-report {
+.huaian-common01-report3 {
+  background: url(./assets/bg.png) no-repeat center;
+  background-size: 100% 100%;
   width: 100%;
   height: 100%;
   padding: pxrem(40px);

@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-project">
+  <div class="huaian-common01-project" id="huaian-common01-project">
     <div class="project-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '选题展示'}}</div>
       <div class="wrap-content">
@@ -44,6 +44,10 @@ export default {
       this.getWorkCallSubjectList()
     }, this.frequency)
   },
+  mounted () {
+    this.setFontsize('huaian-common01-project')
+    document.querySelector('html').style.fontSize = '100px'
+  },
   methods: {
     setFontSize (size) {
       if (this.customSize && size && size > 0) {
@@ -79,7 +83,9 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
-.common01-project {
+.huaian-common01-project {
+  background: url(./assets/bg.png) no-repeat center;
+  background-size: 100% 100%;
   width: 100%;
   height: 100%;
   padding: pxrem(40px);

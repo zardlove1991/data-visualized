@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-workmap">
+  <div class="huaian-common01-workmap" id="huaian-common01-workmap">
     <div class="reporter-map-wrap sys-flex sys-flex-center flex-justify-center">
       <call
         :info-item.sync="callInfo"
@@ -78,6 +78,8 @@ export default {
     })
   },
   mounted () {
+    this.setFontsize('huaian-common01-workmap')
+    document.querySelector('html').style.fontSize = '100px'
     loadScript('/static/jquery.min.js').then(res => {
       loadBMap().then(() => {
         this.getReporter()
@@ -228,7 +230,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
-.common01-workmap {
+.huaian-common01-workmap {
+  background: url(./assets/bg.png) no-repeat center;
+  background-size: 100% 100%;
   width: 100%;
   height: 100%;
   // padding: pxrem(20px);

@@ -299,9 +299,9 @@ export default {
     },
     // 对象数组去重
     removal (arr) {
-      let obj = {}
+      // let obj = {}
       arr = arr.reduce((item, next) => {
-        obj[next.title] ? '' : obj[next.title] = true && item.push(next)
+        // obj[next.title] ? '' : obj[next.title] = true && item.push(next)
         return item
       }, [])
       return arr

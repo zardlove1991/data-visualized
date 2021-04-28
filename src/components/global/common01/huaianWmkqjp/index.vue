@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-wechat">
+  <div class="huaian-common01-wechat" id="huaian-common01-wechat">
     <div class="wechat-wrap common01-border">
       <div class="common01-title">{{viewAttr.header || '外媒看清江浦'}}</div>
       <div class="wrap-content">
@@ -39,6 +39,10 @@ export default {
       this.getHuaianPlusList()
     }, this.frequency)
   },
+  mounted () {
+    this.setFontsize('huaian-common01-wechat')
+    document.querySelector('html').style.fontSize = '100px'
+  },
   methods: {
     getHuaianPlusList () {
       getHuaianPlusList(this.column_id, this.page, 12).then(res => {
@@ -67,7 +71,9 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
-.common01-wechat {
+.huaian-common01-wechat {
+  background: url(./assets/bg.png) no-repeat center;
+  background-size: 100% 100%;
   width: 100%;
   height: 100%;
   padding: pxrem(40px);

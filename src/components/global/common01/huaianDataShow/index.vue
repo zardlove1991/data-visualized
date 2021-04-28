@@ -278,6 +278,8 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .dataShow {
+  background: url(./assets/bg.png) no-repeat center;
+  background-size: 100% 100%;
   width: 100%;
   height: 100%;
   padding: 0 pxrem(40px) pxrem(40px);
