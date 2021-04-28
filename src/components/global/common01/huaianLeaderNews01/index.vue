@@ -111,7 +111,7 @@ export default {
   .leader-news01 {
     background: url(./assets/bg02.png) no-repeat center;
     padding: 1.3rem 0.8rem 0.47rem 0.78rem;
-    padding-top: 1.3rem !important;
+    padding-top: 1.4rem !important;
     padding-right: 0.8rem !important;
     color: #fff;
     .common01-title {
@@ -181,7 +181,7 @@ export default {
       }
     }
     .wrap-list{
-      margin-top: pxrem(33px);
+      margin-top: pxrem(43px);
       li {
         padding: pxrem(10px) pxrem(50px);
         background: url(./assets/news_bg.png) no-repeat center;
