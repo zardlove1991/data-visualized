@@ -99,7 +99,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~@/styles/index.scss";
 @import "../style/index.scss";
 .common01-leader-news {
