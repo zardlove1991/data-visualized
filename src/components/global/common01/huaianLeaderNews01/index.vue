@@ -89,7 +89,7 @@ export default {
           this.contentList = res.data.slice(5, 9)
         }
       })
-    },
+    }
     // setFontSize (size) {
     //   if (this.customSize && size && size > 0) {
     //     return `font-size: ${size / 100}rem!important`
