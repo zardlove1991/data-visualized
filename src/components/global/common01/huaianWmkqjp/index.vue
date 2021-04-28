@@ -83,7 +83,7 @@ export default {
     background-size: 100% 100%;
     color: #fff;
     .common01-title{
-      font-size: pxrem(30px);
+      font-size: pxrem(40px);
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 1px;
@@ -115,10 +115,10 @@ export default {
         .item-info{
           .item-title {
             text-align: left;
-            font-size:pxrem(19px);
-            line-height:pxrem(50px);
+            font-size:pxrem(24px);
+            line-height:pxrem(31px);
             margin-bottom:pxrem(36px);
-            height:pxrem(90px);
+            height:pxrem(64px);
             overflow:hidden;
           }
           .item-time{
