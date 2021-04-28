@@ -65,7 +65,7 @@ export default {
   },
   mounted () {
     // this.setFontSize('huaianLeaderNews01')
-    document.querySelector('html').style.fontSize = '50px'
+    document.querySelector('html').style.fontSize = '100px'
   },
   watch: {
     swiperList: function () {
@@ -110,11 +110,12 @@ export default {
   padding: 0 pxrem(40px) pxrem(40px);
   .leader-news01 {
     background: url(./assets/bg02.png) no-repeat center;
-    padding: 2.2rem 0.8rem 0.95rem 0.78rem;
-    padding-top: 2rem !important;
+    padding: 1.3rem 0.8rem 0.47rem 0.78rem;
+    padding-top: 1.3rem !important;
     padding-right: 0.8rem !important;
     color: #fff;
     .common01-title {
+      transform: scaleY(0.5);
       font-size: pxrem(60px);
       font-family: Source Han Sans CN Bold, Source Han Sans CN Bold-Bold;
       font-weight: 700;
@@ -125,7 +126,7 @@ export default {
     .wrap-top {
       img {
         width: pxrem(557px);
-        height: pxrem(810px);
+        height: pxrem(810px)/2;
         margin-right: pxrem(82px);
       }
       .detail-box {
@@ -136,70 +137,75 @@ export default {
           font-family: PingFang SC Semibold, PingFang SC Semibold-Semibold;
           font-weight: 600;
           color: #00fcff;
-          margin-bottom: pxrem(25px);
+          margin-top: pxrem(-30px);
+          transform: scaleY(0.5);
         }
         .person-title {
           font-size: pxrem(50px);
           font-family: PingFang SC Medium, PingFang SC Medium-Medium;
           font-weight: 500;
           color: #ffffff;
-          line-height: pxrem(46px);
-          margin-bottom: pxrem(44px);
+          line-height: pxrem(23px);
+          margin-bottom: pxrem(22px);
+          transform: scaleY(0.5);
         }
         .swiper-box {
           position: relative;
           background: url(./assets/img_bg.png) no-repeat center;
           background-size: 100% 100%;
           width: pxrem(980px);
-          height: pxrem(600px);
+          height: pxrem(300px);
           .swiper-container, .swiper-slide {
             width: pxrem(906px) !important;
-            height: pxrem(510px);
+            height: pxrem(255px);
             img {
               width: pxrem(906px);
-              height: pxrem(510px);
+              height: pxrem(255px);
               position: relative;
             }
             .swiper-title{
               width: pxrem(819px);
               left: pxrem(29px);
               position: absolute;
-              bottom: pxrem(28px);
+              bottom: pxrem(14px);
               font-size: pxrem(38px);
               font-family: PingFang SC Medium, PingFang SC Medium-Medium;
               font-weight: 500;
               text-align: left;
               color: #ffffff;
-              line-height: pxrem(48px);
+              line-height: pxrem(24px);
+              transform: scaleY(0.5);
             }
           }
         }
       }
     }
     .wrap-list{
-      margin-top: pxrem(132px);
+      margin-top: pxrem(33px);
       li {
-        padding: pxrem(31px) pxrem(50px);
+        padding: pxrem(10px) pxrem(50px);
         background: url(./assets/news_bg.png) no-repeat center;
         background-size: 100% 100%;
-        height: pxrem(181px);
+        height: pxrem(181px)/2;
         text-align: left;
         box-sizing: border-box;
-        margin-bottom: pxrem(49px);
+        margin-bottom: pxrem(49px)/2;
         .li-title {
           width: 1452px;
-          font-size: pxrem(42px);
+          font-size: pxrem(30px);
           font-family: Source Han Sans CN Bold, Source Han Sans CN Bold-Bold;
           font-weight: 700;
           color: #ffffff;
-          margin-bottom: pxrem(20px);
+          margin-bottom: pxrem(5px);
+          transform: scaleY(0.5);
         }
         .li-sub {
           width: pxrem(1452px);
-          font-size: pxrem(32px);
+          font-size: pxrem(22px);
           font-family: Source Han Sans CN Medium, Source Han Sans CN Medium-Medium;
           font-weight: 500;
           color: #00f6ff;
+          transform: scaleY(0.5);
           span:first-child {
             margin-right: pxrem(44px);
           }
@@ -210,18 +216,18 @@ export default {
       background: url(./assets/swiper_default.png) no-repeat center;
       background-size: 100% 100%;
       width: pxrem(40px);
-      height: pxrem(12px);
+      height: pxrem(6px);
       display: inline-block;
     }
     .swiper-pagination-active {
       background: url(./assets/swiper_selected.png) no-repeat center;
       background-size: 100% 100%;
       width: pxrem(40px);
-      height: pxrem(12px);
+      height: pxrem(6px);
       display: inline-block;
     }
     .swiper-pagination2 {
-      bottom: pxrem(15px);
+      bottom: pxrem(5px);
       left: 50%;
       transform: translateX(-50%);
     }
