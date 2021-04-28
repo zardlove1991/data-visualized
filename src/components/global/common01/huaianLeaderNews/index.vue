@@ -100,7 +100,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
-// @import "../style/index.scss";
+@import "../style/index.scss";
 .common01-leader-news {
   width: 100%;
   height: 100%;
