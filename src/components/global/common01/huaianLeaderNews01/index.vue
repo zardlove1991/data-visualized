@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-leader-news">
+  <div class="common01-leader-news" id="huaianLeaderNews01">
     <div class="leader-news01 common01-border">
       <div class="common01-title">领导动态</div>
       <div class="wrap-top sys-flex flex-justify-around">
@@ -63,6 +63,9 @@ export default {
   created () {
     this.getContentList(278)
   },
+  mounted () {
+    this.setFontSize('huaianLeaderNews01')
+  },
   watch: {
     swiperList: function () {
       var _this = this
@@ -87,15 +90,15 @@ export default {
         }
       })
     },
-    setFontSize (size) {
-      if (this.customSize && size && size > 0) {
-        return `font-size: ${size / 100}rem!important`
-      }
-    }
+    // setFontSize (size) {
+    //   if (this.customSize && size && size > 0) {
+    //     return `font-size: ${size / 100}rem!important`
+    //   }
+    // }
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/styles/index.scss";
 @import "../style/index.scss";
 .common01-leader-news {

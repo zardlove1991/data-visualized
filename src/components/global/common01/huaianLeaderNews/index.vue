@@ -1,5 +1,5 @@
 <template>
-  <div class="common01-leader-news">
+  <div class="common01-leader-news" id="huaianLeaderNews">
     <div class="leader-news common01-border">
       <div class="common01-title">领导动态</div>
       <div class="wrap-top sys-flex flex-justify-around">
@@ -63,6 +63,9 @@ export default {
   created () {
     this.getContentList(277)
   },
+  mounted () {
+    this.setFontSize('huaianLeaderNews')
+  },
   watch: {
     swiperList: function () {
       var _this = this
@@ -86,18 +89,18 @@ export default {
           this.contentList = res.data.slice(5, 9)
         }
       })
-    },
-    setFontSize (size) {
-      if (this.customSize && size && size > 0) {
-        return `font-size: ${size / 100}rem!important`
-      }
     }
+    // setFontSize (size) {
+    //   if (this.customSize && size && size > 0) {
+    //     return `font-size: ${size / 100}rem!important`
+    //   }
+    // }
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/styles/index.scss";
-@import "../style/index.scss";
+// @import "../style/index.scss";
 .common01-leader-news {
   width: 100%;
   height: 100%;
@@ -181,7 +184,7 @@ export default {
         box-sizing: border-box;
         margin-bottom: pxrem(49px);
         .li-title {
-          width: 1452px;
+          width: pxrem(1452px);
           font-size: pxrem(42px);
           font-family: Source Han Sans CN Bold, Source Han Sans CN Bold-Bold;
           font-weight: 700;

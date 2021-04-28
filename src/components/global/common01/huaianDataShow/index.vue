@@ -280,7 +280,7 @@ export default {
 .dataShow {
   width: 100%;
   height: 100%;
-  padding: 0 pxrem(40px) pxrem(40px);
+  padding: pxrem(40px);
   .dataShow-wrap {
     width: 100%;
     height: 100%;
