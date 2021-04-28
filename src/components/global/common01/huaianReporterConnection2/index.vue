@@ -19,7 +19,7 @@
                 </div>
                 <div class="member-name">
                   <div class="name common01-ft58 overhidden">{{v.member_name}}</div>
-                  <div class="role common01-ft38 overhidden">{{v.org_title}}-{{v.role_title}}</div>
+                  <div class="role common01-ft38 overhidden">{{v.org_title.replace("淮安市","")}}-{{v.role_title}}</div>
                 </div>
                 <div class="connect connect-audio" @click="callaudio(v)"></div>
                 <div class="connect connect-video" @click="callvideo(v)"></div>
@@ -250,7 +250,7 @@ export default {
       height: calc(100% - 35px);
     }
     .reporter-list-wrap {
-      width: pxrem(495px);
+      width: pxrem(545px);
       position: absolute;
       top: pxrem(40px);
       right: pxrem(46px);
@@ -297,7 +297,7 @@ export default {
             }
           }
           .member-name {
-            width: 38%;
+            width: 48%;
             margin: 0 pxrem(40px) 0 pxrem(21px);
             text-align: left;
             .name {

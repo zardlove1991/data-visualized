@@ -116,14 +116,15 @@ export default {
         }
         .title {
           text-align: left;
-          width: 65%;
+          width: 62%;
           font-size: 0.5rem !important;
           padding-left:pxrem(32px);
           font-weight: 500;
+          margin:0 pxrem(30px) 0 0;
         }
         .name {
           text-align: left;
-          width: 10%!important;
+          width: 11%!important;
           font-size: 0.4rem !important;
           color: #00f6ff;
         }

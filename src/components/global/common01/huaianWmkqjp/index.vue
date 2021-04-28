@@ -103,23 +103,29 @@ export default {
         background-size: 100% 100%;
         margin-right:1%;
         background-color:rgba(0,96,255,0.2);
+        // display: inline-flex;
         .item-img{
-          // width: pxrem(135px);
-          width: 17%;
+          float: left;
+          // flex: 1;
+          width: pxrem(270px);
+          // width: 17%;
+          transform: scaleX(0.5);
           height: pxrem(170px);
           background: #1181e9;
           border-radius: 3px;
           overflow: hidden;
-          float: left;
-          // margin-right: pxrem(15px);
-          margin-right: 1.5%;
+          margin-right: pxrem(15px);
+          // margin-right: 1.5%;
           img{
             width:100%;
           }
         }
         .item-info{
-          float: left;
-          width: 30%;
+          // float: left;
+          // flex: 2;
+          width: pxrem(480px);
+          // width: 30%;
+          transform: scaleX(0.5);
           .item-title {
             text-align: left;
             font-size:pxrem(50px);
@@ -127,12 +133,10 @@ export default {
             margin-bottom:pxrem(20px);
             height:pxrem(110px);
             overflow:hidden;
-            transform: scaleX(0.5);
           }
           .item-time{
             font-size:pxrem(40px);
             color:#00f6ff;
-            transform: scaleX(0.5);
           }
         }
       }
