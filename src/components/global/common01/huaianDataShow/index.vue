@@ -232,9 +232,9 @@ export default {
     this.dataShowList()
   },
   mounted () {
-    this.setFontsize('dataShow')
-    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
-    console.log(document.documentElement.getBoundingClientRect().width)
+    // this.setFontsize('dataShow')
+    document.querySelector('html').style.fontSize = '100px'
+    // document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
   },
   methods: {
     dataShowList () {

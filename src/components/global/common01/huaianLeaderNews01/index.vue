@@ -64,7 +64,8 @@ export default {
     this.getContentList(278)
   },
   mounted () {
-    this.setFontSize('huaianLeaderNews01')
+    // this.setFontSize('huaianLeaderNews01')
+    document.querySelector('html').style.fontSize = '100px'
   },
   watch: {
     swiperList: function () {
