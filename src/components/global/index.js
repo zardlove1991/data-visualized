@@ -30,6 +30,19 @@ export const xinyicomponentCharacterOne = getComponent('xinyi/characterOne')
 export const xinyicomponentClickList = getComponent('xinyi/clickList')
 export const xinyicomponentCharacterSeven = getComponent('xinyi/characterSeven')
 export const xinyicomponentCharacterAll = getComponent('xinyi/characterAll')
+
+/* 梧州套系 */
+export const wuzhoucomponentContentPlot = getComponent('wuzhou/contentPlot')
+export const wuzhoucomponentNewsGather = getComponent('wuzhou/newsGather')
+export const wuzhoucomponentTitleWz = getComponent('wuzhou/titleWz')
+export const wuzhoucomponentHotWords = getComponent('wuzhou/hotWords')
+// export const wuzhoucomponentCummunicationEffetc = getComponent('wuzhou/cummunicationEffetc')
+// export const wuzhoucomponentOnlineReporter = getComponent('wuzhou/onlineReporter')
+// export const wuzhoucomponentAuditRelease = getComponent('wuzhou/auditRelease')
+// export const wuzhoucomponentContentDistribute = getComponent('wuzhou/contentDistribute')
+// export const wuzhoucomponentPerformanceRank = getComponent('wuzhou/performanceRank')
+// export const wuzhoucomponentOperationData = getComponent('wuzhou/operationData')
+
 /* 马鞍山套系 */
 export const maanshancomponentReport = getComponent('maanshan/report') // 报题展示
 export const maanshancomponentProject = getComponent('maanshan/project') // 选题展示
