@@ -1,4 +1,4 @@
-import { httpsbaseUrl, createAPI, GUID } from './api'
+import { httpsbaseUrl, createAPI, huaianUrl, GUID } from './api'
 
 /* 获取报题 */
 export const getJnWorkCallReportList = (count = 10, page = 1, createtime) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallReportList?count=${count}&page=${page}&create_time=${createtime}`)
@@ -229,3 +229,18 @@ export const performanceAppraisal = () => createAPI(`${httpsbaseUrl}/Apidaping/$
 
 // 组织下志愿者列表
 export const getVolunteersInfo = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteer?id=${id}`)
+// 淮安清江浦内容列表
+export const getContentList = (id) => createAPI(`${huaianUrl}/api/v1/contents.php?column_id=${id}`)
+// 淮安清江浦数据展示
+export const dataShowList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkChartWaiting`)
+// 淮安 外媒看德清
+export const getHuaianPlusList = (id, page, size, offset) => createAPI(`http://mapi.qpnews.com.cn/api/v1/contents.php?column_id=${id}&page=${page}&count=${size}&offset=${offset}`)
+
+// 梧州
+export const getContentPlan = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/contentPlanning`)
+export const getNewsPro = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/newsPro`)
+export const getWaiting = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkChartWaiting`)
+export const getWaitAudit = (page = 1, count = 6) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPLUSArticleList?status=1&count=${count}&page=${page}`)
+export const getAudit = (page = 1, count = 6) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPLUSArticleList?status=3&count=${count}&page=${page}`)
+export const getNewsType = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/manuscriptType`)
+export const getOperationData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperationalData`)
