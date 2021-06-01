@@ -13,7 +13,7 @@
         <!-- <div class="title">盐湖区新时代文明实践中心</div> -->
         <div class="title">{{title}}</div>
         <div class="order-list sys-flex">
-          <div class="type-list">
+          <!-- <div class="type-list">
             <div
               class="type-item"
               @click="changType('latest')"
@@ -47,9 +47,9 @@
               </div>
               <div class="type-name">完成鑫愿</div>
             </div>
-          </div>
+          </div> -->
           <div class="list-content sys-flex-one">
-            <div
+            <!-- <div
               class="list-item sys-flex animated"
               @click="changeDetail(v)"
               :class="{'flipInX' : v.title}"
@@ -57,6 +57,18 @@
               v-for="(v, k) in dataList"
               :key="k"
             >
+              <div class="list-country">【{{v.type.title}}】</div>
+              <div class="list-title txt-overflow sys-flex-one">{{v.title}}</div>
+              <div class="list-time">{{v.date}}</div>
+            </div> -->
+            <div
+              class="list-item sys-flex animated"
+              :class="{'flipInX' : v.title}"
+              :style="{'animation-delay' : k/2 + 's'}"
+              v-for="(v, k) in dataList"
+              :key="v.id"
+            >
+              <div class="list-status">{{v.status}}</div>
               <div class="list-country">【{{v.type.title}}】</div>
               <div class="list-title txt-overflow sys-flex-one">{{v.title}}</div>
               <div class="list-time">{{v.date}}</div>
@@ -181,7 +193,8 @@ export default {
   data () {
     return {
       dataList: [],
-      type: 'latest',
+      // type: 'latest',
+      type: 'all',
       temp: '',
       icon: '',
       wstr: '',
@@ -190,11 +203,13 @@ export default {
       count: 4,
       page: 1,
       title: '金山区新时代文明实践中心',
-      isPaging: false,
+      // isPaging: false,
+      isPaging: true,
       detail: {},
       showDetail: false,
-      frequency: 10000,
-      firstLoad: true
+      frequency: 6000,
+      firstLoad: true,
+      maxPage: 8
     }
   },
   created () {
@@ -253,28 +268,57 @@ export default {
               let hour = _date.getHours().toString().padStart(2, '0')
               let min = _date.getMinutes().toString().padStart(2, '0')
               item.date = month + '-' + day + '  ' + hour + ':' + min
+              // 1.待审核，2.通过，3.打回，4.接单中，5.已受理，6已派单，7已接单，8沟通中,9申请结单，10沟通完成
+              switch (item.status) {
+                case 2:
+                  item.status = '通过'
+                  break
+                case 4:
+                  item.status = '接单中'
+                  break
+                case 5:
+                  item.status = '已受理'
+                  break
+                case 6:
+                  item.status = '已派单'
+                  break
+                case 7:
+                  item.status = '已接单'
+                  break
+                case 8:
+                  item.status = '沟通中'
+                  break
+                case 9:
+                  item.status = '申请结单'
+                  break
+                case 10:
+                  item.status = '沟通完成'
+                  break
+              }
               if (index < 8) {
                 this.dataList.push(item)
               }
             })
             if (this.isPaging) {
               this.page += 1
+              // console.log(this.maxPage)
               if (this.page > this.maxPage) {
                 this.page = 1
               }
             }
-          } else {
-            if (this.page !== 1) {
-              this.page = 1
-              this.getList()
-            } else {
-              // 首次进入“最新点单”没有数据，进入“完成点单”
-              if (this.firstLoad) {
-                this.firstLoad = false
-                this.changType('complete')
-              }
-            }
           }
+          // } else {
+          //   if (this.page !== 1) {
+          //     this.page = 1
+          //     this.getList()
+          //   } else {
+          //     // 首次进入“最新点单”没有数据，进入“完成点单”
+          //     if (this.firstLoad) {
+          //       this.firstLoad = false
+          //       this.changType('complete')
+          //     }
+          //   }
+          // }
         }
       })
     },
@@ -328,7 +372,8 @@ export default {
       font-weight: bold;
       letter-spacing: 0.1rem;
       line-height: 1.2rem;
-      margin-top: 0.8rem;
+      // margin-top: 0.8rem;
+      margin-top: 0.6rem;
       margin-bottom: 0.6rem;
     }
     .today-weather {
@@ -394,6 +439,7 @@ export default {
       padding-right: 0.6rem;
       background: url(/static/img/box@2x.d7de315.png);
       background-size: 100% 100%;
+      margin-bottom: 0.2rem;
     }
     .list-item:nth-child(odd) {
       background-color: rgba(13, 99, 223, 0.2);
@@ -404,6 +450,10 @@ export default {
     .list-country {
       font-size: 0.38rem;
       color: #00d2ff;
+      margin-right: 0.1rem;
+    }
+    .list-status{
+      font-size: 0.38rem;
       margin-right: 0.1rem;
     }
     .list-title {
