@@ -2,45 +2,42 @@
     <div class="wz-wrap" id="wzPerformanceRank">
       <div class="content">
         <div class="main-title">绩效考核排行</div>
-            <div class="main-wrap">
-          <swiper :options="swiperOption" ref="mySwiper">
-            <swiper-slide v-for="(item,index) in dataList" :key="index" class="flex sys-flex-center">
-          
-            <div class="main-item flex sys-flex-center">
-              <div class="item-left">
-                <div class="avatar">
-                  <img src="./assets/ava-default.png" alt="" class="avatar-img">
+          <div class="main-wrap" v-for="(item,index) in dataList" :key="index">
+            <swiper :options="swiperOption" ref="mySwiper">
+              <swiper-slide>       
+              <div class="main-item flex sys-flex-center">
+                <div class="item-left">
+                  <div class="avatar">
+                    <img src="./assets/ava-default.png" alt="" class="avatar-img">
+                  </div>
+                  <p class="name">{{item.username}}</p>
                 </div>
-                <p class="name">{{item.username}}</p>
-              </div>
-              <div class="item-middle flex sys-vertical flex-justify-around">
-                  <div>生产量：<span class="num">{{item.total_amount}}</span></div>
-                  <div>发布量：<span class="num">{{item.total_publish_amount}}</span></div>
-              </div>
-              <div class="item-right flex flex-justify-between">
-                  <div class="item">
-                    <p class="num">{{item.total_click_amount}}</p>
-                    <p>总点击量</p>
-                  </div>
-                  <div class="item">
-                    <p class="num">{{item.total_forward_amount}}</p>
-                    <p>总评论量</p>
-                  </div>
-                  <div class="item">
-                    <p class="num">{{item.total_like_amount}}</p>
-                    <p>总点赞量</p>
-                  </div>
-                  <div class="item">
-                    <p class="num">{{item.total_share_amount}}</p>
-                    <p>总分享量</p>
-                  </div>
-              </div>
-            </div>
-            
-            </swiper-slide>
-          </swiper>
+                <div class="item-middle flex sys-vertical flex-justify-around">
+                    <div>生产量：<span class="num">{{item.total_amount}}</span></div>
+                    <div>发布量：<span class="num">{{item.total_publish_amount}}</span></div>
+                </div>
+                <div class="item-right flex flex-justify-between">
+                    <div class="item">
+                      <p class="num">{{item.total_click_amount}}</p>
+                      <p>总点击量</p>
+                    </div>
+                    <div class="item">
+                      <p class="num">{{item.total_forward_amount}}</p>
+                      <p>总评论量</p>
+                    </div>
+                    <div class="item">
+                      <p class="num">{{item.total_like_amount}}</p>
+                      <p>总点赞量</p>
+                    </div>
+                    <div class="item">
+                      <p class="num">{{item.total_share_amount}}</p>
+                      <p>总分享量</p>
+                    </div>
+                </div>
+              </div>          
+              </swiper-slide>
+            </swiper>
         </div>
-
       </div>    
     </div>
 </template>
@@ -57,7 +54,7 @@ export default {
         speed: 5000,
         autoplay: true,
         autoHeight: true,
-        slidesPerView: 4,
+        slidesPerView: 3,
         slidesPerGroup: 3,
         effect: 'flip',
         initialSlide: 0,
@@ -106,11 +103,11 @@ $color: #00F6FF;
 .wz-wrap{
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
         width: 100%;
         height:100%;
-        padding: 5vh 4vw;
+        padding: 1.5%;
         background: url("./assets/main-bg.png") no-repeat;
         background-size: 100% 100%;
         .main-title{
@@ -121,17 +118,17 @@ $color: #00F6FF;
         }
         .swiper-container{
           width: 100%;
-          height: pxrem(700px);
+          height: 100%;
           .swiper-slide{
             width: 100%!important;
           }
         }
         .main-wrap{
             width: 100%;
-            margin-top: pxrem(100px);
+            margin-top: 1.5%;
             .main-item{
               width: 100%;
-              height: pxrem(221px);
+              height: pxrem(220px);
               padding: 0 pxrem(59px);
               font-size: pxrem(32px);
               color: #ffffff;
@@ -148,6 +145,7 @@ $color: #00F6FF;
                 border: 4px solid #F6A904;
               }
               .item-left{
+                width: 5%;
                 .avatar{
                   width: pxrem(110px);
                   height: pxrem(110px);
@@ -164,6 +162,7 @@ $color: #00F6FF;
                 }
               }
               .item-middle{
+                 width: 20%;
                  height: pxrem(179px);
                  margin-left: pxrem(85px);
                  padding-right: pxrem(69px);

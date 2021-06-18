@@ -75,7 +75,7 @@ export default {
           data: ['文稿', '图集', '视频', '专题'],
           textStyle: {
             color: '#fff',
-            fontSize: 28
+            fontSize: '28rem'
           },
           padding: [0, 15, 0, 0],
           x: 'center',
@@ -110,7 +110,7 @@ export default {
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: 28,
+                  fontSize: '28rem',
                   color: '#fff',
                   borderWidth: 5
                   // fontWeight: 'bold'
@@ -129,17 +129,14 @@ export default {
           type: 'category',
           data: ['文稿', '图集', '视频', '专题'],
           axisLabel: {
-            // rotate: 20,
-            // fontWeight: 'bold',
             show: true,
             interval: 0,
             textStyle: {
               color: '#ccc'
             },
-            fontSize: 34
+            fontSize: '34rem'
           }
         },
-        barWidth: 90,
         yAxis: {
           type: 'value',
           show: false,
@@ -164,7 +161,7 @@ export default {
                 position: 'top', // 在上方显示
                 textStyle: { // 数值样式
                   color: '#fff',
-                  fontSize: 28
+                  fontSize: '28rem'
                 }
               },
               color: function (params) {
@@ -260,14 +257,11 @@ export default {
 .wz-wrap{
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
-        // width: pxrem(1840px);
-        // height: pxrem(1000px);
-        // padding: pxrem(53px) pxrem(71px);
         width: 100%;
         height: 100%;
-        padding: 5vh 4vw;
+        padding: 1.5%;
         background: url("./assets/main-bg.png") no-repeat;
         background-size: 100% 100%;
         .main-title{
@@ -303,13 +297,16 @@ export default {
                     background: url("./assets/title-type.png") no-repeat;
                     background-size: 100% 100%;            
                  }
+                 .news-echarts{
+                    height: pxrem(400px);
+                 }   
                  #echarts1{
                     width: 50%;
-                    height: pxrem(490px);
+                    // height: pxrem(490px);
                  }
                  #echarts2{
                      width: 50%;
-                     height: pxrem(490px);
+                    //  height: pxrem(490px);
                  }
                }
             }

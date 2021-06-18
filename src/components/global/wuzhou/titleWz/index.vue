@@ -52,20 +52,19 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .wz-wrap{
-    // width: pxrem(5620px);
-    // height: pxrem(860px);
-    // padding: pxrem(108px) pxrem(75px) pxrem(112px) pxrem(65px);
     width: 100%;
     height: 100%;
-    padding: pxrem(108px) pxrem(75px) pxrem(112px) pxrem(65px);
+    // padding: pxrem(108px) pxrem(75px) pxrem(112px) pxrem(65px);
+    padding: 1.5% 1%;
     .content{
       width: 100%;
       height: 100%;
       .main-title{
         width: 100%;
-        height: pxrem(618px);
+        height: pxrem(648px);
         background: url('./assets/title.png')  center center no-repeat;
-        background-size: pxrem(5139px) pxrem(618px);
+        // background-size: pxrem(5139px) pxrem(648px);
+        background-size: 92% pxrem(648px);
       }
       .time{
         width: pxrem(1896px);

@@ -37,26 +37,33 @@ export default {
         },
         color: ['#013CF9', '#14F7C0'],
         textStyle: {
-          fontSize: 32,
+          fontSize: '32rem',
           fontFamily: 'sans-serif',
-          color: '#ffffff'
+          color: '#fff'
         },
         legend: {
           data: ['阅读量', '评论量'],
           textStyle: {
             color: 'rgb(255,255,255)',
-            fontSize: 32
+            fontSize: '32rem'
           }
         },
         xAxis: [
           {
             type: 'category',
             data: [],
-            axisPointer: {
-              type: 'shadow'
+            axisLabel: {
+              interval: 0,
+              color: '#fff',
+              fontWeight: 'bold'
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#4A6AA8'
+              }
             },
             nameTextStyle: {
-              fontSize: 32
+              fontSize: '32rem'
             }
           }
         ],
@@ -67,11 +74,12 @@ export default {
             // min: 0,
             // max: 600,
             interval: 200,
+            splitLine: { show: false },
             axisLabel: {
               formatter: '{value}'
             },
             nameTextStyle: {
-              fontSize: 32
+              fontSize: '32rem'
             }
           }
         ],
@@ -124,9 +132,10 @@ export default {
             let data = res.data.result
             this.readNum = data.total_click_num
             this.commentNum = data.total_comment_num
-            let dateArr = data.list.map(v => v.time)
+            let dateArr = data.list.map(v => v.time.slice(5, 10))
             // let arr = this.map(data.list)
-            this.barOptions.xAxis.data = dateArr
+            this.barOptions.xAxis[0].data = dateArr
+            // console.log(this.barOptions.xAxis.data)
             this.barOptions.series[1].data = data.list.map(v => v.click_num)
             this.barOptions.series[0].data = data.list.map(v => v.comment_num)
           }
@@ -150,19 +159,13 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .wz-wrap{
-    // width: pxrem(1920px);
-    // height: pxrem(1080px);
-    // padding: pxrem(33px);
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
-      // width: pxrem(1840px);
-      // height: pxrem(1000px);
-      // padding: pxrem(54px) pxrem(110px) pxrem(56px) pxrem(71px);
       width: 100%;
       height: 100%;
-      padding: 5vh 4vw;
+      padding: 1.5%;
       background: url("./assets/main-bg.png") no-repeat;
       background-size: 100% 100%;
       .main-title{

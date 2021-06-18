@@ -183,23 +183,17 @@ export default {
 @import "~@/styles/index.scss";
 $color: #15FEF5;
 .wz-wrap{
-    // width: pxrem(1920px);
-    // height: pxrem(1080px);
-    // padding: pxrem(33px);
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
-      // width: pxrem(1840px);
-      // height: pxrem(1000px);
-      // padding: pxrem(54px) pxrem(100px) pxrem(56px) pxrem(71px);
       width: 100%;
       height: 100%;
-      padding: 5vh 4vw;
+      padding: 1.5%;
       background: url("./assets/main-bg.png") no-repeat;
       background-size: 100% 100%;
       .main-title{
-          font-size: pxrem(29px);
+          font-size: pxrem(58px);
           font-weight: 500;
           color: #ffffff;
           text-align: left;
@@ -207,35 +201,33 @@ $color: #15FEF5;
       .main-wrap{
           width: 100%;
           height: 90%;
-          margin-top: pxrem(25px);
+          margin-top: pxrem(50px);
           .main-num1{
             .num-item{
-                // width: pxrem(740px);
-                // height: pxrem(65px);
                 width: 24%;
-                height: pxrem(80px);
+                height: pxrem(160px);
                 color: #ffffff;
-                font-size: pxrem(19px);
+                font-size: pxrem(38px);
                 background: url('./assets/top-bg.png') no-repeat;
                 background-size: 100% 100%;
                 .num{
-                  font-size: pxrem(32px);
+                  font-size: pxrem(64px);
                   font-weight: 700;
                   color: $color;
-                  margin-left: pxrem(30px);
+                  margin-left: pxrem(60px);
                 }
               }
           }
           
           .list-wrap{
-             margin-top: pxrem(42px);
-             height: 85%; 
+             margin-top: pxrem(80px);
+            //  height: 85%; 
              flex-wrap: wrap;
              .list{
                width: 49%;
-               height: pxrem(360px);
-               margin-bottom: pxrem(30px);
-               padding: pxrem(49px) pxrem(30px) 0;
+               height: pxrem(720px);
+               margin-bottom: pxrem(60px);
+               padding: pxrem(98px) pxrem(60px) 0;
                background: url('./assets/title-hot.png') no-repeat;
                background-size: 100%;
                &.list-project{
@@ -251,20 +243,20 @@ $color: #15FEF5;
                    background-size: 100%;
                 }
                 /deep/ .list-item{
-                  font-size: pxrem(16px);
+                  font-size: pxrem(32px);
                   .title{
-                    font-size: pxrem(20px);
+                    font-size: pxrem(40px);
                   }
                   .click-num{
-                    background-size: pxrem(21px)  pxrem(15px);
-                    padding-left: pxrem(31px);
-                    margin-left: pxrem(25px);
+                    background-size: pxrem(42px)  pxrem(30px);
+                    padding-left: pxrem(62px);
+                    margin-left: pxrem(50px);
                   }
                 }
                 .list-status{
-                  width: pxrem(60px);
-                  height: pxrem(25px); 
-                  margin-right: pxrem(20px); 
+                  width: pxrem(120px);
+                  height: pxrem(50px); 
+                  margin-right: pxrem(40px); 
                   &.list-status0{
                     background: url('./assets/tag-wait.png') no-repeat;
                     background-size: 100% 100%;
@@ -282,8 +274,8 @@ $color: #15FEF5;
                    width: 30%;
                    color: #0FBFFA;
                    .progress-bar{
-                      width: pxrem(110px);
-                      height: pxrem(8px);
+                      width: pxrem(220px);
+                      height: pxrem(16px);
                       background: #2B3A57;
                       border-radius: pxrem(4px);
                       .progress-status{

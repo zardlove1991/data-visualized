@@ -96,11 +96,11 @@ export default {
 .wz-wrap{
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
         width: 100%;
         height:100%;
-        padding: 5vh 4vw;
+        padding: 1.5%;
         background: url("./assets/main-bg.png") no-repeat;
         background-size: 100% 100%;
         .main-title{
@@ -120,6 +120,10 @@ export default {
                 .item-left{
                   width: pxrem(168px);
                   height: pxrem(168px);
+                  img{
+                    width: 100%;
+                    height: 100%;
+                  }
                 }
                 .item-right{
                   color:#ffffff;
@@ -142,6 +146,7 @@ export default {
                 margin-top: pxrem(58px);
                 padding: pxrem(60px);
                 .section2-item{
+                  width: 28%;
                   border-right: 1px solid #0484fa;
                   padding-right: pxrem(80px);
                   &:last-child{
@@ -176,6 +181,7 @@ export default {
                 }
                 .item-bottom{
                   margin-top: pxrem(80px);
+                  text-align: left;
                   .item{
                     color: #ffffff;
                     font-size: pxrem(30px);

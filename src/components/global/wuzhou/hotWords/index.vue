@@ -34,7 +34,7 @@ export default {
           {
             type: 'wordCloud',
             gridSize: 50, // 字体分布的密集程度
-            sizeRange: [10, 30], // 字体大小的范围
+            sizeRange: [this.getProportion('wzHotWords') * 40, this.getProportion('wzHotWords') * 79], // 字体大小的范围
             rotationRange: [0, 90], // 字体旋转的角度
             rotationStep: 90,
             shape: 'square',
@@ -121,11 +121,11 @@ export default {
     // padding: pxrem(33px);
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
         width: 100%;
         height:100%;
-        padding: 5vh 4vw;
+        padding: 1.5%;
         background: url("./assets/main-bg.png") no-repeat;
         background-size: 100% 100%;
         .main-title{
@@ -137,7 +137,6 @@ export default {
         .main-wrap{
             width: 100%;
             height: 90%; 
-            margin-top: pxrem(30px);
             #wordCloud{
               height: 100%;       
             }  

@@ -50,7 +50,7 @@ export default {
           }
         },
         textStyle: {
-          fontSize: 32,
+          fontSize: '32rem',
           color: '#ffffff'
         },
         legend: {
@@ -83,6 +83,9 @@ export default {
             lineStyle: {
               color: '#ffffff'
             }
+          },
+          splitLine: {
+            show: false
           },
           data: ['文稿', '图集', '视频', '专题']
         },
@@ -123,7 +126,7 @@ export default {
           }
         },
         textStyle: {
-          fontSize: 32,
+          fontSize: '32rem',
           color: '#ffffff'
         },
         legend: {
@@ -145,6 +148,9 @@ export default {
             lineStyle: {
               color: 'transparent'
             }
+          },
+          splitLine: {
+            show: false
           }
         },
         yAxis: {
@@ -275,11 +281,11 @@ $color: #15FEF5;
 .wz-wrap{
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
       width: 100%;
       height: 100%;
-      padding: 5vh 4vw;
+      padding: 1.5%;
       background: url("./assets/main-bg.png") no-repeat;
       background-size: 100% 100%;
       .main-title{
@@ -293,16 +299,15 @@ $color: #15FEF5;
           height: 95%;
           margin-top: pxrem(50px); 
           .echart-wrap{
-            // width: pxrem(1680px);
-            // height: pxrem(700px);
             width: 100%;
             height: 45%;
+            padding: 1%;
             background: url("./assets/top-border.png") no-repeat;
             background-size: 100% 100%;
           }
           .list-wrap{
             width: 100%;
-            height: 55%;
+            height: 53%;
             margin-top: 2%;
             overflow: hidden;
             .list{
@@ -321,12 +326,12 @@ $color: #15FEF5;
               }
               .list-ul>li{
                 width: 100%;
-                // height: pxrem(60px);
-                padding: pxrem(20px);
+                height: pxrem(120px);
+                padding: pxrem(40px);
                 background: rgba(0,255,246,0.05);
                 color:#ffffff;
                 font-size: pxrem(36px);
-                margin-top: pxrem(30px);
+                margin-top: pxrem(25px);
                 .dot{
                   display:inline-block;
                   width: pxrem(17px);

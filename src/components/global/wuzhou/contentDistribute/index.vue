@@ -103,19 +103,13 @@ export default {
 @import "~@/styles/index.scss";
 $color: #15FEF5;
 .wz-wrap{
-    // width: pxrem(1920px);
-    // height: pxrem(1080px);
-    // padding: pxrem(33px);
     width: 100%;
     height:100%;
-    padding: 1.5vh 1.5vw;
+    padding: 1%;
     .content{
-      // width: pxrem(1840px);
-      // height: pxrem(1000px);
-      // padding: pxrem(54px) pxrem(100px) pxrem(56px) pxrem(71px);
       width: 100%;
       height: 100%;
-      padding: 5vh 4vw;
+      padding: 1.5%;
       background: url("./assets/main-bg.png") no-repeat;
       background-size: 100% 100%;
       .main-title{
