@@ -74,8 +74,9 @@ export default {
     }, this.frequency)
   },
   mounted () {
-    this.setFontsize('wzContentDistribute')
+    // this.setFontsize('wzContentDistribute')
     // document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
+    // document.documentElement.style.fontSize = '66.7px'
   },
   methods: {
     getNum () {

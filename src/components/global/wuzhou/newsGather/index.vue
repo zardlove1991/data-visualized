@@ -184,7 +184,8 @@ export default {
     }, this.frequency)
   },
   mounted () {
-    this.setFontsize('wzNewsGather')
+    // this.setFontsize('wzNewsGather')
+    // document.documentElement.style.fontSize = '33.3px'
   },
   methods: {
     // 稿件列表
