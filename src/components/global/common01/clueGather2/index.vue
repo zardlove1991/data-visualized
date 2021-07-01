@@ -149,18 +149,21 @@ export default {
         .idx2{
             width:pxrem(56px);
             height:pxrem(56px);
+            line-height: pxrem(56px);
             background:rgba(230,125,39,1);
             border-radius:5px;
         }
         .idx3{
             width:pxrem(56px);
             height:pxrem(56px);
+            line-height: pxrem(56px);
             background:rgba(173,80,238,1);
             border-radius:5px;
         }
         .idx4{
             width:pxrem(56px);
             height:pxrem(56px);
+            line-height: pxrem(56px);
             background:rgba(4,102,255,1);
             border-radius:5px;
         }
