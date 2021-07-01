@@ -109,6 +109,7 @@ export default {
     padding: pxrem(180px) pxrem(50px) pxrem(95px) pxrem(50px);
     color: #fff;
     .wrap-content {
+      margin-top:pxrem(10px);
         .weibo,.weixin{
             img{
                 margin-right: pxrem(20px);

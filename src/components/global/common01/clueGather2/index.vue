@@ -103,7 +103,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
 .common01-cluegather-other {
@@ -111,9 +111,10 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .cluegather-wrap {
-    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(180px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
+      margin-top:pxrem(10px);
       .marginBottom75 {
         margin-bottom: pxrem(75px)!important;
       }
