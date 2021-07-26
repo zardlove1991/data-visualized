@@ -7,4 +7,9 @@ export const configInfo = [{
   guid: 'NWQ2NzNmNz',
   title: '金山区新时代文明实践中心',
   favicon: 'favicon_jinshan'
+},
+{
+  guid: 'NDIzMzc5NW',
+  title: '马鞍山新时代文明实践中心',
+  favicon: 'favicon_maanshan'
 }]
