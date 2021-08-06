@@ -23,6 +23,25 @@ export const xinyicomponentTitle = getComponent('xinyi/title')
 export const xinyicomponentWorkcallInfoMap = getComponent('xinyi/workcallInfoMap')
 export const xinyicomponentNewspaper = getComponent('xinyi/newspaper')
 export const xinyicomponentTv = getComponent('xinyi/tv')
+export const xinyicomponentIntelligenceBriefing = getComponent('xinyi/intelligenceBriefing')
+export const xinyicomponentCharacterInformation = getComponent('xinyi/characterInformation')
+export const xinyicomponentRelatedReports = getComponent('xinyi/relatedReports')
+export const xinyicomponentCharacterOne = getComponent('xinyi/characterOne')
+export const xinyicomponentClickList = getComponent('xinyi/clickList')
+export const xinyicomponentCharacterSeven = getComponent('xinyi/characterSeven')
+export const xinyicomponentCharacterAll = getComponent('xinyi/characterAll')
+
+/* 梧州套系 */
+export const wuzhoucomponentContentPlot = getComponent('wuzhou/contentPlot')
+export const wuzhoucomponentNewsGather = getComponent('wuzhou/newsGather')
+export const wuzhoucomponentTitleWz = getComponent('wuzhou/titleWz')
+export const wuzhoucomponentHotWords = getComponent('wuzhou/hotWords')
+export const wuzhoucomponentCummunicationEffetc = getComponent('wuzhou/cummunicationEffetc')
+export const wuzhoucomponentOnlineReporter = getComponent('wuzhou/onlineReporter')
+export const wuzhoucomponentAuditRelease = getComponent('wuzhou/auditRelease')
+export const wuzhoucomponentContentDistribute = getComponent('wuzhou/contentDistribute')
+export const wuzhoucomponentPerformanceRank = getComponent('wuzhou/performanceRank')
+export const wuzhoucomponentOperationData = getComponent('wuzhou/operationData')
 
 /* 马鞍山套系 */
 export const maanshancomponentReport = getComponent('maanshan/report') // 报题展示
@@ -165,3 +184,23 @@ export const common01componentReporterConnection = getComponent('common01/report
 export const common01componentReviewRelease = getComponent('common01/reviewRelease') // 山西 审核发布
 export const common01componentContentSpread = getComponent('common01/contentSpread') // 山西 内容传播
 export const common01componentOperationData = getComponent('common01/operationData') // 山西 运营数据
+export const common01componentSxMiddle = getComponent('common01/sxMiddle') // 山西 中间
+
+export const common01componentHuaianReport = getComponent('common01/huaianReport') // 淮安清江浦 报题展示
+export const common01componentHuaianReport2 = getComponent('common01/huaianReport2') // 淮安清江浦 报题展示2
+export const common01componentHuaianProject = getComponent('common01/huaianProject') // 淮安清江浦 选题展示
+export const common01componentHuaianProject2 = getComponent('common01/huaianProject2') // 淮安清江浦 选题展示2
+export const common01componentHuaianTaskShow = getComponent('common01/huaianTaskShow') // 淮安清江浦 任务展示
+export const common01componentHuaianClueGather = getComponent('common01/huaianClueGather') // 淮安清江浦 线索汇聚
+export const common01componentHuaianClueGather01 = getComponent('common01/huaianClueGather01') // 淮安清江浦 线索汇聚
+export const common01componentHuaianClueGather02 = getComponent('common01/huaianClueGather02') // 淮安清江浦 线索汇聚
+export const common01componentHuaianClueGather03 = getComponent('common01/huaianClueGather03') // 淮安清江浦 线索汇聚
+export const common01componentHuaianTitle = getComponent('common01/huaianTitle') // 淮安清江浦 标题
+export const common01componentHuaianReporterConnection = getComponent('common01/huaianReporterConnection') // 淮安清江浦 记者连线
+export const common01componentHuaianLeaderNews = getComponent('common01/huaianLeaderNews') // 淮安清江浦 领导动态
+export const common01componentHuaianLeaderNews01 = getComponent('common01/huaianLeaderNews01') // 淮安清江浦 领导动态1
+export const common01componentHuaianDataShow = getComponent('common01/huaianDataShow') // 淮安清江浦 数据展示
+export const common01componentHuaianReporterConnection2 = getComponent('common01/huaianReporterConnection2') // 淮安清江浦 记者连线2
+export const common01componentHuaianHotnews = getComponent('common01/huaianHotnews') // 淮安清江浦 全网热点
+export const common01componentHuaianWmkqjp = getComponent('common01/huaianWmkqjp') // 淮安清江浦 外媒看德清
+export const common01componentHuaianMedia = getComponent('common01/huaianMedia') // 淮安清江浦 媒体矩阵

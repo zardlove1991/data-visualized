@@ -180,6 +180,7 @@
 
 <script>
 import {GUID} from '@/servers/api'
+import { configInfo } from '@/config/common'
 import { getJiangningWeather, getVolunteerHelpList, getVolunteerHelpDetail } from '@/servers/interface'
 export default {
   name: 'manuscript',
@@ -195,7 +196,6 @@ export default {
       weekday: '',
       count: 4,
       page: 1,
-      title: '盐湖区新时代文明实践中心',
       isPaging: false,
       detail: {},
       showDetail: false,
@@ -225,6 +225,11 @@ export default {
       this.getList()
       this.getToday('')
     }, this.frequency)
+  },
+  computed: {
+    title () {
+      return configInfo.find(item => item.guid === GUID).title
+    }
   },
   methods: {
     showAll () {

@@ -103,7 +103,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/styles/index.scss";
 @import '../style/index.scss';
 .common01-cluegather-other {
@@ -111,9 +111,10 @@ export default {
   height: 100%;
   padding: pxrem(40px);
   .cluegather-wrap {
-    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(180px) pxrem(96px) pxrem(95px) pxrem(78px);
     color: #fff;
     .wrap-content {
+      margin-top:pxrem(10px);
       .marginBottom75 {
         margin-bottom: pxrem(75px)!important;
       }
@@ -148,18 +149,21 @@ export default {
         .idx2{
             width:pxrem(56px);
             height:pxrem(56px);
+            line-height: pxrem(56px);
             background:rgba(230,125,39,1);
             border-radius:5px;
         }
         .idx3{
             width:pxrem(56px);
             height:pxrem(56px);
+            line-height: pxrem(56px);
             background:rgba(173,80,238,1);
             border-radius:5px;
         }
         .idx4{
             width:pxrem(56px);
             height:pxrem(56px);
+            line-height: pxrem(56px);
             background:rgba(4,102,255,1);
             border-radius:5px;
         }

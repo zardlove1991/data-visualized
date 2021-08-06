@@ -323,7 +323,7 @@
           </div>
         </div>
         <!-- 三级页面 -->
-        <div class="list-box sys-flex" v-else>
+        <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0 && showList">
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
             <div class="img-box-volunteer">
               <img v-if="item.head_pic" :src="item.head_pic" alt />
@@ -337,6 +337,10 @@
               <span class="volunteer-hours">{{ item.total }}</span>
             </div>
           </div>
+        </div>
+        <!-- 暂无数据 -->
+        <div class="list-box sys-flex" v-if="!detailInfo.length">
+         <p class="no-more">暂无数据</p>
         </div>
       </div>
     </div>
@@ -503,6 +507,9 @@ export default {
               });
               this.detailInfo = _result;
             }
+            // this.timer = setTimeout(() => {
+            //   this.loading = false
+            // }, 2000)
           }
         });
       }
@@ -570,6 +577,7 @@ export default {
             });
             this.showDetailPage = true;
           }
+          this.loading = false
         }
       });
     },
@@ -1060,6 +1068,9 @@ export default {
       flex-flow: row wrap;
       margin: pxrem(59px) auto 0;
       justify-content: center;
+      .no-more {
+        color: #fff;
+      }
       .item {
         width: pxrem(293px);
         height: pxrem(283px);

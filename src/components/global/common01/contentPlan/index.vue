@@ -5,14 +5,7 @@
         <div class="top_left">
           <div class="top_title">今日选题</div>
           <div class="total-num sys-flex sys-flex-center">
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>0</span></div>
-            <div class="num-list hg-flex"><span>2</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>9</span></div>
+            <div class="num-list hg-flex"  v-for="(v, k) in topic_today_amount" :key="k"><span>{{v}}</span></div>
           </div>
           <div class="pic_title">近7日走势</div>
           <div class="jinri_echart">
@@ -22,14 +15,7 @@
         <div class="top_right">
           <div class="top_title">今日完成</div>
           <div class="total-num sys-flex sys-flex-center">
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span class="zero">0</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>0</span></div>
-            <div class="num-list hg-flex"><span>2</span></div>
-            <div class="num-list hg-flex"><span>1</span></div>
-            <div class="num-list hg-flex"><span>9</span></div>
+            <div class="num-list hg-flex"  v-for="(v, k) in topic_today_finish_amount" :key="k"><span>{{v}}</span></div>
           </div>
           <div class="pic_title">近7日走势</div>
           <div class="jinri_echart">
@@ -47,6 +33,7 @@
   </div>
 </template>
 <script>
+import { contentPlanning } from '@/servers/interface'
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
@@ -59,16 +46,19 @@ export default {
   name: 'contentPlan',
   data () {
     return {
+      topic_today_amount: [],
+      topic_today_finish_amount: [],
       barOptions: {
         xAxis: {
           type: 'category',
           boundaryGap: false,
+          data: [],
           axisLabel: {
             show: true,
             textStyle: {
               color: '#fff'
             },
-            fontSize: '26'
+            fontSize: 24
           }
         },
         yAxis: {
@@ -79,9 +69,9 @@ export default {
           }
         },
         grid: {
-          left: '4%',
-          right: '4%',
-          top: '0%'
+          left: 20,
+          right: 20,
+          top: 0
         },
         splitLine: {
           show: true
@@ -101,7 +91,6 @@ export default {
               color: '#2041ad',
               width: 5
             },
-            // color: '#133085',
             areaStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -110,16 +99,7 @@ export default {
                 ])
               }
             },
-            data: [
-              ['02', 150],
-              ['03', 120],
-              ['04', 230],
-              ['05', 180],
-              ['06', 100],
-              ['07', 130],
-              ['08', 160],
-              ['09', 150]
-            ]
+            data: []
           }
         ]
       },
@@ -127,12 +107,13 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
+          data: [],
           axisLabel: {
             show: true,
             textStyle: {
               color: '#fff'
             },
-            fontSize: '26'
+            fontSize: 24
           }
         },
         yAxis: {
@@ -143,9 +124,9 @@ export default {
           }
         },
         grid: {
-          left: '4%',
-          right: '4%',
-          top: '0%'
+          left: 20,
+          right: 20,
+          top: 0
         },
         splitLine: {
           show: true
@@ -174,29 +155,11 @@ export default {
                 ])
               }
             },
-            data: [
-              ['02', 150],
-              ['03', 120],
-              ['04', 230],
-              ['05', 180],
-              ['06', 100],
-              ['07', 130],
-              ['08', 160],
-              ['09', 150]
-            ]
+            data: []
           }
         ]
       },
       barOptions2: {
-        // tooltip: {
-        //   trigger: 'axis',
-        //   axisPointer: {
-        //     type: 'cross',
-        //     label: {
-        //       backgroundColor: '#6a7985'
-        //     }
-        //   }
-        // },
         splitLine: {
           show: false
         },
@@ -206,7 +169,7 @@ export default {
           data: ['累计选题', '累计完成'],
           textStyle: {
             color: '#fff',
-            fontSize: 40
+            fontSize: 34
           },
           itemWidth: 80,
           itemHeight: 30,
@@ -218,22 +181,22 @@ export default {
           }
         },
         grid: {
-          left: '0%',
-          right: '4%',
-          bottom: '0%',
-          top: '20%',
+          left: 0,
+          right: 40,
+          bottom: 0,
+          top: 70,
           containLabel: true
         },
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['10.12', '10.13', '10.14', '10.15', '10.16', '10.16', '10.16'],
+          data: [],
           axisLabel: {
             show: true,
             textStyle: {
               color: '#fff'
             },
-            fontSize: '30'
+            fontSize: 30
           }
         },
         yAxis: {
@@ -242,7 +205,7 @@ export default {
             textStyle: {
               color: '#fff'
             },
-            fontSize: '30'
+            fontSize: 30
           },
           splitLine: {
             show: true,
@@ -256,13 +219,7 @@ export default {
           {
             name: '累计选题',
             type: 'line',
-            // stack: '总量',
-            // emphasis: {
-            //   focus: 'series'
-            // },
-            data: [600, 850, 1000, 600, 550, 450, 310],
-            // color: '#827705',
-            // symbol: 'true',
+            data: [],
             lineStyle: {
               color: '#ffe50c',
               width: 5
@@ -288,13 +245,7 @@ export default {
           {
             name: '累计完成',
             type: 'line',
-            // stack: '总量',
-            // areaStyle: {},
-            // emphasis: {
-            //   focus: 'series'
-            // },
-            data: [279, 300, 201, 334, 290, 300, 210],
-            // color: '#01616f',
+            data: [],
             lineStyle: {
               color: '#00f8e4',
               width: 5
@@ -321,8 +272,94 @@ export default {
       }
     }
   },
+  created () {
+    this.contentPlanning()
+    this.initData()
+  },
+  methods: {
+    contentPlanning () {
+      contentPlanning().then(res => {
+        if (!res.data.error_code) {
+          // 今日选题
+          let topicVal = res.data.result.topic_today_amount.amount.toString()
+          let topicValLength = topicVal.length
+          let chaTopicValLength = 8 - topicValLength
+          for (let i = 0; i < chaTopicValLength; i++) {
+            this.topic_today_amount.push(0)
+          }
+          for (let j = 0; j < topicValLength; j++) {
+            this.topic_today_amount.push(topicVal[j])
+          }
+          // 今日完成
+          let finishVal = res.data.result.topic_today_finish_amount.amount.toString()
+          let finishValLength = finishVal.length
+          let chaFinishValLength = 8 - finishValLength
+          for (let i = 0; i < chaFinishValLength; i++) {
+            this.topic_today_finish_amount.push(0)
+          }
+          for (let j = 0; j < finishValLength; j++) {
+            this.topic_today_finish_amount.push(finishVal[j])
+          }
+          const todayArr = res.data.result.topic_today_amount.seven_amount
+          const todayFinishArr = res.data.result.topic_today_finish_amount.seven_amount
+          const amountArr = res.data.result.amount
+          const finishAmountArr = res.data.result.finish_amount
+          const today = []
+          const todayFinish = []
+          const amount = []
+          const finishAmount = []
+          for (let m = 0; m < todayArr.length; m++) {
+            today.push(todayArr[m].amount)
+          }
+          for (let m = 0; m < todayFinishArr.length; m++) {
+            todayFinish.push(todayFinishArr[m].amount)
+          }
+          for (let m = 0; m < amountArr.length; m++) {
+            amount.push(amountArr[m].amount)
+          }
+          for (let m = 0; m < finishAmountArr.length; m++) {
+            finishAmount.push(finishAmountArr[m].amount)
+          }
+          this.barOptions.series[0].data = today
+          this.barOptions1.series[0].data = todayFinish
+          this.barOptions2.series[0].data = amount
+          this.barOptions2.series[1].data = finishAmount
+        }
+      })
+    },
+    funGetDateStr (pCount) {
+      var dd = new Date()
+      dd.setDate(dd.getDate() + pCount)
+      var d = dd.getDate()
+      return d < 10 ? '0' + d : d
+    },
+    funGetDateStr1 (pCount) {
+      var dd = new Date()
+      dd.setDate(dd.getDate() + pCount)
+      var m = dd.getMonth() + 1
+      var d = dd.getDate()
+      return (m < 10 ? '0' + m : m) + '.' + (d < 10 ? '0' + d : d)
+    },
+    initData () {
+      var dateList = []
+      for (var i = -6; i < 1; i++) {
+        let tempData = this.funGetDateStr(i).toString()
+        dateList.push(tempData)
+      }
+      var dateList1 = []
+      for (var j = -6; j < 1; j++) {
+        let tempData1 = this.funGetDateStr1(j).toString()
+        dateList1.push(tempData1)
+      }
+      this.barOptions.xAxis.data = dateList
+      this.barOptions1.xAxis.data = dateList
+      this.barOptions2.xAxis.data = dateList1
+    }
+  },
   mounted () {
     this.setFontsize('contentplan')
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 1920 * 100 + 'px'
+    console.log(document.documentElement.getBoundingClientRect().width)
   },
   components: {
     chart: echarts
@@ -332,51 +369,55 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .contentplan {
-  width: 100%;
-  height: 100%;
-  padding: pxrem(58px) pxrem(50px) pxrem(53px) pxrem(50px);
+  width: pxrem(1920px);
+  height: pxrem(1080px);
+  padding: pxrem(27px) pxrem(50px);
   position: relative;
   background: #0b072d;
+  box-sizing: border-box;
   .contentplan-wrap {
     width: 100%;
     height: 100%;
     background: url("./assets/border.png") no-repeat center;
     background-size: 100% 100%;
-    padding: pxrem(220px) pxrem(126px) pxrem(0px);
+    padding: pxrem(99px) pxrem(115px) pxrem(0px);
     color: #fff;
+    box-sizing: border-box;
     .wrap-top {
       width: 100%;
-      height: pxrem(750px);
+      height: pxrem(375px);
       background-size: 100% 100%;
-      margin-bottom: pxrem(102px);
+      margin-bottom: pxrem(51px);
       .top_left{
         width: pxrem(750px);
-        height: 100%;
+        height: pxrem(375px);
         background: url("./assets/topBack.png") no-repeat center;
         background-size: 100% 100%;
-        padding: pxrem(50px);
+        padding: pxrem(25px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
-          font-size: pxrem(44px);
+          font-size: pxrem(34px);
           font-weight: bold;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(55px);
+          margin-bottom: pxrem(24px);
+          transform: scale(1,0.5);
         }
         .total-num {
-          margin-bottom: pxrem(80px);
+          margin-bottom: pxrem(45px);
           .num-list {
             width: pxrem(80px);
-            height: pxrem(75px);
+            height: pxrem(37px);
             background: url('./assets/numBack.png') no-repeat center;
             margin-right: pxrem(8px);
             &:last-of-type {
               margin-right: 0;
             }
             span {
-              font-size: pxrem(44px);
+              font-size: pxrem(34px);
               color: #13fee3;
               font-weight: 600;
+              transform: scale(1,0.5);
             }
             span.zero{
               color: #719be2;
@@ -384,44 +425,50 @@ export default {
           }
         }
         .pic_title{
-          font-size: pxrem(36px);
+          font-size: pxrem(30px);
           font-weight: 500;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(42px);
+          margin-bottom: pxrem(16px);
+          transform: scale(1,0.5);
         }
         .jinri_echart{
-          height: pxrem(330px);
+          // height: pxrem(150px);
+          height: pxrem(300px);
+          transform: scale(1,0.5);
+          transform-origin: 0 0;
         }
       }
       .top_right{
         width: pxrem(750px);
-        height: 100%;
+        height: pxrem(375px);
         background: url("./assets/topBack.png") no-repeat center;
         background-size: 100% 100%;
-        padding: pxrem(50px);
+        padding: pxrem(25px) pxrem(50px) pxrem(0px) pxrem(50px);
         box-sizing: border-box;
         .top_title{
-          font-size: pxrem(44px);
+          font-size: pxrem(34px);
           font-weight: bold;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(55px);
+          margin-bottom: pxrem(24px);
+          transform: scale(1,0.5);
         }
         .total-num {
-          margin-bottom: pxrem(80px);
+          margin-bottom: pxrem(45px);
           .num-list {
             width: pxrem(80px);
-            height: pxrem(75px);
+            height: pxrem(37px);
             background: url('./assets/numBack.png') no-repeat center;
             margin-right: pxrem(8px);
             &:last-of-type {
               margin-right: 0;
             }
             span {
-              font-size: pxrem(44px);
+              font-size: pxrem(34px);
               color: #13fee3;
               font-weight: 600;
+              transform: scale(1,0.5);
             }
             span.zero{
               color: #719be2;
@@ -429,28 +476,36 @@ export default {
           }
         }
         .pic_title{
-          font-size: pxrem(36px);
+          font-size: pxrem(30px);
           font-weight: 500;
           color: #fff;
           text-align: left;
-          margin-bottom: pxrem(42px);
+          margin-bottom: pxrem(16px);
+          transform: scale(1,0.5);
         }
         .jinri_echart{
-          height: pxrem(330px);
+          // height: pxrem(150px);
+          height: pxrem(300px);
+          transform: scale(1,0.5);
+          transform-origin: 0 0;
         }
       }
     }
     .wrap-bottom{
-      margin-top: pxrem(125px);
+      margin-top: pxrem(62px);
+      height: pxrem(443px);
       .leiji{
         width: pxrem(350px);
-        height: pxrem(88px);
+        height: pxrem(44px);
         background: url("./assets/leijiBg.png") no-repeat;
         background-size: 100% 100%;
-        margin-bottom: pxrem(38px);
+        margin-bottom: pxrem(19px);
       }
       .leiji_echart{
-        height: pxrem(700px);
+        // height: pxrem(380px);
+        height: pxrem(760px);
+        transform: scale(1,0.5);
+        transform-origin: 0 0;
       }
     }
   }

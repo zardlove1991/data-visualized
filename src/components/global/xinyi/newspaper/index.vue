@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       newspaperTitle: '数字报',
-      url: 'http://epaper.routeryun.com/Home/Page/index/mdid/95353.html'
+      url: 'http://epaper.routeryun.com/Home/page/index/mdid/130706.html'
     }
   },
   mounted () {
