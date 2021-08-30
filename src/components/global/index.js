@@ -4,7 +4,7 @@ const curPath = getStyle()
 const getComponent = modules => () => {
   // 不加载不属于套系内的组件
   if (modules.indexOf(curPath) > -1) {
-    console.log(modules)
+    console.log(modules, 'modules')
     return import(`./${modules}`)
   }
   return false
@@ -113,6 +113,8 @@ export const liuhecomponentJSordersheet = getComponent('liuhe/JSordersheet') // 
 export const liuhecomponentJSorgstructure = getComponent('liuhe/JSorgstructure') // 金山大屏 组织架构
 export const liuhecomponentJScivilizationrank = getComponent('liuhe/JScivilizationrank') // 金山大屏 文明管理
 export const liuhecomponentJScivilizationmap = getComponent('liuhe/JScivilizationmap') // 金山大屏 文明地图
+export const liuhecomponentMASorgStructure = getComponent('liuhe/MASorgStructure') // 马鞍山组织架构
+
 /* 标准套系01 */
 export const common01componentTitle = getComponent('common01/title') // 标题
 export const common01componentClueGather = getComponent('common01/clueGather')
