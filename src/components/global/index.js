@@ -187,7 +187,7 @@ export const common01componentReviewRelease = getComponent('common01/reviewRelea
 export const common01componentContentSpread = getComponent('common01/contentSpread') // 山西 内容传播
 export const common01componentOperationData = getComponent('common01/operationData') // 山西 运营数据
 export const common01componentSxMiddle = getComponent('common01/sxMiddle') // 山西 中间
-
+// 淮安套系
 export const common01componentHuaianReport = getComponent('common01/huaianReport') // 淮安清江浦 报题展示
 export const common01componentHuaianReport2 = getComponent('common01/huaianReport2') // 淮安清江浦 报题展示2
 export const common01componentHuaianProject = getComponent('common01/huaianProject') // 淮安清江浦 选题展示
@@ -206,3 +206,11 @@ export const common01componentHuaianReporterConnection2 = getComponent('common01
 export const common01componentHuaianHotnews = getComponent('common01/huaianHotnews') // 淮安清江浦 全网热点
 export const common01componentHuaianWmkqjp = getComponent('common01/huaianWmkqjp') // 淮安清江浦 外媒看德清
 export const common01componentHuaianMedia = getComponent('common01/huaianMedia') // 淮安清江浦 媒体矩阵
+
+// 石狮套系
+export const shishicomponentProject = getComponent('shishi/project') // 选题展示
+export const shishicomponentClueGather = getComponent('shishi/clueGather') // 线索汇聚
+export const shishicomponentOperateData = getComponent('shishi/operateData') // 运营数据
+export const shishicomponentWorkcallInfoMap = getComponent('shishi/workcallInfoMap') // 记者联线
+export const shishicomponentReleaseStatistics = getComponent('shishi/releaseStatistics') // 发稿统计
+export const shishicomponentReporterConnection = getComponent('shishi/reporterConnection') // 记者连线
