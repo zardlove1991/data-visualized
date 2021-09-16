@@ -1,5 +1,6 @@
 <template>
   <div class="shishi-workmap">
+    <div class="common01-title"></div>
     <div class="reporter-map-wrap sys-flex sys-flex-center flex-justify-center">
       <call
         :info-item.sync="callInfo"
@@ -224,13 +225,20 @@ export default {
   // padding: pxrem(20px);
   padding-bottom: pxrem(53px);
   background: #0b072d;
+  .common01-title {
+    // width: 100%;
+    height: 100%;
+    background: url('./assets/title-right.png');
+    background-repeat: no-repeat;
+  }
   .reporter-map-wrap {
     width: 100%;
-    height: 100%;
+    height: pxrem(1693px);
     position: relative;
     background: url("./assets/mapBorder.png") no-repeat center;
     background-size: 100% 100%;
     color: #fff;
+    margin-top: pxrem(31px);
     .reporter-map {
       width: calc(100% - 35px);
       height: calc(100% - 35px);

@@ -7,8 +7,8 @@
           <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.title}}</div>
           <div class="source common01-ft32" :style="setFontSize(45)">{{v.source}}</div>
           <div class="read common01-ft32 sys-flex sys-flex-center" :style="setFontSize(45)">
-            <img src="../../../../assets/common/time.png" />
-            <span>{{v.date.slice(5, 16)}}</span>
+            <img src="../../../../assets/common/read.png" />
+            <span>{{v.click_num}}</span>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { getCluesTogether } from '@/servers/interface'
+import { getClueList } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'clueGather',
@@ -36,9 +36,9 @@ export default {
         this.customSize = true
       }
     })
-    this.getCluesTogether()
+    this.getClueList()
     setInterval(() => {
-      this.getCluesTogether()
+      this.getClueList()
     }, this.frequency)
   },
   methods: {
@@ -47,8 +47,8 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getCluesTogether () {
-      getCluesTogether('website', 5, this.page, this.currentViewId).then(res => {
+    getClueList () {
+      getClueList('website', this.page, 5, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.dataList = []
@@ -64,7 +64,7 @@ export default {
           } else {
             if (this.page !== 1) {
               this.page = 1
-              this.getCluesTogether()
+              this.getClueList()
             }
           }
         }
@@ -98,7 +98,7 @@ export default {
         }
         .read {
           img {
-            width: pxrem(30px);
+            width: pxrem(42px);
             height: pxrem(30px);
             margin-right: pxrem(18px);
           }

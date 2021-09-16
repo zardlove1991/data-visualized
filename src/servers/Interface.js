@@ -244,3 +244,9 @@ export const getWaitAudit = (page = 1, count = 6) => createAPI(`${httpsbaseUrl}/
 export const getAudit = (page = 1, count = 6) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPLUSArticleList?status=3&count=${count}&page=${page}`)
 export const getNewsType = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/manuscriptType`)
 export const getOperationData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getOperationalData`)
+
+// 石狮
+// 发稿统计
+export const getReleaseStatistics = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkRank`)
+// 线索汇聚
+export const getClueList = (plateform = 0, page, size, source = []) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?plateForm=${plateform}&page=${page}&count=${size}&source=${source}&order=publish_time&use_post=1`)

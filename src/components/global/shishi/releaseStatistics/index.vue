@@ -6,15 +6,17 @@
         <div class="content-left">
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in leftList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
             <div class="index common01-ft40" :class="{'one': k === 0, 'two': k === 1, 'three': k === 2, 'four':k > 2}">{{k + 1}}</div>
+            <img class="avatar common01-ft40" :src="v.avatar || defaultImg">
             <div class="title common01-ft40">{{v.name}}</div>
-            <div class="num common01-ft36"><span class="common01-ft60">{{v.total}}</span>条</div>
+            <div class="num common01-ft36"><span class="common01-ft60">{{v.publish}}</span>条</div>
           </div>
         </div>
         <div class="content-right" v-if="rightList && rightList[0]">
           <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in rightList" :key="k" :class="{'flipInX' : v.name}" :style="{'animation-delay' : k/2+'s'}">
             <div class="index common01-ft40" :class="{'one': k + 5 === 0, 'two': k + 5 === 1, 'three': k + 5 === 2, 'four':k + 5 > 2}">{{k + 6}}</div>
+            <img class="avatar common01-ft40" :src="v.avatar || defaultImg">
             <div class="title common01-ft40">{{v.name}}</div>
-            <div class="num common01-ft36"><span class="common01-ft60">{{v.total}}</span>条</div>
+            <div class="num common01-ft36"><span class="common01-ft60">{{v.publish}}</span>条</div>
           </div>
         </div>
       </div>
@@ -22,13 +24,14 @@
   </div>
 </template>
 <script>
-import { getM2OWorkDepartRank } from '@/servers/interface'
+import { getReleaseStatistics } from '@/servers/interface'
 export default {
   name: 'releaseStatistics',
   data () {
     return {
       leftList: [],
-      rightList: []
+      rightList: [],
+      defaultImg: require('./assets/default_avatar.jpeg')
     }
   },
   created () {
@@ -39,9 +42,9 @@ export default {
   },
   methods: {
     getDataList () {
-      getM2OWorkDepartRank(this.currentViewId).then(res => {
+      getReleaseStatistics(this.currentViewId).then(res => {
         if (!res.data.error_code) {
-          let dataList = res.data.result
+          let dataList = res.data.result.data
           if (dataList && dataList.length > 5) {
             this.leftList = dataList.slice(0, 5)
             this.rightList = dataList.slice(5)
@@ -105,6 +108,13 @@ export default {
           &.four {
             background-image: url("../../common01/clickRank/assets/four.png");
           }
+        }
+        .avatar {
+          width: pxrem(75px);
+          height: pxrem(75px);
+          border-radius: 50%;
+          border: 2px solid #00deff;
+          margin-left: pxrem(46px);
         }
         .title {
           text-align: left;
