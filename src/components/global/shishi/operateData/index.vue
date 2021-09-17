@@ -1,67 +1,38 @@
 <template>
   <div class="xy-operate" id="xy-operate">
     <!--  :class="[{'warp-bg' : showDefault}]"  -->
-    <div class="operate-wrap sys-flex sys-vertical">
+    <div class="operate-wrap common01-border sys-flex sys-vertical">
       <div class="operate-title sys-flex sys-flex-center">{{operateDataTitle}}</div>
-      <div class="operate-list sys-flex">
-        <div class="date_now">
-          <span class="date">{{date}}</span>&nbsp;
-          <span class="week">{{'星'}}</span>
-          <span class="week">{{'期'}}</span>
-          <span class="week">{{week}}</span>
-        </div>
-        <div class="split-img">
-            <img src="./assets/split_line.png" />
-        </div>
-        <div class="sys-flex sys-vertical">
-          <div class="operate-item sys-flex">
-            <div class="one-img img-box">
-              <img src="./assets/app.png" />
-            </div>
-            <div class="one-left mr100">
-              <div class="mbt12">APP安装总数</div>
-              <numCount :num-info="app_total_install" :fontcolor="'yellow'"></numCount>         
-            </div>
-            <div class="one-img img-box">
-                <img src="./assets/app.png" />
-            </div>
-            <div class="one-right">
-              <div class="mbt12">APP昨日阅读数</div>
-              <numCount :num-info="app_yesterday_read_total" :fontcolor="'yellow'"></numCount>
-            </div>
+      <div class="sys-flex">
+        <div class="operate-box sys-flex">
+          <div class="operate mr119">
+            <img src="./assets/operate_web.png" alt="" class="operate-logo">
+            <div class="operate-box-title">石狮网站</div>
+            <img class="split" src="./assets/split.png"/>
+            <div class="text">网站PV</div>
+            <div class="text">网站UV</div>
+            <div class="text">网站IP</div>
           </div>
-          <!-- <div class="operate-line mtt22 operate-item"></div> -->
-          <div class="operate-item sys-flex">
-            <div class="two-img img-box">
-              <img src="./assets/app.png" />
-            </div>
-            <div class="two-left mr100">
-              <div class="mbt12">APP当日启动数量</div>
-              <numCount :num-info="app_pv_amount" :fontcolor="'red'"></numCount>      
-            </div>
-            <div class="one-img img-box">
-                <img src="./assets/app.png" />
-            </div>
-            <div class="two-right">
-              <div class="mbt12">APP日活用户数</div>
-              <numCount :num-info="app_uv_amount" :fontcolor="'red'"></numCount>        
-            </div>
+          <div class="operate">
+            <img src="./assets/operate_app.png" alt="" class="operate-logo">
+            <div class="operate-box-title">看石狮客户端</div>
+            <img class="split" src="./assets/split.png"/>
+            <div class="text">APP启动数</div>
+            <div class="text">APP安装数</div>
+            <div class="text">APP活跃数</div>
           </div>
-          <!-- <div class="operate-line mtt22 operate-item"></div> -->
-          <div class="operate-item sys-flex">
-            <div class="three-img img-box">
-              <img src="./assets/wechat.png" />
+        </div>
+        <div class="data-statistics">
+          <div class="data-title-bar sys-flex">
+            <img src="./assets/pre_icon.png" alt="" class="data-pre">
+            <div class="data-title">数据统计</div>
+          </div>
+          <div class="data-content">
+            <div class="echart_left">
+              <chart :options="barOptions" :autoResize="true"></chart>
             </div>
-            <div class="three-left mr100">
-              <div class="mbt12">今日诗城微信用户数</div>
-              <numCount :num-info="wechat_total" :fontcolor="'green'"></numCount>        
-            </div>
-            <div class="three-img img-box">
-              <img src="./assets/wechat.png" />
-            </div>
-            <div class="three-right">
-              <div class="mbt12">今日诗城微信阅读量</div>
-              <numCount :num-info="wechat_read_total" :fontcolor="'green'"></numCount>        
+            <div class="datalist">
+              <div class="data-item"></div>
             </div>
           </div>
         </div>
@@ -70,84 +41,161 @@
   </div>
 </template>
 <script>
-import numCount from './numCount'
-import { getAppStatisticalData } from '@/servers/interface'
+import echarts from 'vue-echarts/components/ECharts'
+import 'echarts/lib/chart/pie'
+// import { getAppStatisticalData } from '@/servers/interface'
 export default {
   name: 'operateDate',
   data () {
     return {
       operateDataTitle: '运营数据',
-      app_total_install: [0, 0, 0, 0, 0, 0, 0, 0],
-      app_yesterday_read_total: [0, 0, 0, 0, 0, 0, 0, 0],
-      app_pv_amount: [0, 0, 0, 0, 0, 0, 0, 0],
-      app_uv_amount: [0, 0, 0, 0, 0, 0, 0, 0],
-      wechat_total: [0, 0, 0, 0, 0, 0, 0, 0],
-      wechat_read_total: [0, 0, 0, 0, 0, 0, 0, 0],
-      frequency: 35000,
-      date: '',
-      week: ''
+      barOptions: {
+        legend: {
+          icon: 'rect',
+          data: ['文稿', '图集', '视频', '专题'],
+          textStyle: {
+            color: '#fff',
+            fontSize: 34
+          },
+          itemWidth: 40,
+          itemHeight: 14,
+          itemGap: 50,
+          padding: [0, 15, 0, 0],
+          x: 'center',
+          y: 'bottom'
+        },
+        grid: {
+          containLabel: true
+        },
+        color: ['#0d5ee4', '#01c0ff', '#e8854a', '#791fe2'],
+        series: [
+          {
+            type: 'pie',
+            radius: ['35%', '65%'],
+            center: ['50%', '38%'], // 图的位置，距离左跟上的位置
+            avoidLabelOverlap: false,
+            itemStyle: {
+              // borderRadius: 20,
+              borderColor: '#07093A',
+              borderWidth: 10
+            },
+            label: {
+              // show: false,
+              // position: 'center'
+              normal: {
+                show: false,
+                position: 'center',
+                formatter: function (data) { // 设置圆饼图中间文字排版
+                  return data.percent.toFixed(0) + '%\n' + data.name
+                }
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: 40,
+                  color: '#fff',
+                  borderWidth: 5
+                  // fontWeight: 'bold'
+                }
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: []
+          }
+        ]
+      }
     }
   },
-  components: {
-    numCount
-  },
   created () {
-    this.getDataList()
-    this.date = this.$moment(Date.now()).format('YYYY/MM/DD')
-    this.week = this.$moment(Date.now()).format('dddd').slice(2)
+    // this.getDataList()
   },
   mounted () {
     this.setFontsize('xy-operate')
-    setInterval(() => {
-      this.getDataList()
-    }, this.frequency)
+    // setInterval(() => {
+    // this.getDataList()
+    // }, this.frequency)
   },
   methods: {
-    getDataList () {
-      this.getAppData()
-      this.getWechatData()
-    },
-    getAppData () {
-      getAppStatisticalData().then((res) => {
-        this.app_total_install = this.preFixInterge(res.data.result.app_total_install, 8)
-        this.app_pv_amount = this.preFixInterge(res.data.result.app_statistics[0].app_pv_amount, 8)
-        this.app_uv_amount = this.preFixInterge(res.data.result.app_statistics[0].app_uv_amount, 8)
-        this.app_yesterday_read_total = this.preFixInterge(res.data.result.app_click.yesterday[3].total, 8)
-      })
-    },
-    getWechatData () {
-      // this.$api.getWeixinTotal().then((res) => {
-      //   if(res && res.data && res.data.result){
-      //     setTimeout(() => {
-      //       // 微信总数
-      //       this.wechat_total = this.preFixInterge(res.data.result.cumulate_user, 8)
-      //       this.wechat_regist = this.preFixInterge(res.data.result.int_page_read_count, 8)
-      //     },100)
-      //   }
-      // })
-      setTimeout(() => {
-        this.wechat_total = this.preFixInterge('186537', 8)
-        this.wechat_read_total = this.preFixInterge('15636', 8)
-      }, 100)
-    },
-    preFixInterge (num, n) {
-      return (Array(n).join(0) + num).slice(-n).split('')
-    }
+    // getDataList () {
+    //   this.getAppData()
+    //   this.getWechatData()
+    // },
+    // getAppData () {
+    //   getAppStatisticalData().then((res) => {
+    //     this.app_total_install = this.preFixInterge(res.data.result.app_total_install, 8)
+    //     this.app_pv_amount = this.preFixInterge(res.data.result.app_statistics[0].app_pv_amount, 8)
+    //     this.app_uv_amount = this.preFixInterge(res.data.result.app_statistics[0].app_uv_amount, 8)
+    //     this.app_yesterday_read_total = this.preFixInterge(res.data.result.app_click.yesterday[3].total, 8)
+    //   })
+    // },
+  },
+  components: {
+    chart: echarts
   }
 }
 </script>
 <style lang="scss" scoped>
+@import '../../common01/style/index.scss';
 @import 'src/styles/index.scss';
 .xy-operate {
   width: 100%;
-  padding: 0.25vh 0.1vw;
-  text-align: left;
+  height: 100%;
+  padding: pxrem(40px);
   .operate-wrap {
-    width: 100%;
-    height: 100%;
-    background: url('./assets/bg.png') no-repeat center;
-    background-size: 100% 100%;
-    padding: 0 px1em(17px);
+    color: #fff;
+    padding: pxrem(53px) 0 0 pxrem(85px);
+    background: url(./assets/bg.png);
+    background-repeat: no-repeat;
+    .operate-box {
+      margin-right: pxrem(245px);
+      .operate {
+        background: url(./assets/operate_bg.png);
+        width: pxrem(751px);
+        height: pxrem(691px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: pxrem(68px);
+        .operate-logo {
+          height: pxrem(110px);
+          margin-bottom: pxrem(38px);
+        }
+        .operate-box-title {
+          font-size: pxrem(40px);
+          color: #00fffc;
+          letter-spacing: pxrem(3px);
+          margin-bottom: pxrem(49px);
+          font-weight: bold;
+        }
+        .split {
+          height: pxrem(7px);
+          margin-bottom: pxrem(58px);
+        }
+        .text {
+          font-size: pxrem(34px);
+          color:#fff;
+          margin-bottom: pxrem(50px);
+        }
+      }
+    }
+    .data-statistics {
+      .data-title-bar {
+        align-items: center;
+        margin-bottom: pxrem(93px);
+        .data-pre {
+          height: pxrem(44px);
+          margin-right: pxrem(16px);
+        }
+        .data-title {
+          font-size: pxrem(50px);
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+
+    }
   }
   .warp-bg {
     background: url('./assets/bg.png') no-repeat center;
@@ -155,61 +203,19 @@ export default {
   }
   .operate-title {
     text-align: left;
-    height: 15%;
-    font-size: px1em(22px);
+    height: pxrem(55px);
+    font-size: pxrem(58px);
     font-weight: bold;
-    color: #d6e6ff;
-    margin-bottom: 1.2em;
-  }
-  .operate-list {
-    height: 85%;
-    padding: 0 3%;
-    .operate-item {
-      margin-bottom: 1.2em
-    }
-    .date_now {
-      color:#ffffff;
-      font-size: px1em(12px);
-      word-break: break-word;
-      width: 0.1em;
-      margin-right:2em;
-      margin-top: 1em;
-      .week{
-        margin-left:-.2em;
-      }
-      // writing-mode: vertical-lr;
-    }
-  }
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .operate-line {
-    width: 100%;
-    height: 0.2em;
-    background: url("./assets/line.png") no-repeat center;
-    background-size: 100%;
-  }
-  .img-box {
-    width: 1.6em;
-    height: 1.6em;
-    margin-right: .2em;
-  }
-  .split-img {
-    margin-right:1em;
-    img {
-      width: .2em;
-      height: 7.2em;
-    }
+    color: #ffffff;
+    margin-bottom: pxrem(93px);
   }
   .mbt12 {
     font-size: 0.4em;
     margin-bottom: 0.5em;
     color: #ffffff;
   }
-  .mtt22 {
-    margin: 0.8em 0;
+  .mr119 {
+    margin-right: pxrem(119px);
   }
   .mr100 {
     margin-right: 1em;

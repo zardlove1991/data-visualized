@@ -1,6 +1,5 @@
 <template>
   <div class="shishi-workmap">
-    <div class="common01-title"></div>
     <div class="reporter-map-wrap sys-flex sys-flex-center flex-justify-center">
       <call
         :info-item.sync="callInfo"
@@ -40,7 +39,7 @@ import loadBMap from '@/utils/loadBMap.js'
 import { getWorkCallConnectList } from '@/servers/interface'
 import { getDataConfig, getRouterConfig } from '@/utils/model'
 export default {
-  name: 'workcallInfoMap',
+  name: 'shishi-workmap',
   props: {
     viewId: String
   },
@@ -225,12 +224,6 @@ export default {
   // padding: pxrem(20px);
   padding-bottom: pxrem(53px);
   background: #0b072d;
-  .common01-title {
-    // width: 100%;
-    height: 100%;
-    background: url('./assets/title-right.png');
-    background-repeat: no-repeat;
-  }
   .reporter-map-wrap {
     width: 100%;
     height: pxrem(1693px);

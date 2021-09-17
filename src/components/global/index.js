@@ -211,7 +211,6 @@ export const common01componentHuaianMedia = getComponent('common01/huaianMedia')
 export const shishicomponentProject = getComponent('shishi/project') // 选题展示
 export const shishicomponentClueGather = getComponent('shishi/clueGather') // 线索汇聚
 export const shishicomponentOperateData = getComponent('shishi/operateData') // 运营数据
-export const shishicomponentWorkcallInfoMap = getComponent('shishi/workcallInfoMap') // 记者联线
 export const shishicomponentReleaseStatistics = getComponent('shishi/releaseStatistics') // 发稿统计
 export const shishicomponentReporterConnection = getComponent('shishi/reporterConnection') // 记者连线
 export const shishicomponentNonEditedArticle = getComponent('shishi/nonEditedArticle') // 非编文稿 空屏
