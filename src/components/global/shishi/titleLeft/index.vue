@@ -85,6 +85,7 @@ export default {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     align-items: center;
+    position: unset;
     .title-title {
       width: 100%;
       // height: 100%;
@@ -101,8 +102,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
-    top: pxrem(-42px);
+    // position: relative;
+    // top: pxrem(-42px);
     .today-weather {
         font-size: pxrem(60px);
         line-height: pxrem(54px);

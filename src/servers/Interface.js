@@ -257,3 +257,7 @@ export const getOperationData = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUI
 export const getReleaseStatistics = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWorkRank`)
 // 线索汇聚
 export const getClueList = (plateform = 0, page, size, source = []) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsNewsList?plateForm=${plateform}&page=${page}&count=${size}&source=${source}&order=publish_time&use_post=1`)
+// app数据运营
+export const getPlusAppStatisticalData = (sdate, edate, siteId = 0) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusAppStatistic?start_date=${sdate}&end_date=${edate}&site_id=${siteId}`)
+// web数据运营
+export const getPluswebStatisticalData = (sdate, edate, siteId = 0) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWebStatistic?start_date=${sdate}&end_date=${edate}&site_id=${siteId}`)

@@ -27,12 +27,21 @@
             <img src="./assets/pre_icon.png" alt="" class="data-pre">
             <div class="data-title">数据统计</div>
           </div>
-          <div class="data-content">
-            <div class="echart_left">
-              <chart :options="barOptions" :autoResize="true"></chart>
+          <div class="data-content sys-flex">
+            <div class="echart-left">
+              <div class="echart-center">
+                <img :src="centerLogo" alt="">
+                <p>{{echartTitle}}</p>
+              </div>
+              <chart :options="pieOptions" :autoResize="true"></chart>
             </div>
             <div class="datalist">
-              <div class="data-item"></div>
+              <div class="data-item sys-flex sys-flex-center animated flipInX" v-for="(item, index) in dataList" :key="item.name" :style="{'animation-delay' : index/2 +'s'}">
+                <div class="icon" :style="{background: item.icon_color}"></div>
+                <div class="item-title">{{item.name}}</div>
+                <div class="item-count">{{item.value}}</div>
+                <div class="item-count item-percent">{{item.percent}}%</div>
+              </div>
             </div>
           </div>
         </div>
@@ -43,61 +52,40 @@
 <script>
 import echarts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
-// import { getAppStatisticalData } from '@/servers/interface'
+import { getPluswebStatisticalData, getPlusAppStatisticalData } from '@/servers/interface'
 export default {
   name: 'operateDate',
   data () {
     return {
       operateDataTitle: '运营数据',
-      barOptions: {
-        legend: {
-          icon: 'rect',
-          data: ['文稿', '图集', '视频', '专题'],
-          textStyle: {
-            color: '#fff',
-            fontSize: 34
-          },
-          itemWidth: 40,
-          itemHeight: 14,
-          itemGap: 50,
-          padding: [0, 15, 0, 0],
-          x: 'center',
-          y: 'bottom'
+      centerLogo: require('./assets/data_web.png'),
+      echartTitle: '网站',
+      frequency: 15000,
+      date: '',
+      active: 'web',
+      dataList: [],
+      pieOptions: {
+        tooltip: {
+          trigger: 'item'
         },
-        grid: {
-          containLabel: true
-        },
-        color: ['#0d5ee4', '#01c0ff', '#e8854a', '#791fe2'],
+        color: [
+          '#ee6666',
+          '#5470c6',
+          '#fac858'
+        ],
         series: [
           {
             type: 'pie',
-            radius: ['35%', '65%'],
-            center: ['50%', '38%'], // 图的位置，距离左跟上的位置
+            radius: ['60%', '100%'],
             avoidLabelOverlap: false,
             itemStyle: {
-              // borderRadius: 20,
-              borderColor: '#07093A',
-              borderWidth: 10
+              borderRadius: 10,
+              borderColor: '#021d6a',
+              borderWidth: 18
             },
             label: {
-              // show: false,
-              // position: 'center'
-              normal: {
-                show: false,
-                position: 'center',
-                formatter: function (data) { // 设置圆饼图中间文字排版
-                  return data.percent.toFixed(0) + '%\n' + data.name
-                }
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontSize: 40,
-                  color: '#fff',
-                  borderWidth: 5
-                  // fontWeight: 'bold'
-                }
-              }
+              show: false,
+              position: 'center'
             },
             labelLine: {
               show: false
@@ -109,27 +97,92 @@ export default {
     }
   },
   created () {
-    // this.getDataList()
+    this.formatDate()
   },
   mounted () {
     this.setFontsize('xy-operate')
-    // setInterval(() => {
-    // this.getDataList()
-    // }, this.frequency)
+    this.getWebDate()
+    // this.getAppData()
+    setInterval(() => {
+      if (this.active === 'web') {
+        this.getWebDate()
+      } else {
+        this.getAppData()
+      }
+    }, this.frequency)
   },
   methods: {
-    // getDataList () {
-    //   this.getAppData()
-    //   this.getWechatData()
-    // },
-    // getAppData () {
-    //   getAppStatisticalData().then((res) => {
-    //     this.app_total_install = this.preFixInterge(res.data.result.app_total_install, 8)
-    //     this.app_pv_amount = this.preFixInterge(res.data.result.app_statistics[0].app_pv_amount, 8)
-    //     this.app_uv_amount = this.preFixInterge(res.data.result.app_statistics[0].app_uv_amount, 8)
-    //     this.app_yesterday_read_total = this.preFixInterge(res.data.result.app_click.yesterday[3].total, 8)
-    //   })
-    // },
+    formatDate () {
+      const date = new Date()
+      const year = date.getFullYear()
+      const month = date.getMonth() + 1
+      const day = date.getDate()
+      this.date = `${year}-${month}-${day}`
+    },
+    getWebDate () {
+      getPluswebStatisticalData(this.date, this.date, 0).then((res) => {
+        if (res.data && res.data.error_code === 0) {
+          this.active = 'app'
+          const data = res.data.result.data[0]
+          const total = data.web_ip_amount + data.web_pv_amount + data.web_uv_amount
+          this.echartTitle = '网站'
+          this.centerLogo = require('./assets/data_web.png')
+          this.dataList = [
+            {
+              name: '网站PV',
+              icon_color: '#c8355f',
+              value: data.web_pv_amount,
+              percent: total ? Math.round(data.web_pv_amount / total * 100) : 0
+            },
+            {
+              name: '网站UV',
+              icon_color: '#176cff',
+              value: data.web_uv_amount,
+              percent: total ? Math.round(data.web_uv_amount / total * 100) : 0
+            },
+            {
+              name: '网站IP',
+              icon_color: '#e8854a',
+              value: data.web_ip_amount,
+              percent: total ? Math.round(data.web_ip_amount / total * 100) : 0
+            }
+          ]
+          this.pieOptions.series[0].data = this.dataList
+        }
+      })
+    },
+    getAppData () {
+      getPlusAppStatisticalData(this.date, this.date, 0).then((res) => {
+        if (res.data && res.data.error_code === 0) {
+          this.active = 'web'
+          const data = res.data.result.data[0]
+          const total = data.app_install_amount + data.app_pv_amount + data.app_uv_amount
+          this.echartTitle = 'APP'
+          this.centerLogo = require('./assets/data_app.png')
+          this.dataList = [
+            {
+              name: 'APP启动数',
+              icon_color: '#c8355f',
+              value: data.app_pv_amount,
+              percent: total ? Math.round(data.app_pv_amount / total * 100) : 0
+            },
+            {
+              name: 'APP安装数',
+              icon_color: '#176cff',
+              value: data.app_install_amount,
+              percent: total ? Math.round(data.app_install_amount / total * 100) : 0
+            },
+            {
+              name: 'APP活跃数',
+              icon_color: '#e8854a',
+              value: data.app_uv_amount,
+              percent: total ? Math.round(data.app_uv_amount / total * 100) : 0
+            }
+          ]
+          this.pieOptions.series[0].data = this.dataList
+        }
+      })
+    }
   },
   components: {
     chart: echarts
@@ -149,7 +202,7 @@ export default {
     background: url(./assets/bg.png);
     background-repeat: no-repeat;
     .operate-box {
-      margin-right: pxrem(245px);
+      margin-right: pxrem(256px);
       .operate {
         background: url(./assets/operate_bg.png);
         width: pxrem(751px);
@@ -194,7 +247,61 @@ export default {
           color: #fff;
         }
       }
-
+      .data-content {
+        .echart-left {
+          width: pxrem(525px);
+          height: pxrem(525px);
+          position: relative;
+          margin-right: pxrem(164px);
+          .echart-center {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img {
+              height: pxrem(120px);
+              margin-left: pxrem(15px);
+            }
+            p {
+              font-size: pxrem(48px);
+            }
+          }
+        }
+        .datalist {
+          .data-item {
+            width: pxrem(940px);
+            height: pxrem(140px);
+            background: rgba(14,34,75,0.25);
+            border: pxrem(2px) solid rgba(1, 150, 255, 0.3);
+            margin-bottom: pxrem(48px);
+            .icon {
+              width: pxrem(26px);
+              height: pxrem(26px);
+              margin-right: pxrem(28px);
+              margin-left: pxrem(51px);
+              border-radius: 50%;
+            }
+            .item-title {
+              font-size: pxrem(36px);
+              margin-right: pxrem(300px);
+            }
+            .item-count {
+              font-size: pxrem(48px);
+              font-weight: bold;
+              color: #00fffc;
+              margin-right: pxrem(126px);
+              width: .7rem;
+              text-align: left;
+            }
+            .item-percent {
+              margin-right: pxrem(50px);
+            }
+          }
+        }
+      }
     }
   }
   .warp-bg {

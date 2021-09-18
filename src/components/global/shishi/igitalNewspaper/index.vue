@@ -50,10 +50,10 @@ export default {
 .shishi-igitalNewspaper {
   width: 100%;
   height: 100%;
-  padding: px2em(33px) px2em(26px) px2em(53px) px2em(50px);
+  padding: pxrem(40px);
   position: relative;
   .websitecontent-wrap {
-    padding: px2em(195px) px2em(81px) px2em(80px) px2em(73px);
+    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
     .data-box {
       background: url(./assets/data_bg.png);
       background-size: 100%;
