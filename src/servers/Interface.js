@@ -1,4 +1,5 @@
-import { httpsbaseUrl, createAPI, huaianUrl, GUID } from './api'
+import { httpsbaseUrl, createAPI, huaianUrl, GUID, thirdUrl } from './api'
+import Qs from 'qs'
 
 /* 获取报题 */
 export const getJnWorkCallReportList = (count = 10, page = 1, createtime) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getWorkCallReportList?count=${count}&page=${page}&create_time=${createtime}`)
@@ -195,6 +196,10 @@ export const getWebNews = (page = 1, size = 10) => createAPI(`https://monitor-sc
 export const getYuqing = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicEventNews?id=${id}`)
 // 情感分析
 export const getEmotional = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicEmotion?id=${id}`)
+// 第三方接口
+export const getThirdAToken = (config) => createAPI(`${thirdUrl}/api/auth/oauth/token?grant_type=password`, 'post', config)
+export const refreshThirdAToken = (config) => createAPI(`${thirdUrl}/api/auth/oauth/token?grant_type=refresh_token`, 'post', config)
+export const getThirdYuqing = (param) => createAPI(`${thirdUrl}/api/news/display/article/keyword?${Qs.stringify(param)}`)
 // 关键字
 export const getKeywords = (id) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getHotsTopicHotWord?id=${id}`)
 // 内容类型
@@ -211,6 +216,8 @@ export const getHotsList = (plateform = 0, page, size, source = []) => createAPI
 export const getMicroOperationAppList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationAppList`)
 // 运营数据列表
 export const getMicroOperationYesterday = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationEachYesterday`)
+// 获取运营最新文章
+export const getMicroOperationNews = (appid) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getMicroOperationNews?app_ids=${appid}`)
 // 视频列表
 export const getM2OPlusPublishVideo = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusRankList?
 column_id=16&orders=order_id,DESC`)

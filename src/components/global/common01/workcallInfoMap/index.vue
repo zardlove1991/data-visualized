@@ -38,6 +38,7 @@ import loadScript from '@/utils/loadScript.js'
 import loadBMap from '@/utils/loadBMap.js'
 import { getWorkCallConnectList } from '@/servers/interface'
 import { getDataConfig, getRouterConfig } from '@/utils/model'
+import { GUID } from '@/servers/api'
 export default {
   name: 'workcallInfoMap',
   props: {
@@ -54,7 +55,8 @@ export default {
       coordinateList: [],
       unlinecoordinateList: [],
       mapStyle: '',
-      customSize: false
+      customSize: false,
+      isYuhua: false
     }
   },
   components: {
@@ -73,6 +75,7 @@ export default {
         this.mapStyle = data[this.viewId].mapStyle
       }
     })
+    this.getGUID()
   },
   mounted () {
     loadScript('/static/jquery.min.js').then(res => {
@@ -85,6 +88,15 @@ export default {
     })
   },
   methods: {
+    getGUID () {
+      // console.log(GUID)
+      // 判断是否是雨花大屏
+      if (GUID === 'NWFjZGEwYj') {
+        this.isYuhua = true
+      } else {
+        this.isYuhua = false
+      }
+    },
     setFontSize (size) {
       if (this.customSize && size && size > 0) {
         return `font-size: ${size / 100}rem!important`
@@ -164,22 +176,43 @@ export default {
       this.unlinecoordinateList = []
       this.reporterList.forEach(vv => {
         var img = vv.avatar && vv.avatar.uri ? vv.avatar.uri : require('./assets/default_avatar.png')
-        if (vv.longitude && vv.latitude) { // 地图上只画在线且有坐标的
-          if (vv.rc_status === 0 || vv.rc_status === 1) {
-            var mySquare = new SquareOverlay({
-              lng: vv.longitude,
-              lat: vv.latitude
-            }, 60, 'red', img, vv)
-            setTimeout(function () {
-              if (vv.rc_status === 0) {
-                mySquare['_div'].classList.add('landmark-red')
-              }
-            }, 100)
-            map.addOverlay(mySquare)
-            // 设置地图的最佳视图
-            this.coordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
+        if (vv.longitude && vv.latitude) {
+          var mySquare
+          if (this.isYuhua) {
+            if (vv.rc_status === 0) {
+              mySquare = new SquareOverlay({
+                lng: vv.longitude,
+                lat: vv.latitude
+              }, 60, 'red', img, vv)
+              setTimeout(function () {
+                if (vv.rc_status === 0) {
+                  mySquare['_div'].classList.add('landmark-red')
+                }
+              }, 100)
+              map.addOverlay(mySquare)
+              // 设置地图的最佳视图
+              this.coordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
+            } else {
+              this.unlinecoordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
+            }
           } else {
-            this.unlinecoordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
+            // 地图上只画在线且有坐标的
+            if (vv.rc_status === 0 || vv.rc_status === 1) {
+              mySquare = new SquareOverlay({
+                lng: vv.longitude,
+                lat: vv.latitude
+              }, 60, 'red', img, vv)
+              setTimeout(function () {
+                if (vv.rc_status === 0) {
+                  mySquare['_div'].classList.add('landmark-red')
+                }
+              }, 100)
+              map.addOverlay(mySquare)
+              // 设置地图的最佳视图
+              this.coordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
+            } else {
+              this.unlinecoordinateList.push(new BMap.Point(vv.longitude, vv.latitude))
+            }
           }
         }
       })
@@ -197,7 +230,16 @@ export default {
     getReporter () {
       getWorkCallConnectList(this.currentViewId).then(res => {
         if (!res.data.error_code && res.data.result.length) {
-          this.reporterList = res.data.result
+          if (this.isYuhua) {
+            res.data.result.forEach(v => {
+              console.log(v)
+              if (!v.rc_status) {
+                this.reporterList.push(v)
+              }
+            })
+          } else {
+            this.reporterList = res.data.result
+          }
         }
         this.rMap()
       })

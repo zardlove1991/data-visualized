@@ -1,7 +1,7 @@
 <template>
   <div class="common01-cluegather-other">
     <div class="cluegather-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '线索汇聚'}}</div>
+      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || name}}</div>
       <div class="wrap-content">
         <div class="list-sort sys-flex sys-flex-center flex-justify-between">
             <img class="imgHeight" :src=' activeIdx == 0 ? require("./assets/zixun-active.png") : require("./assets/zixun.png")'  alt="">
@@ -35,7 +35,8 @@ export default {
       maxPage: 3,
       dataList: [],
       customSize: false,
-      source: []
+      source: [],
+      name: '全网关注'
     }
   },
   created () {

@@ -5,9 +5,9 @@
     <div class="left">
       <div class="title">{{title}}</div>
       <ul class="leftList">
-        <li v-for="(item, index) in leftList.slice(0,8)" :key="index">
+        <li v-for="(item, index) in leftList.slice(1,9)" :key="index">
           <span class="dian"></span>
-          <p class="lineHeight">{{item.news_title}}</p>  
+          <p class="lineHeight">{{item.news_title || item.hbUrlTitle}}</p>  
         </li>
       </ul>
     </div>
@@ -59,9 +59,11 @@
  </div>
 </template>
 <script>
-import { getYuqing, getEmotional, getKeywords, getContent, getMedia, getTrend, getYuqingList } from '@/servers/interface'
+import { getYuqing, getEmotional, getKeywords, getContent, getMedia, getTrend, getYuqingList, getThirdAToken, refreshThirdAToken, getThirdYuqing } from '@/servers/interface'
 import echarts from 'echarts'
 import 'echarts-wordcloud'
+import { GUID } from '@/servers/api'
+import Qs from 'qs'
 export default {
   name: 'yuqing',
   data () {
@@ -72,7 +74,13 @@ export default {
       yuQingList: [],
       index: 0,
       title: '',
-      id: ''
+      id: '',
+      aToken: '',
+      rToken: '',
+      expiredTime: 0,
+      refreshAToken: '',
+      accessAToken: '',
+      timer: null
     }
   },
   created () {
@@ -83,9 +91,14 @@ export default {
         this.index = 0
       }
       this.id = this.yuQingList[this.index].tracker_id
-      this.title = this.yuQingList[this.index].name
       this.hotWordsList = []
-      this.getLeftList()
+      if (GUID === 'NWFjZGEwYj') {
+        this.getYuqingThirdList(this.accessAToken, this.index)
+        this.title = this.leftList[this.index].hbUrlTitle.substr(0, 8) + '...'
+      } else {
+        this.getLeftList()
+        this.title = this.yuQingList[this.index].name
+      }
       this.getEmotional()
       this.getKeywordsData()
       this.getContentList()
@@ -99,13 +112,77 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
+    getYuqingThirdData () {
+      this.$nextTick(() => {
+        this.getToken()
+      })
+    },
+    getToken () {
+      const param = {
+        password: 'Ap80vtgFKS8BSQiuXxeTGg==',
+        scope: 'server',
+        username: '南京雨花区01'
+      }
+      getThirdAToken({
+        data: Qs.stringify(param),
+        headers: {
+          'Authorization': 'Basic dGVzdDp0ZXN0'
+        }
+      }).then(res => {
+        this.refreshAToken = res.data.refresh_token
+        this.$nextTick(() => {
+          this.refreshToken(this.refreshAToken)
+        })
+      })
+    },
+    refreshToken (token) {
+      this.timer = clearInterval(this.timer)
+      const param = {
+        refresh_token: token,
+        scope: 'server'
+      }
+      refreshThirdAToken({
+        data: Qs.stringify(param),
+        headers: {
+          'Authorization': 'Basic dGVzdDp0ZXN0'
+        }
+      }).then(res => {
+        this.accessAToken = res.data.access_token
+        this.expiredTime = res.data.expires_in
+        this.timer = setInterval(() => {
+          this.getYuqingThirdData()
+        }, this.expiredTime)
+        this.$nextTick(() => {
+          this.getYuqingThirdList(this.accessAToken, 1)
+        })
+      })
+    },
+    getYuqingThirdList (token, offset) {
+      const param = {
+        id: 966,
+        order: 0,
+        pageNo: offset,
+        pageSize: 8,
+        access_token: token
+      }
+      getThirdYuqing(param).then(res => {
+        this.leftList = res.data.data.records
+      })
+    },
     getYuqingData () {
       getYuqingList().then(res => {
         if (res.data.error_code === 0) {
           this.yuQingList = res.data.result.data
-          this.title = this.yuQingList[0].name
           this.id = this.yuQingList[0].tracker_id
-          this.getLeftList()
+          if (GUID === 'NWFjZGEwYj') {
+            this.getYuqingThirdData()
+            if (this.leftList.length) {
+              this.title = this.leftList[0].hbUrlTitle.substr(0, 8) + '...'
+            }
+          } else {
+            this.getLeftList()
+            this.title = this.yuQingList[0].name
+          }
           this.getEmotional()
           this.getKeywordsData()
           this.getContentList()
@@ -357,14 +434,27 @@ export default {
       getMedia(this.id).then(res => {
         if (res.data.error_code === 0) {
           res.data.result.forEach((item, index) => {
-            seriesData.push({
-              name: item.name_zh,
-              value: item.count,
-              itemStyle: {
-                color: colorList[index]
+            if (GUID === 'NWFjZGEwYj') {
+              if (item.name_zh !== '客户端') {
+                seriesData.push({
+                  name: item.name_zh,
+                  value: item.count,
+                  itemStyle: {
+                    color: colorList[index]
+                  }
+                })
+                legendData.push(item.name_zh)
               }
-            })
-            legendData.push(item.name_zh)
+            } else {
+              seriesData.push({
+                name: item.name_zh,
+                value: item.count,
+                itemStyle: {
+                  color: colorList[index]
+                }
+              })
+              legendData.push(item.name_zh)
+            }
           })
         }
         this.$nextTick(() => {
@@ -436,38 +526,76 @@ export default {
       getTrend(this.id).then(res => {
         if (res.data.error_code === 0) {
           seriesData = res.data.result.map((item, index) => {
-            legendData.push(item.name_zh)
-            let arr = []
-            item.count.forEach(itemData => {
-              arr.push(itemData.value)
-            })
-            return {
-              name: item.name_zh,
-              type: 'line',
-              stack: '总量',
-              areaStyle: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, // 变化度
-                  // 三种由深及浅的颜色
-                  [ {
-                    offset: 0,
-                    color: colorList[index]
-                  }, {
-                    offset: 0.5,
-                    color: colorList[index].replace(',1)', ',0.5)')
-                  }, {
-                    offset: 1,
-                    color: colorList[index].replace(',1)', ',0)')
-                  } ])
-              },
-              itemStyle: {
-                normal: {
-                  color: colorList[index],
-                  lineStyle: {
-                    color: colorList[index]
-                  }
+            if (GUID === 'NWFjZGEwYj') {
+              if (item.name_zh !== '客户端') {
+                legendData.push(item.name_zh)
+                let arr = []
+                item.count.forEach(itemData => {
+                  arr.push(itemData.value)
+                })
+                return {
+                  name: item.name_zh,
+                  type: 'line',
+                  stack: '总量',
+                  areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, // 变化度
+                      // 三种由深及浅的颜色
+                      [ {
+                        offset: 0,
+                        color: colorList[index]
+                      }, {
+                        offset: 0.5,
+                        color: colorList[index].replace(',1)', ',0.5)')
+                      }, {
+                        offset: 1,
+                        color: colorList[index].replace(',1)', ',0)')
+                      } ])
+                  },
+                  itemStyle: {
+                    normal: {
+                      color: colorList[index],
+                      lineStyle: {
+                        color: colorList[index]
+                      }
+                    }
+                  },
+                  data: arr
                 }
-              },
-              data: arr
+              }
+            } else {
+              legendData.push(item.name_zh)
+              let arr = []
+              item.count.forEach(itemData => {
+                arr.push(itemData.value)
+              })
+              return {
+                name: item.name_zh,
+                type: 'line',
+                stack: '总量',
+                areaStyle: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, // 变化度
+                    // 三种由深及浅的颜色
+                    [ {
+                      offset: 0,
+                      color: colorList[index]
+                    }, {
+                      offset: 0.5,
+                      color: colorList[index].replace(',1)', ',0.5)')
+                    }, {
+                      offset: 1,
+                      color: colorList[index].replace(',1)', ',0)')
+                    } ])
+                },
+                itemStyle: {
+                  normal: {
+                    color: colorList[index],
+                    lineStyle: {
+                      color: colorList[index]
+                    }
+                  }
+                },
+                data: arr
+              }
             }
           })
           res.data.result[0].count.forEach(itemCount => {

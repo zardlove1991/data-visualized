@@ -1,7 +1,9 @@
 <template>
   <div class="common01-cluegather-other">
     <div class="cluegather-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">运营数据</div>
+      <div class="common01-title" :style="setFontSize(63)">{{name}}</div>
+      <!-- <div class="common01-title" :style="setFontSize(63)" v-if="GUID != 'NWFjZGEwYj'">运营数据</div>
+      <div class="common01-title" :style="setFontSize(63)" v-else>融媒体矩阵</div> -->
       <div class="wrap-content">
         <div class="list-sort sys-flex sys-flex-center flex-justify-around">
             <div class="common01-ft32 weixin sys-flex sys-flex-center flex-justify-center" :class="active ? 'active' : 'normal' ">
@@ -17,15 +19,17 @@
             <div class="list-content list-title">
                 <span class="common01-ft32">名称</span>
                 <span class="common01-ft32">粉丝数</span>
-                <span class="common01-ft32">阅读量</span>
-                <span class="common01-ft32">新用户</span>
+                <span class="common01-ft32" v-show="isNotYuhua">阅读量</span>
+                <span class="common01-ft32" v-show="isNotYuhua">新用户</span>
+                <span class="common01-ft32 w50" v-show="!isNotYuhua">最新文章</span>
             </div>
             <vue-seamless-scroll :data="dateList" :class-option="classOption" style="overflow:hidden">
                 <div class="list-content" v-for="(v,k) in dateList" :key="k">
                     <span class="common01-ft32">{{v.account_name}}</span>
                     <span class="common01-ft32">{{v.cumulate_user}}</span>
-                    <span class="common01-ft32">{{v.int_page_read_count}}</span>
-                    <span class="common01-ft32">{{v.new_user}}</span>
+                    <span class="common01-ft32" v-show="isNotYuhua">{{v.int_page_read_count}}</span>
+                    <span class="common01-ft32" v-show="isNotYuhua">{{v.new_user}}</span>
+                    <span class="common01-ft32 w50" v-show="!isNotYuhua" title="v.newArticle">{{v.newArticle.length >20 ? v.newArticle.substr(0, 20) + '...' : v.newArticle}}</span>
                 </div>
             </vue-seamless-scroll>
         </div>
@@ -34,11 +38,12 @@
   </div>
 </template>
 <script>
-import { getMicroOperationYesterday } from '@/servers/interface'
+import { getMicroOperationYesterday, getMicroOperationNews } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 import vueSeamlessScroll from 'vue-seamless-scroll'
+import { GUID } from '@/servers/api'
 export default {
-  name: 'clueGather2',
+  name: 'businessDate',
   components: {
     vueSeamlessScroll
   },
@@ -51,7 +56,9 @@ export default {
       frequency: 1500,
       maxPage: 3,
       dateList: [],
-      customSize: false
+      customSize: false,
+      name: '运营数据',
+      isNotYuhua: true
     }
   },
   created () {
@@ -61,27 +68,52 @@ export default {
       }
     })
     this.getCluesTogether()
+    this.getGUID()
     // setInterval(() => {
     //   this.active = !this.active
     // //   this.getCluesTogether()
     // }, this.frequency)
   },
   methods: {
+    getGUID () {
+      // console.log(GUID)
+      // 判断是否是雨花大屏
+      if (GUID === 'NWFjZGEwYj') {
+        this.name = '融媒体矩阵'
+        this.isNotYuhua = false
+      } else {
+        this.name = '运营数据'
+        this.isNotYuhua = true
+      }
+    },
     setFontSize (size) {
       if (this.customSize && size && size > 0) {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getCluesTogether () {
+    async getCluesTogether () {
+      let appids = []
+      let mediaList = []
       // getMicroOperationAppList().then(res => {
       //   console.log(res.data, 'getMicroOperationAppList')
       // })
-      getMicroOperationYesterday().then(res => {
+      await getMicroOperationYesterday().then(res => {
         if (res.data.error_code === 0) {
-          this.dateList = res.data.result
+          mediaList = res.data.result
           this.wechatNum = this.dateList.length
+          appids = res.data.result.map(item => item.app_id).join(',')
         }
-        console.log(res.data, 'getMicroOperationYesterday')
+      })
+      await getMicroOperationNews(appids).then(res => {
+        let newsList = res.data.result
+        mediaList.forEach(val => {
+          for (let i in newsList) {
+            if (val.app_id === Number(i)) {
+              val.newArticle = newsList[i].data[0].articles[0].title
+            }
+          }
+        })
+        this.dateList = mediaList
       })
     }
   },
@@ -143,6 +175,9 @@ export default {
             span{
                 text-align: center;
                 width: 25%;
+                &.w50{
+                  width: 50%;
+                }
             }
             &.list-title{
                 color:#01EBFF;
