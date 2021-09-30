@@ -87,6 +87,7 @@ export default {
     align-items: center;
     position: unset;
     .title-title {
+      transform: scaleY(12);
       width: 100%;
       // height: 100%;
       font-size: pxrem(250px);
@@ -104,6 +105,7 @@ export default {
     justify-content: center;
     // position: relative;
     // top: pxrem(-42px);
+    transform: scaleY(12);
     .today-weather {
         font-size: pxrem(60px);
         line-height: pxrem(54px);

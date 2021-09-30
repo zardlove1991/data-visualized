@@ -195,10 +195,10 @@ export default {
 .xy-operate {
   width: 100%;
   height: 100%;
-  padding: pxrem(40px);
+  padding: pxrem(80px);
   .operate-wrap {
     color: #fff;
-    padding: pxrem(53px) 0 0 pxrem(85px);
+    padding: pxrem(106px) 0 0 pxrem(85px);
     background: url(./assets/bg.png);
     background-repeat: no-repeat;
     .operate-box {
@@ -206,45 +206,49 @@ export default {
       .operate {
         background: url(./assets/operate_bg.png);
         width: pxrem(751px);
-        height: pxrem(691px);
+        height: pxrem(1382px);
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: pxrem(68px);
+        padding-top: pxrem(236px);
         .operate-logo {
           height: pxrem(110px);
-          margin-bottom: pxrem(38px);
+          transform: scaleY(2);
+          margin-bottom: pxrem(152px);
         }
         .operate-box-title {
           font-size: pxrem(40px);
           color: #00fffc;
           letter-spacing: pxrem(3px);
-          margin-bottom: pxrem(49px);
+          margin-bottom: pxrem(98px);
           font-weight: bold;
+          transform: scaleY(2);
         }
         .split {
-          height: pxrem(7px);
-          margin-bottom: pxrem(58px);
+          height: pxrem(8px);
+          margin-bottom: pxrem(130px);
         }
         .text {
           font-size: pxrem(34px);
           color:#fff;
-          margin-bottom: pxrem(50px);
+          transform: scaleY(2);
+          margin-bottom: pxrem(130px);
         }
       }
     }
     .data-statistics {
       .data-title-bar {
         align-items: center;
-        margin-bottom: pxrem(93px);
+        margin-bottom: pxrem(386px);
         .data-pre {
-          height: pxrem(44px);
+          height: pxrem(88px);
           margin-right: pxrem(16px);
         }
         .data-title {
           font-size: pxrem(50px);
           font-weight: bold;
           color: #fff;
+          transform: scaleY(2);
         }
       }
       .data-content {
@@ -253,6 +257,7 @@ export default {
           height: pxrem(525px);
           position: relative;
           margin-right: pxrem(164px);
+          transform: scaleY(2);
           .echart-center {
             position: absolute;
             transform: translate(-50%, -50%);
@@ -264,19 +269,22 @@ export default {
             img {
               height: pxrem(120px);
               margin-left: pxrem(15px);
+              margin-bottom: pxrem(30px);
             }
             p {
               font-size: pxrem(48px);
+              // transform: scaleY(2);
             }
           }
         }
         .datalist {
+          transform: scaleY(2);
           .data-item {
             width: pxrem(940px);
             height: pxrem(140px);
             background: rgba(14,34,75,0.25);
             border: pxrem(2px) solid rgba(1, 150, 255, 0.3);
-            margin-bottom: pxrem(48px);
+            margin-bottom: pxrem(96px);
             .icon {
               width: pxrem(26px);
               height: pxrem(26px);
@@ -314,12 +322,14 @@ export default {
     font-size: pxrem(58px);
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: pxrem(93px);
+    margin-bottom: pxrem(186px);
+    transform: scaleY(2);
   }
   .mbt12 {
     font-size: 0.4em;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     color: #ffffff;
+    transform: scaleY(2);
   }
   .mr119 {
     margin-right: pxrem(119px);
