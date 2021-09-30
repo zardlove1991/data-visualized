@@ -32,13 +32,21 @@ export default {
       wstr: '',
       day: '',
       weekday: '',
-      status: ''
+      status: '',
+      frequency: 15000
+
     }
+  },
+  created () {
+    this.getWeather()
+    this.getToday('')
   },
   mounted () {
     this.setFontsize('common01-title')
-    this.getWeather()
-    this.getToday('')
+    setInterval(() => {
+      this.getWeather()
+      this.getToday('')
+    }, this.frequency)
   },
   methods: {
     getWeather () {
