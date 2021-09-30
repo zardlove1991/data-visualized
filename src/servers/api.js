@@ -12,7 +12,8 @@ export const httpsbaseUrl = 'https://monitor-screen.cloud.hoge.cn'
 // export const baseUrl = 'http://monitor-screen.cloud.hoge.cn'
 export const workcallUrl = 'https://sys-team.cloud.hoge.cn'
 export const huaianUrl = 'http://mapi.qpnews.com.cn/'
-export const thirdUrl = 'http://bigdata.hbzyai.com/'
+// export const thirdUrl = 'http://bigdata.hbzyai.com'
+export const thirdUrl = 'https://monitor-screen.cloud.hoge.cn/hbzyai'
 // export const thirdUrl = 'http://localhost:8086'
 export const GUID = getPlatId()
 

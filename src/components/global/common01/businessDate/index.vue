@@ -100,7 +100,7 @@ export default {
       await getMicroOperationYesterday().then(res => {
         if (res.data.error_code === 0) {
           mediaList = res.data.result
-          this.wechatNum = this.dateList.length
+          this.wechatNum = mediaList.length
           appids = res.data.result.map(item => item.app_id).join(',')
         }
       })
