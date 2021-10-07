@@ -6,17 +6,21 @@
         <div class="data-box">
           <div class="left-title">日报数字报</div>
           <div class="data-main sys-flex">
-            <img class="left-icon" src="./assets/left.png" alt="">
-            <iframe :src="dataUrl"></iframe>
-            <img class="right-icon" src="./assets/right.png" alt="">
+            <swiper :options="swiperOption" ref="mySwiper" >
+              <swiper-slide class="sys-flex sys-flex-wrap" style="height:100%!important;align-content:space-between;" v-for="(item,k) in dataList" :key="k">
+                  <iframe :src="item"></iframe>
+              </swiper-slide>
+              <img class="left-icon swiper-button-prev" src="./assets/left.png" alt="">
+              <img class="right-icon swiper-button-next" src="./assets/right.png" alt="">
+            </swiper>
           </div>
         </div>
         <div class="data-box">
           <div class="left-title">看石狮<span class="en-title">APP</span></div>
           <div class="data-main sys-flex">
-            <img class="left-icon" src="./assets/left.png" alt="">
-            <iframe :src="appUrl"></iframe>
-            <img class="right-icon" src="./assets/right.png" alt="">
+            <!-- <img class="left-icon swiper-button-prev" src="./assets/left.png" alt=""> -->
+            <!-- <iframe :src="appUrl"></iframe> -->
+            <!-- <img class="right-icon swiper-button-next" src="./assets/right.png" alt=""> -->
           </div>
         </div>
       </div>
@@ -24,11 +28,43 @@
   </div>
 </template>
 <script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'websiteContent',
+  components: {
+    swiper,
+    swiperSlide
+  },
   data () {
     return {
-      dataUrl: `http://www.xepaper.com/ssrb/html/2021-09/16/node_1.htm?v=1`,
+      swiperOption: {
+        // notNextTick: true,
+        speed: 2000,
+        autoplay: false,
+        // autoplay: {
+        //   delay: 15000,
+        //   stopOnLastSlide: false,
+        //   disableOnInteraction: false
+        // },
+        autoHeight: true,
+        // direction: 'vertical',
+        effect: 'flip',
+        initialSlide: 0,
+        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        paginationClickable: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      },
+      // dataUrl: `http://ssqb.ssrb.com.cn/h5`,
+      dataList: [
+        'http://ssqb.ssrb.com.cn/h5',
+        'http://epaper.dfsc.com.cn/h5',
+        'http://ssjy.ssrb.com.cn/h5'
+      ],
       appUrl: ``
     }
   },
@@ -53,7 +89,7 @@ export default {
   padding: pxrem(40px);
   position: relative;
   .websitecontent-wrap {
-    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(230px) pxrem(78px) pxrem(95px) pxrem(78px);
     .data-box {
       background: url(./assets/data_bg.png);
       background-size: 100%;
@@ -80,6 +116,13 @@ export default {
         height: 100%;
         margin-left: pxrem(141px);
         align-items: center;
+        .swiper-container{
+          width: 100%;
+          height: 100%;
+          .swiper-wrapper{
+            height: 100%;
+          }
+        }
         .left-icon {
           width: pxrem(37px);
           height: pxrem(72px);
@@ -89,14 +132,16 @@ export default {
           height: pxrem(72px);
         }
         iframe {
-          margin:0 pxrem(36px);
+          margin-left:pxrem(95px);
           display: block;
           width: pxrem(495px);
           height: 100%;
           outline: none;
           border: none;
           box-shadow: none;
+          z-index: 999;
           -webkit-appearance: none;
+          background-color: #ffffff;
         }
       }
         
