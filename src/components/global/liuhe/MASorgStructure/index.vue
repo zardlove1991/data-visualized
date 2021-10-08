@@ -6,10 +6,10 @@
         <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery()">
         <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
       <div class="tab-btn sys-flex">
-        <div v-for="(item,index) in orgNav" :key='index'
+        <!-- <div v-for="(item,index) in orgNav" :key='index'
           :class="currentIndex === index?'btn common01-ft38 act':'btn common01-ft38'"
           @click="changeIndex(index)"
-        >{{item}}</div>
+        >{{item}}</div> -->
         <!-- <div
           :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'"
           @click="showOrg=!showOrg"
