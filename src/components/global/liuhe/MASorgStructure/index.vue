@@ -299,7 +299,7 @@ export default {
   name: 'orgStructure',
   data () {
     return {
-      orgNav: ['组织结构', '成员名单'],
+      orgNav: ['组织结构'],
       showUnit: true,
       orgImg: require('./assets/icon_group.png'),
       currentIndex: 0,
