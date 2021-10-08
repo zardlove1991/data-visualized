@@ -132,10 +132,10 @@ export default {
           height: pxrem(72px);
         }
         iframe {
-          margin-left:pxrem(95px);
+          margin: pxrem(16px) 0 0 pxrem(95px);
           display: block;
           width: pxrem(495px);
-          height: 100%;
+          height: pxrem(700px);
           outline: none;
           border: none;
           box-shadow: none;

@@ -165,7 +165,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~@/styles/index.scss";
 .call-wrap {
   width: 100%;
   height: 10.8rem !important;
