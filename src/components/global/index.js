@@ -220,3 +220,4 @@ export const shishicomponentTvSignal = getComponent('shishi/tvSignal') // 电视
 export const shishicomponentTitleLeft = getComponent('shishi/titleLeft') // 标题左8
 export const shishicomponentIndex = getComponent('shishi/index') // 石狮网首页
 export const shishicomponentIgitalNewspaper = getComponent('shishi/igitalNewspaper') // 数字报/APP
+export const shishicomponentAllPage = getComponent('shishi/allPage') // 页面汇总
