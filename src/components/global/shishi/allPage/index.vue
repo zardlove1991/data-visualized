@@ -1,109 +1,129 @@
 <template>
   <div class="shishi-allpage">
-    <div class="column-flex">
-      <div class="base2 sys-flex">
-        <div class="base1 column-flex">
-          <div class="base1">
-            <clue-gather></clue-gather>
-          </div>
-          <div class="base1">
-            <project></project>
-          </div>
+    <div class="layout-item">
+      <div :class="layoutClass()" v-if="view">
+        <div :class="subItemClass(id, viewId)" class="overflow" v-for="id in view.subviews" :key="id" >
+          <layout-view v-if="config[id].view === 'layout'" :viewId="id"></layout-view>
+          <components-view v-else :config="config[id]" :screenConfig="screenConfig" :viewId="viewId"></components-view>
         </div>
-        <div class="base4 column-flex">
-          <div class="base1">
-            <title-left></title-left>
-          </div>
-          <div class="base5 sys-flex">
-            <div class="base1 column-flex">
-              <div class="base2">
-                <non-edited-article></non-edited-article>
-              </div>
-              <div class="base3">
-                <release-statistics></release-statistics>
-              </div>
-            </div>
-            <div class="base1 column-flex">
-              <div class="base2">
-                <non-edited-signal></non-edited-signal>
-              </div>
-              <div class="base3">
-                <tv-signal></tv-signal>
-              </div>
-            </div>
-            <div class="base2">
-              <reporter-connection></reporter-connection>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="base1 sys-flex">
-        <div class="base2">
-          <operate-data></operate-data>
-        </div>
-        <div class="base1">
-          <live-signal></live-signal>
-        </div>
-        <div class="base1">
-          <index></index>          
-        </div>
-        <div class="base1">
-          <igital-newspaper></igital-newspaper>
-        </div>  
       </div>
     </div>
-
   </div>
 </template>
 <script>
-import clueGather from '../clueGather/index.vue'
-import igitalNewspaper from '../igitalNewspaper/index.vue'
-import index from '../index/index.vue'
-import titleLeft from '../titleLeft/index.vue'
-import tvSignal from '../tvSignal/index.vue'
-import liveSignal from '../liveSignal/index.vue'
-import nonEditedSignal from '../nonEditedSignal/index.vue'
-import nonEditedArticle from '../nonEditedArticle/index.vue'
-import reporterConnection from '../reporterConnection/index.vue'
-import releaseStatistics from '../releaseStatistics/index.vue'
-import operateData from '../operateData/index.vue'
-import project from '../project/index.vue'
+
+import {getRouterConfig, getDataConfig} from '@/utils/model'
+import componentsView from '@/components/_modules/componentsView'
+
 export default {
-  name: 'allPage',
-  data () {},
+  name: 'allPage',
+  data () {
+    return {
+      view: '',
+      extend: '',
+      config: '', // 当前组件信息
+      screenConfig: '' // 当前页面信息：缩放倍数
+      // viewId: ''
+    }
+  },
+  props: {
+    viewId: String
+  },
+  created () {
+  },
+  mounted () {
+    this.loadComponent()
+  },
+  methods: {
+    loadComponent () {
+      getDataConfig().then(res => {
+        this.extend = res
+        console.log(this.extend)
+      })
+      getRouterConfig().then(data => {
+        console.log(data)
+        console.log(this.viewId)
+        if (this.extend.style === 'shishi' && this.viewId === '3743') {
+          this.newViewId = '3569'
+        }
+        this.view = data[this.newViewId || this.viewId]
+        if (this.view.view === 'screen') {
+          let multiple = 1
+          let a = document.documentElement.clientWidth / document.documentElement.clientHeight
+          if (a > (1920 / 1080)) {
+            multiple = (1920 / 1080) / a
+          }
+          document.documentElement.style.fontSize = (document.documentElement.clientWidth / 1920) * 100 * multiple * (this.view.multiple || 1) + 'px'
+          console.log('比例', a, multiple)
+          // 初始化浏览器title
+          if (this.view.docTitle) {
+            document.title = this.view.docTitle || ''
+          }
+        }
+        this.config = data
+        if (this.$route.meta && this.$route.meta.viewId) {
+          this.screenConfig = data[this.newViewId || this.viewId]
+        }
+      })
+    },
+    layoutClass () {
+      if (!this.view) return ''
+      let layoutClass = this.view.gravity ? `layout-${this.view.gravity}` : 'layout-horizontal'
+      return layoutClass
+    },
+    subItemClass (id, parentId) {
+      // 水平 按权重 垂直 flex1
+      let subItemClass = ''
+      if (this.config[id] && this.view) {
+        if (this.view.gravity === 'horizontal') {
+          subItemClass = `flex${this.config[id].weight || 1}`
+        } else {
+          subItemClass = `flex${this.config[id].weight || 1}`
+        }
+      } else {
+        subItemClass = 'flex1'
+      }
+      return subItemClass
+    }
+  },
   components: {
-    clueGather,
-    project,
-    operateData,
-    releaseStatistics,
-    reporterConnection,
-    nonEditedArticle,
-    nonEditedSignal,
-    liveSignal,
-    tvSignal,
-    titleLeft,
-    index,
-    igitalNewspaper
+    componentsView
   }
 }
 </script>
 <style lang="scss">
+  @import '~@/styles/global/index.scss';
+:root {
+  --ratio: 1.67;
+}
 .shishi-allpage {
   width: 100%;
   height: 100%;
-  // padding: pxrem(40px);
+  padding: pxrem(40px);
   display: flex;
+  flex-direction: column;
+  .layout-item{
+    height: 100%;
+    .overflow{
+      overflow: hidden;
+    }
+  }
+  .common01-title {
+    transform: scaleY(var(--ratio));
+  }
+  // 线索汇聚
+  .shishi-cluegather {
+  }
+  // 记者连线
+  .shishi-workmap {
+    .reporter-map-wrap {
+      height: 100% !important;
+    }
+    .call-wrap {
+      height: 100% !important;
+    }
+  }
 }
-.base1 {
-  flex: 1;
-}
-.base2 {
-  flex: 2;
-}
-.base3 {
-  flex: 3;
-}
-.base4 {
-  flex: 4;
-}
+
 </style>
+

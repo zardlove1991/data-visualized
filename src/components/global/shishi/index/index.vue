@@ -11,7 +11,7 @@ export default {
   name: 'websiteContent',
   data () {
     return {
-      url: `https://www1.chinashishi.net/`
+      url: `https://www.chinashishi.net/`
     }
   },
   mounted () {
