@@ -76,12 +76,12 @@ export default {
         series: [
           {
             type: 'pie',
-            radius: ['60%', '100%'],
+            radius: ['55%', '100%'],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,
               borderColor: '#021d6a',
-              borderWidth: 18
+              borderWidth: 5
             },
             label: {
               show: false,
@@ -102,7 +102,7 @@ export default {
   mounted () {
     this.setFontsize('xy-operate')
     this.getWebDate()
-    // this.getAppData()
+    this.getAppData()
     setInterval(() => {
       if (this.active === 'web') {
         this.getWebDate()
@@ -294,7 +294,7 @@ export default {
             }
             .item-title {
               font-size: pxrem(36px);
-              margin-right: pxrem(300px);
+              margin-right: pxrem(150px);
             }
             .item-count {
               font-size: pxrem(48px);

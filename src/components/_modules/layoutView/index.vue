@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-item">
+  <div :class="['layout-item', singleConfig]">
     <div :class="layoutClass()" v-if="view">
       <div :class="subItemClass(id, viewId)" class="overflow" v-for="id in view.subviews" :key="id" >
         <layout-view v-if="config[id].view === 'layout'" :viewId="id"></layout-view>
@@ -21,6 +21,9 @@ export default {
     return {
       view: '',
       extend: '',
+      singleConfig: {
+        'shishi-all': false
+      },
       config: '', // 当前组件信息
       screenConfig: '' // 当前页面信息：缩放倍数
     }
@@ -45,6 +48,11 @@ export default {
           }
         }
         this.config = data
+        // this.$route.name = 'all' 石狮页面汇总
+        if (this.extend.style === 'shishi' && this.viewId === '3569') {
+          import('@/styles/all/shishi.scss')
+          this.singleConfig['shishi-all'] = true
+        }
         if (this.$route.meta && this.$route.meta.viewId) {
           this.screenConfig = data[this.$route.meta.viewId]
         }

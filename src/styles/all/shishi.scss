@@ -1,0 +1,299 @@
+@import '../index.scss';
+.shishi-all {
+  $shishi-ratio: 1.67; //横五纵三
+  $shishi-operate: $shishi-ratio / 2; //数据运营比例
+  $shishi-titleLeft: $shishi-ratio / 12; // 标题加天气比例
+  $shishi-map-y: $shishi-ratio * 2; // 地图比例y方向
+  $shishi-map-x: 2; // 地图比例y方向
+  .common01-title {
+    transform: scaleY($shishi-ratio);
+    top: pxrem(90px) !important;
+  }
+  .common01-ft32 {
+    transform: scaleY($shishi-ratio);
+  }
+  .common01-ft36 {
+    transform: scaleY($shishi-ratio);
+  }
+  .common01-ft40 {
+    transform: scaleY($shishi-ratio);
+  }
+  // 线索汇聚
+  .shishi-cluegather {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .cluegather-wrap {
+      padding: pxrem(384px) pxrem(96px) pxrem(160px) pxrem(78px)!important;
+      .wrap-content {
+        .marginBottom75 {
+          margin-bottom: pxrem(152px)!important;
+        }
+        .item-list {
+          margin-bottom: pxrem(150px)!important;
+        }
+      }
+    }
+  }
+  // 选题展示
+  .shishi-project {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .project-wrap {
+      padding: pxrem(384px) pxrem(96px) pxrem(160px) pxrem(78px)!important;
+      .wrap-content {
+        .marginBottom75 {
+          margin-bottom: pxrem(152px)!important;
+        }
+        .item-list {
+          margin-bottom: pxrem(133px)!important;
+        }
+      }
+    }
+  }
+  // 发稿统计
+  .shishi-releaseStatistics {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .releaseStatistics-wrap {
+      padding: pxrem(384px) pxrem(96px) pxrem(160px) pxrem(78px)!important;
+      .wrap-content {
+        .item-list {
+          height: pxrem(140px * $shishi-ratio)!important;
+          margin-bottom: pxrem(50px * $shishi-ratio)!important;
+          .index {
+            height: pxrem(60px * $shishi-ratio)!important;
+            line-height: pxrem(60px * $shishi-ratio)!important;
+          }
+          .avatar {
+            height: pxrem(75px * $shishi-ratio)!important;
+          }
+        }
+      }
+    }
+  }
+  // 四块空屏
+  .shishi-nonEditedSignal {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .block-title {
+      transform: scaleY($shishi-ratio);
+    }
+  }
+  .shishi-nonEditedArticle {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .block-title {
+      transform: scaleY($shishi-ratio);
+    }
+  }
+  .shishi-liveSignal {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .img-icon {
+      transform: scaleY($shishi-ratio);
+    }
+  }
+  .shishi-tvSignal {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+  }
+  // 石狮首页
+  .shishi-index {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .websitecontent-wrap {
+      padding: pxrem(384px) pxrem(96px) pxrem(160px) pxrem(78px)!important;
+    }
+  }
+  // 数字报
+  .shishi-igitalNewspaper {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .websitecontent-wrap {
+      padding: pxrem(384px) pxrem(96px) pxrem(160px) pxrem(78px)!important;
+      .data-box {
+        height: pxrem(730px * $shishi-ratio)!important;
+        .left-title {
+          top: pxrem(225px * $shishi-ratio)!important;
+          transform: scaleY($shishi-ratio);
+          line-height: pxrem(60px * $shishi-ratio)!important;
+        }
+        .data-main {
+          height: 100%;
+          .left-icon {
+            height: pxrem(72px * $shishi-ratio)!important;
+          }
+          .right-icon {
+            height: pxrem(72px * $shishi-ratio)!important;
+          }
+          iframe {
+            margin: pxrem(16px * $shishi-ratio) 0 0 pxrem(95px)!important;
+            height: pxrem(700px * $shishi-ratio)!important;
+          }
+        }
+          
+      }
+    }
+  }
+  // 运营数据
+  .xy-operate {
+    padding: pxrem(66.8px) pxrem(40px)!important;
+    .operate-wrap {
+      padding: pxrem(106px * $shishi-operate) 0 0 pxrem(85px);
+      .operate-box {
+        .operate {
+          height: pxrem(1382px * $shishi-operate)!important;
+          padding-top: pxrem(68px * $shishi-ratio)!important;
+          .operate-logo {
+            height: pxrem(110px);
+            transform: scaleY($shishi-ratio)!important;
+            margin-bottom: pxrem(152px * $shishi-operate)!important;
+          }
+          .operate-box-title {
+            margin-bottom: pxrem(98px * $shishi-operate)!important;
+            transform: scaleY($shishi-ratio)!important;
+          }
+          .split {
+            margin-bottom: pxrem(130px * $shishi-operate)!important;
+          }
+          .text {
+            transform: scaleY($shishi-ratio)!important;
+            margin-bottom: pxrem(130px * $shishi-operate)!important;
+          }
+        }
+      }
+      .data-statistics {
+        .data-title-bar {
+          margin-bottom: pxrem(386px * $shishi-operate)!important;
+          .data-pre {
+            height: pxrem(88px * $shishi-operate)!important;
+          }
+          .data-title {
+            transform: scaleY($shishi-ratio)!important;
+          }
+        }
+        .data-content {
+          .echart-left {
+            transform: scaleY($shishi-ratio)!important;
+            .echart-center {
+              img {
+                margin-bottom: pxrem(30px * $shishi-operate)!important;
+              }
+            }
+          }
+          .datalist {
+            transform: scaleY($shishi-ratio)!important;
+            .data-item {
+              width: pxrem(940px);
+              height: pxrem(140px);
+              background: rgba(14,34,75,0.25);
+              border: pxrem(2px) solid rgba(1, 150, 255, 0.3);
+              margin-bottom: pxrem(96px * $shishi-operate)!important;
+            }
+          }
+        }
+      }
+    }
+    .operate-title {
+      text-align: left;
+      height: pxrem(55px);
+      font-size: pxrem(58px);
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: pxrem(186px);
+      transform: scaleY($shishi-ratio)!important;
+    }
+  }
+  // 标题+天气
+  .title-bar {
+    .mt-42 {
+      margin-top: pxrem(42px * $shishi-ratio)!important;
+    }
+    .common01-title {
+      .title-title {
+        transform: scaleY(12 * $shishi-titleLeft)!important;
+      }
+    }
+    .weather-box {
+      transform: scaleY(12 * $shishi-titleLeft)!important;
+      .today-weather {
+        line-height: pxrem(54px * $shishi-ratio)!important;
+      }
+    }
+  }
+  
+  // 记者连线
+  .shishi-workmap {
+    .common01-ft70 {
+      transform: scaleY($shishi-ratio);
+    }
+    .common01-ft58 {
+      transform: scaleY($shishi-ratio);
+    }
+    .common01-ft38 {
+      transform: scaleY($shishi-ratio);
+    }
+    padding-bottom: pxrem(53px * $shishi-ratio)!important;
+    .reporter-map-wrap {
+      height: 100%!important;
+      margin-top: pxrem(31px * $shishi-ratio)!important;
+      .reporter-map {
+        width: calc(100% - 35px);
+        height: calc(100% - 35px);
+      }
+      .reporter-list-wrap {
+        top: pxrem(40px * $shishi-map-y)!important;
+        right: pxrem(46px * $shishi-map-x)!important;
+        .reporter-title {
+          height: pxrem(78px);
+          line-height: pxrem(78px);
+        }
+        .reporter-body {
+          height: pxrem(800px);
+          .reporter-list {
+            .avatar-box {
+              width: pxrem(80px);
+              height: pxrem(80px);
+              border-radius: pxrem(5px);
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+              }
+            }
+            .member-name {
+              width: 38%;
+              margin: 0 pxrem(40px) 0 pxrem(21px);
+              text-align: left;
+              .name {
+                margin-bottom: pxrem(20px);
+              }
+            }
+            .connect {
+              width: pxrem(55px);
+              height: pxrem(55px);
+              background: no-repeat center right;
+              background-size: pxrem(55px) pxrem(55px);
+              cursor: pointer;
+              &.connect-audio {
+                margin-right: pxrem(20px);
+              }
+              &.connect-video {
+              }
+            }
+            .list-body {
+              padding: pxrem(27.5px) pxrem(30px) pxrem(31.5px);
+            }
+            .border-line{
+              width: 100%;
+              height: pxrem(5px);
+              background-size: 100%;
+            }
+          }
+        }
+        .no-data{
+          width: 100%;
+          height: pxrem(885px);
+          background: #0B2152;
+          font-size: pxrem(35px);
+          color: #ebebeb;
+        }
+      }
+    }
+  }
+  .call-wrap {
+    height: 100% !important;
+  }
+}

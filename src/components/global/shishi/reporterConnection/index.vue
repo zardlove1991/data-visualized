@@ -54,7 +54,8 @@ export default {
       coordinateList: [],
       unlinecoordinateList: [],
       mapStyle: '',
-      customSize: false
+      customSize: false,
+      ratioy: 1.2
     }
   },
   components: {
@@ -219,14 +220,27 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/index.scss";
 .shishi-workmap {
+  $mapscale: 1.2;
   width: 100%;
   height: 100%;
   // padding: pxrem(20px);
-  padding-bottom: pxrem(53px);
+  padding-bottom: pxrem(53px * $mapscale);
   background: #0b072d;
+  .common01-ft70 {
+  font-size: pxrem(35px);
+  transform: scaleY($mapscale);
+  }
+  .common01-ft58 {
+    font-size: pxrem(29px);
+    transform: scaleY($mapscale);
+  }
+  .common01-ft38 {
+    font-size: pxrem(19px);
+    transform: scaleY($mapscale);
+  }
   .reporter-map-wrap {
     width: 100%;
-    height: pxrem(1693px);
+    height: pxrem(1693px * $mapscale);
     position: relative;
     background: url("./assets/mapBorder.png") no-repeat center;
     background-size: 100% 100%;
@@ -234,29 +248,29 @@ export default {
     margin-top: pxrem(31px);
     .reporter-map {
       width: calc(100% - 35px);
-      height: calc(100% - 35px);
+      height: calc(100% - (35px * 1.2));
     }
     .reporter-list-wrap {
       width: pxrem(495px);
       position: absolute;
-      top: pxrem(40px);
+      top: pxrem(40px * $mapscale);
       right: pxrem(46px);
       .reporter-title {
         width: 100%;
-        height: pxrem(78px);
-        line-height: pxrem(78px);
+        height: pxrem(78px * $mapscale);
+        line-height: pxrem(78px * $mapscale);
         background: #174EC1;
       }
       .reporter-body {
         width: 100%;
-        height: pxrem(800px);
+        height: pxrem(860px);
         background: #203e8d;
         overflow-y: scroll;
         overflow-x: hidden;
         .reporter-list {
           .avatar-box {
             width: pxrem(80px);
-            height: pxrem(80px);
+            height: pxrem(80px * $mapscale);
             border-radius: pxrem(5px);
             img {
               width: 100%;
@@ -270,12 +284,12 @@ export default {
             margin: 0 pxrem(40px) 0 pxrem(21px);
             text-align: left;
             .name {
-              margin-bottom: pxrem(20px);
+              margin-bottom: pxrem(20px * $mapscale);
             }
           }
           .connect {
             width: pxrem(55px);
-            height: pxrem(55px);
+            height: pxrem(55px * $mapscale);
             background: no-repeat center right;
             background-size: pxrem(55px) pxrem(55px);
             cursor: pointer;
@@ -288,11 +302,11 @@ export default {
             }
           }
           .list-body {
-            padding: pxrem(27.5px) pxrem(30px) pxrem(31.5px);
+            padding: pxrem(27.5px * $mapscale) pxrem(30px) pxrem(31.5px * $mapscale);
           }
           .border-line{
             width: 100%;
-            height: pxrem(5px);
+            height: pxrem(5px * $mapscale);
             background: url('./assets/line.png') no-repeat bottom;
             background-size: 100%;
           }
@@ -300,21 +314,12 @@ export default {
       }
       .no-data{
         width: 100%;
-        height: pxrem(885px);
+        height: pxrem(885px * $mapscale);
         background: #0B2152;
         font-size: pxrem(35px);
         color: #ebebeb;
       }
     }
   }
-}
-.common01-ft70 {
-  font-size: pxrem(35px);
-}
-.common01-ft58 {
-  font-size: pxrem(29px);
-}
-.common01-ft38 {
-  font-size: pxrem(19px);
 }
 </style>

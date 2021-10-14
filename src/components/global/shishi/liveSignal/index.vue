@@ -42,28 +42,6 @@ export default {
       bottom: pxrem(45px);
       right: pxrem(72px);
     }
-    .wrap-content {
-      .marginBottom75 {
-        margin-bottom: pxrem(75px)!important;
-      }
-      .item-list {
-        margin-bottom: pxrem(90px);
-        &:last-of-type {
-          margin-bottom: 0;
-        }
-        .title {
-          width: 60%;
-          text-align: left;
-        }
-        .read {
-          img {
-            width: pxrem(30px);
-            height: pxrem(30px);
-            margin-right: pxrem(18px);
-          }
-        }
-      }
-    }
   }
 }
 </style>

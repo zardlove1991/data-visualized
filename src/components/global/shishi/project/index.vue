@@ -51,7 +51,7 @@ export default {
       }
     },
     getWorkCallSubjectList () {
-      getWorkCallSubjectList(7, this.page, this.currentViewId).then(res => {
+      getWorkCallSubjectList(5, this.page, this.currentViewId).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data.length) {
             this.projectList = []
@@ -85,7 +85,7 @@ export default {
   padding: pxrem(40px);
   .project-wrap {
     padding: pxrem(220px) pxrem(80px) pxrem(95px) pxrem(78px);
-    padding-top: pxrem(200px)!important;
+    // padding-top: pxrem(200px)!important;
     padding-right: pxrem(80px)!important;
     color: #fff;
     .wrap-content {
@@ -93,21 +93,22 @@ export default {
         margin-bottom: pxrem(75px)!important;
       }
       .item-list {
-        margin-bottom: pxrem(60px)!important;
+        margin-bottom: pxrem(80px);
         &:last-of-type {
           margin-bottom: 0;
         }
         .title {
           text-align: left;
-          width: 55%;
+          flex: 1;
           margin-right: pxrem(20px);
         }
         .name {
-          width: 24%!important;
+          width: 15%!important;
           margin-right: pxrem(10px)!important;
         }
         .project-status {
-          width: pxrem(170px);
+          width: 13%;
+          white-space: nowrap;
           &.on-progress {
             color: #0272ff;
           }
@@ -119,6 +120,7 @@ export default {
           }
         }
         .project-progress {
+          width: 3.8rem;
           margin-left: auto;
           .progress-total {
             width: pxrem(200px)!important;

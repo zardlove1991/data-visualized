@@ -92,7 +92,7 @@ export default {
     padding: pxrem(230px) pxrem(78px) pxrem(95px) pxrem(78px);
     .data-box {
       background: url(./assets/data_bg.png);
-      background-size: 100%;
+      background-size: 100% 100%;
       background-repeat: no-repeat;
       width: pxrem(828px);
       height: pxrem(730px);
@@ -114,7 +114,7 @@ export default {
       }
       .data-main {
         height: 100%;
-        margin-left: pxrem(141px);
+        margin-left: pxrem(130px);
         align-items: center;
         .swiper-container{
           width: 100%;
@@ -126,10 +126,12 @@ export default {
         .left-icon {
           width: pxrem(37px);
           height: pxrem(72px);
+          left: pxrem(24px)
         }
         .right-icon {
           width: pxrem(37px);
           height: pxrem(72px);
+          right: pxrem(43px);
         }
         iframe {
           margin: pxrem(16px) 0 0 pxrem(95px);

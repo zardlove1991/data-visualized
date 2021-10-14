@@ -93,10 +93,10 @@ export default {
 </script>
 <style lang="scss">
   @import '~@/styles/global/index.scss';
-:root {
-  --ratio: 1.67;
-}
 .shishi-allpage {
+  :root {
+  --shishiratio: 1.67;
+  }
   width: 100%;
   height: 100%;
   padding: pxrem(40px);
@@ -109,7 +109,7 @@ export default {
     }
   }
   .common01-title {
-    transform: scaleY(var(--ratio));
+    transform: scaleY(var(--shishiratio));
   }
   // 线索汇聚
   .shishi-cluegather {

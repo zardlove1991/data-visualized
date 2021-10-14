@@ -1,5 +1,5 @@
 <template>
-  <div class="call-wrap sys-flex" v-if="call_Show">
+  <div class="shishi-call-wrap sys-flex" v-if="call_Show">
     <div id="call-main" class="rong-container sys-flex sys-flex-center flex-justify-center">
       <div class="call-user" v-if="!online">
         <img class="call-reporter-avatar" v-if="info_item.avatar" :src="info_item.avatar.uri" />
@@ -165,9 +165,10 @@ export default {
 </script>
 
 <style lang="scss">
-.call-wrap {
+.shishi-call-wrap {
+  $mapscale1: 1.2;
   width: 100%;
-  height: 10.8rem !important;
+  height: 10.8rem * $mapscale1;
   border: pxrem(1px) solid rgba(96, 186, 236, 0.2);
   background: rgba(31, 57, 103, 0.2);
   position: absolute;
@@ -194,18 +195,19 @@ export default {
         text-align: center;
         display: block;
         font-size: 0.3rem;
+        transform: scaleY($mapscale1);
         margin-top: -0.05rem;
       }
       .call-reporter-avatar {
         width: 2rem;
-        height: 2rem;
+        height: 2rem * $mapscale1;
         margin: 1rem auto 0 auto;
         display: block;
         border-radius: 50%;
       }
       .call-reporter-line {
         width: 2.8rem;
-        height: 0.625rem;
+        height: 0.625rem * $mapscale1;;
         margin: 0.25rem auto;
         display: block;
       }
@@ -222,12 +224,13 @@ export default {
         width: 100%;
         text-align: center;
         font-size: 0.25rem;
+        transform: scaleY($mapscale1);
         color: #ddd;
       }
     }
     .rong-max-window {
       width: 5rem;
-      height: 4rem;
+      height: 4rem * $mapscale1;
       background: rgba(0, 0, 0, 0.4);
       border-radius: 0.02rem;
       cursor: pointer;
@@ -268,16 +271,16 @@ export default {
           top: 0;
           right: 0;
           width: 0.5rem !important;
-          height: 0.5rem !important;
+          height: 0.5rem * $mapscale1 !important;
           z-index: 99999 !important;
         }
       }
     }
     .video-info {
       width: 1.5rem;
-      height: 1.5rem;
+      height: 1.5rem * $mapscale1;
       position: absolute;
-      bottom: 1.5rem;
+      bottom: 2rem * $mapscale1;
       left: calc(50% - 0.75rem);
       z-index: 999999;
       .video-time {
@@ -289,14 +292,15 @@ export default {
         border-radius: 0.125rem;
         text-align: center;
         font-size: 0.3rem;
+        transform: scaleY($mapscale1);
         color: #00fdfe;
         margin: 0 auto;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.25rem * $mapscale1;
       }
       .hug-btn {
         display: block;
         width: 1rem;
-        height: 1rem;
+        height: 1rem * $mapscale1;
         background: url(./assets/icon_videoff.png) no-repeat
           center center;
         background-size: 1rem 1rem;
@@ -309,20 +313,21 @@ export default {
     .call-reporter-avatar {
       display: block;
       width: 1.25rem;
-      height: 1.25rem;
+      height: 1.25rem * $mapscale1;
       margin: 0 auto;
       border-radius: 50%;
     }
     .call-reporter-line {
       display: block;
       width: 2.8rem;
-      height: 1.25rem;
+      height: 1.25rem * $mapscale1;
       margin: 0 auto;
     }
     .call-status {
       display: block;
       color: #fff34a;
       font-size: 0.4rem;
+      transform: scaleY($mapscale1);
       margin-top: -0.4rem;
       margin-bottom: 0.1rem;
       text-align: center;
@@ -330,7 +335,7 @@ export default {
     .call-btn {
       display: block;
       width: 0.5rem;
-      height: 0.5rem;
+      height: 0.5rem * $mapscale1;
       margin: 0 0.1rem;
       cursor: pointer;
       &:hover {
@@ -340,7 +345,7 @@ export default {
   }
   .call-info-wrap {
     width: 1.54rem;
-    height: 1.89rem;
+    height: 1.89rem * $mapscale1;
     background-size: 2.54rem 2.89rem;
     margin-right: 0.4rem;
     padding: 0.5rem;
@@ -349,6 +354,7 @@ export default {
         display: block;
         text-align: center;
         font-size: 0.15rem;
+        transform: scaleY($mapscale1);
         color: #fff;
         margin-top: 0.15rem;
         &.invite-name {
@@ -366,6 +372,7 @@ export default {
       line-height: 0.3rem;
       text-indent: 0.5rem;
       font-size: 0.18rem !important;
+      transform: scaleY($mapscale1);
       text-align: left;
       color: #00ffea;
       background-size: 0.41rem 0.14rem;
@@ -374,6 +381,7 @@ export default {
       display: block;
       text-align: left;
       font-size: 0.12rem;
+      transform: scaleY($mapscale1);
       color: #00ffea;
       margin: 0.1rem 0;
       &.introduce {
@@ -386,7 +394,7 @@ export default {
   .close-btn {
     display: block;
     width: 0.485rem;
-    height: 0.14rem;
+    height: 0.14rem * $mapscale1;
     background-size: 0.485rem 0.14rem;
     cursor: pointer;
   }

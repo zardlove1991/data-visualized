@@ -80,10 +80,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/styles/index.scss";
-.mt-42 {
-  margin-top: pxrem(42px);
-}
 .title-bar {
+  .mt-42 {
+    margin-top: pxrem(42px);
+  }
   .common01-title {
     // width: 100%;
     display: flex;
