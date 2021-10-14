@@ -2,14 +2,34 @@
   <div class="common-orgStructure">
     <!-- 一级页面 -->
     <div class="orgStructure-page common01-border" v-if="!showDetailPage">
-      <div class="common01-title">{{viewAttr.header || '组织架构'}}</div>
-        <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery()">
-        <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
+      <div class="common01-title">{{ viewAttr.header || "组织架构" }}</div>
+      <img
+        v-if="showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/allunit.png"
+        alt=""
+        @click="showEvery()"
+      />
+      <img
+        v-if="!showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/unit.png"
+        alt=""
+        @click="showAll()"
+      />
       <div class="tab-btn sys-flex">
-        <!-- <div v-for="(item,index) in orgNav" :key='index'
-          :class="currentIndex === index?'btn common01-ft38 act':'btn common01-ft38'"
+        <div
+          v-for="(item, index) in orgNav"
+          :key="index"
+          :class="
+            currentIndex === index
+              ? 'btn common01-ft38 act'
+              : 'btn common01-ft38'
+          "
           @click="changeIndex(index)"
-        >{{item}}</div> -->
+        >
+          {{ item }}
+        </div>
         <!-- <div
           :class="showOrg?'btn common01-ft38':'btn common01-ft38 act'"
           @click="showOrg=!showOrg"
@@ -18,54 +38,141 @@
       <div class="org-div" v-if="currentIndex === 0">
         <div class="total">
           <p>志愿服务总队</p>
-          <span>{{orgIndexData.total}}</span>
+          <span>{{ orgIndexData.total }}</span>
         </div>
         <div
           v-if="orgIndexData.topInfo.name"
           class="name common01-ft36 animated flipInX left-bottom-info"
-          @click="showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)"
-        >{{orgIndexData.topInfo.name}}</div>
+          @click="
+            showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)
+          "
+        >
+          {{ orgIndexData.topInfo.name }}
+        </div>
         <div
           v-if="orgIndexData.leftTopInfo.name"
           class="name common01-ft36 animated flipInX left-top-info"
-          @click="showChildDetail(orgIndexData.leftTopInfo.id, orgIndexData.leftTopInfo.name)"
-        >{{orgIndexData.leftTopInfo.name}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.leftTopInfo.id,
+              orgIndexData.leftTopInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.leftTopInfo.name }}
+        </div>
         <div
           v-if="orgIndexData.leftBottomInfo.name"
           class="name common01-ft36 animated flipInX top-info"
-          @click="showChildDetail(orgIndexData.leftBottomInfo.id, orgIndexData.leftBottomInfo.name)"
-        >{{orgIndexData.leftBottomInfo.name}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.leftBottomInfo.id,
+              orgIndexData.leftBottomInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.leftBottomInfo.name }}
+        </div>
         <div
           v-if="orgIndexData.rightTopInfo.name"
           class="name common01-ft36 animated flipInX right-top-info"
-          @click="showChildDetail(orgIndexData.rightTopInfo.id, orgIndexData.rightTopInfo.name)"
-        >{{orgIndexData.rightTopInfo.name}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.rightTopInfo.id,
+              orgIndexData.rightTopInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.rightTopInfo.name }}
+        </div>
         <div
           v-if="orgIndexData.rightBottomInfo.name"
           class="name common01-ft36 animated flipInX right-bottom-info"
-          @click="showChildDetail(orgIndexData.rightBottomInfo.id, orgIndexData.rightBottomInfo.name)"
-        >{{orgIndexData.rightBottomInfo.name}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.rightBottomInfo.id,
+              orgIndexData.rightBottomInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.rightBottomInfo.name }}
+        </div>
+        <div
+          v-if="orgIndexData.rightLastInfo.name"
+          class="name common01-ft36 animated flipInX right-last-info"
+          @click="
+            showChildDetail(
+              orgIndexData.rightLastInfo.id,
+              orgIndexData.rightLastInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.rightLastInfo.name }}
+        </div>
 
         <div
           class="number left-bottom-info"
-          @click="showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)"
-        >{{orgIndexData.topInfo.number}}</div>
+          @click="
+            showChildDetail(orgIndexData.topInfo.id, orgIndexData.topInfo.name)
+          "
+        >
+          {{ orgIndexData.topInfo.number }}
+        </div>
         <div
           class="number left-top-info"
-          @click="showChildDetail(orgIndexData.leftTopInfo.id, orgIndexData.leftTopInfo.name)"
-        >{{orgIndexData.leftTopInfo.number}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.leftTopInfo.id,
+              orgIndexData.leftTopInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.leftTopInfo.number }}
+        </div>
         <div
           class="number top-info"
-          @click="showChildDetail(orgIndexData.leftBottomInfo.id, orgIndexData.leftBottomInfo.name)"
-        >{{orgIndexData.leftBottomInfo.number}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.leftBottomInfo.id,
+              orgIndexData.leftBottomInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.leftBottomInfo.number }}
+        </div>
         <div
           class="number right-top-info"
-          @click="showChildDetail(orgIndexData.rightTopInfo.id, orgIndexData.rightTopInfo.name)"
-        >{{orgIndexData.rightTopInfo.number}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.rightTopInfo.id,
+              orgIndexData.rightTopInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.rightTopInfo.number }}
+        </div>
         <div
           class="number right-bottom-info"
-          @click="showChildDetail(orgIndexData.rightBottomInfo.id, orgIndexData.rightBottomInfo.name)"
-        >{{orgIndexData.rightBottomInfo.number}}</div>
+          @click="
+            showChildDetail(
+              orgIndexData.rightBottomInfo.id,
+              orgIndexData.rightBottomInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.rightBottomInfo.number }}
+        </div>
+        <div
+          class="number right-last-info"
+          @click="
+            showChildDetail(
+              orgIndexData.rightLastInfo.id,
+              orgIndexData.rightLastInfo.name
+            )
+          "
+        >
+          {{ orgIndexData.rightLastInfo.number }}
+        </div>
       </div>
       <!-- 成员名单 -->
       <div class="member-div sys-flex" v-if="currentIndex === 1">
@@ -74,53 +181,65 @@
             <div class="img-div">
               <img src="./assets/arrow_list.png" alt />
             </div>
-            <span>{{memberIndexData.leftMember.title}}</span>
+            <span>{{ memberIndexData.leftMember.title }}</span>
           </div>
           <div class="member-list">
             <div
-              :class="item.title === '成员'?'item type-member':'item type-leader'"
+              :class="
+                item.title === '成员' ? 'item type-member' : 'item type-leader'
+              "
               v-for="(item, index) in memberIndexData.leftMember.data"
               :key="index"
             >
               <div class="type-title">
-                <span>{{item.title}}</span>
+                <span>{{ item.title }}</span>
                 <span>:</span>
               </div>
-              <div class="member sys-flex" v-for="(item2, index2) in item.data" :key="index2">
+              <div
+                class="member sys-flex"
+                v-for="(item2, index2) in item.data"
+                :key="index2"
+              >
                 <div class="name">
                   <div>
-                    <span>{{item2.name}}</span>
+                    <span>{{ item2.name }}</span>
                   </div>
                 </div>
-                <div class="position">{{item2.duty}}</div>
+                <div class="position">{{ item2.duty }}</div>
               </div>
             </div>
           </div>
         </div>
         <div class="right-part sys-flex-one">
           <div class="title">
-            <div class="img-div"  v-if="memberIndexData.rightMember.title">
+            <div class="img-div" v-if="memberIndexData.rightMember.title">
               <img src="./assets/arrow_list.png" alt />
             </div>
-            <span>{{memberIndexData.rightMember.title}}</span>
+            <span>{{ memberIndexData.rightMember.title }}</span>
           </div>
           <div class="member-list">
             <div
-              :class="item.title === '成员'?'item type-member':'item type-leader'"
+              :class="
+                item.title === '成员' ? 'item type-member' : 'item type-leader'
+              "
               v-for="(item, index) in memberIndexData.rightMember.data"
               :key="index"
             >
               <div class="type-title">
-                <span>{{item.title}}</span>
+                <span>{{ item.title }}</span>
                 <span>:</span>
               </div>
-              <div class="member sys-flex" v-for="(item2, index2) in item.data" :key="index2">
+              <div
+                class="member sys-flex"
+                v-for="(item2, index2) in item.data"
+                :key="index2"
+              >
                 <div class="name">
                   <div>
-                    <span>{{item2.name}}</span>
+                    <span>{{ item2.name }}</span>
                   </div>
                 </div>
-                <div class="position">{{item2.duty}}</div>
+                <div class="position">{{ item2.duty }}</div>
               </div>
             </div>
           </div>
@@ -128,13 +247,35 @@
       </div>
     </div>
     <!-- 二级页面 -->
-    <div class="orgStructure-detail-page common01-border" v-if="showDetailPage" v-loading="loading"  element-loading-text="拼命加载中"
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(9, 40, 94, 0.9)">
-      <div class="back-btn back-btn-last common01-ft36" v-if="depath" @click="childDetailPageBack">上一级</div>
-      <div class="common01-ft36" :class="depath? ' back-btn-first':'back-btn'"  @click="pageBack">返回</div>
-      <img v-if="showUnit" class="unit_icon" src="../../../../assets/common/allunit.png" alt="" @click="showEvery1()">
-      <img v-if="!showUnit" class="unit_icon" src="../../../../assets/common/unit.png" alt="" @click="showAll()">
+    <div class="orgStructure-detail-page common01-border" v-if="showDetailPage">
+      <div
+        class="back-btn back-btn-last common01-ft36"
+        v-if="depath"
+        @click="childDetailPageBack"
+      >
+        上一级
+      </div>
+      <div
+        class="common01-ft36"
+        :class="depath ? ' back-btn-first' : 'back-btn'"
+        @click="pageBack"
+      >
+        返回
+      </div>
+      <img
+        v-if="showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/allunit.png"
+        alt=""
+        @click="showEvery1()"
+      />
+      <img
+        v-if="!showUnit"
+        class="unit_icon"
+        src="../../../../assets/common/unit.png"
+        alt=""
+        @click="showAll()"
+      />
       <div class="box">
         <div class="top-part">
           <div class="page-title">
@@ -144,11 +285,10 @@
                   <img src="./assets/namebox_left.png" alt />
                 </div>
                 <div class="title">
-                  {{detailTitle}}
-                  <span
-                    class="num"
-                    v-if="detailInfo && detailInfo.length > 0"
-                  >({{detailInfo.length}})</span>
+                  {{ detailTitle }}
+                  <span class="num" v-if="detailInfo && detailInfo.length > 0"
+                    >({{ detailInfo.length }})</span
+                  >
                 </div>
                 <div class="title-right">
                   <img src="./assets/namebox_right.png" alt />
@@ -168,14 +308,17 @@
           <div class="line" v-if="checkCanShow(4)"></div>
           <div class="line" v-if="checkCanShow(5)"></div>
         </div>
-        <div class="list-box sys-flex" v-if="detailInfo && detailInfo.length > 0 && !showList">
+        <div
+          class="list-box sys-flex"
+          v-if="detailInfo && detailInfo.length > 0 && !showList"
+        >
           <div class="item" v-for="(item, index) in detailInfo" :key="index">
             <div class="img-box" @click="getSixPlatformInfo(item)">
               <img v-if="item.head_pic" :src="item.head_pic" alt />
               <img v-else src="./assets/icon_group.png" alt />
             </div>
             <div class="name">
-              <span>{{item.name}}</span>
+              <span>{{ item.name }}</span>
             </div>
           </div>
         </div>
@@ -187,11 +330,11 @@
               <img v-else src="./assets/icon_volunteer.png" alt />
             </div>
             <div class="volunteer-name">
-              <span class="volunteer-name__span">{{item.real_name}}</span>
+              <span class="volunteer-name__span">{{ item.real_name }}</span>
             </div>
             <div class="volunteer-name">
               <span class="volunteer-time">服务时长:</span>
-              <span class="volunteer-hours">{{item.total}}</span>
+              <span class="volunteer-hours">{{ item.total }}</span>
             </div>
           </div>
         </div>
@@ -205,177 +348,193 @@
 </template>
 
 <script>
-import {GUID} from '@/servers/api'
-import { getVolunteerOrganizeList, getVolunteerOrganizeDetail, getVolunteerMemberList, getSixPlatformInfo, getVolunteersInfo } from '@/servers/interface'
+/* eslint-disable */
+import { GUID } from "@/servers/api";
+import {
+  getVolunteerOrganizeList,
+  getVolunteerOrganizeDetail,
+  getVolunteerMemberList,
+  getSixPlatformInfo,
+  getVolunteersInfo,
+} from "@/servers/interface";
 export default {
-  name: 'orgStructure',
-  data () {
+  name: "orgStructure",
+  data() {
     return {
-      orgNav: ['组织结构'],
+      orgNav: ["组织结构", "成员名单"],
       showUnit: true,
-      orgImg: require('./assets/icon_group.png'),
+      orgImg: require("./assets/icon_group.png"),
       currentIndex: 0,
       orgIndexData: {
         total: 0,
         topInfo: {
-          title: '',
+          title: "",
           score: 0,
-          id: ''
+          id: "",
         },
         leftTopInfo: {
-          title: '',
+          title: "",
           score: 0,
-          id: ''
+          id: "",
         },
         leftBottomInfo: {
-          title: '',
+          title: "",
           score: 0,
-          id: ''
+          id: "",
         },
         rightTopInfo: {
-          title: '',
+          title: "",
           score: 0,
-          id: ''
+          id: "",
         },
         rightBottomInfo: {
-          title: '',
+          title: "",
           score: 0,
-          id: ''
-        }
+          id: "",
+        },
+        rightLastInfo: {
+          title: "",
+          score: 0,
+          id: "",
+        },
       },
       dimensionalArr: [],
       memberIndexData: {
         leftMember: {
-          title: '',
-          data: []
+          title: "",
+          data: [],
         },
         rightMember: {
-          title: '',
-          data: []
-        }
+          title: "",
+          data: [],
+        },
       },
       // 二级页面
       showDetailPage: false,
-      detailTitle: '',
+      detailTitle: "",
       detailInfo: [],
       guid: GUID,
-      detailId: '',
-      detailName: '',
+      detailId: "",
+      detailName: "",
       // 三级页面
       depath: false,
       showList: false,
       list: [],
       count: 0,
-      loading: true,
-      timer: null
-    }
+    };
   },
-  created () {
+  created() {
     if (this.$route.query.currentIndex) {
-      this.currentIndex = +this.$route.query.currentIndex
-      console.log(this.$route.query.currentIndex)
+      this.currentIndex = +this.$route.query.currentIndex;
+      console.log(this.$route.query.currentIndex);
     }
     if (this.$route.query.detailId) {
-      this.detailId = this.$route.query.detailId
-      this.detailName = this.$route.query.detailName
-      this.showChildDetail(this.detailId, this.detailName)
+      this.detailId = this.$route.query.detailId;
+      this.detailName = this.$route.query.detailName;
+      this.showChildDetail(this.detailId, this.detailName);
     }
-    this.getVolunteerOrganizeList()
-    this.getVolunteerMemberList()
-    if (window.location.href.indexOf('All') >= 0) {
-      this.showUnit = true
+    this.getVolunteerOrganizeList();
+    this.getVolunteerMemberList();
+    if (window.location.href.indexOf("All") >= 0) {
+      this.showUnit = true;
     } else {
-      this.showUnit = false
+      this.showUnit = false;
     }
   },
-  computed: {
-  },
+  computed: {},
   methods: {
-    changeIndex (index) {
-      this.currentIndex = index
+    changeIndex(index) {
+      this.currentIndex = index;
     },
-    showAll () {
-      var url = window.location.origin + '/' + this.guid + '/All'
-      window.location.href = url
+    showAll() {
+      var url = window.location.origin + "/" + this.guid + "/All";
+      window.location.href = url;
     },
-    showEvery () {
-      var url = window.location.origin + '/' + this.guid + '/orgStructure' + '?currentIndex=' + this.currentIndex
-      window.location.href = url
+    showEvery() {
+      var url =
+        window.location.origin +
+        "/" +
+        this.guid +
+        "/orgStructure" +
+        "?currentIndex=" +
+        this.currentIndex;
+      window.location.href = url;
     },
-    showEvery1 () {
-      var url = window.location.origin + '/' + this.guid + '/orgStructure' + '?detailId=' + this.detailId + '&detailName=' + this.detailName
-      window.location.href = url
+    showEvery1() {
+      var url =
+        window.location.origin +
+        "/" +
+        this.guid +
+        "/orgStructure" +
+        "?detailId=" +
+        this.detailId +
+        "&detailName=" +
+        this.detailName;
+      window.location.href = url;
     },
-    getSixPlatformInfo (item) {
-      this.loading = true
-      // console.log(this.detailInfo)
-      // if (this.detailTitle !== '六大平台' && item.isShow !== true) {
-      //   return false
-      // }
-      if (item.isShow === true || this.detailTitle !== '六大平台') {
-        this.depath = true
-        this.showList = true
-        getVolunteersInfo(item.id).then(res => {
+    getSixPlatformInfo(item) {
+      if (this.detailTitle !== "六大平台" && item.isShow !== true) {
+        return false;
+      }
+      if (item.isShow === true) {
+        this.depath = true;
+        this.showList = true;
+        getVolunteersInfo(item.id).then((res) => {
           if (!res.data.error_code) {
-            let _result = res.data.result
+            let _result = res.data.result;
             if (_result) {
-              this.detailTitle = item.name
+              this.detailTitle = item.name;
               this.dimensionalArr.push({
                 name: item.name,
-                data: _result
-              })
-              this.timer = setTimeout(() => {
-                this.detailInfo = _result
-                this.loading = false
-              }, 2000)
+                data: _result,
+              });
+              this.detailInfo = _result;
             }
           }
-        })
+        });
       } else {
-        getSixPlatformInfo(item.id).then(res => {
+        getSixPlatformInfo(item.id).then((res) => {
           if (!res.data.error_code) {
-            let _result = res.data.result
-            _result.forEach(val => {
-              val['isShow'] = true
-            })
+            let _result = res.data.result;
+            _result.forEach((val) => {
+              val["isShow"] = true;
+            });
             if (_result) {
-              this.detailTitle = item.name
+              this.detailTitle = item.name;
               this.dimensionalArr.push({
                 name: item.name,
-                data: _result
-              })
-              this.timer = setTimeout(() => {
-                this.detailInfo = _result
-                this.loading = false
-              }, 2000)
+                data: _result,
+              });
+              this.detailInfo = _result;
             }
             // this.timer = setTimeout(() => {
             //   this.loading = false
             // }, 2000)
           }
-        })
+        });
       }
     },
-    checkCanShow (num) {
+    checkCanShow(num) {
       if (this.detailInfo && this.detailInfo.length > num) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     },
     // 获取组织架构
-    getVolunteerOrganizeList () {
-      getVolunteerOrganizeList().then(res => {
+    getVolunteerOrganizeList() {
+      getVolunteerOrganizeList().then((res) => {
         if (!res.data.error_code) {
-          let _result = res.data.result.organize_cate
+          let _result = res.data.result.organize_cate;
           if (_result && _result.length > 0) {
-            this.orgIndexData.total = res.data.result.total
-            this.orgIndexData.topInfo = _result[3]
-            this.orgIndexData.leftTopInfo = _result[2]
-            this.orgIndexData.leftBottomInfo = _result[1]
-            this.orgIndexData.rightTopInfo = _result[0]
-            this.orgIndexData.rightBottomInfo = _result[4]
-            _result.forEach(e => {
+            this.orgIndexData.total = res.data.result.total;
+            this.orgIndexData.topInfo = _result[3];
+            this.orgIndexData.leftTopInfo = _result[2];
+            this.orgIndexData.leftBottomInfo = _result[1];
+            this.orgIndexData.rightTopInfo = _result[0];
+            this.orgIndexData.rightBottomInfo = _result[4];
+            this.orgIndexData.rightLastInfo = _result[5];
+            _result.forEach((e) => {
               // if (/专业/.test(e.name)) {
               //   this.orgIndexData.topInfo = e
               // }
@@ -391,100 +550,96 @@ export default {
               // if (/社会/.test(e.name)) {
               //   this.orgIndexData.rightBottomInfo = e
               // }
-            })
+            });
           }
         }
-      })
+      });
     },
     // 获取组织架构（子组织）
-    showChildDetail (id, name) {
-      this.count = 0
-      this.detailId = id
-      this.detailName = name
-      if (name !== '六大平台') {
-        this.depath = false
+    showChildDetail(id, name) {
+      this.count = 0;
+      this.detailId = id;
+      this.detailName = name;
+      if (name !== "六大平台") {
+        this.depath = false;
       } else {
-        this.depath = true
+        this.depath = true;
       }
-      getVolunteerOrganizeDetail(id).then(res => {
+      getVolunteerOrganizeDetail(id).then((res) => {
         if (!res.data.error_code) {
-          let _result = res.data.result
+          let _result = res.data.result;
           if (_result) {
-            this.detailTitle = name
-            this.detailInfo = _result.data
+            this.detailTitle = name;
+            this.detailInfo = _result.data;
             this.dimensionalArr.push({
               name: name,
-              data: _result.data
-            })
-            this.showDetailPage = true
+              data: _result.data,
+            });
+            this.showDetailPage = true;
           }
           this.loading = false
         }
-      })
+      });
     },
     // 二级页面返回
-    childDetailPageBack () {
-      this.count += 1
+    childDetailPageBack() {
+      this.count += 1;
       if (this.dimensionalArr.length > 1) {
         if (this.dimensionalArr.length === 2) {
-          this.showList = false
-          this.dimensionalArr = this.dimensionalArr.splice(0, 1)
-          this.detailInfo = this.dimensionalArr[0].data
-          this.detailTitle = this.dimensionalArr[0].name
-          this.count = 0
+          this.showList = false;
+          this.dimensionalArr = this.dimensionalArr.splice(0, 1);
+          this.detailInfo = this.dimensionalArr[0].data;
+          this.detailTitle = this.dimensionalArr[0].name;
+          this.count = 0;
         } else {
-          this.showList = false
-          this.dimensionalArr = this.dimensionalArr.splice(0, 2)
-          this.detailInfo = this.dimensionalArr[1].data
-          this.detailTitle = this.dimensionalArr[1].name
+          this.showList = false;
+          this.dimensionalArr = this.dimensionalArr.splice(0, 2);
+          this.detailInfo = this.dimensionalArr[1].data;
+          this.detailTitle = this.dimensionalArr[1].name;
         }
         if (this.count === 2) {
-          this.dimensionalArr = this.dimensionalArr.splice(0, 1)
-          this.detailInfo = this.dimensionalArr[0].data
-          this.detailTitle = this.dimensionalArr[0].name
+          this.dimensionalArr = this.dimensionalArr.splice(0, 1);
+          this.detailInfo = this.dimensionalArr[0].data;
+          this.detailTitle = this.dimensionalArr[0].name;
         }
       } else {
-        this.showDetailPage = false
-        this.detailInfo = []
-        this.dimensionalArr = []
-        this.detailTitle = ''
-        this.depath = false
-        this.showList = false
+        this.showDetailPage = false;
+        this.detailInfo = [];
+        this.dimensionalArr = [];
+        this.detailTitle = "";
+        this.depath = false;
+        this.showList = false;
       }
     },
-    pageBack () {
-      this.showDetailPage = false
-      this.detailInfo = []
-      this.dimensionalArr = []
-      this.detailTitle = ''
-      this.depath = false
-      this.showList = false
+    pageBack() {
+      this.showDetailPage = false;
+      this.detailInfo = [];
+      this.dimensionalArr = [];
+      this.detailTitle = "";
+      this.depath = false;
+      this.showList = false;
     },
     // 成员名单
-    getVolunteerMemberList () {
-      getVolunteerMemberList().then(res => {
+    getVolunteerMemberList() {
+      getVolunteerMemberList().then((res) => {
         if (!res.data.error_code) {
-          let _result = res.data.result
+          let _result = res.data.result;
           if (_result) {
-            _result.forEach(e => {
+            _result.forEach((e) => {
               if (/实践中心/.test(e.title)) {
-                this.memberIndexData.leftMember.title = e.title
-                this.memberIndexData.leftMember.data = e.relation
+                this.memberIndexData.leftMember.title = e.title;
+                this.memberIndexData.leftMember.data = e.relation;
               } else {
-                this.memberIndexData.rightMember.title = e.title
-                this.memberIndexData.rightMember.data = e.relation
+                this.memberIndexData.rightMember.title = e.title;
+                this.memberIndexData.rightMember.data = e.relation;
               }
-            })
+            });
           }
         }
-      })
-    }
+      });
+    },
   },
-  beforeDestroy () {
-    clearInterval(this.timer)
-    this.timer = null
-  }
-}
+};
 </script>
 
 <style lang="scss">
@@ -538,11 +693,12 @@ export default {
       position: absolute;
       width: pxrem(1678px);
       height: pxrem(810px);
-      bottom: pxrem(35px);
+      // bottom: pxrem(35px);
       // background: url("./assets/bg_group_new2.png") no-repeat center;
-      background: url("./assets/bg_group_new3.png") no-repeat center;
-      background-size: 100%;
-      left: 52%;
+      background: url("./assets/bg_group_new4.png") no-repeat center;
+      background-size: 65%;
+      top: pxrem(180px);
+      left: 50%;
       -webkit-transform: translateX(-50%);
       -moz-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
@@ -557,8 +713,8 @@ export default {
         width: pxrem(314px);
         height: pxrem(189px);
         text-align: center;
-        top: pxrem(338px);
-        left: pxrem(662px);
+        top: pxrem(288px);
+        left: pxrem(710px);
         p {
           font-size: pxrem(42px);
           height: pxrem(50px);
@@ -604,30 +760,34 @@ export default {
       }
       .name.top-info {
         // width: pxrem(294px);
-        top: 0;
+        top: pxrem(40px);
         // left: pxrem(354px);
-        right: pxrem(1029px);
+        right: pxrem(1240px);
       }
       .name.left-top-info {
         // width: pxrem(294px);
-        top: pxrem(230px);
-        right: pxrem(1300px);
+        top: pxrem(330px);
+        right: pxrem(1400px);
       }
       .name.left-bottom-info {
         // width: pxrem(374px);
-        bottom: pxrem(38px);
+        bottom: pxrem(140px);
         // right: pxrem(1306px);
-        right: pxrem(1260px);
+        right: pxrem(1200px);
       }
       .name.right-top-info {
         // width: pxrem(294px);
-        top: pxrem(180px);
-        left: pxrem(1270px);
+        top: pxrem(50px);
+        left: pxrem(1310px);
       }
       .name.right-bottom-info {
         // width: pxrem(408px);
-        bottom: pxrem(54px);
-        left: pxrem(1270px);
+        bottom: pxrem(390px);
+        left: pxrem(1400px);
+      }
+      .name.right-last-info {
+        top: pxrem(650px);
+        left: pxrem(1320px);
       }
       .number {
         width: pxrem(138px);
@@ -640,26 +800,31 @@ export default {
         color: #becfff;
       }
       .number.top-info {
-        top: pxrem(20px);
-        left: pxrem(750px);
+        top: pxrem(32px);
+        left: pxrem(598px);
       }
       .number.left-top-info {
-        top: pxrem(248px);
-        left: pxrem(428px);
+        top: pxrem(315px);
+        left: pxrem(448px);
         color: #0ce7e6;
       }
       .number.left-bottom-info {
-        bottom: pxrem(96px);
-        left: pxrem(482px);
+        bottom: pxrem(125px);
+        left: pxrem(545px);
       }
       .number.right-top-info {
-        top: pxrem(250px);
-        right: pxrem(462px);
+        top: pxrem(33px);
+        right: pxrem(542px);
         color: #0ce7e6;
       }
       .number.right-bottom-info {
-        bottom: pxrem(96px);
-        right: pxrem(514px);
+        bottom: pxrem(360px);
+        right: pxrem(400px);
+        color: #0ce7e6;
+      }
+      .number.right-last-info {
+        bottom: pxrem(124px);
+        right: pxrem(510px);
       }
     }
     .member-div {
@@ -803,7 +968,7 @@ export default {
       background-size: pxrem(36px) pxrem(28px);
       background-position: 0 pxrem(8px);
     }
-    .back-btn-last{
+    .back-btn-last {
       background: url("./assets/icon_parent@2x.png") no-repeat;
       background-size: 0.36rem 0.36rem;
       background-position: 0 0.075rem;
@@ -970,7 +1135,7 @@ export default {
           }
           .volunteer-hours {
             font-size: pxrem(28px);
-            color:#00fffa;
+            color: #00fffa;
           }
         }
       }
