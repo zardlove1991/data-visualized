@@ -11,7 +11,7 @@
             <div class="progress-total">
               <span class="progress" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}" :style="{'width' : v.percent + '%'}"></span>
             </div>
-            <div class="percent common01-ft32" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{Math.ceil(v.percent)}}%</div>
+            <div class="percent" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{Math.ceil(v.percent)}}%</div>
           </div>
         </div>
       </div>

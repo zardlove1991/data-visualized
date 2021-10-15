@@ -240,7 +240,7 @@ export default {
   }
   .reporter-map-wrap {
     width: 100%;
-    height: pxrem(1693px * $mapscale);
+    height: 100% * $mapscale;
     position: relative;
     background: url("./assets/mapBorder.png") no-repeat center;
     background-size: 100% 100%;
@@ -275,7 +275,7 @@ export default {
             img {
               width: 100%;
               height: 100%;
-              object-fit: cover;
+              // object-fit: cover;
               display: block;
             }
           }

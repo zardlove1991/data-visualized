@@ -3,11 +3,11 @@
   $shishi-ratio: 1.67; //横五纵三
   $shishi-operate: $shishi-ratio / 2; //数据运营比例
   $shishi-titleLeft: $shishi-ratio / 12; // 标题加天气比例
-  $shishi-map-y: $shishi-ratio * 2; // 地图比例y方向
-  $shishi-map-x: 2; // 地图比例y方向
+  $shishi-map-x: 2; // 地图比例x方向
   .common01-title {
     transform: scaleY($shishi-ratio);
     top: pxrem(90px) !important;
+    font-weight: bold!important;
   }
   .common01-ft32 {
     transform: scaleY($shishi-ratio);
@@ -95,6 +95,12 @@
     padding: pxrem(66.8px) pxrem(40px)!important;
     .websitecontent-wrap {
       padding: pxrem(384px) pxrem(96px) pxrem(160px) pxrem(78px)!important;
+      iframe {
+        width: 1529px!important;
+        height: 675px!important;
+        transform-origin: left top;
+        transform: scale(0.22, 0.35);
+      }
     }
   }
   // 数字报
@@ -112,17 +118,19 @@
         .data-main {
           height: 100%;
           .left-icon {
-            height: pxrem(72px * $shishi-ratio)!important;
+            transform: scaleY($shishi-ratio);
           }
           .right-icon {
-            height: pxrem(72px * $shishi-ratio)!important;
+            transform: scaleY($shishi-ratio);
           }
           iframe {
-            margin: pxrem(16px * $shishi-ratio) 0 0 pxrem(95px)!important;
-            height: pxrem(700px * $shishi-ratio)!important;
+            margin: pxrem(16px) 0 0 pxrem(75px)!important;
+            height: 700px!important;
+            width: 495px!important;
+            transform-origin: left top;
+            transform: scale(0.34, 0.33);
           }
-        }
-          
+        } 
       }
     }
   }
@@ -130,13 +138,12 @@
   .xy-operate {
     padding: pxrem(66.8px) pxrem(40px)!important;
     .operate-wrap {
-      padding: pxrem(106px * $shishi-operate) 0 0 pxrem(85px);
+      padding: pxrem(106px * $shishi-operate) pxrem(96px) pxrem(160px) pxrem(78px)!important;      
       .operate-box {
         .operate {
           height: pxrem(1382px * $shishi-operate)!important;
           padding-top: pxrem(68px * $shishi-ratio)!important;
           .operate-logo {
-            height: pxrem(110px);
             transform: scaleY($shishi-ratio)!important;
             margin-bottom: pxrem(152px * $shishi-operate)!important;
           }
@@ -145,11 +152,12 @@
             transform: scaleY($shishi-ratio)!important;
           }
           .split {
-            margin-bottom: pxrem(130px * $shishi-operate)!important;
+            margin-bottom: pxrem(95px)!important;
+            height: pxrem(8px * $shishi-operate * 2)!important;
           }
           .text {
             transform: scaleY($shishi-ratio)!important;
-            margin-bottom: pxrem(130px * $shishi-operate)!important;
+            margin-bottom: pxrem(85px)!important;
           }
         }
       }
@@ -201,8 +209,9 @@
       margin-top: pxrem(42px * $shishi-ratio)!important;
     }
     .common01-title {
+      background-size: 100% 82% !important;
       .title-title {
-        transform: scaleY(12 * $shishi-titleLeft)!important;
+        transform: scaleY(1)!important;
       }
     }
     .weather-box {
@@ -229,66 +238,61 @@
       height: 100%!important;
       margin-top: pxrem(31px * $shishi-ratio)!important;
       .reporter-map {
-        width: calc(100% - 35px);
-        height: calc(100% - 35px);
+        width: calc(100% - 70px)!important;
+        height: calc(100% - 70.14px)!important;
       }
       .reporter-list-wrap {
-        top: pxrem(40px * $shishi-map-y)!important;
+        width: pxrem(495px * $shishi-map-x)!important;
+        top: pxrem(40px * $shishi-ratio)!important;
         right: pxrem(46px * $shishi-map-x)!important;
         .reporter-title {
-          height: pxrem(78px);
-          line-height: pxrem(78px);
+          height: pxrem(78px * $shishi-ratio)!important;
+          line-height: pxrem(78px * $shishi-ratio)!important;
         }
         .reporter-body {
-          height: pxrem(800px);
+          height: pxrem(800px * $shishi-ratio * 1.2)!important;
           .reporter-list {
             .avatar-box {
-              width: pxrem(80px);
-              height: pxrem(80px);
-              border-radius: pxrem(5px);
+              width: pxrem(80px * $shishi-map-x)!important;
+              height: pxrem(80px * $shishi-ratio)!important;
               img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
-                display: block;
               }
             }
             .member-name {
-              width: 38%;
-              margin: 0 pxrem(40px) 0 pxrem(21px);
+              // width: (38% * $shishi-map-x)!important;
+              margin: 0 pxrem(40px * $shishi-map-x) 0 pxrem(21px * $shishi-map-x)!important;
               text-align: left;
               .name {
-                margin-bottom: pxrem(20px);
+                margin-bottom: pxrem(20px * $shishi-ratio)!important;
               }
             }
             .connect {
-              width: pxrem(55px);
-              height: pxrem(55px);
+              width: pxrem(55px * $shishi-map-x)!important;
+              height: pxrem(55px * $shishi-ratio)!important;
               background: no-repeat center right;
               background-size: pxrem(55px) pxrem(55px);
               cursor: pointer;
               &.connect-audio {
-                margin-right: pxrem(20px);
-              }
-              &.connect-video {
+                margin-right: pxrem(20px * $shishi-map-x)!important;
               }
             }
             .list-body {
-              padding: pxrem(27.5px) pxrem(30px) pxrem(31.5px);
+              padding: pxrem(27.5px * $shishi-ratio) pxrem(30px * $shishi-map-x) pxrem(31.5px * $shishi-ratio)!important;
             }
             .border-line{
               width: 100%;
-              height: pxrem(5px);
+              height: pxrem(5px * $shishi-ratio)!important;
               background-size: 100%;
             }
           }
         }
         .no-data{
           width: 100%;
-          height: pxrem(885px);
-          background: #0B2152;
+          height: pxrem(885px* $shishi-ratio)!important;
           font-size: pxrem(35px);
-          color: #ebebeb;
+          transform: scaleY($shishi-ratio)!important;
         }
       }
     }

@@ -168,7 +168,7 @@ export default {
 .shishi-call-wrap {
   $mapscale1: 1.2;
   width: 100%;
-  height: 10.8rem * $mapscale1;
+  height: 100%;
   border: pxrem(1px) solid rgba(96, 186, 236, 0.2);
   background: rgba(31, 57, 103, 0.2);
   position: absolute;

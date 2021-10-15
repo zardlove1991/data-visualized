@@ -201,6 +201,7 @@ export default {
     padding: pxrem(106px) 0 0 pxrem(85px);
     background: url(./assets/bg.png);
     background-repeat: no-repeat;
+    background-size: 100% 100%;
     .operate-box {
       margin-right: pxrem(256px);
       .operate {
@@ -227,6 +228,7 @@ export default {
         .split {
           height: pxrem(8px);
           margin-bottom: pxrem(130px);
+          width: 92%;
         }
         .text {
           font-size: pxrem(34px);

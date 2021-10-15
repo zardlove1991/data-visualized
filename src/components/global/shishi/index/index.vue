@@ -2,7 +2,7 @@
   <div class="shishi-index" id="shishi-index">
     <div class="websitecontent-wrap common01-border">
       <div class="common01-title" :style="setFontSize(63)">石狮网首页</div>
-      <iframe :src="url"></iframe>
+      <iframe allowfullscreen="allowfullscreen" id="urlIframe" :src="url" scrolling="auto" frameborder="no" width="100%" height="100%"></iframe>
     </div>
   </div>
 </template>
