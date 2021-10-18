@@ -1,7 +1,7 @@
 <template>
   <div class="shishi-igitalNewspaper" id="shishi-igitalNewspaper">
     <div class="websitecontent-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">数据报/APP</div>
+      <div class="common01-title" :style="setFontSize(63)">数字报/APP</div>
       <div class="sys-flex flex-justify-between">
         <div class="data-box">
           <div class="left-title">日报数字报</div>
