@@ -4,19 +4,22 @@
   $shishi-operate: $shishi-ratio / 2; //数据运营比例
   $shishi-titleLeft: $shishi-ratio / 12; // 标题加天气比例
   $shishi-map-x: 2; // 地图比例x方向
+  * {
+    -webkit-font-smoothing: subpixel-antialiased!important;
+  }
   .common01-title {
-    transform: scaleY($shishi-ratio);
+    transform:perspective(1px) scaleY($shishi-ratio);
     top: pxrem(90px) !important;
-    font-weight: bold!important;
+    // font-weight: bold!important;
   }
   .common01-ft32 {
-    transform: scaleY($shishi-ratio);
+    transform:perspective(1px) scaleY($shishi-ratio);
   }
   .common01-ft36 {
-    transform: scaleY($shishi-ratio);
+    transform:perspective(1px) scaleY($shishi-ratio);
   }
   .common01-ft40 {
-    transform: scaleY($shishi-ratio);
+    transform:perspective(1px) scaleY($shishi-ratio);
   }
   // 线索汇聚
   .shishi-cluegather {
@@ -58,11 +61,11 @@
           height: pxrem(140px * $shishi-ratio)!important;
           margin-bottom: pxrem(50px * $shishi-ratio)!important;
           .index {
-            height: pxrem(60px * $shishi-ratio)!important;
-            line-height: pxrem(60px * $shishi-ratio)!important;
+            // height: pxrem(60px * $shishi-ratio)!important;
+            // line-height: pxrem(60px * $shishi-ratio)!important;
           }
           .avatar {
-            height: pxrem(75px * $shishi-ratio)!important;
+            // height: pxrem(75px * $shishi-ratio)!important;
           }
         }
       }
@@ -72,19 +75,19 @@
   .shishi-nonEditedSignal {
     padding: pxrem(66.8px) pxrem(40px)!important;
     .block-title {
-      transform: scaleY($shishi-ratio);
+      transform:perspective(1px) scaleY($shishi-ratio);
     }
   }
   .shishi-nonEditedArticle {
     padding: pxrem(66.8px) pxrem(40px)!important;
     .block-title {
-      transform: scaleY($shishi-ratio);
+      transform:perspective(1px) scaleY($shishi-ratio);
     }
   }
   .shishi-liveSignal {
     padding: pxrem(66.8px) pxrem(40px)!important;
     .img-icon {
-      transform: scaleY($shishi-ratio);
+      transform:perspective(1px) scaleY($shishi-ratio);
     }
   }
   .shishi-tvSignal {
@@ -99,7 +102,7 @@
         width: 1529px!important;
         height: 675px!important;
         transform-origin: left top;
-        transform: perspective(1px) scale(0.22, 0.35) translate3d(0, 0, 0);
+        transform: perspective(1px) scale(0.22, 0.35);
       }
     }
   }
@@ -112,16 +115,16 @@
         height: pxrem(730px * $shishi-ratio)!important;
         .left-title {
           top: pxrem(225px * $shishi-ratio)!important;
-          transform: scaleY($shishi-ratio);
+          transform:perspective(1px) scaleY($shishi-ratio);
           line-height: pxrem(60px * $shishi-ratio)!important;
         }
         .data-main {
           height: 100%;
           .left-icon {
-            transform: scaleY($shishi-ratio);
+            transform:perspective(1px) scaleY($shishi-ratio);
           }
           .right-icon {
-            transform: scaleY($shishi-ratio);
+            transform:perspective(1px) scaleY($shishi-ratio);
           }
           iframe {
             margin: pxrem(16px) 0 0 pxrem(75px)!important;
@@ -144,20 +147,20 @@
           height: pxrem(1382px * $shishi-operate)!important;
           padding-top: pxrem(68px * $shishi-ratio)!important;
           .operate-logo {
-            transform: scaleY($shishi-ratio)!important;
+            transform:perspective(1px) scaleY($shishi-ratio)!important;
             margin-bottom: pxrem(152px * $shishi-operate)!important;
           }
           .operate-box-title {
             margin-bottom: pxrem(98px * $shishi-operate)!important;
-            transform: scaleY($shishi-ratio)!important;
+            transform:perspective(1px) scaleY($shishi-ratio)!important;
           }
           .split {
             margin-bottom: pxrem(95px)!important;
             height: pxrem(8px * $shishi-operate * 2)!important;
           }
           .text {
-            transform: scaleY($shishi-ratio)!important;
-            margin-bottom: pxrem(85px)!important;
+            transform:perspective(1px) scaleY($shishi-ratio)!important;
+            // margin-bottom: pxrem(85px)!important;
           }
         }
       }
@@ -168,12 +171,12 @@
             height: pxrem(88px * $shishi-operate)!important;
           }
           .data-title {
-            transform: scaleY($shishi-ratio)!important;
+            transform:perspective(1px) scaleY($shishi-ratio)!important;
           }
         }
         .data-content {
           .echart-left {
-            transform: scaleY($shishi-ratio)!important;
+            transform:perspective(1px) scaleY($shishi-ratio)!important;
             .echart-center {
               img {
                 margin-bottom: pxrem(30px * $shishi-operate)!important;
@@ -181,7 +184,7 @@
             }
           }
           .datalist {
-            transform: scaleY($shishi-ratio)!important;
+            transform:perspective(1px) scaleY($shishi-ratio)!important;
             .data-item {
               width: pxrem(940px);
               height: pxrem(140px);
@@ -194,13 +197,7 @@
       }
     }
     .operate-title {
-      text-align: left;
-      height: pxrem(55px);
-      font-size: pxrem(58px);
-      font-weight: bold;
-      color: #ffffff;
-      margin-bottom: pxrem(186px);
-      transform: scaleY($shishi-ratio)!important;
+      transform:perspective(1px) scaleY($shishi-ratio)!important;
     }
   }
   // 标题+天气
@@ -211,11 +208,11 @@
     .common01-title {
       background-size: 100% 82% !important;
       .title-title {
-        transform: scaleY(1)!important;
+        transform:perspective(1px) scaleY(1)!important;
       }
     }
     .weather-box {
-      transform: scaleY(12 * $shishi-titleLeft)!important;
+      transform:perspective(1px) scaleY(12 * $shishi-titleLeft)!important;
       .today-weather {
         line-height: pxrem(54px * $shishi-ratio)!important;
       }
@@ -225,13 +222,13 @@
   // 记者连线
   .shishi-workmap {
     .common01-ft70 {
-      transform: scaleY($shishi-ratio);
+      transform:perspective(1px) scaleY($shishi-ratio);
     }
     .common01-ft58 {
-      transform: scaleY($shishi-ratio);
+      transform:perspective(1px) scaleY($shishi-ratio);
     }
     .common01-ft38 {
-      transform: scaleY($shishi-ratio);
+      transform:perspective(1px) scaleY($shishi-ratio);
     }
     padding-bottom: pxrem(53px * $shishi-ratio)!important;
     .reporter-map-wrap {
@@ -292,7 +289,7 @@
           width: 100%;
           height: pxrem(885px* $shishi-ratio)!important;
           font-size: pxrem(35px);
-          transform: scaleY($shishi-ratio)!important;
+          transform:perspective(1px) scaleY($shishi-ratio)!important;
         }
       }
     }

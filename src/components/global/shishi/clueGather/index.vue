@@ -93,7 +93,7 @@ export default {
           margin-bottom: 0;
         }
         .title {
-          width: 60%;
+          width: 65%;
           text-align: left;
         }
         .read {

@@ -214,7 +214,7 @@ export default {
         padding-top: pxrem(236px);
         .operate-logo {
           height: pxrem(110px);
-          transform: scaleY(2);
+          transform: perspective(1px) scaleY(2);
           margin-bottom: pxrem(152px);
         }
         .operate-box-title {
@@ -223,7 +223,7 @@ export default {
           letter-spacing: pxrem(3px);
           margin-bottom: pxrem(98px);
           font-weight: bold;
-          transform: scaleY(2);
+          transform: perspective(1px) scaleY(2);
         }
         .split {
           height: pxrem(8px);
@@ -233,7 +233,7 @@ export default {
         .text {
           font-size: pxrem(34px);
           color:#fff;
-          transform: scaleY(2);
+          transform: perspective(1px) scaleY(2);
           margin-bottom: pxrem(130px);
         }
       }
@@ -248,9 +248,9 @@ export default {
         }
         .data-title {
           font-size: pxrem(50px);
-          font-weight: bold;
+          // font-weight: bold;
           color: #fff;
-          transform: scaleY(2);
+          transform: perspective(1px) scaleY(2);
         }
       }
       .data-content {
@@ -259,7 +259,7 @@ export default {
           height: pxrem(525px);
           position: relative;
           margin-right: pxrem(164px);
-          transform: scaleY(2);
+          transform: perspective(1px) scaleY(2);
           .echart-center {
             position: absolute;
             transform: translate(-50%, -50%);
@@ -275,12 +275,12 @@ export default {
             }
             p {
               font-size: pxrem(48px);
-              // transform: scaleY(2);
+              // transform: perspective(1px) scaleY(2);
             }
           }
         }
         .datalist {
-          transform: scaleY(2);
+          transform: perspective(1px) scaleY(2);
           .data-item {
             width: pxrem(940px);
             height: pxrem(140px);
@@ -322,16 +322,16 @@ export default {
     text-align: left;
     height: pxrem(55px);
     font-size: pxrem(58px);
-    font-weight: bold;
+    // font-weight: bold;
     color: #ffffff;
     margin-bottom: pxrem(186px);
-    transform: scaleY(2);
+    transform: perspective(1px) scaleY(2);
   }
   .mbt12 {
     font-size: 0.4em;
     margin-bottom: 1em;
     color: #ffffff;
-    transform: scaleY(2);
+    transform: perspective(1px) scaleY(2);
   }
   .mr119 {
     margin-right: pxrem(119px);
