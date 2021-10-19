@@ -1,4 +1,4 @@
-import { httpsbaseUrl, createAPI, huaianUrl, GUID, thirdUrl } from './api'
+import { httpsbaseUrl, createAPI, huaianUrl, GUID, thirdUrl, shishiUrl } from './api'
 import Qs from 'qs'
 
 /* 获取报题 */
@@ -261,3 +261,5 @@ export const getClueList = (plateform = 0, page, size, source = []) => createAPI
 export const getPlusAppStatisticalData = (sdate, edate, siteId = 0) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusAppStatistic?start_date=${sdate}&end_date=${edate}&site_id=${siteId}`)
 // web数据运营
 export const getPluswebStatisticalData = (sdate, edate, siteId = 0) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusWebStatistic?start_date=${sdate}&end_date=${edate}&site_id=${siteId}`)
+// 最新发布
+export const getPlusNewestContent = (count = 5, offset = 0) => createAPI(`${shishiUrl}/api/v1/contents.php?count=${count}&offset=${offset}&column_id=127`)

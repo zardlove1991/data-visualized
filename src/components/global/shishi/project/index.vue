@@ -1,25 +1,26 @@
 <template>
   <div class="shishi-project">
     <div class="project-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '选题展示'}}</div>
+      <div class="common01-title" :style="setFontSize(63)">{{viewAttr.header || '最新发布'}}</div>
       <div class="wrap-content">
         <div class="item-list sys-flex sys-flex-center animated" v-for="(v, k) in projectList" :key="k" :class="{'flipInX' : v.title, 'marginBottom75': customSize}" :style="{'animation-delay' : k/2+'s'}">
           <div class="title common01-ft40 overhidden" :style="setFontSize(50)">{{v.title}}</div>
-          <div class="name overhidden common01-ft32" :style="setFontSize(45)">{{v.project_user_name}}</div>
-          <div class="project-status common01-ft32" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{v.status_show}}</div>
+          <div class="name overhidden common01-ft32" :style="setFontSize(45)">{{v.author || v.create_user_name}}</div>
+          <!-- <div class="name overhidden common01-ft32" :style="setFontSize(45)">{{v.project_user_name}}</div> -->
+          <!-- <div class="project-status common01-ft32" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{v.status_show}}</div>
           <div class="project-progress common01-ft32 sys-flex sys-flex-center overhidden" :style="setFontSize(45)">
             <div class="progress-total">
               <span class="progress" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}" :style="{'width' : v.percent + '%'}"></span>
             </div>
             <div class="percent" :style="setFontSize(45)" :class="{'on-progress' : v.status == 1 || v.status == 2 , 'on-stop' : v.status==4 , 'on-done' : v.status==3}">{{Math.ceil(v.percent)}}%</div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { getWorkCallSubjectList } from '@/servers/interface'
+import { getPlusNewestContent } from '@/servers/interface'
 import { getDataConfig } from '@/utils/model'
 export default {
   name: 'project',
@@ -39,9 +40,9 @@ export default {
         this.customSize = true
       }
     })
-    this.getWorkCallSubjectList()
+    this.getPlusNewestContent()
     setInterval(() => {
-      this.getWorkCallSubjectList()
+      this.getPlusNewestContent()
     }, this.frequency)
   },
   methods: {
@@ -50,13 +51,13 @@ export default {
         return `font-size: ${size / 100}rem!important`
       }
     },
-    getWorkCallSubjectList () {
-      getWorkCallSubjectList(5, this.page, this.currentViewId).then(res => {
+    getPlusNewestContent () {
+      getPlusNewestContent(5, (this.page - 1) * 5).then(res => {
         if (!res.data.error_code) {
-          if (res.data.result.data.length) {
+          if (res.data.length) {
             this.projectList = []
             setTimeout(() => {
-              this.projectList = res.data.result.data
+              this.projectList = res.data
             }, 100)
             if (this.isPaging) {
               this.page += 1
@@ -67,7 +68,7 @@ export default {
           } else {
             if (this.page !== 1) {
               this.page = 1
-              this.getWorkCallSubjectList()
+              this.getPlusNewestContent()
             }
           }
         }
