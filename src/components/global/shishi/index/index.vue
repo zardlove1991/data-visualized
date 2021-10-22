@@ -35,7 +35,7 @@ export default {
   padding: pxrem(40px);
   position: relative;
   .websitecontent-wrap {
-    padding: pxrem(230px) pxrem(96px) pxrem(95px) pxrem(78px);
+    padding: pxrem(180px) pxrem(96px) pxrem(95px) pxrem(78px);
     iframe {
       display: block;
       width: 100%;

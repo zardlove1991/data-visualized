@@ -89,13 +89,13 @@ export default {
   padding: pxrem(40px);
   position: relative;
   .websitecontent-wrap {
-    padding: pxrem(230px) pxrem(78px) pxrem(95px) pxrem(78px);
+    padding: pxrem(180px) pxrem(78px) pxrem(95px) pxrem(78px);
     .data-box {
       background: url(./assets/data_bg.png);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       width: pxrem(828px);
-      height: pxrem(730px);
+      height: pxrem(770px);
       position: relative;
       .left-title {
         width: pxrem(48px);
@@ -134,10 +134,10 @@ export default {
           right: pxrem(43px);
         }
         iframe {
-          margin: pxrem(16px) 0 0 pxrem(95px);
+          margin: 0 0 0 pxrem(95px);
           display: block;
           width: pxrem(495px);
-          height: pxrem(700px);
+          height: 100%;
           outline: none;
           border: none;
           box-shadow: none;
