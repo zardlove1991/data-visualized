@@ -1,8 +1,8 @@
 <template>
   <div class="shishi-igitalNewspaper" id="shishi-igitalNewspaper">
     <div class="websitecontent-wrap common01-border">
-      <div class="common01-title" :style="setFontSize(63)">数字报/APP</div>
-      <div class="sys-flex flex-justify-between">
+      <div class="common01-title" :style="setFontSize(63)">融合生产发布平台</div>
+      <!-- <div class="sys-flex flex-justify-between">
         <div class="data-box">
           <div class="left-title">日报数字报</div>
           <div class="data-main sys-flex">
@@ -17,13 +17,13 @@
         </div>
         <div class="data-box">
           <div class="left-title">看石狮<span class="en-title">APP</span></div>
-          <div class="data-main sys-flex">
+          <div class="data-main sys-flex"> -->
             <!-- <img class="left-icon swiper-button-prev" src="./assets/left.png" alt=""> -->
             <!-- <iframe :src="appUrl"></iframe> -->
             <!-- <img class="right-icon swiper-button-next" src="./assets/right.png" alt=""> -->
-          </div>
+          <!-- </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -69,7 +69,7 @@ export default {
     }
   },
   mounted () {
-    this.setFontsize('shishi-igitalNewspaper')
+    // this.setFontsize('shishi-igitalNewspaper')
   },
   methods: {
     setFontSize (size) {
