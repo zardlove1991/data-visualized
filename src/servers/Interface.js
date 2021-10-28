@@ -160,7 +160,8 @@ export const getVolunteerOrganizeDetail = (id, count = '') => createAPI(`${https
 // 组织架构 成员名单
 export const getVolunteerMemberList = () => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getVolunteerMemberList`)
 // 活动资讯
-export const getActivityInfo = (page = 1, count = 4, status = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?type=article&page=${page}&count=${count}&status=${status}&column_id=380&site_id=203&date_search=5`)
+// export const getActivityInfo = (page = 1, count = 4, status = 1) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?type=article&page=${page}&count=${count}&status=${status}`)
+export const getActivityInfo = (param) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?type=article&${Qs.stringify(param)}`)
 // export const getJSActivityInfo = (page = 1, count = 4, columnId = 0) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish?type=article&page=${page}&count=${count}&status=1&site_id=143&column_id=${columnId}`)
 export const getJSActivityInfo = (config) => createAPI(`${httpsbaseUrl}/Apidaping/${GUID}/getM2OPlusPublish`, 'get', config)
 // 金山全部组织接口

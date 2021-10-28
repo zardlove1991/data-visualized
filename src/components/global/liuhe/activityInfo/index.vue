@@ -198,7 +198,14 @@ export default {
     // 滑动获取更多
     getMoreList (pageNum, type) {
       // 接口需要调整 获取更多
-      getActivityInfo(pageNum, this.count).then(res => {
+      const extra = this.guid === 'NDIzMzc5NW' ? { column_id: 380, site_id: 203, date_search: 5 } : {}
+      const param = {
+        page: pageNum,
+        count: this.count,
+        status: 1,
+        ...extra
+      }
+      getActivityInfo(param).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
             let newSwiperData = res.data.result.data
@@ -243,7 +250,14 @@ export default {
       this.isCheckPage = true
     },
     getDataList () {
-      getActivityInfo(this.page, this.count).then(res => {
+      const extra = this.guid === 'NDIzMzc5NW' ? { column_id: 380, site_id: 203, date_search: 5 } : {}
+      const param = {
+        page: this.page,
+        count: this.count,
+        status: 1,
+        ...extra
+      }
+      getActivityInfo(param).then(res => {
         if (!res.data.error_code) {
           if (res.data.result.data && res.data.result.data.length) {
             this.dataList = []
