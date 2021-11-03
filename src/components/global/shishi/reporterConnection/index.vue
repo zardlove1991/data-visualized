@@ -224,7 +224,7 @@ export default {
   width: 100%;
   height: 100%;
   // padding: pxrem(20px);
-  padding-bottom: pxrem(53px * $mapscale);
+  // padding-bottom: pxrem(53px * $mapscale);
   background: #0b072d;
   .common01-ft70 {
   font-size: pxrem(35px);
@@ -240,12 +240,13 @@ export default {
   }
   .reporter-map-wrap {
     width: 100%;
-    height: 100% * $mapscale;
+    // height: 100% * $mapscale;
+    height: 100%;
     position: relative;
     background: url("./assets/mapBorder.png") no-repeat center;
     background-size: 100% 100%;
     color: #fff;
-    margin-top: pxrem(31px);
+    // margin-top: pxrem(31px);
     .reporter-map {
       width: calc(100% - 35px);
       height: calc(100% - (35px * 1.2));
